@@ -15,6 +15,9 @@ import (
 	"github.com/ansel1/merry"
 )
 
+//go:generate go run scheme/generate_tl_schema.go scheme/tl-schema-71.json tl_schema.go
+//go:generate gofmt -w tl_schema.go
+
 var ErrNoSessionData = merry.New("no session data")
 
 type SessionInfo struct {
@@ -215,9 +218,9 @@ func (m *MTProto) Connect() error {
 	})
 	if cfg, ok := x.(TL_config); ok {
 		m.dclist = make(map[int32]string, 5)
-		for _, v := range cfg.Dc_options {
+		for _, v := range cfg.DcOptions {
 			v := v.(TL_dcOption)
-			m.dclist[v.Id] = fmt.Sprintf("%s:%d", v.Ip_address, v.Port)
+			m.dclist[v.ID] = fmt.Sprintf("%s:%d", v.IpAddress, v.Port)
 		}
 	} else {
 		return WrongRespError(x)
@@ -272,10 +275,10 @@ func (m *MTProto) Auth() error {
 	flag := true
 	for flag {
 		x := m.SendSync(TL_auth_sendCode{
-			Current_number: TL_boolTrue{},
-			Phone_number:   phonenumber,
-			Api_id:         m.appCfg.AppID,
-			Api_hash:       m.appCfg.AppHash,
+			CurrentNumber: TL_boolTrue{},
+			PhoneNumber:   phonenumber,
+			ApiID:         m.appCfg.AppID,
+			ApiHash:       m.appCfg.AppHash,
 		})
 		switch x.(type) {
 		case TL_auth_sentCode:
@@ -312,7 +315,7 @@ func (m *MTProto) Auth() error {
 	fmt.Scanf("%s", &code)
 
 	//if authSentCode.Phone_registered
-	x := m.SendSync(TL_auth_signIn{phonenumber, authSentCode.Phone_code_hash, code})
+	x := m.SendSync(TL_auth_signIn{phonenumber, authSentCode.PhoneCodeHash, code})
 	if IsError(x, "SESSION_PASSWORD_NEEDED") {
 		x = m.SendSync(TL_account_getPassword{})
 		accPasswd, ok := x.(TL_account_password)
@@ -324,7 +327,7 @@ func (m *MTProto) Auth() error {
 		fmt.Print("Enter password: ")
 		fmt.Scanf("%s", &passwd)
 
-		salt := string(accPasswd.Current_salt)
+		salt := string(accPasswd.CurrentSalt)
 		hash := sha256.Sum256([]byte(salt + passwd + salt))
 		x = m.SendSync(TL_auth_checkPassword{hash[:]})
 		if _, ok := x.(TL_rpc_error); ok {
@@ -336,7 +339,7 @@ func (m *MTProto) Auth() error {
 		return fmt.Errorf("RPC: %#v", x)
 	}
 	userSelf := auth.User.(TL_user)
-	fmt.Printf("Signed in: id %d name <%s %s>\n", userSelf.Id, userSelf.First_name, userSelf.Last_name)
+	fmt.Printf("Signed in: id %d name <%s %s>\n", userSelf.ID, userSelf.FirstName, userSelf.LastName)
 	return nil
 }
 
@@ -352,7 +355,7 @@ func (m *MTProto) GetContacts() error {
 	contacts := make(map[int32]TL_user)
 	for _, v := range list.Users {
 		if v, ok := v.(TL_user); ok {
-			contacts[v.Id] = v
+			contacts[v.ID] = v
 		}
 	}
 	fmt.Printf(
@@ -363,10 +366,10 @@ func (m *MTProto) GetContacts() error {
 		v := v.(TL_contact)
 		fmt.Printf(
 			"%10d    %10t    %-30s    %-20s\n",
-			v.User_id,
+			v.UserID,
 			toBool(v.Mutual),
-			fmt.Sprintf("%s %s", contacts[v.User_id].First_name, contacts[v.User_id].Last_name),
-			contacts[v.User_id].Username,
+			fmt.Sprintf("%s %s", contacts[v.UserID].FirstName, contacts[v.UserID].LastName),
+			contacts[v.UserID].Username,
 		)
 	}
 

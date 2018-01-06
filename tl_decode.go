@@ -211,7 +211,7 @@ func (m *DecodeBuf) VectorInt() []int32 {
 	if m.err != nil {
 		return nil
 	}
-	if constructor != crc_vector {
+	if constructor != CRC_vector {
 		m.err = fmt.Errorf("DecodeVectorInt: Wrong constructor (0x%08x)", constructor)
 		return nil
 	}
@@ -249,7 +249,7 @@ func (m *DecodeBuf) VectorLong() []int64 {
 	if m.err != nil {
 		return nil
 	}
-	if constructor != crc_vector {
+	if constructor != CRC_vector {
 		m.err = fmt.Errorf("DecodeVectorLong: Wrong constructor (0x%08x)", constructor)
 		return nil
 	}
@@ -287,7 +287,7 @@ func (m *DecodeBuf) VectorString() []string {
 	if m.err != nil {
 		return nil
 	}
-	if constructor != crc_vector {
+	if constructor != CRC_vector {
 		m.err = fmt.Errorf("DecodeVectorString: Wrong constructor (0x%08x)", constructor)
 		return nil
 	}
@@ -326,9 +326,9 @@ func (m *DecodeBuf) Bool() bool {
 		return false
 	}
 	switch constructor {
-	case crc_boolFalse:
+	case CRC_boolFalse:
 		return false
-	case crc_boolTrue:
+	case CRC_boolTrue:
 		return true
 	}
 	return false
@@ -339,7 +339,7 @@ func (m *DecodeBuf) Vector() []TL {
 	if m.err != nil {
 		return nil
 	}
-	if constructor != crc_vector {
+	if constructor != CRC_vector {
 		m.err = fmt.Errorf("DecodeVector: Wrong constructor (0x%08x)", constructor)
 		return nil
 	}
@@ -382,28 +382,28 @@ func (m *DecodeBuf) Object() (r TL) {
 	//DEBUG m.dump()
 
 	switch constructor {
-	case crc_resPQ:
+	case CRC_resPQ:
 		r = TL_resPQ{m.Bytes(16), m.Bytes(16), m.BigInt(), m.VectorLong()}
 
-	case crc_server_DH_params_ok:
+	case CRC_server_DH_params_ok:
 		r = TL_server_DH_params_ok{m.Bytes(16), m.Bytes(16), m.StringBytes()}
 
-	case crc_server_DH_inner_data:
+	case CRC_server_DH_inner_data:
 		r = TL_server_DH_inner_data{
 			m.Bytes(16), m.Bytes(16), m.Int(),
 			m.BigInt(), m.BigInt(), m.Int(),
 		}
 
-	case crc_dh_gen_ok:
+	case CRC_dh_gen_ok:
 		r = TL_dh_gen_ok{m.Bytes(16), m.Bytes(16), m.Bytes(16)}
 
-	case crc_ping:
+	case CRC_ping:
 		r = TL_ping{m.Long()}
 
-	case crc_pong:
+	case CRC_pong:
 		r = TL_pong{m.Long(), m.Long()}
 
-	case crc_msg_container:
+	case CRC_msg_container:
 		size := m.Int()
 		arr := make([]TL_MT_message, size)
 		for i := int32(0); i < size; i++ {
@@ -414,25 +414,25 @@ func (m *DecodeBuf) Object() (r TL) {
 		}
 		r = TL_msg_container{arr}
 
-	case crc_rpc_result:
+	case CRC_rpc_result:
 		r = TL_rpc_result{m.Long(), m.Object()}
 
-	case crc_rpc_error:
+	case CRC_rpc_error:
 		r = TL_rpc_error{m.Int(), m.String()}
 
-	case crc_new_session_created:
+	case CRC_new_session_created:
 		r = TL_new_session_created{m.Long(), m.Long(), m.Bytes(8)}
 
-	case crc_bad_server_salt:
+	case CRC_bad_server_salt:
 		r = TL_bad_server_salt{m.Long(), m.Int(), m.Int(), m.Bytes(8)}
 
-	case crc_bad_msg_notification:
+	case CRC_bad_msg_notification:
 		r = TL_crc_bad_msg_notification{m.Long(), m.Int(), m.Int()}
 
-	case crc_msgs_ack:
+	case CRC_msgs_ack:
 		r = TL_msgs_ack{m.VectorLong()}
 
-	case crc_gzip_packed:
+	case CRC_gzip_packed:
 		obj := make([]byte, 0, 4096)
 
 		var buf bytes.Buffer

@@ -82,7 +82,7 @@ func (e *EncodeBuf) Bytes(s []byte) {
 
 func (e *EncodeBuf) VectorInt(v []int32) {
 	x := make([]byte, 4+4+len(v)*4)
-	binary.LittleEndian.PutUint32(x, crc_vector)
+	binary.LittleEndian.PutUint32(x, CRC_vector)
 	binary.LittleEndian.PutUint32(x[4:], uint32(len(v)))
 	i := 8
 	for _, v := range v {
@@ -94,7 +94,7 @@ func (e *EncodeBuf) VectorInt(v []int32) {
 
 func (e *EncodeBuf) VectorLong(v []int64) {
 	x := make([]byte, 4+4+len(v)*8)
-	binary.LittleEndian.PutUint32(x, crc_vector)
+	binary.LittleEndian.PutUint32(x, CRC_vector)
 	binary.LittleEndian.PutUint32(x[4:], uint32(len(v)))
 	i := 8
 	for _, v := range v {
@@ -106,7 +106,7 @@ func (e *EncodeBuf) VectorLong(v []int64) {
 
 func (e *EncodeBuf) VectorString(v []string) {
 	x := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x, crc_vector)
+	binary.LittleEndian.PutUint32(x, CRC_vector)
 	binary.LittleEndian.PutUint32(x[4:], uint32(len(v)))
 	e.buf = append(e.buf, x...)
 	for _, v := range v {
@@ -116,7 +116,7 @@ func (e *EncodeBuf) VectorString(v []string) {
 
 func (e *EncodeBuf) Vector(v []TL) {
 	x := make([]byte, 8)
-	binary.LittleEndian.PutUint32(x, crc_vector)
+	binary.LittleEndian.PutUint32(x, CRC_vector)
 	binary.LittleEndian.PutUint32(x[4:], uint32(len(v)))
 	e.buf = append(e.buf, x...)
 	for _, v := range v {
@@ -137,14 +137,14 @@ func (e TL_crc_bad_msg_notification) encode() []byte { return nil }
 
 func (e TL_req_pq) encode() []byte {
 	x := NewEncodeBuf(20)
-	x.UInt(crc_req_pq)
+	x.UInt(CRC_req_pq)
 	x.Bytes(e.nonce)
 	return x.buf
 }
 
 func (e TL_p_q_inner_data) encode() []byte {
 	x := NewEncodeBuf(256)
-	x.UInt(crc_p_q_inner_data)
+	x.UInt(CRC_p_q_inner_data)
 	x.BigInt(e.pq)
 	x.BigInt(e.p)
 	x.BigInt(e.q)
@@ -156,7 +156,7 @@ func (e TL_p_q_inner_data) encode() []byte {
 
 func (e TL_req_DH_params) encode() []byte {
 	x := NewEncodeBuf(512)
-	x.UInt(crc_req_DH_params)
+	x.UInt(CRC_req_DH_params)
 	x.Bytes(e.nonce)
 	x.Bytes(e.server_nonce)
 	x.BigInt(e.p)
@@ -168,7 +168,7 @@ func (e TL_req_DH_params) encode() []byte {
 
 func (e TL_client_DH_inner_data) encode() []byte {
 	x := NewEncodeBuf(512)
-	x.UInt(crc_client_DH_inner_data)
+	x.UInt(CRC_client_DH_inner_data)
 	x.Bytes(e.nonce)
 	x.Bytes(e.server_nonce)
 	x.Long(e.retry)
@@ -178,7 +178,7 @@ func (e TL_client_DH_inner_data) encode() []byte {
 
 func (e TL_set_client_DH_params) encode() []byte {
 	x := NewEncodeBuf(256)
-	x.UInt(crc_set_client_DH_params)
+	x.UInt(CRC_set_client_DH_params)
 	x.Bytes(e.nonce)
 	x.Bytes(e.server_nonce)
 	x.StringBytes(e.encdata)
@@ -187,14 +187,14 @@ func (e TL_set_client_DH_params) encode() []byte {
 
 func (e TL_ping) encode() []byte {
 	x := NewEncodeBuf(32)
-	x.UInt(crc_ping)
+	x.UInt(CRC_ping)
 	x.Long(e.ping_id)
 	return x.buf
 }
 
 func (e TL_pong) encode() []byte {
 	x := NewEncodeBuf(32)
-	x.UInt(crc_pong)
+	x.UInt(CRC_pong)
 	x.Long(e.msg_id)
 	x.Long(e.ping_id)
 	return x.buf
@@ -202,7 +202,7 @@ func (e TL_pong) encode() []byte {
 
 func (e TL_msgs_ack) encode() []byte {
 	x := NewEncodeBuf(64)
-	x.UInt(crc_msgs_ack)
+	x.UInt(CRC_msgs_ack)
 	x.VectorLong(e.msgIds)
 	return x.buf
 }

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -36,6 +37,16 @@ func normalize(s string) string {
 	return y
 }
 
+func normalizeAttr(s string) string {
+	s = strings.Replace(s, "_", " ", -1)
+	s = strings.Title(s)
+	s = strings.Replace(s, " ", "", -1)
+	if strings.HasSuffix(s, "Id") {
+		s = s[:len(s)-2] + "ID"
+	}
+	return s
+}
+
 func maybeFlagged(_type string, isFlag bool, flagBit int) string {
 	if isFlag {
 		return fmt.Sprintf("m.Flagged%s(flags, %d),\n", _type, flagBit)
@@ -45,23 +56,35 @@ func maybeFlagged(_type string, isFlag bool, flagBit int) string {
 }
 
 func main() {
-	var err error
-	var parsed interface{}
+	if len(os.Args) != 3 {
+		println("Usage: " + os.Args[0] + " tl_schema.json tl_schema.go")
+		os.Exit(2)
+	}
 
-	// read json file from stdin
-	data, err := ioutil.ReadAll(os.Stdin)
+	// reading json file
+	data, err := ioutil.ReadFile(os.Args[1])
 	if err != nil {
-		fmt.Println(err)
-		return
+		log.Fatal(err)
+	}
+
+	// opening out file
+	outFile, err := os.Create(os.Args[2])
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer outFile.Close()
+	write := func(format string, a ...interface{}) {
+		if _, err := fmt.Fprintf(outFile, format, a...); err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	// parse json
+	var parsed interface{}
 	d := json.NewDecoder(bytes.NewReader(data))
 	d.UseNumber()
-	err = d.Decode(&parsed)
-	if err != nil {
-		fmt.Println(err)
-		return
+	if err := d.Decode(&parsed); err != nil {
+		log.Fatal(err)
 	}
 
 	// process constructors
@@ -76,8 +99,7 @@ func main() {
 			// id
 			idx, err := strconv.Atoi(data["id"].(string))
 			if err != nil {
-				fmt.Println(err)
-				return
+				log.Fatal(err)
 			}
 			_id := fmt.Sprintf("0x%08x", uint32(idx))
 
@@ -110,17 +132,17 @@ func main() {
 	parsefunc(parsed.(map[string]interface{})["methods"].([]interface{}), "method")
 
 	// constants
-	fmt.Print("package mtproto\nimport \"fmt\"\nconst (\n")
+	write("package mtproto\nimport \"fmt\"\nconst (\n")
 	for _, key := range _order {
 		c := _cons[key]
-		fmt.Printf("crc_%s = %s\n", c.predicate, c.id)
+		write("CRC_%s = %s\n", c.predicate, c.id)
 	}
-	fmt.Print(")\n\n")
+	write(")\n\n")
 
 	// type structs
 	for _, key := range _order {
 		c := _cons[key]
-		fmt.Printf("type TL_%s struct {\n", c.predicate)
+		write("type TL_%s struct {\n", c.predicate)
 		for _, t := range c.params {
 			isFlag := false
 			typeName := t._type
@@ -128,112 +150,121 @@ func main() {
 				isFlag = true
 				typeName = t._type[strings.Index(t._type, "?")+1:]
 			}
-			fmt.Printf("%s\t", strings.Title(t.name))
+			write("%s\t", normalizeAttr(t.name))
 			switch typeName {
 			case "true": //flags only
-				fmt.Print("bool")
+				write("bool")
 			case "int", "#":
-				fmt.Print("int32")
+				write("int32")
 			case "long":
-				fmt.Print("int64")
+				write("int64")
 			case "string":
-				fmt.Print("string")
+				write("string")
 			case "double":
-				fmt.Print("float64")
+				write("float64")
 			case "bytes":
-				fmt.Print("[]byte")
+				write("[]byte")
 			case "Vector<int>":
-				fmt.Print("[]int32")
+				write("[]int32")
 			case "Vector<long>":
-				fmt.Print("[]int64")
+				write("[]int64")
 			case "Vector<string>":
-				fmt.Print("[]string")
+				write("[]string")
 			case "Vector<double>":
-				fmt.Print("[]float64")
+				write("[]float64")
 			case "!X":
-				fmt.Print("TL")
+				write("TL")
 			default:
 				var inner string
 				n, _ := fmt.Sscanf(typeName, "Vector<%s", &inner)
 				if n == 1 {
-					fmt.Printf("[]TL // %s", inner[:len(inner)-1])
+					write("[]TL // %s", inner[:len(inner)-1])
 				} else {
-					fmt.Printf("TL // %s", typeName)
+					write("TL // %s", typeName)
 				}
 			}
 			if isFlag {
-				fmt.Print(" //flag")
+				write(" //flag")
 			}
-			fmt.Print("\n")
+			write("\n")
 		}
-		fmt.Print("}\n\n")
+		write("}\n\n")
 	}
 
 	// encode funcs
 	for _, key := range _order {
 		c := _cons[key]
-		fmt.Printf("func (e TL_%s) encode() []byte {\n", c.predicate)
-		fmt.Print("x := NewEncodeBuf(512)\n")
-		fmt.Printf("x.UInt(crc_%s)\n", c.predicate)
+		write("func (e TL_%s) encode() []byte {\n", c.predicate)
+		write("x := NewEncodeBuf(512)\n")
+		write("x.UInt(CRC_%s)\n", c.predicate)
 		for _, t := range c.params {
+			isFlag := false
 			typeName := t._type
+			flagBit := 0
 			if strings.HasPrefix(t._type, "flags") {
+				isFlag = true
 				typeName = t._type[strings.Index(t._type, "?")+1:]
+				flagBit, _ = strconv.Atoi(string(t._type[strings.Index(t._type, "_")+1 : strings.Index(t._type, "?")]))
+			}
+			attrName := normalizeAttr(t.name)
+			if isFlag && typeName != "true" {
+				write("if e.Flags & %d != 0 {\n", 1<<uint(flagBit))
 			}
 			switch typeName {
 			case "true": //flags only
-				fmt.Printf("//flag %s\n", t.name)
+				write("//flag %s\n", attrName)
 			case "int", "#":
-				fmt.Printf("x.Int(e.%s)\n", strings.Title(t.name))
+				write("x.Int(e.%s)\n", attrName)
 			case "long":
-				fmt.Printf("x.Long(e.%s)\n", strings.Title(t.name))
+				write("x.Long(e.%s)\n", attrName)
 			case "string":
-				fmt.Printf("x.String(e.%s)\n", strings.Title(t.name))
+				write("x.String(e.%s)\n", attrName)
 			case "double":
-				fmt.Printf("x.Double(e.%s)\n", strings.Title(t.name))
+				write("x.Double(e.%s)\n", attrName)
 			case "bytes":
-				fmt.Printf("x.StringBytes(e.%s)\n", strings.Title(t.name))
+				write("x.StringBytes(e.%s)\n", attrName)
 			case "Vector<int>":
-				fmt.Printf("x.VectorInt(e.%s)\n", strings.Title(t.name))
+				write("x.VectorInt(e.%s)\n", attrName)
 			case "Vector<long>":
-				fmt.Printf("x.VectorLong(e.%s)\n", strings.Title(t.name))
+				write("x.VectorLong(e.%s)\n", attrName)
 			case "Vector<string>":
-				fmt.Printf("x.VectorString(e.%s)\n", strings.Title(t.name))
+				write("x.VectorString(e.%s)\n", attrName)
 			case "Vector<double>":
-				fmt.Printf("x.VectorDouble(e.%s)\n", strings.Title(t.name))
+				write("x.VectorDouble(e.%s)\n", attrName)
 			case "!X":
-				fmt.Printf("x.Bytes(e.%s.encode())\n", strings.Title(t.name))
+				write("x.Bytes(e.%s.encode())\n", attrName)
 			default:
 				var inner string
 				n, _ := fmt.Sscanf(typeName, "Vector<%s", &inner)
 				if n == 1 {
-					fmt.Printf("x.Vector(e.%s)\n", strings.Title(t.name))
+					write("x.Vector(e.%s)\n", attrName)
 				} else {
-					fmt.Printf("x.Bytes(e.%s.encode())\n", strings.Title(t.name))
+					write("x.Bytes(e.%s.encode())\n", attrName)
 				}
 			}
+			if isFlag && typeName != "true" {
+				write("}\n")
+			}
 		}
-		fmt.Print("return x.buf\n")
-		fmt.Print("}\n\n")
-
+		write("return x.buf\n")
+		write("}\n\n")
 	}
 
 	// decode funcs
-	fmt.Println(`
+	write(`
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	switch constructor {`)
 
 	for _, key := range _order {
 		c := _cons[key]
-		fmt.Printf("case crc_%s:\n", c.predicate)
+		write("case CRC_%s:\n", c.predicate)
 		for _, t := range c.params {
 			if t._type == "#" {
-				fmt.Print("flags := m.Int()\n")
-				//fmt.Print("_ = flags\n")
+				write("flags := m.Int()\n")
 				break
 			}
 		}
-		fmt.Printf("r = TL_%s{\n", c.predicate)
+		write("r = TL_%s{\n", c.predicate)
 		for _, t := range c.params {
 			isFlag := false
 			flagBit := 0
@@ -245,43 +276,43 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			}
 			switch typeName {
 			case "true": //flags only
-				fmt.Print("false, //flag\n")
+				write("false, //flag\n")
 			case "#":
-				fmt.Print("flags,\n")
+				write("flags,\n")
 			case "int":
-				fmt.Print(maybeFlagged("Int", isFlag, flagBit))
+				write(maybeFlagged("Int", isFlag, flagBit))
 			case "long":
-				fmt.Print(maybeFlagged("Long", isFlag, flagBit))
+				write(maybeFlagged("Long", isFlag, flagBit))
 			case "string":
-				fmt.Print(maybeFlagged("String", isFlag, flagBit))
+				write(maybeFlagged("String", isFlag, flagBit))
 			case "double":
-				fmt.Print(maybeFlagged("Double", isFlag, flagBit))
+				write(maybeFlagged("Double", isFlag, flagBit))
 			case "bytes":
-				fmt.Print(maybeFlagged("StringBytes", isFlag, flagBit))
+				write(maybeFlagged("StringBytes", isFlag, flagBit))
 			case "Vector<int>":
-				fmt.Print(maybeFlagged("VectorInt", isFlag, flagBit))
+				write(maybeFlagged("VectorInt", isFlag, flagBit))
 			case "Vector<long>":
-				fmt.Print(maybeFlagged("VectorLong", isFlag, flagBit))
+				write(maybeFlagged("VectorLong", isFlag, flagBit))
 			case "Vector<string>":
-				fmt.Print(maybeFlagged("VectorString", isFlag, flagBit))
+				write(maybeFlagged("VectorString", isFlag, flagBit))
 			case "Vector<double>":
-				fmt.Print(maybeFlagged("VectorDouble", isFlag, flagBit))
+				write(maybeFlagged("VectorDouble", isFlag, flagBit))
 			case "!X":
-				fmt.Print(maybeFlagged("Object", isFlag, flagBit))
+				write(maybeFlagged("Object", isFlag, flagBit))
 			default:
 				var inner string
 				n, _ := fmt.Sscanf(typeName, "Vector<%s", &inner)
 				if n == 1 {
-					fmt.Print(maybeFlagged("Vector", isFlag, flagBit))
+					write(maybeFlagged("Vector", isFlag, flagBit))
 				} else {
-					fmt.Print(maybeFlagged("Object", isFlag, flagBit))
+					write(maybeFlagged("Object", isFlag, flagBit))
 				}
 			}
 		}
-		fmt.Print("}\n\n")
+		write("}\n\n")
 	}
 
-	fmt.Println(`
+	write(`
 	default:
 		m.err = fmt.Errorf("Unknown constructor: \u002508x", constructor)
 		return nil
@@ -294,5 +325,4 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	return
 }`)
-
 }
