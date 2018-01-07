@@ -115,6 +115,7 @@ type MTProto struct {
 	msgsIdToResp    map[int64]chan TL
 	seqNo           int32
 	msgId           int64
+	handleEvent     func(TL)
 
 	dclist map[int32]string
 }
@@ -162,6 +163,10 @@ func NewMTProto(appID int32, appHash string) (*MTProto, error) {
 	rand.Seed(time.Now().UnixNano())
 	m.session.sessionId = rand.Int63()
 	return m, nil
+}
+
+func (m *MTProto) SetEventsHandler(handler func(TL)) {
+	m.handleEvent = handler
 }
 
 func (m *MTProto) Connect() error {
@@ -432,17 +437,20 @@ func (m *MTProto) readRoutine() {
 		}
 
 		x := m.process(m.msgId, m.seqNo, data)
+		if m.handleEvent != nil {
+			go m.handleEvent(x)
+		}
 		fmt.Printf("recv: %T %+v\n", x, x)
 	}
 
 }
 
-func (m *MTProto) process(msgId int64, seqNo int32, data interface{}) interface{} {
+func (m *MTProto) process(msgId int64, seqNo int32, data TL) TL {
 	switch data.(type) {
 	case TL_msg_container:
-		data := data.(TL_msg_container).items //TODO
+		data := data.(TL_msg_container).Items //TODO
 		for _, v := range data {
-			m.process(v.msg_id, v.seq_no, v.data)
+			m.process(v.MsgID, v.SeqNo, v.Data)
 		}
 
 	case TL_bad_server_salt:
@@ -490,15 +498,11 @@ func (m *MTProto) process(msgId int64, seqNo int32, data interface{}) interface{
 		}
 		delete(m.msgsIdToAck, data.req_msg_id)
 		m.mutex.Unlock()
-
-	default:
-		return data
-
 	}
 
+	// should acknowledge odd ids
 	if (seqNo & 1) == 1 {
 		m.queueSend <- packetToSend{TL_msgs_ack{[]int64{msgId}}, nil}
 	}
-
-	return nil
+	return data
 }
