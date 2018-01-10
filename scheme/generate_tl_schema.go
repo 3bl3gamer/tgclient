@@ -11,16 +11,21 @@ import (
 	"strings"
 )
 
-type nametype struct {
-	name  string
-	_type string
+// https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/Resources/scheme.tl
+
+// https://core.telegram.org/mtproto/TL-combinator
+// identifier#name attr:type attr:type = resultType;
+
+type Field struct {
+	name     string
+	typeName string
 }
 
-type constuctor struct {
-	id        string
-	predicate string
-	params    []nametype
-	_type     string
+type Combinator struct {
+	id       string
+	name     string
+	fields   []Field
+	typeName string
 }
 
 func normalize(s string) string {
@@ -55,17 +60,71 @@ func maybeFlagged(_type string, isFlag bool, flagBit int) string {
 	}
 }
 
+func parseJsonSchema(fpath string) []*Combinator {
+	// reading json file
+	data, err := ioutil.ReadFile(fpath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// parse json
+	var parsed interface{}
+	d := json.NewDecoder(bytes.NewReader(data))
+	d.UseNumber()
+	if err := d.Decode(&parsed); err != nil {
+		log.Fatal(err)
+	}
+
+	// process constructors
+	combinators := []*Combinator{}
+
+	parsefunc := func(data []interface{}, kind string) {
+		for _, data := range data {
+			data := data.(map[string]interface{})
+
+			// name
+			nameInt, err := strconv.Atoi(data["id"].(string))
+			if err != nil {
+				log.Fatal(err)
+			}
+			name := fmt.Sprintf("0x%08x", uint32(nameInt))
+
+			// identifier
+			id := normalize(data[kind].(string))
+			if id == "vector" {
+				continue
+			}
+
+			// fields
+			fields := make([]Field, 0, 16)
+			srcFields := data["params"].([]interface{})
+			for _, srcField := range srcFields {
+				srcField := srcField.(map[string]interface{})
+				fields = append(fields, Field{
+					normalize(srcField["name"].(string)),
+					normalize(srcField["type"].(string)),
+				})
+			}
+
+			// type
+			typeName := normalize(data["type"].(string))
+
+			combinators = append(combinators, &Combinator{id, name, fields, typeName})
+		}
+	}
+	parsefunc(parsed.(map[string]interface{})["constructors"].([]interface{}), "predicate")
+	parsefunc(parsed.(map[string]interface{})["methods"].([]interface{}), "method")
+	return combinators
+}
+
 func main() {
 	if len(os.Args) != 3 {
 		println("Usage: " + os.Args[0] + " tl_schema.json tl_schema.go")
 		os.Exit(2)
 	}
 
-	// reading json file
-	data, err := ioutil.ReadFile(os.Args[1])
-	if err != nil {
-		log.Fatal(err)
-	}
+	// parsing
+	combinators := parseJsonSchema(os.Args[1])
 
 	// opening out file
 	outFile, err := os.Create(os.Args[2])
@@ -79,76 +138,22 @@ func main() {
 		}
 	}
 
-	// parse json
-	var parsed interface{}
-	d := json.NewDecoder(bytes.NewReader(data))
-	d.UseNumber()
-	if err := d.Decode(&parsed); err != nil {
-		log.Fatal(err)
-	}
-
-	// process constructors
-	_order := make([]string, 0, 1000)
-	_cons := make(map[string]constuctor, 1000)
-	_types := make(map[string][]string, 1000)
-
-	parsefunc := func(data []interface{}, kind string) {
-		for _, data := range data {
-			data := data.(map[string]interface{})
-
-			// id
-			idx, err := strconv.Atoi(data["id"].(string))
-			if err != nil {
-				log.Fatal(err)
-			}
-			_id := fmt.Sprintf("0x%08x", uint32(idx))
-
-			// predicate
-			_predicate := normalize(data[kind].(string))
-
-			if _predicate == "vector" {
-				continue
-			}
-
-			// params
-			_params := make([]nametype, 0, 16)
-			params := data["params"].([]interface{})
-			for _, params := range params {
-				params := params.(map[string]interface{})
-				_params = append(_params, nametype{normalize(params["name"].(string)), normalize(params["type"].(string))})
-			}
-
-			// type
-			_type := normalize(data["type"].(string))
-
-			_order = append(_order, _predicate)
-			_cons[_predicate] = constuctor{_id, _predicate, _params, _type}
-			if kind == "predicate" {
-				_types[_type] = append(_types[_type], _predicate)
-			}
-		}
-	}
-	parsefunc(parsed.(map[string]interface{})["constructors"].([]interface{}), "predicate")
-	parsefunc(parsed.(map[string]interface{})["methods"].([]interface{}), "method")
-
 	// constants
 	write("package mtproto\nimport \"fmt\"\nconst (\n")
-	for _, key := range _order {
-		c := _cons[key]
-		write("CRC_%s = %s\n", c.predicate, c.id)
+	for _, c := range combinators {
+		write("CRC_%s = %s\n", c.id, c.name)
 	}
 	write(")\n\n")
 
 	// type structs
-	for _, key := range _order {
-		c := _cons[key]
-		write("type TL_%s struct {\n", c.predicate)
-		for _, t := range c.params {
+	for _, c := range combinators {
+		write("type TL_%s struct {\n", c.id)
+		for _, t := range c.fields {
 			isFlag := false
-			typeName := t._type
-			if strings.HasPrefix(t._type, "flags") {
+			typeName := t.typeName
+			if strings.HasPrefix(t.typeName, "flags") {
 				isFlag = true
-				typeName = t._type[strings.Index(t._type, "?")+1:]
+				typeName = t.typeName[strings.Index(t.typeName, "?")+1:]
 			}
 			write("%s\t", normalizeAttr(t.name))
 			switch typeName {
@@ -192,19 +197,18 @@ func main() {
 	}
 
 	// encode funcs
-	for _, key := range _order {
-		c := _cons[key]
-		write("func (e TL_%s) encode() []byte {\n", c.predicate)
+	for _, c := range combinators {
+		write("func (e TL_%s) encode() []byte {\n", c.id)
 		write("x := NewEncodeBuf(512)\n")
-		write("x.UInt(CRC_%s)\n", c.predicate)
-		for _, t := range c.params {
+		write("x.UInt(CRC_%s)\n", c.id)
+		for _, t := range c.fields {
 			isFlag := false
-			typeName := t._type
+			typeName := t.typeName
 			flagBit := 0
-			if strings.HasPrefix(t._type, "flags") {
+			if strings.HasPrefix(t.typeName, "flags") {
 				isFlag = true
-				typeName = t._type[strings.Index(t._type, "?")+1:]
-				flagBit, _ = strconv.Atoi(string(t._type[strings.Index(t._type, "_")+1 : strings.Index(t._type, "?")]))
+				typeName = t.typeName[strings.Index(t.typeName, "?")+1:]
+				flagBit, _ = strconv.Atoi(string(t.typeName[strings.Index(t.typeName, "_")+1 : strings.Index(t.typeName, "?")]))
 			}
 			attrName := normalizeAttr(t.name)
 			if isFlag && typeName != "true" {
@@ -255,24 +259,23 @@ func main() {
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	switch constructor {`)
 
-	for _, key := range _order {
-		c := _cons[key]
-		write("case CRC_%s:\n", c.predicate)
-		for _, t := range c.params {
-			if t._type == "#" {
+	for _, c := range combinators {
+		write("case CRC_%s:\n", c.id)
+		for _, t := range c.fields {
+			if t.typeName == "#" {
 				write("flags := m.Int()\n")
 				break
 			}
 		}
-		write("r = TL_%s{\n", c.predicate)
-		for _, t := range c.params {
+		write("r = TL_%s{\n", c.id)
+		for _, t := range c.fields {
 			isFlag := false
 			flagBit := 0
-			typeName := t._type
-			if strings.HasPrefix(t._type, "flags") {
+			typeName := t.typeName
+			if strings.HasPrefix(t.typeName, "flags") {
 				isFlag = true
-				flagBit, _ = strconv.Atoi(string(t._type[strings.Index(t._type, "_")+1 : strings.Index(t._type, "?")]))
-				typeName = t._type[strings.Index(t._type, "?")+1:]
+				flagBit, _ = strconv.Atoi(string(t.typeName[strings.Index(t.typeName, "_")+1 : strings.Index(t.typeName, "?")]))
+				typeName = t.typeName[strings.Index(t.typeName, "?")+1:]
 			}
 			switch typeName {
 			case "true": //flags only
