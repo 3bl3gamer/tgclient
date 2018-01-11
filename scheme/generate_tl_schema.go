@@ -19,6 +19,11 @@ import (
 type Field struct {
 	name     string
 	typeName string
+	flagBit  int
+}
+
+func (f Field) isFlag() bool {
+	return f.flagBit >= 0
 }
 
 type Combinator struct {
@@ -26,6 +31,15 @@ type Combinator struct {
 	name     string
 	fields   []Field
 	typeName string
+}
+
+func (c Combinator) hasFlags() bool {
+	for _, f := range c.fields {
+		if f.typeName == "#" {
+			return true
+		}
+	}
+	return false
 }
 
 func normalize(s string) string {
@@ -100,10 +114,20 @@ func parseJsonSchema(fpath string) []*Combinator {
 			srcFields := data["params"].([]interface{})
 			for _, srcField := range srcFields {
 				srcField := srcField.(map[string]interface{})
-				fields = append(fields, Field{
-					normalize(srcField["name"].(string)),
-					normalize(srcField["type"].(string)),
-				})
+				name := srcField["name"].(string)
+				typeName := srcField["type"].(string)
+				flagBit := -1
+				if strings.HasPrefix(typeName, "flags.") { //flags.2?string
+					var err error
+					qPos := strings.Index(typeName, "?")
+					dPos := strings.Index(typeName, ".")
+					flagBit, err = strconv.Atoi(typeName[dPos+1 : qPos])
+					typeName = typeName[qPos+1:]
+					if err != nil {
+						log.Fatalf("parsing %s: %s", typeName, err)
+					}
+				}
+				fields = append(fields, Field{normalize(name), normalize(typeName), flagBit})
 			}
 
 			// type
@@ -149,14 +173,8 @@ func main() {
 	for _, c := range combinators {
 		write("type TL_%s struct {\n", c.id)
 		for _, t := range c.fields {
-			isFlag := false
-			typeName := t.typeName
-			if strings.HasPrefix(t.typeName, "flags") {
-				isFlag = true
-				typeName = t.typeName[strings.Index(t.typeName, "?")+1:]
-			}
 			write("%s\t", normalizeAttr(t.name))
-			switch typeName {
+			switch t.typeName {
 			case "true": //flags only
 				write("bool")
 			case "int", "#":
@@ -181,14 +199,14 @@ func main() {
 				write("TL")
 			default:
 				var inner string
-				n, _ := fmt.Sscanf(typeName, "Vector<%s", &inner)
+				n, _ := fmt.Sscanf(t.typeName, "Vector<%s", &inner)
 				if n == 1 {
 					write("[]TL // %s", inner[:len(inner)-1])
 				} else {
-					write("TL // %s", typeName)
+					write("TL // %s", t.typeName)
 				}
 			}
-			if isFlag {
+			if t.isFlag() {
 				write(" //flag")
 			}
 			write("\n")
@@ -202,19 +220,11 @@ func main() {
 		write("x := NewEncodeBuf(512)\n")
 		write("x.UInt(CRC_%s)\n", c.id)
 		for _, t := range c.fields {
-			isFlag := false
-			typeName := t.typeName
-			flagBit := 0
-			if strings.HasPrefix(t.typeName, "flags") {
-				isFlag = true
-				typeName = t.typeName[strings.Index(t.typeName, "?")+1:]
-				flagBit, _ = strconv.Atoi(string(t.typeName[strings.Index(t.typeName, "_")+1 : strings.Index(t.typeName, "?")]))
-			}
 			attrName := normalizeAttr(t.name)
-			if isFlag && typeName != "true" {
-				write("if e.Flags & %d != 0 {\n", 1<<uint(flagBit))
+			if t.isFlag() && t.typeName != "true" {
+				write("if e.Flags & %d != 0 {\n", 1<<uint(t.flagBit))
 			}
-			switch typeName {
+			switch t.typeName {
 			case "true": //flags only
 				write("//flag %s\n", attrName)
 			case "int", "#":
@@ -239,14 +249,14 @@ func main() {
 				write("x.Bytes(e.%s.encode())\n", attrName)
 			default:
 				var inner string
-				n, _ := fmt.Sscanf(typeName, "Vector<%s", &inner)
+				n, _ := fmt.Sscanf(t.typeName, "Vector<%s", &inner)
 				if n == 1 {
 					write("x.Vector(e.%s)\n", attrName)
 				} else {
 					write("x.Bytes(e.%s.encode())\n", attrName)
 				}
 			}
-			if isFlag && typeName != "true" {
+			if t.isFlag() && t.typeName != "true" {
 				write("}\n")
 			}
 		}
@@ -261,54 +271,44 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	for _, c := range combinators {
 		write("case CRC_%s:\n", c.id)
-		for _, t := range c.fields {
-			if t.typeName == "#" {
-				write("flags := m.Int()\n")
-				break
-			}
+		if c.hasFlags() {
+			write("flags := m.Int()\n")
 		}
 		write("r = TL_%s{\n", c.id)
 		for _, t := range c.fields {
-			isFlag := false
-			flagBit := 0
-			typeName := t.typeName
-			if strings.HasPrefix(t.typeName, "flags") {
-				isFlag = true
-				flagBit, _ = strconv.Atoi(string(t.typeName[strings.Index(t.typeName, "_")+1 : strings.Index(t.typeName, "?")]))
-				typeName = t.typeName[strings.Index(t.typeName, "?")+1:]
-			}
-			switch typeName {
+			isFlag := t.isFlag()
+			switch t.typeName {
 			case "true": //flags only
 				write("false, //flag\n")
 			case "#":
 				write("flags,\n")
 			case "int":
-				write(maybeFlagged("Int", isFlag, flagBit))
+				write(maybeFlagged("Int", isFlag, t.flagBit))
 			case "long":
-				write(maybeFlagged("Long", isFlag, flagBit))
+				write(maybeFlagged("Long", isFlag, t.flagBit))
 			case "string":
-				write(maybeFlagged("String", isFlag, flagBit))
+				write(maybeFlagged("String", isFlag, t.flagBit))
 			case "double":
-				write(maybeFlagged("Double", isFlag, flagBit))
+				write(maybeFlagged("Double", isFlag, t.flagBit))
 			case "bytes":
-				write(maybeFlagged("StringBytes", isFlag, flagBit))
+				write(maybeFlagged("StringBytes", isFlag, t.flagBit))
 			case "Vector<int>":
-				write(maybeFlagged("VectorInt", isFlag, flagBit))
+				write(maybeFlagged("VectorInt", isFlag, t.flagBit))
 			case "Vector<long>":
-				write(maybeFlagged("VectorLong", isFlag, flagBit))
+				write(maybeFlagged("VectorLong", isFlag, t.flagBit))
 			case "Vector<string>":
-				write(maybeFlagged("VectorString", isFlag, flagBit))
+				write(maybeFlagged("VectorString", isFlag, t.flagBit))
 			case "Vector<double>":
-				write(maybeFlagged("VectorDouble", isFlag, flagBit))
+				write(maybeFlagged("VectorDouble", isFlag, t.flagBit))
 			case "!X":
-				write(maybeFlagged("Object", isFlag, flagBit))
+				write(maybeFlagged("Object", isFlag, t.flagBit))
 			default:
 				var inner string
-				n, _ := fmt.Sscanf(typeName, "Vector<%s", &inner)
+				n, _ := fmt.Sscanf(t.typeName, "Vector<%s", &inner)
 				if n == 1 {
-					write(maybeFlagged("Vector", isFlag, flagBit))
+					write(maybeFlagged("Vector", isFlag, t.flagBit))
 				} else {
-					write(maybeFlagged("Object", isFlag, flagBit))
+					write(maybeFlagged("Object", isFlag, t.flagBit))
 				}
 			}
 		}
