@@ -33,6 +33,11 @@ type SessionStore interface {
 	Load(*SessionInfo) error
 }
 
+type SessNoopStore struct{}
+
+func (s *SessNoopStore) Save(sess *SessionInfo) error { return nil }
+func (s *SessNoopStore) Load(sess *SessionInfo) error { return merry.New("can not load") }
+
 type SessFileStore struct {
 	fpath string
 }
@@ -133,36 +138,53 @@ func NewMTProto(appID int32, appHash string) (*MTProto, error) {
 	}
 	exPath := filepath.Dir(ex)
 
-	// base setup
+	cfg := &AppConfig{
+		AppID:          appID,
+		AppHash:        appHash,
+		AppVersion:     "0.0.4",
+		DeviceModel:    "Unknown",
+		SystemVersion:  runtime.GOOS + "/" + runtime.GOARCH,
+		SystemLangCode: "en",
+		LangPack:       "",
+		LangCode:       "en",
+	}
+	return NewMTProtoExt(cfg, &SessFileStore{exPath + "/tg.session"}, nil)
+}
+
+func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionInfo) (*MTProto, error) {
 	m := &MTProto{
-		sessionStore: &SessFileStore{exPath + "/tg.session"},
-		session:      &SessionInfo{},
-		appCfg: &AppConfig{
-			AppID:          appID,
-			AppHash:        appHash,
-			AppVersion:     "0.0.4",
-			DeviceModel:    "Unknown",
-			SystemVersion:  runtime.GOOS + "/" + runtime.GOARCH,
-			SystemLangCode: "en",
-			LangPack:       "",
-			LangCode:       "en",
-		},
+		sessionStore: sessStore,
+		session:      session,
+		appCfg:       appCfg,
 	}
 
-	// loading session
-	err = m.sessionStore.Load(m.session)
-	if merry.Is(err, ErrNoSessionData) { //no data
-		m.session.Addr = "149.154.167.50:443" //"149.154.167.40"
-		m.encryptionReady = false
-	} else if err == nil { //got saved session
-		m.encryptionReady = true
+	if m.session == nil {
+		m.session = &SessionInfo{}
+		err := m.sessionStore.Load(m.session)
+		if merry.Is(err, ErrNoSessionData) { //no data
+			m.session.Addr = "149.154.167.50:443" //"149.154.167.40"
+			m.encryptionReady = false
+		} else if err == nil { //got saved session
+			m.encryptionReady = true
+		} else {
+			return nil, merry.Wrap(err)
+		}
 	} else {
-		return nil, merry.Wrap(err)
+		m.encryptionReady = true
 	}
 
 	rand.Seed(time.Now().UnixNano())
 	m.session.sessionId = rand.Int63()
 	return m, nil
+}
+
+func (m *MTProto) AppConfig() *AppConfig {
+	return m.appCfg
+}
+
+func (m *MTProto) SessionCopy() *SessionInfo {
+	sess := *m.session
+	return &sess
 }
 
 func (m *MTProto) SetEventsHandler(handler func(TL)) {
@@ -265,6 +287,12 @@ func (m *MTProto) reconnect(newaddr string) error {
 	return nil
 }
 
+func (m *MTProto) Send(msg TL) chan TL {
+	resp := make(chan TL, 1)
+	m.queueSend <- packetToSend{msg, resp}
+	return resp
+}
+
 func (m *MTProto) SendSync(msg TL) TL {
 	resp := make(chan TL, 1)
 	m.queueSend <- packetToSend{msg, resp}
@@ -291,15 +319,15 @@ func (m *MTProto) Auth() error {
 			flag = false
 		case TL_rpc_error:
 			x := x.(TL_rpc_error)
-			if x.error_code != TL_ErrSeeOther {
+			if x.ErrorCode != TL_ErrSeeOther {
 				return WrongRespError(x)
 			}
 			var newDc int32
-			n, _ := fmt.Sscanf(x.error_message, "PHONE_MIGRATE_%d", &newDc)
+			n, _ := fmt.Sscanf(x.ErrorMessage, "PHONE_MIGRATE_%d", &newDc)
 			if n != 1 {
-				n, _ := fmt.Sscanf(x.error_message, "NETWORK_MIGRATE_%d", &newDc)
+				n, _ := fmt.Sscanf(x.ErrorMessage, "NETWORK_MIGRATE_%d", &newDc)
 				if n != 1 {
-					return fmt.Errorf("RPC error_string: %s", x.error_message)
+					return fmt.Errorf("RPC error_string: %s", x.ErrorMessage)
 				}
 			}
 
@@ -440,7 +468,7 @@ func (m *MTProto) readRoutine() {
 		if m.handleEvent != nil {
 			go m.handleEvent(x)
 		}
-		fmt.Printf("recv: %T %+v\n", x, x)
+		fmt.Printf("\033[90mrecv: %T\033[0m\n", x)
 	}
 
 }

@@ -101,8 +101,8 @@ type TL_rpc_result struct {
 }
 
 type TL_rpc_error struct {
-	error_code    int32
-	error_message string
+	ErrorCode    int32
+	ErrorMessage string
 }
 
 type TL_dh_gen_ok struct {
