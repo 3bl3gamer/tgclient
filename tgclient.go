@@ -48,9 +48,9 @@ func NewTGClient(appID int32, appHash string, handleUpdate UpdateHandler, log Lo
 		log:                  log,
 	}
 	mt.SetEventsHandler(client.handleEvent)
-	for i := 0; i < 4; i++ {
-		go client.filesRoutine()
-	}
+	//for i := 0; i < 4; i++ {
+	go client.filesRoutine() //TODO: concurrency (at least for getFileMT)
+	//}
 	return client, nil
 }
 
@@ -212,14 +212,30 @@ func (c *TGClient) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 	if mt != nil {
 		return mt, nil
 	}
+
 	session := c.mt.SessionCopy()
-	session.Addr = c.mt.DCAddr(dcID)
-	mt, err := mtproto.NewMTProtoExt(c.mt.AppConfig(), &mtproto.SessNoopStore{}, session)
+	isOnSameDC := session.DcID == dcID
+	encrIsReady := isOnSameDC
+	session.DcID = dcID
+	session.Addr, _ = c.mt.DCAddr(dcID, false)
+	mt, err := mtproto.NewMTProtoExt(c.mt.AppConfig(), &mtproto.SessNoopStore{}, session, encrIsReady)
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
 	if err := mt.Connect(); err != nil {
 		return nil, merry.Wrap(err)
+	}
+
+	if !isOnSameDC {
+		res := c.mt.SendSync(mtproto.TL_auth_exportAuthorization{DcID: dcID})
+		exported, ok := res.(mtproto.TL_auth_exportedAuthorization)
+		if !ok {
+			return nil, merry.New(mtproto.UnexpectedTL("auth export", res))
+		}
+		res = mt.SendSync(mtproto.TL_auth_importAuthorization{ID: exported.ID, Bytes: exported.Bytes})
+		if _, ok := res.(mtproto.TL_auth_authorization); !ok {
+			return nil, merry.New(mtproto.UnexpectedTL("auth import", res))
+		}
 	}
 	return mt, nil
 }
