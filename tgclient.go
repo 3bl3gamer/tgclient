@@ -186,7 +186,7 @@ func (c *TGClient) filesRoutine() {
 			fileResp.Err = merry.New("cdn redirect: " + mtproto.Sprint(res))
 		case mtproto.TL_rpc_error:
 			if strings.HasPrefix(res.ErrorMessage, "FILE_MIGRATE_") {
-				c.log.Info("got " + res.ErrorMessage)
+				c.log.Infof("got %s, part DC is %d", res.ErrorMessage, part.dcID)
 				id, _ := strconv.Atoi(res.ErrorMessage[13:])
 				part.dcID = int32(id)
 				select {
@@ -212,7 +212,9 @@ func (c *TGClient) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 	if mt != nil {
 		return mt, nil
 	}
-	mt, err := mtproto.NewMTProtoExt(c.mt.AppConfig(), &mtproto.SessNoopStore{}, c.mt.SessionCopy())
+	session := c.mt.SessionCopy()
+	session.Addr = c.mt.DCAddr(dcID)
+	mt, err := mtproto.NewMTProtoExt(c.mt.AppConfig(), &mtproto.SessNoopStore{}, session)
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
