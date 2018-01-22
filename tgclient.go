@@ -6,6 +6,7 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/ansel1/merry"
 )
@@ -22,6 +23,7 @@ type Logger interface {
 type TGClient struct {
 	mt                   *mtproto.MTProto
 	fileMTs              map[int32]*mtproto.MTProto
+	fileMTsMutex         *sync.Mutex
 	updatesState         *mtproto.TL_updates_state
 	filePartsQueue       chan *filePart
 	handleUpdateExternal UpdateHandler
@@ -42,15 +44,16 @@ func NewTGClient(appID int32, appHash string, handleUpdate UpdateHandler, log Lo
 	client := &TGClient{
 		mt:                   mt,
 		fileMTs:              make(map[int32]*mtproto.MTProto),
+		fileMTsMutex:         &sync.Mutex{},
 		updatesState:         &mtproto.TL_updates_state{},
 		filePartsQueue:       make(chan *filePart, 4),
 		handleUpdateExternal: handleUpdate,
 		log:                  log,
 	}
 	mt.SetEventsHandler(client.handleEvent)
-	//for i := 0; i < 4; i++ {
-	go client.filesRoutine() //TODO: concurrency (at least for getFileMT)
-	//}
+	for i := 0; i < 4; i++ {
+		go client.filesRoutine()
+	}
 	return client, nil
 }
 
@@ -208,10 +211,13 @@ func (c *TGClient) filesRoutine() {
 }
 
 func (c *TGClient) getFileMT(dcID int32) (*mtproto.MTProto, error) {
+	c.fileMTsMutex.Lock()
 	mt, _ := c.fileMTs[dcID]
 	if mt != nil {
+		c.fileMTsMutex.Unlock()
 		return mt, nil
 	}
+	c.log.Infof("connecting to file DC %d", dcID)
 
 	session := c.mt.SessionCopy()
 	isOnSameDC := session.DcID == dcID
@@ -237,6 +243,10 @@ func (c *TGClient) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 			return nil, merry.New(mtproto.UnexpectedTL("auth import", res))
 		}
 	}
+
+	c.log.Infof("connected to file DC %d", dcID)
+	c.fileMTsMutex.Unlock()
+	c.fileMTs[dcID] = mt
 	return mt, nil
 }
 
