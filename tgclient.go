@@ -4,9 +4,6 @@ import (
 	"fmt"
 	"mtproto"
 	"reflect"
-	"strconv"
-	"strings"
-	"sync"
 
 	"github.com/ansel1/merry"
 )
@@ -22,12 +19,10 @@ type Logger interface {
 
 type TGClient struct {
 	mt                   *mtproto.MTProto
-	fileMTs              map[int32]*mtproto.MTProto
-	fileMTsMutex         *sync.Mutex
 	updatesState         *mtproto.TL_updates_state
-	filePartsQueue       chan *filePart
 	handleUpdateExternal UpdateHandler
 	log                  Logger
+	Downloader
 }
 
 type UpdateHandler func(mtproto.TL)
@@ -43,16 +38,15 @@ func NewTGClient(appID int32, appHash string, handleUpdate UpdateHandler, log Lo
 
 	client := &TGClient{
 		mt:                   mt,
-		fileMTs:              make(map[int32]*mtproto.MTProto),
-		fileMTsMutex:         &sync.Mutex{},
 		updatesState:         &mtproto.TL_updates_state{},
-		filePartsQueue:       make(chan *filePart, 4),
 		handleUpdateExternal: handleUpdate,
 		log:                  log,
 	}
+	client.Downloader = *NewDownloader(client)
+
 	mt.SetEventsHandler(client.handleEvent)
 	for i := 0; i < 4; i++ {
-		go client.filesRoutine()
+		go client.partsDownloadRoutine()
 	}
 	return client, nil
 }
@@ -150,114 +144,4 @@ func (c *TGClient) AuthAndInitEvents() error {
 
 func (c *TGClient) SendSync(msg mtproto.TL) mtproto.TL {
 	return c.mt.SendSync(msg)
-}
-
-type FileResponse struct {
-	DcID int32
-	Data []byte
-	Err  error
-}
-
-type filePart struct {
-	dcID          int32
-	location      mtproto.TL
-	outChan       chan *FileResponse
-	offset, limit int32
-}
-
-func (c *TGClient) filesRoutine() {
-	for part := range c.filePartsQueue {
-		fileResp := FileResponse{DcID: part.dcID}
-
-		mt, err := c.getFileMT(part.dcID)
-		if err != nil {
-			fileResp.Err = merry.Wrap(err)
-			part.outChan <- &fileResp
-			continue
-		}
-
-		resTL := mt.SendSync(mtproto.TL_upload_getFile{
-			Location: part.location,
-			Offset:   part.offset,
-			Limit:    part.limit,
-		})
-
-		switch res := resTL.(type) {
-		case mtproto.TL_upload_file:
-			fileResp.Data = res.Bytes
-		case mtproto.TL_upload_fileCdnRedirect:
-			fileResp.Err = merry.New("cdn redirect: " + mtproto.Sprint(res))
-		case mtproto.TL_rpc_error:
-			if strings.HasPrefix(res.ErrorMessage, "FILE_MIGRATE_") {
-				c.log.Infof("got %s, part DC is %d", res.ErrorMessage, part.dcID)
-				id, _ := strconv.Atoi(res.ErrorMessage[13:])
-				part.dcID = int32(id)
-				select {
-				case c.filePartsQueue <- part:
-					continue
-				default:
-					fileResp.Err = merry.New("file queue overflow while handling DC migration error")
-				}
-			} else {
-				fileResp.Err = merry.New(mtproto.UnexpectedTL("file part", resTL))
-			}
-		default:
-			fileResp.Err = merry.New(mtproto.UnexpectedTL("file part", resTL))
-		}
-
-		part.outChan <- &fileResp
-		close(part.outChan)
-	}
-}
-
-func (c *TGClient) getFileMT(dcID int32) (*mtproto.MTProto, error) {
-	c.fileMTsMutex.Lock()
-	mt, _ := c.fileMTs[dcID]
-	if mt != nil {
-		c.fileMTsMutex.Unlock()
-		return mt, nil
-	}
-	c.log.Infof("connecting to file DC %d", dcID)
-
-	session := c.mt.SessionCopy()
-	isOnSameDC := session.DcID == dcID
-	encrIsReady := isOnSameDC
-	session.DcID = dcID
-	session.Addr, _ = c.mt.DCAddr(dcID, false)
-	mt, err := mtproto.NewMTProtoExt(c.mt.AppConfig(), &mtproto.SessNoopStore{}, session, encrIsReady)
-	if err != nil {
-		return nil, merry.Wrap(err)
-	}
-	if err := mt.Connect(); err != nil {
-		return nil, merry.Wrap(err)
-	}
-
-	if !isOnSameDC {
-		res := c.mt.SendSync(mtproto.TL_auth_exportAuthorization{DcID: dcID})
-		exported, ok := res.(mtproto.TL_auth_exportedAuthorization)
-		if !ok {
-			return nil, merry.New(mtproto.UnexpectedTL("auth export", res))
-		}
-		res = mt.SendSync(mtproto.TL_auth_importAuthorization{ID: exported.ID, Bytes: exported.Bytes})
-		if _, ok := res.(mtproto.TL_auth_authorization); !ok {
-			return nil, merry.New(mtproto.UnexpectedTL("auth import", res))
-		}
-	}
-
-	c.log.Infof("connected to file DC %d", dcID)
-	c.fileMTsMutex.Unlock()
-	c.fileMTs[dcID] = mt
-	return mt, nil
-}
-
-func (c *TGClient) ReqestFilePart(dcID int32, fileLocation mtproto.TL, offset, limit int32) chan *FileResponse {
-	part := &filePart{
-		dcID:     dcID,
-		location: fileLocation,
-		outChan:  make(chan *FileResponse, 1),
-		limit:    limit,
-		offset:   offset,
-	}
-	c.filePartsQueue <- part
-	return part.outChan
 }
