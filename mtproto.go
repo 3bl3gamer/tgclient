@@ -21,6 +21,7 @@ import (
 var ErrNoSessionData = merry.New("no session data")
 
 type SessionInfo struct {
+	DcID        int32
 	AuthKey     []byte
 	AuthKeyHash []byte
 	ServerSalt  []byte
@@ -122,7 +123,7 @@ type MTProto struct {
 	msgId           int64
 	handleEvent     func(TL)
 
-	dclist map[int32]string
+	dcOptions []*TL_dcOption
 }
 
 type packetToSend struct {
@@ -148,10 +149,10 @@ func NewMTProto(appID int32, appHash string) (*MTProto, error) {
 		LangPack:       "",
 		LangCode:       "en",
 	}
-	return NewMTProtoExt(cfg, &SessFileStore{exPath + "/tg.session"}, nil)
+	return NewMTProtoExt(cfg, &SessFileStore{exPath + "/tg.session"}, nil, false)
 }
 
-func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionInfo) (*MTProto, error) {
+func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionInfo, sessEncrIsReady bool) (*MTProto, error) {
 	m := &MTProto{
 		sessionStore: sessStore,
 		session:      session,
@@ -170,7 +171,7 @@ func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionIn
 			return nil, merry.Wrap(err)
 		}
 	} else {
-		m.encryptionReady = true
+		m.encryptionReady = sessEncrIsReady
 	}
 
 	rand.Seed(time.Now().UnixNano())
@@ -182,9 +183,18 @@ func (m *MTProto) AppConfig() *AppConfig {
 	return m.appCfg
 }
 
-func (m *MTProto) SessionCopy() *SessionInfo {
+func (m *MTProto) CopySession() *SessionInfo {
 	sess := *m.session
 	return &sess
+}
+
+func (m *MTProto) DCAddr(dcID int32, ipv6 bool) (string, bool) {
+	for _, o := range m.dcOptions {
+		if o.ID == dcID && o.Ipv6 == ipv6 {
+			return fmt.Sprintf("%s:%d", o.IpAddress, o.Port), true
+		}
+	}
+	return "", false
 }
 
 func (m *MTProto) SetEventsHandler(handler func(TL)) {
@@ -244,10 +254,10 @@ func (m *MTProto) Connect() error {
 		},
 	})
 	if cfg, ok := x.(TL_config); ok {
-		m.dclist = make(map[int32]string, 5)
+		m.session.DcID = cfg.ThisDc
 		for _, v := range cfg.DcOptions {
 			v := v.(TL_dcOption)
-			m.dclist[v.ID] = fmt.Sprintf("%s:%d", v.IpAddress, v.Port)
+			m.dcOptions = append(m.dcOptions, &v)
 		}
 	} else {
 		return WrongRespError(x)
@@ -255,10 +265,11 @@ func (m *MTProto) Connect() error {
 
 	// starting keepalive pinging
 	go m.pingRoutine()
+	println("\033[90mconnected: " + m.session.Addr + "\033[0m")
 	return nil
 }
 
-func (m *MTProto) reconnect(newaddr string) error {
+func (m *MTProto) reconnect(newDc int32, newAddr string) error {
 	// stopping routines
 	m.stopPing <- struct{}{}
 	m.stopSend <- struct{}{}
@@ -280,7 +291,8 @@ func (m *MTProto) reconnect(newaddr string) error {
 
 	// renewing connection
 	m.encryptionReady = false
-	m.session.Addr = newaddr
+	m.session.DcID = newDc
+	m.session.Addr = newAddr
 	if err := m.Connect(); err != nil {
 		return merry.Wrap(err)
 	}
@@ -331,13 +343,14 @@ func (m *MTProto) Auth() error {
 				}
 			}
 
-			newDcAddr, ok := m.dclist[newDc]
+			newDcAddr, ok := m.DCAddr(newDc, false)
 			if !ok {
-				return fmt.Errorf("Wrong DC index: %d", newDc)
+				return merry.Errorf("wrong DC index: %d", newDc)
 			}
-			if err := m.reconnect(newDcAddr); err != nil {
+			if err := m.reconnect(newDc, newDcAddr); err != nil {
 				return merry.Wrap(err)
 			}
+			//TODO: save session here?
 		default:
 			return WrongRespError(x)
 		}
@@ -442,20 +455,17 @@ func (m *MTProto) pingRoutine() {
 
 func (m *MTProto) sendRoutine() {
 	for x := range m.queueSend {
-		//DEBUG fmt.Printf("Senging: %T %v\n", x.msg, x.msg)
 		err := m.send(x.msg, x.resp)
 		if err != nil {
 			log.Fatal(merry.Details(err)) //TODO: better handling
 		}
 	}
-
 	m.allDone <- struct{}{}
 }
 
 func (m *MTProto) readRoutine() {
 	for {
 		data, err := m.read(m.stopRead)
-		//DEBUG fmt.Printf("Read: %T %v\n", data, data)
 		if err != nil {
 			log.Fatal(merry.Details(err)) //TODO: better handling
 		}
@@ -464,27 +474,25 @@ func (m *MTProto) readRoutine() {
 			return
 		}
 
-		x := m.process(m.msgId, m.seqNo, data)
-		if m.handleEvent != nil {
-			go m.handleEvent(x)
+		fmt.Printf("\033[90mrecv: %T\033[0m\n", data)
+		if err := m.process(m.msgId, m.seqNo, data, true); err != nil {
+			log.Fatal(merry.Details(err)) //TODO: better handling
 		}
-		fmt.Printf("\033[90mrecv: %T\033[0m\n", x)
 	}
-
 }
 
-func (m *MTProto) process(msgId int64, seqNo int32, data TL) TL {
-	switch data.(type) {
+func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler bool) error {
+	switch data := dataTL.(type) {
 	case TL_msg_container:
-		data := data.(TL_msg_container).Items //TODO
-		for _, v := range data {
-			m.process(v.MsgID, v.SeqNo, v.Data)
+		for _, v := range data.Items {
+			m.process(v.MsgID, v.SeqNo, v.Data, true)
 		}
 
 	case TL_bad_server_salt:
-		data := data.(TL_bad_server_salt)
 		m.session.ServerSalt = data.new_server_salt
-		_ = m.sessionStore.Save(m.session) //TODO
+		if err := m.sessionStore.Save(m.session); err != nil {
+			return merry.Wrap(err)
+		}
 		m.mutex.Lock()
 		for k, v := range m.msgsIdToAck {
 			delete(m.msgsIdToAck, k)
@@ -493,19 +501,18 @@ func (m *MTProto) process(msgId int64, seqNo int32, data TL) TL {
 		m.mutex.Unlock()
 
 	case TL_new_session_created:
-		data := data.(TL_new_session_created)
 		m.session.ServerSalt = data.server_salt
-		_ = m.sessionStore.Save(m.session) //TODO
+		if err := m.sessionStore.Save(m.session); err != nil {
+			return merry.Wrap(err)
+		}
 
 	case TL_ping:
-		data := data.(TL_ping)
 		m.queueSend <- packetToSend{TL_pong{msgId, data.ping_id}, nil}
 
 	case TL_pong:
 		// (ignore) TODO
 
 	case TL_msgs_ack:
-		data := data.(TL_msgs_ack)
 		m.mutex.Lock()
 		for _, v := range data.msgIds {
 			delete(m.msgsIdToAck, v)
@@ -513,24 +520,29 @@ func (m *MTProto) process(msgId int64, seqNo int32, data TL) TL {
 		m.mutex.Unlock()
 
 	case TL_rpc_result:
-		data := data.(TL_rpc_result)
-		//DEBUG fmt.Println(msgId, seqNo, data)
-		//DEBUG fmt.Printf("%v %T\n", data, data)
-		x := m.process(msgId, seqNo, data.obj)
+		err := m.process(msgId, 0, data.obj, false)
 		m.mutex.Lock()
 		v, ok := m.msgsIdToResp[data.req_msg_id]
 		if ok {
-			v <- x.(TL)
+			v <- data.obj
 			close(v)
 			delete(m.msgsIdToResp, data.req_msg_id)
 		}
 		delete(m.msgsIdToAck, data.req_msg_id)
 		m.mutex.Unlock()
+		if err != nil {
+			return merry.Wrap(err)
+		}
+
+	default:
+		if mayPassToHandler && m.handleEvent != nil {
+			go m.handleEvent(dataTL)
+		}
 	}
 
 	// should acknowledge odd ids
 	if (seqNo & 1) == 1 {
 		m.queueSend <- packetToSend{TL_msgs_ack{[]int64{msgId}}, nil}
 	}
-	return data
+	return nil
 }
