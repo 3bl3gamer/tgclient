@@ -1,7 +1,6 @@
 package tgclient
 
 import (
-	"fmt"
 	"mtproto"
 	"reflect"
 
@@ -57,7 +56,7 @@ func (c *TGClient) handleEvent(eventObj mtproto.TL) {
 		//TODO: what?
 		// Too many updates, it is necessary to execute updates.getDifference.
 		// https://core.telegram.org/constructor/updatesTooLong
-		fmt.Println("[WARN] updates too long")
+		c.log.Warning("[WARN] updates too long")
 	case mtproto.TL_updateShort:
 		c.updatesState.Date = event.Date
 		c.handleUpdate(event.Update)
@@ -92,9 +91,6 @@ func (c *TGClient) handleEvent(eventObj mtproto.TL) {
 		c.updatesState.Pts = event.Pts
 		// update.PtsCount
 		c.handleUpdate(event)
-	case mtproto.TL_pong:
-	case mtproto.TL_rpc_result:
-		// do nothing
 	default:
 		c.log.Warning(mtproto.UnexpectedTL("event", eventObj))
 	}
