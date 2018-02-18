@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"hash/crc32"
 	"io/ioutil"
 	"log"
 	"os"
@@ -33,7 +34,7 @@ func (f Field) isFlag() bool {
 
 type Combinator struct {
 	id       string
-	name     string
+	name     uint32
 	fields   []Field
 	typeName string
 }
@@ -61,12 +62,18 @@ func normalize(s string) string {
 	return y
 }
 
-func normalizeName(nameStr string, base int) string {
+func normalizeName(nameStr string, base int) uint32 {
+	if nameStr == "" {
+		return 0
+	}
+	if nameStr[0] == '#' {
+		nameStr = nameStr[1:]
+	}
 	nameInt, err := strconv.ParseInt(nameStr, base, 64)
 	if err != nil {
 		log.Fatal(err)
 	}
-	return fmt.Sprintf("0x%08x", uint32(nameInt))
+	return uint32(nameInt)
 }
 
 func normalizeAttr(s string) string {
@@ -101,6 +108,38 @@ func makeField(name, typeName string) Field {
 		}
 	}
 	return Field{normalize(name), normalize(typeName), flagBit}
+}
+
+var fieldsFixForCrcRegexp = regexp.MustCompile(`([Vv])ector<(.*?)>`)
+
+func makeCombinatorDescription(id, fieldsStr, typeName string) string {
+	if fieldsStr != "" {
+		var fiteredFields []string
+		for _, f := range strings.Split(fieldsStr, " ") {
+			// for some reason if flagged field has type "true", it is NOT used in crc32 completely
+			if strings.HasSuffix(f, "?true") {
+				continue
+			}
+			fiteredFields = append(fiteredFields, f)
+		}
+		fieldsStr = strings.Join(fiteredFields, " ")
+		// for some reason if field is "name:bytes" crc32 will be calculated from "name:string"
+		fieldsStr = strings.Replace(fieldsStr, ":bytes", ":string", -1)
+		fieldsStr = strings.Replace(fieldsStr, "?bytes", "?string", -1) //same for flags
+		// for some reason... again
+		fieldsStr = strings.Replace(fieldsStr, "{X:Type}", "X:Type", -1)
+	}
+
+	descr := id
+	if fieldsStr != "" {
+		descr += " " + fieldsStr
+	}
+	descr += " = " + typeName
+
+	// for come reason if type is "Vector<subtype>" crc32 will be calculated from "Vector subtype"
+	// and SOME TIMES it is named "vector<subtype>" (with lower "v")
+	descr = fieldsFixForCrcRegexp.ReplaceAllString(descr, "${1}ector $2")
+	return descr
 }
 
 func parseJsonSchema(fpath string) []*Combinator {
@@ -165,7 +204,7 @@ func parseTLSchema(fpath string) []*Combinator {
 	// processing constructors
 	combinators := []*Combinator{}
 
-	lineRegexp := regexp.MustCompile(`^(.*?)#([a-f0-9]*)? (.*)= (.*);$`)
+	lineRegexp := regexp.MustCompile(`^(.*?)(#[a-f0-9]*)? (.*)= (.*);$`)
 	fieldRegexp := regexp.MustCompile(`^(.*?):(.*)$`)
 	for lineNum, line := range strings.Split(string(data), "\n") {
 		line = strings.TrimSpace(line)
@@ -181,18 +220,28 @@ func parseTLSchema(fpath string) []*Combinator {
 			log.Printf("line %d: wrong combinator: %s", lineNum, line)
 			continue
 		}
-		id := normalize(match[1])
-		name := normalizeName(match[2], 16)
-		fieldsStr := match[3]
-		typeName := normalize(match[4])
 
+		id := strings.TrimSpace(match[1])
 		if id == "vector" {
 			continue
 		}
-		// if strings.HasPrefix(fieldsStr, "{") {
-		// 	log.Printf("line %d: skipping: %s", lineNum, line)
-		// 	continue
-		// }
+		name := normalizeName(match[2], 16)
+		fieldsStr := strings.TrimSpace(match[3])
+		typeName := strings.TrimSpace(match[4])
+
+		// making combinator description string (without id) and checking it's crc32
+		descr := makeCombinatorDescription(id, fieldsStr, typeName)
+		crc32sum := normalizeName(fmt.Sprintf("%x", crc32.ChecksumIEEE([]byte(descr))), 16)
+		if name == 0 {
+			log.Printf("WARN: line %d: missing crc32 sum: %s", lineNum, line)
+			name = crc32sum
+		} else if name != crc32sum {
+			println("\n> " + descr)
+			log.Printf("WARN: line %d: wrong crc32 sum, expected %08x: %s", lineNum, crc32sum, line)
+		}
+
+		id = normalize(id)
+		typeName = normalize(typeName)
 
 		fields := make([]Field, 0, 16)
 		for _, fieldStr := range strings.Split(fieldsStr, " ") {
@@ -250,7 +299,7 @@ func main() {
 	write("package mtproto\nimport \"fmt\"\nconst (\n")
 	write("TL_Layer = %d\n", layer)
 	for _, c := range combinators {
-		write("CRC_%s = %s\n", c.id, c.name)
+		write("CRC_%s = 0x%08x\n", c.id, c.name)
 	}
 	write(")\n\n")
 
