@@ -246,7 +246,10 @@ func parseTLSchema(fpath string) []*Combinator {
 		fields := make([]Field, 0, 16)
 		for _, fieldStr := range strings.Split(fieldsStr, " ") {
 			fieldStr = strings.TrimSpace(fieldStr)
-			if fieldStr == "" || strings.HasPrefix(fieldStr, "{") { //TODO
+			if fieldStr == "" {
+				continue
+			}
+			if strings.HasPrefix(fieldStr, "{") { //if it is "{X:Type}", just skipping, "!X" type will be written as "TL" later
 				continue
 			}
 			match := fieldRegexp.FindStringSubmatch(fieldStr)
