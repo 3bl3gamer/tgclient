@@ -1,8 +1,6 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"hash/crc32"
 	"io/ioutil"
@@ -15,6 +13,7 @@ import (
 
 // https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/Resources/scheme.tl
 // https://github.com/danog/MadelineProto/tree/master/src/danog/MadelineProto
+// https://github.com/tdlib/td/tree/master/td/generate/scheme
 
 // https://core.telegram.org/mtproto/TL
 // https://core.telegram.org/mtproto/TL-combinator
@@ -62,14 +61,14 @@ func normalize(s string) string {
 	return y
 }
 
-func normalizeName(nameStr string, base int) uint32 {
+func normalizeName(nameStr string) uint32 {
 	if nameStr == "" {
 		return 0
 	}
 	if nameStr[0] == '#' {
 		nameStr = nameStr[1:]
 	}
-	nameInt, err := strconv.ParseInt(nameStr, base, 64)
+	nameInt, err := strconv.ParseInt(nameStr, 16, 64)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -142,58 +141,6 @@ func makeCombinatorDescription(id, fieldsStr, typeName string) string {
 	return descr
 }
 
-func parseJsonSchema(fpath string) []*Combinator {
-	// reading json file
-	data, err := ioutil.ReadFile(fpath)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// parsings json
-	var parsed interface{}
-	d := json.NewDecoder(bytes.NewReader(data))
-	d.UseNumber()
-	if err := d.Decode(&parsed); err != nil {
-		log.Fatal(err)
-	}
-
-	// processing constructors
-	combinators := []*Combinator{}
-
-	parsefunc := func(data []interface{}, kind string) {
-		for _, data := range data {
-			data := data.(map[string]interface{})
-
-			// name
-			name := normalizeName(data["id"].(string), 10)
-
-			// identifier
-			id := normalize(data[kind].(string))
-			if id == "vector" {
-				continue
-			}
-
-			// fields
-			fields := make([]Field, 0, 16)
-			srcFields := data["params"].([]interface{})
-			for _, srcField := range srcFields {
-				srcField := srcField.(map[string]interface{})
-				name := srcField["name"].(string)
-				typeName := srcField["type"].(string)
-				fields = append(fields, makeField(name, typeName))
-			}
-
-			// type
-			typeName := normalize(data["type"].(string))
-
-			combinators = append(combinators, &Combinator{id, name, fields, typeName})
-		}
-	}
-	parsefunc(parsed.(map[string]interface{})["constructors"].([]interface{}), "predicate")
-	parsefunc(parsed.(map[string]interface{})["methods"].([]interface{}), "method")
-	return combinators
-}
-
 func parseTLSchema(fpath string) []*Combinator {
 	// reading tl file
 	data, err := ioutil.ReadFile(fpath)
@@ -225,13 +172,13 @@ func parseTLSchema(fpath string) []*Combinator {
 		if id == "vector" {
 			continue
 		}
-		name := normalizeName(match[2], 16)
+		name := normalizeName(match[2])
 		fieldsStr := strings.TrimSpace(match[3])
 		typeName := strings.TrimSpace(match[4])
 
 		// making combinator description string (without id) and checking it's crc32
 		descr := makeCombinatorDescription(id, fieldsStr, typeName)
-		crc32sum := normalizeName(fmt.Sprintf("%x", crc32.ChecksumIEEE([]byte(descr))), 16)
+		crc32sum := normalizeName(fmt.Sprintf("%x", crc32.ChecksumIEEE([]byte(descr))))
 		if name == 0 {
 			log.Printf("WARN: line %d: missing crc32 sum: %s", lineNum, line)
 			name = crc32sum
@@ -267,7 +214,7 @@ func parseTLSchema(fpath string) []*Combinator {
 
 func main() {
 	if len(os.Args) != 4 {
-		println("Usage: " + os.Args[0] + " layer tl_schema.<json|tl> tl_schema.go")
+		println("Usage: " + os.Args[0] + " layer tl_schema.tl tl_schema.go")
 		os.Exit(2)
 	}
 	layer, err := strconv.Atoi(os.Args[1])
@@ -277,14 +224,7 @@ func main() {
 	fpath := os.Args[2]
 
 	// parsing
-	var combinators []*Combinator
-	if strings.HasSuffix(fpath, ".json") {
-		combinators = parseJsonSchema(fpath)
-	} else if strings.HasSuffix(fpath, ".tl") {
-		combinators = parseTLSchema(fpath)
-	} else {
-		log.Fatalf("unknown file format, expected .json or .tl: %s", fpath)
-	}
+	combinators := parseTLSchema(fpath)
 
 	// opening out file
 	outFile, err := os.Create(os.Args[3])
