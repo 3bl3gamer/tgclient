@@ -9,6 +9,7 @@ import (
 )
 
 func (m *MTProto) send(msg TL, resp chan TL) error {
+	//fmt.Printf("send: %#v\n", msg)
 	obj := msg.encode()
 
 	x := NewEncodeBuf(256)
@@ -24,7 +25,7 @@ func (m *MTProto) send(msg TL, resp chan TL) error {
 		}
 		z := NewEncodeBuf(256)
 		newMsgId := GenerateMessageId()
-		z.Bytes(m.session.ServerSalt)
+		z.Long(m.session.ServerSalt)
 		z.Long(m.session.sessionId)
 		z.Long(newMsgId)
 		if needAck {
@@ -202,12 +203,12 @@ func (m *MTProto) makeAuthKey() error {
 	if !ok {
 		return merry.New("Handshake: Need resPQ")
 	}
-	if !bytes.Equal(nonceFirst, res.nonce) {
+	if !bytes.Equal(nonceFirst, res.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
 	}
 	found := false
-	for _, b := range res.fingerprints {
-		if uint64(b) == telegramPublicKey_FP {
+	for _, b := range res.ServerPublicKeyFingerprints {
+		if b == telegramPublicKey_FP {
 			found = true
 			break
 		}
@@ -217,10 +218,10 @@ func (m *MTProto) makeAuthKey() error {
 	}
 
 	// (encoding) p_q_inner_data
-	p, q := splitPQ(res.pq)
+	p, q := splitPQ(str2big(res.Pq))
 	nonceSecond := GenerateNonce(32)
-	nonceServer := res.server_nonce
-	innerData1 := (TL_p_q_inner_data{res.pq, p, q, nonceFirst, nonceServer, nonceSecond}).encode()
+	nonceServer := res.ServerNonce
+	innerData1 := (TL_p_q_inner_data{res.Pq, big2str(p), big2str(q), nonceFirst, nonceServer, nonceSecond}).encode()
 
 	x = make([]byte, 255)
 	copy(x[0:], sha1(innerData1))
@@ -228,7 +229,7 @@ func (m *MTProto) makeAuthKey() error {
 	encryptedData1 := doRSAencrypt(x)
 
 	// (send) req_DH_params
-	err = m.send(TL_req_DH_params{nonceFirst, nonceServer, p, q, telegramPublicKey_FP, encryptedData1}, nil)
+	err = m.send(TL_req_DH_params{nonceFirst, nonceServer, big2str(p), big2str(q), telegramPublicKey_FP, string(encryptedData1)}, nil)
 	if err != nil {
 		return merry.Wrap(err)
 	}
@@ -242,10 +243,10 @@ func (m *MTProto) makeAuthKey() error {
 	if !ok {
 		return merry.New("Handshake: Need server_DH_params_ok")
 	}
-	if !bytes.Equal(nonceFirst, dh.nonce) {
+	if !bytes.Equal(nonceFirst, dh.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
 	}
-	if !bytes.Equal(nonceServer, dh.server_nonce) {
+	if !bytes.Equal(nonceServer, dh.ServerNonce) {
 		return merry.New("Handshake: Wrong server_nonce")
 	}
 	t1 := make([]byte, 48)
@@ -274,7 +275,7 @@ func (m *MTProto) makeAuthKey() error {
 	copy(tmpAESIV[28:], nonceSecond[0:4])
 
 	// (parse-thru) server_DH_inner_data
-	decodedData, err := doAES256IGEdecrypt(dh.encrypted_answer, tmpAESKey, tmpAESIV)
+	decodedData, err := doAES256IGEdecrypt([]byte(dh.EncryptedAnswer), tmpAESKey, tmpAESIV)
 	if err != nil {
 		return merry.Wrap(err)
 	}
@@ -287,14 +288,14 @@ func (m *MTProto) makeAuthKey() error {
 	if !ok {
 		return merry.New("Handshake: Need server_DH_inner_data")
 	}
-	if !bytes.Equal(nonceFirst, dhi.nonce) {
+	if !bytes.Equal(nonceFirst, dhi.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
 	}
-	if !bytes.Equal(nonceServer, dhi.server_nonce) {
+	if !bytes.Equal(nonceServer, dhi.ServerNonce) {
 		return merry.New("Handshake: Wrong server_nonce")
 	}
 
-	_, g_b, g_ab := makeGAB(dhi.g, dhi.g_a, dhi.dh_prime)
+	_, g_b, g_ab := makeGAB(dhi.G, str2big(dhi.GA), str2big(dhi.DhPrime))
 	m.session.AuthKey = g_ab.Bytes()
 	if m.session.AuthKey[0] == 0 { //TODO: what?
 		m.session.AuthKey = m.session.AuthKey[1:]
@@ -305,19 +306,20 @@ func (m *MTProto) makeAuthKey() error {
 	t4[32] = 1
 	copy(t4[33:], sha1(m.session.AuthKey)[0:8])
 	nonceHash1 := sha1(t4)[4:20]
-	m.session.ServerSalt = make([]byte, 8)
-	copy(m.session.ServerSalt, nonceSecond[:8])
-	xor(m.session.ServerSalt, nonceServer[:8])
+	saltBuf := make([]byte, 8)
+	copy(saltBuf, nonceSecond[:8])
+	xor(saltBuf, nonceServer[:8])
+	m.session.ServerSalt = int64(binary.LittleEndian.Uint64(saltBuf))
 
 	// (encoding) client_DH_inner_data
-	innerData2 := (TL_client_DH_inner_data{nonceFirst, nonceServer, 0, g_b}).encode()
+	innerData2 := (TL_client_DH_inner_data{nonceFirst, nonceServer, 0, big2str(g_b)}).encode()
 	x = make([]byte, 20+len(innerData2)+(16-((20+len(innerData2))%16))&15)
 	copy(x[0:], sha1(innerData2))
 	copy(x[20:], innerData2)
 	encryptedData2, err := doAES256IGEencrypt(x, tmpAESKey, tmpAESIV)
 
 	// (send) set_client_DH_params
-	err = m.send(TL_set_client_DH_params{nonceFirst, nonceServer, encryptedData2}, nil)
+	err = m.send(TL_set_client_DH_params{nonceFirst, nonceServer, string(encryptedData2)}, nil)
 	if err != nil {
 		return merry.Wrap(err)
 	}
@@ -331,13 +333,13 @@ func (m *MTProto) makeAuthKey() error {
 	if !ok {
 		return merry.New("Handshake: Need dh_gen_ok")
 	}
-	if !bytes.Equal(nonceFirst, dhg.nonce) {
+	if !bytes.Equal(nonceFirst, dhg.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
 	}
-	if !bytes.Equal(nonceServer, dhg.server_nonce) {
+	if !bytes.Equal(nonceServer, dhg.ServerNonce) {
 		return merry.New("Handshake: Wrong server_nonce")
 	}
-	if !bytes.Equal(nonceHash1, dhg.new_nonce_hash1) {
+	if !bytes.Equal(nonceHash1, dhg.NewNonceHash1) {
 		return merry.New("Handshake: Wrong new_nonce_hash1")
 	}
 	return nil

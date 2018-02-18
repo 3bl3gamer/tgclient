@@ -382,27 +382,6 @@ func (m *DecodeBuf) Object() (r TL) {
 	//DEBUG m.dump()
 
 	switch constructor {
-	case CRC_resPQ:
-		r = TL_resPQ{m.Bytes(16), m.Bytes(16), m.BigInt(), m.VectorLong()}
-
-	case CRC_server_DH_params_ok:
-		r = TL_server_DH_params_ok{m.Bytes(16), m.Bytes(16), m.StringBytes()}
-
-	case CRC_server_DH_inner_data:
-		r = TL_server_DH_inner_data{
-			m.Bytes(16), m.Bytes(16), m.Int(),
-			m.BigInt(), m.BigInt(), m.Int(),
-		}
-
-	case CRC_dh_gen_ok:
-		r = TL_dh_gen_ok{m.Bytes(16), m.Bytes(16), m.Bytes(16)}
-
-	case CRC_ping:
-		r = TL_ping{m.Long()}
-
-	case CRC_pong:
-		r = TL_pong{m.Long(), m.Long()}
-
 	case CRC_msg_container:
 		size := m.Int()
 		arr := make([]TL_MT_message, size)
@@ -416,21 +395,6 @@ func (m *DecodeBuf) Object() (r TL) {
 
 	case CRC_rpc_result:
 		r = TL_rpc_result{m.Long(), m.Object()}
-
-	case CRC_rpc_error:
-		r = TL_rpc_error{m.Int(), m.String()}
-
-	case CRC_new_session_created:
-		r = TL_new_session_created{m.Long(), m.Long(), m.Bytes(8)}
-
-	case CRC_bad_server_salt:
-		r = TL_bad_server_salt{m.Long(), m.Int(), m.Int(), m.Bytes(8)}
-
-	case CRC_bad_msg_notification:
-		r = TL_crc_bad_msg_notification{m.Long(), m.Int(), m.Int()}
-
-	case CRC_msgs_ack:
-		r = TL_msgs_ack{m.VectorLong()}
 
 	case CRC_gzip_packed:
 		obj := make([]byte, 0, 4096)
@@ -476,4 +440,12 @@ func (d *DecodeBuf) dump() {
 func toBool(x TL) bool {
 	_, ok := x.(TL_boolTrue)
 	return ok
+}
+
+func str2big(str string) *big.Int {
+	return new(big.Int).SetBytes([]byte(str))
+}
+
+func big2str(val *big.Int) string {
+	return string(val.Bytes())
 }

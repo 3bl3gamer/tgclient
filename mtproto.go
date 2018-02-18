@@ -15,7 +15,7 @@ import (
 	"github.com/ansel1/merry"
 )
 
-//go:generate go run scheme/generate_tl_schema.go scheme/tl-schema-71.json tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 73 scheme/tl-schema-73.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 var ErrNoSessionData = merry.New("no session data")
@@ -24,7 +24,7 @@ type SessionInfo struct {
 	DcID        int32
 	AuthKey     []byte
 	AuthKeyHash []byte
-	ServerSalt  []byte
+	ServerSalt  int64
 	Addr        string
 	sessionId   int64
 }
@@ -53,7 +53,7 @@ func (s *SessFileStore) Save(sess *SessionInfo) (err error) {
 	b := NewEncodeBuf(1024)
 	b.StringBytes(sess.AuthKey)
 	b.StringBytes(sess.AuthKeyHash)
-	b.StringBytes(sess.ServerSalt)
+	b.Long(sess.ServerSalt)
 	b.String(sess.Addr)
 
 	_, err = f.Write(b.buf)
@@ -82,7 +82,7 @@ func (s *SessFileStore) Load(sess *SessionInfo) error {
 	d := NewDecodeBuf(b)
 	sess.AuthKey = d.StringBytes()
 	sess.AuthKeyHash = d.StringBytes()
-	sess.ServerSalt = d.StringBytes()
+	sess.ServerSalt = d.Long()
 	sess.Addr = d.String()
 
 	if d.err != nil {
@@ -241,7 +241,7 @@ func (m *MTProto) Connect() error {
 
 	// getting connection configs
 	x := m.SendSync(TL_invokeWithLayer{
-		layer,
+		TL_Layer,
 		TL_initConnection{
 			m.appCfg.AppID,
 			m.appCfg.DeviceModel,
@@ -489,7 +489,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 		}
 
 	case TL_bad_server_salt:
-		m.session.ServerSalt = data.new_server_salt
+		m.session.ServerSalt = data.NewServerSalt
 		if err := m.sessionStore.Save(m.session); err != nil {
 			return merry.Wrap(err)
 		}
@@ -501,20 +501,20 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 		m.mutex.Unlock()
 
 	case TL_new_session_created:
-		m.session.ServerSalt = data.server_salt
+		m.session.ServerSalt = data.ServerSalt
 		if err := m.sessionStore.Save(m.session); err != nil {
 			return merry.Wrap(err)
 		}
 
 	case TL_ping:
-		m.queueSend <- packetToSend{TL_pong{msgId, data.ping_id}, nil}
+		m.queueSend <- packetToSend{TL_pong{msgId, data.PingID}, nil}
 
 	case TL_pong:
 		// (ignore) TODO
 
 	case TL_msgs_ack:
 		m.mutex.Lock()
-		for _, v := range data.msgIds {
+		for _, v := range data.MsgIds {
 			delete(m.msgsIdToAck, v)
 		}
 		m.mutex.Unlock()

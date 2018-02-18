@@ -18,11 +18,11 @@ func IsErrorType(obj TL, code int32) bool {
 }
 
 func Sprint(obj TL) string {
-	return fmt.Sprintf("%T%+v", obj, obj)
+	return fmt.Sprintf("%#v", obj)
 }
 
 func UnexpectedTL(name string, obj TL) string {
-	return fmt.Sprintf("unexpected " + name + ": " + Sprint(obj))
+	return fmt.Sprint("unexpected " + name + ": " + Sprint(obj))
 }
 
 func WrongRespError(obj TL) error {

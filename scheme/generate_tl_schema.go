@@ -7,14 +7,19 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 )
 
 // https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/Resources/scheme.tl
+// https://github.com/danog/MadelineProto/tree/master/src/danog/MadelineProto
 
+// https://core.telegram.org/mtproto/TL
 // https://core.telegram.org/mtproto/TL-combinator
 // identifier#name attr:type attr:type = resultType;
+
+// Pq Ids
 
 type Field struct {
 	name     string
@@ -56,6 +61,14 @@ func normalize(s string) string {
 	return y
 }
 
+func normalizeName(nameStr string, base int) string {
+	nameInt, err := strconv.ParseInt(nameStr, base, 64)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return fmt.Sprintf("0x%08x", uint32(nameInt))
+}
+
 func normalizeAttr(s string) string {
 	s = strings.Replace(s, "_", " ", -1)
 	s = strings.Title(s)
@@ -66,12 +79,28 @@ func normalizeAttr(s string) string {
 	return s
 }
 
-func maybeFlagged(_type string, isFlag bool, flagBit int) string {
+func maybeFlagged(_type string, isFlag bool, flagBit int, args ...string) string {
+	argsStr := strings.Join(args, ",")
 	if isFlag {
-		return fmt.Sprintf("m.Flagged%s(flags, %d),\n", _type, flagBit)
+		return fmt.Sprintf("m.Flagged%s(flags, %d, %s),\n", _type, flagBit, argsStr)
 	} else {
-		return fmt.Sprintf("m.%s(),\n", _type)
+		return fmt.Sprintf("m.%s(%s),\n", _type, argsStr)
 	}
+}
+
+func makeField(name, typeName string) Field {
+	flagBit := -1
+	if strings.HasPrefix(typeName, "flags.") { //flags.2?string
+		var err error
+		qPos := strings.Index(typeName, "?")
+		dPos := strings.Index(typeName, ".")
+		flagBit, err = strconv.Atoi(typeName[dPos+1 : qPos])
+		typeName = typeName[qPos+1:]
+		if err != nil {
+			log.Fatalf("parsing %s: %s", typeName, err)
+		}
+	}
+	return Field{normalize(name), normalize(typeName), flagBit}
 }
 
 func parseJsonSchema(fpath string) []*Combinator {
@@ -81,7 +110,7 @@ func parseJsonSchema(fpath string) []*Combinator {
 		log.Fatal(err)
 	}
 
-	// parse json
+	// parsings json
 	var parsed interface{}
 	d := json.NewDecoder(bytes.NewReader(data))
 	d.UseNumber()
@@ -89,7 +118,7 @@ func parseJsonSchema(fpath string) []*Combinator {
 		log.Fatal(err)
 	}
 
-	// process constructors
+	// processing constructors
 	combinators := []*Combinator{}
 
 	parsefunc := func(data []interface{}, kind string) {
@@ -97,11 +126,7 @@ func parseJsonSchema(fpath string) []*Combinator {
 			data := data.(map[string]interface{})
 
 			// name
-			nameInt, err := strconv.Atoi(data["id"].(string))
-			if err != nil {
-				log.Fatal(err)
-			}
-			name := fmt.Sprintf("0x%08x", uint32(nameInt))
+			name := normalizeName(data["id"].(string), 10)
 
 			// identifier
 			id := normalize(data[kind].(string))
@@ -116,18 +141,7 @@ func parseJsonSchema(fpath string) []*Combinator {
 				srcField := srcField.(map[string]interface{})
 				name := srcField["name"].(string)
 				typeName := srcField["type"].(string)
-				flagBit := -1
-				if strings.HasPrefix(typeName, "flags.") { //flags.2?string
-					var err error
-					qPos := strings.Index(typeName, "?")
-					dPos := strings.Index(typeName, ".")
-					flagBit, err = strconv.Atoi(typeName[dPos+1 : qPos])
-					typeName = typeName[qPos+1:]
-					if err != nil {
-						log.Fatalf("parsing %s: %s", typeName, err)
-					}
-				}
-				fields = append(fields, Field{normalize(name), normalize(typeName), flagBit})
+				fields = append(fields, makeField(name, typeName))
 			}
 
 			// type
@@ -141,17 +155,87 @@ func parseJsonSchema(fpath string) []*Combinator {
 	return combinators
 }
 
-func main() {
-	if len(os.Args) != 3 {
-		println("Usage: " + os.Args[0] + " tl_schema.json tl_schema.go")
-		os.Exit(2)
+func parseTLSchema(fpath string) []*Combinator {
+	// reading tl file
+	data, err := ioutil.ReadFile(fpath)
+	if err != nil {
+		log.Fatal(err)
 	}
 
+	// processing constructors
+	combinators := []*Combinator{}
+
+	lineRegexp := regexp.MustCompile(`^(.*?)#([a-f0-9]*)? (.*)= (.*);$`)
+	fieldRegexp := regexp.MustCompile(`^(.*?):(.*)$`)
+	for lineNum, line := range strings.Split(string(data), "\n") {
+		line = strings.TrimSpace(line)
+		if line == "" || strings.HasPrefix(line, "//") {
+			continue
+		}
+		if line == "---functions---" || line == "---types---" {
+			continue
+		}
+
+		match := lineRegexp.FindStringSubmatch(line)
+		if len(match) == 0 {
+			log.Printf("line %d: wrong combinator: %s", lineNum, line)
+			continue
+		}
+		id := normalize(match[1])
+		name := normalizeName(match[2], 16)
+		fieldsStr := match[3]
+		typeName := normalize(match[4])
+
+		if id == "vector" {
+			continue
+		}
+		// if strings.HasPrefix(fieldsStr, "{") {
+		// 	log.Printf("line %d: skipping: %s", lineNum, line)
+		// 	continue
+		// }
+
+		fields := make([]Field, 0, 16)
+		for _, fieldStr := range strings.Split(fieldsStr, " ") {
+			fieldStr = strings.TrimSpace(fieldStr)
+			if fieldStr == "" || strings.HasPrefix(fieldStr, "{") { //TODO
+				continue
+			}
+			match := fieldRegexp.FindStringSubmatch(fieldStr)
+			if len(match) == 0 {
+				log.Fatalf("line %d: wrong field: %s", lineNum, fieldStr)
+			}
+			name, typeName := match[1], match[2]
+			fields = append(fields, makeField(name, typeName))
+		}
+
+		combinators = append(combinators, &Combinator{id, name, fields, typeName})
+	}
+	return combinators
+}
+
+func main() {
+	if len(os.Args) != 4 {
+		println("Usage: " + os.Args[0] + " layer tl_schema.<json|tl> tl_schema.go")
+		os.Exit(2)
+	}
+	layer, err := strconv.Atoi(os.Args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+	fpath := os.Args[2]
+
 	// parsing
-	combinators := parseJsonSchema(os.Args[1])
+	var combinators []*Combinator
+	if strings.HasSuffix(fpath, ".json") {
+		combinators = parseJsonSchema(fpath)
+	} else if strings.HasSuffix(fpath, ".tl") {
+		combinators = parseTLSchema(fpath)
+	} else {
+		log.Fatalf("unknown file format, expected .json or .tl: %s", fpath)
+	}
 
 	// opening out file
-	outFile, err := os.Create(os.Args[2])
+	outFile, err := os.Create(os.Args[3])
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -164,6 +248,7 @@ func main() {
 
 	// constants
 	write("package mtproto\nimport \"fmt\"\nconst (\n")
+	write("TL_Layer = %d\n", layer)
 	for _, c := range combinators {
 		write("CRC_%s = %s\n", c.id, c.name)
 	}
@@ -181,6 +266,10 @@ func main() {
 				write("int32")
 			case "long":
 				write("int64")
+			case "int128":
+				write("[]byte")
+			case "int256":
+				write("[]byte")
 			case "string":
 				write("string")
 			case "double":
@@ -231,6 +320,10 @@ func main() {
 				write("x.Int(e.%s)\n", attrName)
 			case "long":
 				write("x.Long(e.%s)\n", attrName)
+			case "int128":
+				write("x.Bytes(e.%s)\n", attrName)
+			case "int256":
+				write("x.Bytes(e.%s)\n", attrName)
 			case "string":
 				write("x.String(e.%s)\n", attrName)
 			case "double":
@@ -286,6 +379,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 				write(maybeFlagged("Int", isFlag, t.flagBit))
 			case "long":
 				write(maybeFlagged("Long", isFlag, t.flagBit))
+			case "int128":
+				write(maybeFlagged("Bytes", isFlag, t.flagBit, "16"))
+			case "int256":
+				write(maybeFlagged("Bytes", isFlag, t.flagBit, "32"))
 			case "string":
 				write(maybeFlagged("String", isFlag, t.flagBit))
 			case "double":
