@@ -21,6 +21,7 @@ type TGClient struct {
 	updatesState         *mtproto.TL_updates_state
 	handleUpdateExternal UpdateHandler
 	log                  Logger
+	extraData
 	Downloader
 }
 
@@ -42,6 +43,7 @@ func NewTGClient(appID int32, appHash string, handleUpdate UpdateHandler, log Lo
 		log:                  log,
 	}
 	client.Downloader = *NewDownloader(client)
+	client.extraData = *newExtraData(client)
 
 	mt.SetEventsHandler(client.handleEvent)
 	for i := 0; i < 4; i++ {
@@ -102,21 +104,6 @@ func (e *TGClient) handleUpdate(obj mtproto.TL) {
 		e.updatesState.Pts = int32(value.Int())
 	}
 	e.handleUpdateExternal(obj)
-}
-
-func (c *TGClient) rememberEventExtraData(objs []mtproto.TL) {
-	for _, obj := range objs {
-		switch x := obj.(type) {
-		case mtproto.TL_user:
-			c.log.Info("extra: user: ", x.ID, x.Username)
-		case mtproto.TL_chat:
-			c.log.Info("extra: chat: ", x.ID, x.Title)
-		case mtproto.TL_channel:
-			c.log.Info("extra: channel: ", x.ID, x.Username)
-		default:
-			c.log.Warning(mtproto.UnexpectedTL("extra data", obj))
-		}
-	}
 }
 
 func (c *TGClient) AuthAndInitEvents() error {
