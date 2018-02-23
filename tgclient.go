@@ -2,7 +2,10 @@ package tgclient
 
 import (
 	"mtproto"
+	"os"
+	"path/filepath"
 	"reflect"
+	"runtime"
 
 	"github.com/ansel1/merry"
 )
@@ -28,7 +31,31 @@ type TGClient struct {
 type UpdateHandler func(mtproto.TL)
 
 func NewTGClient(appID int32, appHash string, handleUpdate UpdateHandler, log Logger) (*TGClient, error) {
-	mt, err := mtproto.NewMTProto(appID, appHash)
+	ex, err := os.Executable()
+	if err != nil {
+		return nil, merry.Wrap(err)
+	}
+	exPath := filepath.Dir(ex)
+	sessStore := &mtproto.SessFileStore{exPath + "/tg.session"}
+
+	cfg := &mtproto.AppConfig{
+		AppID:          appID,
+		AppHash:        appHash,
+		AppVersion:     "0.0.1",
+		DeviceModel:    "Unknown",
+		SystemVersion:  runtime.GOOS + "/" + runtime.GOARCH,
+		SystemLangCode: "en",
+		LangPack:       "",
+		LangCode:       "en",
+	}
+	return NewTGClientExt(cfg, sessStore, handleUpdate, log)
+}
+
+func NewTGClientExt(
+	cfg *mtproto.AppConfig, sessStore mtproto.SessionStore,
+	handleUpdate UpdateHandler, log Logger,
+) (*TGClient, error) {
+	mt, err := mtproto.NewMTProtoExt(cfg, sessStore, nil, false)
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
@@ -106,11 +133,11 @@ func (e *TGClient) handleUpdate(obj mtproto.TL) {
 	e.handleUpdateExternal(obj)
 }
 
-func (c *TGClient) AuthAndInitEvents() error {
+func (c *TGClient) AuthAndInitEvents(authData mtproto.AuthDataProvider) error {
 	for {
 		res := c.mt.SendSync(mtproto.TL_updates_getState{})
 		if mtproto.IsErrorType(res, mtproto.TL_ErrUnauthorized) { //AUTH_KEY_UNREGISTERED SESSION_REVOKED SESSION_EXPIRED
-			if err := c.mt.Auth(); err != nil {
+			if err := c.mt.Auth(authData); err != nil {
 				return merry.Wrap(err)
 			}
 			continue
