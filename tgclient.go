@@ -30,12 +30,15 @@ type TGClient struct {
 
 type UpdateHandler func(mtproto.TL)
 
-func NewTGClient(appID int32, appHash string, handleUpdate UpdateHandler, log Logger) (*TGClient, error) {
+func NewTGClient(appID int32, appHash string, log Logger) *TGClient {
+	var exPath string
 	ex, err := os.Executable()
 	if err != nil {
-		return nil, merry.Wrap(err)
+		log.Error(err)
+		exPath = "."
+	} else {
+		exPath = filepath.Dir(ex)
 	}
-	exPath := filepath.Dir(ex)
 	sessStore := &mtproto.SessFileStore{exPath + "/tg.session"}
 
 	cfg := &mtproto.AppConfig{
@@ -48,26 +51,16 @@ func NewTGClient(appID int32, appHash string, handleUpdate UpdateHandler, log Lo
 		LangPack:       "",
 		LangCode:       "en",
 	}
-	return NewTGClientExt(cfg, sessStore, handleUpdate, log)
+	return NewTGClientExt(cfg, sessStore, log)
 }
 
-func NewTGClientExt(
-	cfg *mtproto.AppConfig, sessStore mtproto.SessionStore,
-	handleUpdate UpdateHandler, log Logger,
-) (*TGClient, error) {
-	mt, err := mtproto.NewMTProtoExt(cfg, sessStore, nil, false)
-	if err != nil {
-		return nil, merry.Wrap(err)
-	}
-	if err := mt.Connect(); err != nil {
-		return nil, merry.Wrap(err)
-	}
+func NewTGClientExt(cfg *mtproto.AppConfig, sessStore mtproto.SessionStore, log Logger) *TGClient {
+	mt := mtproto.NewMTProtoExt(cfg, sessStore, nil)
 
 	client := &TGClient{
-		mt:                   mt,
-		updatesState:         &mtproto.TL_updates_state{},
-		handleUpdateExternal: handleUpdate,
-		log:                  log,
+		mt:           mt,
+		updatesState: &mtproto.TL_updates_state{},
+		log:          log,
 	}
 	client.Downloader = *NewDownloader(client)
 	client.extraData = *newExtraData(client)
@@ -76,7 +69,15 @@ func NewTGClientExt(
 	for i := 0; i < 4; i++ {
 		go client.partsDownloadRoutine()
 	}
-	return client, nil
+	return client
+}
+
+func (c *TGClient) SetUpdateHandler(handleUpdate UpdateHandler) {
+	c.handleUpdateExternal = handleUpdate
+}
+
+func (c *TGClient) InitAndConnect() error {
+	return merry.Wrap(c.mt.InitSessAndConnect())
 }
 
 func (c *TGClient) handleEvent(eventObj mtproto.TL) {
@@ -130,7 +131,9 @@ func (e *TGClient) handleUpdate(obj mtproto.TL) {
 	if value != (reflect.Value{}) {
 		e.updatesState.Pts = int32(value.Int())
 	}
-	e.handleUpdateExternal(obj)
+	if e.handleUpdateExternal != nil {
+		e.handleUpdateExternal(obj)
+	}
 }
 
 func (c *TGClient) AuthAndInitEvents(authData mtproto.AuthDataProvider) error {

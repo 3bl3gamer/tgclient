@@ -228,8 +228,8 @@ func (d *Downloader) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 	if !ok {
 		return nil, merry.Errorf("unable find address for DC #%d", dcID)
 	}
-	mt, err := mtproto.NewMTProtoExt(d.tg.mt.AppConfig(), &mtproto.SessNoopStore{}, session, encrIsReady)
-	if err != nil {
+	mt = mtproto.NewMTProtoExt(d.tg.mt.AppConfig(), &mtproto.SessNoopStore{}, session)
+	if err := mt.InitSession(encrIsReady); err != nil {
 		return nil, merry.Wrap(err)
 	}
 	if err := mt.Connect(); err != nil {
