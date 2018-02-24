@@ -3,11 +3,10 @@ package main
 import (
 	"flag"
 	"log"
+	"mtproto"
 	"os"
 
 	"github.com/ansel1/merry"
-
-	"../../mtproto"
 )
 
 func main() {
@@ -38,7 +37,7 @@ func start(appID int32, appHash string) error {
 	for {
 		res := m.SendSync(mtproto.TL_updates_getState{})
 		if mtproto.IsErrorType(res, mtproto.TL_ErrUnauthorized) { //AUTH_KEY_UNREGISTERED SESSION_REVOKED SESSION_EXPIRED
-			if err := m.Auth(); err != nil {
+			if err := m.Auth(mtproto.ScanfAuthDataProvider{}); err != nil {
 				return merry.Wrap(err)
 			}
 			continue

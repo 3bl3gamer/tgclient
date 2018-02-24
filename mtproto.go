@@ -40,11 +40,11 @@ func (s *SessNoopStore) Save(sess *SessionInfo) error { return nil }
 func (s *SessNoopStore) Load(sess *SessionInfo) error { return merry.New("can not load") }
 
 type SessFileStore struct {
-	fpath string
+	FPath string
 }
 
 func (s *SessFileStore) Save(sess *SessionInfo) (err error) {
-	f, err := os.Create(s.fpath)
+	f, err := os.Create(s.FPath)
 	if err != nil {
 		return merry.Wrap(err)
 	}
@@ -64,7 +64,7 @@ func (s *SessFileStore) Save(sess *SessionInfo) (err error) {
 }
 
 func (s *SessFileStore) Load(sess *SessionInfo) error {
-	f, err := os.Open(s.fpath)
+	f, err := os.Open(s.FPath)
 	if os.IsNotExist(err) {
 		return ErrNoSessionData.Here()
 	}
@@ -142,7 +142,7 @@ func NewMTProto(appID int32, appHash string) (*MTProto, error) {
 	cfg := &AppConfig{
 		AppID:          appID,
 		AppHash:        appHash,
-		AppVersion:     "0.0.4",
+		AppVersion:     "0.0.1",
 		DeviceModel:    "Unknown",
 		SystemVersion:  runtime.GOOS + "/" + runtime.GOARCH,
 		SystemLangCode: "en",
@@ -311,10 +311,40 @@ func (m *MTProto) SendSync(msg TL) TL {
 	return <-resp
 }
 
-func (m *MTProto) Auth() error {
+type AuthDataProvider interface {
+	PhoneNumber() (string, error)
+	Code() (string, error)
+	Password() (string, error)
+}
+
+type ScanfAuthDataProvider struct{}
+
+func (ap ScanfAuthDataProvider) PhoneNumber() (string, error) {
 	var phonenumber string
 	fmt.Print("Enter phone number: ")
 	fmt.Scanf("%s", &phonenumber)
+	return phonenumber, nil
+}
+
+func (ap ScanfAuthDataProvider) Code() (string, error) {
+	var code string
+	fmt.Print("Enter code: ")
+	fmt.Scanf("%s", &code)
+	return code, nil
+}
+
+func (ap ScanfAuthDataProvider) Password() (string, error) {
+	var passwd string
+	fmt.Print("Enter password: ")
+	fmt.Scanf("%s", &passwd)
+	return passwd, nil
+}
+
+func (m *MTProto) Auth(authData AuthDataProvider) error {
+	phonenumber, err := authData.PhoneNumber()
+	if err != nil {
+		return merry.Wrap(err)
+	}
 
 	var authSentCode TL_auth_sentCode
 	flag := true
@@ -356,9 +386,10 @@ func (m *MTProto) Auth() error {
 		}
 	}
 
-	var code string
-	fmt.Print("Enter code: ")
-	fmt.Scanf("%s", &code)
+	code, err := authData.Code()
+	if err != nil {
+		return merry.Wrap(err)
+	}
 
 	//if authSentCode.Phone_registered
 	x := m.SendSync(TL_auth_signIn{phonenumber, authSentCode.PhoneCodeHash, code})
@@ -369,9 +400,10 @@ func (m *MTProto) Auth() error {
 			return WrongRespError(x)
 		}
 
-		var passwd string
-		fmt.Print("Enter password: ")
-		fmt.Scanf("%s", &passwd)
+		passwd, err := authData.Password()
+		if err != nil {
+			return merry.Wrap(err)
+		}
 
 		salt := string(accPasswd.CurrentSalt)
 		hash := sha256.Sum256([]byte(salt + passwd + salt))
