@@ -131,13 +131,16 @@ type packetToSend struct {
 	resp chan TL
 }
 
-func NewMTProto(appID int32, appHash string) (*MTProto, error) {
+func NewMTProto(appID int32, appHash string) *MTProto {
 	// getting exec directory
+	var exPath string
 	ex, err := os.Executable()
 	if err != nil {
-		return nil, merry.Wrap(err)
+		log.Print(err)
+		exPath = "."
+	} else {
+		exPath = filepath.Dir(ex)
 	}
-	exPath := filepath.Dir(ex)
 
 	cfg := &AppConfig{
 		AppID:          appID,
@@ -149,16 +152,28 @@ func NewMTProto(appID int32, appHash string) (*MTProto, error) {
 		LangPack:       "",
 		LangCode:       "en",
 	}
-	return NewMTProtoExt(cfg, &SessFileStore{exPath + "/tg.session"}, nil, false)
+	return NewMTProtoExt(cfg, &SessFileStore{exPath + "/tg.session"}, nil)
 }
 
-func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionInfo, sessEncrIsReady bool) (*MTProto, error) {
-	m := &MTProto{
+func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionInfo) *MTProto {
+	return &MTProto{
 		sessionStore: sessStore,
 		session:      session,
 		appCfg:       appCfg,
 	}
+}
 
+func (m *MTProto) InitSessAndConnect() error {
+	if err := m.InitSession(false); err != nil {
+		return merry.Wrap(err)
+	}
+	if err := m.Connect(); err != nil {
+		return merry.Wrap(err)
+	}
+	return nil
+}
+
+func (m *MTProto) InitSession(sessEncrIsReady bool) error {
 	if m.session == nil {
 		m.session = &SessionInfo{}
 		err := m.sessionStore.Load(m.session)
@@ -168,7 +183,7 @@ func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionIn
 		} else if err == nil { //got saved session
 			m.encryptionReady = true
 		} else {
-			return nil, merry.Wrap(err)
+			return merry.Wrap(err)
 		}
 	} else {
 		m.encryptionReady = sessEncrIsReady
@@ -176,7 +191,7 @@ func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionIn
 
 	rand.Seed(time.Now().UnixNano())
 	m.session.sessionId = rand.Int63()
-	return m, nil
+	return nil
 }
 
 func (m *MTProto) AppConfig() *AppConfig {
