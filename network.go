@@ -84,7 +84,7 @@ func (m *MTProto) send(msg TL, resp chan TL) error {
 	return nil
 }
 
-func (m *MTProto) read(stop <-chan struct{}) (TL, error) {
+func (m *MTProto) read() (TL, error) {
 	var err error
 	var n int
 	var size int
@@ -96,13 +96,6 @@ func (m *MTProto) read(stop <-chan struct{}) (TL, error) {
 	}
 	b := make([]byte, 1)
 	n, err = m.conn.Read(b)
-	if stop != nil {
-		select {
-		case <-stop: //TODO: strange
-			return nil, nil
-		default:
-		}
-	}
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
@@ -195,7 +188,7 @@ func (m *MTProto) makeAuthKey() error {
 	}
 
 	// (parse) resPQ
-	data, err = m.read(nil)
+	data, err = m.read()
 	if err != nil {
 		return merry.Wrap(err)
 	}
@@ -235,7 +228,7 @@ func (m *MTProto) makeAuthKey() error {
 	}
 
 	// (parse) server_DH_params_{ok, fail}
-	data, err = m.read(nil)
+	data, err = m.read()
 	if err != nil {
 		return merry.Wrap(err)
 	}
@@ -325,7 +318,7 @@ func (m *MTProto) makeAuthKey() error {
 	}
 
 	// (parse) dh_gen_{ok, retry, fail}
-	data, err = m.read(nil)
+	data, err = m.read()
 	if err != nil {
 		return merry.Wrap(err)
 	}

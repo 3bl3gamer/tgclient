@@ -2,6 +2,7 @@ package mtproto
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/ansel1/merry"
 )
@@ -15,6 +16,10 @@ func IsError(obj TL, message string) bool {
 func IsErrorType(obj TL, code int32) bool {
 	err, ok := obj.(TL_rpc_error)
 	return ok && err.ErrorCode == code
+}
+
+func IsClosedConnErr(err error) bool {
+	return err != nil && strings.Contains(err.Error(), "use of closed network connection")
 }
 
 func Sprint(obj TL) string {

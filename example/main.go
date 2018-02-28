@@ -26,11 +26,8 @@ func main() {
 }
 
 func start(appID int32, appHash string) error {
-	m, err := mtproto.NewMTProto(appID, appHash)
-	if err != nil {
-		return merry.Wrap(err)
-	}
-	if err := m.Connect(); err != nil {
+	m := mtproto.NewMTProto(appID, appHash)
+	if err := m.InitSessAndConnect(); err != nil {
 		return merry.Wrap(err)
 	}
 
@@ -49,6 +46,16 @@ func start(appID int32, appHash string) error {
 		break
 	}
 	log.Println("Seems authed.")
+
+	if err := m.GetContacts(); err != nil {
+		return merry.Wrap(err)
+	}
+
+	log.Println("Reconnecting...")
+	if err := m.Reconnect(); err != nil {
+		return merry.Wrap(err)
+	}
+	log.Println("Reconnected.")
 
 	if err := m.GetContacts(); err != nil {
 		return merry.Wrap(err)

@@ -109,9 +109,9 @@ type MTProto struct {
 	conn         *net.TCPConn
 
 	queueSend chan packetToSend
-	stopSend  chan struct{}
-	stopRead  chan struct{}
 	stopPing  chan struct{}
+	stopRead  chan struct{}
+	stopSend  chan struct{}
 	allDone   chan struct{}
 
 	mutex           *sync.Mutex
@@ -160,6 +160,16 @@ func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionIn
 		sessionStore: sessStore,
 		session:      session,
 		appCfg:       appCfg,
+
+		queueSend: make(chan packetToSend, 64),
+		stopPing:  make(chan struct{}, 1),
+		stopRead:  make(chan struct{}, 1),
+		stopSend:  make(chan struct{}, 1),
+		allDone:   make(chan struct{}, 3),
+
+		msgsIdToAck:  make(map[int64]packetToSend),
+		msgsIdToResp: make(map[int64]chan TL),
+		mutex:        &sync.Mutex{},
 	}
 }
 
@@ -249,14 +259,6 @@ func (m *MTProto) Connect() error {
 	}
 
 	// starting goroutines
-	m.queueSend = make(chan packetToSend, 64)
-	m.stopSend = make(chan struct{}, 1)
-	m.stopRead = make(chan struct{}, 1)
-	m.stopPing = make(chan struct{}, 1)
-	m.allDone = make(chan struct{}, 3)
-	m.msgsIdToAck = make(map[int64]packetToSend)
-	m.msgsIdToResp = make(map[int64]chan TL)
-	m.mutex = &sync.Mutex{}
 	go m.sendRoutine()
 	go m.readRoutine()
 
@@ -290,28 +292,26 @@ func (m *MTProto) Connect() error {
 	return nil
 }
 
+func (m *MTProto) Reconnect() error {
+	return m.reconnect(m.session.DcID, m.session.Addr)
+}
+
 func (m *MTProto) reconnect(newDc int32, newAddr string) error {
-	// stopping routines
-	m.stopPing <- struct{}{}
-	m.stopSend <- struct{}{}
-	m.stopRead <- struct{}{}
-	<-m.allDone
-	<-m.allDone
-	<-m.allDone
-	close(m.stopPing)
-	close(m.stopSend)
-	close(m.stopRead)
-
-	// closing send queue
-	close(m.queueSend)
-
 	// closing connection
 	if err := m.conn.Close(); err != nil {
 		return merry.Wrap(err)
 	}
 
+	// stopping routines
+	m.stopPing <- struct{}{}
+	m.stopRead <- struct{}{}
+	m.stopSend <- struct{}{}
+	<-m.allDone
+	<-m.allDone
+	<-m.allDone
+
 	// renewing connection
-	m.encryptionReady = false
+	//m.encryptionReady = false //export auth here (if authed)
 	m.session.DcID = newDc
 	m.session.Addr = newAddr
 	if err := m.Connect(); err != nil {
@@ -507,24 +507,34 @@ func (m *MTProto) pingRoutine() {
 }
 
 func (m *MTProto) sendRoutine() {
-	for x := range m.queueSend {
-		err := m.send(x.msg, x.resp)
-		if err != nil {
-			log.Fatal(merry.Details(err)) //TODO: better handling
+	for {
+		select {
+		case <-m.stopSend:
+			m.allDone <- struct{}{}
+			return
+		case x := <-m.queueSend:
+			if err := m.send(x.msg, x.resp); err != nil {
+				log.Fatal(merry.Details(err)) //TODO: better handling
+			}
 		}
 	}
-	m.allDone <- struct{}{}
 }
 
 func (m *MTProto) readRoutine() {
 	for {
-		data, err := m.read(m.stopRead)
-		if err != nil {
-			log.Fatal(merry.Details(err)) //TODO: better handling
-		}
-		if data == nil { //nil data means reconnection, not very good TODO
+		select {
+		case <-m.stopRead:
 			m.allDone <- struct{}{}
 			return
+		default:
+		}
+
+		data, err := m.read()
+		if IsClosedConnErr(err) {
+			continue
+		}
+		if err != nil {
+			log.Fatal(merry.Details(err)) //TODO: better handling
 		}
 
 		fmt.Printf("\033[90mrecv: %T\033[0m\n", data)
