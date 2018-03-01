@@ -127,8 +127,9 @@ type MTProto struct {
 }
 
 type packetToSend struct {
-	msg  TL
-	resp chan TL
+	msgID int64
+	msg   TL
+	resp  chan TL
 }
 
 func NewMTProto(appID int32, appHash string) *MTProto {
@@ -293,10 +294,10 @@ func (m *MTProto) Connect() error {
 }
 
 func (m *MTProto) Reconnect() error {
-	return m.reconnect(m.session.DcID, m.session.Addr)
+	return m.reconnect(m.session.DcID)
 }
 
-func (m *MTProto) reconnect(newDc int32, newAddr string) error {
+func (m *MTProto) reconnect(newDc int32) error {
 	// closing connection
 	if err := m.conn.Close(); err != nil {
 		return merry.Wrap(err)
@@ -311,9 +312,16 @@ func (m *MTProto) reconnect(newDc int32, newAddr string) error {
 	<-m.allDone
 
 	// renewing connection
-	//m.encryptionReady = false //export auth here (if authed)
+	if newDc != m.session.DcID {
+		m.encryptionReady = false //TODO: export auth here (if authed)
+		//https://github.com/sochix/TLSharp/blob/0940d3d982e9c22adac96b6c81a435403802899a/TLSharp.Core/TelegramClient.cs#L84
+	}
+	newDcAddr, ok := m.DCAddr(newDc, false)
+	if !ok {
+		return merry.Errorf("wrong DC number: %d", newDc)
+	}
 	m.session.DcID = newDc
-	m.session.Addr = newAddr
+	m.session.Addr = newDcAddr
 	if err := m.Connect(); err != nil {
 		return merry.Wrap(err)
 	}
@@ -322,13 +330,13 @@ func (m *MTProto) reconnect(newDc int32, newAddr string) error {
 
 func (m *MTProto) Send(msg TL) chan TL {
 	resp := make(chan TL, 1)
-	m.queueSend <- packetToSend{msg, resp}
+	m.queueSend <- packetToSend{0, msg, resp}
 	return resp
 }
 
 func (m *MTProto) SendSync(msg TL) TL {
 	resp := make(chan TL, 1)
-	m.queueSend <- packetToSend{msg, resp}
+	m.queueSend <- packetToSend{0, msg, resp}
 	return <-resp
 }
 
@@ -394,11 +402,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 				}
 			}
 
-			newDcAddr, ok := m.DCAddr(newDc, false)
-			if !ok {
-				return merry.Errorf("wrong DC index: %d", newDc)
-			}
-			if err := m.reconnect(newDc, newDcAddr); err != nil {
+			if err := m.reconnect(newDc); err != nil {
 				return merry.Wrap(err)
 			}
 			//TODO: save session here?
@@ -444,7 +448,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 
 func (m *MTProto) GetContacts() error {
 	resp := make(chan TL, 1)
-	m.queueSend <- packetToSend{TL_contacts_getContacts{0}, resp}
+	m.queueSend <- packetToSend{0, TL_contacts_getContacts{0}, resp}
 	x := <-resp
 	list, ok := x.(TL_contacts_contacts)
 	if !ok {
@@ -501,7 +505,7 @@ func (m *MTProto) pingRoutine() {
 			m.allDone <- struct{}{}
 			return
 		case <-time.After(60 * time.Second):
-			m.queueSend <- packetToSend{TL_ping{0xCADACADA}, nil}
+			m.queueSend <- packetToSend{0, TL_ping{0xCADACADA}, nil}
 		}
 	}
 }
@@ -513,7 +517,7 @@ func (m *MTProto) sendRoutine() {
 			m.allDone <- struct{}{}
 			return
 		case x := <-m.queueSend:
-			if err := m.send(x.msg, x.resp); err != nil {
+			if err := m.send(x); err != nil {
 				log.Fatal(merry.Details(err)) //TODO: better handling
 			}
 		}
@@ -564,7 +568,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 		m.SaveSessionLogged()
 
 	case TL_ping:
-		m.queueSend <- packetToSend{TL_pong{msgId, data.PingID}, nil}
+		m.queueSend <- packetToSend{0, TL_pong{msgId, data.PingID}, nil}
 
 	case TL_pong:
 		// (ignore) TODO
@@ -596,6 +600,6 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 
 	// should acknowledge odd ids
 	if (seqNo & 1) == 1 {
-		m.queueSend <- packetToSend{TL_msgs_ack{[]int64{msgId}}, nil}
+		m.queueSend <- packetToSend{0, TL_msgs_ack{[]int64{msgId}}, nil}
 	}
 }

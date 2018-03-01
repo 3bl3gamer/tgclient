@@ -8,9 +8,16 @@ import (
 	"github.com/ansel1/merry"
 )
 
-func (m *MTProto) send(msg TL, resp chan TL) error {
+func (m *MTProto) justSend(msg TL) error {
+	return merry.Wrap(m.send(packetToSend{0, msg, nil}))
+}
+
+func (m *MTProto) send(packet packetToSend) error {
 	//fmt.Printf("send: %#v\n", msg)
-	obj := msg.encode()
+	if packet.msgID == 0 {
+		packet.msgID = GenerateMessageId()
+	}
+	obj := packet.msg.encode()
 
 	x := NewEncodeBuf(256)
 
@@ -19,15 +26,14 @@ func (m *MTProto) send(msg TL, resp chan TL) error {
 
 	if m.encryptionReady {
 		needAck := true
-		switch msg.(type) {
+		switch packet.msg.(type) {
 		case TL_ping, TL_msgs_ack:
 			needAck = false
 		}
 		z := NewEncodeBuf(256)
-		newMsgId := GenerateMessageId()
 		z.Long(m.session.ServerSalt)
 		z.Long(m.session.sessionId)
-		z.Long(newMsgId)
+		z.Long(packet.msgID)
 		if needAck {
 			z.Int(m.lastSeqNo | 1)
 		} else {
@@ -49,7 +55,7 @@ func (m *MTProto) send(msg TL, resp chan TL) error {
 		m.lastSeqNo += 2
 		if needAck {
 			m.mutex.Lock()
-			m.msgsIdToAck[newMsgId] = packetToSend{msg, resp}
+			m.msgsIdToAck[packet.msgID] = packet //packetToSend{newMsgId, msg, resp}
 			m.mutex.Unlock()
 		}
 
@@ -57,14 +63,14 @@ func (m *MTProto) send(msg TL, resp chan TL) error {
 		x.Bytes(msgKey)
 		x.Bytes(encryptedData)
 
-		if resp != nil {
+		if packet.resp != nil {
 			m.mutex.Lock()
-			m.msgsIdToResp[newMsgId] = resp
+			m.msgsIdToResp[packet.msgID] = packet.resp
 			m.mutex.Unlock()
 		}
 	} else {
 		x.Long(0)
-		x.Long(GenerateMessageId())
+		x.Long(packet.msgID)
 		x.Int(int32(len(obj)))
 		x.Bytes(obj)
 	}
@@ -182,7 +188,7 @@ func (m *MTProto) makeAuthKey() error {
 
 	// (send) req_pq
 	nonceFirst := GenerateNonce(16)
-	err = m.send(TL_req_pq{nonceFirst}, nil)
+	err = m.justSend(TL_req_pq{nonceFirst})
 	if err != nil {
 		return merry.Wrap(err)
 	}
@@ -222,7 +228,7 @@ func (m *MTProto) makeAuthKey() error {
 	encryptedData1 := doRSAencrypt(x)
 
 	// (send) req_DH_params
-	err = m.send(TL_req_DH_params{nonceFirst, nonceServer, big2str(p), big2str(q), telegramPublicKey_FP, string(encryptedData1)}, nil)
+	err = m.justSend(TL_req_DH_params{nonceFirst, nonceServer, big2str(p), big2str(q), telegramPublicKey_FP, string(encryptedData1)})
 	if err != nil {
 		return merry.Wrap(err)
 	}
@@ -312,7 +318,7 @@ func (m *MTProto) makeAuthKey() error {
 	encryptedData2, err := doAES256IGEencrypt(x, tmpAESKey, tmpAESIV)
 
 	// (send) set_client_DH_params
-	err = m.send(TL_set_client_DH_params{nonceFirst, nonceServer, string(encryptedData2)}, nil)
+	err = m.justSend(TL_set_client_DH_params{nonceFirst, nonceServer, string(encryptedData2)})
 	if err != nil {
 		return merry.Wrap(err)
 	}
