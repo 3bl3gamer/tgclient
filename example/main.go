@@ -5,6 +5,7 @@ import (
 	"log"
 	"mtproto"
 	"os"
+	"time"
 
 	"github.com/ansel1/merry"
 )
@@ -57,6 +58,7 @@ func start(appID int32, appHash string) error {
 	}
 	log.Println("Reconnected.")
 
+	time.Sleep(time.Microsecond)
 	if err := m.GetContacts(); err != nil {
 		return merry.Wrap(err)
 	}

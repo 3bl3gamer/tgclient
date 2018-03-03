@@ -115,6 +115,7 @@ type MTProto struct {
 	allDone   chan struct{}
 
 	mutex           *sync.Mutex
+	reconnSemaphore chan struct{}
 	encryptionReady bool
 	lastSeqNo       int32
 	msgsIdToAck     map[int64]packetToSend
@@ -168,9 +169,10 @@ func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionIn
 		stopSend:  make(chan struct{}, 1),
 		allDone:   make(chan struct{}, 3),
 
-		msgsIdToAck:  make(map[int64]packetToSend),
-		msgsIdToResp: make(map[int64]chan TL),
-		mutex:        &sync.Mutex{},
+		msgsIdToAck:     make(map[int64]packetToSend),
+		msgsIdToResp:    make(map[int64]chan TL),
+		mutex:           &sync.Mutex{},
+		reconnSemaphore: make(chan struct{}, 1),
 	}
 }
 
@@ -234,6 +236,7 @@ func (m *MTProto) SetEventsHandler(handler func(TL)) {
 }
 
 func (m *MTProto) Connect() error {
+	log.Print("INFO: connecting...")
 	// connecting
 	tcpAddr, err := net.ResolveTCPAddr("tcp", m.session.Addr)
 	if err != nil {
@@ -260,10 +263,12 @@ func (m *MTProto) Connect() error {
 	}
 
 	// starting goroutines
+	log.Print("DEBUG: starting routines...")
 	go m.sendRoutine()
 	go m.readRoutine()
 
 	// getting connection configs
+	log.Print("DEBUG: getting config...")
 	x := m.SendSync(TL_invokeWithLayer{
 		TL_Layer,
 		TL_initConnection{
@@ -289,42 +294,87 @@ func (m *MTProto) Connect() error {
 
 	// starting keepalive pinging
 	go m.pingRoutine()
-	println("\033[90mconnected: " + m.session.Addr + "\033[0m")
+	log.Print("INFO: \033[90mconnected: " + m.session.Addr + "\033[0m")
 	return nil
 }
 
-func (m *MTProto) Reconnect() error {
-	return m.reconnect(m.session.DcID)
+func (m *MTProto) reconnectLogged() {
+	log.Print("INFO: reconnecting...")
+	select {
+	case m.reconnSemaphore <- struct{}{}:
+	default:
+		log.Print("INFO: reconnection already in progress, aborting")
+		return
+	}
+	defer func() { <-m.reconnSemaphore }()
+
+	for {
+		err := m.reconnectToDc(m.session.DcID)
+		if err == nil {
+			return
+		}
+		log.Print(err)
+		time.Sleep(5 * time.Second)
+		// and trying to reconnect again
+	}
 }
 
-func (m *MTProto) reconnect(newDc int32) error {
-	// closing connection
+func (m *MTProto) Reconnect() error {
+	go m.reconnectLogged()
+	return nil
+	//return m.reconnectToDc(m.session.DcID)
+}
+
+func (m *MTProto) reconnectToDc(newDcID int32) error {
+	log.Printf("INFO: reconnecting: DC %d -> %d", m.session.DcID, newDcID)
+
+	// stopping routines
+	println("stopping...")
+	m.stopPing <- struct{}{}
+	m.stopRead <- struct{}{}
+	m.stopSend <- struct{}{}
+
+	// closing connection, readRoutine will then fail to read() and will handle stop signal
 	if err := m.conn.Close(); err != nil {
 		return merry.Wrap(err)
 	}
 
-	// stopping routines
-	m.stopPing <- struct{}{}
-	m.stopRead <- struct{}{}
-	m.stopSend <- struct{}{}
+	// waiting for all routines to stop
+	println("waiting...")
 	<-m.allDone
 	<-m.allDone
 	<-m.allDone
+	println("done stopping")
+
+	// removing unused stop signals (if any)
+	for empty := false; !empty; {
+		select {
+		case <-m.stopPing:
+		case <-m.stopRead:
+		case <-m.stopSend:
+		default:
+			empty = true
+		}
+	}
+
+	// putting unfinished messages back to queue
+	m.resendPendingMessages()
 
 	// renewing connection
-	if newDc != m.session.DcID {
+	if newDcID != m.session.DcID {
 		m.encryptionReady = false //TODO: export auth here (if authed)
 		//https://github.com/sochix/TLSharp/blob/0940d3d982e9c22adac96b6c81a435403802899a/TLSharp.Core/TelegramClient.cs#L84
 	}
-	newDcAddr, ok := m.DCAddr(newDc, false)
+	newDcAddr, ok := m.DCAddr(newDcID, false)
 	if !ok {
-		return merry.Errorf("wrong DC number: %d", newDc)
+		return merry.Errorf("wrong DC number: %d", newDcID)
 	}
-	m.session.DcID = newDc
+	m.session.DcID = newDcID
 	m.session.Addr = newDcAddr
 	if err := m.Connect(); err != nil {
 		return merry.Wrap(err)
 	}
+	log.Printf("INFO: reconnected to DC %d", m.session.DcID)
 	return nil
 }
 
@@ -402,7 +452,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 				}
 			}
 
-			if err := m.reconnect(newDc); err != nil {
+			if err := m.reconnectToDc(newDc); err != nil {
 				return merry.Wrap(err)
 			}
 			//TODO: save session here?
@@ -444,6 +494,21 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	userSelf := auth.User.(TL_user)
 	fmt.Printf("Signed in: id %d name <%s %s>\n", userSelf.ID, userSelf.FirstName, userSelf.LastName)
 	return nil
+}
+
+func (m *MTProto) resendPendingMessagesUnlocked() {
+	log.Printf("DEBUG: returning pending packages: returning...")
+	count := len(m.msgsIdToAck)
+	for k, v := range m.msgsIdToAck {
+		delete(m.msgsIdToAck, k)
+		m.queueSend <- v //may lock here, TODO
+	}
+	log.Printf("DEBUG: returning pending packages: done, %d returned", count)
+}
+func (m *MTProto) resendPendingMessages() {
+	m.mutex.Lock()
+	defer m.mutex.Unlock()
+	m.resendPendingMessagesUnlocked()
 }
 
 func (m *MTProto) GetContacts() error {
@@ -499,10 +564,13 @@ func (m *MTProto) GetContacts() error {
 }*/
 
 func (m *MTProto) pingRoutine() {
+	defer func() {
+		log.Print("DEBUG: pingRoutine done")
+		m.allDone <- struct{}{}
+	}()
 	for {
 		select {
 		case <-m.stopPing:
-			m.allDone <- struct{}{}
 			return
 		case <-time.After(60 * time.Second):
 			m.queueSend <- packetToSend{0, TL_ping{0xCADACADA}, nil}
@@ -511,34 +579,50 @@ func (m *MTProto) pingRoutine() {
 }
 
 func (m *MTProto) sendRoutine() {
+	defer func() {
+		log.Print("DEBUG: sendRoutine done")
+		m.allDone <- struct{}{}
+	}()
 	for {
 		select {
 		case <-m.stopSend:
-			m.allDone <- struct{}{}
 			return
 		case x := <-m.queueSend:
-			if err := m.send(x); err != nil {
-				log.Fatal(merry.Details(err)) //TODO: better handling
+			err := m.send(x)
+			if IsClosedConnErr(err) {
+				continue //closed connection, should receive stop signal now
+			}
+			if err != nil {
+				log.Printf("ERROR: sending: %s", err) //TODO: ERROR
+				go m.reconnectLogged()
+				//log.Fatal(merry.Details(err)) //TODO: better handling
+				return
 			}
 		}
 	}
 }
 
 func (m *MTProto) readRoutine() {
+	defer func() {
+		log.Print("DEBUG: readRoutine done")
+		m.allDone <- struct{}{}
+	}()
 	for {
 		select {
 		case <-m.stopRead:
-			m.allDone <- struct{}{}
 			return
 		default:
 		}
 
 		data, err := m.read()
 		if IsClosedConnErr(err) {
-			continue
+			continue //closed connection, should receive stop signal now
 		}
 		if err != nil {
-			log.Fatal(merry.Details(err)) //TODO: better handling
+			log.Printf("ERROR: reading: %s", err) //TODO: ERROR
+			go m.reconnectLogged()
+			//log.Fatal(merry.Details(err)) //TODO: better handling
+			return
 		}
 
 		fmt.Printf("\033[90mrecv: %T\033[0m\n", data)
@@ -556,12 +640,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 	case TL_bad_server_salt:
 		m.session.ServerSalt = data.NewServerSalt
 		m.SaveSessionLogged()
-		m.mutex.Lock()
-		for k, v := range m.msgsIdToAck {
-			delete(m.msgsIdToAck, k)
-			m.queueSend <- v //may lock here, TODO
-		}
-		m.mutex.Unlock()
+		m.resendPendingMessages()
 
 	case TL_new_session_created:
 		m.session.ServerSalt = data.ServerSalt
