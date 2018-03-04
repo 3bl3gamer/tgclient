@@ -3,7 +3,6 @@ package mtproto
 import (
 	"crypto/sha256"
 	"fmt"
-	"log"
 	"math/rand"
 	"net"
 	"os"
@@ -107,6 +106,7 @@ type MTProto struct {
 	session      *SessionInfo
 	appCfg       *AppConfig
 	conn         *net.TCPConn
+	log          Logger
 
 	queueSend chan packetToSend
 	stopPing  chan struct{}
@@ -134,11 +134,13 @@ type packetToSend struct {
 }
 
 func NewMTProto(appID int32, appHash string) *MTProto {
+	log := &SimpleLogHandler{}
+
 	// getting exec directory
 	var exPath string
 	ex, err := os.Executable()
 	if err != nil {
-		log.Print(err)
+		Logger{log}.Error(err, "failed to get executable file path")
 		exPath = "."
 	} else {
 		exPath = filepath.Dir(ex)
@@ -154,14 +156,15 @@ func NewMTProto(appID int32, appHash string) *MTProto {
 		LangPack:       "",
 		LangCode:       "en",
 	}
-	return NewMTProtoExt(cfg, &SessFileStore{exPath + "/tg.session"}, nil)
+	return NewMTProtoExt(cfg, &SessFileStore{exPath + "/tg.session"}, log, nil)
 }
 
-func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, session *SessionInfo) *MTProto {
+func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, logHandler LogHandler, session *SessionInfo) *MTProto {
 	return &MTProto{
 		sessionStore: sessStore,
 		session:      session,
 		appCfg:       appCfg,
+		log:          Logger{logHandler},
 
 		queueSend: make(chan packetToSend, 64),
 		stopPing:  make(chan struct{}, 1),
@@ -218,7 +221,7 @@ func (m *MTProto) CopySession() *SessionInfo {
 
 func (m *MTProto) SaveSessionLogged() {
 	if err := m.sessionStore.Save(m.session); err != nil {
-		log.Println(merry.Details(err)) //TODO: external log
+		m.log.Error(err, "failed to save session data")
 	}
 }
 
@@ -236,8 +239,7 @@ func (m *MTProto) SetEventsHandler(handler func(TL)) {
 }
 
 func (m *MTProto) Connect() error {
-	log.Print("INFO: connecting...")
-	// connecting
+	m.log.Info("connecting to DC %d (%s)...", m.session.DcID, m.session.Addr)
 	tcpAddr, err := net.ResolveTCPAddr("tcp", m.session.Addr)
 	if err != nil {
 		return merry.Wrap(err)
@@ -263,12 +265,12 @@ func (m *MTProto) Connect() error {
 	}
 
 	// starting goroutines
-	log.Print("DEBUG: starting routines...")
+	m.log.Debug("connecting: starting routines...")
 	go m.sendRoutine()
 	go m.readRoutine()
 
 	// getting connection configs
-	log.Print("DEBUG: getting config...")
+	m.log.Debug("connecting: getting config...")
 	x := m.SendSync(TL_invokeWithLayer{
 		TL_Layer,
 		TL_initConnection{
@@ -294,16 +296,16 @@ func (m *MTProto) Connect() error {
 
 	// starting keepalive pinging
 	go m.pingRoutine()
-	log.Print("INFO: \033[90mconnected: " + m.session.Addr + "\033[0m")
+	m.log.Info("connected to DC %d (%s)...", m.session.DcID, m.session.Addr)
 	return nil
 }
 
 func (m *MTProto) reconnectLogged() {
-	log.Print("INFO: reconnecting...")
+	m.log.Info("reconnecting...")
 	select {
 	case m.reconnSemaphore <- struct{}{}:
 	default:
-		log.Print("INFO: reconnection already in progress, aborting")
+		m.log.Info("reconnection already in progress, aborting")
 		return
 	}
 	defer func() { <-m.reconnSemaphore }()
@@ -313,20 +315,19 @@ func (m *MTProto) reconnectLogged() {
 		if err == nil {
 			return
 		}
-		log.Print(err)
+		m.log.Error(err, "failed to reconnect")
+		m.log.Info("retrying in 5 seconds")
 		time.Sleep(5 * time.Second)
 		// and trying to reconnect again
 	}
 }
 
 func (m *MTProto) Reconnect() error {
-	go m.reconnectLogged()
-	return nil
-	//return m.reconnectToDc(m.session.DcID)
+	return m.reconnectToDc(m.session.DcID)
 }
 
 func (m *MTProto) reconnectToDc(newDcID int32) error {
-	log.Printf("INFO: reconnecting: DC %d -> %d", m.session.DcID, newDcID)
+	m.log.Info("reconnecting: DC %d -> %d", m.session.DcID, newDcID)
 
 	// stopping routines
 	println("stopping...")
@@ -374,7 +375,7 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 	if err := m.Connect(); err != nil {
 		return merry.Wrap(err)
 	}
-	log.Printf("INFO: reconnected to DC %d", m.session.DcID)
+	m.log.Info("reconnected to DC %d (%s)", m.session.DcID, m.session.Addr)
 	return nil
 }
 
@@ -497,13 +498,13 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 }
 
 func (m *MTProto) resendPendingMessagesUnlocked() {
-	log.Printf("DEBUG: returning pending packages: returning...")
+	m.log.Debug("returning pending packages: returning...")
 	count := len(m.msgsIdToAck)
 	for k, v := range m.msgsIdToAck {
 		delete(m.msgsIdToAck, k)
 		m.queueSend <- v //may lock here, TODO
 	}
-	log.Printf("DEBUG: returning pending packages: done, %d returned", count)
+	m.log.Debug("returning pending packages: done, %d returned", count)
 }
 func (m *MTProto) resendPendingMessages() {
 	m.mutex.Lock()
@@ -565,7 +566,7 @@ func (m *MTProto) GetContacts() error {
 
 func (m *MTProto) pingRoutine() {
 	defer func() {
-		log.Print("DEBUG: pingRoutine done")
+		m.log.Debug("pingRoutine done")
 		m.allDone <- struct{}{}
 	}()
 	for {
@@ -580,7 +581,7 @@ func (m *MTProto) pingRoutine() {
 
 func (m *MTProto) sendRoutine() {
 	defer func() {
-		log.Print("DEBUG: sendRoutine done")
+		m.log.Debug("sendRoutine done")
 		m.allDone <- struct{}{}
 	}()
 	for {
@@ -593,9 +594,8 @@ func (m *MTProto) sendRoutine() {
 				continue //closed connection, should receive stop signal now
 			}
 			if err != nil {
-				log.Printf("ERROR: sending: %s", err) //TODO: ERROR
+				m.log.Error(err, "sending filed")
 				go m.reconnectLogged()
-				//log.Fatal(merry.Details(err)) //TODO: better handling
 				return
 			}
 		}
@@ -604,7 +604,7 @@ func (m *MTProto) sendRoutine() {
 
 func (m *MTProto) readRoutine() {
 	defer func() {
-		log.Print("DEBUG: readRoutine done")
+		m.log.Debug("readRoutine done")
 		m.allDone <- struct{}{}
 	}()
 	for {
@@ -619,13 +619,12 @@ func (m *MTProto) readRoutine() {
 			continue //closed connection, should receive stop signal now
 		}
 		if err != nil {
-			log.Printf("ERROR: reading: %s", err) //TODO: ERROR
+			m.log.Error(err, "reading failed")
 			go m.reconnectLogged()
-			//log.Fatal(merry.Details(err)) //TODO: better handling
 			return
 		}
 
-		fmt.Printf("\033[90mrecv: %T\033[0m\n", data)
+		fmt.Printf("\033[90mrecv: %T\033[0m\n", data) //TODO: packet logging
 		m.process(m.msgId, m.seqNo, data, true)
 	}
 }

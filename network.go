@@ -13,7 +13,6 @@ func (m *MTProto) justSend(msg TL) error {
 }
 
 func (m *MTProto) send(packet packetToSend) error {
-	//fmt.Printf("send: %#v\n", msg)
 	if packet.msgID == 0 {
 		packet.msgID = GenerateMessageId()
 	}
@@ -177,7 +176,6 @@ func (m *MTProto) read() (TL, error) {
 		return nil, merry.Errorf("Wrong bits of message_id: %d", mod)
 	}
 
-	//DEBUG fmt.Printf("read data: %T %+v", data, data)
 	return data, nil
 }
 

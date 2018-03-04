@@ -7,6 +7,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"log"
 	"math"
 	"math/big"
 )
@@ -419,7 +420,7 @@ func (m *DecodeBuf) Object() (r TL) {
 	}
 
 	if m.err != nil {
-		fmt.Println("err", m.err)
+		log.Println("err", m.err) //TODO: better logging
 		return nil
 	}
 	return r
