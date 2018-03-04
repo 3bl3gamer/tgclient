@@ -164,7 +164,7 @@ func parseTLSchema(fpath string) []*Combinator {
 
 		match := lineRegexp.FindStringSubmatch(line)
 		if len(match) == 0 {
-			log.Printf("line %d: wrong combinator: %s", lineNum, line)
+			log.Printf("line %d: wrong combinator: %s", lineNum+1, line)
 			continue
 		}
 
@@ -180,11 +180,10 @@ func parseTLSchema(fpath string) []*Combinator {
 		descr := makeCombinatorDescription(id, fieldsStr, typeName)
 		crc32sum := normalizeName(fmt.Sprintf("%x", crc32.ChecksumIEEE([]byte(descr))))
 		if name == 0 {
-			log.Printf("WARN: line %d: missing crc32 sum: %s", lineNum, line)
+			log.Printf("WARN: line %d: missing crc32 sum: %s", lineNum+1, line)
 			name = crc32sum
 		} else if name != crc32sum {
-			println("\n> " + descr)
-			log.Printf("WARN: line %d: wrong crc32 sum, expected %08x: %s", lineNum, crc32sum, line)
+			log.Printf("WARN: line %d: wrong crc32 sum, expected %08x: %s", lineNum+1, crc32sum, line)
 		}
 
 		id = normalize(id)
@@ -201,7 +200,7 @@ func parseTLSchema(fpath string) []*Combinator {
 			}
 			match := fieldRegexp.FindStringSubmatch(fieldStr)
 			if len(match) == 0 {
-				log.Fatalf("line %d: wrong field: %s", lineNum, fieldStr)
+				log.Fatalf("line %d: wrong field: %s", lineNum+1, fieldStr)
 			}
 			name, typeName := match[1], match[2]
 			fields = append(fields, makeField(name, typeName))

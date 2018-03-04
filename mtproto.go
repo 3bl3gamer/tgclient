@@ -14,7 +14,7 @@ import (
 	"github.com/ansel1/merry"
 )
 
-//go:generate go run scheme/generate_tl_schema.go 73 scheme/tl-schema-73.tl tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 75 scheme/tl-schema-75.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 const ROUTINES_COUNT = 4
@@ -340,7 +340,7 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 	m.log.Info("reconnecting: DC %d -> %d", m.session.DcID, newDcID)
 
 	// stopping routines
-	println("stopping...")
+	m.log.Debug("stopping routines...")
 	for i := 0; i < ROUTINES_COUNT; i++ {
 		m.allStop <- struct{}{}
 	}
@@ -351,11 +351,11 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 	}
 
 	// waiting for all routines to stop
-	println("waiting...")
+	m.log.Debug("waiting for routines...")
 	for i := 0; i < ROUTINES_COUNT; i++ {
 		<-m.allDone
 	}
-	println("done stopping")
+	m.log.Debug("done stopping routines...")
 
 	// removing unused stop signals (if any)
 	for empty := false; !empty; {
@@ -366,8 +366,8 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 		}
 	}
 
-	// putting unfinished messages back to queue
-	m.resendPendingMessages()
+	// taking all messages that are currently in progress (will later put them back to queue)
+	pendingPackets := m.popPendingPackets()
 
 	// renewing connection
 	if newDcID != m.session.DcID {
@@ -383,6 +383,9 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 	if err := m.Connect(); err != nil {
 		return merry.Wrap(err)
 	}
+
+	// returning interrupted messages back
+	m.pushPendingPackets(pendingPackets)
 	m.log.Info("reconnected to DC %d (%s)", m.session.DcID, m.session.Addr)
 	return nil
 }
@@ -511,19 +514,36 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	return nil
 }
 
-func (m *MTProto) resendPendingMessagesUnlocked() {
-	m.log.Debug("returning pending packages: returning...")
-	count := len(m.msgsIdToAck)
-	for k, v := range m.msgsIdToAck {
-		delete(m.msgsIdToAck, k)
-		m.sendQueue <- v
+func (m *MTProto) popPendingPacketsUnlocked() []packetToSend {
+	packets := make([]packetToSend, 0, len(m.msgsIdToAck))
+	for id, packet := range m.msgsIdToAck {
+		delete(m.msgsIdToAck, id)
+		packets = append(packets, packet)
 	}
-	m.log.Debug("returning pending packages: done, %d returned", count)
+	m.log.Debug("popped %d pending packet(s)", len(packets))
+	return packets
 }
-func (m *MTProto) resendPendingMessages() {
+func (m *MTProto) popPendingPackets() []packetToSend {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
-	m.resendPendingMessagesUnlocked()
+	return m.popPendingPacketsUnlocked()
+}
+func (m *MTProto) pushPendingPacketsUnlocked(packets []packetToSend) {
+	for _, packet := range packets {
+		m.sendQueue <- packet
+	}
+	m.log.Debug("pushed %d pending packet(s)", len(packets))
+}
+func (m *MTProto) pushPendingPackets(packets []packetToSend) {
+	m.mutex.Lock()
+	defer m.mutex.Unlock()
+	m.pushPendingPacketsUnlocked(packets)
+}
+func (m *MTProto) resendPendingPackets() {
+	m.mutex.Lock()
+	defer m.mutex.Unlock()
+	packets := m.popPendingPacketsUnlocked()
+	m.pushPendingPacketsUnlocked(packets)
 }
 
 func (m *MTProto) GetContacts() error {
@@ -675,7 +695,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 	case TL_bad_server_salt:
 		m.session.ServerSalt = data.NewServerSalt
 		m.SaveSessionLogged()
-		m.resendPendingMessages()
+		m.resendPendingPackets()
 
 	case TL_new_session_created:
 		m.session.ServerSalt = data.ServerSalt
