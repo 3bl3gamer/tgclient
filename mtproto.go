@@ -17,6 +17,8 @@ import (
 //go:generate go run scheme/generate_tl_schema.go 73 scheme/tl-schema-73.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
+const ROUTINES_COUNT = 4
+
 var ErrNoSessionData = merry.New("no session data")
 
 type SessionInfo struct {
@@ -108,11 +110,18 @@ type MTProto struct {
 	conn         *net.TCPConn
 	log          Logger
 
-	queueSend chan packetToSend
-	stopPing  chan struct{}
-	stopRead  chan struct{}
-	stopSend  chan struct{}
-	allDone   chan struct{}
+	// Two queues here.
+	// First (external) has limited size and contains external requests.
+	// Second (internal) is unlimited. Special goroutine transfers messages
+	// from external to internal queue while len(interbal) < cap(external).
+	// This allows throttling (as same as single limited queue).
+	// And this allow to safely (without locks) return any failed (due to
+	// network probles for example) messages back to internal queue and retry later.
+	extSendQueue chan packetToSend //external
+	sendQueue    chan packetToSend //internal
+
+	allStop chan struct{}
+	allDone chan struct{}
 
 	mutex           *sync.Mutex
 	reconnSemaphore chan struct{}
@@ -166,11 +175,10 @@ func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, logHandler LogHand
 		appCfg:       appCfg,
 		log:          Logger{logHandler},
 
-		queueSend: make(chan packetToSend, 64),
-		stopPing:  make(chan struct{}, 1),
-		stopRead:  make(chan struct{}, 1),
-		stopSend:  make(chan struct{}, 1),
-		allDone:   make(chan struct{}, 3),
+		extSendQueue: make(chan packetToSend, 64),
+		sendQueue:    make(chan packetToSend),
+		allStop:      make(chan struct{}, ROUTINES_COUNT),
+		allDone:      make(chan struct{}, ROUTINES_COUNT),
 
 		msgsIdToAck:     make(map[int64]packetToSend),
 		msgsIdToResp:    make(map[int64]chan TL),
@@ -271,7 +279,7 @@ func (m *MTProto) Connect() error {
 
 	// getting connection configs
 	m.log.Debug("connecting: getting config...")
-	x := m.SendSync(TL_invokeWithLayer{
+	x := m.sendSyncInternal(TL_invokeWithLayer{
 		TL_Layer,
 		TL_initConnection{
 			m.appCfg.AppID,
@@ -294,6 +302,8 @@ func (m *MTProto) Connect() error {
 		return WrongRespError(x)
 	}
 
+	// straintg messages transfer from external to internal queue
+	go m.queueTransferRoutine()
 	// starting keepalive pinging
 	go m.pingRoutine()
 	m.log.Info("connected to DC %d (%s)...", m.session.DcID, m.session.Addr)
@@ -331,9 +341,9 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 
 	// stopping routines
 	println("stopping...")
-	m.stopPing <- struct{}{}
-	m.stopRead <- struct{}{}
-	m.stopSend <- struct{}{}
+	for i := 0; i < ROUTINES_COUNT; i++ {
+		m.allStop <- struct{}{}
+	}
 
 	// closing connection, readRoutine will then fail to read() and will handle stop signal
 	if err := m.conn.Close(); err != nil {
@@ -342,17 +352,15 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 
 	// waiting for all routines to stop
 	println("waiting...")
-	<-m.allDone
-	<-m.allDone
-	<-m.allDone
+	for i := 0; i < ROUTINES_COUNT; i++ {
+		<-m.allDone
+	}
 	println("done stopping")
 
 	// removing unused stop signals (if any)
 	for empty := false; !empty; {
 		select {
-		case <-m.stopPing:
-		case <-m.stopRead:
-		case <-m.stopSend:
+		case <-m.allStop:
 		default:
 			empty = true
 		}
@@ -381,13 +389,19 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 
 func (m *MTProto) Send(msg TL) chan TL {
 	resp := make(chan TL, 1)
-	m.queueSend <- packetToSend{0, msg, resp}
+	m.extSendQueue <- packetToSend{0, msg, resp}
 	return resp
 }
 
 func (m *MTProto) SendSync(msg TL) TL {
 	resp := make(chan TL, 1)
-	m.queueSend <- packetToSend{0, msg, resp}
+	m.extSendQueue <- packetToSend{0, msg, resp}
+	return <-resp
+}
+
+func (m *MTProto) sendSyncInternal(msg TL) TL {
+	resp := make(chan TL, 1)
+	m.sendQueue <- packetToSend{0, msg, resp}
 	return <-resp
 }
 
@@ -502,7 +516,7 @@ func (m *MTProto) resendPendingMessagesUnlocked() {
 	count := len(m.msgsIdToAck)
 	for k, v := range m.msgsIdToAck {
 		delete(m.msgsIdToAck, k)
-		m.queueSend <- v //may lock here, TODO
+		m.sendQueue <- v
 	}
 	m.log.Debug("returning pending packages: done, %d returned", count)
 }
@@ -514,7 +528,7 @@ func (m *MTProto) resendPendingMessages() {
 
 func (m *MTProto) GetContacts() error {
 	resp := make(chan TL, 1)
-	m.queueSend <- packetToSend{0, TL_contacts_getContacts{0}, resp}
+	m.sendQueue <- packetToSend{0, TL_contacts_getContacts{0}, resp}
 	x := <-resp
 	list, ok := x.(TL_contacts_contacts)
 	if !ok {
@@ -547,7 +561,7 @@ func (m *MTProto) GetContacts() error {
 
 /*func (m *MTProto) SendMessage(user_id int32, msg string) error {
 	resp := make(chan TL, 1)
-	m.queueSend <- packetToSend{
+	m.sendQueue <- packetToSend{
 		TL_messages_sendMessage{
 			TL_inputPeerContact{user_id},
 			msg,
@@ -571,10 +585,10 @@ func (m *MTProto) pingRoutine() {
 	}()
 	for {
 		select {
-		case <-m.stopPing:
+		case <-m.allStop:
 			return
 		case <-time.After(60 * time.Second):
-			m.queueSend <- packetToSend{0, TL_ping{0xCADACADA}, nil}
+			m.sendQueue <- packetToSend{0, TL_ping{0xCADACADA}, nil}
 		}
 	}
 }
@@ -586,9 +600,9 @@ func (m *MTProto) sendRoutine() {
 	}()
 	for {
 		select {
-		case <-m.stopSend:
+		case <-m.allStop:
 			return
-		case x := <-m.queueSend:
+		case x := <-m.sendQueue:
 			err := m.send(x)
 			if IsClosedConnErr(err) {
 				continue //closed connection, should receive stop signal now
@@ -609,7 +623,7 @@ func (m *MTProto) readRoutine() {
 	}()
 	for {
 		select {
-		case <-m.stopRead:
+		case <-m.allStop:
 			return
 		default:
 		}
@@ -624,6 +638,30 @@ func (m *MTProto) readRoutine() {
 			return
 		}
 		m.process(m.msgId, m.seqNo, data, true)
+	}
+}
+
+func (m *MTProto) queueTransferRoutine() {
+	defer func() {
+		m.log.Debug("queueTransferRoutine done")
+		m.allDone <- struct{}{}
+	}()
+	for {
+		if len(m.sendQueue) < cap(m.extSendQueue) {
+			select {
+			case <-m.allStop:
+				return
+			case msg := <-m.extSendQueue:
+				m.sendQueue <- msg
+			}
+		} else {
+			select {
+			case <-m.allStop:
+				return
+			default:
+				time.Sleep(10000 * time.Microsecond)
+			}
+		}
 	}
 }
 
@@ -644,7 +682,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 		m.SaveSessionLogged()
 
 	case TL_ping:
-		m.queueSend <- packetToSend{0, TL_pong{msgId, data.PingID}, nil}
+		m.sendQueue <- packetToSend{0, TL_pong{msgId, data.PingID}, nil}
 
 	case TL_pong:
 		// (ignore) TODO
@@ -676,6 +714,6 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 
 	// should acknowledge odd ids
 	if (seqNo & 1) == 1 {
-		m.queueSend <- packetToSend{0, TL_msgs_ack{[]int64{msgId}}, nil}
+		m.sendQueue <- packetToSend{0, TL_msgs_ack{[]int64{msgId}}, nil}
 	}
 }

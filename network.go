@@ -200,7 +200,7 @@ func (m *MTProto) makeAuthKey() error {
 	}
 	res, ok := data.(TL_resPQ)
 	if !ok {
-		return merry.New("Handshake: Need resPQ")
+		return merry.Errorf("Handshake: Need resPQ, got %#v", data)
 	}
 	if !bytes.Equal(nonceFirst, res.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
@@ -240,7 +240,7 @@ func (m *MTProto) makeAuthKey() error {
 	}
 	dh, ok := data.(TL_server_DH_params_ok)
 	if !ok {
-		return merry.New("Handshake: Need server_DH_params_ok")
+		return merry.Errorf("Handshake: Need server_DH_params_ok, got %#v", data)
 	}
 	if !bytes.Equal(nonceFirst, dh.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
@@ -330,7 +330,7 @@ func (m *MTProto) makeAuthKey() error {
 	}
 	dhg, ok := data.(TL_dh_gen_ok)
 	if !ok {
-		return merry.New("Handshake: Need dh_gen_ok")
+		return merry.Errorf("Handshake: Need dh_gen_ok, got %#v", data)
 	}
 	if !bytes.Equal(nonceFirst, dhg.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
