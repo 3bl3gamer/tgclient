@@ -623,8 +623,6 @@ func (m *MTProto) readRoutine() {
 			go m.reconnectLogged()
 			return
 		}
-
-		fmt.Printf("\033[90mrecv: %T\033[0m\n", data) //TODO: packet logging
 		m.process(m.msgId, m.seqNo, data, true)
 	}
 }

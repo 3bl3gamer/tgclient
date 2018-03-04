@@ -3,6 +3,8 @@ package mtproto
 import (
 	"fmt"
 	"log"
+	"reflect"
+	"strings"
 
 	"github.com/ansel1/merry"
 )
@@ -18,6 +20,7 @@ const (
 
 type LogHandler interface {
 	Log(LogLevel, error, string, ...interface{})
+	Message(bool, TL)
 }
 
 type SimpleLogHandler struct{}
@@ -42,6 +45,32 @@ func (h SimpleLogHandler) Log(level LogLevel, err error, msg string, args ...int
 	log.Print(msg)
 }
 
+func tlName(obj interface{}) string {
+	return reflect.TypeOf(obj).Name()
+}
+
+func (h SimpleLogHandler) Message(isIncoming bool, msg TL) {
+	var text string
+	switch x := msg.(type) {
+	case TL_msg_container:
+		names := make([]string, len(x.Items))
+		for i, item := range x.Items {
+			names[i] = tlName(item)
+		}
+		text = tlName(x) + " -> [" + strings.Join(names, ", ") + "]"
+	case TL_rpc_result:
+		text = tlName(x) + " -> " + tlName(x.obj)
+	default:
+		text = tlName(x)
+	}
+	if isIncoming {
+		text = ">>> " + text
+	} else {
+		text = "<<< " + text
+	}
+	h.Log(DEBUG, nil, text)
+}
+
 type Logger struct {
 	hnd LogHandler
 }
@@ -60,4 +89,8 @@ func (l Logger) Info(msg string, args ...interface{}) {
 
 func (l Logger) Debug(msg string, args ...interface{}) {
 	l.hnd.Log(DEBUG, nil, msg, args...)
+}
+
+func (l Logger) Message(isIncoming bool, message TL) {
+	l.hnd.Message(isIncoming, message)
 }
