@@ -20,7 +20,7 @@ const (
 
 type LogHandler interface {
 	Log(LogLevel, error, string, ...interface{})
-	Message(bool, TL)
+	Message(bool, TL, int64)
 }
 
 type SimpleLogHandler struct{}
@@ -49,7 +49,7 @@ func tlName(obj interface{}) string {
 	return reflect.TypeOf(obj).Name()
 }
 
-func (h SimpleLogHandler) Message(isIncoming bool, msg TL) {
+func (h SimpleLogHandler) Message(isIncoming bool, msg TL, id int64) {
 	var text string
 	switch x := msg.(type) {
 	case TL_msg_container:
@@ -66,7 +66,7 @@ func (h SimpleLogHandler) Message(isIncoming bool, msg TL) {
 	if isIncoming {
 		text = ">>> " + text
 	} else {
-		text = "<<< " + text
+		text = "<<< " + text + fmt.Sprintf(" (#%d)", id)
 	}
 	h.Log(DEBUG, nil, text)
 }
@@ -91,6 +91,6 @@ func (l Logger) Debug(msg string, args ...interface{}) {
 	l.hnd.Log(DEBUG, nil, msg, args...)
 }
 
-func (l Logger) Message(isIncoming bool, message TL) {
-	l.hnd.Message(isIncoming, message)
+func (l Logger) Message(isIncoming bool, message TL, id int64) {
+	l.hnd.Message(isIncoming, message, id)
 }

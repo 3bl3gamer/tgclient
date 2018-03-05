@@ -9,14 +9,14 @@ import (
 )
 
 func (m *MTProto) justSend(msg TL) error {
-	return merry.Wrap(m.send(packetToSend{0, msg, nil}))
+	return merry.Wrap(m.send(newPacket(msg, nil)))
 }
 
-func (m *MTProto) send(packet packetToSend) error {
-	m.log.Message(false, packet.msg)
+func (m *MTProto) send(packet *packetToSend) error {
 	if packet.msgID == 0 {
 		packet.msgID = GenerateMessageId()
 	}
+	m.log.Message(false, packet.msg, packet.msgID)
 	obj := packet.msg.encode()
 
 	x := NewEncodeBuf(256)
@@ -25,16 +25,16 @@ func (m *MTProto) send(packet packetToSend) error {
 	x.Int(0)
 
 	if m.encryptionReady {
-		needAck := true
+		packet.needAck = true
 		switch packet.msg.(type) {
 		case TL_ping, TL_msgs_ack:
-			needAck = false
+			packet.needAck = false
 		}
 		z := NewEncodeBuf(256)
 		z.Long(m.session.ServerSalt)
 		z.Long(m.session.sessionId)
 		z.Long(packet.msgID)
-		if needAck {
+		if packet.needAck {
 			z.Int(m.lastSeqNo | 1)
 		} else {
 			z.Int(m.lastSeqNo)
@@ -53,19 +53,14 @@ func (m *MTProto) send(packet packetToSend) error {
 		}
 
 		m.lastSeqNo += 2
-		if needAck {
-			m.mutex.Lock()
-			m.msgsIdToAck[packet.msgID] = packet //packetToSend{newMsgId, msg, resp}
-			m.mutex.Unlock()
-		}
 
 		x.Bytes(m.session.AuthKeyHash)
 		x.Bytes(msgKey)
 		x.Bytes(encryptedData)
 
-		if packet.resp != nil {
+		if packet.resp != nil || packet.needAck {
 			m.mutex.Lock()
-			m.msgsIdToResp[packet.msgID] = packet.resp
+			m.msgsByID[packet.msgID] = packet
 			m.mutex.Unlock()
 		}
 	} else {
@@ -177,7 +172,7 @@ func (m *MTProto) read() (TL, error) {
 		return nil, merry.Errorf("Wrong bits of message_id: %d", mod)
 	}
 
-	m.log.Message(true, data)
+	m.log.Message(true, data, 0)
 	return data, nil
 }
 

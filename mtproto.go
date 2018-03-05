@@ -117,8 +117,8 @@ type MTProto struct {
 	// This allows throttling (as same as single limited queue).
 	// And this allow to safely (without locks) return any failed (due to
 	// network probles for example) messages back to internal queue and retry later.
-	extSendQueue chan packetToSend //external
-	sendQueue    chan packetToSend //internal
+	extSendQueue chan *packetToSend //external
+	sendQueue    chan *packetToSend //internal
 
 	allStop chan struct{}
 	allDone chan struct{}
@@ -127,8 +127,7 @@ type MTProto struct {
 	reconnSemaphore chan struct{}
 	encryptionReady bool
 	lastSeqNo       int32
-	msgsIdToAck     map[int64]packetToSend
-	msgsIdToResp    map[int64]chan TL
+	msgsByID        map[int64]*packetToSend
 	seqNo           int32
 	msgId           int64
 	handleEvent     func(TL)
@@ -137,9 +136,14 @@ type MTProto struct {
 }
 
 type packetToSend struct {
-	msgID int64
-	msg   TL
-	resp  chan TL
+	msgID   int64
+	msg     TL
+	resp    chan TL
+	needAck bool
+}
+
+func newPacket(msg TL, resp chan TL) *packetToSend {
+	return &packetToSend{msg: msg, resp: resp}
 }
 
 func NewMTProto(appID int32, appHash string) *MTProto {
@@ -175,13 +179,12 @@ func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, logHandler LogHand
 		appCfg:       appCfg,
 		log:          Logger{logHandler},
 
-		extSendQueue: make(chan packetToSend, 64),
-		sendQueue:    make(chan packetToSend),
+		extSendQueue: make(chan *packetToSend, 64),
+		sendQueue:    make(chan *packetToSend, 1024),
 		allStop:      make(chan struct{}, ROUTINES_COUNT),
 		allDone:      make(chan struct{}, ROUTINES_COUNT),
 
-		msgsIdToAck:     make(map[int64]packetToSend),
-		msgsIdToResp:    make(map[int64]chan TL),
+		msgsByID:        make(map[int64]*packetToSend),
 		mutex:           &sync.Mutex{},
 		reconnSemaphore: make(chan struct{}, 1),
 	}
@@ -367,7 +370,15 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 	}
 
 	// taking all messages that are currently in progress (will later put them back to queue)
-	pendingPackets := m.popPendingPackets()
+	// TODO: pop from internal queue too
+	// pendingPackets := m.popPendingPackets()
+
+	// TODO: routine for checking too old messages in msgsByID
+
+	pendingIDs := make([]int64, 0, len(m.msgsByID))
+	for id := range m.msgsByID {
+		pendingIDs = append(pendingIDs, id)
+	}
 
 	// renewing connection
 	if newDcID != m.session.DcID {
@@ -384,27 +395,50 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 		return merry.Wrap(err)
 	}
 
-	// returning interrupted messages back
-	m.pushPendingPackets(pendingPackets)
+	if len(pendingIDs) > 0 {
+		res := m.sendSyncInternal(TL_msgs_state_req{pendingIDs})
+		info, ok := res.(TL_msgs_state_info)
+		if !ok {
+			return WrongRespError(res)
+		}
+		m.log.Debug("messages state info: %#v", info.Info)
+		m.mutex.Lock()
+		for i, b := range []byte(info.Info) {
+			if b&7 == 4 { // 4 = message has been received (https://core.telegram.org/mtproto/service_msg_about_messages)
+				// will wait for response
+			} else {
+				id := pendingIDs[i]
+				packet, ok := m.msgsByID[id]
+				if ok {
+					m.log.Debug("resending message #%d %#v witn new ID", id, packet.msg)
+					delete(m.msgsByID, id)
+					packet.msgID = 0
+					m.sendQueue <- packet
+				}
+			}
+		}
+		m.mutex.Unlock()
+	}
+
 	m.log.Info("reconnected to DC %d (%s)", m.session.DcID, m.session.Addr)
 	return nil
 }
 
 func (m *MTProto) Send(msg TL) chan TL {
 	resp := make(chan TL, 1)
-	m.extSendQueue <- packetToSend{0, msg, resp}
+	m.extSendQueue <- newPacket(msg, resp)
 	return resp
 }
 
 func (m *MTProto) SendSync(msg TL) TL {
 	resp := make(chan TL, 1)
-	m.extSendQueue <- packetToSend{0, msg, resp}
+	m.extSendQueue <- newPacket(msg, resp)
 	return <-resp
 }
 
 func (m *MTProto) sendSyncInternal(msg TL) TL {
 	resp := make(chan TL, 1)
-	m.sendQueue <- packetToSend{0, msg, resp}
+	m.sendQueue <- newPacket(msg, resp)
 	return <-resp
 }
 
@@ -514,27 +548,29 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	return nil
 }
 
-func (m *MTProto) popPendingPacketsUnlocked() []packetToSend {
-	packets := make([]packetToSend, 0, len(m.msgsIdToAck))
-	for id, packet := range m.msgsIdToAck {
-		delete(m.msgsIdToAck, id)
+func (m *MTProto) popPendingPacketsUnlocked() []*packetToSend {
+	packets := make([]*packetToSend, 0, len(m.msgsByID))
+	msgs := make([]TL, 0)
+	for id, packet := range m.msgsByID {
+		delete(m.msgsByID, id)
 		packets = append(packets, packet)
+		msgs = append(msgs, packet.msg)
 	}
-	m.log.Debug("popped %d pending packet(s)", len(packets))
+	m.log.Debug("popped %d pending packet(s): %#v", len(packets), msgs)
 	return packets
 }
-func (m *MTProto) popPendingPackets() []packetToSend {
+func (m *MTProto) popPendingPackets() []*packetToSend {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 	return m.popPendingPacketsUnlocked()
 }
-func (m *MTProto) pushPendingPacketsUnlocked(packets []packetToSend) {
+func (m *MTProto) pushPendingPacketsUnlocked(packets []*packetToSend) {
 	for _, packet := range packets {
 		m.sendQueue <- packet
 	}
 	m.log.Debug("pushed %d pending packet(s)", len(packets))
 }
-func (m *MTProto) pushPendingPackets(packets []packetToSend) {
+func (m *MTProto) pushPendingPackets(packets []*packetToSend) {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 	m.pushPendingPacketsUnlocked(packets)
@@ -547,9 +583,7 @@ func (m *MTProto) resendPendingPackets() {
 }
 
 func (m *MTProto) GetContacts() error {
-	resp := make(chan TL, 1)
-	m.sendQueue <- packetToSend{0, TL_contacts_getContacts{0}, resp}
-	x := <-resp
+	x := m.SendSync(TL_contacts_getContacts{0})
 	list, ok := x.(TL_contacts_contacts)
 	if !ok {
 		return fmt.Errorf("RPC: %#v", x)
@@ -608,7 +642,7 @@ func (m *MTProto) pingRoutine() {
 		case <-m.allStop:
 			return
 		case <-time.After(60 * time.Second):
-			m.sendQueue <- packetToSend{0, TL_ping{0xCADACADA}, nil}
+			m.sendQueue <- newPacket(TL_ping{0xCADACADA}, nil)
 		}
 	}
 }
@@ -685,6 +719,22 @@ func (m *MTProto) queueTransferRoutine() {
 	}
 }
 
+func (m *MTProto) clearPacketData(msgID int64, response TL) {
+	m.mutex.Lock()
+	packet, ok := m.msgsByID[msgID]
+	if ok {
+		if packet.resp == nil {
+			m.log.Warn("second response to message #%d %#v", msgID, packet.msg)
+		} else {
+			packet.resp <- response
+			close(packet.resp)
+			packet.resp = nil
+		}
+		delete(m.msgsByID, msgID)
+	}
+	m.mutex.Unlock()
+}
+
 func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler bool) {
 	switch data := dataTL.(type) {
 	case TL_msg_container:
@@ -697,12 +747,18 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 		m.SaveSessionLogged()
 		m.resendPendingPackets()
 
+	case TL_bad_msg_notification:
+		m.clearPacketData(data.BadMsgID, data)
+
+	case TL_msgs_state_info:
+		m.clearPacketData(data.ReqMsgID, data)
+
 	case TL_new_session_created:
 		m.session.ServerSalt = data.ServerSalt
 		m.SaveSessionLogged()
 
 	case TL_ping:
-		m.sendQueue <- packetToSend{0, TL_pong{msgId, data.PingID}, nil}
+		m.sendQueue <- newPacket(TL_pong{msgId, data.PingID}, nil)
 
 	case TL_pong:
 		// (ignore) TODO
@@ -710,21 +766,20 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 	case TL_msgs_ack:
 		m.mutex.Lock()
 		for _, id := range data.MsgIds {
-			delete(m.msgsIdToAck, id)
+			packet, ok := m.msgsByID[id]
+			if ok {
+				packet.needAck = false
+				// if request does not wait for response, removing it
+				if m.msgsByID[id].resp == nil {
+					delete(m.msgsByID, id)
+				}
+			}
 		}
 		m.mutex.Unlock()
 
 	case TL_rpc_result:
 		m.process(msgId, 0, data.obj, false)
-		m.mutex.Lock()
-		v, ok := m.msgsIdToResp[data.req_msg_id]
-		if ok {
-			v <- data.obj
-			close(v)
-			delete(m.msgsIdToResp, data.req_msg_id)
-		}
-		delete(m.msgsIdToAck, data.req_msg_id)
-		m.mutex.Unlock()
+		m.clearPacketData(data.req_msg_id, data.obj)
 
 	default:
 		if mayPassToHandler && m.handleEvent != nil {
@@ -734,6 +789,6 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 
 	// should acknowledge odd ids
 	if (seqNo & 1) == 1 {
-		m.sendQueue <- packetToSend{0, TL_msgs_ack{[]int64{msgId}}, nil}
+		m.sendQueue <- newPacket(TL_msgs_ack{[]int64{msgId}}, nil)
 	}
 }
