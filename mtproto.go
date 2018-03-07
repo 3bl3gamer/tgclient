@@ -137,6 +137,7 @@ type MTProto struct {
 
 type packetToSend struct {
 	msgID   int64
+	seqNo   int32
 	msg     TL
 	resp    chan TL
 	needAck bool
@@ -369,16 +370,15 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 		}
 	}
 
-	// taking all messages that are currently in progress (will later put them back to queue)
-	// TODO: pop from internal queue too
-	// pendingPackets := m.popPendingPackets()
-
 	// TODO: routine for checking too old messages in msgsByID
 
+	// saving IDs of messages from msgsByID[],
+	// some of them may not have been sent, so we'll resend them after reconnection
 	pendingIDs := make([]int64, 0, len(m.msgsByID))
 	for id := range m.msgsByID {
 		pendingIDs = append(pendingIDs, id)
 	}
+	m.log.Debug("found %d pending packet(s)", len(pendingIDs))
 
 	// renewing connection
 	if newDcID != m.session.DcID {
@@ -395,28 +395,22 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 		return merry.Wrap(err)
 	}
 
+	// Checking pending messages.
+	// 1) some of them may have been answered, so they will not be in msgsByID[]
+	// 2) some of them may have been received by TG, but response has not reached us yet
+	// 3) some of them may be actually lost and must be resend
+	// Here we resend messages both from (2) and (3). But since msgID and seqNo
+	// are preserved, TG will ignore doubles from (2). And (3) will finally reach TG.
 	if len(pendingIDs) > 0 {
-		res := m.sendSyncInternal(TL_msgs_state_req{pendingIDs})
-		info, ok := res.(TL_msgs_state_info)
-		if !ok {
-			return WrongRespError(res)
-		}
-		m.log.Debug("messages state info: %#v", info.Info)
+		var packets []*packetToSend
 		m.mutex.Lock()
-		for i, b := range []byte(info.Info) {
-			if b&7 == 4 { // 4 = message has been received (https://core.telegram.org/mtproto/service_msg_about_messages)
-				// will wait for response
-			} else {
-				id := pendingIDs[i]
-				packet, ok := m.msgsByID[id]
-				if ok {
-					m.log.Debug("resending message #%d %#v witn new ID", id, packet.msg)
-					delete(m.msgsByID, id)
-					packet.msgID = 0
-					m.sendQueue <- packet
-				}
+		for _, id := range pendingIDs {
+			packet, ok := m.msgsByID[id]
+			if ok {
+				packets = append(packets, packet)
 			}
 		}
+		m.pushPendingPacketsUnlocked(packets)
 		m.mutex.Unlock()
 	}
 

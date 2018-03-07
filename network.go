@@ -34,11 +34,15 @@ func (m *MTProto) send(packet *packetToSend) error {
 		z.Long(m.session.ServerSalt)
 		z.Long(m.session.sessionId)
 		z.Long(packet.msgID)
-		if packet.needAck {
-			z.Int(m.lastSeqNo | 1)
-		} else {
-			z.Int(m.lastSeqNo)
+		if packet.seqNo == 0 {
+			if packet.needAck {
+				packet.seqNo = m.lastSeqNo | 1
+			} else {
+				packet.seqNo = m.lastSeqNo
+			}
+			m.lastSeqNo += 2
 		}
+		z.Int(packet.seqNo)
 		z.Int(int32(len(obj)))
 		z.Bytes(obj)
 
@@ -51,8 +55,6 @@ func (m *MTProto) send(packet *packetToSend) error {
 		if err != nil {
 			return merry.Wrap(err)
 		}
-
-		m.lastSeqNo += 2
 
 		x.Bytes(m.session.AuthKeyHash)
 		x.Bytes(msgKey)
