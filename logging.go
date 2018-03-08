@@ -25,72 +25,88 @@ type LogHandler interface {
 
 type SimpleLogHandler struct{}
 
-func (h SimpleLogHandler) Log(level LogLevel, err error, msg string, args ...interface{}) {
+func (h SimpleLogHandler) TLName(obj interface{}) string {
+	return reflect.TypeOf(obj).Name()
+}
+
+func (h SimpleLogHandler) StringifyLog(level LogLevel, err error, msg string, args ...interface{}) string {
 	if len(args) > 0 {
 		msg = fmt.Sprintf(msg, args...)
 	}
 	if err != nil {
 		msg += ":\n" + merry.Details(err)
 	}
+	return msg
+}
+
+func (h SimpleLogHandler) AddLevelPrevix(level LogLevel, text string) string {
 	switch level {
 	case ERROR:
-		msg = "[ERROR] " + msg
+		text = "[ERROR] " + text
 	case WARN:
-		msg = "[WARN] " + msg
+		text = "[WARN] " + text
 	case INFO:
-		msg = "[INFO] " + msg
+		text = "[INFO] " + text
 	case DEBUG:
-		msg = "\033[90m[DEBUG] " + msg + "\033[0m"
+		text = "[DEBUG] " + text
 	}
-	log.Print(msg)
+	return text
 }
 
-func tlName(obj interface{}) string {
-	return reflect.TypeOf(obj).Name()
-}
-
-func (h SimpleLogHandler) Message(isIncoming bool, msg TL, id int64) {
+func (h SimpleLogHandler) StringifyMessage(isIncoming bool, msg TL, id int64) string {
 	var text string
 	switch x := msg.(type) {
 	case TL_msg_container:
 		names := make([]string, len(x.Items))
 		for i, item := range x.Items {
-			names[i] = tlName(item)
+			names[i] = h.TLName(item)
 		}
-		text = tlName(x) + " -> [" + strings.Join(names, ", ") + "]"
+		text = h.TLName(x) + " -> [" + strings.Join(names, ", ") + "]"
 	case TL_rpc_result:
-		text = tlName(x) + " -> " + tlName(x.obj)
+		text = h.TLName(x) + " -> " + h.TLName(x.obj)
 	default:
-		text = tlName(x)
+		text = h.TLName(x)
 	}
 	if isIncoming {
 		text = ">>> " + text
 	} else {
 		text = "<<< " + text + fmt.Sprintf(" (#%d)", id)
 	}
-	h.Log(DEBUG, nil, text)
+	return text
+}
+
+func (h SimpleLogHandler) Log(level LogLevel, err error, msg string, args ...interface{}) {
+	text := h.AddLevelPrevix(level, h.StringifyLog(level, err, msg, args...))
+	if level == DEBUG {
+		text = "\033[90m" + text + "\033[0m"
+	}
+	log.Print(text)
+}
+
+func (h SimpleLogHandler) Message(isIncoming bool, msg TL, id int64) {
+	h.Log(DEBUG, nil, h.StringifyMessage(isIncoming, msg, id))
 }
 
 type Logger struct {
-	hnd LogHandler
+	Hnd LogHandler
 }
 
 func (l Logger) Error(err error, msg string, args ...interface{}) {
-	l.hnd.Log(ERROR, err, msg, args...)
+	l.Hnd.Log(ERROR, err, msg, args...)
 }
 
 func (l Logger) Warn(msg string, args ...interface{}) {
-	l.hnd.Log(WARN, nil, msg, args...)
+	l.Hnd.Log(WARN, nil, msg, args...)
 }
 
 func (l Logger) Info(msg string, args ...interface{}) {
-	l.hnd.Log(INFO, nil, msg, args...)
+	l.Hnd.Log(INFO, nil, msg, args...)
 }
 
 func (l Logger) Debug(msg string, args ...interface{}) {
-	l.hnd.Log(DEBUG, nil, msg, args...)
+	l.Hnd.Log(DEBUG, nil, msg, args...)
 }
 
 func (l Logger) Message(isIncoming bool, message TL, id int64) {
-	l.hnd.Message(isIncoming, message, id)
+	l.Hnd.Message(isIncoming, message, id)
 }

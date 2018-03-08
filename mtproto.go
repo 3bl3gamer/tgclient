@@ -228,7 +228,7 @@ func (m *MTProto) AppConfig() *AppConfig {
 }
 
 func (m *MTProto) LogHandler() LogHandler {
-	return m.log.hnd
+	return m.log.Hnd
 }
 
 func (m *MTProto) CopySession() *SessionInfo {
