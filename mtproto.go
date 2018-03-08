@@ -120,8 +120,8 @@ type MTProto struct {
 	extSendQueue chan *packetToSend //external
 	sendQueue    chan *packetToSend //internal
 
-	allStop chan struct{}
-	allDone chan struct{}
+	routinesStop chan struct{}
+	routinesWG   sync.WaitGroup
 
 	mutex           *sync.Mutex
 	reconnSemaphore chan struct{}
@@ -174,7 +174,7 @@ func NewMTProto(appID int32, appHash string) *MTProto {
 }
 
 func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, logHandler LogHandler, session *SessionInfo) *MTProto {
-	return &MTProto{
+	m := &MTProto{
 		sessionStore: sessStore,
 		session:      session,
 		appCfg:       appCfg,
@@ -182,13 +182,14 @@ func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, logHandler LogHand
 
 		extSendQueue: make(chan *packetToSend, 64),
 		sendQueue:    make(chan *packetToSend, 1024),
-		allStop:      make(chan struct{}, ROUTINES_COUNT),
-		allDone:      make(chan struct{}, ROUTINES_COUNT),
+		routinesStop: make(chan struct{}, ROUTINES_COUNT),
 
 		msgsByID:        make(map[int64]*packetToSend),
 		mutex:           &sync.Mutex{},
 		reconnSemaphore: make(chan struct{}, 1),
 	}
+	go m.debugRoutine()
+	return m
 }
 
 func (m *MTProto) InitSessAndConnect() error {
@@ -224,6 +225,10 @@ func (m *MTProto) InitSession(sessEncrIsReady bool) error {
 
 func (m *MTProto) AppConfig() *AppConfig {
 	return m.appCfg
+}
+
+func (m *MTProto) LogHandler() LogHandler {
+	return m.log.hnd
 }
 
 func (m *MTProto) CopySession() *SessionInfo {
@@ -278,6 +283,7 @@ func (m *MTProto) Connect() error {
 
 	// starting goroutines
 	m.log.Debug("connecting: starting routines...")
+	m.routinesWG.Add(2)
 	go m.sendRoutine()
 	go m.readRoutine()
 
@@ -306,10 +312,9 @@ func (m *MTProto) Connect() error {
 		return WrongRespError(x)
 	}
 
-	// straintg messages transfer from external to internal queue
-	go m.queueTransferRoutine()
-	// starting keepalive pinging
-	go m.pingRoutine()
+	m.routinesWG.Add(2)
+	go m.queueTransferRoutine() // straintg messages transfer from external to internal queue
+	go m.pingRoutine()          // starting keepalive pinging
 	m.log.Info("connected to DC %d (%s)...", m.session.DcID, m.session.Addr)
 	return nil
 }
@@ -346,31 +351,29 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 	// stopping routines
 	m.log.Debug("stopping routines...")
 	for i := 0; i < ROUTINES_COUNT; i++ {
-		m.allStop <- struct{}{}
+		m.routinesStop <- struct{}{}
 	}
 
 	// closing connection, readRoutine will then fail to read() and will handle stop signal
-	if err := m.conn.Close(); err != nil {
-		return merry.Wrap(err)
+	if m.conn != nil {
+		if err := m.conn.Close(); err != nil && !IsClosedConnErr(err) {
+			return merry.Wrap(err)
+		}
 	}
 
 	// waiting for all routines to stop
 	m.log.Debug("waiting for routines...")
-	for i := 0; i < ROUTINES_COUNT; i++ {
-		<-m.allDone
-	}
+	m.routinesWG.Wait()
 	m.log.Debug("done stopping routines...")
 
 	// removing unused stop signals (if any)
 	for empty := false; !empty; {
 		select {
-		case <-m.allStop:
+		case <-m.routinesStop:
 		default:
 			empty = true
 		}
 	}
-
-	// TODO: routine for checking too old messages in msgsByID
 
 	// saving IDs of messages from msgsByID[],
 	// some of them may not have been sent, so we'll resend them after reconnection
@@ -629,11 +632,11 @@ func (m *MTProto) GetContacts() error {
 func (m *MTProto) pingRoutine() {
 	defer func() {
 		m.log.Debug("pingRoutine done")
-		m.allDone <- struct{}{}
+		m.routinesWG.Done()
 	}()
 	for {
 		select {
-		case <-m.allStop:
+		case <-m.routinesStop:
 			return
 		case <-time.After(60 * time.Second):
 			m.sendQueue <- newPacket(TL_ping{0xCADACADA}, nil)
@@ -644,11 +647,11 @@ func (m *MTProto) pingRoutine() {
 func (m *MTProto) sendRoutine() {
 	defer func() {
 		m.log.Debug("sendRoutine done")
-		m.allDone <- struct{}{}
+		m.routinesWG.Done()
 	}()
 	for {
 		select {
-		case <-m.allStop:
+		case <-m.routinesStop:
 			return
 		case x := <-m.sendQueue:
 			err := m.send(x)
@@ -667,11 +670,11 @@ func (m *MTProto) sendRoutine() {
 func (m *MTProto) readRoutine() {
 	defer func() {
 		m.log.Debug("readRoutine done")
-		m.allDone <- struct{}{}
+		m.routinesWG.Done()
 	}()
 	for {
 		select {
-		case <-m.allStop:
+		case <-m.routinesStop:
 			return
 		default:
 		}
@@ -692,24 +695,42 @@ func (m *MTProto) readRoutine() {
 func (m *MTProto) queueTransferRoutine() {
 	defer func() {
 		m.log.Debug("queueTransferRoutine done")
-		m.allDone <- struct{}{}
+		m.routinesWG.Done()
 	}()
 	for {
 		if len(m.sendQueue) < cap(m.extSendQueue) {
 			select {
-			case <-m.allStop:
+			case <-m.routinesStop:
 				return
 			case msg := <-m.extSendQueue:
 				m.sendQueue <- msg
 			}
 		} else {
 			select {
-			case <-m.allStop:
+			case <-m.routinesStop:
 				return
 			default:
 				time.Sleep(10000 * time.Microsecond)
 			}
 		}
+	}
+}
+
+// Periodically checks messages in "msgsByID" and warns if they stay there too long
+func (m *MTProto) debugRoutine() {
+	for {
+		m.mutex.Lock()
+		count := 0
+		for id := range m.msgsByID {
+			delta := time.Now().Unix() - (id >> 32)
+			if delta > 5 {
+				m.log.Warn("msgsByID: #%d: is here for %ds", id, delta)
+			}
+			count++
+		}
+		m.mutex.Unlock()
+		m.log.Debug("msgsByID: %d total", count)
+		time.Sleep(5 * time.Second)
 	}
 }
 
