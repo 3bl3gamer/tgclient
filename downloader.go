@@ -47,7 +47,7 @@ type Downloader struct {
 	fileMTs        map[int32]*mtproto.MTProto
 	fileMTsMutex   *sync.Mutex
 	filePartsQueue chan *filePart
-	log            Logger
+	log            mtproto.Logger
 }
 
 func NewDownloader(tg *TGClient) *Downloader {
@@ -80,7 +80,7 @@ func (d *Downloader) DownloadFileToPath(
 		return nil, merry.Wrap(err)
 	}
 	if offset%int64(partSize) != 0 {
-		d.log.Warningf("file '%s' exists but size is not multiple of block size (%d % %d != 0), moving to start",
+		d.log.Warn("file '%s' exists but size is not multiple of block size (%d % %d != 0), moving to start",
 			tempFpath, offset, partSize)
 		offset, err = fd.Seek(0, io.SeekStart)
 		if err != nil {
@@ -188,7 +188,7 @@ func (d *Downloader) partsDownloadRoutine() {
 			fileResp.Err = merry.New("cdn redirect: " + mtproto.Sprint(res))
 		case mtproto.TL_rpc_error:
 			if strings.HasPrefix(res.ErrorMessage, "FILE_MIGRATE_") {
-				d.log.Infof("got %s, part DC is %d", res.ErrorMessage, part.dcID)
+				d.log.Warn("got %s, part DC is %d", res.ErrorMessage, part.dcID)
 				id, _ := strconv.Atoi(res.ErrorMessage[13:])
 				part.dcID = int32(id)
 				select {
@@ -219,7 +219,7 @@ func (d *Downloader) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 	}
 
 	session := d.tg.mt.CopySession()
-	d.log.Infof("connecting to file DC %d (current: %d)", dcID, session.DcID)
+	d.log.Info("connecting to file DC %d (current: %d)", dcID, session.DcID)
 	isOnSameDC := session.DcID == dcID
 	encrIsReady := isOnSameDC
 	session.DcID = dcID
@@ -228,7 +228,7 @@ func (d *Downloader) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 	if !ok {
 		return nil, merry.Errorf("unable find address for DC #%d", dcID)
 	}
-	mt = mtproto.NewMTProtoExt(d.tg.mt.AppConfig(), &mtproto.SessNoopStore{}, session)
+	mt = mtproto.NewMTProtoExt(d.tg.mt.AppConfig(), &mtproto.SessNoopStore{}, d.tg.mt.LogHandler(), session)
 	if err := mt.InitSession(encrIsReady); err != nil {
 		return nil, merry.Wrap(err)
 	}
@@ -248,7 +248,7 @@ func (d *Downloader) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 		}
 	}
 
-	d.log.Infof("connected to file DC %d", dcID)
+	d.log.Info("connected to file DC %d", dcID)
 	d.fileMTs[dcID] = mt
 	return mt, nil
 }

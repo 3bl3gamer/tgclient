@@ -23,18 +23,18 @@ type TGClient struct {
 	mt                   *mtproto.MTProto
 	updatesState         *mtproto.TL_updates_state
 	handleUpdateExternal UpdateHandler
-	log                  Logger
+	log                  mtproto.Logger
 	extraData
 	Downloader
 }
 
 type UpdateHandler func(mtproto.TL)
 
-func NewTGClient(appID int32, appHash string, log Logger) *TGClient {
+func NewTGClient(appID int32, appHash string, logHnd mtproto.LogHandler) *TGClient {
 	var exPath string
 	ex, err := os.Executable()
 	if err != nil {
-		log.Error(err)
+		mtproto.Logger{logHnd}.Error(err, "failed to get executable file path")
 		exPath = "."
 	} else {
 		exPath = filepath.Dir(ex)
@@ -51,16 +51,16 @@ func NewTGClient(appID int32, appHash string, log Logger) *TGClient {
 		LangPack:       "",
 		LangCode:       "en",
 	}
-	return NewTGClientExt(cfg, sessStore, log)
+	return NewTGClientExt(cfg, sessStore, logHnd)
 }
 
-func NewTGClientExt(cfg *mtproto.AppConfig, sessStore mtproto.SessionStore, log Logger) *TGClient {
-	mt := mtproto.NewMTProtoExt(cfg, sessStore, nil)
+func NewTGClientExt(cfg *mtproto.AppConfig, sessStore mtproto.SessionStore, logHnd mtproto.LogHandler) *TGClient {
+	mt := mtproto.NewMTProtoExt(cfg, sessStore, logHnd, nil)
 
 	client := &TGClient{
 		mt:           mt,
 		updatesState: &mtproto.TL_updates_state{},
-		log:          log,
+		log:          mtproto.Logger{logHnd},
 	}
 	client.Downloader = *NewDownloader(client)
 	client.extraData = *newExtraData(client)
@@ -86,7 +86,7 @@ func (c *TGClient) handleEvent(eventObj mtproto.TL) {
 		//TODO: what?
 		// Too many updates, it is necessary to execute updates.getDifference.
 		// https://core.telegram.org/constructor/updatesTooLong
-		c.log.Warning("[WARN] updates too long")
+		c.log.Warn("updates too long")
 	case mtproto.TL_updateShort:
 		c.updatesState.Date = event.Date
 		c.handleUpdate(event.Update)
@@ -122,7 +122,7 @@ func (c *TGClient) handleEvent(eventObj mtproto.TL) {
 		// update.PtsCount
 		c.handleUpdate(event)
 	default:
-		c.log.Warning(mtproto.UnexpectedTL("event", eventObj))
+		c.log.Warn(mtproto.UnexpectedTL("event", eventObj))
 	}
 }
 
