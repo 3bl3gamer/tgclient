@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/ansel1/merry"
+	"golang.org/x/net/proxy"
 )
 
 //go:generate go run scheme/generate_tl_schema.go 75 scheme/tl-schema-75.tl tl_schema.go
@@ -107,7 +108,8 @@ type MTProto struct {
 	sessionStore SessionStore
 	session      *SessionInfo
 	appCfg       *AppConfig
-	conn         *net.TCPConn
+	connDialer   proxy.Dialer
+	conn         net.Conn
 	log          Logger
 
 	// Two queues here.
@@ -170,13 +172,14 @@ func NewMTProto(appID int32, appHash string) *MTProto {
 		LangPack:       "",
 		LangCode:       "en",
 	}
-	return NewMTProtoExt(cfg, &SessFileStore{exPath + "/tg.session"}, log, nil)
+	return NewMTProtoExt(cfg, &net.Dialer{}, &SessFileStore{exPath + "/tg.session"}, log, nil)
 }
 
-func NewMTProtoExt(appCfg *AppConfig, sessStore SessionStore, logHandler LogHandler, session *SessionInfo) *MTProto {
+func NewMTProtoExt(appCfg *AppConfig, dialer proxy.Dialer, sessStore SessionStore, logHandler LogHandler, session *SessionInfo) *MTProto {
 	m := &MTProto{
 		sessionStore: sessStore,
 		session:      session,
+		connDialer:   dialer,
 		appCfg:       appCfg,
 		log:          Logger{logHandler},
 
@@ -257,11 +260,8 @@ func (m *MTProto) SetEventsHandler(handler func(TL)) {
 
 func (m *MTProto) Connect() error {
 	m.log.Info("connecting to DC %d (%s)...", m.session.DcID, m.session.Addr)
-	tcpAddr, err := net.ResolveTCPAddr("tcp", m.session.Addr)
-	if err != nil {
-		return merry.Wrap(err)
-	}
-	m.conn, err = net.DialTCP("tcp", nil, tcpAddr)
+	var err error
+	m.conn, err = m.connDialer.Dial("tcp", m.session.Addr)
 	if err != nil {
 		return merry.Wrap(err)
 	}
