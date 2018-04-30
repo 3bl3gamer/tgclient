@@ -3,6 +3,7 @@ package mtproto
 import (
 	"bytes"
 	"encoding/binary"
+	"fmt"
 	"time"
 
 	"github.com/ansel1/merry"
@@ -158,11 +159,23 @@ func (m *MTProto) read() (TL, error) {
 		m.seqNo = dbuf.Int()
 		messageLen := dbuf.Int()
 		if int(messageLen) > dbuf.size-32 {
-			return nil, merry.Errorf("Message len: %d (need less than %d)", messageLen, dbuf.size-32)
+			return nil, merry.Errorf("Message len: %d (need <= %d)", messageLen, dbuf.size-32)
 		}
-		if !bytes.Equal(sha1(dbuf.buf[0 : 32+messageLen])[4:20], msgKey) {
+		// DEBUG vvv
+		if int(messageLen)+32 > len(dbuf.buf) {
+			panic(fmt.Sprintf("AHTUNG!!! %d(%d) + 32 > %d", messageLen, int(messageLen), len(dbuf.buf)))
+		}
+		hash := sha1(dbuf.buf[0 : 32+messageLen])
+		if len(hash) < 20 {
+			panic(fmt.Sprintf("AHTUNG!!! %d < 20", len(hash)))
+		}
+		if !bytes.Equal(hash[4:20], msgKey) {
 			return nil, merry.New("Wrong msg_key")
 		}
+		// if !bytes.Equal(sha1(dbuf.buf[0 : 32+messageLen])[4:20], msgKey) {
+		// 	return nil, merry.New("Wrong msg_key")
+		// }
+		// DEBUG ^^^
 
 		data = dbuf.Object()
 		if dbuf.err != nil {
