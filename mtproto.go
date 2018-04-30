@@ -149,39 +149,67 @@ func newPacket(msg TL, resp chan TL) *packetToSend {
 	return &packetToSend{msg: msg, resp: resp}
 }
 
-func NewMTProto(appID int32, appHash string) *MTProto {
-	log := &SimpleLogHandler{}
-
-	// getting exec directory
-	var exPath string
-	ex, err := os.Executable()
-	if err != nil {
-		Logger{log}.Error(err, "failed to get executable file path")
-		exPath = "."
-	} else {
-		exPath = filepath.Dir(ex)
-	}
-
-	cfg := &AppConfig{
-		AppID:          appID,
-		AppHash:        appHash,
-		AppVersion:     "0.0.1",
-		DeviceModel:    "Unknown",
-		SystemVersion:  runtime.GOOS + "/" + runtime.GOARCH,
-		SystemLangCode: "en",
-		LangPack:       "",
-		LangCode:       "en",
-	}
-	return NewMTProtoExt(cfg, &net.Dialer{}, &SessFileStore{exPath + "/tg.session"}, log, nil)
+type MTParams struct {
+	LogHandler LogHandler
+	AppID      int32
+	AppHash    string
+	AppConfig  *AppConfig
+	ConnDialer proxy.Dialer
+	SessStore  SessionStore
+	Session    *SessionInfo
 }
 
-func NewMTProtoExt(appCfg *AppConfig, dialer proxy.Dialer, sessStore SessionStore, logHandler LogHandler, session *SessionInfo) *MTProto {
+func NewMTProto(appID int32, appHash string) *MTProto {
+	return NewMTProtoExt(MTParams{AppID: appID, AppHash: appHash})
+}
+
+func NewMTProtoExt(params MTParams) *MTProto {
+	if params.LogHandler == nil {
+		params.LogHandler = &SimpleLogHandler{}
+	}
+
+	if params.AppConfig == nil {
+		params.AppConfig = &AppConfig{
+			AppID:          0,
+			AppHash:        "",
+			AppVersion:     "0.0.1",
+			DeviceModel:    "Unknown",
+			SystemVersion:  runtime.GOOS + "/" + runtime.GOARCH,
+			SystemLangCode: "en",
+			LangPack:       "",
+			LangCode:       "en",
+		}
+	}
+
+	if params.AppID != 0 {
+		params.AppConfig.AppID = params.AppID
+	}
+	if params.AppHash != "" {
+		params.AppConfig.AppHash = params.AppHash
+	}
+
+	if params.ConnDialer == nil {
+		params.ConnDialer = &net.Dialer{}
+	}
+
+	if params.SessStore == nil {
+		var exPath string
+		ex, err := os.Executable()
+		if err != nil {
+			Logger{params.LogHandler}.Error(err, "failed to get executable file path")
+			exPath = "."
+		} else {
+			exPath = filepath.Dir(ex)
+		}
+		params.SessStore = &SessFileStore{exPath + "/tg.session"}
+	}
+
 	m := &MTProto{
-		sessionStore: sessStore,
-		session:      session,
-		connDialer:   dialer,
-		appCfg:       appCfg,
-		log:          Logger{logHandler},
+		sessionStore: params.SessStore,
+		session:      params.Session,
+		connDialer:   params.ConnDialer,
+		appCfg:       params.AppConfig,
+		log:          Logger{params.LogHandler},
 
 		extSendQueue: make(chan *packetToSend, 64),
 		sendQueue:    make(chan *packetToSend, 1024),
