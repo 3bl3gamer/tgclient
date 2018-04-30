@@ -330,7 +330,7 @@ func (m *MTProto) reconnectLogged() {
 	defer func() { <-m.reconnSemaphore }()
 
 	for {
-		err := m.reconnectToDc(m.session.DcID)
+		err := m.reconnect(0)
 		if err == nil {
 			return
 		}
@@ -342,10 +342,10 @@ func (m *MTProto) reconnectLogged() {
 }
 
 func (m *MTProto) Reconnect() error {
-	return m.reconnectToDc(m.session.DcID)
+	return m.reconnect(0)
 }
 
-func (m *MTProto) reconnectToDc(newDcID int32) error {
+func (m *MTProto) reconnect(newDcID int32) error {
 	m.log.Info("reconnecting: DC %d -> %d", m.session.DcID, newDcID)
 
 	// stopping routines
@@ -378,22 +378,27 @@ func (m *MTProto) reconnectToDc(newDcID int32) error {
 	// saving IDs of messages from msgsByID[],
 	// some of them may not have been sent, so we'll resend them after reconnection
 	pendingIDs := make([]int64, 0, len(m.msgsByID))
+	m.mutex.Lock()
 	for id := range m.msgsByID {
 		pendingIDs = append(pendingIDs, id)
 	}
+	m.mutex.Unlock()
 	m.log.Debug("found %d pending packet(s)", len(pendingIDs))
 
-	// renewing connection
-	if newDcID != m.session.DcID {
-		m.encryptionReady = false //TODO: export auth here (if authed)
-		//https://github.com/sochix/TLSharp/blob/0940d3d982e9c22adac96b6c81a435403802899a/TLSharp.Core/TelegramClient.cs#L84
+	if newDcID != 0 {
+		// renewing connection
+		if newDcID != m.session.DcID {
+			m.encryptionReady = false //TODO: export auth here (if authed)
+			//https://github.com/sochix/TLSharp/blob/0940d3d982e9c22adac96b6c81a435403802899a/TLSharp.Core/TelegramClient.cs#L84
+		}
+		newDcAddr, ok := m.DCAddr(newDcID, false)
+		if !ok {
+			return merry.Errorf("wrong DC number: %d", newDcID)
+		}
+		m.session.DcID = newDcID
+		m.session.Addr = newDcAddr
 	}
-	newDcAddr, ok := m.DCAddr(newDcID, false)
-	if !ok {
-		return merry.Errorf("wrong DC number: %d", newDcID)
-	}
-	m.session.DcID = newDcID
-	m.session.Addr = newDcAddr
+
 	if err := m.Connect(); err != nil {
 		return merry.Wrap(err)
 	}
@@ -501,7 +506,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 				}
 			}
 
-			if err := m.reconnectToDc(newDc); err != nil {
+			if err := m.reconnect(newDc); err != nil {
 				return merry.Wrap(err)
 			}
 			//TODO: save session here?
@@ -659,7 +664,7 @@ func (m *MTProto) sendRoutine() {
 				continue //closed connection, should receive stop signal now
 			}
 			if err != nil {
-				m.log.Error(err, "sending filed")
+				m.log.Error(err, "sending failed")
 				go m.reconnectLogged()
 				return
 			}
