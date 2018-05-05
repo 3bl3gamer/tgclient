@@ -13,6 +13,7 @@ import (
 
 	"github.com/ansel1/merry"
 	"golang.org/x/net/proxy"
+	"golang.org/x/sync/semaphore"
 )
 
 //go:generate go run scheme/generate_tl_schema.go 75 scheme/tl-schema-75.tl tl_schema.go
@@ -125,8 +126,10 @@ type MTProto struct {
 	routinesStop chan struct{}
 	routinesWG   sync.WaitGroup
 
-	mutex           *sync.Mutex
-	reconnSemaphore chan struct{}
+	mutex            *sync.Mutex
+	connectSemaphore *semaphore.Weighted
+	reconnSemaphore  *semaphore.Weighted
+
 	encryptionReady bool
 	lastSeqNo       int32
 	msgsByID        map[int64]*packetToSend
@@ -215,9 +218,11 @@ func NewMTProtoExt(params MTParams) *MTProto {
 		sendQueue:    make(chan *packetToSend, 1024),
 		routinesStop: make(chan struct{}, ROUTINES_COUNT),
 
-		msgsByID:        make(map[int64]*packetToSend),
-		mutex:           &sync.Mutex{},
-		reconnSemaphore: make(chan struct{}, 1),
+		msgsByID: make(map[int64]*packetToSend),
+		mutex:    &sync.Mutex{},
+
+		connectSemaphore: semaphore.NewWeighted(1),
+		reconnSemaphore:  semaphore.NewWeighted(1),
 	}
 	go m.debugRoutine()
 	return m
@@ -287,6 +292,12 @@ func (m *MTProto) SetEventsHandler(handler func(TL)) {
 }
 
 func (m *MTProto) Connect() error {
+	if !m.connectSemaphore.TryAcquire(1) {
+		m.log.Info("connection already in progress, aborting")
+		return nil
+	}
+	defer m.connectSemaphore.Release(1)
+
 	m.log.Info("connecting to DC %d (%s)...", m.session.DcID, m.session.Addr)
 	var err error
 	m.conn, err = m.connDialer.Dial("tcp", m.session.Addr)
@@ -309,15 +320,9 @@ func (m *MTProto) Connect() error {
 		m.encryptionReady = true
 	}
 
-	// starting goroutines
-	m.log.Debug("connecting: starting routines...")
-	m.routinesWG.Add(2)
-	go m.sendRoutine()
-	go m.readRoutine()
-
 	// getting connection configs
 	m.log.Debug("connecting: getting config...")
-	x := m.sendSyncInternal(TL_invokeWithLayer{
+	x, err := m.sendAndReadDirect(TL_invokeWithLayer{
 		TL_Layer,
 		TL_initConnection{
 			m.appCfg.AppID,
@@ -330,6 +335,9 @@ func (m *MTProto) Connect() error {
 			TL_help_getConfig{},
 		},
 	})
+	if err != nil {
+		return merry.Wrap(err)
+	}
 	if cfg, ok := x.(TL_config); ok {
 		m.session.DcID = cfg.ThisDc
 		for _, v := range cfg.DcOptions {
@@ -340,22 +348,25 @@ func (m *MTProto) Connect() error {
 		return WrongRespError(x)
 	}
 
-	m.routinesWG.Add(2)
+	// starting goroutines
+	m.log.Debug("connecting: starting routines...")
+	m.routinesWG.Add(4)
+	go m.sendRoutine()
+	go m.readRoutine()
 	go m.queueTransferRoutine() // straintg messages transfer from external to internal queue
 	go m.pingRoutine()          // starting keepalive pinging
+
 	m.log.Info("connected to DC %d (%s)...", m.session.DcID, m.session.Addr)
 	return nil
 }
 
 func (m *MTProto) reconnectLogged() {
 	m.log.Info("reconnecting...")
-	select {
-	case m.reconnSemaphore <- struct{}{}:
-	default:
+	if !m.reconnSemaphore.TryAcquire(1) {
 		m.log.Info("reconnection already in progress, aborting")
 		return
 	}
-	defer func() { <-m.reconnSemaphore }()
+	defer func() { m.reconnSemaphore.Release(1) }()
 
 	for {
 		err := m.reconnect(0)
@@ -466,10 +477,51 @@ func (m *MTProto) SendSync(msg TL) TL {
 	return <-resp
 }
 
-func (m *MTProto) sendSyncInternal(msg TL) TL {
+// Must be called only when sendRoutine and recvRoutine are stopped!
+func (m *MTProto) sendAndReadDirect(msg TL) (TL, error) {
 	resp := make(chan TL, 1)
-	m.sendQueue <- newPacket(msg, resp)
-	return <-resp
+	err := m.send(newPacket(msg, resp))
+	if err != nil {
+		return nil, merry.Wrap(err)
+	}
+
+	// small local version or sendRoutine: just sends and passes error (if any) outside
+	stopSend := make(chan struct{}, 1)
+	sendErr := make(chan error)
+	go func() {
+		select {
+		case <-stopSend:
+			return
+		case x := <-m.sendQueue:
+			m.log.Debug("direct send: sending: %#v", x)
+			if err := m.send(x); err != nil {
+				sendErr <- err
+				return
+			}
+		}
+	}()
+	defer func() {
+		stopSend <- struct{}{}
+		close(stopSend)
+		m.log.Debug("direct send: done")
+	}()
+
+	// small version of readRoutine: just reads, processes and check for error from sending
+	for {
+		data, err := m.read()
+		if err != nil {
+			return nil, merry.Wrap(err)
+		}
+		m.process(m.msgId, m.seqNo, data, false)
+		select {
+		case res := <-resp:
+			return res, nil
+		case err := <-sendErr:
+			return nil, err
+		default:
+			m.log.Debug("direct send: waiting for next packet")
+		}
+	}
 }
 
 type AuthDataProvider interface {
@@ -672,7 +724,7 @@ func (m *MTProto) pingRoutine() {
 		case <-m.routinesStop:
 			return
 		case <-time.After(60 * time.Second):
-			m.sendQueue <- newPacket(TL_ping{0xCADACADA}, nil)
+			m.extSendQueue <- newPacket(TL_ping{0xCADACADA}, nil)
 		}
 	}
 }
@@ -817,7 +869,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 			packet, ok := m.msgsByID[id]
 			if ok {
 				packet.needAck = false
-				// if request does not wait for response, removing it
+				// if request is not waiting for response, removing it
 				if m.msgsByID[id].resp == nil {
 					delete(m.msgsByID, id)
 				}
