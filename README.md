@@ -15,4 +15,4 @@ May be just `&net.Dialer{}` for bare TCP connection or (for example)
 for socks5 proxy.
 
 ## TODO
-* if error occures while performing request to `TL_invokeWithLayer` in `Connect()`, reconnection will be started and it will then call `Connect()` again which will spawn routines twice
+* if error occures while performing request to `TL_invokeWithLayer` in `Connect()`, two `TL_invokeWithLayer` may be sent. Nothing bad happens though.

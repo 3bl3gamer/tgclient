@@ -291,13 +291,7 @@ func (m *MTProto) SetEventsHandler(handler func(TL)) {
 	m.handleEvent = handler
 }
 
-func (m *MTProto) Connect() error {
-	if !m.connectSemaphore.TryAcquire(1) {
-		m.log.Info("connection already in progress, aborting")
-		return nil
-	}
-	defer m.connectSemaphore.Release(1)
-
+func (m *MTProto) initConection() error {
 	m.log.Info("connecting to DC %d (%s)...", m.session.DcID, m.session.Addr)
 	var err error
 	m.conn, err = m.connDialer.Dial("tcp", m.session.Addr)
@@ -346,6 +340,24 @@ func (m *MTProto) Connect() error {
 		}
 	} else {
 		return WrongRespError(x)
+	}
+	return nil
+}
+func (m *MTProto) Connect() error {
+	if !m.connectSemaphore.TryAcquire(1) {
+		m.log.Info("connection already in progress, aborting")
+		return nil
+	}
+	defer m.connectSemaphore.Release(1)
+
+	var err error
+	for i := 4; i >= 0; i++ {
+		err = m.initConection()
+		if err == nil {
+			break
+		}
+		m.log.Error(err, "failed to connect")
+		m.log.Info("trying to connect one more time (%d)", i)
 	}
 
 	// starting goroutines
@@ -485,18 +497,20 @@ func (m *MTProto) sendAndReadDirect(msg TL) (TL, error) {
 		return nil, merry.Wrap(err)
 	}
 
-	// small local version or sendRoutine: just sends and passes error (if any) outside
+	// small local version or sendRoutine: just sends data and passes error (if any) outside
 	stopSend := make(chan struct{}, 1)
 	sendErr := make(chan error)
 	go func() {
-		select {
-		case <-stopSend:
-			return
-		case x := <-m.sendQueue:
-			m.log.Debug("direct send: sending: %#v", x)
-			if err := m.send(x); err != nil {
-				sendErr <- err
+		for {
+			select {
+			case <-stopSend:
 				return
+			case x := <-m.sendQueue:
+				m.log.Debug("direct send: sending: %#v", x)
+				if err := m.send(x); err != nil {
+					sendErr <- err
+					return
+				}
 			}
 		}
 	}()
