@@ -259,13 +259,13 @@ func (m *MTProto) InitSession(sessEncrIsReady bool) error {
 	return nil
 }
 
-func (m *MTProto) AppConfig() *AppConfig {
-	return m.appCfg
-}
+// func (m *MTProto) AppConfig() *AppConfig {
+// 	return m.appCfg
+// }
 
-func (m *MTProto) LogHandler() LogHandler {
-	return m.log.Hnd
-}
+// func (m *MTProto) LogHandler() LogHandler {
+// 	return m.log.Hnd
+// }
 
 func (m *MTProto) CopySession() *SessionInfo {
 	sess := *m.session
@@ -475,6 +475,46 @@ func (m *MTProto) reconnect(newDcID int32) error {
 
 	m.log.Info("reconnected to DC %d (%s)", m.session.DcID, m.session.Addr)
 	return nil
+}
+
+func (m *MTProto) NewConnection(dcID int32) (*MTProto, error) {
+	session := m.CopySession()
+	m.log.Info("making new connection to DC %d (current: %d)", dcID, session.DcID)
+	isOnSameDC := session.DcID == dcID
+	encrIsReady := isOnSameDC
+	session.DcID = dcID
+	var ok bool
+	session.Addr, ok = m.DCAddr(dcID, false)
+	if !ok {
+		return nil, merry.Errorf("unable find address for DC #%d", dcID)
+	}
+
+	newMT := NewMTProtoExt(MTParams{
+		AppConfig:  m.appCfg,
+		SessStore:  &SessNoopStore{},
+		Session:    session,
+		LogHandler: m.log.Hnd,
+		ConnDialer: m.connDialer,
+	})
+	if err := newMT.InitSession(encrIsReady); err != nil {
+		return nil, merry.Wrap(err)
+	}
+	if err := newMT.Connect(); err != nil {
+		return nil, merry.Wrap(err)
+	}
+
+	if !isOnSameDC {
+		res := m.SendSync(TL_auth_exportAuthorization{DcID: dcID})
+		exported, ok := res.(TL_auth_exportedAuthorization)
+		if !ok {
+			return nil, merry.New(UnexpectedTL("auth export", res))
+		}
+		res = newMT.SendSync(TL_auth_importAuthorization{ID: exported.ID, Bytes: exported.Bytes})
+		if _, ok := res.(TL_auth_authorization); !ok {
+			return nil, merry.New(UnexpectedTL("auth import", res))
+		}
+	}
+	return newMT, nil
 }
 
 func (m *MTProto) Send(msg TL) chan TL {
