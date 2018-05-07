@@ -11,15 +11,6 @@ import (
 	"golang.org/x/net/proxy"
 )
 
-type Logger interface {
-	Info(args ...interface{})
-	Infof(format string, args ...interface{})
-	Warning(args ...interface{})
-	Warningf(format string, args ...interface{})
-	Error(args ...interface{})
-	Errorf(format string, args ...interface{})
-}
-
 type TGClient struct {
 	mt                   *mtproto.MTProto
 	updatesState         *mtproto.TL_updates_state
