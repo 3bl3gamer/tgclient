@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/ansel1/merry"
+	"golang.org/x/net/proxy"
 )
 
 type Logger interface {
@@ -51,11 +52,16 @@ func NewTGClient(appID int32, appHash string, logHnd mtproto.LogHandler) *TGClie
 		LangPack:       "",
 		LangCode:       "en",
 	}
-	return NewTGClientExt(cfg, sessStore, logHnd)
+	return NewTGClientExt(cfg, sessStore, logHnd, nil)
 }
 
-func NewTGClientExt(cfg *mtproto.AppConfig, sessStore mtproto.SessionStore, logHnd mtproto.LogHandler) *TGClient {
-	mt := mtproto.NewMTProtoExt(cfg, sessStore, logHnd, nil)
+func NewTGClientExt(cfg *mtproto.AppConfig, sessStore mtproto.SessionStore, logHnd mtproto.LogHandler, daler proxy.Dialer) *TGClient {
+	mt := mtproto.NewMTProtoExt(mtproto.MTParams{
+		AppConfig:  cfg,
+		SessStore:  sessStore,
+		LogHandler: logHnd,
+		ConnDialer: daler,
+	})
 
 	client := &TGClient{
 		mt:           mt,

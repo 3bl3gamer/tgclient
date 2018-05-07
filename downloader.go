@@ -218,34 +218,10 @@ func (d *Downloader) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 		return mt, nil
 	}
 
-	session := d.tg.mt.CopySession()
-	d.log.Info("connecting to file DC %d (current: %d)", dcID, session.DcID)
-	isOnSameDC := session.DcID == dcID
-	encrIsReady := isOnSameDC
-	session.DcID = dcID
-	var ok bool
-	session.Addr, ok = d.tg.mt.DCAddr(dcID, false)
-	if !ok {
-		return nil, merry.Errorf("unable find address for DC #%d", dcID)
-	}
-	mt = mtproto.NewMTProtoExt(d.tg.mt.AppConfig(), &mtproto.SessNoopStore{}, d.tg.mt.LogHandler(), session)
-	if err := mt.InitSession(encrIsReady); err != nil {
+	var err error
+	mt, err = d.tg.mt.NewConnection(dcID)
+	if err != nil {
 		return nil, merry.Wrap(err)
-	}
-	if err := mt.Connect(); err != nil {
-		return nil, merry.Wrap(err)
-	}
-
-	if !isOnSameDC {
-		res := d.tg.SendSync(mtproto.TL_auth_exportAuthorization{DcID: dcID})
-		exported, ok := res.(mtproto.TL_auth_exportedAuthorization)
-		if !ok {
-			return nil, merry.New(mtproto.UnexpectedTL("auth export", res))
-		}
-		res = mt.SendSync(mtproto.TL_auth_importAuthorization{ID: exported.ID, Bytes: exported.Bytes})
-		if _, ok := res.(mtproto.TL_auth_authorization); !ok {
-			return nil, merry.New(mtproto.UnexpectedTL("auth import", res))
-		}
 	}
 
 	d.log.Info("connected to file DC %d", dcID)
