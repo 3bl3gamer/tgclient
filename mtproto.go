@@ -259,14 +259,6 @@ func (m *MTProto) InitSession(sessEncrIsReady bool) error {
 	return nil
 }
 
-// func (m *MTProto) AppConfig() *AppConfig {
-// 	return m.appCfg
-// }
-
-// func (m *MTProto) LogHandler() LogHandler {
-// 	return m.log.Hnd
-// }
-
 func (m *MTProto) CopySession() *SessionInfo {
 	sess := *m.session
 	return &sess
@@ -351,13 +343,14 @@ func (m *MTProto) Connect() error {
 	defer m.connectSemaphore.Release(1)
 
 	var err error
-	for i := 4; i >= 0; i++ {
+	for i := 4; i >= 0; i-- {
 		err = m.initConection()
 		if err == nil {
 			break
 		}
 		m.log.Error(err, "failed to connect")
 		m.log.Info("trying to connect one more time (%d)", i)
+		time.Sleep(1)
 	}
 
 	// starting goroutines
@@ -532,7 +525,8 @@ func (m *MTProto) SendSync(msg TL) TL {
 // Must be called only when sendRoutine and recvRoutine are stopped!
 func (m *MTProto) sendAndReadDirect(msg TL) (TL, error) {
 	resp := make(chan TL, 1)
-	err := m.send(newPacket(msg, resp))
+	packet := newPacket(msg, resp)
+	err := m.send(packet)
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
@@ -564,6 +558,7 @@ func (m *MTProto) sendAndReadDirect(msg TL) (TL, error) {
 	for {
 		data, err := m.read()
 		if err != nil {
+			m.clearPacketData(packet.msgID)
 			return nil, merry.Wrap(err)
 		}
 		m.process(m.msgId, m.seqNo, data, false)
@@ -571,6 +566,7 @@ func (m *MTProto) sendAndReadDirect(msg TL) (TL, error) {
 		case res := <-resp:
 			return res, nil
 		case err := <-sendErr:
+			m.clearPacketData(packet.msgID)
 			return nil, err
 		default:
 			m.log.Debug("direct send: waiting for next packet")
@@ -873,7 +869,18 @@ func (m *MTProto) debugRoutine() {
 	}
 }
 
-func (m *MTProto) clearPacketData(msgID int64, response TL) {
+func (m *MTProto) clearPacketData(msgID int64) {
+	m.mutex.Lock()
+	packet, ok := m.msgsByID[msgID]
+	if ok {
+		if packet.resp != nil {
+			close(packet.resp)
+		}
+		delete(m.msgsByID, msgID)
+	}
+	m.mutex.Unlock()
+}
+func (m *MTProto) respAndClearPacketData(msgID int64, response TL) {
 	m.mutex.Lock()
 	packet, ok := m.msgsByID[msgID]
 	if ok {
@@ -902,10 +909,10 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 		m.resendPendingPackets()
 
 	case TL_bad_msg_notification:
-		m.clearPacketData(data.BadMsgID, data)
+		m.respAndClearPacketData(data.BadMsgID, data)
 
 	case TL_msgs_state_info:
-		m.clearPacketData(data.ReqMsgID, data)
+		m.respAndClearPacketData(data.ReqMsgID, data)
 
 	case TL_new_session_created:
 		m.session.ServerSalt = data.ServerSalt
@@ -933,7 +940,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 
 	case TL_rpc_result:
 		m.process(msgId, 0, data.obj, false)
-		m.clearPacketData(data.req_msg_id, data.obj)
+		m.respAndClearPacketData(data.req_msg_id, data.obj)
 
 	default:
 		if mayPassToHandler && m.handleEvent != nil {
