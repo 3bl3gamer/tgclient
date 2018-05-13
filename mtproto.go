@@ -24,74 +24,12 @@ const ROUTINES_COUNT = 4
 var ErrNoSessionData = merry.New("no session data")
 
 type SessionInfo struct {
-	DcID        int32
-	AuthKey     []byte
-	AuthKeyHash []byte
-	ServerSalt  int64
-	Addr        string
+	DcID        int32  `json:"dc_id"`
+	AuthKey     []byte `json:"auth_key"`
+	AuthKeyHash []byte `json:"auth_key_hash"`
+	ServerSalt  int64  `json:"server_salt"`
+	Addr        string `json:"addr"`
 	sessionId   int64
-}
-
-type SessionStore interface {
-	Save(*SessionInfo) error
-	Load(*SessionInfo) error
-}
-
-type SessNoopStore struct{}
-
-func (s *SessNoopStore) Save(sess *SessionInfo) error { return nil }
-func (s *SessNoopStore) Load(sess *SessionInfo) error { return merry.New("can not load") }
-
-type SessFileStore struct {
-	FPath string
-}
-
-func (s *SessFileStore) Save(sess *SessionInfo) (err error) {
-	f, err := os.Create(s.FPath)
-	if err != nil {
-		return merry.Wrap(err)
-	}
-	defer f.Close()
-
-	b := NewEncodeBuf(1024)
-	b.StringBytes(sess.AuthKey)
-	b.StringBytes(sess.AuthKeyHash)
-	b.Long(sess.ServerSalt)
-	b.String(sess.Addr)
-
-	_, err = f.Write(b.buf)
-	if err != nil {
-		return merry.Wrap(err)
-	}
-	return nil
-}
-
-func (s *SessFileStore) Load(sess *SessionInfo) error {
-	f, err := os.Open(s.FPath)
-	if os.IsNotExist(err) {
-		return ErrNoSessionData.Here()
-	}
-	if err != nil {
-		return merry.Wrap(err)
-	}
-	defer f.Close()
-
-	b := make([]byte, 1024*4)
-	_, err = f.Read(b)
-	if err != nil {
-		return merry.Wrap(err)
-	}
-
-	d := NewDecodeBuf(b)
-	sess.AuthKey = d.StringBytes()
-	sess.AuthKeyHash = d.StringBytes()
-	sess.ServerSalt = d.Long()
-	sess.Addr = d.String()
-
-	if d.err != nil {
-		return merry.Wrap(d.err)
-	}
-	return nil
 }
 
 type AppConfig struct {
@@ -204,7 +142,7 @@ func NewMTProtoExt(params MTParams) *MTProto {
 		} else {
 			exPath = filepath.Dir(ex)
 		}
-		params.SessStore = &SessFileStore{exPath + "/tg.session"}
+		params.SessStore = &SessFileStore{exPath + "/session.json"}
 	}
 
 	m := &MTProto{
