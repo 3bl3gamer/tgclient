@@ -363,7 +363,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			isFlag := t.isFlag()
 			switch t.typeName {
 			case "true": //flags only
-				write("false, //flag\n")
+				write("flags & %d != 0, //flag #%d\n", 1<<uint(t.flagBit), t.flagBit)
 			case "#":
 				write("flags,\n")
 			case "int":

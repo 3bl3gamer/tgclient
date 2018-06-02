@@ -14412,7 +14412,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_inputMediaUploadedDocument{
 			flags,
-			false, //flag
+			flags&8 != 0, //flag #3
 			m.Object(),
 			m.FlaggedObject(flags, 2),
 			m.String(),
@@ -14614,17 +14614,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_user{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1024 != 0,    //flag #10
+			flags&2048 != 0,    //flag #11
+			flags&4096 != 0,    //flag #12
+			flags&8192 != 0,    //flag #13
+			flags&16384 != 0,   //flag #14
+			flags&32768 != 0,   //flag #15
+			flags&65536 != 0,   //flag #16
+			flags&131072 != 0,  //flag #17
+			flags&262144 != 0,  //flag #18
+			flags&1048576 != 0, //flag #20
+			flags&2097152 != 0, //flag #21
 			m.Int(),
 			m.FlaggedLong(flags, 0),
 			m.FlaggedString(flags, 1),
@@ -14680,12 +14680,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_chat{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,  //flag #0
+			flags&2 != 0,  //flag #1
+			flags&4 != 0,  //flag #2
+			flags&8 != 0,  //flag #3
+			flags&16 != 0, //flag #4
+			flags&32 != 0, //flag #5
 			m.Int(),
 			m.String(),
 			m.Object(),
@@ -14705,16 +14705,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channel{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,    //flag #0
+			flags&4 != 0,    //flag #2
+			flags&8 != 0,    //flag #3
+			flags&32 != 0,   //flag #5
+			flags&128 != 0,  //flag #7
+			flags&256 != 0,  //flag #8
+			flags&512 != 0,  //flag #9
+			flags&1024 != 0, //flag #10
+			flags&2048 != 0, //flag #11
+			flags&4096 != 0, //flag #12
 			m.Int(),
 			m.FlaggedLong(flags, 13),
 			m.String(),
@@ -14732,8 +14732,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channelForbidden{
 			flags,
-			false, //flag
-			false, //flag
+			flags&32 != 0,  //flag #5
+			flags&256 != 0, //flag #8
 			m.Int(),
 			m.Long(),
 			m.String(),
@@ -14754,10 +14754,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channelFull{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&8 != 0,    //flag #3
+			flags&64 != 0,   //flag #6
+			flags&128 != 0,  //flag #7
+			flags&1024 != 0, //flag #10
 			m.Int(),
 			m.String(),
 			m.FlaggedInt(flags, 0),
@@ -14830,11 +14830,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_message{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&2 != 0,     //flag #1
+			flags&16 != 0,    //flag #4
+			flags&32 != 0,    //flag #5
+			flags&8192 != 0,  //flag #13
+			flags&16384 != 0, //flag #14
 			m.Int(),
 			m.FlaggedInt(flags, 8),
 			m.Object(),
@@ -14856,11 +14856,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messageService{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&2 != 0,     //flag #1
+			flags&16 != 0,    //flag #4
+			flags&32 != 0,    //flag #5
+			flags&8192 != 0,  //flag #13
+			flags&16384 != 0, //flag #14
 			m.Int(),
 			m.FlaggedInt(flags, 8),
 			m.Object(),
@@ -14928,8 +14928,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messageMediaInvoice{
 			flags,
-			false, //flag
-			false, //flag
+			flags&2 != 0, //flag #1
+			flags&8 != 0, //flag #3
 			m.String(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
@@ -15049,7 +15049,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_dialog{
 			flags,
-			false, //flag
+			flags&4 != 0, //flag #2
 			m.Object(),
 			m.Int(),
 			m.Int(),
@@ -15070,7 +15070,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_photo{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Long(),
 			m.Long(),
 			m.Int(),
@@ -15118,7 +15118,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_auth_sentCode{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 			m.String(),
 			m.FlaggedObject(flags, 1),
@@ -15163,8 +15163,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_inputPeerNotifySettings{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Int(),
 			m.String(),
 		}
@@ -15182,8 +15182,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_peerNotifySettings{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Int(),
 			m.String(),
 		}
@@ -15192,7 +15192,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_peerSettings{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 		}
 
 	case CRC_wallPaper:
@@ -15229,9 +15229,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_userFull{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,  //flag #0
+			flags&16 != 0, //flag #4
+			flags&32 != 0, //flag #5
 			m.Object(),
 			m.FlaggedString(flags, 1),
 			m.Object(),
@@ -15410,7 +15410,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_inputMessagesFilterPhoneCalls{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 		}
 
 	case CRC_inputMessagesFilterRoundVoice:
@@ -15562,7 +15562,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updateServiceNotification{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.FlaggedInt(flags, 1),
 			m.String(),
 			m.String(),
@@ -15677,7 +15677,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updateStickerSetsOrder{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.VectorLong(),
 		}
 
@@ -15790,7 +15790,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updateDialogPinned{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 		}
 
@@ -15912,10 +15912,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updateShortMessage{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&2 != 0,    //flag #1
+			flags&16 != 0,   //flag #4
+			flags&32 != 0,   //flag #5
+			flags&8192 != 0, //flag #13
 			m.Int(),
 			m.Int(),
 			m.String(),
@@ -15932,10 +15932,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updateShortChatMessage{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&2 != 0,    //flag #1
+			flags&16 != 0,   //flag #4
+			flags&32 != 0,   //flag #5
+			flags&8192 != 0, //flag #13
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -15978,7 +15978,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updateShortSentMessage{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -16026,11 +16026,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_dcOption{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,  //flag #0
+			flags&2 != 0,  //flag #1
+			flags&4 != 0,  //flag #2
+			flags&8 != 0,  //flag #3
+			flags&16 != 0, //flag #4
 			m.Int(),
 			m.String(),
 			m.Int(),
@@ -16040,8 +16040,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_config{
 			flags,
-			false, //flag
-			false, //flag
+			flags&2 != 0, //flag #1
+			flags&8 != 0, //flag #3
 			m.Int(),
 			m.Int(),
 			m.Object(),
@@ -16413,7 +16413,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_documentAttributeSticker{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.String(),
 			m.Object(),
 			m.FlaggedObject(flags, 0),
@@ -16423,8 +16423,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_documentAttributeVideo{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -16434,7 +16434,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_documentAttributeAudio{
 			flags,
-			false, //flag
+			flags&1024 != 0, //flag #10
 			m.Int(),
 			m.FlaggedString(flags, 0),
 			m.FlaggedString(flags, 1),
@@ -16614,10 +16614,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_chatInvite{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
+			flags&8 != 0, //flag #3
 			m.String(),
 			m.Object(),
 			m.Int(),
@@ -16642,10 +16642,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_stickerSet{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
+			flags&8 != 0, //flag #3
 			m.Long(),
 			m.Long(),
 			m.String(),
@@ -16705,7 +16705,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_keyboardButtonSwitchInline{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.String(),
 			m.String(),
 		}
@@ -16729,24 +16729,24 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_replyKeyboardHide{
 			flags,
-			false, //flag
+			flags&4 != 0, //flag #2
 		}
 
 	case CRC_replyKeyboardForceReply:
 		flags := m.Int()
 		r = TL_replyKeyboardForceReply{
 			flags,
-			false, //flag
-			false, //flag
+			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
 		}
 
 	case CRC_replyKeyboardMarkup:
 		flags := m.Int()
 		r = TL_replyKeyboardMarkup{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
 			m.Vector(),
 		}
 
@@ -16863,7 +16863,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updates_channelDifferenceEmpty{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Int(),
 			m.FlaggedInt(flags, 1),
 		}
@@ -16872,7 +16872,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updates_channelDifferenceTooLong{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Int(),
 			m.FlaggedInt(flags, 1),
 			m.Int(),
@@ -16889,7 +16889,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updates_channelDifference{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Int(),
 			m.FlaggedInt(flags, 1),
 			m.Vector(),
@@ -16905,7 +16905,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channelMessagesFilter{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.Vector(),
 		}
 
@@ -16931,7 +16931,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channelParticipantAdmin{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -16943,7 +16943,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channelParticipantBanned{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -17040,7 +17040,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_inputBotInlineMessageText{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedObject(flags, 2),
@@ -17142,7 +17142,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_botInlineMessageText{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedObject(flags, 2),
@@ -17214,7 +17214,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_botResults{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Long(),
 			m.FlaggedString(flags, 1),
 			m.FlaggedObject(flags, 2),
@@ -17275,9 +17275,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_botCallbackAnswer{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&2 != 0,  //flag #1
+			flags&8 != 0,  //flag #3
+			flags&16 != 0, //flag #4
 			m.FlaggedString(flags, 0),
 			m.FlaggedString(flags, 2),
 			m.Int(),
@@ -17287,7 +17287,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_messageEditData{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 		}
 
 	case CRC_inputBotInlineMessageID:
@@ -17360,7 +17360,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_draftMessage{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.FlaggedInt(flags, 0),
 			m.String(),
 			m.FlaggedVector(flags, 3),
@@ -17600,8 +17600,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_pageBlockVideo{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Long(),
 			m.Object(),
 		}
@@ -17615,8 +17615,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_pageBlockEmbed{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&8 != 0, //flag #3
 			m.FlaggedString(flags, 1),
 			m.FlaggedString(flags, 2),
 			m.FlaggedLong(flags, 4),
@@ -17700,14 +17700,14 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_invoice{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,   //flag #0
+			flags&2 != 0,   //flag #1
+			flags&4 != 0,   //flag #2
+			flags&8 != 0,   //flag #3
+			flags&16 != 0,  //flag #4
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&128 != 0, //flag #7
 			m.String(),
 			m.Vector(),
 		}
@@ -17781,8 +17781,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_payments_paymentForm{
 			flags,
-			false, //flag
-			false, //flag
+			flags&4 != 0, //flag #2
+			flags&8 != 0, //flag #3
 			m.Int(),
 			m.Object(),
 			m.Int(),
@@ -17832,7 +17832,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_payments_savedInfo{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.FlaggedObject(flags, 0),
 		}
 
@@ -17846,7 +17846,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_inputPaymentCredentials{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 		}
 
@@ -17948,8 +17948,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_phoneCallDiscarded{
 			flags,
-			false, //flag
-			false, //flag
+			flags&4 != 0, //flag #2
+			flags&8 != 0, //flag #3
 			m.Long(),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedInt(flags, 1),
@@ -17968,8 +17968,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_phoneCallProtocol{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Int(),
 			m.Int(),
 		}
@@ -18044,29 +18044,29 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channelAdminRights{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,   //flag #0
+			flags&2 != 0,   //flag #1
+			flags&4 != 0,   //flag #2
+			flags&8 != 0,   //flag #3
+			flags&16 != 0,  //flag #4
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&128 != 0, //flag #7
+			flags&512 != 0, //flag #9
 		}
 
 	case CRC_channelBannedRights:
 		flags := m.Int()
 		r = TL_channelBannedRights{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,   //flag #0
+			flags&2 != 0,   //flag #1
+			flags&4 != 0,   //flag #2
+			flags&8 != 0,   //flag #3
+			flags&16 != 0,  //flag #4
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&128 != 0, //flag #7
 			m.Int(),
 		}
 
@@ -18173,20 +18173,20 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channelAdminLogEventsFilter{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,    //flag #0
+			flags&2 != 0,    //flag #1
+			flags&4 != 0,    //flag #2
+			flags&8 != 0,    //flag #3
+			flags&16 != 0,   //flag #4
+			flags&32 != 0,   //flag #5
+			flags&64 != 0,   //flag #6
+			flags&128 != 0,  //flag #7
+			flags&256 != 0,  //flag #8
+			flags&512 != 0,  //flag #9
+			flags&1024 != 0, //flag #10
+			flags&2048 != 0, //flag #11
+			flags&4096 != 0, //flag #12
+			flags&8192 != 0, //flag #13
 		}
 
 	case CRC_popularContact:
@@ -18334,7 +18334,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_auth_sendCode{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedObject(flags, 0),
 			m.Int(),
@@ -18516,7 +18516,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_account_sendChangePhoneCode{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedObject(flags, 0),
 		}
@@ -18559,7 +18559,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_account_sendConfirmPhoneCode{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedObject(flags, 0),
 		}
@@ -18659,12 +18659,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_contacts_getTopPeers{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&1 != 0,     //flag #0
+			flags&2 != 0,     //flag #1
+			flags&4 != 0,     //flag #2
+			flags&8 != 0,     //flag #3
+			flags&1024 != 0,  //flag #10
+			flags&32768 != 0, //flag #15
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -18688,7 +18688,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_getDialogs{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Int(),
 			m.Int(),
 			m.Object(),
@@ -18734,7 +18734,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_deleteHistory{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Int(),
 		}
@@ -18743,7 +18743,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_deleteMessages{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.VectorInt(),
 		}
 
@@ -18762,10 +18762,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_sendMessage{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&2 != 0,   //flag #1
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&128 != 0, //flag #7
 			m.Object(),
 			m.FlaggedInt(flags, 0),
 			m.String(),
@@ -18778,9 +18778,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_sendMedia{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&128 != 0, //flag #7
 			m.Object(),
 			m.FlaggedInt(flags, 0),
 			m.Object(),
@@ -18794,10 +18794,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_forwardMessages{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&256 != 0, //flag #8
+			flags&512 != 0, //flag #9
 			m.Object(),
 			m.VectorInt(),
 			m.VectorLong(),
@@ -19030,7 +19030,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_reorderStickerSets{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.VectorLong(),
 		}
 
@@ -19073,8 +19073,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_setInlineBotResults{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Long(),
 			m.Vector(),
 			m.Int(),
@@ -19086,9 +19086,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_sendInlineBotResult{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&128 != 0, //flag #7
 			m.Object(),
 			m.FlaggedInt(flags, 0),
 			m.Long(),
@@ -19106,8 +19106,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_editMessage{
 			flags,
-			false, //flag
-			false, //flag
+			flags&2 != 0,    //flag #1
+			flags&4096 != 0, //flag #12
 			m.Object(),
 			m.Int(),
 			m.FlaggedString(flags, 11),
@@ -19120,8 +19120,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_editInlineBotMessage{
 			flags,
-			false, //flag
-			false, //flag
+			flags&2 != 0,    //flag #1
+			flags&4096 != 0, //flag #12
 			m.Object(),
 			m.FlaggedString(flags, 11),
 			m.FlaggedObject(flags, 2),
@@ -19133,7 +19133,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_getBotCallbackAnswer{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.Object(),
 			m.Int(),
 			m.FlaggedStringBytes(flags, 0),
@@ -19143,7 +19143,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_setBotCallbackAnswer{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.Long(),
 			m.FlaggedString(flags, 0),
 			m.FlaggedString(flags, 2),
@@ -19159,7 +19159,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_saveDraft{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.FlaggedInt(flags, 0),
 			m.Object(),
 			m.String(),
@@ -19183,7 +19183,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_getRecentStickers{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Int(),
 		}
 
@@ -19191,7 +19191,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_saveRecentSticker{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Object(),
 		}
@@ -19200,14 +19200,14 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_clearRecentStickers{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 		}
 
 	case CRC_messages_getArchivedStickers:
 		flags := m.Int()
 		r = TL_messages_getArchivedStickers{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Long(),
 			m.Int(),
 		}
@@ -19226,8 +19226,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_setGameScore{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Object(),
 			m.Int(),
 			m.Object(),
@@ -19238,8 +19238,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_setInlineGameScore{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Object(),
 			m.Object(),
 			m.Int(),
@@ -19280,7 +19280,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_toggleDialogPin{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 		}
 
@@ -19288,7 +19288,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_reorderPinnedDialogs{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Vector(),
 		}
 
@@ -19308,7 +19308,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_setBotPrecheckoutResults{
 			flags,
-			false, //flag
+			flags&2 != 0, //flag #1
 			m.Long(),
 			m.FlaggedString(flags, 0),
 		}
@@ -19362,9 +19362,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_messages_sendMultiMedia{
 			flags,
-			false, //flag
-			false, //flag
-			false, //flag
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&128 != 0, //flag #7
 			m.Object(),
 			m.FlaggedInt(flags, 0),
 			m.Vector(),
@@ -19393,7 +19393,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_updates_getChannelDifference{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Object(),
 			m.Int(),
@@ -19573,8 +19573,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channels_createChannel{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.String(),
 			m.String(),
 		}
@@ -19665,7 +19665,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_channels_updatePinnedMessage{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Int(),
 		}
@@ -19743,7 +19743,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_payments_validateRequestedInfo{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Int(),
 			m.Object(),
 		}
@@ -19765,15 +19765,15 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_payments_clearSavedInfo{
 			flags,
-			false, //flag
-			false, //flag
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 		}
 
 	case CRC_stickers_createStickerSet:
 		flags := m.Int()
 		r = TL_stickers_createStickerSet{
 			flags,
-			false, //flag
+			flags&1 != 0, //flag #0
 			m.Object(),
 			m.String(),
 			m.String(),

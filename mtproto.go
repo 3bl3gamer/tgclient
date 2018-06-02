@@ -210,7 +210,7 @@ func (m *MTProto) SaveSessionLogged() {
 
 func (m *MTProto) DCAddr(dcID int32, ipv6 bool) (string, bool) {
 	for _, o := range m.dcOptions {
-		if o.ID == dcID && o.Ipv6 == ipv6 {
+		if o.ID == dcID && o.Ipv6 == ipv6 && !o.Cdn {
 			return fmt.Sprintf("%s:%d", o.IpAddress, o.Port), true
 		}
 	}
