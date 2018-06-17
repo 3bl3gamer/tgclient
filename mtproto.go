@@ -470,12 +470,14 @@ func (m *MTProto) sendAndReadDirect(msg TL) (TL, error) {
 	}
 
 	// small local version or sendRoutine: just sends data and passes error (if any) outside
-	stopSend := make(chan struct{}, 1)
+	stopSend := make(chan struct{})
+	stopSendDone := make(chan struct{})
 	sendErr := make(chan error)
 	go func() {
 		for {
 			select {
 			case <-stopSend:
+				close(stopSendDone)
 				return
 			case x := <-m.sendQueue:
 				m.log.Debug("direct send: sending: %#v", x)
@@ -487,12 +489,12 @@ func (m *MTProto) sendAndReadDirect(msg TL) (TL, error) {
 		}
 	}()
 	defer func() {
-		stopSend <- struct{}{}
 		close(stopSend)
+		<-stopSendDone
 		m.log.Debug("direct send: done")
 	}()
 
-	// small version of readRoutine: just reads, processes and check for error from sending
+	// small version of readRoutine: just reads, processes and checks for error from sending
 	for {
 		data, err := m.read()
 		if err != nil {
