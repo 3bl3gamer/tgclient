@@ -1,7 +1,6 @@
 package mtproto
 
 const (
-	// layer = 73
 	CRC_vector        = 0x1cb5c415
 	CRC_rpc_result    = 0xf35c6d01
 	CRC_msg_container = 0x73f1f8dc

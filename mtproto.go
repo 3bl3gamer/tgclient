@@ -16,7 +16,7 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-//go:generate go run scheme/generate_tl_schema.go 75 scheme/tl-schema-75.tl tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 82 scheme/tl-schema-82.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 const ROUTINES_COUNT = 4
@@ -249,14 +249,16 @@ func (m *MTProto) initConection() error {
 	x, err := m.sendAndReadDirect(TL_invokeWithLayer{
 		TL_Layer,
 		TL_initConnection{
-			m.appCfg.AppID,
-			m.appCfg.DeviceModel,
-			m.appCfg.SystemVersion,
-			m.appCfg.AppVersion,
-			m.appCfg.SystemLangCode,
-			m.appCfg.LangPack,
-			m.appCfg.LangCode,
-			TL_help_getConfig{},
+			Flags:          0,
+			ApiID:          m.appCfg.AppID,
+			DeviceModel:    m.appCfg.DeviceModel,
+			SystemVersion:  m.appCfg.SystemVersion,
+			AppVersion:     m.appCfg.AppVersion,
+			SystemLangCode: m.appCfg.SystemLangCode,
+			LangPack:       m.appCfg.LangPack,
+			LangCode:       m.appCfg.LangCode,
+			Proxy:          nil, //flagged
+			Query:          TL_help_getConfig{},
 		},
 	})
 	if err != nil {
