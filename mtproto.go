@@ -450,20 +450,20 @@ func (m *MTProto) NewConnection(dcID int32) (*MTProto, error) {
 	return newMT, nil
 }
 
-func (m *MTProto) Send(msg TL) chan TL {
+func (m *MTProto) Send(msg TLReq) chan TL {
 	resp := make(chan TL, 1)
 	m.extSendQueue <- newPacket(msg, resp)
 	return resp
 }
 
-func (m *MTProto) SendSync(msg TL) TL {
+func (m *MTProto) SendSync(msg TLReq) TL {
 	resp := make(chan TL, 1)
 	m.extSendQueue <- newPacket(msg, resp)
 	return <-resp
 }
 
 // Must be called only when sendRoutine and recvRoutine are stopped!
-func (m *MTProto) sendAndReadDirect(msg TL) (TL, error) {
+func (m *MTProto) sendAndReadDirect(msg TLReq) (TL, error) {
 	resp := make(chan TL, 1)
 	packet := newPacket(msg, resp)
 	err := m.send(packet)
@@ -882,7 +882,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 
 	case TL_rpc_result:
 		m.process(msgId, 0, data.obj, false)
-		m.respAndClearPacketData(data.req_msg_id, data.obj)
+		m.respAndClearPacketData(data.reqMsgID, data.obj)
 
 	default:
 		if mayPassToHandler && m.handleEvent != nil {

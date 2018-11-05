@@ -19,7 +19,12 @@ import (
 // https://core.telegram.org/mtproto/TL-combinator
 // identifier#name attr:type attr:type = resultType;
 
+// TODO:
 // Pq Ids
+// Silent  bool //flag (add flag number)
+// Channel TL   // InputChannel (add possible types)
+// Use decodeResponse of inner obj when decoding types like:
+//  invokeWithLayer#da9b0d0d {X:Type} layer:int query:!X = X;
 
 type Field struct {
 	name     string
@@ -32,10 +37,11 @@ func (f Field) isFlag() bool {
 }
 
 type Combinator struct {
-	id       string
-	name     uint32
-	fields   []Field
-	typeName string
+	id         string
+	name       uint32
+	fields     []Field
+	typeName   string
+	isFunction bool
 }
 
 func (c Combinator) hasFlags() bool {
@@ -150,6 +156,7 @@ func parseTLSchema(fpath string) []*Combinator {
 
 	// processing constructors
 	combinators := []*Combinator{}
+	isFunction := false
 
 	lineRegexp := regexp.MustCompile(`^(.*?)(#[a-f0-9]*)? (.*)= (.*);$`)
 	fieldRegexp := regexp.MustCompile(`^(.*?):(.*)$`)
@@ -158,7 +165,12 @@ func parseTLSchema(fpath string) []*Combinator {
 		if line == "" || strings.HasPrefix(line, "//") {
 			continue
 		}
-		if line == "---functions---" || line == "---types---" {
+		if line == "---functions---" {
+			isFunction = true
+			continue
+		}
+		if line == "---types---" {
+			isFunction = false
 			continue
 		}
 
@@ -206,7 +218,7 @@ func parseTLSchema(fpath string) []*Combinator {
 			fields = append(fields, makeField(name, typeName))
 		}
 
-		combinators = append(combinators, &Combinator{id, name, fields, typeName})
+		combinators = append(combinators, &Combinator{id, name, fields, typeName, isFunction})
 	}
 	return combinators
 }
@@ -238,7 +250,12 @@ func main() {
 	}
 
 	// constants
-	write("package mtproto\nimport \"fmt\"\nconst (\n")
+	write(`package mtproto
+import (
+	"github.com/ansel1/merry"
+)
+`)
+	write("const (\n")
 	write("TL_Layer = %d\n", layer)
 	for _, c := range combinators {
 		write("CRC_%s = 0x%08x\n", c.id, c.name)
@@ -348,6 +365,23 @@ func main() {
 		write("}\n\n")
 	}
 
+	// request decode funcs (for funtions)
+	for _, c := range combinators {
+		if c.isFunction {
+			write("func (e TL_%s) decodeResponse(dbuf *DecodeBuf) TL {\n", c.id)
+			if c.typeName == "Vector<int>" {
+				write("return VectorInt(dbuf.VectorInt())\n")
+			} else if c.typeName == "Vector<long>" {
+				write("return VectorLong(dbuf.VectorLong())\n")
+			} else if strings.HasPrefix(c.typeName, "Vector<") {
+				write("return VectorObject(dbuf.Vector())\n")
+			} else {
+				write("return dbuf.Object()\n")
+			}
+			write("}\n\n")
+		}
+	}
+
 	// decode funcs
 	write(`
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
@@ -405,7 +439,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	write(`
 	default:
-		m.err = fmt.Errorf("Unknown constructor: \u002508x", constructor)
+		m.err = merry.Errorf("Unknown constructor: \u002508x", constructor)
 		return nil
 
 	}

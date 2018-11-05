@@ -7,7 +7,6 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"log"
 	"math"
 	"math/big"
 )
@@ -21,6 +20,14 @@ type DecodeBuf struct {
 
 func NewDecodeBuf(b []byte) *DecodeBuf {
 	return &DecodeBuf{b, 0, len(b), nil}
+}
+
+func (m *DecodeBuf) SeekBack(n int) {
+	if m.off >= n {
+		m.off -= n
+	} else {
+		m.err = fmt.Errorf("triet to moved %d byte(s) from offset %d", n, m.off)
+	}
 }
 
 func (m *DecodeBuf) Long() int64 {
@@ -373,57 +380,12 @@ func (m *DecodeBuf) FlaggedVector(flags, num int32) []TL {
 	return m.Vector()
 }
 
-func (m *DecodeBuf) Object() (r TL) {
+func (m *DecodeBuf) Object() TL {
 	constructor := m.UInt()
 	if m.err != nil {
 		return nil
 	}
-
-	//DEBUG fmt.Printf("[%08x]\n", constructor)
-	//DEBUG m.dump()
-
-	switch constructor {
-	case CRC_msg_container:
-		size := m.Int()
-		arr := make([]TL_MT_message, size)
-		for i := int32(0); i < size; i++ {
-			arr[i] = TL_MT_message{m.Long(), m.Int(), m.Int(), m.Object()}
-			if m.err != nil {
-				return nil
-			}
-		}
-		r = TL_msg_container{arr}
-
-	case CRC_rpc_result:
-		r = TL_rpc_result{m.Long(), m.Object()}
-
-	case CRC_gzip_packed:
-		obj := make([]byte, 0, 4096)
-
-		var buf bytes.Buffer
-		_, _ = buf.Write(m.StringBytes())
-		gz, _ := gzip.NewReader(&buf)
-
-		b := make([]byte, 4096)
-		for true {
-			n, _ := gz.Read(b)
-			obj = append(obj, b[0:n]...)
-			if n <= 0 {
-				break
-			}
-		}
-		d := NewDecodeBuf(obj)
-		r = d.Object()
-
-	default:
-		r = m.ObjectGenerated(constructor)
-	}
-
-	if m.err != nil {
-		log.Println("err", m.err) //TODO: better logging
-		return nil
-	}
-	return r
+	return m.ObjectGenerated(constructor)
 }
 
 func (m *DecodeBuf) FlaggedObject(flags, num int32) TL {
@@ -449,4 +411,86 @@ func str2big(str string) *big.Int {
 
 func big2str(val *big.Int) string {
 	return string(val.Bytes())
+}
+
+// decodeMessage decodes types before actual RPC response by itself,
+// then decodes remaining data by DecodeBuf or RLReq.decodeResponse().
+// This all could be done in DecodeBuf, but...
+// Some TL methods return bare vectors:
+//   account.getWallPapers#c04cfac2 = Vector<WallPaper>
+//   messages.getMessagesViews#c4c8a55d ... = Vector<int>
+//   photos.deletePhotos#87cf7f2f ... = Vector<long>
+// All this vectors will be received with same constructor ID: 0x1cb5c415.
+// To find out correct vector type, we need no find a request for this response.
+// Request message ID is in `rpc_result.reqMsgID`. So we have to decode everything
+// until `rpc_result`, find request and use it (reqMsg arg) for further decoding.
+func (m *MTProto) decodeMessage(dbuf *DecodeBuf, reqMsg TLReq) (r TL) {
+	constructor := dbuf.UInt()
+	if dbuf.err != nil {
+		return nil
+	}
+
+	switch constructor {
+	case CRC_msg_container:
+		size := dbuf.Int()
+		arr := make([]TL_MT_message, size)
+		for i := int32(0); i < size; i++ {
+			arr[i] = TL_MT_message{dbuf.Long(), dbuf.Int(), dbuf.Int(), m.decodeMessage(dbuf, reqMsg)}
+			if dbuf.err != nil {
+				return nil
+			}
+		}
+		r = TL_msg_container{arr}
+
+	case CRC_rpc_result:
+		requestID := dbuf.Long()
+		m.mutex.Lock()
+		packet, ok := m.msgsByID[requestID]
+		m.mutex.Unlock()
+		if ok {
+			if req, ok := packet.msg.(TLReq); ok {
+				//r = req.decodeResponse(dbuf)
+				r = m.decodeMessage(dbuf, req)
+			} else {
+				r = m.decodeMessage(dbuf, nil)
+				m.log.Warn("got RPC result (%T) not-a-request message #%d #T", r, requestID, packet.msg)
+			}
+		} else {
+			r = m.decodeMessage(dbuf, nil)
+			m.log.Warn("got RPC result (%T) for unknown message #%d", r, requestID)
+		}
+		r = TL_rpc_result{requestID, r}
+
+	case CRC_gzip_packed:
+		obj := make([]byte, 0, 4096)
+
+		var buf bytes.Buffer
+		_, _ = buf.Write(dbuf.StringBytes())
+		gz, _ := gzip.NewReader(&buf)
+
+		b := make([]byte, 4096)
+		for true {
+			n, _ := gz.Read(b)
+			obj = append(obj, b[0:n]...)
+			if n <= 0 {
+				break
+			}
+		}
+		d := NewDecodeBuf(obj)
+		r = m.decodeMessage(d, reqMsg)
+		dbuf.err = d.err
+
+	default:
+		dbuf.SeekBack(4) //returning constructor ID
+		if reqMsg == nil {
+			r = dbuf.Object()
+		} else {
+			r = reqMsg.decodeResponse(dbuf)
+		}
+	}
+
+	if dbuf.err != nil {
+		return nil
+	}
+	return r
 }

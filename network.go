@@ -9,7 +9,7 @@ import (
 	"github.com/ansel1/merry"
 )
 
-func (m *MTProto) justSend(msg TL) error {
+func (m *MTProto) justSend(msg TLReq) error {
 	return merry.Wrap(m.send(newPacket(msg, nil)))
 }
 
@@ -162,6 +162,9 @@ func (m *MTProto) read() (TL, error) {
 			return nil, merry.Errorf("Message len: %d (need <= %d)", messageLen, dbuf.size-32)
 		}
 		// DEBUG vvv
+		if dbuf.err != nil {
+			panic(dbuf.err)
+		}
 		if int(messageLen)+32 > len(dbuf.buf) {
 			panic(fmt.Sprintf("AHTUNG!!! %d(%d) + 32 > %d", messageLen, int(messageLen), len(dbuf.buf)))
 		}
@@ -177,7 +180,7 @@ func (m *MTProto) read() (TL, error) {
 		// }
 		// DEBUG ^^^
 
-		data = dbuf.Object()
+		data = m.decodeMessage(dbuf, nil)
 		if dbuf.err != nil {
 			return nil, merry.Wrap(dbuf.err)
 		}
