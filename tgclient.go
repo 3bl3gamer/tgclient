@@ -152,6 +152,6 @@ func (c *TGClient) AuthAndInitEvents(authData mtproto.AuthDataProvider) error {
 	return nil
 }
 
-func (c *TGClient) SendSync(msg mtproto.TL) mtproto.TL {
+func (c *TGClient) SendSync(msg mtproto.TLReq) mtproto.TL {
 	return c.mt.SendSync(msg)
 }
