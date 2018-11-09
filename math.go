@@ -4,10 +4,11 @@ import (
 	"crypto/aes"
 	"crypto/rsa"
 	sha1lib "crypto/sha1"
-	"errors"
 	"math/big"
 	"math/rand"
 	"time"
+
+	"github.com/ansel1/merry"
 )
 
 const (
@@ -180,10 +181,10 @@ func doAES256IGEencrypt(data, key, iv []byte) ([]byte, error) {
 		return nil, err
 	}
 	if len(data) < aes.BlockSize {
-		return nil, errors.New("AES256IGE: data too small to encrypt")
+		return nil, merry.Errorf("AES256IGE: data too small to encrypt: %d < %d", len(data), aes.BlockSize)
 	}
 	if len(data)%aes.BlockSize != 0 {
-		return nil, errors.New("AES256IGE: data not divisible by block size")
+		return nil, merry.Errorf("AES256IGE: data not divisible by block size: %d %% %d != 0", len(data), aes.BlockSize)
 	}
 
 	t := make([]byte, aes.BlockSize)
@@ -212,10 +213,10 @@ func doAES256IGEdecrypt(data, key, iv []byte) ([]byte, error) {
 		return nil, err
 	}
 	if len(data) < aes.BlockSize {
-		return nil, errors.New("AES256IGE: data too small to decrypt")
+		return nil, merry.Errorf("AES256IGE: data too small to decrypt: %d < %d", len(data), aes.BlockSize)
 	}
 	if len(data)%aes.BlockSize != 0 {
-		return nil, errors.New("AES256IGE: data not divisible by block size")
+		return nil, merry.Errorf("AES256IGE: data not divisible by block size: %d %% %d != 0", len(data), aes.BlockSize)
 	}
 
 	t := make([]byte, aes.BlockSize)

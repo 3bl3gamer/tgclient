@@ -5,11 +5,18 @@ import (
 	"compress/gzip"
 	"encoding/binary"
 	"encoding/hex"
-	"errors"
 	"fmt"
 	"math"
 	"math/big"
+
+	"github.com/ansel1/merry"
 )
+
+func notEnoughBytesErr(kind string, pos, inc, size int) error {
+	err := merry.Errorf("%s: not enough bytes in buffer: expected %d + %d = %d, got %d",
+		kind, pos, inc, pos+inc, size)
+	return merry.WrapSkipping(err, 1)
+}
 
 type DecodeBuf struct {
 	buf  []byte
@@ -26,7 +33,7 @@ func (m *DecodeBuf) SeekBack(n int) {
 	if m.off >= n {
 		m.off -= n
 	} else {
-		m.err = fmt.Errorf("triet to moved %d byte(s) from offset %d", n, m.off)
+		m.err = merry.Errorf("tried to move back %d byte(s) from offset %d", n, m.off)
 	}
 }
 
@@ -35,7 +42,7 @@ func (m *DecodeBuf) Long() int64 {
 		return 0
 	}
 	if m.off+8 > m.size {
-		m.err = errors.New("DecodeLong")
+		m.err = notEnoughBytesErr("DecodeLong", m.off, 8, m.size)
 		return 0
 	}
 	x := int64(binary.LittleEndian.Uint64(m.buf[m.off : m.off+8]))
@@ -56,7 +63,7 @@ func (m *DecodeBuf) Double() float64 {
 		return 0
 	}
 	if m.off+8 > m.size {
-		m.err = errors.New("DecodeDouble")
+		m.err = notEnoughBytesErr("DecodeDouble", m.off, 8, m.size)
 		return 0
 	}
 	x := math.Float64frombits(binary.LittleEndian.Uint64(m.buf[m.off : m.off+8]))
@@ -77,7 +84,7 @@ func (m *DecodeBuf) Int() int32 {
 		return 0
 	}
 	if m.off+4 > m.size {
-		m.err = errors.New("DecodeInt")
+		m.err = notEnoughBytesErr("DecodeInt", m.off, 4, m.size)
 		return 0
 	}
 	x := binary.LittleEndian.Uint32(m.buf[m.off : m.off+4])
@@ -98,7 +105,7 @@ func (m *DecodeBuf) UInt() uint32 {
 		return 0
 	}
 	if m.off+4 > m.size {
-		m.err = errors.New("DecodeUInt")
+		m.err = notEnoughBytesErr("DecodeUInt", m.off, 4, m.size)
 		return 0
 	}
 	x := binary.LittleEndian.Uint32(m.buf[m.off : m.off+4])
@@ -119,7 +126,7 @@ func (m *DecodeBuf) Bytes(size int) []byte {
 		return nil
 	}
 	if m.off+size > m.size {
-		m.err = errors.New("DecodeBytes")
+		m.err = notEnoughBytesErr("DecodeBytes", m.off, size, m.size)
 		return nil
 	}
 	x := make([]byte, size)
@@ -135,7 +142,7 @@ func (m *DecodeBuf) StringBytes() []byte {
 	var size, padding int
 
 	if m.off+1 > m.size {
-		m.err = errors.New("DecodeStringBytes")
+		m.err = notEnoughBytesErr("DecodeStringBytes", m.off, 1, m.size)
 		return nil
 	}
 	size = int(m.buf[m.off])
@@ -143,7 +150,7 @@ func (m *DecodeBuf) StringBytes() []byte {
 	padding = (4 - ((size + 1) % 4)) & 3
 	if size == 254 {
 		if m.off+3 > m.size {
-			m.err = errors.New("DecodeStringBytes")
+			m.err = notEnoughBytesErr("DecodeStringBytes", m.off, 3, m.size)
 			return nil
 		}
 		size = int(m.buf[m.off]) | int(m.buf[m.off+1])<<8 | int(m.buf[m.off+2])<<16
@@ -152,8 +159,7 @@ func (m *DecodeBuf) StringBytes() []byte {
 	}
 
 	if m.off+size > m.size {
-		m.err = fmt.Errorf("DecodeStringBytes: Wrong size: expected %d+%d=%d, buffer is %d",
-			m.off, size, m.off+size, m.size)
+		m.err = notEnoughBytesErr("DecodeStringBytes", m.off, size, m.size)
 		return nil
 	}
 	x := make([]byte, size)
@@ -161,7 +167,7 @@ func (m *DecodeBuf) StringBytes() []byte {
 	m.off += size
 
 	if m.off+padding > m.size {
-		m.err = errors.New("DecodeStringBytes: Wrong padding")
+		m.err = notEnoughBytesErr("DecodeStringBytes: padding", m.off, padding, m.size)
 		return nil
 	}
 	m.off += padding
@@ -220,7 +226,7 @@ func (m *DecodeBuf) VectorInt() []int32 {
 		return nil
 	}
 	if constructor != CRC_vector {
-		m.err = fmt.Errorf("DecodeVectorInt: Wrong constructor (0x%08x)", constructor)
+		m.err = merry.Errorf("DecodeVectorInt: wrong constructor (0x%08x)", constructor)
 		return nil
 	}
 	size := m.Int()
@@ -228,7 +234,7 @@ func (m *DecodeBuf) VectorInt() []int32 {
 		return nil
 	}
 	if size < 0 {
-		m.err = errors.New("DecodeVectorInt: Wrong size")
+		m.err = merry.Errorf("DecodeVectorInt: negative size: %d", size)
 		return nil
 	}
 	x := make([]int32, size)
@@ -258,7 +264,7 @@ func (m *DecodeBuf) VectorLong() []int64 {
 		return nil
 	}
 	if constructor != CRC_vector {
-		m.err = fmt.Errorf("DecodeVectorLong: Wrong constructor (0x%08x)", constructor)
+		m.err = merry.Errorf("DecodeVectorLong: wrong constructor (0x%08x)", constructor)
 		return nil
 	}
 	size := m.Int()
@@ -266,7 +272,7 @@ func (m *DecodeBuf) VectorLong() []int64 {
 		return nil
 	}
 	if size < 0 {
-		m.err = errors.New("DecodeVectorLong: Wrong size")
+		m.err = merry.Errorf("DecodeVectorLong: negative size: %d", size)
 		return nil
 	}
 	x := make([]int64, size)
@@ -296,7 +302,7 @@ func (m *DecodeBuf) VectorString() []string {
 		return nil
 	}
 	if constructor != CRC_vector {
-		m.err = fmt.Errorf("DecodeVectorString: Wrong constructor (0x%08x)", constructor)
+		m.err = merry.Errorf("DecodeVectorString: wrong constructor (0x%08x)", constructor)
 		return nil
 	}
 	size := m.Int()
@@ -304,7 +310,7 @@ func (m *DecodeBuf) VectorString() []string {
 		return nil
 	}
 	if size < 0 {
-		m.err = errors.New("DecodeVectorString: Wrong size")
+		m.err = merry.Errorf("DecodeVectorString: negative size: %d", size)
 		return nil
 	}
 	x := make([]string, size)
@@ -348,7 +354,7 @@ func (m *DecodeBuf) Vector() []TL {
 		return nil
 	}
 	if constructor != CRC_vector {
-		m.err = fmt.Errorf("DecodeVector: Wrong constructor (0x%08x)", constructor)
+		m.err = merry.Errorf("DecodeVector: wrong constructor (0x%08x)", constructor)
 		return nil
 	}
 	size := m.Int()
@@ -356,7 +362,7 @@ func (m *DecodeBuf) Vector() []TL {
 		return nil
 	}
 	if size < 0 {
-		m.err = errors.New("DecodeVector: Wrong size")
+		m.err = merry.Errorf("DecodeVector: negative size: %d", size)
 		return nil
 	}
 	x := make([]TL, size)

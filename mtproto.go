@@ -574,7 +574,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 			if n != 1 {
 				n, _ := fmt.Sscanf(x.ErrorMessage, "NETWORK_MIGRATE_%d", &newDc)
 				if n != 1 {
-					return fmt.Errorf("RPC error_string: %s", x.ErrorMessage)
+					return merry.Errorf("RPC error_string: %s", x.ErrorMessage)
 				}
 			}
 
@@ -615,7 +615,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	}
 	auth, ok := x.(TL_auth_authorization)
 	if !ok {
-		return fmt.Errorf("RPC: %#v", x)
+		return merry.Errorf("RPC: %#v", x)
 	}
 	userSelf := auth.User.(TL_user)
 	fmt.Printf("Signed in: id %d name <%s %s>\n", userSelf.ID, userSelf.FirstName, userSelf.LastName)
@@ -660,7 +660,7 @@ func (m *MTProto) GetContacts() error {
 	x := m.SendSync(TL_contacts_getContacts{0})
 	list, ok := x.(TL_contacts_contacts)
 	if !ok {
-		return fmt.Errorf("RPC: %#v", x)
+		return merry.Errorf("RPC: %#v", x)
 	}
 
 	contacts := make(map[int32]TL_user)
@@ -700,7 +700,7 @@ func (m *MTProto) GetContacts() error {
 	x := <-resp
 	_, ok := x.(TL_messages_sentMessage)
 	if !ok {
-		return fmt.Errorf("RPC: %#v", x)
+		return merry.Errorf("RPC: %#v", x)
 	}
 
 	return nil
