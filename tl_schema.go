@@ -5,981 +5,990 @@ import (
 )
 
 const (
-	TL_Layer                                             = 82
-	CRC_resPQ                                            = 0x05162463
-	CRC_p_q_inner_data                                   = 0x83c95aec
-	CRC_p_q_inner_data_dc                                = 0xa9f55f95
-	CRC_p_q_inner_data_temp                              = 0x3c6a84d4
-	CRC_p_q_inner_data_temp_dc                           = 0x56fddf88
-	CRC_server_DH_params_fail                            = 0x79cb045d
-	CRC_server_DH_params_ok                              = 0xd0e8075c
-	CRC_server_DH_inner_data                             = 0xb5890dba
-	CRC_client_DH_inner_data                             = 0x6643b654
-	CRC_dh_gen_ok                                        = 0x3bcbf734
-	CRC_dh_gen_retry                                     = 0x46dc1fb9
-	CRC_dh_gen_fail                                      = 0xa69dae02
-	CRC_destroy_auth_key_ok                              = 0xf660e1d4
-	CRC_destroy_auth_key_none                            = 0x0a9f2259
-	CRC_destroy_auth_key_fail                            = 0xea109b13
-	CRC_req_pq                                           = 0x60469778
-	CRC_req_pq_multi                                     = 0xbe7e8ef1
-	CRC_req_DH_params                                    = 0xd712e4be
-	CRC_set_client_DH_params                             = 0xf5045f1f
-	CRC_destroy_auth_key                                 = 0xd1435160
-	CRC_msgs_ack                                         = 0x62d6b459
-	CRC_bad_msg_notification                             = 0xa7eff811
-	CRC_bad_server_salt                                  = 0xedab447b
-	CRC_msgs_state_req                                   = 0xda69fb52
-	CRC_msgs_state_info                                  = 0x04deb57d
-	CRC_msgs_all_info                                    = 0x8cc0d131
-	CRC_msg_detailed_info                                = 0x276d3ec6
-	CRC_msg_new_detailed_info                            = 0x809db6df
-	CRC_msg_resend_req                                   = 0x7d861a08
-	CRC_rpc_error                                        = 0x2144ca19
-	CRC_rpc_answer_unknown                               = 0x5e2ad36e
-	CRC_rpc_answer_dropped_running                       = 0xcd78e586
-	CRC_rpc_answer_dropped                               = 0xa43ad8b7
-	CRC_future_salt                                      = 0x0949d9dc
-	CRC_future_salts                                     = 0xae500895
-	CRC_pong                                             = 0x347773c5
-	CRC_destroy_session_ok                               = 0xe22045fc
-	CRC_destroy_session_none                             = 0x62d350c9
-	CRC_new_session_created                              = 0x9ec20908
-	CRC_http_wait                                        = 0x9299359f
-	CRC_ipPort                                           = 0xd433ad73
-	CRC_ipPortSecret                                     = 0x37982646
-	CRC_accessPointRule                                  = 0x4679b65f
-	CRC_help_configSimple                                = 0x5a592a6c
-	CRC_rpc_drop_answer                                  = 0x58e4a740
-	CRC_get_future_salts                                 = 0xb921bd04
-	CRC_ping                                             = 0x7abe77ec
-	CRC_ping_delay_disconnect                            = 0xf3427b8c
-	CRC_destroy_session                                  = 0xe7512126
-	CRC_contest_saveDeveloperInfo                        = 0x9a5f6e95
-	CRC_boolFalse                                        = 0xbc799737
-	CRC_boolTrue                                         = 0x997275b5
-	CRC_true                                             = 0x3fedd339
-	CRC_error                                            = 0xc4b9f9bb
-	CRC_null                                             = 0x56730bcc
-	CRC_inputPeerEmpty                                   = 0x7f3b18ea
-	CRC_inputPeerSelf                                    = 0x7da07ec9
-	CRC_inputPeerChat                                    = 0x179be863
-	CRC_inputPeerUser                                    = 0x7b8e7de6
-	CRC_inputPeerChannel                                 = 0x20adaef8
-	CRC_inputUserEmpty                                   = 0xb98886cf
-	CRC_inputUserSelf                                    = 0xf7c1b13f
-	CRC_inputUser                                        = 0xd8292816
-	CRC_inputPhoneContact                                = 0xf392b7f4
-	CRC_inputFile                                        = 0xf52ff27f
-	CRC_inputFileBig                                     = 0xfa4f0bb5
-	CRC_inputMediaEmpty                                  = 0x9664f57f
-	CRC_inputMediaUploadedPhoto                          = 0x1e287d04
-	CRC_inputMediaPhoto                                  = 0xb3ba0635
-	CRC_inputMediaGeoPoint                               = 0xf9c44144
-	CRC_inputMediaContact                                = 0xf8ab7dfb
-	CRC_inputMediaUploadedDocument                       = 0x5b38c6c1
-	CRC_inputMediaDocument                               = 0x23ab23d2
-	CRC_inputMediaVenue                                  = 0xc13d1c11
-	CRC_inputMediaGifExternal                            = 0x4843b0fd
-	CRC_inputMediaPhotoExternal                          = 0xe5bbfe1a
-	CRC_inputMediaDocumentExternal                       = 0xfb52dc99
-	CRC_inputMediaGame                                   = 0xd33f43f3
-	CRC_inputMediaInvoice                                = 0xf4e096c3
-	CRC_inputMediaGeoLive                                = 0x7b1a118f
-	CRC_inputChatPhotoEmpty                              = 0x1ca48f57
-	CRC_inputChatUploadedPhoto                           = 0x927c55b4
-	CRC_inputChatPhoto                                   = 0x8953ad37
-	CRC_inputGeoPointEmpty                               = 0xe4c123d6
-	CRC_inputGeoPoint                                    = 0xf3b7acc9
-	CRC_inputPhotoEmpty                                  = 0x1cd7bf0d
-	CRC_inputPhoto                                       = 0xfb95c6c4
-	CRC_inputFileLocation                                = 0x14637196
-	CRC_inputEncryptedFileLocation                       = 0xf5235d55
-	CRC_inputDocumentFileLocation                        = 0x430f0724
-	CRC_inputSecureFileLocation                          = 0xcbc7ee28
-	CRC_inputTakeoutFileLocation                         = 0x29be5899
-	CRC_inputAppEvent                                    = 0x770656a8
-	CRC_peerUser                                         = 0x9db1bc6d
-	CRC_peerChat                                         = 0xbad0e5bb
-	CRC_peerChannel                                      = 0xbddde532
-	CRC_storage_fileUnknown                              = 0xaa963b05
-	CRC_storage_filePartial                              = 0x40bc6f52
-	CRC_storage_fileJpeg                                 = 0x007efe0e
-	CRC_storage_fileGif                                  = 0xcae1aadf
-	CRC_storage_filePng                                  = 0x0a4f63c0
-	CRC_storage_filePdf                                  = 0xae1e508d
-	CRC_storage_fileMp3                                  = 0x528a0677
-	CRC_storage_fileMov                                  = 0x4b09ebbc
-	CRC_storage_fileMp4                                  = 0xb3cea0e4
-	CRC_storage_fileWebp                                 = 0x1081464c
-	CRC_fileLocationUnavailable                          = 0x7c596b46
-	CRC_fileLocation                                     = 0x53d69076
-	CRC_userEmpty                                        = 0x200250ba
-	CRC_user                                             = 0x2e13f4c3
-	CRC_userProfilePhotoEmpty                            = 0x4f11bae1
-	CRC_userProfilePhoto                                 = 0xd559d8c8
-	CRC_userStatusEmpty                                  = 0x09d05049
-	CRC_userStatusOnline                                 = 0xedb93949
-	CRC_userStatusOffline                                = 0x008c703f
-	CRC_userStatusRecently                               = 0xe26f42f1
-	CRC_userStatusLastWeek                               = 0x07bf09fc
-	CRC_userStatusLastMonth                              = 0x77ebc742
-	CRC_chatEmpty                                        = 0x9ba2d800
-	CRC_chat                                             = 0xd91cdd54
-	CRC_chatForbidden                                    = 0x07328bdb
-	CRC_channel                                          = 0xc88974ac
-	CRC_channelForbidden                                 = 0x289da732
-	CRC_chatFull                                         = 0x2e02a614
-	CRC_channelFull                                      = 0x76af5481
-	CRC_chatParticipant                                  = 0xc8d7493e
-	CRC_chatParticipantCreator                           = 0xda13538a
-	CRC_chatParticipantAdmin                             = 0xe2d6e436
-	CRC_chatParticipantsForbidden                        = 0xfc900c2b
-	CRC_chatParticipants                                 = 0x3f460fed
-	CRC_chatPhotoEmpty                                   = 0x37c1011c
-	CRC_chatPhoto                                        = 0x6153276a
-	CRC_messageEmpty                                     = 0x83e5de54
-	CRC_message                                          = 0x44f9b43d
-	CRC_messageService                                   = 0x9e19a1f6
-	CRC_messageMediaEmpty                                = 0x3ded6320
-	CRC_messageMediaPhoto                                = 0x695150d7
-	CRC_messageMediaGeo                                  = 0x56e0d474
-	CRC_messageMediaContact                              = 0xcbf24940
-	CRC_messageMediaUnsupported                          = 0x9f84f49e
-	CRC_messageMediaDocument                             = 0x9cb070d7
-	CRC_messageMediaWebPage                              = 0xa32dd600
-	CRC_messageMediaVenue                                = 0x2ec0533f
-	CRC_messageMediaGame                                 = 0xfdb19008
-	CRC_messageMediaInvoice                              = 0x84551347
-	CRC_messageMediaGeoLive                              = 0x7c3c2609
-	CRC_messageActionEmpty                               = 0xb6aef7b0
-	CRC_messageActionChatCreate                          = 0xa6638b9a
-	CRC_messageActionChatEditTitle                       = 0xb5a1ce5a
-	CRC_messageActionChatEditPhoto                       = 0x7fcb13a8
-	CRC_messageActionChatDeletePhoto                     = 0x95e3fbef
-	CRC_messageActionChatAddUser                         = 0x488a7337
-	CRC_messageActionChatDeleteUser                      = 0xb2ae9b0c
-	CRC_messageActionChatJoinedByLink                    = 0xf89cf5e8
-	CRC_messageActionChannelCreate                       = 0x95d2ac92
-	CRC_messageActionChatMigrateTo                       = 0x51bdb021
-	CRC_messageActionChannelMigrateFrom                  = 0xb055eaee
-	CRC_messageActionPinMessage                          = 0x94bd38ed
-	CRC_messageActionHistoryClear                        = 0x9fbab604
-	CRC_messageActionGameScore                           = 0x92a72876
-	CRC_messageActionPaymentSentMe                       = 0x8f31b327
-	CRC_messageActionPaymentSent                         = 0x40699cd0
-	CRC_messageActionPhoneCall                           = 0x80e11a7f
-	CRC_messageActionScreenshotTaken                     = 0x4792929b
-	CRC_messageActionCustomAction                        = 0xfae69f56
-	CRC_messageActionBotAllowed                          = 0xabe9affe
-	CRC_messageActionSecureValuesSentMe                  = 0x1b287353
-	CRC_messageActionSecureValuesSent                    = 0xd95c6154
-	CRC_dialog                                           = 0xe4def5db
-	CRC_photoEmpty                                       = 0x2331b22d
-	CRC_photo                                            = 0x9288dd29
-	CRC_photoSizeEmpty                                   = 0x0e17e23c
-	CRC_photoSize                                        = 0x77bfb61b
-	CRC_photoCachedSize                                  = 0xe9a734fa
-	CRC_geoPointEmpty                                    = 0x1117dd5f
-	CRC_geoPoint                                         = 0x0296f104
-	CRC_auth_checkedPhone                                = 0x811ea28e
-	CRC_auth_sentCode                                    = 0x38faab5f
-	CRC_auth_authorization                               = 0xcd050916
-	CRC_auth_exportedAuthorization                       = 0xdf969c2d
-	CRC_inputNotifyPeer                                  = 0xb8bc5b0c
-	CRC_inputNotifyUsers                                 = 0x193b4417
-	CRC_inputNotifyChats                                 = 0x4a95e84e
-	CRC_inputPeerNotifySettings                          = 0x9c3d198e
-	CRC_peerNotifySettings                               = 0xaf509d20
-	CRC_peerSettings                                     = 0x818426cd
-	CRC_wallPaper                                        = 0xccb03657
-	CRC_wallPaperSolid                                   = 0x63117f24
-	CRC_inputReportReasonSpam                            = 0x58dbcab8
-	CRC_inputReportReasonViolence                        = 0x1e22c78d
-	CRC_inputReportReasonPornography                     = 0x2e59d922
-	CRC_inputReportReasonOther                           = 0xe1746d0a
-	CRC_userFull                                         = 0x0f220f3f
-	CRC_contact                                          = 0xf911c994
-	CRC_importedContact                                  = 0xd0028438
-	CRC_contactBlocked                                   = 0x561bc879
-	CRC_contactStatus                                    = 0xd3680c61
-	CRC_contacts_link                                    = 0x3ace484c
-	CRC_contacts_contactsNotModified                     = 0xb74ba9d2
-	CRC_contacts_contacts                                = 0xeae87e42
-	CRC_contacts_importedContacts                        = 0x77d01c3b
-	CRC_contacts_blocked                                 = 0x1c138d15
-	CRC_contacts_blockedSlice                            = 0x900802a1
-	CRC_messages_dialogs                                 = 0x15ba6c40
-	CRC_messages_dialogsSlice                            = 0x71e094f3
-	CRC_messages_dialogsNotModified                      = 0xf0e3e596
-	CRC_messages_messages                                = 0x8c718e87
-	CRC_messages_messagesSlice                           = 0x0b446ae3
-	CRC_messages_channelMessages                         = 0x99262e37
-	CRC_messages_messagesNotModified                     = 0x74535f21
-	CRC_messages_chats                                   = 0x64ff9fd5
-	CRC_messages_chatsSlice                              = 0x9cd81144
-	CRC_messages_chatFull                                = 0xe5d7d19c
-	CRC_messages_affectedHistory                         = 0xb45c69d1
-	CRC_inputMessagesFilterEmpty                         = 0x57e2f66c
-	CRC_inputMessagesFilterPhotos                        = 0x9609a51c
-	CRC_inputMessagesFilterVideo                         = 0x9fc00e65
-	CRC_inputMessagesFilterPhotoVideo                    = 0x56e9f0e4
-	CRC_inputMessagesFilterDocument                      = 0x9eddf188
-	CRC_inputMessagesFilterUrl                           = 0x7ef0dd87
-	CRC_inputMessagesFilterGif                           = 0xffc86587
-	CRC_inputMessagesFilterVoice                         = 0x50f5c392
-	CRC_inputMessagesFilterMusic                         = 0x3751b49e
-	CRC_inputMessagesFilterChatPhotos                    = 0x3a20ecb8
-	CRC_inputMessagesFilterPhoneCalls                    = 0x80c99768
-	CRC_inputMessagesFilterRoundVoice                    = 0x7a7c17a4
-	CRC_inputMessagesFilterRoundVideo                    = 0xb549da53
-	CRC_inputMessagesFilterMyMentions                    = 0xc1f8e69a
-	CRC_inputMessagesFilterGeo                           = 0xe7026d0d
-	CRC_inputMessagesFilterContacts                      = 0xe062db83
-	CRC_updateNewMessage                                 = 0x1f2b0afd
-	CRC_updateMessageID                                  = 0x4e90bfd6
-	CRC_updateDeleteMessages                             = 0xa20db0e5
-	CRC_updateUserTyping                                 = 0x5c486927
-	CRC_updateChatUserTyping                             = 0x9a65ea1f
-	CRC_updateChatParticipants                           = 0x07761198
-	CRC_updateUserStatus                                 = 0x1bfbd823
-	CRC_updateUserName                                   = 0xa7332b73
-	CRC_updateUserPhoto                                  = 0x95313b0c
-	CRC_updateContactRegistered                          = 0x2575bbb9
-	CRC_updateContactLink                                = 0x9d2e67c5
-	CRC_updateNewEncryptedMessage                        = 0x12bcbd9a
-	CRC_updateEncryptedChatTyping                        = 0x1710f156
-	CRC_updateEncryption                                 = 0xb4a2e88d
-	CRC_updateEncryptedMessagesRead                      = 0x38fe25b7
-	CRC_updateChatParticipantAdd                         = 0xea4b0e5c
-	CRC_updateChatParticipantDelete                      = 0x6e5f8c22
-	CRC_updateDcOptions                                  = 0x8e5e9873
-	CRC_updateUserBlocked                                = 0x80ece81a
-	CRC_updateNotifySettings                             = 0xbec268ef
-	CRC_updateServiceNotification                        = 0xebe46819
-	CRC_updatePrivacy                                    = 0xee3b272a
-	CRC_updateUserPhone                                  = 0x12b9417b
-	CRC_updateReadHistoryInbox                           = 0x9961fd5c
-	CRC_updateReadHistoryOutbox                          = 0x2f2f21bf
-	CRC_updateWebPage                                    = 0x7f891213
-	CRC_updateReadMessagesContents                       = 0x68c13933
-	CRC_updateChannelTooLong                             = 0xeb0467fb
-	CRC_updateChannel                                    = 0xb6d45656
-	CRC_updateNewChannelMessage                          = 0x62ba04d9
-	CRC_updateReadChannelInbox                           = 0x4214f37f
-	CRC_updateDeleteChannelMessages                      = 0xc37521c9
-	CRC_updateChannelMessageViews                        = 0x98a12b4b
-	CRC_updateChatAdmins                                 = 0x6e947941
-	CRC_updateChatParticipantAdmin                       = 0xb6901959
-	CRC_updateNewStickerSet                              = 0x688a30aa
-	CRC_updateStickerSetsOrder                           = 0x0bb2d201
-	CRC_updateStickerSets                                = 0x43ae3dec
-	CRC_updateSavedGifs                                  = 0x9375341e
-	CRC_updateBotInlineQuery                             = 0x54826690
-	CRC_updateBotInlineSend                              = 0x0e48f964
-	CRC_updateEditChannelMessage                         = 0x1b3f4df7
-	CRC_updateChannelPinnedMessage                       = 0x98592475
-	CRC_updateBotCallbackQuery                           = 0xe73547e1
-	CRC_updateEditMessage                                = 0xe40370a3
-	CRC_updateInlineBotCallbackQuery                     = 0xf9d27a5a
-	CRC_updateReadChannelOutbox                          = 0x25d6c9c7
-	CRC_updateDraftMessage                               = 0xee2bb969
-	CRC_updateReadFeaturedStickers                       = 0x571d2742
-	CRC_updateRecentStickers                             = 0x9a422c20
-	CRC_updateConfig                                     = 0xa229dd06
-	CRC_updatePtsChanged                                 = 0x3354678f
-	CRC_updateChannelWebPage                             = 0x40771900
-	CRC_updateDialogPinned                               = 0x19d27f3c
-	CRC_updatePinnedDialogs                              = 0xea4cb65b
-	CRC_updateBotWebhookJSON                             = 0x8317c0c3
-	CRC_updateBotWebhookJSONQuery                        = 0x9b9240a6
-	CRC_updateBotShippingQuery                           = 0xe0cdc940
-	CRC_updateBotPrecheckoutQuery                        = 0x5d2f3aa9
-	CRC_updatePhoneCall                                  = 0xab0f6b1e
-	CRC_updateLangPackTooLong                            = 0x10c2404b
-	CRC_updateLangPack                                   = 0x56022f4d
-	CRC_updateFavedStickers                              = 0xe511996d
-	CRC_updateChannelReadMessagesContents                = 0x89893b45
-	CRC_updateContactsReset                              = 0x7084a7be
-	CRC_updateChannelAvailableMessages                   = 0x70db6837
-	CRC_updateDialogUnreadMark                           = 0xe16459c3
-	CRC_updates_state                                    = 0xa56c2a3e
-	CRC_updates_differenceEmpty                          = 0x5d75a138
-	CRC_updates_difference                               = 0x00f49ca0
-	CRC_updates_differenceSlice                          = 0xa8fb1981
-	CRC_updates_differenceTooLong                        = 0x4afe8f6d
-	CRC_updatesTooLong                                   = 0xe317af7e
-	CRC_updateShortMessage                               = 0x914fbf11
-	CRC_updateShortChatMessage                           = 0x16812688
-	CRC_updateShort                                      = 0x78d4dec1
-	CRC_updatesCombined                                  = 0x725b04c3
-	CRC_updates                                          = 0x74ae4240
-	CRC_updateShortSentMessage                           = 0x11f1331c
-	CRC_photos_photos                                    = 0x8dca6aa5
-	CRC_photos_photosSlice                               = 0x15051f54
-	CRC_photos_photo                                     = 0x20212ca8
-	CRC_upload_file                                      = 0x096a18d5
-	CRC_upload_fileCdnRedirect                           = 0xf18cda44
-	CRC_dcOption                                         = 0x18b7a10d
-	CRC_config                                           = 0x3213dbba
-	CRC_nearestDc                                        = 0x8e1a1775
-	CRC_help_appUpdate                                   = 0x8987f311
-	CRC_help_noAppUpdate                                 = 0xc45a6536
-	CRC_help_inviteText                                  = 0x18cb9f78
-	CRC_encryptedChatEmpty                               = 0xab7ec0a0
-	CRC_encryptedChatWaiting                             = 0x3bf703dc
-	CRC_encryptedChatRequested                           = 0xc878527e
-	CRC_encryptedChat                                    = 0xfa56ce36
-	CRC_encryptedChatDiscarded                           = 0x13d6dd27
-	CRC_inputEncryptedChat                               = 0xf141b5e1
-	CRC_encryptedFileEmpty                               = 0xc21f497e
-	CRC_encryptedFile                                    = 0x4a70994c
-	CRC_inputEncryptedFileEmpty                          = 0x1837c364
-	CRC_inputEncryptedFileUploaded                       = 0x64bd0306
-	CRC_inputEncryptedFile                               = 0x5a17b5e5
-	CRC_inputEncryptedFileBigUploaded                    = 0x2dc173c8
-	CRC_encryptedMessage                                 = 0xed18c118
-	CRC_encryptedMessageService                          = 0x23734b06
-	CRC_messages_dhConfigNotModified                     = 0xc0e24635
-	CRC_messages_dhConfig                                = 0x2c221edd
-	CRC_messages_sentEncryptedMessage                    = 0x560f8935
-	CRC_messages_sentEncryptedFile                       = 0x9493ff32
-	CRC_inputDocumentEmpty                               = 0x72f0eaae
-	CRC_inputDocument                                    = 0x18798952
-	CRC_documentEmpty                                    = 0x36f8c871
-	CRC_document                                         = 0x87232bc7
-	CRC_help_support                                     = 0x17c6b5f6
-	CRC_notifyPeer                                       = 0x9fd40bd8
-	CRC_notifyUsers                                      = 0xb4c83b4c
-	CRC_notifyChats                                      = 0xc007cec3
-	CRC_sendMessageTypingAction                          = 0x16bf744e
-	CRC_sendMessageCancelAction                          = 0xfd5ec8f5
-	CRC_sendMessageRecordVideoAction                     = 0xa187d66f
-	CRC_sendMessageUploadVideoAction                     = 0xe9763aec
-	CRC_sendMessageRecordAudioAction                     = 0xd52f73f7
-	CRC_sendMessageUploadAudioAction                     = 0xf351d7ab
-	CRC_sendMessageUploadPhotoAction                     = 0xd1d34a26
-	CRC_sendMessageUploadDocumentAction                  = 0xaa0cd9e4
-	CRC_sendMessageGeoLocationAction                     = 0x176f8ba1
-	CRC_sendMessageChooseContactAction                   = 0x628cbc6f
-	CRC_sendMessageGamePlayAction                        = 0xdd6a8f48
-	CRC_sendMessageRecordRoundAction                     = 0x88f27fbc
-	CRC_sendMessageUploadRoundAction                     = 0x243e1c66
-	CRC_contacts_found                                   = 0xb3134d9d
-	CRC_inputPrivacyKeyStatusTimestamp                   = 0x4f96cb18
-	CRC_inputPrivacyKeyChatInvite                        = 0xbdfb0426
-	CRC_inputPrivacyKeyPhoneCall                         = 0xfabadc5f
-	CRC_privacyKeyStatusTimestamp                        = 0xbc2eab30
-	CRC_privacyKeyChatInvite                             = 0x500e6dfa
-	CRC_privacyKeyPhoneCall                              = 0x3d662b7b
-	CRC_inputPrivacyValueAllowContacts                   = 0x0d09e07b
-	CRC_inputPrivacyValueAllowAll                        = 0x184b35ce
-	CRC_inputPrivacyValueAllowUsers                      = 0x131cc67f
-	CRC_inputPrivacyValueDisallowContacts                = 0x0ba52007
-	CRC_inputPrivacyValueDisallowAll                     = 0xd66b66c9
-	CRC_inputPrivacyValueDisallowUsers                   = 0x90110467
-	CRC_privacyValueAllowContacts                        = 0xfffe1bac
-	CRC_privacyValueAllowAll                             = 0x65427b82
-	CRC_privacyValueAllowUsers                           = 0x4d5bbe0c
-	CRC_privacyValueDisallowContacts                     = 0xf888fa1a
-	CRC_privacyValueDisallowAll                          = 0x8b73e763
-	CRC_privacyValueDisallowUsers                        = 0x0c7f49b7
-	CRC_account_privacyRules                             = 0x554abb6f
-	CRC_accountDaysTTL                                   = 0xb8d0afdf
-	CRC_documentAttributeImageSize                       = 0x6c37c15c
-	CRC_documentAttributeAnimated                        = 0x11b58939
-	CRC_documentAttributeSticker                         = 0x6319d612
-	CRC_documentAttributeVideo                           = 0x0ef02ce6
-	CRC_documentAttributeAudio                           = 0x9852f9c6
-	CRC_documentAttributeFilename                        = 0x15590068
-	CRC_documentAttributeHasStickers                     = 0x9801d2f7
-	CRC_messages_stickersNotModified                     = 0xf1749a22
-	CRC_messages_stickers                                = 0xe4599bbd
-	CRC_stickerPack                                      = 0x12b299d4
-	CRC_messages_allStickersNotModified                  = 0xe86602c3
-	CRC_messages_allStickers                             = 0xedfd405f
-	CRC_messages_affectedMessages                        = 0x84d19185
-	CRC_contactLinkUnknown                               = 0x5f4f9247
-	CRC_contactLinkNone                                  = 0xfeedd3ad
-	CRC_contactLinkHasPhone                              = 0x268f3f59
-	CRC_contactLinkContact                               = 0xd502c2d0
-	CRC_webPageEmpty                                     = 0xeb1477e8
-	CRC_webPagePending                                   = 0xc586da1c
-	CRC_webPage                                          = 0x5f07b4bc
-	CRC_webPageNotModified                               = 0x85849473
-	CRC_authorization                                    = 0x7bf2e6f6
-	CRC_account_authorizations                           = 0x1250abde
-	CRC_account_noPassword                               = 0x5ea182f6
-	CRC_account_password                                 = 0xca39b447
-	CRC_account_passwordSettings                         = 0x7bd9c3f1
-	CRC_account_passwordInputSettings                    = 0x21ffa60d
-	CRC_auth_passwordRecovery                            = 0x137948a5
-	CRC_receivedNotifyMessage                            = 0xa384b779
-	CRC_chatInviteEmpty                                  = 0x69df3769
-	CRC_chatInviteExported                               = 0xfc2e05bc
-	CRC_chatInviteAlready                                = 0x5a686d7c
-	CRC_chatInvite                                       = 0xdb74f558
-	CRC_inputStickerSetEmpty                             = 0xffb62b95
-	CRC_inputStickerSetID                                = 0x9de7a269
-	CRC_inputStickerSetShortName                         = 0x861cc8a0
-	CRC_stickerSet                                       = 0x5585a139
-	CRC_messages_stickerSet                              = 0xb60a24a6
-	CRC_botCommand                                       = 0xc27ac8c7
-	CRC_botInfo                                          = 0x98e81d3a
-	CRC_keyboardButton                                   = 0xa2fa4880
-	CRC_keyboardButtonUrl                                = 0x258aff05
-	CRC_keyboardButtonCallback                           = 0x683a5e46
-	CRC_keyboardButtonRequestPhone                       = 0xb16a6c29
-	CRC_keyboardButtonRequestGeoLocation                 = 0xfc796b3f
-	CRC_keyboardButtonSwitchInline                       = 0x0568a748
-	CRC_keyboardButtonGame                               = 0x50f41ccf
-	CRC_keyboardButtonBuy                                = 0xafd93fbb
-	CRC_keyboardButtonRow                                = 0x77608b83
-	CRC_replyKeyboardHide                                = 0xa03e5b85
-	CRC_replyKeyboardForceReply                          = 0xf4108aa0
-	CRC_replyKeyboardMarkup                              = 0x3502758c
-	CRC_replyInlineMarkup                                = 0x48a30254
-	CRC_messageEntityUnknown                             = 0xbb92ba95
-	CRC_messageEntityMention                             = 0xfa04579d
-	CRC_messageEntityHashtag                             = 0x6f635b0d
-	CRC_messageEntityBotCommand                          = 0x6cef8ac7
-	CRC_messageEntityUrl                                 = 0x6ed02538
-	CRC_messageEntityEmail                               = 0x64e475c2
-	CRC_messageEntityBold                                = 0xbd610bc9
-	CRC_messageEntityItalic                              = 0x826f8b60
-	CRC_messageEntityCode                                = 0x28a20571
-	CRC_messageEntityPre                                 = 0x73924be0
-	CRC_messageEntityTextUrl                             = 0x76a6d327
-	CRC_messageEntityMentionName                         = 0x352dca58
-	CRC_inputMessageEntityMentionName                    = 0x208e68c9
-	CRC_messageEntityPhone                               = 0x9b69e34b
-	CRC_messageEntityCashtag                             = 0x4c4e743f
-	CRC_inputChannelEmpty                                = 0xee8c1e86
-	CRC_inputChannel                                     = 0xafeb712e
-	CRC_contacts_resolvedPeer                            = 0x7f077ad9
-	CRC_messageRange                                     = 0x0ae30253
-	CRC_updates_channelDifferenceEmpty                   = 0x3e11affb
-	CRC_updates_channelDifferenceTooLong                 = 0x6a9d7b35
-	CRC_updates_channelDifference                        = 0x2064674e
-	CRC_channelMessagesFilterEmpty                       = 0x94d42ee7
-	CRC_channelMessagesFilter                            = 0xcd77d957
-	CRC_channelParticipant                               = 0x15ebac1d
-	CRC_channelParticipantSelf                           = 0xa3289a6d
-	CRC_channelParticipantCreator                        = 0xe3e2e1f9
-	CRC_channelParticipantAdmin                          = 0xa82fa898
-	CRC_channelParticipantBanned                         = 0x222c1886
-	CRC_channelParticipantsRecent                        = 0xde3f3c79
-	CRC_channelParticipantsAdmins                        = 0xb4608969
-	CRC_channelParticipantsKicked                        = 0xa3b54985
-	CRC_channelParticipantsBots                          = 0xb0d1865b
-	CRC_channelParticipantsBanned                        = 0x1427a5e1
-	CRC_channelParticipantsSearch                        = 0x0656ac4b
-	CRC_channels_channelParticipants                     = 0xf56ee2a8
-	CRC_channels_channelParticipantsNotModified          = 0xf0173fe9
-	CRC_channels_channelParticipant                      = 0xd0d9b163
-	CRC_help_termsOfService                              = 0x780a0310
-	CRC_foundGif                                         = 0x162ecc1f
-	CRC_foundGifCached                                   = 0x9c750409
-	CRC_messages_foundGifs                               = 0x450a1c0a
-	CRC_messages_savedGifsNotModified                    = 0xe8025ca2
-	CRC_messages_savedGifs                               = 0x2e0709a5
-	CRC_inputBotInlineMessageMediaAuto                   = 0x3380c786
-	CRC_inputBotInlineMessageText                        = 0x3dcd7a87
-	CRC_inputBotInlineMessageMediaGeo                    = 0xc1b15d65
-	CRC_inputBotInlineMessageMediaVenue                  = 0x417bbf11
-	CRC_inputBotInlineMessageMediaContact                = 0xa6edbffd
-	CRC_inputBotInlineMessageGame                        = 0x4b425864
-	CRC_inputBotInlineResult                             = 0x88bf9319
-	CRC_inputBotInlineResultPhoto                        = 0xa8d864a7
-	CRC_inputBotInlineResultDocument                     = 0xfff8fdc4
-	CRC_inputBotInlineResultGame                         = 0x4fa417f2
-	CRC_botInlineMessageMediaAuto                        = 0x764cf810
-	CRC_botInlineMessageText                             = 0x8c7f65e2
-	CRC_botInlineMessageMediaGeo                         = 0xb722de65
-	CRC_botInlineMessageMediaVenue                       = 0x8a86659c
-	CRC_botInlineMessageMediaContact                     = 0x18d1cdc2
-	CRC_botInlineResult                                  = 0x11965f3a
-	CRC_botInlineMediaResult                             = 0x17db940b
-	CRC_messages_botResults                              = 0x947ca848
-	CRC_exportedMessageLink                              = 0x5dab1af4
-	CRC_messageFwdHeader                                 = 0x559ebe6d
-	CRC_auth_codeTypeSms                                 = 0x72a3158c
-	CRC_auth_codeTypeCall                                = 0x741cd3e3
-	CRC_auth_codeTypeFlashCall                           = 0x226ccefb
-	CRC_auth_sentCodeTypeApp                             = 0x3dbb5986
-	CRC_auth_sentCodeTypeSms                             = 0xc000bba2
-	CRC_auth_sentCodeTypeCall                            = 0x5353e5a7
-	CRC_auth_sentCodeTypeFlashCall                       = 0xab03c6d9
-	CRC_messages_botCallbackAnswer                       = 0x36585ea4
-	CRC_messages_messageEditData                         = 0x26b5dde6
-	CRC_inputBotInlineMessageID                          = 0x890c3d89
-	CRC_inlineBotSwitchPM                                = 0x3c20629f
-	CRC_messages_peerDialogs                             = 0x3371c354
-	CRC_topPeer                                          = 0xedcdc05b
-	CRC_topPeerCategoryBotsPM                            = 0xab661b5b
-	CRC_topPeerCategoryBotsInline                        = 0x148677e2
-	CRC_topPeerCategoryCorrespondents                    = 0x0637b7ed
-	CRC_topPeerCategoryGroups                            = 0xbd17a14a
-	CRC_topPeerCategoryChannels                          = 0x161d9628
-	CRC_topPeerCategoryPhoneCalls                        = 0x1e76a78c
-	CRC_topPeerCategoryPeers                             = 0xfb834291
-	CRC_contacts_topPeersNotModified                     = 0xde266ef5
-	CRC_contacts_topPeers                                = 0x70b772a8
-	CRC_contacts_topPeersDisabled                        = 0xb52c939d
-	CRC_draftMessageEmpty                                = 0x1b0c841a
-	CRC_draftMessage                                     = 0xfd8e711f
-	CRC_messages_featuredStickersNotModified             = 0x04ede3cf
-	CRC_messages_featuredStickers                        = 0xf89d88e5
-	CRC_messages_recentStickersNotModified               = 0x0b17f890
-	CRC_messages_recentStickers                          = 0x22f3afb3
-	CRC_messages_archivedStickers                        = 0x4fcba9c8
-	CRC_messages_stickerSetInstallResultSuccess          = 0x38641628
-	CRC_messages_stickerSetInstallResultArchive          = 0x35e410a8
-	CRC_stickerSetCovered                                = 0x6410a5d2
-	CRC_stickerSetMultiCovered                           = 0x3407e51b
-	CRC_maskCoords                                       = 0xaed6dbb2
-	CRC_inputStickeredMediaPhoto                         = 0x4a992157
-	CRC_inputStickeredMediaDocument                      = 0x0438865b
-	CRC_game                                             = 0xbdf9653b
-	CRC_inputGameID                                      = 0x032c3e77
-	CRC_inputGameShortName                               = 0xc331e80a
-	CRC_highScore                                        = 0x58fffcd0
-	CRC_messages_highScores                              = 0x9a3bfd99
-	CRC_textEmpty                                        = 0xdc3d824f
-	CRC_textPlain                                        = 0x744694e0
-	CRC_textBold                                         = 0x6724abc4
-	CRC_textItalic                                       = 0xd912a59c
-	CRC_textUnderline                                    = 0xc12622c4
-	CRC_textStrike                                       = 0x9bf8bb95
-	CRC_textFixed                                        = 0x6c3f19b9
-	CRC_textUrl                                          = 0x3c2884c1
-	CRC_textEmail                                        = 0xde5a0dd6
-	CRC_textConcat                                       = 0x7e6260d7
-	CRC_pageBlockUnsupported                             = 0x13567e8a
-	CRC_pageBlockTitle                                   = 0x70abc3fd
-	CRC_pageBlockSubtitle                                = 0x8ffa9a1f
-	CRC_pageBlockAuthorDate                              = 0xbaafe5e0
-	CRC_pageBlockHeader                                  = 0xbfd064ec
-	CRC_pageBlockSubheader                               = 0xf12bb6e1
-	CRC_pageBlockParagraph                               = 0x467a0766
-	CRC_pageBlockPreformatted                            = 0xc070d93e
-	CRC_pageBlockFooter                                  = 0x48870999
-	CRC_pageBlockDivider                                 = 0xdb20b188
-	CRC_pageBlockAnchor                                  = 0xce0d37b0
-	CRC_pageBlockList                                    = 0x3a58c7f4
-	CRC_pageBlockBlockquote                              = 0x263d7c26
-	CRC_pageBlockPullquote                               = 0x4f4456d3
-	CRC_pageBlockPhoto                                   = 0xe9c69982
-	CRC_pageBlockVideo                                   = 0xd9d71866
-	CRC_pageBlockCover                                   = 0x39f23300
-	CRC_pageBlockEmbed                                   = 0xcde200d1
-	CRC_pageBlockEmbedPost                               = 0x292c7be9
-	CRC_pageBlockCollage                                 = 0x08b31c4f
-	CRC_pageBlockSlideshow                               = 0x130c8963
-	CRC_pageBlockChannel                                 = 0xef1751b5
-	CRC_pageBlockAudio                                   = 0x31b81a7f
-	CRC_pagePart                                         = 0x8e3f9ebe
-	CRC_pageFull                                         = 0x556ec7aa
-	CRC_phoneCallDiscardReasonMissed                     = 0x85e42301
-	CRC_phoneCallDiscardReasonDisconnect                 = 0xe095c1a0
-	CRC_phoneCallDiscardReasonHangup                     = 0x57adc690
-	CRC_phoneCallDiscardReasonBusy                       = 0xfaf7e8c9
-	CRC_dataJSON                                         = 0x7d748d04
-	CRC_labeledPrice                                     = 0xcb296bf8
-	CRC_invoice                                          = 0xc30aa358
-	CRC_paymentCharge                                    = 0xea02c27e
-	CRC_postAddress                                      = 0x1e8caaeb
-	CRC_paymentRequestedInfo                             = 0x909c3f94
-	CRC_paymentSavedCredentialsCard                      = 0xcdc27a1f
-	CRC_webDocument                                      = 0x1c570ed1
-	CRC_webDocumentNoProxy                               = 0xf9c8bcc6
-	CRC_inputWebDocument                                 = 0x9bed434d
-	CRC_inputWebFileLocation                             = 0xc239d686
-	CRC_inputWebFileGeoPointLocation                     = 0x9f2221c9
-	CRC_upload_webFile                                   = 0x21e753bc
-	CRC_payments_paymentForm                             = 0x3f56aea3
-	CRC_payments_validatedRequestedInfo                  = 0xd1451883
-	CRC_payments_paymentResult                           = 0x4e5f810d
-	CRC_payments_paymentVerficationNeeded                = 0x6b56b921
-	CRC_payments_paymentReceipt                          = 0x500911e1
-	CRC_payments_savedInfo                               = 0xfb8fe43c
-	CRC_inputPaymentCredentialsSaved                     = 0xc10eb2cf
-	CRC_inputPaymentCredentials                          = 0x3417d728
-	CRC_inputPaymentCredentialsApplePay                  = 0x0aa1c39f
-	CRC_inputPaymentCredentialsAndroidPay                = 0xca05d50e
-	CRC_account_tmpPassword                              = 0xdb64fd34
-	CRC_shippingOption                                   = 0xb6213cdf
-	CRC_inputStickerSetItem                              = 0xffa0a496
-	CRC_inputPhoneCall                                   = 0x1e36fded
-	CRC_phoneCallEmpty                                   = 0x5366c915
-	CRC_phoneCallWaiting                                 = 0x1b8f4ad1
-	CRC_phoneCallRequested                               = 0x83761ce4
-	CRC_phoneCallAccepted                                = 0x6d003d3f
-	CRC_phoneCall                                        = 0xffe6ab67
-	CRC_phoneCallDiscarded                               = 0x50ca4de1
-	CRC_phoneConnection                                  = 0x9d4c17c0
-	CRC_phoneCallProtocol                                = 0xa2bb35cb
-	CRC_phone_phoneCall                                  = 0xec82e140
-	CRC_upload_cdnFileReuploadNeeded                     = 0xeea8e46e
-	CRC_upload_cdnFile                                   = 0xa99fca4f
-	CRC_cdnPublicKey                                     = 0xc982eaba
-	CRC_cdnConfig                                        = 0x5725e40a
-	CRC_langPackString                                   = 0xcad181f6
-	CRC_langPackStringPluralized                         = 0x6c47ac9f
-	CRC_langPackStringDeleted                            = 0x2979eeb2
-	CRC_langPackDifference                               = 0xf385c1f6
-	CRC_langPackLanguage                                 = 0x117698f1
-	CRC_channelAdminRights                               = 0x5d7ceba5
-	CRC_channelBannedRights                              = 0x58cf4249
-	CRC_channelAdminLogEventActionChangeTitle            = 0xe6dfb825
-	CRC_channelAdminLogEventActionChangeAbout            = 0x55188a2e
-	CRC_channelAdminLogEventActionChangeUsername         = 0x6a4afc38
-	CRC_channelAdminLogEventActionChangePhoto            = 0xb82f55c3
-	CRC_channelAdminLogEventActionToggleInvites          = 0x1b7907ae
-	CRC_channelAdminLogEventActionToggleSignatures       = 0x26ae0971
-	CRC_channelAdminLogEventActionUpdatePinned           = 0xe9e82c18
-	CRC_channelAdminLogEventActionEditMessage            = 0x709b2405
-	CRC_channelAdminLogEventActionDeleteMessage          = 0x42e047bb
-	CRC_channelAdminLogEventActionParticipantJoin        = 0x183040d3
-	CRC_channelAdminLogEventActionParticipantLeave       = 0xf89777f2
-	CRC_channelAdminLogEventActionParticipantInvite      = 0xe31c34d8
-	CRC_channelAdminLogEventActionParticipantToggleBan   = 0xe6d83d7e
-	CRC_channelAdminLogEventActionParticipantToggleAdmin = 0xd5676710
-	CRC_channelAdminLogEventActionChangeStickerSet       = 0xb1c3caa7
-	CRC_channelAdminLogEventActionTogglePreHistoryHidden = 0x5f5c95f1
-	CRC_channelAdminLogEvent                             = 0x3b5a3e40
-	CRC_channels_adminLogResults                         = 0xed8af74d
-	CRC_channelAdminLogEventsFilter                      = 0xea107ae4
-	CRC_popularContact                                   = 0x5ce14175
-	CRC_messages_favedStickersNotModified                = 0x9e8fa6d3
-	CRC_messages_favedStickers                           = 0xf37f2f16
-	CRC_recentMeUrlUnknown                               = 0x46e1d13d
-	CRC_recentMeUrlUser                                  = 0x8dbc3336
-	CRC_recentMeUrlChat                                  = 0xa01b22f9
-	CRC_recentMeUrlChatInvite                            = 0xeb49081d
-	CRC_recentMeUrlStickerSet                            = 0xbc0a57dc
-	CRC_help_recentMeUrls                                = 0x0e0310d7
-	CRC_inputSingleMedia                                 = 0x1cc6e91f
-	CRC_webAuthorization                                 = 0xcac943f2
-	CRC_account_webAuthorizations                        = 0xed56c9fc
-	CRC_inputMessageID                                   = 0xa676a322
-	CRC_inputMessageReplyTo                              = 0xbad88395
-	CRC_inputMessagePinned                               = 0x86872538
-	CRC_inputDialogPeer                                  = 0xfcaafeb7
-	CRC_dialogPeer                                       = 0xe56dbf05
-	CRC_messages_foundStickerSetsNotModified             = 0x0d54b65d
-	CRC_messages_foundStickerSets                        = 0x5108d648
-	CRC_fileHash                                         = 0x6242c773
-	CRC_inputClientProxy                                 = 0x75588b3f
-	CRC_help_proxyDataEmpty                              = 0xe09e1fb8
-	CRC_help_proxyDataPromo                              = 0x2bf7ee23
-	CRC_help_termsOfServiceUpdateEmpty                   = 0xe3309f7f
-	CRC_help_termsOfServiceUpdate                        = 0x28ecf961
-	CRC_inputSecureFileUploaded                          = 0x3334b0f0
-	CRC_inputSecureFile                                  = 0x5367e5be
-	CRC_secureFileEmpty                                  = 0x64199744
-	CRC_secureFile                                       = 0xe0277a62
-	CRC_secureData                                       = 0x8aeabec3
-	CRC_securePlainPhone                                 = 0x7d6099dd
-	CRC_securePlainEmail                                 = 0x21ec5a5f
-	CRC_secureValueTypePersonalDetails                   = 0x9d2a81e3
-	CRC_secureValueTypePassport                          = 0x3dac6a00
-	CRC_secureValueTypeDriverLicense                     = 0x06e425c4
-	CRC_secureValueTypeIdentityCard                      = 0xa0d0744b
-	CRC_secureValueTypeInternalPassport                  = 0x99a48f23
-	CRC_secureValueTypeAddress                           = 0xcbe31e26
-	CRC_secureValueTypeUtilityBill                       = 0xfc36954e
-	CRC_secureValueTypeBankStatement                     = 0x89137c0d
-	CRC_secureValueTypeRentalAgreement                   = 0x8b883488
-	CRC_secureValueTypePassportRegistration              = 0x99e3806a
-	CRC_secureValueTypeTemporaryRegistration             = 0xea02ec33
-	CRC_secureValueTypePhone                             = 0xb320aadb
-	CRC_secureValueTypeEmail                             = 0x8e3ca7ee
-	CRC_secureValue                                      = 0xb4b4b699
-	CRC_inputSecureValue                                 = 0x067872e8
-	CRC_secureValueHash                                  = 0xed1ecdb0
-	CRC_secureValueErrorData                             = 0xe8a40bd9
-	CRC_secureValueErrorFrontSide                        = 0x00be3dfa
-	CRC_secureValueErrorReverseSide                      = 0x868a2aa5
-	CRC_secureValueErrorSelfie                           = 0xe537ced6
-	CRC_secureValueErrorFile                             = 0x7a700873
-	CRC_secureValueErrorFiles                            = 0x666220e9
-	CRC_secureCredentialsEncrypted                       = 0x33f0ea47
-	CRC_account_authorizationForm                        = 0xcb976d53
-	CRC_account_sentEmailCode                            = 0x811f854f
-	CRC_help_deepLinkInfoEmpty                           = 0x66afa166
-	CRC_help_deepLinkInfo                                = 0x6a4ee832
-	CRC_savedPhoneContact                                = 0x1142bd56
-	CRC_account_takeout                                  = 0x4dba4501
-	CRC_invokeAfterMsg                                   = 0xcb9f372d
-	CRC_invokeAfterMsgs                                  = 0x3dc4b4f0
-	CRC_initConnection                                   = 0x785188b8
-	CRC_invokeWithLayer                                  = 0xda9b0d0d
-	CRC_invokeWithoutUpdates                             = 0xbf9459b7
-	CRC_invokeWithMessagesRange                          = 0x365275f2
-	CRC_invokeWithTakeout                                = 0xaca9fd2e
-	CRC_auth_sendCode                                    = 0x86aef0ec
-	CRC_auth_signUp                                      = 0x1b067634
-	CRC_auth_signIn                                      = 0xbcd51581
-	CRC_auth_logOut                                      = 0x5717da40
-	CRC_auth_resetAuthorizations                         = 0x9fab0d1a
-	CRC_auth_exportAuthorization                         = 0xe5bfffcd
-	CRC_auth_importAuthorization                         = 0xe3ef9613
-	CRC_auth_bindTempAuthKey                             = 0xcdd42a05
-	CRC_auth_importBotAuthorization                      = 0x67a3ff2c
-	CRC_auth_checkPassword                               = 0x0a63011e
-	CRC_auth_requestPasswordRecovery                     = 0xd897bc66
-	CRC_auth_recoverPassword                             = 0x4ea56e92
-	CRC_auth_resendCode                                  = 0x3ef1a9bf
-	CRC_auth_cancelCode                                  = 0x1f040578
-	CRC_auth_dropTempAuthKeys                            = 0x8e48a188
-	CRC_account_registerDevice                           = 0x5cbea590
-	CRC_account_unregisterDevice                         = 0x3076c4bf
-	CRC_account_updateNotifySettings                     = 0x84be5b93
-	CRC_account_getNotifySettings                        = 0x12b3ad31
-	CRC_account_resetNotifySettings                      = 0xdb7e1747
-	CRC_account_updateProfile                            = 0x78515775
-	CRC_account_updateStatus                             = 0x6628562c
-	CRC_account_getWallPapers                            = 0xc04cfac2
-	CRC_account_reportPeer                               = 0xae189d5f
-	CRC_account_checkUsername                            = 0x2714d86c
-	CRC_account_updateUsername                           = 0x3e0bdd7c
-	CRC_account_getPrivacy                               = 0xdadbc950
-	CRC_account_setPrivacy                               = 0xc9f81ce8
-	CRC_account_deleteAccount                            = 0x418d4e0b
-	CRC_account_getAccountTTL                            = 0x08fc711d
-	CRC_account_setAccountTTL                            = 0x2442485e
-	CRC_account_sendChangePhoneCode                      = 0x08e57deb
-	CRC_account_changePhone                              = 0x70c32edb
-	CRC_account_updateDeviceLocked                       = 0x38df3532
-	CRC_account_getAuthorizations                        = 0xe320c158
-	CRC_account_resetAuthorization                       = 0xdf77f3bc
-	CRC_account_getPassword                              = 0x548a30f5
-	CRC_account_getPasswordSettings                      = 0xbc8d11bb
-	CRC_account_updatePasswordSettings                   = 0xfa7c4b86
-	CRC_account_sendConfirmPhoneCode                     = 0x1516d7bd
-	CRC_account_confirmPhone                             = 0x5f2178c3
-	CRC_account_getTmpPassword                           = 0x4a82327e
-	CRC_account_getWebAuthorizations                     = 0x182e6d6f
-	CRC_account_resetWebAuthorization                    = 0x2d01b9ef
-	CRC_account_resetWebAuthorizations                   = 0x682d2594
-	CRC_account_getAllSecureValues                       = 0xb288bc7d
-	CRC_account_getSecureValue                           = 0x73665bc2
-	CRC_account_saveSecureValue                          = 0x899fe31d
-	CRC_account_deleteSecureValue                        = 0xb880bc4b
-	CRC_account_getAuthorizationForm                     = 0xb86ba8e1
-	CRC_account_acceptAuthorization                      = 0xe7027c94
-	CRC_account_sendVerifyPhoneCode                      = 0x823380b4
-	CRC_account_verifyPhone                              = 0x4dd3a7f6
-	CRC_account_sendVerifyEmailCode                      = 0x7011509f
-	CRC_account_verifyEmail                              = 0xecba39db
-	CRC_account_initTakeoutSession                       = 0xf05b4804
-	CRC_account_finishTakeoutSession                     = 0x1d2652ee
-	CRC_users_getUsers                                   = 0x0d91a548
-	CRC_users_getFullUser                                = 0xca30a5b1
-	CRC_users_setSecureValueErrors                       = 0x90c894b5
-	CRC_contacts_getStatuses                             = 0xc4a353ee
-	CRC_contacts_getContacts                             = 0xc023849f
-	CRC_contacts_importContacts                          = 0x2c800be5
-	CRC_contacts_deleteContact                           = 0x8e953744
-	CRC_contacts_deleteContacts                          = 0x59ab389e
-	CRC_contacts_block                                   = 0x332b49fc
-	CRC_contacts_unblock                                 = 0xe54100bd
-	CRC_contacts_getBlocked                              = 0xf57c350f
-	CRC_contacts_exportCard                              = 0x84e53737
-	CRC_contacts_importCard                              = 0x4fe196fe
-	CRC_contacts_search                                  = 0x11f812d8
-	CRC_contacts_resolveUsername                         = 0xf93ccba3
-	CRC_contacts_getTopPeers                             = 0xd4982db5
-	CRC_contacts_resetTopPeerRating                      = 0x1ae373ac
-	CRC_contacts_resetSaved                              = 0x879537f1
-	CRC_contacts_getSaved                                = 0x82f1e39f
-	CRC_contacts_toggleTopPeers                          = 0x8514bdda
-	CRC_messages_getMessages                             = 0x63c66506
-	CRC_messages_getDialogs                              = 0xb098aee6
-	CRC_messages_getHistory                              = 0xdcbb8260
-	CRC_messages_search                                  = 0x8614ef68
-	CRC_messages_readHistory                             = 0x0e306d3a
-	CRC_messages_deleteHistory                           = 0x1c015b09
-	CRC_messages_deleteMessages                          = 0xe58e95d2
-	CRC_messages_receivedMessages                        = 0x05a954c0
-	CRC_messages_setTyping                               = 0xa3825e50
-	CRC_messages_sendMessage                             = 0xfa88427a
-	CRC_messages_sendMedia                               = 0xb8d1262b
-	CRC_messages_forwardMessages                         = 0x708e0195
-	CRC_messages_reportSpam                              = 0xcf1592db
-	CRC_messages_hideReportSpam                          = 0xa8f1709b
-	CRC_messages_getPeerSettings                         = 0x3672e09c
-	CRC_messages_report                                  = 0xbd82b658
-	CRC_messages_getChats                                = 0x3c6aa187
-	CRC_messages_getFullChat                             = 0x3b831c66
-	CRC_messages_editChatTitle                           = 0xdc452855
-	CRC_messages_editChatPhoto                           = 0xca4c79d8
-	CRC_messages_addChatUser                             = 0xf9a0aa09
-	CRC_messages_deleteChatUser                          = 0xe0611f16
-	CRC_messages_createChat                              = 0x09cb126e
-	CRC_messages_getDhConfig                             = 0x26cf8950
-	CRC_messages_requestEncryption                       = 0xf64daf43
-	CRC_messages_acceptEncryption                        = 0x3dbc0415
-	CRC_messages_discardEncryption                       = 0xedd923c5
-	CRC_messages_setEncryptedTyping                      = 0x791451ed
-	CRC_messages_readEncryptedHistory                    = 0x7f4b690a
-	CRC_messages_sendEncrypted                           = 0xa9776773
-	CRC_messages_sendEncryptedFile                       = 0x9a901b66
-	CRC_messages_sendEncryptedService                    = 0x32d439a4
-	CRC_messages_receivedQueue                           = 0x55a5bb66
-	CRC_messages_reportEncryptedSpam                     = 0x4b0c8c0f
-	CRC_messages_readMessageContents                     = 0x36a73f77
-	CRC_messages_getStickers                             = 0x043d4f2c
-	CRC_messages_getAllStickers                          = 0x1c9618b1
-	CRC_messages_getWebPagePreview                       = 0x8b68b0cc
-	CRC_messages_exportChatInvite                        = 0x7d885289
-	CRC_messages_checkChatInvite                         = 0x3eadb1bb
-	CRC_messages_importChatInvite                        = 0x6c50051c
-	CRC_messages_getStickerSet                           = 0x2619a90e
-	CRC_messages_installStickerSet                       = 0xc78fe460
-	CRC_messages_uninstallStickerSet                     = 0xf96e55de
-	CRC_messages_startBot                                = 0xe6df7378
-	CRC_messages_getMessagesViews                        = 0xc4c8a55d
-	CRC_messages_toggleChatAdmins                        = 0xec8bd9e1
-	CRC_messages_editChatAdmin                           = 0xa9e69f2e
-	CRC_messages_migrateChat                             = 0x15a3b8e3
-	CRC_messages_searchGlobal                            = 0x9e3cacb0
-	CRC_messages_reorderStickerSets                      = 0x78337739
-	CRC_messages_getDocumentByHash                       = 0x338e2464
-	CRC_messages_searchGifs                              = 0xbf9a776b
-	CRC_messages_getSavedGifs                            = 0x83bf3d52
-	CRC_messages_saveGif                                 = 0x327a30cb
-	CRC_messages_getInlineBotResults                     = 0x514e999d
-	CRC_messages_setInlineBotResults                     = 0xeb5ea206
-	CRC_messages_sendInlineBotResult                     = 0xb16e06fe
-	CRC_messages_getMessageEditData                      = 0xfda68d36
-	CRC_messages_editMessage                             = 0xc000e4c8
-	CRC_messages_editInlineBotMessage                    = 0xadc3e828
-	CRC_messages_getBotCallbackAnswer                    = 0x810a9fec
-	CRC_messages_setBotCallbackAnswer                    = 0xd58f130a
-	CRC_messages_getPeerDialogs                          = 0xe470bcfd
-	CRC_messages_saveDraft                               = 0xbc39e14b
-	CRC_messages_getAllDrafts                            = 0x6a3f8d65
-	CRC_messages_getFeaturedStickers                     = 0x2dacca4f
-	CRC_messages_readFeaturedStickers                    = 0x5b118126
-	CRC_messages_getRecentStickers                       = 0x5ea192c9
-	CRC_messages_saveRecentSticker                       = 0x392718f8
-	CRC_messages_clearRecentStickers                     = 0x8999602d
-	CRC_messages_getArchivedStickers                     = 0x57f17692
-	CRC_messages_getMaskStickers                         = 0x65b8c79f
-	CRC_messages_getAttachedStickers                     = 0xcc5b67cc
-	CRC_messages_setGameScore                            = 0x8ef8ecc0
-	CRC_messages_setInlineGameScore                      = 0x15ad9f64
-	CRC_messages_getGameHighScores                       = 0xe822649d
-	CRC_messages_getInlineGameHighScores                 = 0x0f635e1b
-	CRC_messages_getCommonChats                          = 0x0d0a48c4
-	CRC_messages_getAllChats                             = 0xeba80ff0
-	CRC_messages_getWebPage                              = 0x32ca8f91
-	CRC_messages_toggleDialogPin                         = 0xa731e257
-	CRC_messages_reorderPinnedDialogs                    = 0x5b51d63f
-	CRC_messages_getPinnedDialogs                        = 0xe254d64e
-	CRC_messages_setBotShippingResults                   = 0xe5f672fa
-	CRC_messages_setBotPrecheckoutResults                = 0x09c2dd95
-	CRC_messages_uploadMedia                             = 0x519bc2b1
-	CRC_messages_sendScreenshotNotification              = 0xc97df020
-	CRC_messages_getFavedStickers                        = 0x21ce0b0e
-	CRC_messages_faveSticker                             = 0xb9ffc55b
-	CRC_messages_getUnreadMentions                       = 0x46578472
-	CRC_messages_readMentions                            = 0x0f0189d3
-	CRC_messages_getRecentLocations                      = 0xbbc45b09
-	CRC_messages_sendMultiMedia                          = 0x2095512f
-	CRC_messages_uploadEncryptedFile                     = 0x5057c497
-	CRC_messages_searchStickerSets                       = 0xc2b7d08b
-	CRC_messages_getSplitRanges                          = 0x1cff7e08
-	CRC_messages_markDialogUnread                        = 0xc286d98f
-	CRC_messages_getDialogUnreadMarks                    = 0x22e24e22
-	CRC_updates_getState                                 = 0xedd4882a
-	CRC_updates_getDifference                            = 0x25939651
-	CRC_updates_getChannelDifference                     = 0x03173d78
-	CRC_photos_updateProfilePhoto                        = 0xf0bb5152
-	CRC_photos_uploadProfilePhoto                        = 0x4f32c098
-	CRC_photos_deletePhotos                              = 0x87cf7f2f
-	CRC_photos_getUserPhotos                             = 0x91cd32a8
-	CRC_upload_saveFilePart                              = 0xb304a621
-	CRC_upload_getFile                                   = 0xe3a6cfb5
-	CRC_upload_saveBigFilePart                           = 0xde7b673d
-	CRC_upload_getWebFile                                = 0x24e6818d
-	CRC_upload_getCdnFile                                = 0x2000bcc3
-	CRC_upload_reuploadCdnFile                           = 0x9b2754a8
-	CRC_upload_getCdnFileHashes                          = 0x4da54231
-	CRC_upload_getFileHashes                             = 0xc7025931
-	CRC_help_getConfig                                   = 0xc4f9186b
-	CRC_help_getNearestDc                                = 0x1fb33026
-	CRC_help_getAppUpdate                                = 0xae2de196
-	CRC_help_saveAppLog                                  = 0x6f02f748
-	CRC_help_getInviteText                               = 0x4d392343
-	CRC_help_getSupport                                  = 0x9cdf08cd
-	CRC_help_getAppChangelog                             = 0x9010ef6f
-	CRC_help_setBotUpdatesStatus                         = 0xec22cfcd
-	CRC_help_getCdnConfig                                = 0x52029342
-	CRC_help_getRecentMeUrls                             = 0x3dc0f114
-	CRC_help_getProxyData                                = 0x3d7758e1
-	CRC_help_getTermsOfServiceUpdate                     = 0x2ca51fd1
-	CRC_help_acceptTermsOfService                        = 0xee72f79a
-	CRC_help_getDeepLinkInfo                             = 0x3fedc75f
-	CRC_channels_readHistory                             = 0xcc104937
-	CRC_channels_deleteMessages                          = 0x84c1fd4e
-	CRC_channels_deleteUserHistory                       = 0xd10dd71b
-	CRC_channels_reportSpam                              = 0xfe087810
-	CRC_channels_getMessages                             = 0xad8c9a23
-	CRC_channels_getParticipants                         = 0x123e05e9
-	CRC_channels_getParticipant                          = 0x546dd7a6
-	CRC_channels_getChannels                             = 0x0a7f6bbb
-	CRC_channels_getFullChannel                          = 0x08736a09
-	CRC_channels_createChannel                           = 0xf4893d7f
-	CRC_channels_editAbout                               = 0x13e27f1e
-	CRC_channels_editAdmin                               = 0x20b88214
-	CRC_channels_editTitle                               = 0x566decd0
-	CRC_channels_editPhoto                               = 0xf12e57c9
-	CRC_channels_checkUsername                           = 0x10e6bd2c
-	CRC_channels_updateUsername                          = 0x3514b3de
-	CRC_channels_joinChannel                             = 0x24b524c5
-	CRC_channels_leaveChannel                            = 0xf836aa95
-	CRC_channels_inviteToChannel                         = 0x199f3a6c
-	CRC_channels_exportInvite                            = 0xc7560885
-	CRC_channels_deleteChannel                           = 0xc0111fe3
-	CRC_channels_toggleInvites                           = 0x49609307
-	CRC_channels_exportMessageLink                       = 0xceb77163
-	CRC_channels_toggleSignatures                        = 0x1f69b606
-	CRC_channels_updatePinnedMessage                     = 0xa72ded52
-	CRC_channels_getAdminedPublicChannels                = 0x8d8d82d7
-	CRC_channels_editBanned                              = 0xbfd915cd
-	CRC_channels_getAdminLog                             = 0x33ddf480
-	CRC_channels_setStickers                             = 0xea8ca4f9
-	CRC_channels_readMessageContents                     = 0xeab5dc38
-	CRC_channels_deleteHistory                           = 0xaf369d42
-	CRC_channels_togglePreHistoryHidden                  = 0xeabbb94c
-	CRC_channels_getLeftChannels                         = 0x8341ecc0
-	CRC_bots_sendCustomRequest                           = 0xaa2769ed
-	CRC_bots_answerWebhookJSONQuery                      = 0xe6213f4d
-	CRC_payments_getPaymentForm                          = 0x99f09745
-	CRC_payments_getPaymentReceipt                       = 0xa092a980
-	CRC_payments_validateRequestedInfo                   = 0x770a8e74
-	CRC_payments_sendPaymentForm                         = 0x2b8879b3
-	CRC_payments_getSavedInfo                            = 0x227d824b
-	CRC_payments_clearSavedInfo                          = 0xd83d70c1
-	CRC_stickers_createStickerSet                        = 0x9bd86e6a
-	CRC_stickers_removeStickerFromSet                    = 0xf7760f51
-	CRC_stickers_changeStickerPosition                   = 0xffb6d4ca
-	CRC_stickers_addStickerToSet                         = 0x8653febe
-	CRC_phone_getCallConfig                              = 0x55451fa9
-	CRC_phone_requestCall                                = 0x5b95b3d4
-	CRC_phone_acceptCall                                 = 0x3bd2b4a0
-	CRC_phone_confirmCall                                = 0x2efe1722
-	CRC_phone_receivedCall                               = 0x17d54f61
-	CRC_phone_discardCall                                = 0x78d413a6
-	CRC_phone_setCallRating                              = 0x1c536a34
-	CRC_phone_saveCallDebug                              = 0x277add7e
-	CRC_langpack_getLangPack                             = 0x9ab5c58e
-	CRC_langpack_getStrings                              = 0x2e1ee318
-	CRC_langpack_getDifference                           = 0x0b2e4d7d
-	CRC_langpack_getLanguages                            = 0x800fd57d
+	TL_Layer                                                              = 84
+	CRC_resPQ                                                             = 0x05162463
+	CRC_p_q_inner_data                                                    = 0x83c95aec
+	CRC_p_q_inner_data_dc                                                 = 0xa9f55f95
+	CRC_p_q_inner_data_temp                                               = 0x3c6a84d4
+	CRC_p_q_inner_data_temp_dc                                            = 0x56fddf88
+	CRC_server_DH_params_fail                                             = 0x79cb045d
+	CRC_server_DH_params_ok                                               = 0xd0e8075c
+	CRC_server_DH_inner_data                                              = 0xb5890dba
+	CRC_client_DH_inner_data                                              = 0x6643b654
+	CRC_dh_gen_ok                                                         = 0x3bcbf734
+	CRC_dh_gen_retry                                                      = 0x46dc1fb9
+	CRC_dh_gen_fail                                                       = 0xa69dae02
+	CRC_destroy_auth_key_ok                                               = 0xf660e1d4
+	CRC_destroy_auth_key_none                                             = 0x0a9f2259
+	CRC_destroy_auth_key_fail                                             = 0xea109b13
+	CRC_req_pq                                                            = 0x60469778
+	CRC_req_pq_multi                                                      = 0xbe7e8ef1
+	CRC_req_DH_params                                                     = 0xd712e4be
+	CRC_set_client_DH_params                                              = 0xf5045f1f
+	CRC_destroy_auth_key                                                  = 0xd1435160
+	CRC_msgs_ack                                                          = 0x62d6b459
+	CRC_bad_msg_notification                                              = 0xa7eff811
+	CRC_bad_server_salt                                                   = 0xedab447b
+	CRC_msgs_state_req                                                    = 0xda69fb52
+	CRC_msgs_state_info                                                   = 0x04deb57d
+	CRC_msgs_all_info                                                     = 0x8cc0d131
+	CRC_msg_detailed_info                                                 = 0x276d3ec6
+	CRC_msg_new_detailed_info                                             = 0x809db6df
+	CRC_msg_resend_req                                                    = 0x7d861a08
+	CRC_rpc_error                                                         = 0x2144ca19
+	CRC_rpc_answer_unknown                                                = 0x5e2ad36e
+	CRC_rpc_answer_dropped_running                                        = 0xcd78e586
+	CRC_rpc_answer_dropped                                                = 0xa43ad8b7
+	CRC_future_salt                                                       = 0x0949d9dc
+	CRC_future_salts                                                      = 0xae500895
+	CRC_pong                                                              = 0x347773c5
+	CRC_destroy_session_ok                                                = 0xe22045fc
+	CRC_destroy_session_none                                              = 0x62d350c9
+	CRC_new_session_created                                               = 0x9ec20908
+	CRC_http_wait                                                         = 0x9299359f
+	CRC_ipPort                                                            = 0xd433ad73
+	CRC_ipPortSecret                                                      = 0x37982646
+	CRC_accessPointRule                                                   = 0x4679b65f
+	CRC_help_configSimple                                                 = 0x5a592a6c
+	CRC_rpc_drop_answer                                                   = 0x58e4a740
+	CRC_get_future_salts                                                  = 0xb921bd04
+	CRC_ping                                                              = 0x7abe77ec
+	CRC_ping_delay_disconnect                                             = 0xf3427b8c
+	CRC_destroy_session                                                   = 0xe7512126
+	CRC_contest_saveDeveloperInfo                                         = 0x9a5f6e95
+	CRC_boolFalse                                                         = 0xbc799737
+	CRC_boolTrue                                                          = 0x997275b5
+	CRC_true                                                              = 0x3fedd339
+	CRC_error                                                             = 0xc4b9f9bb
+	CRC_null                                                              = 0x56730bcc
+	CRC_inputPeerEmpty                                                    = 0x7f3b18ea
+	CRC_inputPeerSelf                                                     = 0x7da07ec9
+	CRC_inputPeerChat                                                     = 0x179be863
+	CRC_inputPeerUser                                                     = 0x7b8e7de6
+	CRC_inputPeerChannel                                                  = 0x20adaef8
+	CRC_inputUserEmpty                                                    = 0xb98886cf
+	CRC_inputUserSelf                                                     = 0xf7c1b13f
+	CRC_inputUser                                                         = 0xd8292816
+	CRC_inputPhoneContact                                                 = 0xf392b7f4
+	CRC_inputFile                                                         = 0xf52ff27f
+	CRC_inputFileBig                                                      = 0xfa4f0bb5
+	CRC_inputMediaEmpty                                                   = 0x9664f57f
+	CRC_inputMediaUploadedPhoto                                           = 0x1e287d04
+	CRC_inputMediaPhoto                                                   = 0xb3ba0635
+	CRC_inputMediaGeoPoint                                                = 0xf9c44144
+	CRC_inputMediaContact                                                 = 0xf8ab7dfb
+	CRC_inputMediaUploadedDocument                                        = 0x5b38c6c1
+	CRC_inputMediaDocument                                                = 0x23ab23d2
+	CRC_inputMediaVenue                                                   = 0xc13d1c11
+	CRC_inputMediaGifExternal                                             = 0x4843b0fd
+	CRC_inputMediaPhotoExternal                                           = 0xe5bbfe1a
+	CRC_inputMediaDocumentExternal                                        = 0xfb52dc99
+	CRC_inputMediaGame                                                    = 0xd33f43f3
+	CRC_inputMediaInvoice                                                 = 0xf4e096c3
+	CRC_inputMediaGeoLive                                                 = 0x7b1a118f
+	CRC_inputChatPhotoEmpty                                               = 0x1ca48f57
+	CRC_inputChatUploadedPhoto                                            = 0x927c55b4
+	CRC_inputChatPhoto                                                    = 0x8953ad37
+	CRC_inputGeoPointEmpty                                                = 0xe4c123d6
+	CRC_inputGeoPoint                                                     = 0xf3b7acc9
+	CRC_inputPhotoEmpty                                                   = 0x1cd7bf0d
+	CRC_inputPhoto                                                        = 0xfb95c6c4
+	CRC_inputFileLocation                                                 = 0x14637196
+	CRC_inputEncryptedFileLocation                                        = 0xf5235d55
+	CRC_inputDocumentFileLocation                                         = 0x430f0724
+	CRC_inputSecureFileLocation                                           = 0xcbc7ee28
+	CRC_inputTakeoutFileLocation                                          = 0x29be5899
+	CRC_inputAppEvent                                                     = 0x770656a8
+	CRC_peerUser                                                          = 0x9db1bc6d
+	CRC_peerChat                                                          = 0xbad0e5bb
+	CRC_peerChannel                                                       = 0xbddde532
+	CRC_storage_fileUnknown                                               = 0xaa963b05
+	CRC_storage_filePartial                                               = 0x40bc6f52
+	CRC_storage_fileJpeg                                                  = 0x007efe0e
+	CRC_storage_fileGif                                                   = 0xcae1aadf
+	CRC_storage_filePng                                                   = 0x0a4f63c0
+	CRC_storage_filePdf                                                   = 0xae1e508d
+	CRC_storage_fileMp3                                                   = 0x528a0677
+	CRC_storage_fileMov                                                   = 0x4b09ebbc
+	CRC_storage_fileMp4                                                   = 0xb3cea0e4
+	CRC_storage_fileWebp                                                  = 0x1081464c
+	CRC_fileLocationUnavailable                                           = 0x7c596b46
+	CRC_fileLocation                                                      = 0x53d69076
+	CRC_userEmpty                                                         = 0x200250ba
+	CRC_user                                                              = 0x2e13f4c3
+	CRC_userProfilePhotoEmpty                                             = 0x4f11bae1
+	CRC_userProfilePhoto                                                  = 0xd559d8c8
+	CRC_userStatusEmpty                                                   = 0x09d05049
+	CRC_userStatusOnline                                                  = 0xedb93949
+	CRC_userStatusOffline                                                 = 0x008c703f
+	CRC_userStatusRecently                                                = 0xe26f42f1
+	CRC_userStatusLastWeek                                                = 0x07bf09fc
+	CRC_userStatusLastMonth                                               = 0x77ebc742
+	CRC_chatEmpty                                                         = 0x9ba2d800
+	CRC_chat                                                              = 0xd91cdd54
+	CRC_chatForbidden                                                     = 0x07328bdb
+	CRC_channel                                                           = 0xc88974ac
+	CRC_channelForbidden                                                  = 0x289da732
+	CRC_chatFull                                                          = 0x2e02a614
+	CRC_channelFull                                                       = 0x76af5481
+	CRC_chatParticipant                                                   = 0xc8d7493e
+	CRC_chatParticipantCreator                                            = 0xda13538a
+	CRC_chatParticipantAdmin                                              = 0xe2d6e436
+	CRC_chatParticipantsForbidden                                         = 0xfc900c2b
+	CRC_chatParticipants                                                  = 0x3f460fed
+	CRC_chatPhotoEmpty                                                    = 0x37c1011c
+	CRC_chatPhoto                                                         = 0x6153276a
+	CRC_messageEmpty                                                      = 0x83e5de54
+	CRC_message                                                           = 0x44f9b43d
+	CRC_messageService                                                    = 0x9e19a1f6
+	CRC_messageMediaEmpty                                                 = 0x3ded6320
+	CRC_messageMediaPhoto                                                 = 0x695150d7
+	CRC_messageMediaGeo                                                   = 0x56e0d474
+	CRC_messageMediaContact                                               = 0xcbf24940
+	CRC_messageMediaUnsupported                                           = 0x9f84f49e
+	CRC_messageMediaDocument                                              = 0x9cb070d7
+	CRC_messageMediaWebPage                                               = 0xa32dd600
+	CRC_messageMediaVenue                                                 = 0x2ec0533f
+	CRC_messageMediaGame                                                  = 0xfdb19008
+	CRC_messageMediaInvoice                                               = 0x84551347
+	CRC_messageMediaGeoLive                                               = 0x7c3c2609
+	CRC_messageActionEmpty                                                = 0xb6aef7b0
+	CRC_messageActionChatCreate                                           = 0xa6638b9a
+	CRC_messageActionChatEditTitle                                        = 0xb5a1ce5a
+	CRC_messageActionChatEditPhoto                                        = 0x7fcb13a8
+	CRC_messageActionChatDeletePhoto                                      = 0x95e3fbef
+	CRC_messageActionChatAddUser                                          = 0x488a7337
+	CRC_messageActionChatDeleteUser                                       = 0xb2ae9b0c
+	CRC_messageActionChatJoinedByLink                                     = 0xf89cf5e8
+	CRC_messageActionChannelCreate                                        = 0x95d2ac92
+	CRC_messageActionChatMigrateTo                                        = 0x51bdb021
+	CRC_messageActionChannelMigrateFrom                                   = 0xb055eaee
+	CRC_messageActionPinMessage                                           = 0x94bd38ed
+	CRC_messageActionHistoryClear                                         = 0x9fbab604
+	CRC_messageActionGameScore                                            = 0x92a72876
+	CRC_messageActionPaymentSentMe                                        = 0x8f31b327
+	CRC_messageActionPaymentSent                                          = 0x40699cd0
+	CRC_messageActionPhoneCall                                            = 0x80e11a7f
+	CRC_messageActionScreenshotTaken                                      = 0x4792929b
+	CRC_messageActionCustomAction                                         = 0xfae69f56
+	CRC_messageActionBotAllowed                                           = 0xabe9affe
+	CRC_messageActionSecureValuesSentMe                                   = 0x1b287353
+	CRC_messageActionSecureValuesSent                                     = 0xd95c6154
+	CRC_dialog                                                            = 0xe4def5db
+	CRC_photoEmpty                                                        = 0x2331b22d
+	CRC_photo                                                             = 0x9288dd29
+	CRC_photoSizeEmpty                                                    = 0x0e17e23c
+	CRC_photoSize                                                         = 0x77bfb61b
+	CRC_photoCachedSize                                                   = 0xe9a734fa
+	CRC_geoPointEmpty                                                     = 0x1117dd5f
+	CRC_geoPoint                                                          = 0x0296f104
+	CRC_auth_checkedPhone                                                 = 0x811ea28e
+	CRC_auth_sentCode                                                     = 0x38faab5f
+	CRC_auth_authorization                                                = 0xcd050916
+	CRC_auth_exportedAuthorization                                        = 0xdf969c2d
+	CRC_inputNotifyPeer                                                   = 0xb8bc5b0c
+	CRC_inputNotifyUsers                                                  = 0x193b4417
+	CRC_inputNotifyChats                                                  = 0x4a95e84e
+	CRC_inputPeerNotifySettings                                           = 0x9c3d198e
+	CRC_peerNotifySettings                                                = 0xaf509d20
+	CRC_peerSettings                                                      = 0x818426cd
+	CRC_wallPaper                                                         = 0xccb03657
+	CRC_wallPaperSolid                                                    = 0x63117f24
+	CRC_inputReportReasonSpam                                             = 0x58dbcab8
+	CRC_inputReportReasonViolence                                         = 0x1e22c78d
+	CRC_inputReportReasonPornography                                      = 0x2e59d922
+	CRC_inputReportReasonOther                                            = 0xe1746d0a
+	CRC_inputReportReasonCopyright                                        = 0x9b89f93a
+	CRC_userFull                                                          = 0x0f220f3f
+	CRC_contact                                                           = 0xf911c994
+	CRC_importedContact                                                   = 0xd0028438
+	CRC_contactBlocked                                                    = 0x561bc879
+	CRC_contactStatus                                                     = 0xd3680c61
+	CRC_contacts_link                                                     = 0x3ace484c
+	CRC_contacts_contactsNotModified                                      = 0xb74ba9d2
+	CRC_contacts_contacts                                                 = 0xeae87e42
+	CRC_contacts_importedContacts                                         = 0x77d01c3b
+	CRC_contacts_blocked                                                  = 0x1c138d15
+	CRC_contacts_blockedSlice                                             = 0x900802a1
+	CRC_messages_dialogs                                                  = 0x15ba6c40
+	CRC_messages_dialogsSlice                                             = 0x71e094f3
+	CRC_messages_dialogsNotModified                                       = 0xf0e3e596
+	CRC_messages_messages                                                 = 0x8c718e87
+	CRC_messages_messagesSlice                                            = 0x0b446ae3
+	CRC_messages_channelMessages                                          = 0x99262e37
+	CRC_messages_messagesNotModified                                      = 0x74535f21
+	CRC_messages_chats                                                    = 0x64ff9fd5
+	CRC_messages_chatsSlice                                               = 0x9cd81144
+	CRC_messages_chatFull                                                 = 0xe5d7d19c
+	CRC_messages_affectedHistory                                          = 0xb45c69d1
+	CRC_inputMessagesFilterEmpty                                          = 0x57e2f66c
+	CRC_inputMessagesFilterPhotos                                         = 0x9609a51c
+	CRC_inputMessagesFilterVideo                                          = 0x9fc00e65
+	CRC_inputMessagesFilterPhotoVideo                                     = 0x56e9f0e4
+	CRC_inputMessagesFilterDocument                                       = 0x9eddf188
+	CRC_inputMessagesFilterUrl                                            = 0x7ef0dd87
+	CRC_inputMessagesFilterGif                                            = 0xffc86587
+	CRC_inputMessagesFilterVoice                                          = 0x50f5c392
+	CRC_inputMessagesFilterMusic                                          = 0x3751b49e
+	CRC_inputMessagesFilterChatPhotos                                     = 0x3a20ecb8
+	CRC_inputMessagesFilterPhoneCalls                                     = 0x80c99768
+	CRC_inputMessagesFilterRoundVoice                                     = 0x7a7c17a4
+	CRC_inputMessagesFilterRoundVideo                                     = 0xb549da53
+	CRC_inputMessagesFilterMyMentions                                     = 0xc1f8e69a
+	CRC_inputMessagesFilterGeo                                            = 0xe7026d0d
+	CRC_inputMessagesFilterContacts                                       = 0xe062db83
+	CRC_updateNewMessage                                                  = 0x1f2b0afd
+	CRC_updateMessageID                                                   = 0x4e90bfd6
+	CRC_updateDeleteMessages                                              = 0xa20db0e5
+	CRC_updateUserTyping                                                  = 0x5c486927
+	CRC_updateChatUserTyping                                              = 0x9a65ea1f
+	CRC_updateChatParticipants                                            = 0x07761198
+	CRC_updateUserStatus                                                  = 0x1bfbd823
+	CRC_updateUserName                                                    = 0xa7332b73
+	CRC_updateUserPhoto                                                   = 0x95313b0c
+	CRC_updateContactRegistered                                           = 0x2575bbb9
+	CRC_updateContactLink                                                 = 0x9d2e67c5
+	CRC_updateNewEncryptedMessage                                         = 0x12bcbd9a
+	CRC_updateEncryptedChatTyping                                         = 0x1710f156
+	CRC_updateEncryption                                                  = 0xb4a2e88d
+	CRC_updateEncryptedMessagesRead                                       = 0x38fe25b7
+	CRC_updateChatParticipantAdd                                          = 0xea4b0e5c
+	CRC_updateChatParticipantDelete                                       = 0x6e5f8c22
+	CRC_updateDcOptions                                                   = 0x8e5e9873
+	CRC_updateUserBlocked                                                 = 0x80ece81a
+	CRC_updateNotifySettings                                              = 0xbec268ef
+	CRC_updateServiceNotification                                         = 0xebe46819
+	CRC_updatePrivacy                                                     = 0xee3b272a
+	CRC_updateUserPhone                                                   = 0x12b9417b
+	CRC_updateReadHistoryInbox                                            = 0x9961fd5c
+	CRC_updateReadHistoryOutbox                                           = 0x2f2f21bf
+	CRC_updateWebPage                                                     = 0x7f891213
+	CRC_updateReadMessagesContents                                        = 0x68c13933
+	CRC_updateChannelTooLong                                              = 0xeb0467fb
+	CRC_updateChannel                                                     = 0xb6d45656
+	CRC_updateNewChannelMessage                                           = 0x62ba04d9
+	CRC_updateReadChannelInbox                                            = 0x4214f37f
+	CRC_updateDeleteChannelMessages                                       = 0xc37521c9
+	CRC_updateChannelMessageViews                                         = 0x98a12b4b
+	CRC_updateChatAdmins                                                  = 0x6e947941
+	CRC_updateChatParticipantAdmin                                        = 0xb6901959
+	CRC_updateNewStickerSet                                               = 0x688a30aa
+	CRC_updateStickerSetsOrder                                            = 0x0bb2d201
+	CRC_updateStickerSets                                                 = 0x43ae3dec
+	CRC_updateSavedGifs                                                   = 0x9375341e
+	CRC_updateBotInlineQuery                                              = 0x54826690
+	CRC_updateBotInlineSend                                               = 0x0e48f964
+	CRC_updateEditChannelMessage                                          = 0x1b3f4df7
+	CRC_updateChannelPinnedMessage                                        = 0x98592475
+	CRC_updateBotCallbackQuery                                            = 0xe73547e1
+	CRC_updateEditMessage                                                 = 0xe40370a3
+	CRC_updateInlineBotCallbackQuery                                      = 0xf9d27a5a
+	CRC_updateReadChannelOutbox                                           = 0x25d6c9c7
+	CRC_updateDraftMessage                                                = 0xee2bb969
+	CRC_updateReadFeaturedStickers                                        = 0x571d2742
+	CRC_updateRecentStickers                                              = 0x9a422c20
+	CRC_updateConfig                                                      = 0xa229dd06
+	CRC_updatePtsChanged                                                  = 0x3354678f
+	CRC_updateChannelWebPage                                              = 0x40771900
+	CRC_updateDialogPinned                                                = 0x19d27f3c
+	CRC_updatePinnedDialogs                                               = 0xea4cb65b
+	CRC_updateBotWebhookJSON                                              = 0x8317c0c3
+	CRC_updateBotWebhookJSONQuery                                         = 0x9b9240a6
+	CRC_updateBotShippingQuery                                            = 0xe0cdc940
+	CRC_updateBotPrecheckoutQuery                                         = 0x5d2f3aa9
+	CRC_updatePhoneCall                                                   = 0xab0f6b1e
+	CRC_updateLangPackTooLong                                             = 0x10c2404b
+	CRC_updateLangPack                                                    = 0x56022f4d
+	CRC_updateFavedStickers                                               = 0xe511996d
+	CRC_updateChannelReadMessagesContents                                 = 0x89893b45
+	CRC_updateContactsReset                                               = 0x7084a7be
+	CRC_updateChannelAvailableMessages                                    = 0x70db6837
+	CRC_updateDialogUnreadMark                                            = 0xe16459c3
+	CRC_updates_state                                                     = 0xa56c2a3e
+	CRC_updates_differenceEmpty                                           = 0x5d75a138
+	CRC_updates_difference                                                = 0x00f49ca0
+	CRC_updates_differenceSlice                                           = 0xa8fb1981
+	CRC_updates_differenceTooLong                                         = 0x4afe8f6d
+	CRC_updatesTooLong                                                    = 0xe317af7e
+	CRC_updateShortMessage                                                = 0x914fbf11
+	CRC_updateShortChatMessage                                            = 0x16812688
+	CRC_updateShort                                                       = 0x78d4dec1
+	CRC_updatesCombined                                                   = 0x725b04c3
+	CRC_updates                                                           = 0x74ae4240
+	CRC_updateShortSentMessage                                            = 0x11f1331c
+	CRC_photos_photos                                                     = 0x8dca6aa5
+	CRC_photos_photosSlice                                                = 0x15051f54
+	CRC_photos_photo                                                      = 0x20212ca8
+	CRC_upload_file                                                       = 0x096a18d5
+	CRC_upload_fileCdnRedirect                                            = 0xf18cda44
+	CRC_dcOption                                                          = 0x18b7a10d
+	CRC_config                                                            = 0x3213dbba
+	CRC_nearestDc                                                         = 0x8e1a1775
+	CRC_help_appUpdate                                                    = 0x1da7158f
+	CRC_help_noAppUpdate                                                  = 0xc45a6536
+	CRC_help_inviteText                                                   = 0x18cb9f78
+	CRC_encryptedChatEmpty                                                = 0xab7ec0a0
+	CRC_encryptedChatWaiting                                              = 0x3bf703dc
+	CRC_encryptedChatRequested                                            = 0xc878527e
+	CRC_encryptedChat                                                     = 0xfa56ce36
+	CRC_encryptedChatDiscarded                                            = 0x13d6dd27
+	CRC_inputEncryptedChat                                                = 0xf141b5e1
+	CRC_encryptedFileEmpty                                                = 0xc21f497e
+	CRC_encryptedFile                                                     = 0x4a70994c
+	CRC_inputEncryptedFileEmpty                                           = 0x1837c364
+	CRC_inputEncryptedFileUploaded                                        = 0x64bd0306
+	CRC_inputEncryptedFile                                                = 0x5a17b5e5
+	CRC_inputEncryptedFileBigUploaded                                     = 0x2dc173c8
+	CRC_encryptedMessage                                                  = 0xed18c118
+	CRC_encryptedMessageService                                           = 0x23734b06
+	CRC_messages_dhConfigNotModified                                      = 0xc0e24635
+	CRC_messages_dhConfig                                                 = 0x2c221edd
+	CRC_messages_sentEncryptedMessage                                     = 0x560f8935
+	CRC_messages_sentEncryptedFile                                        = 0x9493ff32
+	CRC_inputDocumentEmpty                                                = 0x72f0eaae
+	CRC_inputDocument                                                     = 0x18798952
+	CRC_documentEmpty                                                     = 0x36f8c871
+	CRC_document                                                          = 0x87232bc7
+	CRC_help_support                                                      = 0x17c6b5f6
+	CRC_notifyPeer                                                        = 0x9fd40bd8
+	CRC_notifyUsers                                                       = 0xb4c83b4c
+	CRC_notifyChats                                                       = 0xc007cec3
+	CRC_sendMessageTypingAction                                           = 0x16bf744e
+	CRC_sendMessageCancelAction                                           = 0xfd5ec8f5
+	CRC_sendMessageRecordVideoAction                                      = 0xa187d66f
+	CRC_sendMessageUploadVideoAction                                      = 0xe9763aec
+	CRC_sendMessageRecordAudioAction                                      = 0xd52f73f7
+	CRC_sendMessageUploadAudioAction                                      = 0xf351d7ab
+	CRC_sendMessageUploadPhotoAction                                      = 0xd1d34a26
+	CRC_sendMessageUploadDocumentAction                                   = 0xaa0cd9e4
+	CRC_sendMessageGeoLocationAction                                      = 0x176f8ba1
+	CRC_sendMessageChooseContactAction                                    = 0x628cbc6f
+	CRC_sendMessageGamePlayAction                                         = 0xdd6a8f48
+	CRC_sendMessageRecordRoundAction                                      = 0x88f27fbc
+	CRC_sendMessageUploadRoundAction                                      = 0x243e1c66
+	CRC_contacts_found                                                    = 0xb3134d9d
+	CRC_inputPrivacyKeyStatusTimestamp                                    = 0x4f96cb18
+	CRC_inputPrivacyKeyChatInvite                                         = 0xbdfb0426
+	CRC_inputPrivacyKeyPhoneCall                                          = 0xfabadc5f
+	CRC_privacyKeyStatusTimestamp                                         = 0xbc2eab30
+	CRC_privacyKeyChatInvite                                              = 0x500e6dfa
+	CRC_privacyKeyPhoneCall                                               = 0x3d662b7b
+	CRC_inputPrivacyValueAllowContacts                                    = 0x0d09e07b
+	CRC_inputPrivacyValueAllowAll                                         = 0x184b35ce
+	CRC_inputPrivacyValueAllowUsers                                       = 0x131cc67f
+	CRC_inputPrivacyValueDisallowContacts                                 = 0x0ba52007
+	CRC_inputPrivacyValueDisallowAll                                      = 0xd66b66c9
+	CRC_inputPrivacyValueDisallowUsers                                    = 0x90110467
+	CRC_privacyValueAllowContacts                                         = 0xfffe1bac
+	CRC_privacyValueAllowAll                                              = 0x65427b82
+	CRC_privacyValueAllowUsers                                            = 0x4d5bbe0c
+	CRC_privacyValueDisallowContacts                                      = 0xf888fa1a
+	CRC_privacyValueDisallowAll                                           = 0x8b73e763
+	CRC_privacyValueDisallowUsers                                         = 0x0c7f49b7
+	CRC_account_privacyRules                                              = 0x554abb6f
+	CRC_accountDaysTTL                                                    = 0xb8d0afdf
+	CRC_documentAttributeImageSize                                        = 0x6c37c15c
+	CRC_documentAttributeAnimated                                         = 0x11b58939
+	CRC_documentAttributeSticker                                          = 0x6319d612
+	CRC_documentAttributeVideo                                            = 0x0ef02ce6
+	CRC_documentAttributeAudio                                            = 0x9852f9c6
+	CRC_documentAttributeFilename                                         = 0x15590068
+	CRC_documentAttributeHasStickers                                      = 0x9801d2f7
+	CRC_messages_stickersNotModified                                      = 0xf1749a22
+	CRC_messages_stickers                                                 = 0xe4599bbd
+	CRC_stickerPack                                                       = 0x12b299d4
+	CRC_messages_allStickersNotModified                                   = 0xe86602c3
+	CRC_messages_allStickers                                              = 0xedfd405f
+	CRC_messages_affectedMessages                                         = 0x84d19185
+	CRC_contactLinkUnknown                                                = 0x5f4f9247
+	CRC_contactLinkNone                                                   = 0xfeedd3ad
+	CRC_contactLinkHasPhone                                               = 0x268f3f59
+	CRC_contactLinkContact                                                = 0xd502c2d0
+	CRC_webPageEmpty                                                      = 0xeb1477e8
+	CRC_webPagePending                                                    = 0xc586da1c
+	CRC_webPage                                                           = 0x5f07b4bc
+	CRC_webPageNotModified                                                = 0x85849473
+	CRC_authorization                                                     = 0x7bf2e6f6
+	CRC_account_authorizations                                            = 0x1250abde
+	CRC_account_password                                                  = 0xad2641f8
+	CRC_account_passwordSettings                                          = 0x9a5c33e5
+	CRC_account_passwordInputSettings                                     = 0xc23727c9
+	CRC_auth_passwordRecovery                                             = 0x137948a5
+	CRC_receivedNotifyMessage                                             = 0xa384b779
+	CRC_chatInviteEmpty                                                   = 0x69df3769
+	CRC_chatInviteExported                                                = 0xfc2e05bc
+	CRC_chatInviteAlready                                                 = 0x5a686d7c
+	CRC_chatInvite                                                        = 0xdb74f558
+	CRC_inputStickerSetEmpty                                              = 0xffb62b95
+	CRC_inputStickerSetID                                                 = 0x9de7a269
+	CRC_inputStickerSetShortName                                          = 0x861cc8a0
+	CRC_stickerSet                                                        = 0x5585a139
+	CRC_messages_stickerSet                                               = 0xb60a24a6
+	CRC_botCommand                                                        = 0xc27ac8c7
+	CRC_botInfo                                                           = 0x98e81d3a
+	CRC_keyboardButton                                                    = 0xa2fa4880
+	CRC_keyboardButtonUrl                                                 = 0x258aff05
+	CRC_keyboardButtonCallback                                            = 0x683a5e46
+	CRC_keyboardButtonRequestPhone                                        = 0xb16a6c29
+	CRC_keyboardButtonRequestGeoLocation                                  = 0xfc796b3f
+	CRC_keyboardButtonSwitchInline                                        = 0x0568a748
+	CRC_keyboardButtonGame                                                = 0x50f41ccf
+	CRC_keyboardButtonBuy                                                 = 0xafd93fbb
+	CRC_keyboardButtonRow                                                 = 0x77608b83
+	CRC_replyKeyboardHide                                                 = 0xa03e5b85
+	CRC_replyKeyboardForceReply                                           = 0xf4108aa0
+	CRC_replyKeyboardMarkup                                               = 0x3502758c
+	CRC_replyInlineMarkup                                                 = 0x48a30254
+	CRC_messageEntityUnknown                                              = 0xbb92ba95
+	CRC_messageEntityMention                                              = 0xfa04579d
+	CRC_messageEntityHashtag                                              = 0x6f635b0d
+	CRC_messageEntityBotCommand                                           = 0x6cef8ac7
+	CRC_messageEntityUrl                                                  = 0x6ed02538
+	CRC_messageEntityEmail                                                = 0x64e475c2
+	CRC_messageEntityBold                                                 = 0xbd610bc9
+	CRC_messageEntityItalic                                               = 0x826f8b60
+	CRC_messageEntityCode                                                 = 0x28a20571
+	CRC_messageEntityPre                                                  = 0x73924be0
+	CRC_messageEntityTextUrl                                              = 0x76a6d327
+	CRC_messageEntityMentionName                                          = 0x352dca58
+	CRC_inputMessageEntityMentionName                                     = 0x208e68c9
+	CRC_messageEntityPhone                                                = 0x9b69e34b
+	CRC_messageEntityCashtag                                              = 0x4c4e743f
+	CRC_inputChannelEmpty                                                 = 0xee8c1e86
+	CRC_inputChannel                                                      = 0xafeb712e
+	CRC_contacts_resolvedPeer                                             = 0x7f077ad9
+	CRC_messageRange                                                      = 0x0ae30253
+	CRC_updates_channelDifferenceEmpty                                    = 0x3e11affb
+	CRC_updates_channelDifferenceTooLong                                  = 0x6a9d7b35
+	CRC_updates_channelDifference                                         = 0x2064674e
+	CRC_channelMessagesFilterEmpty                                        = 0x94d42ee7
+	CRC_channelMessagesFilter                                             = 0xcd77d957
+	CRC_channelParticipant                                                = 0x15ebac1d
+	CRC_channelParticipantSelf                                            = 0xa3289a6d
+	CRC_channelParticipantCreator                                         = 0xe3e2e1f9
+	CRC_channelParticipantAdmin                                           = 0xa82fa898
+	CRC_channelParticipantBanned                                          = 0x222c1886
+	CRC_channelParticipantsRecent                                         = 0xde3f3c79
+	CRC_channelParticipantsAdmins                                         = 0xb4608969
+	CRC_channelParticipantsKicked                                         = 0xa3b54985
+	CRC_channelParticipantsBots                                           = 0xb0d1865b
+	CRC_channelParticipantsBanned                                         = 0x1427a5e1
+	CRC_channelParticipantsSearch                                         = 0x0656ac4b
+	CRC_channels_channelParticipants                                      = 0xf56ee2a8
+	CRC_channels_channelParticipantsNotModified                           = 0xf0173fe9
+	CRC_channels_channelParticipant                                       = 0xd0d9b163
+	CRC_help_termsOfService                                               = 0x780a0310
+	CRC_foundGif                                                          = 0x162ecc1f
+	CRC_foundGifCached                                                    = 0x9c750409
+	CRC_messages_foundGifs                                                = 0x450a1c0a
+	CRC_messages_savedGifsNotModified                                     = 0xe8025ca2
+	CRC_messages_savedGifs                                                = 0x2e0709a5
+	CRC_inputBotInlineMessageMediaAuto                                    = 0x3380c786
+	CRC_inputBotInlineMessageText                                         = 0x3dcd7a87
+	CRC_inputBotInlineMessageMediaGeo                                     = 0xc1b15d65
+	CRC_inputBotInlineMessageMediaVenue                                   = 0x417bbf11
+	CRC_inputBotInlineMessageMediaContact                                 = 0xa6edbffd
+	CRC_inputBotInlineMessageGame                                         = 0x4b425864
+	CRC_inputBotInlineResult                                              = 0x88bf9319
+	CRC_inputBotInlineResultPhoto                                         = 0xa8d864a7
+	CRC_inputBotInlineResultDocument                                      = 0xfff8fdc4
+	CRC_inputBotInlineResultGame                                          = 0x4fa417f2
+	CRC_botInlineMessageMediaAuto                                         = 0x764cf810
+	CRC_botInlineMessageText                                              = 0x8c7f65e2
+	CRC_botInlineMessageMediaGeo                                          = 0xb722de65
+	CRC_botInlineMessageMediaVenue                                        = 0x8a86659c
+	CRC_botInlineMessageMediaContact                                      = 0x18d1cdc2
+	CRC_botInlineResult                                                   = 0x11965f3a
+	CRC_botInlineMediaResult                                              = 0x17db940b
+	CRC_messages_botResults                                               = 0x947ca848
+	CRC_exportedMessageLink                                               = 0x5dab1af4
+	CRC_messageFwdHeader                                                  = 0x559ebe6d
+	CRC_auth_codeTypeSms                                                  = 0x72a3158c
+	CRC_auth_codeTypeCall                                                 = 0x741cd3e3
+	CRC_auth_codeTypeFlashCall                                            = 0x226ccefb
+	CRC_auth_sentCodeTypeApp                                              = 0x3dbb5986
+	CRC_auth_sentCodeTypeSms                                              = 0xc000bba2
+	CRC_auth_sentCodeTypeCall                                             = 0x5353e5a7
+	CRC_auth_sentCodeTypeFlashCall                                        = 0xab03c6d9
+	CRC_messages_botCallbackAnswer                                        = 0x36585ea4
+	CRC_messages_messageEditData                                          = 0x26b5dde6
+	CRC_inputBotInlineMessageID                                           = 0x890c3d89
+	CRC_inlineBotSwitchPM                                                 = 0x3c20629f
+	CRC_messages_peerDialogs                                              = 0x3371c354
+	CRC_topPeer                                                           = 0xedcdc05b
+	CRC_topPeerCategoryBotsPM                                             = 0xab661b5b
+	CRC_topPeerCategoryBotsInline                                         = 0x148677e2
+	CRC_topPeerCategoryCorrespondents                                     = 0x0637b7ed
+	CRC_topPeerCategoryGroups                                             = 0xbd17a14a
+	CRC_topPeerCategoryChannels                                           = 0x161d9628
+	CRC_topPeerCategoryPhoneCalls                                         = 0x1e76a78c
+	CRC_topPeerCategoryPeers                                              = 0xfb834291
+	CRC_contacts_topPeersNotModified                                      = 0xde266ef5
+	CRC_contacts_topPeers                                                 = 0x70b772a8
+	CRC_contacts_topPeersDisabled                                         = 0xb52c939d
+	CRC_draftMessageEmpty                                                 = 0x1b0c841a
+	CRC_draftMessage                                                      = 0xfd8e711f
+	CRC_messages_featuredStickersNotModified                              = 0x04ede3cf
+	CRC_messages_featuredStickers                                         = 0xf89d88e5
+	CRC_messages_recentStickersNotModified                                = 0x0b17f890
+	CRC_messages_recentStickers                                           = 0x22f3afb3
+	CRC_messages_archivedStickers                                         = 0x4fcba9c8
+	CRC_messages_stickerSetInstallResultSuccess                           = 0x38641628
+	CRC_messages_stickerSetInstallResultArchive                           = 0x35e410a8
+	CRC_stickerSetCovered                                                 = 0x6410a5d2
+	CRC_stickerSetMultiCovered                                            = 0x3407e51b
+	CRC_maskCoords                                                        = 0xaed6dbb2
+	CRC_inputStickeredMediaPhoto                                          = 0x4a992157
+	CRC_inputStickeredMediaDocument                                       = 0x0438865b
+	CRC_game                                                              = 0xbdf9653b
+	CRC_inputGameID                                                       = 0x032c3e77
+	CRC_inputGameShortName                                                = 0xc331e80a
+	CRC_highScore                                                         = 0x58fffcd0
+	CRC_messages_highScores                                               = 0x9a3bfd99
+	CRC_textEmpty                                                         = 0xdc3d824f
+	CRC_textPlain                                                         = 0x744694e0
+	CRC_textBold                                                          = 0x6724abc4
+	CRC_textItalic                                                        = 0xd912a59c
+	CRC_textUnderline                                                     = 0xc12622c4
+	CRC_textStrike                                                        = 0x9bf8bb95
+	CRC_textFixed                                                         = 0x6c3f19b9
+	CRC_textUrl                                                           = 0x3c2884c1
+	CRC_textEmail                                                         = 0xde5a0dd6
+	CRC_textConcat                                                        = 0x7e6260d7
+	CRC_pageBlockUnsupported                                              = 0x13567e8a
+	CRC_pageBlockTitle                                                    = 0x70abc3fd
+	CRC_pageBlockSubtitle                                                 = 0x8ffa9a1f
+	CRC_pageBlockAuthorDate                                               = 0xbaafe5e0
+	CRC_pageBlockHeader                                                   = 0xbfd064ec
+	CRC_pageBlockSubheader                                                = 0xf12bb6e1
+	CRC_pageBlockParagraph                                                = 0x467a0766
+	CRC_pageBlockPreformatted                                             = 0xc070d93e
+	CRC_pageBlockFooter                                                   = 0x48870999
+	CRC_pageBlockDivider                                                  = 0xdb20b188
+	CRC_pageBlockAnchor                                                   = 0xce0d37b0
+	CRC_pageBlockList                                                     = 0x3a58c7f4
+	CRC_pageBlockBlockquote                                               = 0x263d7c26
+	CRC_pageBlockPullquote                                                = 0x4f4456d3
+	CRC_pageBlockPhoto                                                    = 0xe9c69982
+	CRC_pageBlockVideo                                                    = 0xd9d71866
+	CRC_pageBlockCover                                                    = 0x39f23300
+	CRC_pageBlockEmbed                                                    = 0xcde200d1
+	CRC_pageBlockEmbedPost                                                = 0x292c7be9
+	CRC_pageBlockCollage                                                  = 0x08b31c4f
+	CRC_pageBlockSlideshow                                                = 0x130c8963
+	CRC_pageBlockChannel                                                  = 0xef1751b5
+	CRC_pageBlockAudio                                                    = 0x31b81a7f
+	CRC_pagePart                                                          = 0x8e3f9ebe
+	CRC_pageFull                                                          = 0x556ec7aa
+	CRC_phoneCallDiscardReasonMissed                                      = 0x85e42301
+	CRC_phoneCallDiscardReasonDisconnect                                  = 0xe095c1a0
+	CRC_phoneCallDiscardReasonHangup                                      = 0x57adc690
+	CRC_phoneCallDiscardReasonBusy                                        = 0xfaf7e8c9
+	CRC_dataJSON                                                          = 0x7d748d04
+	CRC_labeledPrice                                                      = 0xcb296bf8
+	CRC_invoice                                                           = 0xc30aa358
+	CRC_paymentCharge                                                     = 0xea02c27e
+	CRC_postAddress                                                       = 0x1e8caaeb
+	CRC_paymentRequestedInfo                                              = 0x909c3f94
+	CRC_paymentSavedCredentialsCard                                       = 0xcdc27a1f
+	CRC_webDocument                                                       = 0x1c570ed1
+	CRC_webDocumentNoProxy                                                = 0xf9c8bcc6
+	CRC_inputWebDocument                                                  = 0x9bed434d
+	CRC_inputWebFileLocation                                              = 0xc239d686
+	CRC_inputWebFileGeoPointLocation                                      = 0x9f2221c9
+	CRC_upload_webFile                                                    = 0x21e753bc
+	CRC_payments_paymentForm                                              = 0x3f56aea3
+	CRC_payments_validatedRequestedInfo                                   = 0xd1451883
+	CRC_payments_paymentResult                                            = 0x4e5f810d
+	CRC_payments_paymentVerficationNeeded                                 = 0x6b56b921
+	CRC_payments_paymentReceipt                                           = 0x500911e1
+	CRC_payments_savedInfo                                                = 0xfb8fe43c
+	CRC_inputPaymentCredentialsSaved                                      = 0xc10eb2cf
+	CRC_inputPaymentCredentials                                           = 0x3417d728
+	CRC_inputPaymentCredentialsApplePay                                   = 0x0aa1c39f
+	CRC_inputPaymentCredentialsAndroidPay                                 = 0xca05d50e
+	CRC_account_tmpPassword                                               = 0xdb64fd34
+	CRC_shippingOption                                                    = 0xb6213cdf
+	CRC_inputStickerSetItem                                               = 0xffa0a496
+	CRC_inputPhoneCall                                                    = 0x1e36fded
+	CRC_phoneCallEmpty                                                    = 0x5366c915
+	CRC_phoneCallWaiting                                                  = 0x1b8f4ad1
+	CRC_phoneCallRequested                                                = 0x83761ce4
+	CRC_phoneCallAccepted                                                 = 0x6d003d3f
+	CRC_phoneCall                                                         = 0xffe6ab67
+	CRC_phoneCallDiscarded                                                = 0x50ca4de1
+	CRC_phoneConnection                                                   = 0x9d4c17c0
+	CRC_phoneCallProtocol                                                 = 0xa2bb35cb
+	CRC_phone_phoneCall                                                   = 0xec82e140
+	CRC_upload_cdnFileReuploadNeeded                                      = 0xeea8e46e
+	CRC_upload_cdnFile                                                    = 0xa99fca4f
+	CRC_cdnPublicKey                                                      = 0xc982eaba
+	CRC_cdnConfig                                                         = 0x5725e40a
+	CRC_langPackString                                                    = 0xcad181f6
+	CRC_langPackStringPluralized                                          = 0x6c47ac9f
+	CRC_langPackStringDeleted                                             = 0x2979eeb2
+	CRC_langPackDifference                                                = 0xf385c1f6
+	CRC_langPackLanguage                                                  = 0x117698f1
+	CRC_channelAdminRights                                                = 0x5d7ceba5
+	CRC_channelBannedRights                                               = 0x58cf4249
+	CRC_channelAdminLogEventActionChangeTitle                             = 0xe6dfb825
+	CRC_channelAdminLogEventActionChangeAbout                             = 0x55188a2e
+	CRC_channelAdminLogEventActionChangeUsername                          = 0x6a4afc38
+	CRC_channelAdminLogEventActionChangePhoto                             = 0xb82f55c3
+	CRC_channelAdminLogEventActionToggleInvites                           = 0x1b7907ae
+	CRC_channelAdminLogEventActionToggleSignatures                        = 0x26ae0971
+	CRC_channelAdminLogEventActionUpdatePinned                            = 0xe9e82c18
+	CRC_channelAdminLogEventActionEditMessage                             = 0x709b2405
+	CRC_channelAdminLogEventActionDeleteMessage                           = 0x42e047bb
+	CRC_channelAdminLogEventActionParticipantJoin                         = 0x183040d3
+	CRC_channelAdminLogEventActionParticipantLeave                        = 0xf89777f2
+	CRC_channelAdminLogEventActionParticipantInvite                       = 0xe31c34d8
+	CRC_channelAdminLogEventActionParticipantToggleBan                    = 0xe6d83d7e
+	CRC_channelAdminLogEventActionParticipantToggleAdmin                  = 0xd5676710
+	CRC_channelAdminLogEventActionChangeStickerSet                        = 0xb1c3caa7
+	CRC_channelAdminLogEventActionTogglePreHistoryHidden                  = 0x5f5c95f1
+	CRC_channelAdminLogEvent                                              = 0x3b5a3e40
+	CRC_channels_adminLogResults                                          = 0xed8af74d
+	CRC_channelAdminLogEventsFilter                                       = 0xea107ae4
+	CRC_popularContact                                                    = 0x5ce14175
+	CRC_messages_favedStickersNotModified                                 = 0x9e8fa6d3
+	CRC_messages_favedStickers                                            = 0xf37f2f16
+	CRC_recentMeUrlUnknown                                                = 0x46e1d13d
+	CRC_recentMeUrlUser                                                   = 0x8dbc3336
+	CRC_recentMeUrlChat                                                   = 0xa01b22f9
+	CRC_recentMeUrlChatInvite                                             = 0xeb49081d
+	CRC_recentMeUrlStickerSet                                             = 0xbc0a57dc
+	CRC_help_recentMeUrls                                                 = 0x0e0310d7
+	CRC_inputSingleMedia                                                  = 0x1cc6e91f
+	CRC_webAuthorization                                                  = 0xcac943f2
+	CRC_account_webAuthorizations                                         = 0xed56c9fc
+	CRC_inputMessageID                                                    = 0xa676a322
+	CRC_inputMessageReplyTo                                               = 0xbad88395
+	CRC_inputMessagePinned                                                = 0x86872538
+	CRC_inputDialogPeer                                                   = 0xfcaafeb7
+	CRC_dialogPeer                                                        = 0xe56dbf05
+	CRC_messages_foundStickerSetsNotModified                              = 0x0d54b65d
+	CRC_messages_foundStickerSets                                         = 0x5108d648
+	CRC_fileHash                                                          = 0x6242c773
+	CRC_inputClientProxy                                                  = 0x75588b3f
+	CRC_help_proxyDataEmpty                                               = 0xe09e1fb8
+	CRC_help_proxyDataPromo                                               = 0x2bf7ee23
+	CRC_help_termsOfServiceUpdateEmpty                                    = 0xe3309f7f
+	CRC_help_termsOfServiceUpdate                                         = 0x28ecf961
+	CRC_inputSecureFileUploaded                                           = 0x3334b0f0
+	CRC_inputSecureFile                                                   = 0x5367e5be
+	CRC_secureFileEmpty                                                   = 0x64199744
+	CRC_secureFile                                                        = 0xe0277a62
+	CRC_secureData                                                        = 0x8aeabec3
+	CRC_securePlainPhone                                                  = 0x7d6099dd
+	CRC_securePlainEmail                                                  = 0x21ec5a5f
+	CRC_secureValueTypePersonalDetails                                    = 0x9d2a81e3
+	CRC_secureValueTypePassport                                           = 0x3dac6a00
+	CRC_secureValueTypeDriverLicense                                      = 0x06e425c4
+	CRC_secureValueTypeIdentityCard                                       = 0xa0d0744b
+	CRC_secureValueTypeInternalPassport                                   = 0x99a48f23
+	CRC_secureValueTypeAddress                                            = 0xcbe31e26
+	CRC_secureValueTypeUtilityBill                                        = 0xfc36954e
+	CRC_secureValueTypeBankStatement                                      = 0x89137c0d
+	CRC_secureValueTypeRentalAgreement                                    = 0x8b883488
+	CRC_secureValueTypePassportRegistration                               = 0x99e3806a
+	CRC_secureValueTypeTemporaryRegistration                              = 0xea02ec33
+	CRC_secureValueTypePhone                                              = 0xb320aadb
+	CRC_secureValueTypeEmail                                              = 0x8e3ca7ee
+	CRC_secureValue                                                       = 0xb4b4b699
+	CRC_inputSecureValue                                                  = 0x067872e8
+	CRC_secureValueHash                                                   = 0xed1ecdb0
+	CRC_secureValueErrorData                                              = 0xe8a40bd9
+	CRC_secureValueErrorFrontSide                                         = 0x00be3dfa
+	CRC_secureValueErrorReverseSide                                       = 0x868a2aa5
+	CRC_secureValueErrorSelfie                                            = 0xe537ced6
+	CRC_secureValueErrorFile                                              = 0x7a700873
+	CRC_secureValueErrorFiles                                             = 0x666220e9
+	CRC_secureCredentialsEncrypted                                        = 0x33f0ea47
+	CRC_account_authorizationForm                                         = 0xcb976d53
+	CRC_account_sentEmailCode                                             = 0x811f854f
+	CRC_help_deepLinkInfoEmpty                                            = 0x66afa166
+	CRC_help_deepLinkInfo                                                 = 0x6a4ee832
+	CRC_savedPhoneContact                                                 = 0x1142bd56
+	CRC_account_takeout                                                   = 0x4dba4501
+	CRC_passwordKdfAlgoUnknown                                            = 0xd45ab096
+	CRC_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow = 0x3a912d4a
+	CRC_securePasswordKdfAlgoUnknown                                      = 0x004a8537
+	CRC_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000                   = 0xbbf2dda0
+	CRC_securePasswordKdfAlgoSHA512                                       = 0x86471d92
+	CRC_secureSecretSettings                                              = 0x1527bcac
+	CRC_inputCheckPasswordEmpty                                           = 0x9880f658
+	CRC_inputCheckPasswordSRP                                             = 0xd27ff082
+	CRC_invokeAfterMsg                                                    = 0xcb9f372d
+	CRC_invokeAfterMsgs                                                   = 0x3dc4b4f0
+	CRC_initConnection                                                    = 0x785188b8
+	CRC_invokeWithLayer                                                   = 0xda9b0d0d
+	CRC_invokeWithoutUpdates                                              = 0xbf9459b7
+	CRC_invokeWithMessagesRange                                           = 0x365275f2
+	CRC_invokeWithTakeout                                                 = 0xaca9fd2e
+	CRC_auth_sendCode                                                     = 0x86aef0ec
+	CRC_auth_signUp                                                       = 0x1b067634
+	CRC_auth_signIn                                                       = 0xbcd51581
+	CRC_auth_logOut                                                       = 0x5717da40
+	CRC_auth_resetAuthorizations                                          = 0x9fab0d1a
+	CRC_auth_exportAuthorization                                          = 0xe5bfffcd
+	CRC_auth_importAuthorization                                          = 0xe3ef9613
+	CRC_auth_bindTempAuthKey                                              = 0xcdd42a05
+	CRC_auth_importBotAuthorization                                       = 0x67a3ff2c
+	CRC_auth_checkPassword                                                = 0xd18b4d16
+	CRC_auth_requestPasswordRecovery                                      = 0xd897bc66
+	CRC_auth_recoverPassword                                              = 0x4ea56e92
+	CRC_auth_resendCode                                                   = 0x3ef1a9bf
+	CRC_auth_cancelCode                                                   = 0x1f040578
+	CRC_auth_dropTempAuthKeys                                             = 0x8e48a188
+	CRC_account_registerDevice                                            = 0x5cbea590
+	CRC_account_unregisterDevice                                          = 0x3076c4bf
+	CRC_account_updateNotifySettings                                      = 0x84be5b93
+	CRC_account_getNotifySettings                                         = 0x12b3ad31
+	CRC_account_resetNotifySettings                                       = 0xdb7e1747
+	CRC_account_updateProfile                                             = 0x78515775
+	CRC_account_updateStatus                                              = 0x6628562c
+	CRC_account_getWallPapers                                             = 0xc04cfac2
+	CRC_account_reportPeer                                                = 0xae189d5f
+	CRC_account_checkUsername                                             = 0x2714d86c
+	CRC_account_updateUsername                                            = 0x3e0bdd7c
+	CRC_account_getPrivacy                                                = 0xdadbc950
+	CRC_account_setPrivacy                                                = 0xc9f81ce8
+	CRC_account_deleteAccount                                             = 0x418d4e0b
+	CRC_account_getAccountTTL                                             = 0x08fc711d
+	CRC_account_setAccountTTL                                             = 0x2442485e
+	CRC_account_sendChangePhoneCode                                       = 0x08e57deb
+	CRC_account_changePhone                                               = 0x70c32edb
+	CRC_account_updateDeviceLocked                                        = 0x38df3532
+	CRC_account_getAuthorizations                                         = 0xe320c158
+	CRC_account_resetAuthorization                                        = 0xdf77f3bc
+	CRC_account_getPassword                                               = 0x548a30f5
+	CRC_account_getPasswordSettings                                       = 0x9cd4eaf9
+	CRC_account_updatePasswordSettings                                    = 0xa59b102f
+	CRC_account_sendConfirmPhoneCode                                      = 0x1516d7bd
+	CRC_account_confirmPhone                                              = 0x5f2178c3
+	CRC_account_getTmpPassword                                            = 0x449e0b51
+	CRC_account_getWebAuthorizations                                      = 0x182e6d6f
+	CRC_account_resetWebAuthorization                                     = 0x2d01b9ef
+	CRC_account_resetWebAuthorizations                                    = 0x682d2594
+	CRC_account_getAllSecureValues                                        = 0xb288bc7d
+	CRC_account_getSecureValue                                            = 0x73665bc2
+	CRC_account_saveSecureValue                                           = 0x899fe31d
+	CRC_account_deleteSecureValue                                         = 0xb880bc4b
+	CRC_account_getAuthorizationForm                                      = 0xb86ba8e1
+	CRC_account_acceptAuthorization                                       = 0xe7027c94
+	CRC_account_sendVerifyPhoneCode                                       = 0x823380b4
+	CRC_account_verifyPhone                                               = 0x4dd3a7f6
+	CRC_account_sendVerifyEmailCode                                       = 0x7011509f
+	CRC_account_verifyEmail                                               = 0xecba39db
+	CRC_account_initTakeoutSession                                        = 0xf05b4804
+	CRC_account_finishTakeoutSession                                      = 0x1d2652ee
+	CRC_users_getUsers                                                    = 0x0d91a548
+	CRC_users_getFullUser                                                 = 0xca30a5b1
+	CRC_users_setSecureValueErrors                                        = 0x90c894b5
+	CRC_contacts_getStatuses                                              = 0xc4a353ee
+	CRC_contacts_getContacts                                              = 0xc023849f
+	CRC_contacts_importContacts                                           = 0x2c800be5
+	CRC_contacts_deleteContact                                            = 0x8e953744
+	CRC_contacts_deleteContacts                                           = 0x59ab389e
+	CRC_contacts_block                                                    = 0x332b49fc
+	CRC_contacts_unblock                                                  = 0xe54100bd
+	CRC_contacts_getBlocked                                               = 0xf57c350f
+	CRC_contacts_exportCard                                               = 0x84e53737
+	CRC_contacts_importCard                                               = 0x4fe196fe
+	CRC_contacts_search                                                   = 0x11f812d8
+	CRC_contacts_resolveUsername                                          = 0xf93ccba3
+	CRC_contacts_getTopPeers                                              = 0xd4982db5
+	CRC_contacts_resetTopPeerRating                                       = 0x1ae373ac
+	CRC_contacts_resetSaved                                               = 0x879537f1
+	CRC_contacts_getSaved                                                 = 0x82f1e39f
+	CRC_contacts_toggleTopPeers                                           = 0x8514bdda
+	CRC_messages_getMessages                                              = 0x63c66506
+	CRC_messages_getDialogs                                               = 0xb098aee6
+	CRC_messages_getHistory                                               = 0xdcbb8260
+	CRC_messages_search                                                   = 0x8614ef68
+	CRC_messages_readHistory                                              = 0x0e306d3a
+	CRC_messages_deleteHistory                                            = 0x1c015b09
+	CRC_messages_deleteMessages                                           = 0xe58e95d2
+	CRC_messages_receivedMessages                                         = 0x05a954c0
+	CRC_messages_setTyping                                                = 0xa3825e50
+	CRC_messages_sendMessage                                              = 0xfa88427a
+	CRC_messages_sendMedia                                                = 0xb8d1262b
+	CRC_messages_forwardMessages                                          = 0x708e0195
+	CRC_messages_reportSpam                                               = 0xcf1592db
+	CRC_messages_hideReportSpam                                           = 0xa8f1709b
+	CRC_messages_getPeerSettings                                          = 0x3672e09c
+	CRC_messages_report                                                   = 0xbd82b658
+	CRC_messages_getChats                                                 = 0x3c6aa187
+	CRC_messages_getFullChat                                              = 0x3b831c66
+	CRC_messages_editChatTitle                                            = 0xdc452855
+	CRC_messages_editChatPhoto                                            = 0xca4c79d8
+	CRC_messages_addChatUser                                              = 0xf9a0aa09
+	CRC_messages_deleteChatUser                                           = 0xe0611f16
+	CRC_messages_createChat                                               = 0x09cb126e
+	CRC_messages_getDhConfig                                              = 0x26cf8950
+	CRC_messages_requestEncryption                                        = 0xf64daf43
+	CRC_messages_acceptEncryption                                         = 0x3dbc0415
+	CRC_messages_discardEncryption                                        = 0xedd923c5
+	CRC_messages_setEncryptedTyping                                       = 0x791451ed
+	CRC_messages_readEncryptedHistory                                     = 0x7f4b690a
+	CRC_messages_sendEncrypted                                            = 0xa9776773
+	CRC_messages_sendEncryptedFile                                        = 0x9a901b66
+	CRC_messages_sendEncryptedService                                     = 0x32d439a4
+	CRC_messages_receivedQueue                                            = 0x55a5bb66
+	CRC_messages_reportEncryptedSpam                                      = 0x4b0c8c0f
+	CRC_messages_readMessageContents                                      = 0x36a73f77
+	CRC_messages_getStickers                                              = 0x043d4f2c
+	CRC_messages_getAllStickers                                           = 0x1c9618b1
+	CRC_messages_getWebPagePreview                                        = 0x8b68b0cc
+	CRC_messages_exportChatInvite                                         = 0x7d885289
+	CRC_messages_checkChatInvite                                          = 0x3eadb1bb
+	CRC_messages_importChatInvite                                         = 0x6c50051c
+	CRC_messages_getStickerSet                                            = 0x2619a90e
+	CRC_messages_installStickerSet                                        = 0xc78fe460
+	CRC_messages_uninstallStickerSet                                      = 0xf96e55de
+	CRC_messages_startBot                                                 = 0xe6df7378
+	CRC_messages_getMessagesViews                                         = 0xc4c8a55d
+	CRC_messages_toggleChatAdmins                                         = 0xec8bd9e1
+	CRC_messages_editChatAdmin                                            = 0xa9e69f2e
+	CRC_messages_migrateChat                                              = 0x15a3b8e3
+	CRC_messages_searchGlobal                                             = 0x9e3cacb0
+	CRC_messages_reorderStickerSets                                       = 0x78337739
+	CRC_messages_getDocumentByHash                                        = 0x338e2464
+	CRC_messages_searchGifs                                               = 0xbf9a776b
+	CRC_messages_getSavedGifs                                             = 0x83bf3d52
+	CRC_messages_saveGif                                                  = 0x327a30cb
+	CRC_messages_getInlineBotResults                                      = 0x514e999d
+	CRC_messages_setInlineBotResults                                      = 0xeb5ea206
+	CRC_messages_sendInlineBotResult                                      = 0xb16e06fe
+	CRC_messages_getMessageEditData                                       = 0xfda68d36
+	CRC_messages_editMessage                                              = 0xc000e4c8
+	CRC_messages_editInlineBotMessage                                     = 0xadc3e828
+	CRC_messages_getBotCallbackAnswer                                     = 0x810a9fec
+	CRC_messages_setBotCallbackAnswer                                     = 0xd58f130a
+	CRC_messages_getPeerDialogs                                           = 0xe470bcfd
+	CRC_messages_saveDraft                                                = 0xbc39e14b
+	CRC_messages_getAllDrafts                                             = 0x6a3f8d65
+	CRC_messages_getFeaturedStickers                                      = 0x2dacca4f
+	CRC_messages_readFeaturedStickers                                     = 0x5b118126
+	CRC_messages_getRecentStickers                                        = 0x5ea192c9
+	CRC_messages_saveRecentSticker                                        = 0x392718f8
+	CRC_messages_clearRecentStickers                                      = 0x8999602d
+	CRC_messages_getArchivedStickers                                      = 0x57f17692
+	CRC_messages_getMaskStickers                                          = 0x65b8c79f
+	CRC_messages_getAttachedStickers                                      = 0xcc5b67cc
+	CRC_messages_setGameScore                                             = 0x8ef8ecc0
+	CRC_messages_setInlineGameScore                                       = 0x15ad9f64
+	CRC_messages_getGameHighScores                                        = 0xe822649d
+	CRC_messages_getInlineGameHighScores                                  = 0x0f635e1b
+	CRC_messages_getCommonChats                                           = 0x0d0a48c4
+	CRC_messages_getAllChats                                              = 0xeba80ff0
+	CRC_messages_getWebPage                                               = 0x32ca8f91
+	CRC_messages_toggleDialogPin                                          = 0xa731e257
+	CRC_messages_reorderPinnedDialogs                                     = 0x5b51d63f
+	CRC_messages_getPinnedDialogs                                         = 0xe254d64e
+	CRC_messages_setBotShippingResults                                    = 0xe5f672fa
+	CRC_messages_setBotPrecheckoutResults                                 = 0x09c2dd95
+	CRC_messages_uploadMedia                                              = 0x519bc2b1
+	CRC_messages_sendScreenshotNotification                               = 0xc97df020
+	CRC_messages_getFavedStickers                                         = 0x21ce0b0e
+	CRC_messages_faveSticker                                              = 0xb9ffc55b
+	CRC_messages_getUnreadMentions                                        = 0x46578472
+	CRC_messages_readMentions                                             = 0x0f0189d3
+	CRC_messages_getRecentLocations                                       = 0xbbc45b09
+	CRC_messages_sendMultiMedia                                           = 0x2095512f
+	CRC_messages_uploadEncryptedFile                                      = 0x5057c497
+	CRC_messages_searchStickerSets                                        = 0xc2b7d08b
+	CRC_messages_getSplitRanges                                           = 0x1cff7e08
+	CRC_messages_markDialogUnread                                         = 0xc286d98f
+	CRC_messages_getDialogUnreadMarks                                     = 0x22e24e22
+	CRC_messages_clearAllDrafts                                           = 0x7e58ee9c
+	CRC_updates_getState                                                  = 0xedd4882a
+	CRC_updates_getDifference                                             = 0x25939651
+	CRC_updates_getChannelDifference                                      = 0x03173d78
+	CRC_photos_updateProfilePhoto                                         = 0xf0bb5152
+	CRC_photos_uploadProfilePhoto                                         = 0x4f32c098
+	CRC_photos_deletePhotos                                               = 0x87cf7f2f
+	CRC_photos_getUserPhotos                                              = 0x91cd32a8
+	CRC_upload_saveFilePart                                               = 0xb304a621
+	CRC_upload_getFile                                                    = 0xe3a6cfb5
+	CRC_upload_saveBigFilePart                                            = 0xde7b673d
+	CRC_upload_getWebFile                                                 = 0x24e6818d
+	CRC_upload_getCdnFile                                                 = 0x2000bcc3
+	CRC_upload_reuploadCdnFile                                            = 0x9b2754a8
+	CRC_upload_getCdnFileHashes                                           = 0x4da54231
+	CRC_upload_getFileHashes                                              = 0xc7025931
+	CRC_help_getConfig                                                    = 0xc4f9186b
+	CRC_help_getNearestDc                                                 = 0x1fb33026
+	CRC_help_getAppUpdate                                                 = 0x522d5a7d
+	CRC_help_saveAppLog                                                   = 0x6f02f748
+	CRC_help_getInviteText                                                = 0x4d392343
+	CRC_help_getSupport                                                   = 0x9cdf08cd
+	CRC_help_getAppChangelog                                              = 0x9010ef6f
+	CRC_help_setBotUpdatesStatus                                          = 0xec22cfcd
+	CRC_help_getCdnConfig                                                 = 0x52029342
+	CRC_help_getRecentMeUrls                                              = 0x3dc0f114
+	CRC_help_getProxyData                                                 = 0x3d7758e1
+	CRC_help_getTermsOfServiceUpdate                                      = 0x2ca51fd1
+	CRC_help_acceptTermsOfService                                         = 0xee72f79a
+	CRC_help_getDeepLinkInfo                                              = 0x3fedc75f
+	CRC_channels_readHistory                                              = 0xcc104937
+	CRC_channels_deleteMessages                                           = 0x84c1fd4e
+	CRC_channels_deleteUserHistory                                        = 0xd10dd71b
+	CRC_channels_reportSpam                                               = 0xfe087810
+	CRC_channels_getMessages                                              = 0xad8c9a23
+	CRC_channels_getParticipants                                          = 0x123e05e9
+	CRC_channels_getParticipant                                           = 0x546dd7a6
+	CRC_channels_getChannels                                              = 0x0a7f6bbb
+	CRC_channels_getFullChannel                                           = 0x08736a09
+	CRC_channels_createChannel                                            = 0xf4893d7f
+	CRC_channels_editAbout                                                = 0x13e27f1e
+	CRC_channels_editAdmin                                                = 0x20b88214
+	CRC_channels_editTitle                                                = 0x566decd0
+	CRC_channels_editPhoto                                                = 0xf12e57c9
+	CRC_channels_checkUsername                                            = 0x10e6bd2c
+	CRC_channels_updateUsername                                           = 0x3514b3de
+	CRC_channels_joinChannel                                              = 0x24b524c5
+	CRC_channels_leaveChannel                                             = 0xf836aa95
+	CRC_channels_inviteToChannel                                          = 0x199f3a6c
+	CRC_channels_exportInvite                                             = 0xc7560885
+	CRC_channels_deleteChannel                                            = 0xc0111fe3
+	CRC_channels_toggleInvites                                            = 0x49609307
+	CRC_channels_exportMessageLink                                        = 0xceb77163
+	CRC_channels_toggleSignatures                                         = 0x1f69b606
+	CRC_channels_updatePinnedMessage                                      = 0xa72ded52
+	CRC_channels_getAdminedPublicChannels                                 = 0x8d8d82d7
+	CRC_channels_editBanned                                               = 0xbfd915cd
+	CRC_channels_getAdminLog                                              = 0x33ddf480
+	CRC_channels_setStickers                                              = 0xea8ca4f9
+	CRC_channels_readMessageContents                                      = 0xeab5dc38
+	CRC_channels_deleteHistory                                            = 0xaf369d42
+	CRC_channels_togglePreHistoryHidden                                   = 0xeabbb94c
+	CRC_channels_getLeftChannels                                          = 0x8341ecc0
+	CRC_bots_sendCustomRequest                                            = 0xaa2769ed
+	CRC_bots_answerWebhookJSONQuery                                       = 0xe6213f4d
+	CRC_payments_getPaymentForm                                           = 0x99f09745
+	CRC_payments_getPaymentReceipt                                        = 0xa092a980
+	CRC_payments_validateRequestedInfo                                    = 0x770a8e74
+	CRC_payments_sendPaymentForm                                          = 0x2b8879b3
+	CRC_payments_getSavedInfo                                             = 0x227d824b
+	CRC_payments_clearSavedInfo                                           = 0xd83d70c1
+	CRC_stickers_createStickerSet                                         = 0x9bd86e6a
+	CRC_stickers_removeStickerFromSet                                     = 0xf7760f51
+	CRC_stickers_changeStickerPosition                                    = 0xffb6d4ca
+	CRC_stickers_addStickerToSet                                          = 0x8653febe
+	CRC_phone_getCallConfig                                               = 0x55451fa9
+	CRC_phone_requestCall                                                 = 0x5b95b3d4
+	CRC_phone_acceptCall                                                  = 0x3bd2b4a0
+	CRC_phone_confirmCall                                                 = 0x2efe1722
+	CRC_phone_receivedCall                                                = 0x17d54f61
+	CRC_phone_discardCall                                                 = 0x78d413a6
+	CRC_phone_setCallRating                                               = 0x1c536a34
+	CRC_phone_saveCallDebug                                               = 0x277add7e
+	CRC_langpack_getLangPack                                              = 0x9ab5c58e
+	CRC_langpack_getStrings                                               = 0x2e1ee318
+	CRC_langpack_getDifference                                            = 0x0b2e4d7d
+	CRC_langpack_getLanguages                                             = 0x800fd57d
 )
 
 type TL_resPQ struct {
@@ -2074,6 +2083,9 @@ type TL_inputReportReasonOther struct {
 	Text string
 }
 
+type TL_inputReportReasonCopyright struct {
+}
+
 type TL_userFull struct {
 	Flags               int32
 	Blocked             bool   //flag
@@ -2843,10 +2855,14 @@ type TL_nearestDc struct {
 }
 
 type TL_help_appUpdate struct {
+	Flags    int32
+	Popup    bool //flag
 	ID       int32
-	Critical TL // Bool
-	Url      string
+	Version  string
 	Text     string
+	Entities []TL   // MessageEntity
+	Document TL     // Document //flag
+	Url      string //flag
 }
 
 type TL_help_noAppUpdate struct {
@@ -3252,41 +3268,34 @@ type TL_account_authorizations struct {
 	Authorizations []TL // Authorization
 }
 
-type TL_account_noPassword struct {
-	NewSalt                 []byte
-	NewSecureSalt           []byte
-	SecureRandom            []byte
-	EmailUnconfirmedPattern string
-}
-
 type TL_account_password struct {
 	Flags                   int32
-	HasRecovery             bool //flag
-	HasSecureValues         bool //flag
-	CurrentSalt             []byte
-	NewSalt                 []byte
-	NewSecureSalt           []byte
+	HasRecovery             bool   //flag
+	HasSecureValues         bool   //flag
+	HasPassword             bool   //flag
+	CurrentAlgo             TL     // PasswordKdfAlgo //flag
+	SrpB                    []byte //flag
+	SrpID                   int64  //flag
+	Hint                    string //flag
+	EmailUnconfirmedPattern string //flag
+	NewAlgo                 TL     // PasswordKdfAlgo
+	NewSecureAlgo           TL     // SecurePasswordKdfAlgo
 	SecureRandom            []byte
-	Hint                    string
-	EmailUnconfirmedPattern string
 }
 
 type TL_account_passwordSettings struct {
-	Email          string
-	SecureSalt     []byte
-	SecureSecret   []byte
-	SecureSecretID int64
+	Flags          int32
+	Email          string //flag
+	SecureSettings TL     // SecureSecretSettings //flag
 }
 
 type TL_account_passwordInputSettings struct {
 	Flags             int32
-	NewSalt           []byte //flag
+	NewAlgo           TL     // PasswordKdfAlgo //flag
 	NewPasswordHash   []byte //flag
 	Hint              string //flag
 	Email             string //flag
-	NewSecureSalt     []byte //flag
-	NewSecureSecret   []byte //flag
-	NewSecureSecretID int64  //flag
+	NewSecureSettings TL     // SecureSecretSettings //flag
 }
 
 type TL_auth_passwordRecovery struct {
@@ -4989,6 +4998,42 @@ type TL_account_takeout struct {
 	ID int64
 }
 
+type TL_passwordKdfAlgoUnknown struct {
+}
+
+type TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow struct {
+	Salt1 []byte
+	Salt2 []byte
+	G     int32
+	P     []byte
+}
+
+type TL_securePasswordKdfAlgoUnknown struct {
+}
+
+type TL_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000 struct {
+	Salt []byte
+}
+
+type TL_securePasswordKdfAlgoSHA512 struct {
+	Salt []byte
+}
+
+type TL_secureSecretSettings struct {
+	SecureAlgo     TL // SecurePasswordKdfAlgo
+	SecureSecret   []byte
+	SecureSecretID int64
+}
+
+type TL_inputCheckPasswordEmpty struct {
+}
+
+type TL_inputCheckPasswordSRP struct {
+	SrpID int64
+	A     []byte
+	M1    []byte
+}
+
 type TL_invokeAfterMsg struct {
 	MsgID int64
 	Query TL
@@ -5084,7 +5129,7 @@ type TL_auth_importBotAuthorization struct {
 }
 
 type TL_auth_checkPassword struct {
-	PasswordHash []byte
+	Password TL // InputCheckPasswordSRP
 }
 
 type TL_auth_requestPasswordRecovery struct {
@@ -5209,12 +5254,12 @@ type TL_account_getPassword struct {
 }
 
 type TL_account_getPasswordSettings struct {
-	CurrentPasswordHash []byte
+	Password TL // InputCheckPasswordSRP
 }
 
 type TL_account_updatePasswordSettings struct {
-	CurrentPasswordHash []byte
-	NewSettings         TL // account_PasswordInputSettings
+	Password    TL // InputCheckPasswordSRP
+	NewSettings TL // account_PasswordInputSettings
 }
 
 type TL_account_sendConfirmPhoneCode struct {
@@ -5230,8 +5275,8 @@ type TL_account_confirmPhone struct {
 }
 
 type TL_account_getTmpPassword struct {
-	PasswordHash []byte
-	Period       int32
+	Password TL // InputCheckPasswordSRP
+	Period   int32
 }
 
 type TL_account_getWebAuthorizations struct {
@@ -6008,6 +6053,9 @@ type TL_messages_markDialogUnread struct {
 type TL_messages_getDialogUnreadMarks struct {
 }
 
+type TL_messages_clearAllDrafts struct {
+}
+
 type TL_updates_getState struct {
 }
 
@@ -6100,6 +6148,7 @@ type TL_help_getNearestDc struct {
 }
 
 type TL_help_getAppUpdate struct {
+	Source string
 }
 
 type TL_help_saveAppLog struct {
@@ -8262,6 +8311,12 @@ func (e TL_inputReportReasonOther) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputReportReasonCopyright) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputReportReasonCopyright)
+	return x.buf
+}
+
 func (e TL_userFull) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_userFull)
@@ -9476,10 +9531,18 @@ func (e TL_nearestDc) encode() []byte {
 func (e TL_help_appUpdate) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_help_appUpdate)
+	x.Int(e.Flags)
+	//flag Popup
 	x.Int(e.ID)
-	x.Bytes(e.Critical.encode())
-	x.String(e.Url)
+	x.String(e.Version)
 	x.String(e.Text)
+	x.Vector(e.Entities)
+	if e.Flags&2 != 0 {
+		x.Bytes(e.Document.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.String(e.Url)
+	}
 	return x.buf
 }
 
@@ -10175,38 +10238,44 @@ func (e TL_account_authorizations) encode() []byte {
 	return x.buf
 }
 
-func (e TL_account_noPassword) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_account_noPassword)
-	x.StringBytes(e.NewSalt)
-	x.StringBytes(e.NewSecureSalt)
-	x.StringBytes(e.SecureRandom)
-	x.String(e.EmailUnconfirmedPattern)
-	return x.buf
-}
-
 func (e TL_account_password) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_password)
 	x.Int(e.Flags)
 	//flag HasRecovery
 	//flag HasSecureValues
-	x.StringBytes(e.CurrentSalt)
-	x.StringBytes(e.NewSalt)
-	x.StringBytes(e.NewSecureSalt)
+	//flag HasPassword
+	if e.Flags&4 != 0 {
+		x.Bytes(e.CurrentAlgo.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.StringBytes(e.SrpB)
+	}
+	if e.Flags&4 != 0 {
+		x.Long(e.SrpID)
+	}
+	if e.Flags&8 != 0 {
+		x.String(e.Hint)
+	}
+	if e.Flags&16 != 0 {
+		x.String(e.EmailUnconfirmedPattern)
+	}
+	x.Bytes(e.NewAlgo.encode())
+	x.Bytes(e.NewSecureAlgo.encode())
 	x.StringBytes(e.SecureRandom)
-	x.String(e.Hint)
-	x.String(e.EmailUnconfirmedPattern)
 	return x.buf
 }
 
 func (e TL_account_passwordSettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_passwordSettings)
-	x.String(e.Email)
-	x.StringBytes(e.SecureSalt)
-	x.StringBytes(e.SecureSecret)
-	x.Long(e.SecureSecretID)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.String(e.Email)
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.SecureSettings.encode())
+	}
 	return x.buf
 }
 
@@ -10215,7 +10284,7 @@ func (e TL_account_passwordInputSettings) encode() []byte {
 	x.UInt(CRC_account_passwordInputSettings)
 	x.Int(e.Flags)
 	if e.Flags&1 != 0 {
-		x.StringBytes(e.NewSalt)
+		x.Bytes(e.NewAlgo.encode())
 	}
 	if e.Flags&1 != 0 {
 		x.StringBytes(e.NewPasswordHash)
@@ -10227,13 +10296,7 @@ func (e TL_account_passwordInputSettings) encode() []byte {
 		x.String(e.Email)
 	}
 	if e.Flags&4 != 0 {
-		x.StringBytes(e.NewSecureSalt)
-	}
-	if e.Flags&4 != 0 {
-		x.StringBytes(e.NewSecureSecret)
-	}
-	if e.Flags&4 != 0 {
-		x.Long(e.NewSecureSecretID)
+		x.Bytes(e.NewSecureSettings.encode())
 	}
 	return x.buf
 }
@@ -13014,6 +13077,66 @@ func (e TL_account_takeout) encode() []byte {
 	return x.buf
 }
 
+func (e TL_passwordKdfAlgoUnknown) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_passwordKdfAlgoUnknown)
+	return x.buf
+}
+
+func (e TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow)
+	x.StringBytes(e.Salt1)
+	x.StringBytes(e.Salt2)
+	x.Int(e.G)
+	x.StringBytes(e.P)
+	return x.buf
+}
+
+func (e TL_securePasswordKdfAlgoUnknown) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_securePasswordKdfAlgoUnknown)
+	return x.buf
+}
+
+func (e TL_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000)
+	x.StringBytes(e.Salt)
+	return x.buf
+}
+
+func (e TL_securePasswordKdfAlgoSHA512) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_securePasswordKdfAlgoSHA512)
+	x.StringBytes(e.Salt)
+	return x.buf
+}
+
+func (e TL_secureSecretSettings) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_secureSecretSettings)
+	x.Bytes(e.SecureAlgo.encode())
+	x.StringBytes(e.SecureSecret)
+	x.Long(e.SecureSecretID)
+	return x.buf
+}
+
+func (e TL_inputCheckPasswordEmpty) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputCheckPasswordEmpty)
+	return x.buf
+}
+
+func (e TL_inputCheckPasswordSRP) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputCheckPasswordSRP)
+	x.Long(e.SrpID)
+	x.StringBytes(e.A)
+	x.StringBytes(e.M1)
+	return x.buf
+}
+
 func (e TL_invokeAfterMsg) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_invokeAfterMsg)
@@ -13163,7 +13286,7 @@ func (e TL_auth_importBotAuthorization) encode() []byte {
 func (e TL_auth_checkPassword) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_auth_checkPassword)
-	x.StringBytes(e.PasswordHash)
+	x.Bytes(e.Password.encode())
 	return x.buf
 }
 
@@ -13380,14 +13503,14 @@ func (e TL_account_getPassword) encode() []byte {
 func (e TL_account_getPasswordSettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_getPasswordSettings)
-	x.StringBytes(e.CurrentPasswordHash)
+	x.Bytes(e.Password.encode())
 	return x.buf
 }
 
 func (e TL_account_updatePasswordSettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_updatePasswordSettings)
-	x.StringBytes(e.CurrentPasswordHash)
+	x.Bytes(e.Password.encode())
 	x.Bytes(e.NewSettings.encode())
 	return x.buf
 }
@@ -13415,7 +13538,7 @@ func (e TL_account_confirmPhone) encode() []byte {
 func (e TL_account_getTmpPassword) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_getTmpPassword)
-	x.StringBytes(e.PasswordHash)
+	x.Bytes(e.Password.encode())
 	x.Int(e.Period)
 	return x.buf
 }
@@ -14662,6 +14785,12 @@ func (e TL_messages_getDialogUnreadMarks) encode() []byte {
 	return x.buf
 }
 
+func (e TL_messages_clearAllDrafts) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_clearAllDrafts)
+	return x.buf
+}
+
 func (e TL_updates_getState) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updates_getState)
@@ -14809,6 +14938,7 @@ func (e TL_help_getNearestDc) encode() []byte {
 func (e TL_help_getAppUpdate) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_help_getAppUpdate)
+	x.String(e.Source)
 	return x.buf
 }
 
@@ -16138,6 +16268,10 @@ func (e TL_messages_markDialogUnread) decodeResponse(dbuf *DecodeBuf) TL {
 
 func (e TL_messages_getDialogUnreadMarks) decodeResponse(dbuf *DecodeBuf) TL {
 	return VectorObject(dbuf.Vector())
+}
+
+func (e TL_messages_clearAllDrafts) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
 }
 
 func (e TL_updates_getState) decodeResponse(dbuf *DecodeBuf) TL {
@@ -17749,6 +17883,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_inputReportReasonCopyright:
+		r = TL_inputReportReasonCopyright{}
+
 	case CRC_userFull:
 		flags := m.Int()
 		r = TL_userFull{
@@ -18636,11 +18773,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_help_appUpdate:
+		flags := m.Int()
 		r = TL_help_appUpdate{
+			flags,
+			flags&1 != 0, //flag #0
 			m.Int(),
-			m.Object(),
 			m.String(),
 			m.String(),
+			m.Vector(),
+			m.FlaggedObject(flags, 1),
+			m.FlaggedString(flags, 2),
 		}
 
 	case CRC_help_noAppUpdate:
@@ -19098,47 +19240,40 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Vector(),
 		}
 
-	case CRC_account_noPassword:
-		r = TL_account_noPassword{
-			m.StringBytes(),
-			m.StringBytes(),
-			m.StringBytes(),
-			m.String(),
-		}
-
 	case CRC_account_password:
 		flags := m.Int()
 		r = TL_account_password{
 			flags,
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
+			m.FlaggedObject(flags, 2),
+			m.FlaggedStringBytes(flags, 2),
+			m.FlaggedLong(flags, 2),
+			m.FlaggedString(flags, 3),
+			m.FlaggedString(flags, 4),
+			m.Object(),
+			m.Object(),
 			m.StringBytes(),
-			m.StringBytes(),
-			m.StringBytes(),
-			m.StringBytes(),
-			m.String(),
-			m.String(),
 		}
 
 	case CRC_account_passwordSettings:
+		flags := m.Int()
 		r = TL_account_passwordSettings{
-			m.String(),
-			m.StringBytes(),
-			m.StringBytes(),
-			m.Long(),
+			flags,
+			m.FlaggedString(flags, 0),
+			m.FlaggedObject(flags, 1),
 		}
 
 	case CRC_account_passwordInputSettings:
 		flags := m.Int()
 		r = TL_account_passwordInputSettings{
 			flags,
-			m.FlaggedStringBytes(flags, 0),
+			m.FlaggedObject(flags, 0),
 			m.FlaggedStringBytes(flags, 0),
 			m.FlaggedString(flags, 0),
 			m.FlaggedString(flags, 1),
-			m.FlaggedStringBytes(flags, 2),
-			m.FlaggedStringBytes(flags, 2),
-			m.FlaggedLong(flags, 2),
+			m.FlaggedObject(flags, 2),
 		}
 
 	case CRC_auth_passwordRecovery:
@@ -21146,6 +21281,47 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Long(),
 		}
 
+	case CRC_passwordKdfAlgoUnknown:
+		r = TL_passwordKdfAlgoUnknown{}
+
+	case CRC_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow:
+		r = TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{
+			m.StringBytes(),
+			m.StringBytes(),
+			m.Int(),
+			m.StringBytes(),
+		}
+
+	case CRC_securePasswordKdfAlgoUnknown:
+		r = TL_securePasswordKdfAlgoUnknown{}
+
+	case CRC_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000:
+		r = TL_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000{
+			m.StringBytes(),
+		}
+
+	case CRC_securePasswordKdfAlgoSHA512:
+		r = TL_securePasswordKdfAlgoSHA512{
+			m.StringBytes(),
+		}
+
+	case CRC_secureSecretSettings:
+		r = TL_secureSecretSettings{
+			m.Object(),
+			m.StringBytes(),
+			m.Long(),
+		}
+
+	case CRC_inputCheckPasswordEmpty:
+		r = TL_inputCheckPasswordEmpty{}
+
+	case CRC_inputCheckPasswordSRP:
+		r = TL_inputCheckPasswordSRP{
+			m.Long(),
+			m.StringBytes(),
+			m.StringBytes(),
+		}
+
 	case CRC_invokeAfterMsg:
 		r = TL_invokeAfterMsg{
 			m.Long(),
@@ -21258,7 +21434,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_auth_checkPassword:
 		r = TL_auth_checkPassword{
-			m.StringBytes(),
+			m.Object(),
 		}
 
 	case CRC_auth_requestPasswordRecovery:
@@ -21407,12 +21583,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_account_getPasswordSettings:
 		r = TL_account_getPasswordSettings{
-			m.StringBytes(),
+			m.Object(),
 		}
 
 	case CRC_account_updatePasswordSettings:
 		r = TL_account_updatePasswordSettings{
-			m.StringBytes(),
+			m.Object(),
 			m.Object(),
 		}
 
@@ -21433,7 +21609,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_account_getTmpPassword:
 		r = TL_account_getTmpPassword{
-			m.StringBytes(),
+			m.Object(),
 			m.Int(),
 		}
 
@@ -22368,6 +22544,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_getDialogUnreadMarks:
 		r = TL_messages_getDialogUnreadMarks{}
 
+	case CRC_messages_clearAllDrafts:
+		r = TL_messages_clearAllDrafts{}
+
 	case CRC_updates_getState:
 		r = TL_updates_getState{}
 
@@ -22476,7 +22655,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_help_getNearestDc{}
 
 	case CRC_help_getAppUpdate:
-		r = TL_help_getAppUpdate{}
+		r = TL_help_getAppUpdate{
+			m.String(),
+		}
 
 	case CRC_help_saveAppLog:
 		r = TL_help_saveAppLog{

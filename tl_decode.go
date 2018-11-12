@@ -488,7 +488,7 @@ func (m *MTProto) decodeMessage(dbuf *DecodeBuf, reqMsg TLReq) (r TL) {
 
 	default:
 		dbuf.SeekBack(4) //returning constructor ID
-		if reqMsg == nil {
+		if reqMsg == nil || constructor == CRC_rpc_error {
 			r = dbuf.Object()
 		} else {
 			r = reqMsg.decodeResponse(dbuf)

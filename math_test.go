@@ -7,6 +7,14 @@ import (
 	"testing"
 )
 
+func hex2bytes(str string) []byte {
+	res, err := hex.DecodeString(str)
+	if err != nil {
+		panic(err)
+	}
+	return res
+}
+
 func TestSplitPQ(t *testing.T) {
 	cases := []struct {
 		pq, p, q *big.Int
@@ -38,5 +46,77 @@ func TestDoAES256IGEdecrypt(t *testing.T) {
 
 	if !bytes.Equal(result[20:584], answer) {
 		t.Error("Decrypt mismatch")
+	}
+}
+
+func TestCalcInputCheckPasswordSRP(t *testing.T) {
+	dummyDebugFunc := func(msg string, args ...interface{}) {}
+	tests := []struct {
+		algo        TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
+		accPassword TL_account_password
+		password    string
+		rand        []byte
+		dest        TL_inputCheckPasswordSRP
+	}{{
+		// tNum becomes positive
+		algo: TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{
+			Salt1: hex2bytes("b6cb41e42a56054eb2e8320e30b215c0"),
+			Salt2: hex2bytes("f7951e1b4ac1d1ff6722d4adf1941577"),
+			G:     3,
+			P:     hex2bytes("c71caeb9c6b1c9048e6c522f70f13f73980d40238e3e21c14934d037563d930f48198a0aa7c14058229493d22530f4dbfa336f6e0ac925139543aed44cce7c3720fd51f69458705ac68cd4fe6b6b13abdc9746512969328454f18faf8c595f642477fe96bb2a941d5bcd1d4ac8cc49880708fa9b378e3c4f3a9060bee67cf9a4a4a695811051907e162753b56b0f6b410dba74d8a84b2a14b3144e0ef1284754fd17ed950d5965b4b9dd46582db1178d169c6bc465b0d6ff9ca3928fef5b9ae4e418fc15e83ebea0f87fa9ff5eed70050ded2849f47bf959d956850ce929851f0d8115f635b105ee2e4e15d04b2454bf6f4fadf034b10403119cd8e3b92fcc5b"),
+		},
+		accPassword: TL_account_password{
+			SrpB:  hex2bytes("9ac2cd7f80945b9db27737553df8e4dacaa1cd1e18793dbc75d534311ec79a00234becae655b58ca5ef22a34d3898fb1819ca98c3d0daf93ec90ea1156a76522c8a53e94a103a9cc673325f1c3d620f9678c040f3c26c9c409158bea37b50053852c6c0831869d940b7e6909f200adfcd75d0b6fe9119262919909acf77f9abe0f68be3aaa5c6abcb3a7115f65501fb4ebcf3f49506e00f92c335a5b3b827740541b4666dd9ee6645419abfda67af46b34959e401082fc0a8e7264c0ceedfcbc0c8a723671294e052ca0edcddc9a6bc9f5e8b48867d04f3b122883228680946aa9cbcb0a3fea6e618e5099062e36ca9911846156e99f5b2c03b41de3de2c9539"),
+			SrpID: 3541879028763065224,
+		},
+		password: "pas",
+		rand:     hex2bytes("9153faef8f2bb6da91f6e5bc96bc00860a530a572a0f45aac0842b4602d711f8bda8d59fb53705e4ae3e31a3c4f0681955425f224297b8e9efd898fec22046debb7ba8a0bcf2be1ada7b100424ea318fdcef6ccfe6d7ab7d978c0eb76a807d4ab200eb767a22de0d828bc53f42c5a35c2df6e6ceeef9a3487aae8e9ef2271f2f6742e83b8211161fb1a0e037491ab2c2c73ad63c8bd1d739de1b523fe8d461270cedcf240de8da75f31be4933576532955041dc5770c18d3e75d0b357df9da4a5c8726d4fced87d15752400883dc57fa1937ac17608c5446c4774dcd123676d683ce3a1ab9f7e020ca52faafc99969822717c8e07ea383d5fb1a007ba0d170cb"),
+		dest: TL_inputCheckPasswordSRP{
+			SrpID: 3541879028763065224,
+			A:     hex2bytes("5327bf0e6b28d0757fa2ab239caf742c72689095c5dcef0f5429e51a3ca42999aa9b482e720fd9a24be9931aa541060df2f08006d9c4ec587a434d87ab2a5ef61d45e9793957e6d0deaf0c791ebaef55d9f9c1f4ecfc8d57266c459704805ea92437cd839dc8208ce9fab52bf9bd6140e82783b52cc9b632cc3c7a5f356b25281114fccbcff43bb799a6cdd6f668753c26a35f9455186875ad46b045e48905a0a0c9c8f564fa998060d8f3db49769213b049e04ad830750e505d1ecbdacd5bd32091f65919b8a085e3315efca2e1a5eb41a41defbb63ed39c46c99197f44c53b01124bddabf1f6982457f53dc9d3477a6eb745046c709520825c571a63b7dfa1"),
+			M1:    hex2bytes("8647f0c3814dcba9fce53ba40d87920880a413eddccc5995a289f6e08c21512c"),
+		},
+	}, {
+		// tNum becomes negative
+		algo: TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{
+			Salt1: hex2bytes("b6cb41e42a56054eb2e8320e30b215c0"),
+			Salt2: hex2bytes("f7951e1b4ac1d1ff6722d4adf1941577"),
+			G:     3,
+			P:     hex2bytes("c71caeb9c6b1c9048e6c522f70f13f73980d40238e3e21c14934d037563d930f48198a0aa7c14058229493d22530f4dbfa336f6e0ac925139543aed44cce7c3720fd51f69458705ac68cd4fe6b6b13abdc9746512969328454f18faf8c595f642477fe96bb2a941d5bcd1d4ac8cc49880708fa9b378e3c4f3a9060bee67cf9a4a4a695811051907e162753b56b0f6b410dba74d8a84b2a14b3144e0ef1284754fd17ed950d5965b4b9dd46582db1178d169c6bc465b0d6ff9ca3928fef5b9ae4e418fc15e83ebea0f87fa9ff5eed70050ded2849f47bf959d956850ce929851f0d8115f635b105ee2e4e15d04b2454bf6f4fadf034b10403119cd8e3b92fcc5b"),
+		},
+		accPassword: TL_account_password{
+			SrpB:  hex2bytes("4893bf77132c2937e718a91122fac0c17354ac3a2b70653d747552f1ca7132951617347fe3613c1ac271d97af34f62d3a8f89902e3ac9bcd300c249e754137fb1290d19fcef903f70e7f8576136a719eb3024fef6025bd37aed5e2e1455df919bbbee8e3beb252c744152c3180e484b907177a8bcd60ef659be146bf1944a9cfc9125f58d8f708a1e386801665056b9af8ac4ef03320b297f06a1e665d8438e990bf83a77449a3e3fa3eb63b3d9ea4f642597eb41bab25a969712d051cf9d83b8fb82a6fd10186596294af9dee718590c5dc8ad280c6100dd75fdb70628bb72ae84c56925dd9e8cb953532b36825721274e42f283b6ebac4ae684200eb97fec1"),
+			SrpID: 5669272249588182471,
+		},
+		password: "pas",
+		rand:     hex2bytes("a7ca3b25a0345e8ddd6d459ebcf36c30e23cee56188ba7b2f2879c6e84df6ea92de1a8bb6a1b474c96bc727cf41a573f9325839161f690e6a9f48ee4280f7dd1afcb760e9a49f05e08cbb2205bd7a64cd321f5ca12180ef941d7d5ef68a05db3669c62a6d3a304f7caec2c03ec91a2430daff5ca75ed47e647c42db61c3319b96c410de1d8b97211654270a19f2554129330a9542f76bc993d0c73d735e0d948b026c7bd5e0bb65a47cb6628ff2ab9bde8c840ded6294e8d4ded8e9dff04e8b1de311340aa23df3d3920180a4e8f261fdfb0b6c4e93f1b3b8af1aef5eddd6476878f9089489ebe7ae7e390e8db701776e79295762983f983f69ed875d6191748"),
+		dest: TL_inputCheckPasswordSRP{
+			SrpID: 5669272249588182471,
+			A:     hex2bytes("182066be5d9bded9d88bc1ee2bedd29a043ed17eafe82a59d667da444733bc026c8f4119e2aef80761f349b571105ddfc1b55adc07d889f2294b5182b87e6d46d757c8a65706be2a74d72b7199c70cf129a5c6da964b3783b6bd79c42553afb3799bef1769effff67b94f3f8d8722f7ee74bc81e5a8a0ead620c8810c623fe815f56795492f4a199335bb9d011e699f5ca0f0ecc0d8725628840b865e0d96dd1ba422345af43de11d9cb21e526efb6c73094daaefde0972405c12d829511e19a01500d3c3578b7ecf769ff8f0c7a68de8fe9442a1577939d9d4702314b6d5896bb7c6ee09efe874e7536693c206ef401eb88307147859ee2c8f7e72d0aa46186"),
+			M1:    hex2bytes("f45cbac0a8c0af9f61dda37a6b6f96f1b1a74102f6e4ae7d07ae549bd3195b14"),
+		},
+	}}
+
+	for _, test := range tests {
+		randFunc := func(buf []byte) (int, error) {
+			copy(buf, test.rand)
+			return len(buf), nil
+		}
+		srpTL, err := calcInputCheckPasswordSRP(test.algo, test.accPassword, test.password, randFunc, dummyDebugFunc)
+		if err != nil {
+			t.Errorf("error: %s", err)
+			continue
+		}
+		srp := srpTL.(TL_inputCheckPasswordSRP)
+		destSRP := test.dest
+		if srp.SrpID != destSRP.SrpID {
+			t.Errorf("wrong SrpID: expected:\n%#v\ngot:\n%#v", destSRP.SrpID, srp.SrpID)
+		}
+		if !bytes.Equal(srp.A, destSRP.A) {
+			t.Errorf("wrong A: expected:\n%#v\ngot:\n%#v", destSRP.A, srp.A)
+		}
+		if !bytes.Equal(srp.M1, destSRP.M1) {
+			t.Errorf("wrong M1: expected:\n%#v\ngot:\n%#v", destSRP.M1, srp.M1)
+		}
 	}
 }

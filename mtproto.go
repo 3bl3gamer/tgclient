@@ -1,7 +1,7 @@
 package mtproto
 
 import (
-	"crypto/sha256"
+	cryptoRand "crypto/rand"
 	"fmt"
 	"math/rand"
 	"net"
@@ -16,7 +16,7 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-//go:generate go run scheme/generate_tl_schema.go 82 scheme/tl-schema-82.tl tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 84 scheme/tl-schema-84.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 const ROUTINES_COUNT = 4
@@ -606,9 +606,16 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 			return merry.Wrap(err)
 		}
 
-		salt := string(accPasswd.CurrentSalt)
-		hash := sha256.Sum256([]byte(salt + passwd + salt))
-		x = m.SendSync(TL_auth_checkPassword{hash[:]})
+		algo, ok := accPasswd.CurrentAlgo.(TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow)
+		if !ok {
+			return merry.Errorf("unknown password algo %T, application update is maybe needed to log in",
+				accPasswd.CurrentAlgo)
+		}
+		passwdSRP, err := calcInputCheckPasswordSRP(algo, accPasswd, passwd, cryptoRand.Read, m.log.Debug)
+		if err != nil {
+			return merry.Wrap(err)
+		}
+		x = m.SendSync(TL_auth_checkPassword{passwdSRP})
 		if _, ok := x.(TL_rpc_error); ok {
 			return WrongRespError(x)
 		}

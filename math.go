@@ -4,11 +4,14 @@ import (
 	"crypto/aes"
 	"crypto/rsa"
 	sha1lib "crypto/sha1"
+	"crypto/sha256"
+	"crypto/sha512"
 	"math/big"
 	"math/rand"
 	"time"
 
 	"github.com/ansel1/merry"
+	"golang.org/x/crypto/pbkdf2"
 )
 
 const (
@@ -27,6 +30,27 @@ func init() {
 func sha1(data []byte) []byte {
 	r := sha1lib.Sum(data)
 	return r[:]
+}
+
+func sha256some(buffers ...[]byte) []byte {
+	s := sha256.New()
+	for _, buf := range buffers {
+		s.Write(buf)
+	}
+	return s.Sum(nil)
+}
+
+func xor(dst, src []byte) {
+	for i := range dst {
+		dst[i] = dst[i] ^ src[i]
+	}
+}
+
+func bigIntPaddedBytes(num *big.Int, size int) []byte {
+	buf := make([]byte, size)
+	numBuf := num.Bytes()
+	copy(buf[size-len(numBuf):], numBuf)
+	return buf
 }
 
 func doRSAencrypt(em []byte) []byte {
@@ -240,8 +264,98 @@ func doAES256IGEdecrypt(data, key, iv []byte) ([]byte, error) {
 
 }
 
-func xor(dst, src []byte) {
-	for i := range dst {
-		dst[i] = dst[i] ^ src[i]
+func calcInputCheckPasswordSRP(
+	algo TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow,
+	accPassword TL_account_password,
+	password string,
+	randFunc func([]byte) (int, error),
+	logDebug func(string, ...interface{}),
+) (TL, error) {
+	logDebug(" --- SRP calculation start --- ")
+	logDebug("algo.Salt1 (client): %#v", algo.Salt1)
+	logDebug("algo.Salt2 (server): %#v", algo.Salt2)
+	logDebug("algo.G:              %#v", algo.G)
+	logDebug("algo.P:              %#v", algo.P)
+	logDebug("accPassword.SrpB:    %#v", accPassword.SrpB)
+	logDebug("accPassword.SrpID:   %#v", accPassword.SrpID)
+	logDebug("password:            %#v", password)
+	defer logDebug(" --- SRP calculation end --- ")
+
+	if len(password) == 0 {
+		return nil, merry.New("password is empty")
 	}
+	// TODO: check g and p
+	// https://github.com/tdlib/td/blob/d9a18a064fa99130dc9214fb6131ba59e5660892/td/telegram/PasswordManager.cpp#L79
+	// DhHandshake::check_config(g, p, ...
+
+	clientSalt := algo.Salt1
+	serverSalt := algo.Salt2
+	gVal := algo.G
+	pBuf := algo.P
+	BBuf := accPassword.SrpB
+	srpID := accPassword.SrpID
+
+	if len(BBuf) != 256 {
+		return nil, merry.Errorf("wrong SrpB size, expected 256 bytes, got %d", len(BBuf))
+	}
+
+	gNum := new(big.Int).SetInt64(int64(gVal))
+	gBuf := bigIntPaddedBytes(gNum, 256)
+	pNum := new(big.Int).SetBytes([]byte(pBuf))
+	BNum := new(big.Int).SetBytes([]byte(BBuf))
+
+	if BNum.Cmp(pNum) != -1 {
+		return nil, merry.Errorf("expected SrpB < P, got: SrpB = %s, P = %s", BNum, pNum)
+	}
+
+	// calc_password_hash
+	buf := sha256some(clientSalt, []byte(password), clientSalt)
+	buf = sha256some(serverSalt, buf, serverSalt)
+	hash := pbkdf2.Key(buf, clientSalt, 100000, 64, sha512.New)
+	xBuf := sha256some(serverSalt, hash, serverSalt)
+	xNum := new(big.Int).SetBytes(xBuf)
+	// /calc_password_hash
+
+	aBuf := make([]byte, 2048/8)
+	_, err := randFunc(aBuf)
+	if err != nil {
+		return nil, merry.Wrap(err)
+	}
+	aNum := new(big.Int).SetBytes(aBuf)
+	logDebug("a: %s %#v", aNum, aBuf)
+
+	ANum := new(big.Int).Exp(gNum, aNum, pNum)
+	ABuf := bigIntPaddedBytes(ANum, 256)
+
+	uBuf := sha256some(ABuf, BBuf)
+	uNum := new(big.Int).SetBytes(uBuf)
+	kBuf := sha256some(pBuf, gBuf)
+	kNum := new(big.Int).SetBytes(kBuf)
+
+	vNum := new(big.Int).Exp(gNum, xNum, pNum)
+	kvNum := new(big.Int).Mul(kNum, vNum)
+	kvNum.Mod(kvNum, pNum)
+	tNum := new(big.Int).Sub(BNum, kvNum)
+	if tNum.Sign() == -1 {
+		logDebug("LZ!!! %s", tNum)
+		tNum.Add(tNum, pNum)
+	}
+	expNum := new(big.Int).Mul(uNum, xNum)
+	expNum.Add(expNum, aNum)
+
+	SNum := new(big.Int).Exp(tNum, expNum, pNum)
+	SBuf := bigIntPaddedBytes(SNum, 256)
+	KBuf := sha256some(SBuf)
+
+	h1 := sha256some(pBuf)
+	h2 := sha256some(gBuf)
+	xor(h1, h2)
+	clientSaltHash := sha256some(clientSalt)
+	serverSaltHash := sha256some(serverSalt)
+	MBuf := sha256some(h1, clientSaltHash, serverSaltHash, ABuf, BBuf, KBuf)
+	logDebug("srpID: %#v", srpID)
+	logDebug("ABuf:  %#v", ABuf)
+	logDebug("MBuf:  %#v", MBuf)
+
+	return TL_inputCheckPasswordSRP{SrpID: srpID, A: ABuf, M1: MBuf}, nil
 }
