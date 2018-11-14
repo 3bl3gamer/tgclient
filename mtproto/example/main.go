@@ -5,7 +5,6 @@ import (
 	"log"
 	"mtproto"
 	"os"
-	"time"
 
 	"github.com/ansel1/merry"
 )
@@ -27,7 +26,16 @@ func main() {
 }
 
 func start(appID int32, appHash string) error {
+	// simple:
 	m := mtproto.NewMTProto(appID, appHash)
+
+	// with proxy (golang.org/x/net/proxy):
+	// dialer, err := proxy.SOCKS5("tcp", "127.0.0.1:9050", nil, proxy.Direct)
+	// if err != nil {
+	// 	return merry.Wrap(err)
+	// }
+	// m := mtproto.NewMTProtoExt(mtproto.MTParams{AppID: appID, AppHash: appHash, ConnDialer: dialer})
+
 	if err := m.InitSessAndConnect(); err != nil {
 		return merry.Wrap(err)
 	}
@@ -48,17 +56,6 @@ func start(appID int32, appHash string) error {
 	}
 	log.Println("Seems authed.")
 
-	if err := m.GetContacts(); err != nil {
-		return merry.Wrap(err)
-	}
-
-	log.Println("Reconnecting...")
-	if err := m.Reconnect(); err != nil {
-		return merry.Wrap(err)
-	}
-	log.Println("Reconnected.")
-
-	time.Sleep(time.Microsecond)
 	if err := m.GetContacts(); err != nil {
 		return merry.Wrap(err)
 	}
