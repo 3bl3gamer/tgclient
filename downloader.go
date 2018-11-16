@@ -2,12 +2,12 @@ package tgclient
 
 import (
 	"io"
-	"mtproto"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
 	"sync"
+	"tgclient/mtproto"
 
 	"github.com/ansel1/merry"
 )

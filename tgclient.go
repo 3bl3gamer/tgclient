@@ -1,11 +1,11 @@
 package tgclient
 
 import (
-	"mtproto"
 	"os"
 	"path/filepath"
 	"reflect"
 	"runtime"
+	"tgclient/mtproto"
 
 	"github.com/ansel1/merry"
 	"golang.org/x/net/proxy"

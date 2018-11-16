@@ -1,8 +1,8 @@
 package tgclient
 
 import (
-	"mtproto"
 	"sync"
+	"tgclient/mtproto"
 )
 
 type extraData struct {
