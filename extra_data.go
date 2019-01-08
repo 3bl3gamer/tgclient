@@ -2,7 +2,7 @@ package tgclient
 
 import (
 	"sync"
-	"tgclient/mtproto"
+	"github.com/3bl3gamer/tgclient/mtproto"
 )
 
 type extraData struct {

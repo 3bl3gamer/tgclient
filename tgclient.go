@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"reflect"
 	"runtime"
-	"tgclient/mtproto"
 
+	"github.com/3bl3gamer/tgclient/mtproto"
 	"github.com/ansel1/merry"
 	"golang.org/x/net/proxy"
 )

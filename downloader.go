@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"tgclient/mtproto"
 
+	"github.com/3bl3gamer/tgclient/mtproto"
 	"github.com/ansel1/merry"
 )
 
