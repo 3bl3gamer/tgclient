@@ -1,11 +1,13 @@
-# mtproto-go
+# TG Client
+It is a pure-Golang MTProto client for Telegram API.
+
 Initially based on https://github.com/sdidyk/mtproto and https://github.com/ronaksoft/mtproto.
 
-TL layer: 75
+TL layer: 84
 
-Can connect by phone number and password and recieve updates.
-
-Schema parser uses tl-files.
+Consists of two parts:
+  * mtproto — core part for API interation;
+  * tgclient — wrapper over mtproto with some useful logic like file download.
 
 ## API
 ### NewMTProtoExt
