@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"log"
-	"mtproto"
 	"os"
 
+	"github.com/3bl3gamer/tgclient/mtproto"
 	"github.com/ansel1/merry"
 )
 
