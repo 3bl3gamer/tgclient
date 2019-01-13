@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	TL_Layer                                                              = 84
+	TL_Layer                                                              = 86
 	CRC_resPQ                                                             = 0x05162463
 	CRC_p_q_inner_data                                                    = 0x83c95aec
 	CRC_p_q_inner_data_dc                                                 = 0xa9f55f95
@@ -92,10 +92,10 @@ const (
 	CRC_inputGeoPointEmpty                                                = 0xe4c123d6
 	CRC_inputGeoPoint                                                     = 0xf3b7acc9
 	CRC_inputPhotoEmpty                                                   = 0x1cd7bf0d
-	CRC_inputPhoto                                                        = 0xfb95c6c4
-	CRC_inputFileLocation                                                 = 0x14637196
+	CRC_inputPhoto                                                        = 0x3bb3b94a
+	CRC_inputFileLocation                                                 = 0xdfdaabe1
 	CRC_inputEncryptedFileLocation                                        = 0xf5235d55
-	CRC_inputDocumentFileLocation                                         = 0x430f0724
+	CRC_inputDocumentFileLocation                                         = 0x196683d9
 	CRC_inputSecureFileLocation                                           = 0xcbc7ee28
 	CRC_inputTakeoutFileLocation                                          = 0x29be5899
 	CRC_inputAppEvent                                                     = 0x770656a8
@@ -113,7 +113,7 @@ const (
 	CRC_storage_fileMp4                                                   = 0xb3cea0e4
 	CRC_storage_fileWebp                                                  = 0x1081464c
 	CRC_fileLocationUnavailable                                           = 0x7c596b46
-	CRC_fileLocation                                                      = 0x53d69076
+	CRC_fileLocation                                                      = 0x091d11eb
 	CRC_userEmpty                                                         = 0x200250ba
 	CRC_user                                                              = 0x2e13f4c3
 	CRC_userProfilePhotoEmpty                                             = 0x4f11bae1
@@ -176,7 +176,7 @@ const (
 	CRC_messageActionSecureValuesSent                                     = 0xd95c6154
 	CRC_dialog                                                            = 0xe4def5db
 	CRC_photoEmpty                                                        = 0x2331b22d
-	CRC_photo                                                             = 0x9288dd29
+	CRC_photo                                                             = 0x9c477dd8
 	CRC_photoSizeEmpty                                                    = 0x0e17e23c
 	CRC_photoSize                                                         = 0x77bfb61b
 	CRC_photoCachedSize                                                   = 0xe9a734fa
@@ -346,9 +346,9 @@ const (
 	CRC_messages_sentEncryptedMessage                                     = 0x560f8935
 	CRC_messages_sentEncryptedFile                                        = 0x9493ff32
 	CRC_inputDocumentEmpty                                                = 0x72f0eaae
-	CRC_inputDocument                                                     = 0x18798952
+	CRC_inputDocument                                                     = 0x1abfb575
 	CRC_documentEmpty                                                     = 0x36f8c871
-	CRC_document                                                          = 0x87232bc7
+	CRC_document                                                          = 0x59534e4c
 	CRC_help_support                                                      = 0x17c6b5f6
 	CRC_notifyPeer                                                        = 0x9fd40bd8
 	CRC_notifyUsers                                                       = 0xb4c83b4c
@@ -695,8 +695,8 @@ const (
 	CRC_secureValueTypeTemporaryRegistration                              = 0xea02ec33
 	CRC_secureValueTypePhone                                              = 0xb320aadb
 	CRC_secureValueTypeEmail                                              = 0x8e3ca7ee
-	CRC_secureValue                                                       = 0xb4b4b699
-	CRC_inputSecureValue                                                  = 0x067872e8
+	CRC_secureValue                                                       = 0x187fa0ca
+	CRC_inputSecureValue                                                  = 0xdb21d0a7
 	CRC_secureValueHash                                                   = 0xed1ecdb0
 	CRC_secureValueErrorData                                              = 0xe8a40bd9
 	CRC_secureValueErrorFrontSide                                         = 0x00be3dfa
@@ -704,8 +704,11 @@ const (
 	CRC_secureValueErrorSelfie                                            = 0xe537ced6
 	CRC_secureValueErrorFile                                              = 0x7a700873
 	CRC_secureValueErrorFiles                                             = 0x666220e9
+	CRC_secureValueError                                                  = 0x869d758f
+	CRC_secureValueErrorTranslationFile                                   = 0xa1144770
+	CRC_secureValueErrorTranslationFiles                                  = 0x34636dd8
 	CRC_secureCredentialsEncrypted                                        = 0x33f0ea47
-	CRC_account_authorizationForm                                         = 0xcb976d53
+	CRC_account_authorizationForm                                         = 0xad2e1cd8
 	CRC_account_sentEmailCode                                             = 0x811f854f
 	CRC_help_deepLinkInfoEmpty                                            = 0x66afa166
 	CRC_help_deepLinkInfo                                                 = 0x6a4ee832
@@ -719,6 +722,10 @@ const (
 	CRC_secureSecretSettings                                              = 0x1527bcac
 	CRC_inputCheckPasswordEmpty                                           = 0x9880f658
 	CRC_inputCheckPasswordSRP                                             = 0xd27ff082
+	CRC_secureRequiredType                                                = 0x829d99da
+	CRC_secureRequiredTypeOneOf                                           = 0x027477b4
+	CRC_help_passportConfigNotModified                                    = 0xbfb9f457
+	CRC_help_passportConfig                                               = 0xa098d6af
 	CRC_invokeAfterMsg                                                    = 0xcb9f372d
 	CRC_invokeAfterMsgs                                                   = 0x3dc4b4f0
 	CRC_initConnection                                                    = 0x785188b8
@@ -932,6 +939,7 @@ const (
 	CRC_help_getTermsOfServiceUpdate                                      = 0x2ca51fd1
 	CRC_help_acceptTermsOfService                                         = 0xee72f79a
 	CRC_help_getDeepLinkInfo                                              = 0x3fedc75f
+	CRC_help_getPassportConfig                                            = 0xc661ad08
 	CRC_channels_readHistory                                              = 0xcc104937
 	CRC_channels_deleteMessages                                           = 0x84c1fd4e
 	CRC_channels_deleteUserHistory                                        = 0xd10dd71b
@@ -985,10 +993,10 @@ const (
 	CRC_phone_discardCall                                                 = 0x78d413a6
 	CRC_phone_setCallRating                                               = 0x1c536a34
 	CRC_phone_saveCallDebug                                               = 0x277add7e
-	CRC_langpack_getLangPack                                              = 0x9ab5c58e
-	CRC_langpack_getStrings                                               = 0x2e1ee318
+	CRC_langpack_getLangPack                                              = 0xf2f2330a
+	CRC_langpack_getStrings                                               = 0xefea3803
 	CRC_langpack_getDifference                                            = 0x0b2e4d7d
-	CRC_langpack_getLanguages                                             = 0x800fd57d
+	CRC_langpack_getLanguages                                             = 0x42c6978f
 )
 
 type TL_resPQ struct {
@@ -1455,14 +1463,16 @@ type TL_inputPhotoEmpty struct {
 }
 
 type TL_inputPhoto struct {
-	ID         int64
-	AccessHash int64
+	ID            int64
+	AccessHash    int64
+	FileReference []byte
 }
 
 type TL_inputFileLocation struct {
-	VolumeID int64
-	LocalID  int32
-	Secret   int64
+	VolumeID      int64
+	LocalID       int32
+	Secret        int64
+	FileReference []byte
 }
 
 type TL_inputEncryptedFileLocation struct {
@@ -1471,9 +1481,9 @@ type TL_inputEncryptedFileLocation struct {
 }
 
 type TL_inputDocumentFileLocation struct {
-	ID         int64
-	AccessHash int64
-	Version    int32
+	ID            int64
+	AccessHash    int64
+	FileReference []byte
 }
 
 type TL_inputSecureFileLocation struct {
@@ -1540,10 +1550,11 @@ type TL_fileLocationUnavailable struct {
 }
 
 type TL_fileLocation struct {
-	DcID     int32
-	VolumeID int64
-	LocalID  int32
-	Secret   int64
+	DcID          int32
+	VolumeID      int64
+	LocalID       int32
+	Secret        int64
+	FileReference []byte
 }
 
 type TL_userEmpty struct {
@@ -1963,12 +1974,13 @@ type TL_photoEmpty struct {
 }
 
 type TL_photo struct {
-	Flags       int32
-	HasStickers bool //flag
-	ID          int64
-	AccessHash  int64
-	Date        int32
-	Sizes       []TL // PhotoSize
+	Flags         int32
+	HasStickers   bool //flag
+	ID            int64
+	AccessHash    int64
+	FileReference []byte
+	Date          int32
+	Sizes         []TL // PhotoSize
 }
 
 type TL_photoSizeEmpty struct {
@@ -2983,8 +2995,9 @@ type TL_inputDocumentEmpty struct {
 }
 
 type TL_inputDocument struct {
-	ID         int64
-	AccessHash int64
+	ID            int64
+	AccessHash    int64
+	FileReference []byte
 }
 
 type TL_documentEmpty struct {
@@ -2992,15 +3005,15 @@ type TL_documentEmpty struct {
 }
 
 type TL_document struct {
-	ID         int64
-	AccessHash int64
-	Date       int32
-	MimeType   string
-	Size       int32
-	Thumb      TL // PhotoSize
-	DcID       int32
-	Version    int32
-	Attributes []TL // DocumentAttribute
+	ID            int64
+	AccessHash    int64
+	FileReference []byte
+	Date          int32
+	MimeType      string
+	Size          int32
+	Thumb         TL // PhotoSize
+	DcID          int32
+	Attributes    []TL // DocumentAttribute
 }
 
 type TL_help_support struct {
@@ -4898,6 +4911,7 @@ type TL_secureValue struct {
 	FrontSide   TL   // SecureFile //flag
 	ReverseSide TL   // SecureFile //flag
 	Selfie      TL   // SecureFile //flag
+	Translation []TL // SecureFile //flag
 	Files       []TL // SecureFile //flag
 	PlainData   TL   // SecurePlainData //flag
 	Hash        []byte
@@ -4910,6 +4924,7 @@ type TL_inputSecureValue struct {
 	FrontSide   TL   // InputSecureFile //flag
 	ReverseSide TL   // InputSecureFile //flag
 	Selfie      TL   // InputSecureFile //flag
+	Translation []TL // InputSecureFile //flag
 	Files       []TL // InputSecureFile //flag
 	PlainData   TL   // SecurePlainData //flag
 }
@@ -4956,6 +4971,24 @@ type TL_secureValueErrorFiles struct {
 	Text     string
 }
 
+type TL_secureValueError struct {
+	Type TL // SecureValueType
+	Hash []byte
+	Text string
+}
+
+type TL_secureValueErrorTranslationFile struct {
+	Type     TL // SecureValueType
+	FileHash []byte
+	Text     string
+}
+
+type TL_secureValueErrorTranslationFiles struct {
+	Type     TL   // SecureValueType
+	FileHash []TL // bytes
+	Text     string
+}
+
 type TL_secureCredentialsEncrypted struct {
 	Data   []byte
 	Hash   []byte
@@ -4964,8 +4997,7 @@ type TL_secureCredentialsEncrypted struct {
 
 type TL_account_authorizationForm struct {
 	Flags            int32
-	SelfieRequired   bool   //flag
-	RequiredTypes    []TL   // SecureValueType
+	RequiredTypes    []TL   // SecureRequiredType
 	Values           []TL   // SecureValue
 	Errors           []TL   // SecureValueError
 	Users            []TL   // User
@@ -5032,6 +5064,26 @@ type TL_inputCheckPasswordSRP struct {
 	SrpID int64
 	A     []byte
 	M1    []byte
+}
+
+type TL_secureRequiredType struct {
+	Flags               int32
+	NativeNames         bool //flag
+	SelfieRequired      bool //flag
+	TranslationRequired bool //flag
+	Type                TL   // SecureValueType
+}
+
+type TL_secureRequiredTypeOneOf struct {
+	Types []TL // SecureRequiredType
+}
+
+type TL_help_passportConfigNotModified struct {
+}
+
+type TL_help_passportConfig struct {
+	Hash           int32
+	CountriesLangs TL // DataJSON
 }
 
 type TL_invokeAfterMsg struct {
@@ -6191,6 +6243,10 @@ type TL_help_getDeepLinkInfo struct {
 	Path string
 }
 
+type TL_help_getPassportConfig struct {
+	Hash int32
+}
+
 type TL_channels_readHistory struct {
 	Channel TL // InputChannel
 	MaxID   int32
@@ -6476,10 +6532,12 @@ type TL_phone_saveCallDebug struct {
 }
 
 type TL_langpack_getLangPack struct {
+	LangPack string
 	LangCode string
 }
 
 type TL_langpack_getStrings struct {
+	LangPack string
 	LangCode string
 	Keys     []string
 }
@@ -6489,6 +6547,7 @@ type TL_langpack_getDifference struct {
 }
 
 type TL_langpack_getLanguages struct {
+	LangPack string
 }
 
 func (e TL_resPQ) encode() []byte {
@@ -7237,6 +7296,7 @@ func (e TL_inputPhoto) encode() []byte {
 	x.UInt(CRC_inputPhoto)
 	x.Long(e.ID)
 	x.Long(e.AccessHash)
+	x.StringBytes(e.FileReference)
 	return x.buf
 }
 
@@ -7246,6 +7306,7 @@ func (e TL_inputFileLocation) encode() []byte {
 	x.Long(e.VolumeID)
 	x.Int(e.LocalID)
 	x.Long(e.Secret)
+	x.StringBytes(e.FileReference)
 	return x.buf
 }
 
@@ -7262,7 +7323,7 @@ func (e TL_inputDocumentFileLocation) encode() []byte {
 	x.UInt(CRC_inputDocumentFileLocation)
 	x.Long(e.ID)
 	x.Long(e.AccessHash)
-	x.Int(e.Version)
+	x.StringBytes(e.FileReference)
 	return x.buf
 }
 
@@ -7387,6 +7448,7 @@ func (e TL_fileLocation) encode() []byte {
 	x.Long(e.VolumeID)
 	x.Int(e.LocalID)
 	x.Long(e.Secret)
+	x.StringBytes(e.FileReference)
 	return x.buf
 }
 
@@ -8107,6 +8169,7 @@ func (e TL_photo) encode() []byte {
 	//flag HasStickers
 	x.Long(e.ID)
 	x.Long(e.AccessHash)
+	x.StringBytes(e.FileReference)
 	x.Int(e.Date)
 	x.Vector(e.Sizes)
 	return x.buf
@@ -9731,6 +9794,7 @@ func (e TL_inputDocument) encode() []byte {
 	x.UInt(CRC_inputDocument)
 	x.Long(e.ID)
 	x.Long(e.AccessHash)
+	x.StringBytes(e.FileReference)
 	return x.buf
 }
 
@@ -9746,12 +9810,12 @@ func (e TL_document) encode() []byte {
 	x.UInt(CRC_document)
 	x.Long(e.ID)
 	x.Long(e.AccessHash)
+	x.StringBytes(e.FileReference)
 	x.Int(e.Date)
 	x.String(e.MimeType)
 	x.Int(e.Size)
 	x.Bytes(e.Thumb.encode())
 	x.Int(e.DcID)
-	x.Int(e.Version)
 	x.Vector(e.Attributes)
 	return x.buf
 }
@@ -12911,6 +12975,9 @@ func (e TL_secureValue) encode() []byte {
 	if e.Flags&8 != 0 {
 		x.Bytes(e.Selfie.encode())
 	}
+	if e.Flags&64 != 0 {
+		x.Vector(e.Translation)
+	}
 	if e.Flags&16 != 0 {
 		x.Vector(e.Files)
 	}
@@ -12937,6 +13004,9 @@ func (e TL_inputSecureValue) encode() []byte {
 	}
 	if e.Flags&8 != 0 {
 		x.Bytes(e.Selfie.encode())
+	}
+	if e.Flags&64 != 0 {
+		x.Vector(e.Translation)
 	}
 	if e.Flags&16 != 0 {
 		x.Vector(e.Files)
@@ -13010,6 +13080,33 @@ func (e TL_secureValueErrorFiles) encode() []byte {
 	return x.buf
 }
 
+func (e TL_secureValueError) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_secureValueError)
+	x.Bytes(e.Type.encode())
+	x.StringBytes(e.Hash)
+	x.String(e.Text)
+	return x.buf
+}
+
+func (e TL_secureValueErrorTranslationFile) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_secureValueErrorTranslationFile)
+	x.Bytes(e.Type.encode())
+	x.StringBytes(e.FileHash)
+	x.String(e.Text)
+	return x.buf
+}
+
+func (e TL_secureValueErrorTranslationFiles) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_secureValueErrorTranslationFiles)
+	x.Bytes(e.Type.encode())
+	x.Vector(e.FileHash)
+	x.String(e.Text)
+	return x.buf
+}
+
 func (e TL_secureCredentialsEncrypted) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_secureCredentialsEncrypted)
@@ -13023,7 +13120,6 @@ func (e TL_account_authorizationForm) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_authorizationForm)
 	x.Int(e.Flags)
-	//flag SelfieRequired
 	x.Vector(e.RequiredTypes)
 	x.Vector(e.Values)
 	x.Vector(e.Errors)
@@ -13134,6 +13230,38 @@ func (e TL_inputCheckPasswordSRP) encode() []byte {
 	x.Long(e.SrpID)
 	x.StringBytes(e.A)
 	x.StringBytes(e.M1)
+	return x.buf
+}
+
+func (e TL_secureRequiredType) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_secureRequiredType)
+	x.Int(e.Flags)
+	//flag NativeNames
+	//flag SelfieRequired
+	//flag TranslationRequired
+	x.Bytes(e.Type.encode())
+	return x.buf
+}
+
+func (e TL_secureRequiredTypeOneOf) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_secureRequiredTypeOneOf)
+	x.Vector(e.Types)
+	return x.buf
+}
+
+func (e TL_help_passportConfigNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_help_passportConfigNotModified)
+	return x.buf
+}
+
+func (e TL_help_passportConfig) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_help_passportConfig)
+	x.Int(e.Hash)
+	x.Bytes(e.CountriesLangs.encode())
 	return x.buf
 }
 
@@ -15015,6 +15143,13 @@ func (e TL_help_getDeepLinkInfo) encode() []byte {
 	return x.buf
 }
 
+func (e TL_help_getPassportConfig) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_help_getPassportConfig)
+	x.Int(e.Hash)
+	return x.buf
+}
+
 func (e TL_channels_readHistory) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_readHistory)
@@ -15469,6 +15604,7 @@ func (e TL_phone_saveCallDebug) encode() []byte {
 func (e TL_langpack_getLangPack) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_langpack_getLangPack)
+	x.String(e.LangPack)
 	x.String(e.LangCode)
 	return x.buf
 }
@@ -15476,6 +15612,7 @@ func (e TL_langpack_getLangPack) encode() []byte {
 func (e TL_langpack_getStrings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_langpack_getStrings)
+	x.String(e.LangPack)
 	x.String(e.LangCode)
 	x.VectorString(e.Keys)
 	return x.buf
@@ -15491,6 +15628,7 @@ func (e TL_langpack_getDifference) encode() []byte {
 func (e TL_langpack_getLanguages) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_langpack_getLanguages)
+	x.String(e.LangPack)
 	return x.buf
 }
 
@@ -16390,6 +16528,10 @@ func (e TL_help_getDeepLinkInfo) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_help_getPassportConfig) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_channels_readHistory) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -17162,6 +17304,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputPhoto{
 			m.Long(),
 			m.Long(),
+			m.StringBytes(),
 		}
 
 	case CRC_inputFileLocation:
@@ -17169,6 +17312,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Long(),
 			m.Int(),
 			m.Long(),
+			m.StringBytes(),
 		}
 
 	case CRC_inputEncryptedFileLocation:
@@ -17181,7 +17325,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputDocumentFileLocation{
 			m.Long(),
 			m.Long(),
-			m.Int(),
+			m.StringBytes(),
 		}
 
 	case CRC_inputSecureFileLocation:
@@ -17259,6 +17403,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Long(),
 			m.Int(),
 			m.Long(),
+			m.StringBytes(),
 		}
 
 	case CRC_userEmpty:
@@ -17747,6 +17892,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&1 != 0, //flag #0
 			m.Long(),
 			m.Long(),
+			m.StringBytes(),
 			m.Int(),
 			m.Vector(),
 		}
@@ -18923,6 +19069,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputDocument{
 			m.Long(),
 			m.Long(),
+			m.StringBytes(),
 		}
 
 	case CRC_documentEmpty:
@@ -18934,11 +19081,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_document{
 			m.Long(),
 			m.Long(),
+			m.StringBytes(),
 			m.Int(),
 			m.String(),
 			m.Int(),
 			m.Object(),
-			m.Int(),
 			m.Int(),
 			m.Vector(),
 		}
@@ -21164,6 +21311,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 1),
 			m.FlaggedObject(flags, 2),
 			m.FlaggedObject(flags, 3),
+			m.FlaggedVector(flags, 6),
 			m.FlaggedVector(flags, 4),
 			m.FlaggedObject(flags, 5),
 			m.StringBytes(),
@@ -21178,6 +21326,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 1),
 			m.FlaggedObject(flags, 2),
 			m.FlaggedObject(flags, 3),
+			m.FlaggedVector(flags, 6),
 			m.FlaggedVector(flags, 4),
 			m.FlaggedObject(flags, 5),
 		}
@@ -21231,6 +21380,27 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_secureValueError:
+		r = TL_secureValueError{
+			m.Object(),
+			m.StringBytes(),
+			m.String(),
+		}
+
+	case CRC_secureValueErrorTranslationFile:
+		r = TL_secureValueErrorTranslationFile{
+			m.Object(),
+			m.StringBytes(),
+			m.String(),
+		}
+
+	case CRC_secureValueErrorTranslationFiles:
+		r = TL_secureValueErrorTranslationFiles{
+			m.Object(),
+			m.Vector(),
+			m.String(),
+		}
+
 	case CRC_secureCredentialsEncrypted:
 		r = TL_secureCredentialsEncrypted{
 			m.StringBytes(),
@@ -21242,7 +21412,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_account_authorizationForm{
 			flags,
-			flags&2 != 0, //flag #1
 			m.Vector(),
 			m.Vector(),
 			m.Vector(),
@@ -21320,6 +21489,30 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Long(),
 			m.StringBytes(),
 			m.StringBytes(),
+		}
+
+	case CRC_secureRequiredType:
+		flags := m.Int()
+		r = TL_secureRequiredType{
+			flags,
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
+			m.Object(),
+		}
+
+	case CRC_secureRequiredTypeOneOf:
+		r = TL_secureRequiredTypeOneOf{
+			m.Vector(),
+		}
+
+	case CRC_help_passportConfigNotModified:
+		r = TL_help_passportConfigNotModified{}
+
+	case CRC_help_passportConfig:
+		r = TL_help_passportConfig{
+			m.Int(),
+			m.Object(),
 		}
 
 	case CRC_invokeAfterMsg:
@@ -22705,6 +22898,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_help_getPassportConfig:
+		r = TL_help_getPassportConfig{
+			m.Int(),
+		}
+
 	case CRC_channels_readHistory:
 		r = TL_channels_readHistory{
 			m.Object(),
@@ -23049,10 +23247,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_langpack_getLangPack:
 		r = TL_langpack_getLangPack{
 			m.String(),
+			m.String(),
 		}
 
 	case CRC_langpack_getStrings:
 		r = TL_langpack_getStrings{
+			m.String(),
 			m.String(),
 			m.VectorString(),
 		}
@@ -23063,7 +23263,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_langpack_getLanguages:
-		r = TL_langpack_getLanguages{}
+		r = TL_langpack_getLanguages{
+			m.String(),
+		}
 
 	default:
 		m.err = merry.Errorf("Unknown constructor: \u002508x", constructor)

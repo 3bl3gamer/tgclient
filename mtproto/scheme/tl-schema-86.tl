@@ -186,11 +186,11 @@ inputGeoPointEmpty#e4c123d6 = InputGeoPoint;
 inputGeoPoint#f3b7acc9 lat:double long:double = InputGeoPoint;
 
 inputPhotoEmpty#1cd7bf0d = InputPhoto;
-inputPhoto#fb95c6c4 id:long access_hash:long = InputPhoto;
+inputPhoto#3bb3b94a id:long access_hash:long file_reference:bytes = InputPhoto;
 
-inputFileLocation#14637196 volume_id:long local_id:int secret:long = InputFileLocation;
+inputFileLocation#dfdaabe1 volume_id:long local_id:int secret:long file_reference:bytes = InputFileLocation;
 inputEncryptedFileLocation#f5235d55 id:long access_hash:long = InputFileLocation;
-inputDocumentFileLocation#430f0724 id:long access_hash:long version:int = InputFileLocation;
+inputDocumentFileLocation#a9b915b0 id:long access_hash:long version:int file_reference:bytes = InputFileLocation;
 inputSecureFileLocation#cbc7ee28 id:long access_hash:long = InputFileLocation;
 inputTakeoutFileLocation#29be5899 = InputFileLocation;
 
@@ -212,7 +212,7 @@ storage.fileMp4#b3cea0e4 = storage.FileType;
 storage.fileWebp#1081464c = storage.FileType;
 
 fileLocationUnavailable#7c596b46 volume_id:long local_id:int secret:long = FileLocation;
-fileLocation#53d69076 dc_id:int volume_id:long local_id:int secret:long = FileLocation;
+fileLocation#91d11eb dc_id:int volume_id:long local_id:int secret:long file_reference:bytes = FileLocation;
 
 userEmpty#200250ba id:int = User;
 user#2e13f4c3 flags:# self:flags.10?true contact:flags.11?true mutual_contact:flags.12?true deleted:flags.13?true bot:flags.14?true bot_chat_history:flags.15?true bot_nochats:flags.16?true verified:flags.17?true restricted:flags.18?true min:flags.20?true bot_inline_geo:flags.21?true id:int access_hash:flags.0?long first_name:flags.1?string last_name:flags.2?string username:flags.3?string phone:flags.4?string photo:flags.5?UserProfilePhoto status:flags.6?UserStatus bot_info_version:flags.14?int restriction_reason:flags.18?string bot_inline_placeholder:flags.19?string lang_code:flags.22?string = User;
@@ -288,7 +288,7 @@ messageActionSecureValuesSent#d95c6154 types:Vector<SecureValueType> = MessageAc
 dialog#e4def5db flags:# pinned:flags.2?true unread_mark:flags.3?true peer:Peer top_message:int read_inbox_max_id:int read_outbox_max_id:int unread_count:int unread_mentions_count:int notify_settings:PeerNotifySettings pts:flags.0?int draft:flags.1?DraftMessage = Dialog;
 
 photoEmpty#2331b22d id:long = Photo;
-photo#9288dd29 flags:# has_stickers:flags.0?true id:long access_hash:long date:int sizes:Vector<PhotoSize> = Photo;
+photo#9c477dd8 flags:# has_stickers:flags.0?true id:long access_hash:long file_reference:bytes date:int sizes:Vector<PhotoSize> = Photo;
 
 photoSizeEmpty#e17e23c type:string = PhotoSize;
 photoSize#77bfb61b type:string location:FileLocation w:int h:int size:int = PhotoSize;
@@ -505,10 +505,10 @@ messages.sentEncryptedMessage#560f8935 date:int = messages.SentEncryptedMessage;
 messages.sentEncryptedFile#9493ff32 date:int file:EncryptedFile = messages.SentEncryptedMessage;
 
 inputDocumentEmpty#72f0eaae = InputDocument;
-inputDocument#18798952 id:long access_hash:long = InputDocument;
+inputDocument#1abfb575 id:long access_hash:long file_reference:bytes = InputDocument;
 
 documentEmpty#36f8c871 id:long = Document;
-document#87232bc7 id:long access_hash:long date:int mime_type:string size:int thumb:PhotoSize dc_id:int version:int attributes:Vector<DocumentAttribute> = Document;
+document#ca84c039 id:long access_hash:long file_reference:bytes date:int mime_type:string size:int thumb:PhotoSize dc_id:int version:int attributes:Vector<DocumentAttribute> = Document;
 
 help.support#17c6b5f6 phone_number:string user:User = help.Support;
 
@@ -995,9 +995,9 @@ secureValueTypeTemporaryRegistration#ea02ec33 = SecureValueType;
 secureValueTypePhone#b320aadb = SecureValueType;
 secureValueTypeEmail#8e3ca7ee = SecureValueType;
 
-secureValue#b4b4b699 flags:# type:SecureValueType data:flags.0?SecureData front_side:flags.1?SecureFile reverse_side:flags.2?SecureFile selfie:flags.3?SecureFile files:flags.4?Vector<SecureFile> plain_data:flags.5?SecurePlainData hash:bytes = SecureValue;
+secureValue#187fa0ca flags:# type:SecureValueType data:flags.0?SecureData front_side:flags.1?SecureFile reverse_side:flags.2?SecureFile selfie:flags.3?SecureFile translation:flags.6?Vector<SecureFile> files:flags.4?Vector<SecureFile> plain_data:flags.5?SecurePlainData hash:bytes = SecureValue;
 
-inputSecureValue#67872e8 flags:# type:SecureValueType data:flags.0?SecureData front_side:flags.1?InputSecureFile reverse_side:flags.2?InputSecureFile selfie:flags.3?InputSecureFile files:flags.4?Vector<InputSecureFile> plain_data:flags.5?SecurePlainData = InputSecureValue;
+inputSecureValue#db21d0a7 flags:# type:SecureValueType data:flags.0?SecureData front_side:flags.1?InputSecureFile reverse_side:flags.2?InputSecureFile selfie:flags.3?InputSecureFile translation:flags.6?Vector<InputSecureFile> files:flags.4?Vector<InputSecureFile> plain_data:flags.5?SecurePlainData = InputSecureValue;
 
 secureValueHash#ed1ecdb0 type:SecureValueType hash:bytes = SecureValueHash;
 
@@ -1007,10 +1007,13 @@ secureValueErrorReverseSide#868a2aa5 type:SecureValueType file_hash:bytes text:s
 secureValueErrorSelfie#e537ced6 type:SecureValueType file_hash:bytes text:string = SecureValueError;
 secureValueErrorFile#7a700873 type:SecureValueType file_hash:bytes text:string = SecureValueError;
 secureValueErrorFiles#666220e9 type:SecureValueType file_hash:Vector<bytes> text:string = SecureValueError;
+secureValueError#869d758f type:SecureValueType hash:bytes text:string = SecureValueError;
+secureValueErrorTranslationFile#a1144770 type:SecureValueType file_hash:bytes text:string = SecureValueError;
+secureValueErrorTranslationFiles#34636dd8 type:SecureValueType file_hash:Vector<bytes> text:string = SecureValueError;
 
 secureCredentialsEncrypted#33f0ea47 data:bytes hash:bytes secret:bytes = SecureCredentialsEncrypted;
 
-account.authorizationForm#cb976d53 flags:# selfie_required:flags.1?true required_types:Vector<SecureValueType> values:Vector<SecureValue> errors:Vector<SecureValueError> users:Vector<User> privacy_policy_url:flags.0?string = account.AuthorizationForm;
+account.authorizationForm#ad2e1cd8 flags:# required_types:Vector<SecureRequiredType> values:Vector<SecureValue> errors:Vector<SecureValueError> users:Vector<User> privacy_policy_url:flags.0?string = account.AuthorizationForm;
 
 account.sentEmailCode#811f854f email_pattern:string length:int = account.SentEmailCode;
 
@@ -1032,6 +1035,12 @@ secureSecretSettings#1527bcac secure_algo:SecurePasswordKdfAlgo secure_secret:by
 
 inputCheckPasswordEmpty#9880f658 = InputCheckPasswordSRP;
 inputCheckPasswordSRP#d27ff082 srp_id:long A:bytes M1:bytes = InputCheckPasswordSRP;
+
+secureRequiredType#829d99da flags:# native_names:flags.0?true selfie_required:flags.1?true translation_required:flags.2?true type:SecureValueType = SecureRequiredType;
+secureRequiredTypeOneOf#27477b4 types:Vector<SecureRequiredType> = SecureRequiredType;
+
+help.passportConfigNotModified#bfb9f457 = help.PassportConfig;
+help.passportConfig#a098d6af hash:int countries_langs:DataJSON = help.PassportConfig;
 
 ---functions---
 
@@ -1257,6 +1266,7 @@ help.getProxyData#3d7758e1 = help.ProxyData;
 help.getTermsOfServiceUpdate#2ca51fd1 = help.TermsOfServiceUpdate;
 help.acceptTermsOfService#ee72f79a id:DataJSON = Bool;
 help.getDeepLinkInfo#3fedc75f path:string = help.DeepLinkInfo;
+help.getPassportConfig#c661ad08 hash:int = help.PassportConfig;
 
 channels.readHistory#cc104937 channel:InputChannel max_id:int = Bool;
 channels.deleteMessages#84c1fd4e channel:InputChannel id:Vector<int> = messages.AffectedMessages;
@@ -1316,9 +1326,9 @@ phone.discardCall#78d413a6 peer:InputPhoneCall duration:int reason:PhoneCallDisc
 phone.setCallRating#1c536a34 peer:InputPhoneCall rating:int comment:string = Updates;
 phone.saveCallDebug#277add7e peer:InputPhoneCall debug:DataJSON = Bool;
 
-langpack.getLangPack#9ab5c58e lang_code:string = LangPackDifference;
-langpack.getStrings#2e1ee318 lang_code:string keys:Vector<string> = Vector<LangPackString>;
+langpack.getLangPack#f2f2330a lang_pack:string lang_code:string = LangPackDifference;
+langpack.getStrings#efea3803 lang_pack:string lang_code:string keys:Vector<string> = Vector<LangPackString>;
 langpack.getDifference#b2e4d7d from_version:int = LangPackDifference;
-langpack.getLanguages#800fd57d = Vector<LangPackLanguage>;
+langpack.getLanguages#42c6978f lang_pack:string = Vector<LangPackLanguage>;
 
-// LAYER 84
+// LAYER 85
