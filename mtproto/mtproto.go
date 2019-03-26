@@ -16,7 +16,7 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-//go:generate go run scheme/generate_tl_schema.go 91 scheme/tl-schema-91.tl tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 97 scheme/tl-schema-97.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 const ROUTINES_COUNT = 4
@@ -555,10 +555,10 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	flag := true
 	for flag {
 		x := m.SendSync(TL_auth_sendCode{
-			CurrentNumber: TL_boolTrue{},
-			PhoneNumber:   phonenumber,
-			ApiID:         m.appCfg.AppID,
-			ApiHash:       m.appCfg.AppHash,
+			PhoneNumber: phonenumber,
+			ApiID:       m.appCfg.AppID,
+			ApiHash:     m.appCfg.AppHash,
+			Settings:    TL_codeSettings{Flags: 1, CurrentNumber: true},
 		})
 		switch x.(type) {
 		case TL_auth_sentCode:
