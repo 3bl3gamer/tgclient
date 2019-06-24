@@ -133,22 +133,29 @@ func (e *TGClient) handleUpdate(obj mtproto.TL) {
 	}
 }
 
-func (c *TGClient) AuthAndInitEvents(authData mtproto.AuthDataProvider) error {
+func (c *TGClient) AuthExt(authData mtproto.AuthDataProvider, message mtproto.TLReq) (mtproto.TL, error) {
 	for {
-		res := c.mt.SendSync(mtproto.TL_updates_getState{})
+		res := c.mt.SendSync(message)
 		if mtproto.IsErrorType(res, mtproto.TL_ErrUnauthorized) { //AUTH_KEY_UNREGISTERED SESSION_REVOKED SESSION_EXPIRED
 			if err := c.mt.Auth(authData); err != nil {
-				return merry.Wrap(err)
+				return nil, merry.Wrap(err)
 			}
 			continue
 		}
-		_, ok := res.(mtproto.TL_updates_state)
-		if !ok {
-			return mtproto.WrongRespError(res)
-		}
-		break
+		c.log.Info("Seems authed.")
+		return res, nil
 	}
-	c.log.Info("Seems authed.")
+}
+
+func (c *TGClient) AuthAndInitEvents(authData mtproto.AuthDataProvider) error {
+	res, err := c.AuthExt(authData, mtproto.TL_updates_getState{})
+	if err != nil {
+		return merry.Wrap(err)
+	}
+	_, ok := res.(mtproto.TL_updates_state)
+	if !ok {
+		return mtproto.WrongRespError(res)
+	}
 	return nil
 }
 
