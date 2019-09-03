@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	TL_Layer                                                              = 102
+	TL_Layer                                                              = 104
 	CRC_resPQ                                                             = 0x05162463
 	CRC_p_q_inner_data                                                    = 0x83c95aec
 	CRC_p_q_inner_data_dc                                                 = 0xa9f55f95
@@ -50,6 +50,13 @@ const (
 	CRC_ipPortSecret                                                      = 0x37982646
 	CRC_accessPointRule                                                   = 0x4679b65f
 	CRC_help_configSimple                                                 = 0x5a592a6c
+	CRC_tlsClientHello                                                    = 0x6c52c484
+	CRC_tlsBlockString                                                    = 0x4218a164
+	CRC_tlsBlockRandom                                                    = 0x4d4dc41e
+	CRC_tlsBlockZero                                                      = 0x09333afb
+	CRC_tlsBlockDomain                                                    = 0x10e8636f
+	CRC_tlsBlockGrease                                                    = 0xe675a1c1
+	CRC_tlsBlockScope                                                     = 0xe725d44f
 	CRC_rpc_drop_answer                                                   = 0x58e4a740
 	CRC_get_future_salts                                                  = 0xb921bd04
 	CRC_ping                                                              = 0x7abe77ec
@@ -134,7 +141,7 @@ const (
 	CRC_channel                                                           = 0x4df30834
 	CRC_channelForbidden                                                  = 0x289da732
 	CRC_chatFull                                                          = 0x1b7c9db3
-	CRC_channelFull                                                       = 0x10916653
+	CRC_channelFull                                                       = 0x2d895c74
 	CRC_chatParticipant                                                   = 0xc8d7493e
 	CRC_chatParticipantCreator                                            = 0xda13538a
 	CRC_chatParticipantAdmin                                              = 0xe2d6e436
@@ -191,8 +198,9 @@ const (
 	CRC_geoPointEmpty                                                     = 0x1117dd5f
 	CRC_geoPoint                                                          = 0x0296f104
 	CRC_auth_checkedPhone                                                 = 0x811ea28e
-	CRC_auth_sentCode                                                     = 0x38faab5f
+	CRC_auth_sentCode                                                     = 0x5e002502
 	CRC_auth_authorization                                                = 0xcd050916
+	CRC_auth_authorizationSignUpRequired                                  = 0x44747e9a
 	CRC_auth_exportedAuthorization                                        = 0xdf969c2d
 	CRC_inputNotifyPeer                                                   = 0xb8bc5b0c
 	CRC_inputNotifyUsers                                                  = 0x193b4417
@@ -493,8 +501,8 @@ const (
 	CRC_channelMessagesFilter                                             = 0xcd77d957
 	CRC_channelParticipant                                                = 0x15ebac1d
 	CRC_channelParticipantSelf                                            = 0xa3289a6d
-	CRC_channelParticipantCreator                                         = 0xe3e2e1f9
-	CRC_channelParticipantAdmin                                           = 0x5daa6e23
+	CRC_channelParticipantCreator                                         = 0x808d15a4
+	CRC_channelParticipantAdmin                                           = 0xccbebbaf
 	CRC_channelParticipantBanned                                          = 0x1c0facaf
 	CRC_channelParticipantsRecent                                         = 0xde3f3c79
 	CRC_channelParticipantsAdmins                                         = 0xb4608969
@@ -641,7 +649,7 @@ const (
 	CRC_payments_paymentForm                                              = 0x3f56aea3
 	CRC_payments_validatedRequestedInfo                                   = 0xd1451883
 	CRC_payments_paymentResult                                            = 0x4e5f810d
-	CRC_payments_paymentVerficationNeeded                                 = 0x6b56b921
+	CRC_payments_paymentVerificationNeeded                                = 0xd8411139
 	CRC_payments_paymentReceipt                                           = 0x500911e1
 	CRC_payments_savedInfo                                                = 0xfb8fe43c
 	CRC_inputPaymentCredentialsSaved                                      = 0xc10eb2cf
@@ -690,6 +698,7 @@ const (
 	CRC_channelAdminLogEventActionStopPoll                                = 0x8f079643
 	CRC_channelAdminLogEventActionChangeLinkedChat                        = 0xa26f881b
 	CRC_channelAdminLogEventActionChangeLocation                          = 0x0e6b76ae
+	CRC_channelAdminLogEventActionToggleSlowMode                          = 0x53909779
 	CRC_channelAdminLogEvent                                              = 0x3b5a3e40
 	CRC_channels_adminLogResults                                          = 0xed8af74d
 	CRC_channelAdminLogEventsFilter                                       = 0xea107ae4
@@ -831,7 +840,7 @@ const (
 	CRC_invokeWithMessagesRange                                           = 0x365275f2
 	CRC_invokeWithTakeout                                                 = 0xaca9fd2e
 	CRC_auth_sendCode                                                     = 0xa677244f
-	CRC_auth_signUp                                                       = 0x1b067634
+	CRC_auth_signUp                                                       = 0x80eee427
 	CRC_auth_signIn                                                       = 0xbcd51581
 	CRC_auth_logOut                                                       = 0x5717da40
 	CRC_auth_resetAuthorizations                                          = 0x9fab0d1a
@@ -845,7 +854,7 @@ const (
 	CRC_auth_resendCode                                                   = 0x3ef1a9bf
 	CRC_auth_cancelCode                                                   = 0x1f040578
 	CRC_auth_dropTempAuthKeys                                             = 0x8e48a188
-	CRC_account_registerDevice                                            = 0x5cbea590
+	CRC_account_registerDevice                                            = 0x68976c6f
 	CRC_account_unregisterDevice                                          = 0x3076c4bf
 	CRC_account_updateNotifySettings                                      = 0x84be5b93
 	CRC_account_getNotifySettings                                         = 0x12b3ad31
@@ -1079,7 +1088,7 @@ const (
 	CRC_channels_getChannels                                              = 0x0a7f6bbb
 	CRC_channels_getFullChannel                                           = 0x08736a09
 	CRC_channels_createChannel                                            = 0x3d5fb10f
-	CRC_channels_editAdmin                                                = 0x70f893ba
+	CRC_channels_editAdmin                                                = 0xd33c8902
 	CRC_channels_editTitle                                                = 0x566decd0
 	CRC_channels_editPhoto                                                = 0xf12e57c9
 	CRC_channels_checkUsername                                            = 0x10e6bd2c
@@ -1102,6 +1111,7 @@ const (
 	CRC_channels_setDiscussionGroup                                       = 0x40582bb2
 	CRC_channels_editCreator                                              = 0x8f38cd1f
 	CRC_channels_editLocation                                             = 0x58e63f6d
+	CRC_channels_toggleSlowMode                                           = 0xedd49ef0
 	CRC_bots_sendCustomRequest                                            = 0xaa2769ed
 	CRC_bots_answerWebhookJSONQuery                                       = 0xe6213f4d
 	CRC_payments_getPaymentForm                                           = 0x99f09745
@@ -1382,6 +1392,33 @@ type TL_help_configSimple struct {
 	Date    int32
 	Expires int32
 	Rules   TL // vector<AccessPointRule>
+}
+
+type TL_tlsClientHello struct {
+	Blocks TL // vector<TlsBlock>
+}
+
+type TL_tlsBlockString struct {
+	Data string
+}
+
+type TL_tlsBlockRandom struct {
+	Length int32
+}
+
+type TL_tlsBlockZero struct {
+	Length int32
+}
+
+type TL_tlsBlockDomain struct {
+}
+
+type TL_tlsBlockGrease struct {
+	Seed int32
+}
+
+type TL_tlsBlockScope struct {
+	Entries []TL // TlsBlock
 }
 
 type TL_rpc_drop_answer struct {
@@ -1815,6 +1852,8 @@ type TL_channel struct {
 	Min                 bool //flag
 	Scam                bool //flag
 	HasLink             bool //flag
+	HasGeo              bool //flag
+	SlowmodeEnabled     bool //flag
 	ID                  int32
 	AccessHash          int64 //flag
 	Title               string
@@ -1854,36 +1893,38 @@ type TL_chatFull struct {
 }
 
 type TL_channelFull struct {
-	Flags               int32
-	CanViewParticipants bool //flag
-	CanSetUsername      bool //flag
-	CanSetStickers      bool //flag
-	HiddenPrehistory    bool //flag
-	CanViewStats        bool //flag
-	CanSetLocation      bool //flag
-	ID                  int32
-	About               string
-	ParticipantsCount   int32 //flag
-	AdminsCount         int32 //flag
-	KickedCount         int32 //flag
-	BannedCount         int32 //flag
-	OnlineCount         int32 //flag
-	ReadInboxMaxID      int32
-	ReadOutboxMaxID     int32
-	UnreadCount         int32
-	ChatPhoto           TL    // Photo
-	NotifySettings      TL    // PeerNotifySettings
-	ExportedInvite      TL    // ExportedChatInvite
-	BotInfo             []TL  // BotInfo
-	MigratedFromChatID  int32 //flag
-	MigratedFromMaxID   int32 //flag
-	PinnedMsgID         int32 //flag
-	Stickerset          TL    // StickerSet //flag
-	AvailableMinID      int32 //flag
-	FolderID            int32 //flag
-	LinkedChatID        int32 //flag
-	Location            TL    // ChannelLocation //flag
-	Pts                 int32
+	Flags                int32
+	CanViewParticipants  bool //flag
+	CanSetUsername       bool //flag
+	CanSetStickers       bool //flag
+	HiddenPrehistory     bool //flag
+	CanViewStats         bool //flag
+	CanSetLocation       bool //flag
+	ID                   int32
+	About                string
+	ParticipantsCount    int32 //flag
+	AdminsCount          int32 //flag
+	KickedCount          int32 //flag
+	BannedCount          int32 //flag
+	OnlineCount          int32 //flag
+	ReadInboxMaxID       int32
+	ReadOutboxMaxID      int32
+	UnreadCount          int32
+	ChatPhoto            TL    // Photo
+	NotifySettings       TL    // PeerNotifySettings
+	ExportedInvite       TL    // ExportedChatInvite
+	BotInfo              []TL  // BotInfo
+	MigratedFromChatID   int32 //flag
+	MigratedFromMaxID    int32 //flag
+	PinnedMsgID          int32 //flag
+	Stickerset           TL    // StickerSet //flag
+	AvailableMinID       int32 //flag
+	FolderID             int32 //flag
+	LinkedChatID         int32 //flag
+	Location             TL    // ChannelLocation //flag
+	SlowmodeSeconds      int32 //flag
+	SlowmodeNextSendDate int32 //flag
+	Pts                  int32
 }
 
 type TL_chatParticipant struct {
@@ -2222,19 +2263,22 @@ type TL_auth_checkedPhone struct {
 }
 
 type TL_auth_sentCode struct {
-	Flags           int32
-	PhoneRegistered bool //flag
-	Type            TL   // auth_SentCodeType
-	PhoneCodeHash   string
-	NextType        TL    // auth_CodeType //flag
-	Timeout         int32 //flag
-	TermsOfService  TL    // help_TermsOfService //flag
+	Flags         int32
+	Type          TL // auth_SentCodeType
+	PhoneCodeHash string
+	NextType      TL    // auth_CodeType //flag
+	Timeout       int32 //flag
 }
 
 type TL_auth_authorization struct {
 	Flags       int32
 	TmpSessions int32 //flag
 	User        TL    // User
+}
+
+type TL_auth_authorizationSignUpRequired struct {
+	Flags          int32
+	TermsOfService TL // help_TermsOfService //flag
 }
 
 type TL_auth_exportedAuthorization struct {
@@ -3121,14 +3165,14 @@ type TL_nearestDc struct {
 }
 
 type TL_help_appUpdate struct {
-	Flags    int32
-	Popup    bool //flag
-	ID       int32
-	Version  string
-	Text     string
-	Entities []TL   // MessageEntity
-	Document TL     // Document //flag
-	Url      string //flag
+	Flags      int32
+	CanNotSkip bool //flag
+	ID         int32
+	Version    string
+	Text       string
+	Entities   []TL   // MessageEntity
+	Document   TL     // Document //flag
+	Url        string //flag
 }
 
 type TL_help_noAppUpdate struct {
@@ -3928,7 +3972,9 @@ type TL_channelParticipantSelf struct {
 }
 
 type TL_channelParticipantCreator struct {
+	Flags  int32
 	UserID int32
+	Rank   string //flag
 }
 
 type TL_channelParticipantAdmin struct {
@@ -3939,7 +3985,8 @@ type TL_channelParticipantAdmin struct {
 	InviterID   int32 //flag
 	PromotedBy  int32
 	Date        int32
-	AdminRights TL // ChatAdminRights
+	AdminRights TL     // ChatAdminRights
+	Rank        string //flag
 }
 
 type TL_channelParticipantBanned struct {
@@ -4766,7 +4813,7 @@ type TL_payments_paymentResult struct {
 	Updates TL // Updates
 }
 
-type TL_payments_paymentVerficationNeeded struct {
+type TL_payments_paymentVerificationNeeded struct {
 	Url string
 }
 
@@ -5065,6 +5112,11 @@ type TL_channelAdminLogEventActionChangeLinkedChat struct {
 type TL_channelAdminLogEventActionChangeLocation struct {
 	PrevValue TL // ChannelLocation
 	NewValue  TL // ChannelLocation
+}
+
+type TL_channelAdminLogEventActionToggleSlowMode struct {
+	PrevValue int32
+	NewValue  int32
 }
 
 type TL_channelAdminLogEvent struct {
@@ -5855,7 +5907,6 @@ type TL_auth_sendCode struct {
 type TL_auth_signUp struct {
 	PhoneNumber   string
 	PhoneCodeHash string
-	PhoneCode     string
 	FirstName     string
 	LastName      string
 }
@@ -5921,6 +5972,8 @@ type TL_auth_dropTempAuthKeys struct {
 }
 
 type TL_account_registerDevice struct {
+	Flags      int32
+	NoMuted    bool //flag
 	TokenType  int32
 	Token      string
 	AppSandbox TL // Bool
@@ -7180,6 +7233,7 @@ type TL_channels_editAdmin struct {
 	Channel     TL // InputChannel
 	UserID      TL // InputUser
 	AdminRights TL // ChatAdminRights
+	Rank        string
 }
 
 type TL_channels_editTitle struct {
@@ -7295,6 +7349,11 @@ type TL_channels_editLocation struct {
 	Channel  TL // InputChannel
 	GeoPoint TL // InputGeoPoint
 	Address  string
+}
+
+type TL_channels_toggleSlowMode struct {
+	Channel TL // InputChannel
+	Seconds int32
 }
 
 type TL_bots_sendCustomRequest struct {
@@ -7829,6 +7888,54 @@ func (e TL_help_configSimple) encode() []byte {
 	x.Int(e.Date)
 	x.Int(e.Expires)
 	x.Bytes(e.Rules.encode())
+	return x.buf
+}
+
+func (e TL_tlsClientHello) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_tlsClientHello)
+	x.Bytes(e.Blocks.encode())
+	return x.buf
+}
+
+func (e TL_tlsBlockString) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_tlsBlockString)
+	x.String(e.Data)
+	return x.buf
+}
+
+func (e TL_tlsBlockRandom) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_tlsBlockRandom)
+	x.Int(e.Length)
+	return x.buf
+}
+
+func (e TL_tlsBlockZero) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_tlsBlockZero)
+	x.Int(e.Length)
+	return x.buf
+}
+
+func (e TL_tlsBlockDomain) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_tlsBlockDomain)
+	return x.buf
+}
+
+func (e TL_tlsBlockGrease) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_tlsBlockGrease)
+	x.Int(e.Seed)
+	return x.buf
+}
+
+func (e TL_tlsBlockScope) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_tlsBlockScope)
+	x.Vector(e.Entries)
 	return x.buf
 }
 
@@ -8558,6 +8665,8 @@ func (e TL_channel) encode() []byte {
 	//flag Min
 	//flag Scam
 	//flag HasLink
+	//flag HasGeo
+	//flag SlowmodeEnabled
 	x.Int(e.ID)
 	if e.Flags&8192 != 0 {
 		x.Long(e.AccessHash)
@@ -8684,6 +8793,12 @@ func (e TL_channelFull) encode() []byte {
 	}
 	if e.Flags&32768 != 0 {
 		x.Bytes(e.Location.encode())
+	}
+	if e.Flags&131072 != 0 {
+		x.Int(e.SlowmodeSeconds)
+	}
+	if e.Flags&262144 != 0 {
+		x.Int(e.SlowmodeNextSendDate)
 	}
 	x.Int(e.Pts)
 	return x.buf
@@ -9250,7 +9365,6 @@ func (e TL_auth_sentCode) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_auth_sentCode)
 	x.Int(e.Flags)
-	//flag PhoneRegistered
 	x.Bytes(e.Type.encode())
 	x.String(e.PhoneCodeHash)
 	if e.Flags&2 != 0 {
@@ -9258,9 +9372,6 @@ func (e TL_auth_sentCode) encode() []byte {
 	}
 	if e.Flags&4 != 0 {
 		x.Int(e.Timeout)
-	}
-	if e.Flags&8 != 0 {
-		x.Bytes(e.TermsOfService.encode())
 	}
 	return x.buf
 }
@@ -9273,6 +9384,16 @@ func (e TL_auth_authorization) encode() []byte {
 		x.Int(e.TmpSessions)
 	}
 	x.Bytes(e.User.encode())
+	return x.buf
+}
+
+func (e TL_auth_authorizationSignUpRequired) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_authorizationSignUpRequired)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.TermsOfService.encode())
+	}
 	return x.buf
 }
 
@@ -10699,7 +10820,7 @@ func (e TL_help_appUpdate) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_help_appUpdate)
 	x.Int(e.Flags)
-	//flag Popup
+	//flag CanNotSkip
 	x.Int(e.ID)
 	x.String(e.Version)
 	x.String(e.Text)
@@ -12055,7 +12176,11 @@ func (e TL_channelParticipantSelf) encode() []byte {
 func (e TL_channelParticipantCreator) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelParticipantCreator)
+	x.Int(e.Flags)
 	x.Int(e.UserID)
+	if e.Flags&1 != 0 {
+		x.String(e.Rank)
+	}
 	return x.buf
 }
 
@@ -12072,6 +12197,9 @@ func (e TL_channelParticipantAdmin) encode() []byte {
 	x.Int(e.PromotedBy)
 	x.Int(e.Date)
 	x.Bytes(e.AdminRights.encode())
+	if e.Flags&4 != 0 {
+		x.String(e.Rank)
+	}
 	return x.buf
 }
 
@@ -13465,9 +13593,9 @@ func (e TL_payments_paymentResult) encode() []byte {
 	return x.buf
 }
 
-func (e TL_payments_paymentVerficationNeeded) encode() []byte {
+func (e TL_payments_paymentVerificationNeeded) encode() []byte {
 	x := NewEncodeBuf(512)
-	x.UInt(CRC_payments_paymentVerficationNeeded)
+	x.UInt(CRC_payments_paymentVerificationNeeded)
 	x.String(e.Url)
 	return x.buf
 }
@@ -13936,6 +14064,14 @@ func (e TL_channelAdminLogEventActionChangeLocation) encode() []byte {
 	x.UInt(CRC_channelAdminLogEventActionChangeLocation)
 	x.Bytes(e.PrevValue.encode())
 	x.Bytes(e.NewValue.encode())
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionToggleSlowMode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionToggleSlowMode)
+	x.Int(e.PrevValue)
+	x.Int(e.NewValue)
 	return x.buf
 }
 
@@ -15216,7 +15352,6 @@ func (e TL_auth_signUp) encode() []byte {
 	x.UInt(CRC_auth_signUp)
 	x.String(e.PhoneNumber)
 	x.String(e.PhoneCodeHash)
-	x.String(e.PhoneCode)
 	x.String(e.FirstName)
 	x.String(e.LastName)
 	return x.buf
@@ -15324,6 +15459,8 @@ func (e TL_auth_dropTempAuthKeys) encode() []byte {
 func (e TL_account_registerDevice) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_registerDevice)
+	x.Int(e.Flags)
+	//flag NoMuted
 	x.Int(e.TokenType)
 	x.String(e.Token)
 	x.Bytes(e.AppSandbox.encode())
@@ -17363,6 +17500,7 @@ func (e TL_channels_editAdmin) encode() []byte {
 	x.Bytes(e.Channel.encode())
 	x.Bytes(e.UserID.encode())
 	x.Bytes(e.AdminRights.encode())
+	x.String(e.Rank)
 	return x.buf
 }
 
@@ -17548,6 +17686,14 @@ func (e TL_channels_editLocation) encode() []byte {
 	x.Bytes(e.Channel.encode())
 	x.Bytes(e.GeoPoint.encode())
 	x.String(e.Address)
+	return x.buf
+}
+
+func (e TL_channels_toggleSlowMode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_toggleSlowMode)
+	x.Bytes(e.Channel.encode())
+	x.Int(e.Seconds)
 	return x.buf
 }
 
@@ -18946,6 +19092,10 @@ func (e TL_channels_editLocation) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_channels_toggleSlowMode) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_bots_sendCustomRequest) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -19345,6 +19495,39 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.Int(),
 			m.Object(),
+		}
+
+	case CRC_tlsClientHello:
+		r = TL_tlsClientHello{
+			m.Object(),
+		}
+
+	case CRC_tlsBlockString:
+		r = TL_tlsBlockString{
+			m.String(),
+		}
+
+	case CRC_tlsBlockRandom:
+		r = TL_tlsBlockRandom{
+			m.Int(),
+		}
+
+	case CRC_tlsBlockZero:
+		r = TL_tlsBlockZero{
+			m.Int(),
+		}
+
+	case CRC_tlsBlockDomain:
+		r = TL_tlsBlockDomain{}
+
+	case CRC_tlsBlockGrease:
+		r = TL_tlsBlockGrease{
+			m.Int(),
+		}
+
+	case CRC_tlsBlockScope:
+		r = TL_tlsBlockScope{
+			m.Vector(),
 		}
 
 	case CRC_rpc_drop_answer:
@@ -19844,6 +20027,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&4096 != 0,    //flag #12
 			flags&524288 != 0,  //flag #19
 			flags&1048576 != 0, //flag #20
+			flags&2097152 != 0, //flag #21
+			flags&4194304 != 0, //flag #22
 			m.Int(),
 			m.FlaggedLong(flags, 13),
 			m.String(),
@@ -19918,6 +20103,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedInt(flags, 11),
 			m.FlaggedInt(flags, 14),
 			m.FlaggedObject(flags, 15),
+			m.FlaggedInt(flags, 17),
+			m.FlaggedInt(flags, 18),
 			m.Int(),
 		}
 
@@ -20317,12 +20504,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		r = TL_auth_sentCode{
 			flags,
-			flags&1 != 0, //flag #0
 			m.Object(),
 			m.String(),
 			m.FlaggedObject(flags, 1),
 			m.FlaggedInt(flags, 2),
-			m.FlaggedObject(flags, 3),
 		}
 
 	case CRC_auth_authorization:
@@ -20331,6 +20516,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags,
 			m.FlaggedInt(flags, 0),
 			m.Object(),
+		}
+
+	case CRC_auth_authorizationSignUpRequired:
+		flags := m.Int()
+		r = TL_auth_authorizationSignUpRequired{
+			flags,
+			m.FlaggedObject(flags, 0),
 		}
 
 	case CRC_auth_exportedAuthorization:
@@ -22293,8 +22485,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channelParticipantCreator:
+		flags := m.Int()
 		r = TL_channelParticipantCreator{
+			flags,
 			m.Int(),
+			m.FlaggedString(flags, 0),
 		}
 
 	case CRC_channelParticipantAdmin:
@@ -22308,6 +22503,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.Int(),
 			m.Object(),
+			m.FlaggedString(flags, 2),
 		}
 
 	case CRC_channelParticipantBanned:
@@ -23285,8 +23481,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 		}
 
-	case CRC_payments_paymentVerficationNeeded:
-		r = TL_payments_paymentVerficationNeeded{
+	case CRC_payments_paymentVerificationNeeded:
+		r = TL_payments_paymentVerificationNeeded{
 			m.String(),
 		}
 
@@ -23643,6 +23839,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_channelAdminLogEventActionChangeLocation{
 			m.Object(),
 			m.Object(),
+		}
+
+	case CRC_channelAdminLogEventActionToggleSlowMode:
+		r = TL_channelAdminLogEventActionToggleSlowMode{
+			m.Int(),
+			m.Int(),
 		}
 
 	case CRC_channelAdminLogEvent:
@@ -24572,7 +24774,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.String(),
 			m.String(),
-			m.String(),
 		}
 
 	case CRC_auth_signIn:
@@ -24646,7 +24847,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_registerDevice:
+		flags := m.Int()
 		r = TL_account_registerDevice{
+			flags,
+			flags&1 != 0, //flag #0
 			m.Int(),
 			m.String(),
 			m.Object(),
@@ -26155,6 +26359,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 			m.Object(),
 			m.Object(),
+			m.String(),
 		}
 
 	case CRC_channels_editTitle:
@@ -26293,6 +26498,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 			m.Object(),
 			m.String(),
+		}
+
+	case CRC_channels_toggleSlowMode:
+		r = TL_channels_toggleSlowMode{
+			m.Object(),
+			m.Int(),
 		}
 
 	case CRC_bots_sendCustomRequest:
