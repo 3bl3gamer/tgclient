@@ -22,6 +22,10 @@ func clampI(a, v, b int) int {
 	return v
 }
 
+type FileProgressHandler interface {
+	OnProgress(fileLocation mtproto.TL, offset, size int64)
+}
+
 type FileResponse struct {
 	DcID int32
 	Data []byte
@@ -61,7 +65,7 @@ func NewDownloader(tg *TGClient) *Downloader {
 }
 
 func (d *Downloader) DownloadFileToPath(
-	fpath string, fileLocation mtproto.TL, dcID int32, size int64,
+	fpath string, fileLocation mtproto.TL, dcID int32, size int64, progressHnd FileProgressHandler,
 ) (*FilePartsResult, error) {
 	partSize := int64(512 * 1024)
 	tempFpath := fpath + ".temp"
@@ -91,7 +95,7 @@ func (d *Downloader) DownloadFileToPath(
 		}
 	}
 
-	partsRes, err := d.DownloadFileParts(fd, fileLocation, dcID, size, partSize, offset)
+	partsRes, err := d.DownloadFileParts(fd, fileLocation, dcID, size, partSize, offset, progressHnd)
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
@@ -106,7 +110,9 @@ func (d *Downloader) DownloadFileToPath(
 }
 
 func (d *Downloader) DownloadFileParts(
-	file io.Writer, fileLocation mtproto.TL, dcID int32, size, partSize, offset int64,
+	file io.Writer, fileLocation mtproto.TL,
+	dcID int32, size, partSize, offset int64,
+	progressHnd FileProgressHandler,
 ) (*FilePartsResult, error) {
 	partsRes := &FilePartsResult{ActualDcID: dcID}
 
@@ -143,6 +149,10 @@ func (d *Downloader) DownloadFileParts(
 			return nil, merry.Wrap(err)
 		}
 		partsRes.BytesWritten += n
+
+		if progressHnd != nil {
+			progressHnd.OnProgress(fileLocation, offset, size)
+		}
 
 		if len(res.Data) < int(partSize) {
 			partsRes.Finished = true
