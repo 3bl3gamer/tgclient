@@ -16,7 +16,7 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-//go:generate go run scheme/generate_tl_schema.go 104 scheme/tl-schema-104.tl tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 114 scheme/tl-schema-114.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 const ROUTINES_COUNT = 4
@@ -880,7 +880,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 			if ok {
 				packet.needAck = false
 				// if request is not waiting for response, removing it
-				if m.msgsByID[id].resp == nil {
+				if m.msgsByID[id].resp == nil { //TODO: packet.resp
 					delete(m.msgsByID, id)
 				}
 			}

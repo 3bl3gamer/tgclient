@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-// https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/Resources/scheme.tl
+// https://github.com/telegramdesktop/tdesktop/tree/dev/Telegram/Resources/tl
 // https://github.com/danog/MadelineProto/tree/master/src/danog/MadelineProto
 // https://github.com/tdlib/td/tree/master/td/generate/scheme
 
