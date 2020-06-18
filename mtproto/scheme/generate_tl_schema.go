@@ -384,13 +384,19 @@ import (
 
 	// decode funcs
 	write(`
+func readFlags(m *DecodeBuf, flagsPtr *int32) int32 {
+	flags := m.Int()
+	*flagsPtr = flags
+	return flags
+}
+
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	switch constructor {`)
 
 	for _, c := range combinators {
 		write("case CRC_%s:\n", c.id)
 		if c.hasFlags() {
-			write("flags := m.Int()\n")
+			write("var flags int32\n")
 		}
 		write("r = TL_%s{\n", c.id)
 		for _, t := range c.fields {
@@ -399,7 +405,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			case "true": //flags only
 				write("flags & %d != 0, //flag #%d\n", 1<<uint(t.flagBit), t.flagBit)
 			case "#":
-				write("flags,\n")
+				write("readFlags(m, &flags),\n")
 			case "int":
 				write(maybeFlagged("Int", isFlag, t.flagBit))
 			case "long":

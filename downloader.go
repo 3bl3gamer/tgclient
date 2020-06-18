@@ -130,6 +130,10 @@ func (d *Downloader) DownloadFileParts(
 			return nil, merry.Wrap(res.Err)
 		}
 
+		if progressHnd != nil {
+			progressHnd.OnProgress(fileLocation, offset+int64(len(res.Data)), size)
+		}
+
 		offset += partSize
 		for i := 1; i < len(resChans); i++ {
 			resChans[i-1] = resChans[i]
@@ -149,10 +153,6 @@ func (d *Downloader) DownloadFileParts(
 			return nil, merry.Wrap(err)
 		}
 		partsRes.BytesWritten += n
-
-		if progressHnd != nil {
-			progressHnd.OnProgress(fileLocation, offset, size)
-		}
 
 		if len(res.Data) < int(partSize) {
 			partsRes.Finished = true

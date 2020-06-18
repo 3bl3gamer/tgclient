@@ -24188,6 +24188,12 @@ func (e TL_stats_loadAsyncGraph) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func readFlags(m *DecodeBuf, flagsPtr *int32) int32 {
+	flags := m.Int()
+	*flagsPtr = flags
+	return flags
+}
+
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	switch constructor {
 	case CRC_resPQ:
@@ -24653,18 +24659,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputMediaEmpty{}
 
 	case CRC_inputMediaUploadedPhoto:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaUploadedPhoto{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.FlaggedVector(flags, 0),
 			m.FlaggedInt(flags, 1),
 		}
 
 	case CRC_inputMediaPhoto:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaPhoto{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.FlaggedInt(flags, 0),
 		}
@@ -24683,9 +24689,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputMediaUploadedDocument:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaUploadedDocument{
-			flags,
+			readFlags(m, &flags),
 			flags&8 != 0, //flag #3
 			m.Object(),
 			m.FlaggedObject(flags, 2),
@@ -24696,9 +24702,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputMediaDocument:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaDocument{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.FlaggedInt(flags, 0),
 		}
@@ -24720,17 +24726,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputMediaPhotoExternal:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaPhotoExternal{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_inputMediaDocumentExternal:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaDocumentExternal{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.FlaggedInt(flags, 0),
 		}
@@ -24741,9 +24747,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputMediaInvoice:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaInvoice{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
@@ -24755,18 +24761,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputMediaGeoLive:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaGeoLive{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.FlaggedInt(flags, 1),
 		}
 
 	case CRC_inputMediaPoll:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMediaPoll{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.FlaggedVector(flags, 0),
 			m.FlaggedString(flags, 1),
@@ -24860,9 +24866,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputPeerPhotoFileLocation:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputPeerPhotoFileLocation{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Long(),
@@ -24927,9 +24933,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_user:
-		flags := m.Int()
+		var flags int32
 		r = TL_user{
-			flags,
+			readFlags(m, &flags),
 			flags&1024 != 0,     //flag #10
 			flags&2048 != 0,     //flag #11
 			flags&4096 != 0,     //flag #12
@@ -24996,9 +25002,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_chat:
-		flags := m.Int()
+		var flags int32
 		r = TL_chat{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,  //flag #0
 			flags&2 != 0,  //flag #1
 			flags&4 != 0,  //flag #2
@@ -25021,9 +25027,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channel:
-		flags := m.Int()
+		var flags int32
 		r = TL_channel{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,       //flag #0
 			flags&4 != 0,       //flag #2
 			flags&32 != 0,      //flag #5
@@ -25051,9 +25057,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channelForbidden:
-		flags := m.Int()
+		var flags int32
 		r = TL_channelForbidden{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0,  //flag #5
 			flags&256 != 0, //flag #8
 			m.Int(),
@@ -25063,9 +25069,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_chatFull:
-		flags := m.Int()
+		var flags int32
 		r = TL_chatFull{
-			flags,
+			readFlags(m, &flags),
 			flags&128 != 0, //flag #7
 			flags&256 != 0, //flag #8
 			m.Int(),
@@ -25080,9 +25086,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channelFull:
-		flags := m.Int()
+		var flags int32
 		r = TL_channelFull{
-			flags,
+			readFlags(m, &flags),
 			flags&8 != 0,      //flag #3
 			flags&64 != 0,     //flag #6
 			flags&128 != 0,    //flag #7
@@ -25138,9 +25144,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_chatParticipantsForbidden:
-		flags := m.Int()
+		var flags int32
 		r = TL_chatParticipantsForbidden{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.FlaggedObject(flags, 0),
 		}
@@ -25168,9 +25174,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_message:
-		flags := m.Int()
+		var flags int32
 		r = TL_message{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,       //flag #1
 			flags&16 != 0,      //flag #4
 			flags&32 != 0,      //flag #5
@@ -25198,9 +25204,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messageService:
-		flags := m.Int()
+		var flags int32
 		r = TL_messageService{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,      //flag #1
 			flags&16 != 0,     //flag #4
 			flags&32 != 0,     //flag #5
@@ -25219,9 +25225,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messageMediaEmpty{}
 
 	case CRC_messageMediaPhoto:
-		flags := m.Int()
+		var flags int32
 		r = TL_messageMediaPhoto{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedInt(flags, 2),
 		}
@@ -25244,9 +25250,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messageMediaUnsupported{}
 
 	case CRC_messageMediaDocument:
-		flags := m.Int()
+		var flags int32
 		r = TL_messageMediaDocument{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedInt(flags, 2),
 		}
@@ -25272,9 +25278,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messageMediaInvoice:
-		flags := m.Int()
+		var flags int32
 		r = TL_messageMediaInvoice{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			flags&8 != 0, //flag #3
 			m.String(),
@@ -25370,9 +25376,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messageActionPaymentSentMe:
-		flags := m.Int()
+		var flags int32
 		r = TL_messageActionPaymentSentMe{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.Long(),
 			m.StringBytes(),
@@ -25388,9 +25394,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messageActionPhoneCall:
-		flags := m.Int()
+		var flags int32
 		r = TL_messageActionPhoneCall{
-			flags,
+			readFlags(m, &flags),
 			flags&4 != 0, //flag #2
 			m.Long(),
 			m.FlaggedObject(flags, 0),
@@ -25425,9 +25431,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messageActionContactSignUp{}
 
 	case CRC_dialog:
-		flags := m.Int()
+		var flags int32
 		r = TL_dialog{
-			flags,
+			readFlags(m, &flags),
 			flags&4 != 0, //flag #2
 			flags&8 != 0, //flag #3
 			m.Object(),
@@ -25443,9 +25449,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_dialogFolder:
-		flags := m.Int()
+		var flags int32
 		r = TL_dialogFolder{
-			flags,
+			readFlags(m, &flags),
 			flags&4 != 0, //flag #2
 			m.Object(),
 			m.Object(),
@@ -25462,9 +25468,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_photo:
-		flags := m.Int()
+		var flags int32
 		r = TL_photo{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Long(),
 			m.Long(),
@@ -25514,9 +25520,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_auth_sentCode:
-		flags := m.Int()
+		var flags int32
 		r = TL_auth_sentCode{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.String(),
 			m.FlaggedObject(flags, 1),
@@ -25524,17 +25530,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_auth_authorization:
-		flags := m.Int()
+		var flags int32
 		r = TL_auth_authorization{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedInt(flags, 0),
 			m.Object(),
 		}
 
 	case CRC_auth_authorizationSignUpRequired:
-		flags := m.Int()
+		var flags int32
 		r = TL_auth_authorizationSignUpRequired{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedObject(flags, 0),
 		}
 
@@ -25559,9 +25565,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputNotifyBroadcasts{}
 
 	case CRC_inputPeerNotifySettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputPeerNotifySettings{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 1),
 			m.FlaggedInt(flags, 2),
@@ -25569,9 +25575,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_peerNotifySettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_peerNotifySettings{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 1),
 			m.FlaggedInt(flags, 2),
@@ -25579,9 +25585,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_peerSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_peerSettings{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,  //flag #0
 			flags&2 != 0,  //flag #1
 			flags&4 != 0,  //flag #2
@@ -25591,10 +25597,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_wallPaper:
-		flags := m.Int()
+		var flags int32
 		r = TL_wallPaper{
 			m.Long(),
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,  //flag #0
 			flags&2 != 0,  //flag #1
 			flags&8 != 0,  //flag #3
@@ -25606,9 +25612,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_wallPaperNoFile:
-		flags := m.Int()
+		var flags int32
 		r = TL_wallPaperNoFile{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,  //flag #1
 			flags&16 != 0, //flag #4
 			m.FlaggedObject(flags, 2),
@@ -25638,9 +25644,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputReportReasonGeoIrrelevant{}
 
 	case CRC_userFull:
-		flags := m.Int()
+		var flags int32
 		r = TL_userFull{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,    //flag #0
 			flags&16 != 0,   //flag #4
 			flags&32 != 0,   //flag #5
@@ -25742,9 +25748,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_messagesSlice:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_messagesSlice{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Int(),
 			m.FlaggedInt(flags, 0),
@@ -25754,9 +25760,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_channelMessages:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_channelMessages{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Int(),
 			m.Int(),
@@ -25826,9 +25832,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputMessagesFilterChatPhotos{}
 
 	case CRC_inputMessagesFilterPhoneCalls:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputMessagesFilterPhoneCalls{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 		}
 
@@ -25965,9 +25971,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateServiceNotification:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateServiceNotification{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.FlaggedInt(flags, 1),
 			m.String(),
@@ -25989,9 +25995,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateReadHistoryInbox:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateReadHistoryInbox{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedInt(flags, 0),
 			m.Object(),
 			m.Int(),
@@ -26023,9 +26029,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateChannelTooLong:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateChannelTooLong{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.FlaggedInt(flags, 0),
 		}
@@ -26043,9 +26049,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateReadChannelInbox:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateReadChannelInbox{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedInt(flags, 0),
 			m.Int(),
 			m.Int(),
@@ -26082,9 +26088,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateStickerSetsOrder:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateStickerSetsOrder{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.VectorLong(),
 		}
@@ -26096,9 +26102,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_updateSavedGifs{}
 
 	case CRC_updateBotInlineQuery:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateBotInlineQuery{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.Int(),
 			m.String(),
@@ -26107,9 +26113,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateBotInlineSend:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateBotInlineSend{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
@@ -26131,9 +26137,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateBotCallbackQuery:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateBotCallbackQuery{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.Int(),
 			m.Object(),
@@ -26151,9 +26157,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateInlineBotCallbackQuery:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateInlineBotCallbackQuery{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.Int(),
 			m.Object(),
@@ -26195,18 +26201,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateDialogPinned:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateDialogPinned{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.FlaggedInt(flags, 1),
 			m.Object(),
 		}
 
 	case CRC_updatePinnedDialogs:
-		flags := m.Int()
+		var flags int32
 		r = TL_updatePinnedDialogs{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedInt(flags, 1),
 			m.FlaggedVector(flags, 0),
 		}
@@ -26232,9 +26238,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateBotPrecheckoutQuery:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateBotPrecheckoutQuery{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.Int(),
 			m.StringBytes(),
@@ -26278,9 +26284,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateDialogUnreadMark:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateDialogUnreadMark{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 		}
@@ -26299,9 +26305,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateMessagePoll:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateMessagePoll{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.FlaggedObject(flags, 0),
 			m.Object(),
@@ -26365,9 +26371,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateDialogFilter:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateDialogFilter{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.FlaggedObject(flags, 0),
 		}
@@ -26430,9 +26436,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_updatesTooLong{}
 
 	case CRC_updateShortMessage:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateShortMessage{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,    //flag #1
 			flags&16 != 0,   //flag #4
 			flags&32 != 0,   //flag #5
@@ -26450,9 +26456,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateShortChatMessage:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateShortChatMessage{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,    //flag #1
 			flags&16 != 0,   //flag #4
 			flags&32 != 0,   //flag #5
@@ -26496,9 +26502,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateShortSentMessage:
-		flags := m.Int()
+		var flags int32
 		r = TL_updateShortSentMessage{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Int(),
 			m.Int(),
@@ -26544,9 +26550,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_dcOption:
-		flags := m.Int()
+		var flags int32
 		r = TL_dcOption{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,  //flag #0
 			flags&2 != 0,  //flag #1
 			flags&4 != 0,  //flag #2
@@ -26559,9 +26565,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_config:
-		flags := m.Int()
+		var flags int32
 		r = TL_config{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,    //flag #1
 			flags&8 != 0,    //flag #3
 			flags&16 != 0,   //flag #4
@@ -26623,9 +26629,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_help_appUpdate:
-		flags := m.Int()
+		var flags int32
 		r = TL_help_appUpdate{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 			m.String(),
@@ -26782,9 +26788,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_document:
-		flags := m.Int()
+		var flags int32
 		r = TL_document{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.Long(),
 			m.StringBytes(),
@@ -27008,9 +27014,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_documentAttributeAnimated{}
 
 	case CRC_documentAttributeSticker:
-		flags := m.Int()
+		var flags int32
 		r = TL_documentAttributeSticker{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.String(),
 			m.Object(),
@@ -27018,9 +27024,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_documentAttributeVideo:
-		flags := m.Int()
+		var flags int32
 		r = TL_documentAttributeVideo{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Int(),
@@ -27029,9 +27035,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_documentAttributeAudio:
-		flags := m.Int()
+		var flags int32
 		r = TL_documentAttributeAudio{
-			flags,
+			readFlags(m, &flags),
 			flags&1024 != 0, //flag #10
 			m.Int(),
 			m.FlaggedString(flags, 0),
@@ -27089,9 +27095,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_webPage:
-		flags := m.Int()
+		var flags int32
 		r = TL_webPage{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.String(),
 			m.String(),
@@ -27113,16 +27119,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_webPageNotModified:
-		flags := m.Int()
+		var flags int32
 		r = TL_webPageNotModified{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_authorization:
-		flags := m.Int()
+		var flags int32
 		r = TL_authorization{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -27146,9 +27152,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_password:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_password{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -27163,17 +27169,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_passwordSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_passwordSettings{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedString(flags, 0),
 			m.FlaggedObject(flags, 1),
 		}
 
 	case CRC_account_passwordInputSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_passwordInputSettings{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedStringBytes(flags, 0),
 			m.FlaggedString(flags, 0),
@@ -27206,9 +27212,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_chatInvite:
-		flags := m.Int()
+		var flags int32
 		r = TL_chatInvite{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -27242,9 +27248,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_stickerSet:
-		flags := m.Int()
+		var flags int32
 		r = TL_stickerSet{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,  //flag #1
 			flags&4 != 0,  //flag #2
 			flags&8 != 0,  //flag #3
@@ -27308,9 +27314,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_keyboardButtonSwitchInline:
-		flags := m.Int()
+		var flags int32
 		r = TL_keyboardButtonSwitchInline{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.String(),
 			m.String(),
@@ -27327,9 +27333,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_keyboardButtonUrlAuth:
-		flags := m.Int()
+		var flags int32
 		r = TL_keyboardButtonUrlAuth{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.FlaggedString(flags, 0),
 			m.String(),
@@ -27337,9 +27343,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputKeyboardButtonUrlAuth:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputKeyboardButtonUrlAuth{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedString(flags, 1),
@@ -27348,9 +27354,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_keyboardButtonRequestPoll:
-		flags := m.Int()
+		var flags int32
 		r = TL_keyboardButtonRequestPoll{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedObject(flags, 0),
 			m.String(),
 		}
@@ -27361,24 +27367,24 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_replyKeyboardHide:
-		flags := m.Int()
+		var flags int32
 		r = TL_replyKeyboardHide{
-			flags,
+			readFlags(m, &flags),
 			flags&4 != 0, //flag #2
 		}
 
 	case CRC_replyKeyboardForceReply:
-		flags := m.Int()
+		var flags int32
 		r = TL_replyKeyboardForceReply{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
 		}
 
 	case CRC_replyKeyboardMarkup:
-		flags := m.Int()
+		var flags int32
 		r = TL_replyKeyboardMarkup{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -27538,18 +27544,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updates_channelDifferenceEmpty:
-		flags := m.Int()
+		var flags int32
 		r = TL_updates_channelDifferenceEmpty{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 			m.FlaggedInt(flags, 1),
 		}
 
 	case CRC_updates_channelDifferenceTooLong:
-		flags := m.Int()
+		var flags int32
 		r = TL_updates_channelDifferenceTooLong{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.FlaggedInt(flags, 1),
 			m.Object(),
@@ -27559,9 +27565,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updates_channelDifference:
-		flags := m.Int()
+		var flags int32
 		r = TL_updates_channelDifference{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 			m.FlaggedInt(flags, 1),
@@ -27575,9 +27581,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_channelMessagesFilterEmpty{}
 
 	case CRC_channelMessagesFilter:
-		flags := m.Int()
+		var flags int32
 		r = TL_channelMessagesFilter{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Vector(),
 		}
@@ -27596,17 +27602,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channelParticipantCreator:
-		flags := m.Int()
+		var flags int32
 		r = TL_channelParticipantCreator{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.FlaggedString(flags, 0),
 		}
 
 	case CRC_channelParticipantAdmin:
-		flags := m.Int()
+		var flags int32
 		r = TL_channelParticipantAdmin{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Int(),
@@ -27618,9 +27624,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channelParticipantBanned:
-		flags := m.Int()
+		var flags int32
 		r = TL_channelParticipantBanned{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 			m.Int(),
@@ -27674,9 +27680,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_help_termsOfService:
-		flags := m.Int()
+		var flags int32
 		r = TL_help_termsOfService{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.String(),
@@ -27717,18 +27723,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputBotInlineMessageMediaAuto:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputBotInlineMessageMediaAuto{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedObject(flags, 2),
 		}
 
 	case CRC_inputBotInlineMessageText:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputBotInlineMessageText{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedVector(flags, 1),
@@ -27736,18 +27742,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputBotInlineMessageMediaGeo:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputBotInlineMessageMediaGeo{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.Int(),
 			m.FlaggedObject(flags, 2),
 		}
 
 	case CRC_inputBotInlineMessageMediaVenue:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputBotInlineMessageMediaVenue{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.String(),
 			m.String(),
@@ -27758,9 +27764,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputBotInlineMessageMediaContact:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputBotInlineMessageMediaContact{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
 			m.String(),
@@ -27769,16 +27775,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputBotInlineMessageGame:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputBotInlineMessageGame{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedObject(flags, 2),
 		}
 
 	case CRC_inputBotInlineResult:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputBotInlineResult{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
 			m.FlaggedString(flags, 1),
@@ -27798,9 +27804,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputBotInlineResultDocument:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputBotInlineResultDocument{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
 			m.FlaggedString(flags, 1),
@@ -27817,18 +27823,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_botInlineMessageMediaAuto:
-		flags := m.Int()
+		var flags int32
 		r = TL_botInlineMessageMediaAuto{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedObject(flags, 2),
 		}
 
 	case CRC_botInlineMessageText:
-		flags := m.Int()
+		var flags int32
 		r = TL_botInlineMessageText{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedVector(flags, 1),
@@ -27836,18 +27842,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_botInlineMessageMediaGeo:
-		flags := m.Int()
+		var flags int32
 		r = TL_botInlineMessageMediaGeo{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.Int(),
 			m.FlaggedObject(flags, 2),
 		}
 
 	case CRC_botInlineMessageMediaVenue:
-		flags := m.Int()
+		var flags int32
 		r = TL_botInlineMessageMediaVenue{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.String(),
 			m.String(),
@@ -27858,9 +27864,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_botInlineMessageMediaContact:
-		flags := m.Int()
+		var flags int32
 		r = TL_botInlineMessageMediaContact{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
 			m.String(),
@@ -27869,9 +27875,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_botInlineResult:
-		flags := m.Int()
+		var flags int32
 		r = TL_botInlineResult{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
 			m.FlaggedString(flags, 1),
@@ -27883,9 +27889,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_botInlineMediaResult:
-		flags := m.Int()
+		var flags int32
 		r = TL_botInlineMediaResult{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
@@ -27896,9 +27902,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_botResults:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_botResults{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Long(),
 			m.FlaggedString(flags, 1),
@@ -27915,9 +27921,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messageFwdHeader:
-		flags := m.Int()
+		var flags int32
 		r = TL_messageFwdHeader{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedInt(flags, 0),
 			m.FlaggedString(flags, 5),
 			m.Int(),
@@ -27959,9 +27965,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_botCallbackAnswer:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_botCallbackAnswer{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,  //flag #1
 			flags&8 != 0,  //flag #3
 			flags&16 != 0, //flag #4
@@ -27971,9 +27977,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_messageEditData:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_messageEditData{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 		}
 
@@ -28050,16 +28056,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_contacts_topPeersDisabled{}
 
 	case CRC_draftMessageEmpty:
-		flags := m.Int()
+		var flags int32
 		r = TL_draftMessageEmpty{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_draftMessage:
-		flags := m.Int()
+		var flags int32
 		r = TL_draftMessage{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.FlaggedInt(flags, 0),
 			m.String(),
@@ -28136,9 +28142,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_game:
-		flags := m.Int()
+		var flags int32
 		r = TL_game{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.Long(),
 			m.String(),
@@ -28329,9 +28335,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pageBlockPhoto:
-		flags := m.Int()
+		var flags int32
 		r = TL_pageBlockPhoto{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.Object(),
 			m.FlaggedString(flags, 0),
@@ -28339,9 +28345,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pageBlockVideo:
-		flags := m.Int()
+		var flags int32
 		r = TL_pageBlockVideo{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Long(),
@@ -28354,9 +28360,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pageBlockEmbed:
-		flags := m.Int()
+		var flags int32
 		r = TL_pageBlockEmbed{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&8 != 0, //flag #3
 			m.FlaggedString(flags, 1),
@@ -28407,9 +28413,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pageBlockTable:
-		flags := m.Int()
+		var flags int32
 		r = TL_pageBlockTable{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Object(),
@@ -28422,9 +28428,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pageBlockDetails:
-		flags := m.Int()
+		var flags int32
 		r = TL_pageBlockDetails{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Vector(),
 			m.Object(),
@@ -28469,9 +28475,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_invoice:
-		flags := m.Int()
+		var flags int32
 		r = TL_invoice{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,   //flag #0
 			flags&2 != 0,   //flag #1
 			flags&4 != 0,   //flag #2
@@ -28501,9 +28507,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_paymentRequestedInfo:
-		flags := m.Int()
+		var flags int32
 		r = TL_paymentRequestedInfo{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedString(flags, 0),
 			m.FlaggedString(flags, 1),
 			m.FlaggedString(flags, 2),
@@ -28567,9 +28573,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_payments_paymentForm:
-		flags := m.Int()
+		var flags int32
 		r = TL_payments_paymentForm{
-			flags,
+			readFlags(m, &flags),
 			flags&4 != 0, //flag #2
 			flags&8 != 0, //flag #3
 			m.Int(),
@@ -28584,9 +28590,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_payments_validatedRequestedInfo:
-		flags := m.Int()
+		var flags int32
 		r = TL_payments_validatedRequestedInfo{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedString(flags, 0),
 			m.FlaggedVector(flags, 1),
 		}
@@ -28602,9 +28608,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_payments_paymentReceipt:
-		flags := m.Int()
+		var flags int32
 		r = TL_payments_paymentReceipt{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.Int(),
 			m.Object(),
@@ -28618,9 +28624,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_payments_savedInfo:
-		flags := m.Int()
+		var flags int32
 		r = TL_payments_savedInfo{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.FlaggedObject(flags, 0),
 		}
@@ -28632,9 +28638,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputPaymentCredentials:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputPaymentCredentials{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 		}
@@ -28664,9 +28670,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputStickerSetItem:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputStickerSetItem{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
@@ -28684,9 +28690,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_phoneCallWaiting:
-		flags := m.Int()
+		var flags int32
 		r = TL_phoneCallWaiting{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0, //flag #5
 			m.Long(),
 			m.Long(),
@@ -28698,9 +28704,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_phoneCallRequested:
-		flags := m.Int()
+		var flags int32
 		r = TL_phoneCallRequested{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0, //flag #5
 			m.Long(),
 			m.Long(),
@@ -28712,9 +28718,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_phoneCallAccepted:
-		flags := m.Int()
+		var flags int32
 		r = TL_phoneCallAccepted{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0, //flag #5
 			m.Long(),
 			m.Long(),
@@ -28726,9 +28732,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_phoneCall:
-		flags := m.Int()
+		var flags int32
 		r = TL_phoneCall{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0, //flag #5
 			m.Long(),
 			m.Long(),
@@ -28743,9 +28749,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_phoneCallDiscarded:
-		flags := m.Int()
+		var flags int32
 		r = TL_phoneCallDiscarded{
-			flags,
+			readFlags(m, &flags),
 			flags&4 != 0,  //flag #2
 			flags&8 != 0,  //flag #3
 			flags&32 != 0, //flag #5
@@ -28764,9 +28770,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_phoneCallProtocol:
-		flags := m.Int()
+		var flags int32
 		r = TL_phoneCallProtocol{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Int(),
@@ -28808,9 +28814,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_langPackStringPluralized:
-		flags := m.Int()
+		var flags int32
 		r = TL_langPackStringPluralized{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.FlaggedString(flags, 0),
 			m.FlaggedString(flags, 1),
@@ -28834,9 +28840,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_langPackLanguage:
-		flags := m.Int()
+		var flags int32
 		r = TL_langPackLanguage{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&4 != 0, //flag #2
 			flags&8 != 0, //flag #3
@@ -28979,9 +28985,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channelAdminLogEventsFilter:
-		flags := m.Int()
+		var flags int32
 		r = TL_channelAdminLogEventsFilter{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,    //flag #0
 			flags&2 != 0,    //flag #1
 			flags&4 != 0,    //flag #2
@@ -29051,9 +29057,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputSingleMedia:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputSingleMedia{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.Long(),
 			m.String(),
@@ -29231,9 +29237,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_secureValueTypeEmail{}
 
 	case CRC_secureValue:
-		flags := m.Int()
+		var flags int32
 		r = TL_secureValue{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 1),
@@ -29246,9 +29252,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_inputSecureValue:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputSecureValue{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 1),
@@ -29337,9 +29343,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_authorizationForm:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_authorizationForm{
-			flags,
+			readFlags(m, &flags),
 			m.Vector(),
 			m.Vector(),
 			m.Vector(),
@@ -29357,9 +29363,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_help_deepLinkInfoEmpty{}
 
 	case CRC_help_deepLinkInfo:
-		flags := m.Int()
+		var flags int32
 		r = TL_help_deepLinkInfo{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.String(),
 			m.FlaggedVector(flags, 1),
@@ -29420,9 +29426,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_secureRequiredType:
-		flags := m.Int()
+		var flags int32
 		r = TL_secureRequiredType{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -29486,9 +29492,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pageTableCell:
-		flags := m.Int()
+		var flags int32
 		r = TL_pageTableCell{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,  //flag #0
 			flags&8 != 0,  //flag #3
 			flags&16 != 0, //flag #4
@@ -29533,9 +29539,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pageRelatedArticle:
-		flags := m.Int()
+		var flags int32
 		r = TL_pageRelatedArticle{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.Long(),
 			m.FlaggedString(flags, 0),
@@ -29546,9 +29552,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_page:
-		flags := m.Int()
+		var flags int32
 		r = TL_page{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -29582,10 +29588,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_poll:
-		flags := m.Int()
+		var flags int32
 		r = TL_poll{
 			m.Long(),
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -29597,9 +29603,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pollAnswerVoters:
-		flags := m.Int()
+		var flags int32
 		r = TL_pollAnswerVoters{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.StringBytes(),
@@ -29607,9 +29613,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_pollResults:
-		flags := m.Int()
+		var flags int32
 		r = TL_pollResults{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.FlaggedVector(flags, 1),
 			m.FlaggedInt(flags, 2),
@@ -29629,9 +29635,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_chatAdminRights:
-		flags := m.Int()
+		var flags int32
 		r = TL_chatAdminRights{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,   //flag #0
 			flags&2 != 0,   //flag #1
 			flags&4 != 0,   //flag #2
@@ -29643,9 +29649,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_chatBannedRights:
-		flags := m.Int()
+		var flags int32
 		r = TL_chatBannedRights{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,      //flag #0
 			flags&2 != 0,      //flag #1
 			flags&4 != 0,      //flag #2
@@ -29685,18 +29691,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_codeSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_codeSettings{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,  //flag #0
 			flags&2 != 0,  //flag #1
 			flags&16 != 0, //flag #4
 		}
 
 	case CRC_wallPaperSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_wallPaperSettings{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
 			m.FlaggedInt(flags, 0),
@@ -29706,9 +29712,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_autoDownloadSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_autoDownloadSettings{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -29763,9 +29769,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_folder:
-		flags := m.Int()
+		var flags int32
 		r = TL_folder{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -29787,18 +29793,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_searchCounter:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_searchCounter{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Object(),
 			m.Int(),
 		}
 
 	case CRC_urlAuthResultRequest:
-		flags := m.Int()
+		var flags int32
 		r = TL_urlAuthResultRequest{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.String(),
@@ -29852,9 +29858,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_theme:
-		flags := m.Int()
+		var flags int32
 		r = TL_theme{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Long(),
@@ -29893,9 +29899,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_contentSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_contentSettings{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 		}
@@ -29923,9 +29929,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_baseThemeArctic{}
 
 	case CRC_inputThemeSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_inputThemeSettings{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.Int(),
 			m.FlaggedInt(flags, 0),
@@ -29935,9 +29941,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_themeSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_themeSettings{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.Int(),
 			m.FlaggedInt(flags, 0),
@@ -29946,9 +29952,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_webPageAttributeTheme:
-		flags := m.Int()
+		var flags int32
 		r = TL_webPageAttributeTheme{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedVector(flags, 0),
 			m.FlaggedObject(flags, 1),
 		}
@@ -29974,9 +29980,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_votesList:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_votesList{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.Vector(),
 			m.Vector(),
@@ -29996,9 +30002,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_dialogFilter:
-		flags := m.Int()
+		var flags int32
 		r = TL_dialogFilter{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,    //flag #0
 			flags&2 != 0,    //flag #1
 			flags&4 != 0,    //flag #2
@@ -30050,9 +30056,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_statsGraph:
-		flags := m.Int()
+		var flags int32
 		r = TL_statsGraph{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.FlaggedString(flags, 0),
 		}
@@ -30089,9 +30095,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_help_promoData:
-		flags := m.Int()
+		var flags int32
 		r = TL_help_promoData{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 			m.Object(),
@@ -30123,9 +30129,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_initConnection:
-		flags := m.Int()
+		var flags int32
 		r = TL_initConnection{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.String(),
 			m.String(),
@@ -30265,9 +30271,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_registerDevice:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_registerDevice{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 			m.String(),
@@ -30298,9 +30304,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_account_resetNotifySettings{}
 
 	case CRC_account_updateProfile:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_updateProfile{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedString(flags, 0),
 			m.FlaggedString(flags, 1),
 			m.FlaggedString(flags, 2),
@@ -30485,9 +30491,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_initTakeoutSession:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_initTakeoutSession{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,  //flag #0
 			flags&2 != 0,  //flag #1
 			flags&4 != 0,  //flag #2
@@ -30498,9 +30504,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_finishTakeoutSession:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_finishTakeoutSession{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 		}
 
@@ -30524,9 +30530,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_getNotifyExceptions:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_getNotifyExceptions{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.FlaggedObject(flags, 0),
 		}
@@ -30563,18 +30569,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_account_getAutoDownloadSettings{}
 
 	case CRC_account_saveAutoDownloadSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_saveAutoDownloadSettings{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Object(),
 		}
 
 	case CRC_account_uploadTheme:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_uploadTheme{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.FlaggedObject(flags, 0),
 			m.String(),
@@ -30582,9 +30588,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_createTheme:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_createTheme{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
 			m.FlaggedObject(flags, 2),
@@ -30592,9 +30598,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_updateTheme:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_updateTheme{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.Object(),
 			m.FlaggedString(flags, 0),
@@ -30610,9 +30616,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_installTheme:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_installTheme{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.FlaggedString(flags, 1),
 			m.FlaggedObject(flags, 1),
@@ -30632,9 +30638,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_setContentSettings:
-		flags := m.Int()
+		var flags int32
 		r = TL_account_setContentSettings{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 		}
 
@@ -30718,9 +30724,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_contacts_getTopPeers:
-		flags := m.Int()
+		var flags int32
 		r = TL_contacts_getTopPeers{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0,     //flag #0
 			flags&2 != 0,     //flag #1
 			flags&4 != 0,     //flag #2
@@ -30752,9 +30758,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_contacts_addContact:
-		flags := m.Int()
+		var flags int32
 		r = TL_contacts_addContact{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.String(),
@@ -30768,9 +30774,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_contacts_getLocated:
-		flags := m.Int()
+		var flags int32
 		r = TL_contacts_getLocated{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Object(),
 			m.FlaggedInt(flags, 0),
@@ -30782,9 +30788,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getDialogs:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_getDialogs{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.FlaggedInt(flags, 1),
 			m.Int(),
@@ -30807,9 +30813,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_search:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_search{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
@@ -30831,9 +30837,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_deleteHistory:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_deleteHistory{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Object(),
@@ -30841,9 +30847,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_deleteMessages:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_deleteMessages{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.VectorInt(),
 		}
@@ -30860,9 +30866,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_sendMessage:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_sendMessage{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0,   //flag #1
 			flags&32 != 0,  //flag #5
 			flags&64 != 0,  //flag #6
@@ -30877,9 +30883,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_sendMedia:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_sendMedia{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0,  //flag #5
 			flags&64 != 0,  //flag #6
 			flags&128 != 0, //flag #7
@@ -30894,9 +30900,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_forwardMessages:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_forwardMessages{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0,  //flag #5
 			flags&64 != 0,  //flag #6
 			flags&256 != 0, //flag #8
@@ -31052,9 +31058,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getWebPagePreview:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_getWebPagePreview{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.FlaggedVector(flags, 3),
 		}
@@ -31118,9 +31124,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_searchGlobal:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_searchGlobal{
-			flags,
+			readFlags(m, &flags),
 			m.FlaggedInt(flags, 0),
 			m.String(),
 			m.Int(),
@@ -31130,9 +31136,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_reorderStickerSets:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_reorderStickerSets{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.VectorLong(),
 		}
@@ -31162,9 +31168,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getInlineBotResults:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_getInlineBotResults{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.Object(),
 			m.FlaggedObject(flags, 0),
@@ -31173,9 +31179,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_setInlineBotResults:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_setInlineBotResults{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Long(),
@@ -31186,9 +31192,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_sendInlineBotResult:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_sendInlineBotResult{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0,   //flag #5
 			flags&64 != 0,   //flag #6
 			flags&128 != 0,  //flag #7
@@ -31208,9 +31214,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_editMessage:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_editMessage{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Object(),
 			m.Int(),
@@ -31222,9 +31228,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_editInlineBotMessage:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_editInlineBotMessage{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Object(),
 			m.FlaggedString(flags, 11),
@@ -31234,9 +31240,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getBotCallbackAnswer:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_getBotCallbackAnswer{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Object(),
 			m.Int(),
@@ -31244,9 +31250,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_setBotCallbackAnswer:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_setBotCallbackAnswer{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Long(),
 			m.FlaggedString(flags, 0),
@@ -31260,9 +31266,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_saveDraft:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_saveDraft{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.FlaggedInt(flags, 0),
 			m.Object(),
@@ -31284,33 +31290,33 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getRecentStickers:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_getRecentStickers{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 		}
 
 	case CRC_messages_saveRecentSticker:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_saveRecentSticker{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Object(),
 		}
 
 	case CRC_messages_clearRecentStickers:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_clearRecentStickers{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 		}
 
 	case CRC_messages_getArchivedStickers:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_getArchivedStickers{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Long(),
 			m.Int(),
@@ -31327,9 +31333,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_setGameScore:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_setGameScore{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Object(),
@@ -31339,9 +31345,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_setInlineGameScore:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_setInlineGameScore{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Object(),
@@ -31381,17 +31387,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_toggleDialogPin:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_toggleDialogPin{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 		}
 
 	case CRC_messages_reorderPinnedDialogs:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_reorderPinnedDialogs{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 			m.Vector(),
@@ -31403,18 +31409,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_setBotShippingResults:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_setBotShippingResults{
-			flags,
+			readFlags(m, &flags),
 			m.Long(),
 			m.FlaggedString(flags, 0),
 			m.FlaggedVector(flags, 1),
 		}
 
 	case CRC_messages_setBotPrecheckoutResults:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_setBotPrecheckoutResults{
-			flags,
+			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.Long(),
 			m.FlaggedString(flags, 0),
@@ -31467,9 +31473,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_sendMultiMedia:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_sendMultiMedia{
-			flags,
+			readFlags(m, &flags),
 			flags&32 != 0,  //flag #5
 			flags&64 != 0,  //flag #6
 			flags&128 != 0, //flag #7
@@ -31486,9 +31492,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_searchStickerSets:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_searchStickerSets{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.String(),
 			m.Int(),
@@ -31498,9 +31504,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_getSplitRanges{}
 
 	case CRC_messages_markDialogUnread:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_markDialogUnread{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 		}
@@ -31512,9 +31518,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_clearAllDrafts{}
 
 	case CRC_messages_updatePinnedMessage:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_updatePinnedMessage{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Int(),
@@ -31539,9 +31545,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getStatsURL:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_getStatsURL{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.String(),
@@ -31594,9 +31600,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_acceptUrlAuth:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_acceptUrlAuth{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Int(),
@@ -31633,9 +31639,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getPollVotes:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_getPollVotes{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.Int(),
 			m.FlaggedStringBytes(flags, 0),
@@ -31644,9 +31650,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_toggleStickerSets:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_toggleStickerSets{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			flags&4 != 0, //flag #2
@@ -31660,9 +31666,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_getSuggestedDialogFilters{}
 
 	case CRC_messages_updateDialogFilter:
-		flags := m.Int()
+		var flags int32
 		r = TL_messages_updateDialogFilter{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.FlaggedObject(flags, 0),
 		}
@@ -31683,9 +31689,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_updates_getState{}
 
 	case CRC_updates_getDifference:
-		flags := m.Int()
+		var flags int32
 		r = TL_updates_getDifference{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.FlaggedInt(flags, 0),
 			m.Int(),
@@ -31693,9 +31699,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updates_getChannelDifference:
-		flags := m.Int()
+		var flags int32
 		r = TL_updates_getChannelDifference{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Object(),
@@ -31734,9 +31740,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_upload_getFile:
-		flags := m.Int()
+		var flags int32
 		r = TL_upload_getFile{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Object(),
@@ -31926,9 +31932,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channels_createChannel:
-		flags := m.Int()
+		var flags int32
 		r = TL_channels_createChannel{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.String(),
@@ -32004,9 +32010,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channels_getAdminedPublicChannels:
-		flags := m.Int()
+		var flags int32
 		r = TL_channels_getAdminedPublicChannels{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 		}
@@ -32019,9 +32025,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channels_getAdminLog:
-		flags := m.Int()
+		var flags int32
 		r = TL_channels_getAdminLog{
-			flags,
+			readFlags(m, &flags),
 			m.Object(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
@@ -32120,18 +32126,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_payments_validateRequestedInfo:
-		flags := m.Int()
+		var flags int32
 		r = TL_payments_validateRequestedInfo{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Int(),
 			m.Object(),
 		}
 
 	case CRC_payments_sendPaymentForm:
-		flags := m.Int()
+		var flags int32
 		r = TL_payments_sendPaymentForm{
-			flags,
+			readFlags(m, &flags),
 			m.Int(),
 			m.FlaggedString(flags, 0),
 			m.FlaggedString(flags, 1),
@@ -32142,9 +32148,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_payments_getSavedInfo{}
 
 	case CRC_payments_clearSavedInfo:
-		flags := m.Int()
+		var flags int32
 		r = TL_payments_clearSavedInfo{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 		}
@@ -32155,9 +32161,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_stickers_createStickerSet:
-		flags := m.Int()
+		var flags int32
 		r = TL_stickers_createStickerSet{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Object(),
@@ -32194,9 +32200,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_phone_getCallConfig{}
 
 	case CRC_phone_requestCall:
-		flags := m.Int()
+		var flags int32
 		r = TL_phone_requestCall{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Int(),
@@ -32225,9 +32231,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_phone_discardCall:
-		flags := m.Int()
+		var flags int32
 		r = TL_phone_discardCall{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Int(),
@@ -32236,9 +32242,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_phone_setCallRating:
-		flags := m.Int()
+		var flags int32
 		r = TL_phone_setCallRating{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Int(),
@@ -32299,17 +32305,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_stats_getBroadcastStats:
-		flags := m.Int()
+		var flags int32
 		r = TL_stats_getBroadcastStats{
-			flags,
+			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
 		}
 
 	case CRC_stats_loadAsyncGraph:
-		flags := m.Int()
+		var flags int32
 		r = TL_stats_loadAsyncGraph{
-			flags,
+			readFlags(m, &flags),
 			m.String(),
 			m.FlaggedLong(flags, 0),
 		}
