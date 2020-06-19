@@ -77,8 +77,13 @@ func (h SimpleLogHandler) StringifyMessage(isIncoming bool, msg TL, id int64) st
 
 func (h SimpleLogHandler) Log(level LogLevel, err error, msg string, args ...interface{}) {
 	text := h.AddLevelPrevix(level, h.StringifyLog(level, err, msg, args...))
-	if level == DEBUG {
+	switch level {
+	case DEBUG:
 		text = "\033[90m" + text + "\033[0m"
+	case WARN:
+		text = "\033[93m" + text + "\033[0m"
+	case ERROR:
+		text = "\033[91m" + text + "\033[0m"
 	}
 	log.Print(text)
 }
