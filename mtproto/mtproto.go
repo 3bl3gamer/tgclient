@@ -462,6 +462,38 @@ func (m *MTProto) SendSync(msg TLReq) TL {
 	return <-resp
 }
 
+func (m *MTProto) SendSyncRetry(
+	msg TLReq, failRetryInterval time.Duration,
+	floodNumShortRetries int, floodMaxWait time.Duration,
+) TL {
+	retryNum := -1
+	for {
+		retryNum += 1
+		res := m.SendSync(msg)
+
+		if IsError(res, "RPC_CALL_FAIL") {
+			m.log.Warn("got RPC error, retrying in %s", failRetryInterval)
+			time.Sleep(failRetryInterval)
+			continue
+		}
+
+		if floodWait, ok := IsFloodError(res); ok {
+			if retryNum < floodNumShortRetries {
+				floodWait = time.Second
+			}
+			if floodWait > floodMaxWait {
+				return res
+			}
+			m.log.Warn("got flood-wait, retrying in %s, retry #%d of %d short",
+				floodWait, retryNum, floodNumShortRetries)
+			time.Sleep(floodWait)
+			continue
+		}
+
+		return res
+	}
+}
+
 // Must be called only when sendRoutine and recvRoutine are stopped!
 func (m *MTProto) sendAndReadDirect(msg TLReq) (TL, error) {
 	resp := make(chan TL, 1)

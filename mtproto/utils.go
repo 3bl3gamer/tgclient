@@ -2,7 +2,9 @@ package mtproto
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/ansel1/merry"
 )
@@ -16,6 +18,19 @@ func IsError(obj TL, message string) bool {
 func IsErrorType(obj TL, code int32) bool {
 	err, ok := obj.(TL_rpc_error)
 	return ok && err.ErrorCode == code
+}
+
+const FloodWaitErrPerfix = "FLOOD_WAIT_"
+
+func IsFloodError(obj TL) (time.Duration, bool) {
+	if err, ok := obj.(TL_rpc_error); ok && strings.HasPrefix(err.ErrorMessage, FloodWaitErrPerfix) {
+		secs, _ := strconv.ParseInt(err.ErrorMessage[len(FloodWaitErrPerfix):], 10, 64)
+		if secs <= 0 {
+			secs = 1
+		}
+		return time.Duration(secs) * time.Second, true
+	}
+	return 0, false
 }
 
 func IsClosedConnErr(err error) bool {

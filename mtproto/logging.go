@@ -53,6 +53,18 @@ func (h SimpleLogHandler) AddLevelPrevix(level LogLevel, text string) string {
 	return text
 }
 
+func (h SimpleLogHandler) AddLevelColor(level LogLevel, text string) string {
+	switch level {
+	case DEBUG:
+		return "\033[90m" + text + "\033[0m"
+	case WARN:
+		return "\033[93m" + text + "\033[0m"
+	case ERROR:
+		return "\033[91m" + text + "\033[0m"
+	}
+	return text
+}
+
 func (h SimpleLogHandler) StringifyMessage(isIncoming bool, msg TL, id int64) string {
 	var text string
 	switch x := msg.(type) {
@@ -76,15 +88,9 @@ func (h SimpleLogHandler) StringifyMessage(isIncoming bool, msg TL, id int64) st
 }
 
 func (h SimpleLogHandler) Log(level LogLevel, err error, msg string, args ...interface{}) {
-	text := h.AddLevelPrevix(level, h.StringifyLog(level, err, msg, args...))
-	switch level {
-	case DEBUG:
-		text = "\033[90m" + text + "\033[0m"
-	case WARN:
-		text = "\033[93m" + text + "\033[0m"
-	case ERROR:
-		text = "\033[91m" + text + "\033[0m"
-	}
+	text := h.StringifyLog(level, err, msg, args...)
+	text = h.AddLevelPrevix(level, text)
+	text = h.AddLevelColor(level, text)
 	log.Print(text)
 }
 

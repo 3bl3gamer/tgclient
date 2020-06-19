@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/3bl3gamer/tgclient/mtproto"
 	"github.com/ansel1/merry"
@@ -185,11 +186,11 @@ func (d *Downloader) partsDownloadRoutine() {
 			continue
 		}
 
-		resTL := mt.SendSync(mtproto.TL_upload_getFile{
+		resTL := mt.SendSyncRetry(mtproto.TL_upload_getFile{
 			Location: part.location,
 			Offset:   part.offset,
 			Limit:    part.limit,
-		})
+		}, time.Second, 5, 10*time.Second)
 
 		switch res := resTL.(type) {
 		case mtproto.TL_upload_file:

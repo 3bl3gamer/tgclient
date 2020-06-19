@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"runtime"
+	"time"
 
 	"github.com/3bl3gamer/tgclient/mtproto"
 	"github.com/ansel1/merry"
@@ -161,4 +162,11 @@ func (c *TGClient) AuthAndInitEvents(authData mtproto.AuthDataProvider) error {
 
 func (c *TGClient) SendSync(msg mtproto.TLReq) mtproto.TL {
 	return c.mt.SendSync(msg)
+}
+
+func (c *TGClient) SendSyncRetry(
+	msg mtproto.TLReq, failRetryInterval time.Duration,
+	floodNumShortRetries int, floodMaxWait time.Duration,
+) mtproto.TL {
+	return c.mt.SendSyncRetry(msg, failRetryInterval, floodNumShortRetries, floodMaxWait)
 }
