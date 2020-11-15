@@ -4,7 +4,7 @@ It is a pure-Golang MTProto client for Telegram API.
 
 Initially based on https://github.com/sdidyk/mtproto and https://github.com/ronaksoft/mtproto.
 
-TL layer: 119
+TL layer: 120
 
 Consists of two parts:
   * mtproto — core part for API interaction;
@@ -13,7 +13,7 @@ Consists of two parts:
 
 ## How to use it
 
-You may use [tg-history-dumper](https://github.com/3bl3gamer/tg-history-dumper) repo as an example, in particular his file: https://github.com/3bl3gamer/tg-history-dumper/blob/master/tg.go#L89
+You may use [tg-history-dumper](https://github.com/3bl3gamer/tg-history-dumper) repo as an example, in particular this file: https://github.com/3bl3gamer/tg-history-dumper/blob/master/tg.go#L89
 
 ### Create
 
@@ -37,7 +37,7 @@ cfg := &mtproto.AppConfig{
     LangCode:       "en",
 }
 
-// store stat will save/read session data
+// store that will save/read session data
 sessStore := &mtproto.SessFileStore{FPath: "tg_session.json"}
 
 // optional dialer (may be nil) for proxying requests

@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	TL_Layer                                                              = 119
+	TL_Layer                                                              = 120
 	CRC_resPQ                                                             = 0x05162463
 	CRC_p_q_inner_data                                                    = 0x83c95aec
 	CRC_p_q_inner_data_dc                                                 = 0xa9f55f95
@@ -95,14 +95,14 @@ const (
 	CRC_inputMediaDocumentExternal                                        = 0xfb52dc99
 	CRC_inputMediaGame                                                    = 0xd33f43f3
 	CRC_inputMediaInvoice                                                 = 0xf4e096c3
-	CRC_inputMediaGeoLive                                                 = 0xce4e82fd
+	CRC_inputMediaGeoLive                                                 = 0x971fa843
 	CRC_inputMediaPoll                                                    = 0x0f94e5f1
 	CRC_inputMediaDice                                                    = 0xe66fbf7b
 	CRC_inputChatPhotoEmpty                                               = 0x1ca48f57
 	CRC_inputChatUploadedPhoto                                            = 0xc642724e
 	CRC_inputChatPhoto                                                    = 0x8953ad37
 	CRC_inputGeoPointEmpty                                                = 0xe4c123d6
-	CRC_inputGeoPoint                                                     = 0xf3b7acc9
+	CRC_inputGeoPoint                                                     = 0x48222faf
 	CRC_inputPhotoEmpty                                                   = 0x1cd7bf0d
 	CRC_inputPhoto                                                        = 0x3bb3b94a
 	CRC_inputFileLocation                                                 = 0xdfdaabe1
@@ -164,7 +164,7 @@ const (
 	CRC_messageMediaVenue                                                 = 0x2ec0533f
 	CRC_messageMediaGame                                                  = 0xfdb19008
 	CRC_messageMediaInvoice                                               = 0x84551347
-	CRC_messageMediaGeoLive                                               = 0x7c3c2609
+	CRC_messageMediaGeoLive                                               = 0xb940c666
 	CRC_messageMediaPoll                                                  = 0x4bd6e798
 	CRC_messageMediaDice                                                  = 0x3f7ee58b
 	CRC_messageActionEmpty                                                = 0xb6aef7b0
@@ -190,6 +190,7 @@ const (
 	CRC_messageActionSecureValuesSentMe                                   = 0x1b287353
 	CRC_messageActionSecureValuesSent                                     = 0xd95c6154
 	CRC_messageActionContactSignUp                                        = 0xf3f25f76
+	CRC_messageActionGeoProximityReached                                  = 0x98e0d697
 	CRC_dialog                                                            = 0x2c171f72
 	CRC_dialogFolder                                                      = 0x71bd134c
 	CRC_photoEmpty                                                        = 0x2331b22d
@@ -200,7 +201,7 @@ const (
 	CRC_photoStrippedSize                                                 = 0xe0b0bc2e
 	CRC_photoSizeProgressive                                              = 0x5aa86a51
 	CRC_geoPointEmpty                                                     = 0x1117dd5f
-	CRC_geoPoint                                                          = 0x0296f104
+	CRC_geoPoint                                                          = 0xb2a2f663
 	CRC_auth_sentCode                                                     = 0x5e002502
 	CRC_auth_authorization                                                = 0xcd050916
 	CRC_auth_authorizationSignUpRequired                                  = 0x44747e9a
@@ -234,8 +235,8 @@ const (
 	CRC_messages_dialogsSlice                                             = 0x71e094f3
 	CRC_messages_dialogsNotModified                                       = 0xf0e3e596
 	CRC_messages_messages                                                 = 0x8c718e87
-	CRC_messages_messagesSlice                                            = 0xc8edce1e
-	CRC_messages_channelMessages                                          = 0x99262e37
+	CRC_messages_messagesSlice                                            = 0x3a54685e
+	CRC_messages_channelMessages                                          = 0x64479808
 	CRC_messages_messagesNotModified                                      = 0x74535f21
 	CRC_messages_chats                                                    = 0x64ff9fd5
 	CRC_messages_chatsSlice                                               = 0x9cd81144
@@ -257,6 +258,7 @@ const (
 	CRC_inputMessagesFilterMyMentions                                     = 0xc1f8e69a
 	CRC_inputMessagesFilterGeo                                            = 0xe7026d0d
 	CRC_inputMessagesFilterContacts                                       = 0xe062db83
+	CRC_inputMessagesFilterPinned                                         = 0x1bb00451
 	CRC_updateNewMessage                                                  = 0x1f2b0afd
 	CRC_updateMessageID                                                   = 0x4e90bfd6
 	CRC_updateDeleteMessages                                              = 0xa20db0e5
@@ -295,7 +297,6 @@ const (
 	CRC_updateBotInlineQuery                                              = 0x54826690
 	CRC_updateBotInlineSend                                               = 0x0e48f964
 	CRC_updateEditChannelMessage                                          = 0x1b3f4df7
-	CRC_updateChannelPinnedMessage                                        = 0x98592475
 	CRC_updateBotCallbackQuery                                            = 0xe73547e1
 	CRC_updateEditMessage                                                 = 0xe40370a3
 	CRC_updateInlineBotCallbackQuery                                      = 0xf9d27a5a
@@ -320,8 +321,6 @@ const (
 	CRC_updateContactsReset                                               = 0x7084a7be
 	CRC_updateChannelAvailableMessages                                    = 0x70db6837
 	CRC_updateDialogUnreadMark                                            = 0xe16459c3
-	CRC_updateUserPinnedMessage                                           = 0x4c43da18
-	CRC_updateChatPinnedMessage                                           = 0xe10db349
 	CRC_updateMessagePoll                                                 = 0xaca1657b
 	CRC_updateChatDefaultBannedRights                                     = 0x54c01850
 	CRC_updateFolderPeers                                                 = 0x19360dc0
@@ -343,6 +342,8 @@ const (
 	CRC_updateReadChannelDiscussionOutbox                                 = 0x4638a26c
 	CRC_updatePeerBlocked                                                 = 0x246a4b22
 	CRC_updateChannelUserTyping                                           = 0xff2abe9f
+	CRC_updatePinnedMessages                                              = 0xed85eab5
+	CRC_updatePinnedChannelMessages                                       = 0x8588878b
 	CRC_updates_state                                                     = 0xa56c2a3e
 	CRC_updates_differenceEmpty                                           = 0x5d75a138
 	CRC_updates_difference                                                = 0x00f49ca0
@@ -529,6 +530,7 @@ const (
 	CRC_channelParticipantCreator                                         = 0x447dca4b
 	CRC_channelParticipantAdmin                                           = 0xccbebbaf
 	CRC_channelParticipantBanned                                          = 0x1c0facaf
+	CRC_channelParticipantLeft                                            = 0xc3c6796b
 	CRC_channelParticipantsRecent                                         = 0xde3f3c79
 	CRC_channelParticipantsAdmins                                         = 0xb4608969
 	CRC_channelParticipantsKicked                                         = 0xa3b54985
@@ -536,6 +538,7 @@ const (
 	CRC_channelParticipantsBanned                                         = 0x1427a5e1
 	CRC_channelParticipantsSearch                                         = 0x0656ac4b
 	CRC_channelParticipantsContacts                                       = 0xbb6ae88d
+	CRC_channelParticipantsMentions                                       = 0xe04b5ceb
 	CRC_channels_channelParticipants                                      = 0xf56ee2a8
 	CRC_channels_channelParticipantsNotModified                           = 0xf0173fe9
 	CRC_channels_channelParticipant                                       = 0xd0d9b163
@@ -544,7 +547,7 @@ const (
 	CRC_messages_savedGifs                                                = 0x2e0709a5
 	CRC_inputBotInlineMessageMediaAuto                                    = 0x3380c786
 	CRC_inputBotInlineMessageText                                         = 0x3dcd7a87
-	CRC_inputBotInlineMessageMediaGeo                                     = 0xc1b15d65
+	CRC_inputBotInlineMessageMediaGeo                                     = 0x96929a85
 	CRC_inputBotInlineMessageMediaVenue                                   = 0x417bbf11
 	CRC_inputBotInlineMessageMediaContact                                 = 0xa6edbffd
 	CRC_inputBotInlineMessageGame                                         = 0x4b425864
@@ -554,7 +557,7 @@ const (
 	CRC_inputBotInlineResultGame                                          = 0x4fa417f2
 	CRC_botInlineMessageMediaAuto                                         = 0x764cf810
 	CRC_botInlineMessageText                                              = 0x8c7f65e2
-	CRC_botInlineMessageMediaGeo                                          = 0xb722de65
+	CRC_botInlineMessageMediaGeo                                          = 0x051846fd
 	CRC_botInlineMessageMediaVenue                                        = 0x8a86659c
 	CRC_botInlineMessageMediaContact                                      = 0x18d1cdc2
 	CRC_botInlineResult                                                   = 0x11965f3a
@@ -904,11 +907,11 @@ const (
 	CRC_help_countriesList                                                = 0x87d0759e
 	CRC_messageViews                                                      = 0x455b853d
 	CRC_messages_messageViews                                             = 0xb6c4f543
-	CRC_stats_messageStats                                                = 0x8999f295
 	CRC_messages_discussionMessage                                        = 0xf5dd8f9d
 	CRC_messageReplyHeader                                                = 0xa6d57763
 	CRC_messageReplies                                                    = 0x4128faac
 	CRC_peerBlocked                                                       = 0xe8fd8014
+	CRC_stats_messageStats                                                = 0x8999f295
 	CRC_invokeAfterMsg                                                    = 0xcb9f372d
 	CRC_invokeAfterMsgs                                                   = 0x3dc4b4f0
 	CRC_initConnection                                                    = 0xc1cd5ea9
@@ -1027,7 +1030,7 @@ const (
 	CRC_messages_getMessages                                              = 0x63c66506
 	CRC_messages_getDialogs                                               = 0xa0ee3b73
 	CRC_messages_getHistory                                               = 0xdcbb8260
-	CRC_messages_search                                                   = 0x4e17810b
+	CRC_messages_search                                                   = 0x0c352eec
 	CRC_messages_readHistory                                              = 0x0e306d3a
 	CRC_messages_deleteHistory                                            = 0x1c015b09
 	CRC_messages_deleteMessages                                           = 0xe58e95d2
@@ -1150,6 +1153,7 @@ const (
 	CRC_messages_getReplies                                               = 0x24b581ba
 	CRC_messages_getDiscussionMessage                                     = 0x446972fd
 	CRC_messages_readDiscussion                                           = 0xf731a9f4
+	CRC_messages_unpinAllMessages                                         = 0xf025bc8b
 	CRC_updates_getState                                                  = 0xedd4882a
 	CRC_updates_getDifference                                             = 0x25939651
 	CRC_updates_getChannelDifference                                      = 0x03173d78
@@ -1741,10 +1745,12 @@ type TL_inputMediaInvoice struct {
 }
 
 type TL_inputMediaGeoLive struct {
-	Flags    int32
-	Stopped  bool  //flag
-	GeoPoint TL    // InputGeoPoint
-	Period   int32 //flag
+	Flags                       int32
+	Stopped                     bool  //flag
+	GeoPoint                    TL    // InputGeoPoint
+	Heading                     int32 //flag
+	Period                      int32 //flag
+	ProximityNotificationRadius int32 //flag
 }
 
 type TL_inputMediaPoll struct {
@@ -1777,8 +1783,10 @@ type TL_inputGeoPointEmpty struct {
 }
 
 type TL_inputGeoPoint struct {
-	Lat  float64
-	Long float64
+	Flags          int32
+	Lat            float64
+	Long           float64
+	AccuracyRadius int32 //flag
 }
 
 type TL_inputPhotoEmpty struct {
@@ -2125,6 +2133,7 @@ type TL_message struct {
 	FromScheduled     bool //flag
 	Legacy            bool //flag
 	EditHide          bool //flag
+	Pinned            bool //flag
 	ID                int32
 	FromID            TL    // Peer //flag
 	PeerID            TL    // Peer
@@ -2222,8 +2231,11 @@ type TL_messageMediaInvoice struct {
 }
 
 type TL_messageMediaGeoLive struct {
-	Geo    TL // GeoPoint
-	Period int32
+	Flags                       int32
+	Geo                         TL    // GeoPoint
+	Heading                     int32 //flag
+	Period                      int32
+	ProximityNotificationRadius int32 //flag
 }
 
 type TL_messageMediaPoll struct {
@@ -2337,6 +2349,12 @@ type TL_messageActionSecureValuesSent struct {
 type TL_messageActionContactSignUp struct {
 }
 
+type TL_messageActionGeoProximityReached struct {
+	FromID   TL // Peer
+	ToID     TL // Peer
+	Distance int32
+}
+
 type TL_dialog struct {
 	Flags               int32
 	Pinned              bool //flag
@@ -2418,9 +2436,11 @@ type TL_geoPointEmpty struct {
 }
 
 type TL_geoPoint struct {
-	Long       float64
-	Lat        float64
-	AccessHash int64
+	Flags          int32
+	Long           float64
+	Lat            float64
+	AccessHash     int64
+	AccuracyRadius int32 //flag
 }
 
 type TL_auth_sentCode struct {
@@ -2619,23 +2639,25 @@ type TL_messages_messages struct {
 }
 
 type TL_messages_messagesSlice struct {
-	Flags    int32
-	Inexact  bool //flag
-	Count    int32
-	NextRate int32 //flag
-	Messages []TL  // Message
-	Chats    []TL  // Chat
-	Users    []TL  // User
+	Flags          int32
+	Inexact        bool //flag
+	Count          int32
+	NextRate       int32 //flag
+	OffsetIdOffset int32 //flag
+	Messages       []TL  // Message
+	Chats          []TL  // Chat
+	Users          []TL  // User
 }
 
 type TL_messages_channelMessages struct {
-	Flags    int32
-	Inexact  bool //flag
-	Pts      int32
-	Count    int32
-	Messages []TL // Message
-	Chats    []TL // Chat
-	Users    []TL // User
+	Flags          int32
+	Inexact        bool //flag
+	Pts            int32
+	Count          int32
+	OffsetIdOffset int32 //flag
+	Messages       []TL  // Message
+	Chats          []TL  // Chat
+	Users          []TL  // User
 }
 
 type TL_messages_messagesNotModified struct {
@@ -2711,6 +2733,9 @@ type TL_inputMessagesFilterGeo struct {
 }
 
 type TL_inputMessagesFilterContacts struct {
+}
+
+type TL_inputMessagesFilterPinned struct {
 }
 
 type TL_updateNewMessage struct {
@@ -2941,11 +2966,6 @@ type TL_updateEditChannelMessage struct {
 	PtsCount int32
 }
 
-type TL_updateChannelPinnedMessage struct {
-	ChannelID int32
-	ID        int32
-}
-
 type TL_updateBotCallbackQuery struct {
 	Flags         int32
 	QueryID       int64
@@ -3077,17 +3097,6 @@ type TL_updateDialogUnreadMark struct {
 	Peer   TL   // DialogPeer
 }
 
-type TL_updateUserPinnedMessage struct {
-	UserID int32
-	ID     int32
-}
-
-type TL_updateChatPinnedMessage struct {
-	ChatID  int32
-	ID      int32
-	Version int32
-}
-
 type TL_updateMessagePoll struct {
 	Flags   int32
 	PollID  int64
@@ -3203,6 +3212,24 @@ type TL_updateChannelUserTyping struct {
 	TopMsgID  int32 //flag
 	UserID    int32
 	Action    TL // SendMessageAction
+}
+
+type TL_updatePinnedMessages struct {
+	Flags    int32
+	Pinned   bool //flag
+	Peer     TL   // Peer
+	Messages []int32
+	Pts      int32
+	PtsCount int32
+}
+
+type TL_updatePinnedChannelMessages struct {
+	Flags     int32
+	Pinned    bool //flag
+	ChannelID int32
+	Messages  []int32
+	Pts       int32
+	PtsCount  int32
 }
 
 type TL_updates_state struct {
@@ -4289,6 +4316,10 @@ type TL_channelParticipantBanned struct {
 	BannedRights TL // ChatBannedRights
 }
 
+type TL_channelParticipantLeft struct {
+	UserID int32
+}
+
 type TL_channelParticipantsRecent struct {
 }
 
@@ -4312,6 +4343,12 @@ type TL_channelParticipantsSearch struct {
 
 type TL_channelParticipantsContacts struct {
 	Q string
+}
+
+type TL_channelParticipantsMentions struct {
+	Flags    int32
+	Q        string //flag
+	TopMsgID int32  //flag
 }
 
 type TL_channels_channelParticipants struct {
@@ -4361,10 +4398,12 @@ type TL_inputBotInlineMessageText struct {
 }
 
 type TL_inputBotInlineMessageMediaGeo struct {
-	Flags       int32
-	GeoPoint    TL // InputGeoPoint
-	Period      int32
-	ReplyMarkup TL // ReplyMarkup //flag
+	Flags                       int32
+	GeoPoint                    TL    // InputGeoPoint
+	Heading                     int32 //flag
+	Period                      int32 //flag
+	ProximityNotificationRadius int32 //flag
+	ReplyMarkup                 TL    // ReplyMarkup //flag
 }
 
 type TL_inputBotInlineMessageMediaVenue struct {
@@ -4443,10 +4482,12 @@ type TL_botInlineMessageText struct {
 }
 
 type TL_botInlineMessageMediaGeo struct {
-	Flags       int32
-	Geo         TL // GeoPoint
-	Period      int32
-	ReplyMarkup TL // ReplyMarkup //flag
+	Flags                       int32
+	Geo                         TL    // GeoPoint
+	Heading                     int32 //flag
+	Period                      int32 //flag
+	ProximityNotificationRadius int32 //flag
+	ReplyMarkup                 TL    // ReplyMarkup //flag
 }
 
 type TL_botInlineMessageMediaVenue struct {
@@ -6469,10 +6510,6 @@ type TL_messages_messageViews struct {
 	Users []TL // User
 }
 
-type TL_stats_messageStats struct {
-	ViewsGraph TL // StatsGraph
-}
-
 type TL_messages_discussionMessage struct {
 	Flags           int32
 	Messages        []TL  // Message
@@ -6504,6 +6541,10 @@ type TL_messageReplies struct {
 type TL_peerBlocked struct {
 	PeerID TL // Peer
 	Date   int32
+}
+
+type TL_stats_messageStats struct {
+	ViewsGraph TL // StatsGraph
 }
 
 type TL_invokeAfterMsg struct {
@@ -7109,7 +7150,7 @@ type TL_messages_search struct {
 	Flags     int32
 	Peer      TL // InputPeer
 	Q         string
-	FromID    TL    // InputUser //flag
+	FromID    TL    // InputPeer //flag
 	TopMsgID  int32 //flag
 	Filter    TL    // MessagesFilter
 	MinDate   int32
@@ -7695,10 +7736,12 @@ type TL_messages_clearAllDrafts struct {
 }
 
 type TL_messages_updatePinnedMessage struct {
-	Flags  int32
-	Silent bool //flag
-	Peer   TL   // InputPeer
-	ID     int32
+	Flags     int32
+	Silent    bool //flag
+	Unpin     bool //flag
+	PmOneside bool //flag
+	Peer      TL   // InputPeer
+	ID        int32
 }
 
 type TL_messages_sendVote struct {
@@ -7853,6 +7896,10 @@ type TL_messages_readDiscussion struct {
 	Peer      TL // InputPeer
 	MsgID     int32
 	ReadMaxID int32
+}
+
+type TL_messages_unpinAllMessages struct {
+	Peer TL // InputPeer
 }
 
 type TL_updates_getState struct {
@@ -9195,8 +9242,14 @@ func (e TL_inputMediaGeoLive) encode() []byte {
 	x.Int(e.Flags)
 	//flag Stopped
 	x.Bytes(e.GeoPoint.encode())
+	if e.Flags&4 != 0 {
+		x.Int(e.Heading)
+	}
 	if e.Flags&2 != 0 {
 		x.Int(e.Period)
+	}
+	if e.Flags&8 != 0 {
+		x.Int(e.ProximityNotificationRadius)
 	}
 	return x.buf
 }
@@ -9263,8 +9316,12 @@ func (e TL_inputGeoPointEmpty) encode() []byte {
 func (e TL_inputGeoPoint) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputGeoPoint)
+	x.Int(e.Flags)
 	x.Double(e.Lat)
 	x.Double(e.Long)
+	if e.Flags&1 != 0 {
+		x.Int(e.AccuracyRadius)
+	}
 	return x.buf
 }
 
@@ -9847,6 +9904,7 @@ func (e TL_message) encode() []byte {
 	//flag FromScheduled
 	//flag Legacy
 	//flag EditHide
+	//flag Pinned
 	x.Int(e.ID)
 	if e.Flags&256 != 0 {
 		x.Bytes(e.FromID.encode())
@@ -10024,8 +10082,15 @@ func (e TL_messageMediaInvoice) encode() []byte {
 func (e TL_messageMediaGeoLive) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageMediaGeoLive)
+	x.Int(e.Flags)
 	x.Bytes(e.Geo.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.Heading)
+	}
 	x.Int(e.Period)
+	if e.Flags&2 != 0 {
+		x.Int(e.ProximityNotificationRadius)
+	}
 	return x.buf
 }
 
@@ -10223,6 +10288,15 @@ func (e TL_messageActionContactSignUp) encode() []byte {
 	return x.buf
 }
 
+func (e TL_messageActionGeoProximityReached) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionGeoProximityReached)
+	x.Bytes(e.FromID.encode())
+	x.Bytes(e.ToID.encode())
+	x.Int(e.Distance)
+	return x.buf
+}
+
 func (e TL_dialog) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_dialog)
@@ -10344,9 +10418,13 @@ func (e TL_geoPointEmpty) encode() []byte {
 func (e TL_geoPoint) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_geoPoint)
+	x.Int(e.Flags)
 	x.Double(e.Long)
 	x.Double(e.Lat)
 	x.Long(e.AccessHash)
+	if e.Flags&1 != 0 {
+		x.Int(e.AccuracyRadius)
+	}
 	return x.buf
 }
 
@@ -10693,6 +10771,9 @@ func (e TL_messages_messagesSlice) encode() []byte {
 	if e.Flags&1 != 0 {
 		x.Int(e.NextRate)
 	}
+	if e.Flags&4 != 0 {
+		x.Int(e.OffsetIdOffset)
+	}
 	x.Vector(e.Messages)
 	x.Vector(e.Chats)
 	x.Vector(e.Users)
@@ -10706,6 +10787,9 @@ func (e TL_messages_channelMessages) encode() []byte {
 	//flag Inexact
 	x.Int(e.Pts)
 	x.Int(e.Count)
+	if e.Flags&4 != 0 {
+		x.Int(e.OffsetIdOffset)
+	}
 	x.Vector(e.Messages)
 	x.Vector(e.Chats)
 	x.Vector(e.Users)
@@ -10847,6 +10931,12 @@ func (e TL_inputMessagesFilterGeo) encode() []byte {
 func (e TL_inputMessagesFilterContacts) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMessagesFilterContacts)
+	return x.buf
+}
+
+func (e TL_inputMessagesFilterPinned) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputMessagesFilterPinned)
 	return x.buf
 }
 
@@ -11206,14 +11296,6 @@ func (e TL_updateEditChannelMessage) encode() []byte {
 	return x.buf
 }
 
-func (e TL_updateChannelPinnedMessage) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_updateChannelPinnedMessage)
-	x.Int(e.ChannelID)
-	x.Int(e.ID)
-	return x.buf
-}
-
 func (e TL_updateBotCallbackQuery) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateBotCallbackQuery)
@@ -11435,23 +11517,6 @@ func (e TL_updateDialogUnreadMark) encode() []byte {
 	return x.buf
 }
 
-func (e TL_updateUserPinnedMessage) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_updateUserPinnedMessage)
-	x.Int(e.UserID)
-	x.Int(e.ID)
-	return x.buf
-}
-
-func (e TL_updateChatPinnedMessage) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_updateChatPinnedMessage)
-	x.Int(e.ChatID)
-	x.Int(e.ID)
-	x.Int(e.Version)
-	return x.buf
-}
-
 func (e TL_updateMessagePoll) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateMessagePoll)
@@ -11643,6 +11708,30 @@ func (e TL_updateChannelUserTyping) encode() []byte {
 	}
 	x.Int(e.UserID)
 	x.Bytes(e.Action.encode())
+	return x.buf
+}
+
+func (e TL_updatePinnedMessages) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updatePinnedMessages)
+	x.Int(e.Flags)
+	//flag Pinned
+	x.Bytes(e.Peer.encode())
+	x.VectorInt(e.Messages)
+	x.Int(e.Pts)
+	x.Int(e.PtsCount)
+	return x.buf
+}
+
+func (e TL_updatePinnedChannelMessages) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updatePinnedChannelMessages)
+	x.Int(e.Flags)
+	//flag Pinned
+	x.Int(e.ChannelID)
+	x.VectorInt(e.Messages)
+	x.Int(e.Pts)
+	x.Int(e.PtsCount)
 	return x.buf
 }
 
@@ -13426,6 +13515,13 @@ func (e TL_channelParticipantBanned) encode() []byte {
 	return x.buf
 }
 
+func (e TL_channelParticipantLeft) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelParticipantLeft)
+	x.Int(e.UserID)
+	return x.buf
+}
+
 func (e TL_channelParticipantsRecent) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelParticipantsRecent)
@@ -13469,6 +13565,19 @@ func (e TL_channelParticipantsContacts) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelParticipantsContacts)
 	x.String(e.Q)
+	return x.buf
+}
+
+func (e TL_channelParticipantsMentions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelParticipantsMentions)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.String(e.Q)
+	}
+	if e.Flags&2 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	return x.buf
 }
 
@@ -13557,7 +13666,15 @@ func (e TL_inputBotInlineMessageMediaGeo) encode() []byte {
 	x.UInt(CRC_inputBotInlineMessageMediaGeo)
 	x.Int(e.Flags)
 	x.Bytes(e.GeoPoint.encode())
-	x.Int(e.Period)
+	if e.Flags&1 != 0 {
+		x.Int(e.Heading)
+	}
+	if e.Flags&2 != 0 {
+		x.Int(e.Period)
+	}
+	if e.Flags&8 != 0 {
+		x.Int(e.ProximityNotificationRadius)
+	}
 	if e.Flags&4 != 0 {
 		x.Bytes(e.ReplyMarkup.encode())
 	}
@@ -13699,7 +13816,15 @@ func (e TL_botInlineMessageMediaGeo) encode() []byte {
 	x.UInt(CRC_botInlineMessageMediaGeo)
 	x.Int(e.Flags)
 	x.Bytes(e.Geo.encode())
-	x.Int(e.Period)
+	if e.Flags&1 != 0 {
+		x.Int(e.Heading)
+	}
+	if e.Flags&2 != 0 {
+		x.Int(e.Period)
+	}
+	if e.Flags&8 != 0 {
+		x.Int(e.ProximityNotificationRadius)
+	}
 	if e.Flags&4 != 0 {
 		x.Bytes(e.ReplyMarkup.encode())
 	}
@@ -17009,13 +17134,6 @@ func (e TL_messages_messageViews) encode() []byte {
 	return x.buf
 }
 
-func (e TL_stats_messageStats) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_stats_messageStats)
-	x.Bytes(e.ViewsGraph.encode())
-	return x.buf
-}
-
 func (e TL_messages_discussionMessage) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_discussionMessage)
@@ -17076,6 +17194,13 @@ func (e TL_peerBlocked) encode() []byte {
 	x.UInt(CRC_peerBlocked)
 	x.Bytes(e.PeerID.encode())
 	x.Int(e.Date)
+	return x.buf
+}
+
+func (e TL_stats_messageStats) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stats_messageStats)
+	x.Bytes(e.ViewsGraph.encode())
 	return x.buf
 }
 
@@ -19022,6 +19147,8 @@ func (e TL_messages_updatePinnedMessage) encode() []byte {
 	x.UInt(CRC_messages_updatePinnedMessage)
 	x.Int(e.Flags)
 	//flag Silent
+	//flag Unpin
+	//flag PmOneside
 	x.Bytes(e.Peer.encode())
 	x.Int(e.ID)
 	return x.buf
@@ -19268,6 +19395,13 @@ func (e TL_messages_readDiscussion) encode() []byte {
 	x.Bytes(e.Peer.encode())
 	x.Int(e.MsgID)
 	x.Int(e.ReadMaxID)
+	return x.buf
+}
+
+func (e TL_messages_unpinAllMessages) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_unpinAllMessages)
+	x.Bytes(e.Peer.encode())
 	return x.buf
 }
 
@@ -20730,6 +20864,10 @@ func (e TL_messageActionContactSignUp) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_messageActionGeoProximityReached) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_dialog) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -20998,6 +21136,10 @@ func (e TL_inputMessagesFilterContacts) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_inputMessagesFilterPinned) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_updateNewMessage) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -21150,10 +21292,6 @@ func (e TL_updateEditChannelMessage) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
-func (e TL_updateChannelPinnedMessage) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
 func (e TL_updateBotCallbackQuery) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -21250,14 +21388,6 @@ func (e TL_updateDialogUnreadMark) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
-func (e TL_updateUserPinnedMessage) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
-func (e TL_updateChatPinnedMessage) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
 func (e TL_updateMessagePoll) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -21339,6 +21469,14 @@ func (e TL_updatePeerBlocked) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_updateChannelUserTyping) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updatePinnedMessages) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updatePinnedChannelMessages) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -22086,6 +22224,10 @@ func (e TL_channelParticipantBanned) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_channelParticipantLeft) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_channelParticipantsRecent) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -22111,6 +22253,10 @@ func (e TL_channelParticipantsSearch) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_channelParticipantsContacts) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channelParticipantsMentions) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -23586,10 +23732,6 @@ func (e TL_messages_messageViews) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
-func (e TL_stats_messageStats) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
 func (e TL_messages_discussionMessage) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -23603,6 +23745,10 @@ func (e TL_messageReplies) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_peerBlocked) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stats_messageStats) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -24567,6 +24713,10 @@ func (e TL_messages_getDiscussionMessage) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_messages_readDiscussion) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_unpinAllMessages) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -25575,7 +25725,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			m.Object(),
+			m.FlaggedInt(flags, 2),
 			m.FlaggedInt(flags, 1),
+			m.FlaggedInt(flags, 3),
 		}
 
 	case CRC_inputMediaPoll:
@@ -25614,9 +25766,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputGeoPointEmpty{}
 
 	case CRC_inputGeoPoint:
+		var flags int32
 		r = TL_inputGeoPoint{
+			readFlags(m, &flags),
 			m.Double(),
 			m.Double(),
+			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_inputPhotoEmpty:
@@ -25998,14 +26153,15 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_message{
 			readFlags(m, &flags),
-			flags&2 != 0,       //flag #1
-			flags&16 != 0,      //flag #4
-			flags&32 != 0,      //flag #5
-			flags&8192 != 0,    //flag #13
-			flags&16384 != 0,   //flag #14
-			flags&262144 != 0,  //flag #18
-			flags&524288 != 0,  //flag #19
-			flags&2097152 != 0, //flag #21
+			flags&2 != 0,        //flag #1
+			flags&16 != 0,       //flag #4
+			flags&32 != 0,       //flag #5
+			flags&8192 != 0,     //flag #13
+			flags&16384 != 0,    //flag #14
+			flags&262144 != 0,   //flag #18
+			flags&524288 != 0,   //flag #19
+			flags&2097152 != 0,  //flag #21
+			flags&16777216 != 0, //flag #24
 			m.Int(),
 			m.FlaggedObject(flags, 8),
 			m.Object(),
@@ -26116,9 +26272,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messageMediaGeoLive:
+		var flags int32
 		r = TL_messageMediaGeoLive{
+			readFlags(m, &flags),
 			m.Object(),
+			m.FlaggedInt(flags, 0),
 			m.Int(),
+			m.FlaggedInt(flags, 1),
 		}
 
 	case CRC_messageMediaPoll:
@@ -26253,6 +26413,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messageActionContactSignUp:
 		r = TL_messageActionContactSignUp{}
 
+	case CRC_messageActionGeoProximityReached:
+		r = TL_messageActionGeoProximityReached{
+			m.Object(),
+			m.Object(),
+			m.Int(),
+		}
+
 	case CRC_dialog:
 		var flags int32
 		r = TL_dialog{
@@ -26346,10 +26513,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_geoPointEmpty{}
 
 	case CRC_geoPoint:
+		var flags int32
 		r = TL_geoPoint{
+			readFlags(m, &flags),
 			m.Double(),
 			m.Double(),
 			m.Long(),
+			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_auth_sentCode:
@@ -26586,6 +26756,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&2 != 0, //flag #1
 			m.Int(),
 			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 2),
 			m.Vector(),
 			m.Vector(),
 			m.Vector(),
@@ -26598,6 +26769,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&2 != 0, //flag #1
 			m.Int(),
 			m.Int(),
+			m.FlaggedInt(flags, 2),
 			m.Vector(),
 			m.Vector(),
 			m.Vector(),
@@ -26684,6 +26856,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_inputMessagesFilterContacts:
 		r = TL_inputMessagesFilterContacts{}
+
+	case CRC_inputMessagesFilterPinned:
+		r = TL_inputMessagesFilterPinned{}
 
 	case CRC_updateNewMessage:
 		r = TL_updateNewMessage{
@@ -26956,12 +27131,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 		}
 
-	case CRC_updateChannelPinnedMessage:
-		r = TL_updateChannelPinnedMessage{
-			m.Int(),
-			m.Int(),
-		}
-
 	case CRC_updateBotCallbackQuery:
 		var flags int32
 		r = TL_updateBotCallbackQuery{
@@ -27117,19 +27286,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 		}
 
-	case CRC_updateUserPinnedMessage:
-		r = TL_updateUserPinnedMessage{
-			m.Int(),
-			m.Int(),
-		}
-
-	case CRC_updateChatPinnedMessage:
-		r = TL_updateChatPinnedMessage{
-			m.Int(),
-			m.Int(),
-			m.Int(),
-		}
-
 	case CRC_updateMessagePoll:
 		var flags int32
 		r = TL_updateMessagePoll{
@@ -27269,6 +27425,28 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedInt(flags, 0),
 			m.Int(),
 			m.Object(),
+		}
+
+	case CRC_updatePinnedMessages:
+		var flags int32
+		r = TL_updatePinnedMessages{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.Object(),
+			m.VectorInt(),
+			m.Int(),
+			m.Int(),
+		}
+
+	case CRC_updatePinnedChannelMessages:
+		var flags int32
+		r = TL_updatePinnedChannelMessages{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.Int(),
+			m.VectorInt(),
+			m.Int(),
+			m.Int(),
 		}
 
 	case CRC_updates_state:
@@ -28526,6 +28704,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 		}
 
+	case CRC_channelParticipantLeft:
+		r = TL_channelParticipantLeft{
+			m.Int(),
+		}
+
 	case CRC_channelParticipantsRecent:
 		r = TL_channelParticipantsRecent{}
 
@@ -28553,6 +28736,14 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_channelParticipantsContacts:
 		r = TL_channelParticipantsContacts{
 			m.String(),
+		}
+
+	case CRC_channelParticipantsMentions:
+		var flags int32
+		r = TL_channelParticipantsMentions{
+			readFlags(m, &flags),
+			m.FlaggedString(flags, 0),
+			m.FlaggedInt(flags, 1),
 		}
 
 	case CRC_channels_channelParticipants:
@@ -28615,7 +28806,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputBotInlineMessageMediaGeo{
 			readFlags(m, &flags),
 			m.Object(),
-			m.Int(),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 1),
+			m.FlaggedInt(flags, 3),
 			m.FlaggedObject(flags, 2),
 		}
 
@@ -28715,7 +28908,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_botInlineMessageMediaGeo{
 			readFlags(m, &flags),
 			m.Object(),
-			m.Int(),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 1),
+			m.FlaggedInt(flags, 3),
 			m.FlaggedObject(flags, 2),
 		}
 
@@ -31097,11 +31292,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Vector(),
 		}
 
-	case CRC_stats_messageStats:
-		r = TL_stats_messageStats{
-			m.Object(),
-		}
-
 	case CRC_messages_discussionMessage:
 		var flags int32
 		r = TL_messages_discussionMessage{
@@ -31140,6 +31330,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_peerBlocked{
 			m.Object(),
 			m.Int(),
+		}
+
+	case CRC_stats_messageStats:
+		r = TL_stats_messageStats{
+			m.Object(),
 		}
 
 	case CRC_invokeAfterMsg:
@@ -32573,6 +32768,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_updatePinnedMessage{
 			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
 			m.Object(),
 			m.Int(),
 		}
@@ -32760,6 +32957,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 			m.Int(),
 			m.Int(),
+		}
+
+	case CRC_messages_unpinAllMessages:
+		r = TL_messages_unpinAllMessages{
+			m.Object(),
 		}
 
 	case CRC_updates_getState:
