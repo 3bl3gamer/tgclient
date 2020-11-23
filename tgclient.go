@@ -149,12 +149,20 @@ func (c *TGClient) AuthExt(authData mtproto.AuthDataProvider, message mtproto.TL
 }
 
 func (c *TGClient) AuthAndInitEvents(authData mtproto.AuthDataProvider) error {
+	// after reconnection TG *sometimes* stops sending updates
+	c.mt.SetReconnectionHandler(func() error {
+		res := c.SendSync(mtproto.TL_updates_getState{})
+		if _, ok := res.(mtproto.TL_updates_state); !ok {
+			return mtproto.WrongRespError(res)
+		}
+		return nil
+	})
+
 	res, err := c.AuthExt(authData, mtproto.TL_updates_getState{})
 	if err != nil {
 		return merry.Wrap(err)
 	}
-	_, ok := res.(mtproto.TL_updates_state)
-	if !ok {
+	if _, ok := res.(mtproto.TL_updates_state); !ok {
 		return mtproto.WrongRespError(res)
 	}
 	return nil

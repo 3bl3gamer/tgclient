@@ -67,7 +67,7 @@ authDataProvider := mtproto.ScanfAuthDataProvider{}
 err := tgclient.AuthAndInitEvents(authDataProvider)
 ```
 
-While authing, `AuthAndInitEvents` sends `mtproto.TL_updates_getState` request. It makes TG server send updates to client (like new incoming messages). If you do not need those (maybe you just want to dump your chats history), you may send something different:
+While authing, `AuthAndInitEvents` sends `mtproto.TL_updates_getState` request. Same request will also be sent after each reconnection. It makes TG server send updates to client (like new incoming messages). If you do not need those (maybe you just want to dump your chats history), you may send something different:
 
 ```go
 authDataProvider := mtproto.ScanfAuthDataProvider{}

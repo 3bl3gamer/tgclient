@@ -68,12 +68,13 @@ type MTProto struct {
 	connectSemaphore *semaphore.Weighted
 	reconnSemaphore  *semaphore.Weighted
 
-	encryptionReady bool
-	lastSeqNo       int32
-	msgsByID        map[int64]*packetToSend
-	seqNo           int32
-	msgId           int64
-	handleEvent     func(TL)
+	encryptionReady    bool
+	lastSeqNo          int32
+	msgsByID           map[int64]*packetToSend
+	seqNo              int32
+	msgId              int64
+	handleEvent        func(TL)
+	handleReconnection func() error
 
 	dcOptions []*TL_dcOption
 }
@@ -221,6 +222,10 @@ func (m *MTProto) SetEventsHandler(handler func(TL)) {
 	m.handleEvent = handler
 }
 
+func (m *MTProto) SetReconnectionHandler(handler func() error) {
+	m.handleReconnection = handler
+}
+
 func (m *MTProto) initConection() error {
 	m.log.Info("connecting to DC %d (%s)...", m.session.DcID, m.session.Addr)
 	var err error
@@ -314,7 +319,7 @@ func (m *MTProto) reconnectLogged() {
 	defer func() { m.reconnSemaphore.Release(1) }()
 
 	for {
-		err := m.reconnect(0)
+		err := m.reconnect(0, true)
 		if err == nil {
 			return
 		}
@@ -326,10 +331,10 @@ func (m *MTProto) reconnectLogged() {
 }
 
 func (m *MTProto) Reconnect() error {
-	return m.reconnect(0)
+	return m.reconnect(0, true)
 }
 
-func (m *MTProto) reconnect(newDcID int32) error {
+func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
 	m.log.Info("reconnecting: DC %d -> %d", m.session.DcID, newDcID)
 
 	// stopping routines
@@ -407,6 +412,13 @@ func (m *MTProto) reconnect(newDcID int32) error {
 	}
 
 	m.log.Info("reconnected to DC %d (%s)", m.session.DcID, m.session.Addr)
+
+	if mayPassToHandler && m.handleReconnection != nil {
+		if err := m.handleReconnection(); err != nil {
+			return merry.Wrap(err)
+		}
+	}
+
 	return nil
 }
 
@@ -592,12 +604,11 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 			ApiHash:     m.appCfg.AppHash,
 			Settings:    TL_codeSettings{Flags: 1, CurrentNumber: true},
 		})
-		switch x.(type) {
+		switch x := x.(type) {
 		case TL_auth_sentCode:
-			authSentCode = x.(TL_auth_sentCode)
+			authSentCode = x
 			flag = false
 		case TL_rpc_error:
-			x := x.(TL_rpc_error)
 			if x.ErrorCode != TL_ErrSeeOther {
 				return WrongRespError(x)
 			}
@@ -610,7 +621,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 				}
 			}
 
-			if err := m.reconnect(newDc); err != nil {
+			if err := m.reconnect(newDc, false); err != nil {
 				return merry.Wrap(err)
 			}
 			//TODO: save session here?

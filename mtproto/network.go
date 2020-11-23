@@ -94,7 +94,7 @@ func (m *MTProto) read() (TL, error) {
 	var size int
 	var data TL
 
-	err = m.conn.SetReadDeadline(time.Now().Add(300 * time.Second))
+	err = m.conn.SetReadDeadline(time.Now().Add(90 * time.Second))
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
