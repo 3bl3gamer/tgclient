@@ -12,6 +12,12 @@ import (
 	"github.com/ansel1/merry"
 )
 
+const ErrorBufStackKey = "mtproto_decode_err_buf_stack"
+
+func init() {
+	merry.RegisterDetail("Buffer stack", ErrorBufStackKey)
+}
+
 func notEnoughBytesErr(kind string, pos, inc, size int) error {
 	err := merry.Errorf("%s: not enough bytes in buffer: expected %d + %d = %d, got %d",
 		kind, pos, inc, pos+inc, size)
@@ -404,6 +410,34 @@ func (m *DecodeBuf) FlaggedObject(flags, num int32) TL {
 
 func (d *DecodeBuf) dump() {
 	fmt.Println(hex.Dump(d.buf[d.off:d.size]))
+}
+
+func (d *DecodeBuf) pushToErrBufStack(initialOffset int, constructor uint32) {
+	if d.err == nil {
+		return
+	}
+	bufStack, _ := merry.Value(d.err, ErrorBufStackKey).(string)
+	startOffset := 0
+	if initialOffset-64 > 0 {
+		startOffset = initialOffset - 32
+	}
+	endOffset := d.size
+	if d.off+64 < endOffset {
+		endOffset = d.off + 32
+	}
+	ellipsis := ""
+	if endOffset < d.size {
+		ellipsis = "... ... ...\n"
+	}
+	bufStack += fmt.Sprintf(
+		"\nconstructor:        %08x\nobj decoded from:   %d 0x%x (absolute: %d 0x%x)\noffset after error: %d 0x%x (absolute: %d 0x%x)\nthis slice offset:  %d 0x%x\nfull buffer size:   %d 0x%x\n%s%s\n",
+		constructor,
+		initialOffset-startOffset, initialOffset-startOffset, initialOffset, initialOffset,
+		d.off-startOffset, d.off-startOffset, d.off, d.off,
+		startOffset, startOffset, d.size, d.size,
+		hex.Dump(d.buf[startOffset:endOffset]), ellipsis,
+	)
+	d.err = merry.WithValue(d.err, ErrorBufStackKey, bufStack)
 }
 
 func toBool(x TL) bool {

@@ -391,6 +391,7 @@ func readFlags(m *DecodeBuf, flagsPtr *int32) int32 {
 }
 
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
+	initialOffset := m.off
 	switch constructor {`)
 
 	for _, c := range combinators {
@@ -445,12 +446,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	write(`
 	default:
-		m.err = merry.Errorf("Unknown constructor: \u002508x", constructor)
+		m.err = merry.Errorf("Unknown constructor: %%08x", constructor)
 		return nil
 
 	}
 
 	if m.err != nil {
+		m.pushToErrBufStack(initialOffset, constructor)
 		return nil
 	}
 
