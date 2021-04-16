@@ -617,7 +617,10 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 			if n != 1 {
 				n, _ := fmt.Sscanf(x.ErrorMessage, "NETWORK_MIGRATE_%d", &newDc)
 				if n != 1 {
-					return merry.Errorf("RPC error_string: %s", x.ErrorMessage)
+					n, _ := fmt.Sscanf(x.ErrorMessage, "USER_MIGRATE_%d", &newDc)
+					if n != 1 {
+						return merry.Errorf("RPC error_string:%s", x.ErrorMessage)
+					}
 				}
 			}
 
