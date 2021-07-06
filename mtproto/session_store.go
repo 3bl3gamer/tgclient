@@ -33,6 +33,9 @@ func (s *SessFileStore) Save(sess *SessionInfo) (err error) {
 	if err := encoder.Encode(sess); err != nil {
 		return merry.Wrap(err)
 	}
+	if err := f.Close(); err != nil {
+		return merry.Wrap(err)
+	}
 
 	if err := os.Rename(s.FPath+".temp", s.FPath); err != nil {
 		return merry.Wrap(err)
