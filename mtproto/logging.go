@@ -55,7 +55,7 @@ func (h SimpleLogHandler) AddLevelPrevix(level LogLevel, text string) string {
 }
 
 var debugLogColor = color.New(color.FgHiBlack).SprintFunc()
-var warnLogColor = color.New(color.FgHiBlack).Add(color.Bold).SprintFunc()
+var warnLogColor = color.New(color.FgHiYellow).SprintFunc()
 var errorLogColor = color.New(color.FgRed).SprintFunc()
 
 func (h SimpleLogHandler) AddLevelColor(level LogLevel, text string) string {
