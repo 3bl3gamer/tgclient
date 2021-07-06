@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/ansel1/merry"
+	"github.com/fatih/color"
 	"golang.org/x/net/proxy"
 	"golang.org/x/sync/semaphore"
 )
@@ -722,8 +723,8 @@ func (m *MTProto) GetContacts() error {
 			contacts[v.ID] = v
 		}
 	}
-	fmt.Printf(
-		"\033[33m\033[1m%10s    %10s    %-30s    %-20s\033[0m\n",
+	color.New(color.FgYellow).Add(color.Bold).Printf(
+		"%10s    %10s    %-30s    %-20s\n",
 		"id", "mutual", "name", "username",
 	)
 	for _, v := range list.Contacts {

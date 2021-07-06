@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/ansel1/merry"
+	"github.com/fatih/color"
 )
 
 type LogLevel int
@@ -53,14 +54,18 @@ func (h SimpleLogHandler) AddLevelPrevix(level LogLevel, text string) string {
 	return text
 }
 
+var debugLogColor = color.New(color.FgHiBlack).SprintFunc()
+var warnLogColor = color.New(color.FgHiBlack).Add(color.Bold).SprintFunc()
+var errorLogColor = color.New(color.FgRed).SprintFunc()
+
 func (h SimpleLogHandler) AddLevelColor(level LogLevel, text string) string {
 	switch level {
 	case DEBUG:
-		return "\033[90m" + text + "\033[0m"
+		return debugLogColor(text)
 	case WARN:
-		return "\033[93m" + text + "\033[0m"
+		return warnLogColor(text)
 	case ERROR:
-		return "\033[91m" + text + "\033[0m"
+		return errorLogColor(text)
 	}
 	return text
 }
