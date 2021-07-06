@@ -4,7 +4,7 @@ It is a pure-Golang MTProto client for Telegram API.
 
 Initially based on https://github.com/sdidyk/mtproto and https://github.com/ronaksoft/mtproto.
 
-TL layer: 126
+TL layer: 130
 
 Consists of two parts:
   * mtproto — core part for API interaction;
