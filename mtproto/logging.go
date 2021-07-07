@@ -54,22 +54,6 @@ func (h SimpleLogHandler) AddLevelPrevix(level LogLevel, text string) string {
 	return text
 }
 
-var debugLogColor = color.New(color.FgHiBlack).SprintFunc()
-var warnLogColor = color.New(color.FgHiYellow).SprintFunc()
-var errorLogColor = color.New(color.FgRed).SprintFunc()
-
-func (h SimpleLogHandler) AddLevelColor(level LogLevel, text string) string {
-	switch level {
-	case DEBUG:
-		return debugLogColor(text)
-	case WARN:
-		return warnLogColor(text)
-	case ERROR:
-		return errorLogColor(text)
-	}
-	return text
-}
-
 func (h SimpleLogHandler) StringifyMessage(isIncoming bool, msg TL, id int64) string {
 	var text string
 	switch x := msg.(type) {
@@ -95,11 +79,48 @@ func (h SimpleLogHandler) StringifyMessage(isIncoming bool, msg TL, id int64) st
 func (h SimpleLogHandler) Log(level LogLevel, err error, msg string, args ...interface{}) {
 	text := h.StringifyLog(level, err, msg, args...)
 	text = h.AddLevelPrevix(level, text)
-	text = h.AddLevelColor(level, text)
 	log.Print(text)
 }
 
 func (h SimpleLogHandler) Message(isIncoming bool, msg TL, id int64) {
+	h.Log(DEBUG, nil, h.StringifyMessage(isIncoming, msg, id))
+}
+
+// ColorLogHandler adds log line colors depending on severity level
+type ColorLogHandler struct {
+	SimpleLogHandler
+	StdLogger *log.Logger
+}
+
+func NewColorLogHandler() *ColorLogHandler {
+	// color.Error pases text via go-colorable which converts color escape sequences into ansi color on windows
+	return &ColorLogHandler{StdLogger: log.New(color.Error, "", log.LstdFlags)}
+}
+
+var debugLogColor = color.New(color.FgHiBlack).SprintFunc()
+var warnLogColor = color.New(color.FgHiYellow).SprintFunc()
+var errorLogColor = color.New(color.FgRed).SprintFunc()
+
+func (h ColorLogHandler) AddLevelColor(level LogLevel, text string) string {
+	switch level {
+	case DEBUG:
+		return debugLogColor(text)
+	case WARN:
+		return warnLogColor(text)
+	case ERROR:
+		return errorLogColor(text)
+	}
+	return text
+}
+
+func (h ColorLogHandler) Log(level LogLevel, err error, msg string, args ...interface{}) {
+	text := h.StringifyLog(level, err, msg, args...)
+	text = h.AddLevelPrevix(level, text)
+	text = h.AddLevelColor(level, text)
+	h.StdLogger.Print(text)
+}
+
+func (h ColorLogHandler) Message(isIncoming bool, msg TL, id int64) {
 	h.Log(DEBUG, nil, h.StringifyMessage(isIncoming, msg, id))
 }
 

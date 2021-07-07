@@ -108,7 +108,7 @@ func NewMTProto(appID int32, appHash string) *MTProto {
 
 func NewMTProtoExt(params MTParams) *MTProto {
 	if params.LogHandler == nil {
-		params.LogHandler = &SimpleLogHandler{}
+		params.LogHandler = NewColorLogHandler()
 	}
 
 	if params.AppConfig == nil {
@@ -710,6 +710,8 @@ func (m *MTProto) resendPendingPackets() {
 	m.pushPendingPacketsUnlocked(packets)
 }
 
+// GetContacts prints account contacts as a table.
+// For demonstration/debuging purposes.
 func (m *MTProto) GetContacts() error {
 	x := m.SendSync(TL_contacts_getContacts{0})
 	list, ok := x.(TL_contacts_contacts)
@@ -723,13 +725,17 @@ func (m *MTProto) GetContacts() error {
 			contacts[v.ID] = v
 		}
 	}
-	color.New(color.FgYellow).Add(color.Bold).Printf(
+	// writing to stderr because otherwise this output (stdout)
+	// may mess up with logs output (which is sent to stderr) on Windows
+	color.New(color.FgYellow, color.Bold).Fprintf(
+		color.Error,
 		"%10s    %10s    %-30s    %-20s\n",
 		"id", "mutual", "name", "username",
 	)
 	for _, v := range list.Contacts {
 		v := v.(TL_contact)
-		fmt.Printf(
+		fmt.Fprintf(
+			color.Error,
 			"%10d    %10t    %-30s    %-20s\n",
 			v.UserID,
 			toBool(v.Mutual),
