@@ -298,6 +298,9 @@ func (m *MTProto) Connect() error {
 		m.log.Info("trying to connect one more time (%d)", i)
 		time.Sleep(1)
 	}
+	if err != nil {
+		return merry.Wrap(err)
+	}
 
 	// starting goroutines
 	m.log.Debug("connecting: starting routines...")
