@@ -17,7 +17,7 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-//go:generate go run scheme/generate_tl_schema.go 130 scheme/tl-schema-130.tl tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 133 scheme/tl-schema-133.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 const ROUTINES_COUNT = 4
@@ -722,7 +722,7 @@ func (m *MTProto) GetContacts() error {
 		return merry.Errorf("RPC: %#v", x)
 	}
 
-	contacts := make(map[int32]TL_user)
+	contacts := make(map[int64]TL_user)
 	for _, v := range list.Users {
 		if v, ok := v.(TL_user); ok {
 			contacts[v.ID] = v

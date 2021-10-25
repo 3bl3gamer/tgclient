@@ -9,18 +9,18 @@ import (
 type extraData struct {
 	tg       *TGClient
 	mutex    *sync.RWMutex
-	users    map[int32]*mtproto.TL_user
-	chats    map[int32]*mtproto.TL_chat
-	channels map[int32]*mtproto.TL_channel
+	users    map[int64]*mtproto.TL_user
+	chats    map[int64]*mtproto.TL_chat
+	channels map[int64]*mtproto.TL_channel
 }
 
 func newExtraData(tg *TGClient) *extraData {
 	return &extraData{
 		tg:       tg,
 		mutex:    &sync.RWMutex{},
-		users:    make(map[int32]*mtproto.TL_user),
-		chats:    make(map[int32]*mtproto.TL_chat),
-		channels: make(map[int32]*mtproto.TL_channel),
+		users:    make(map[int64]*mtproto.TL_user),
+		chats:    make(map[int64]*mtproto.TL_chat),
+		channels: make(map[int64]*mtproto.TL_channel),
 	}
 }
 
@@ -47,17 +47,17 @@ func (e *extraData) rememberEventExtraData(objs []mtproto.TL) {
 	}
 }
 
-func (e *extraData) FindExtraUser(userID int32) *mtproto.TL_user {
+func (e *extraData) FindExtraUser(userID int64) *mtproto.TL_user {
 	e.mutex.RLock()
 	defer e.mutex.RUnlock()
 	return e.users[userID]
 }
-func (e *extraData) FindExtraChat(chatID int32) *mtproto.TL_chat {
+func (e *extraData) FindExtraChat(chatID int64) *mtproto.TL_chat {
 	e.mutex.RLock()
 	defer e.mutex.RUnlock()
 	return e.chats[chatID]
 }
-func (e *extraData) FindExtraChannel(channelID int32) *mtproto.TL_channel {
+func (e *extraData) FindExtraChannel(channelID int64) *mtproto.TL_channel {
 	e.mutex.RLock()
 	defer e.mutex.RUnlock()
 	return e.channels[channelID]
