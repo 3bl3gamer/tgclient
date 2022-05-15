@@ -60,13 +60,9 @@ func NewTGClientExt(cfg *mtproto.AppConfig, sessStore mtproto.SessionStore, logH
 		updatesState: &mtproto.TL_updates_state{},
 		log:          mtproto.Logger{logHnd},
 	}
-	client.Downloader = *NewDownloader(client)
 	client.extraData = *newExtraData(client)
 
 	mt.SetEventsHandler(client.handleEvent)
-	for i := 0; i < 4; i++ {
-		go client.partsDownloadRoutine()
-	}
 	return client
 }
 
@@ -75,7 +71,14 @@ func (c *TGClient) SetUpdateHandler(handleUpdate UpdateHandler) {
 }
 
 func (c *TGClient) InitAndConnect() error {
+	c.Downloader.Start(c)
 	return merry.Wrap(c.mt.InitSessAndConnect())
+}
+
+func (c *TGClient) Disconnect() error {
+	err := c.Downloader.Stop()
+	err = c.mt.Disconnect()
+	return merry.Wrap(err)
 }
 
 func (c *TGClient) handleEvent(eventObj mtproto.TL) {

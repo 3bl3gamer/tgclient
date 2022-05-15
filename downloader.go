@@ -52,17 +52,34 @@ type Downloader struct {
 	fileMTs        map[int32]*mtproto.MTProto
 	fileMTsMutex   *sync.Mutex
 	filePartsQueue chan *filePart
+	routinesWG     sync.WaitGroup
 	log            mtproto.Logger
 }
 
-func NewDownloader(tg *TGClient) *Downloader {
-	return &Downloader{
-		tg:             tg,
-		fileMTs:        make(map[int32]*mtproto.MTProto),
-		fileMTsMutex:   &sync.Mutex{},
-		filePartsQueue: make(chan *filePart, 4),
-		log:            tg.log,
+func (d *Downloader) Start(tg *TGClient) {
+	d.tg = tg
+	d.fileMTs = make(map[int32]*mtproto.MTProto)
+	d.fileMTsMutex = &sync.Mutex{}
+	d.filePartsQueue = make(chan *filePart, 4)
+	d.log = tg.log
+
+	for i := 0; i < 4; i++ {
+		go d.partsDownloadRoutine()
 	}
+}
+
+func (d *Downloader) Stop() error {
+	close(d.filePartsQueue)
+	d.routinesWG.Wait()
+
+	d.fileMTsMutex.Lock()
+	defer d.fileMTsMutex.Unlock()
+	var err error
+	for dcID, mt := range d.fileMTs {
+		err = mt.Disconnect()
+		delete(d.fileMTs, dcID)
+	}
+	return merry.Wrap(err)
 }
 
 func (d *Downloader) DownloadFileToPath(
@@ -176,6 +193,7 @@ func (d *Downloader) ReqestFilePart(dcID int32, fileLocation mtproto.TL, offset,
 }
 
 func (d *Downloader) partsDownloadRoutine() {
+	d.routinesWG.Add(1)
 	for part := range d.filePartsQueue {
 		fileResp := FileResponse{DcID: part.dcID}
 
@@ -218,6 +236,7 @@ func (d *Downloader) partsDownloadRoutine() {
 		part.outChan <- &fileResp
 		close(part.outChan)
 	}
+	d.routinesWG.Done()
 }
 
 func (d *Downloader) getFileMT(dcID int32) (*mtproto.MTProto, error) {

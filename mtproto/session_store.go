@@ -2,6 +2,8 @@ package mtproto
 
 import (
 	"encoding/json"
+	"errors"
+	"io/fs"
 	"os"
 
 	"github.com/ansel1/merry"
@@ -45,7 +47,7 @@ func (s *SessFileStore) Save(sess *SessionInfo) (err error) {
 
 func (s *SessFileStore) Load(sess *SessionInfo) error {
 	f, err := os.Open(s.FPath)
-	if os.IsNotExist(err) {
+	if errors.Is(err, fs.ErrNotExist) {
 		return ErrNoSessionData.Here()
 	}
 	if err != nil {

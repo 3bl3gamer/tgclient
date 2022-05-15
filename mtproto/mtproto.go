@@ -20,7 +20,7 @@ import (
 //go:generate go run scheme/generate_tl_schema.go 138 scheme/tl-schema-138.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
-const ROUTINES_COUNT = 4
+const ROUTINES_COUNT = 5
 
 var ErrNoSessionData = merry.New("no session data")
 
@@ -164,12 +164,11 @@ func NewMTProtoExt(params MTParams) *MTProto {
 		connectSemaphore: semaphore.NewWeighted(1),
 		reconnSemaphore:  semaphore.NewWeighted(1),
 	}
-	go m.debugRoutine()
 	return m
 }
 
 func (m *MTProto) InitSessAndConnect() error {
-	if err := m.InitSession(false); err != nil {
+	if err := m.InitSession(m.encryptionReady); err != nil {
 		return merry.Wrap(err)
 	}
 	if err := m.Connect(); err != nil {
@@ -304,43 +303,30 @@ func (m *MTProto) Connect() error {
 
 	// starting goroutines
 	m.log.Debug("connecting: starting routines...")
-	m.routinesWG.Add(4)
+	m.routinesWG.Add(ROUTINES_COUNT)
 	go m.sendRoutine()
 	go m.readRoutine()
 	go m.queueTransferRoutine() // straintg messages transfer from external to internal queue
 	go m.pingRoutine()          // starting keepalive pinging
+	go m.debugRoutine()
 
 	m.log.Info("connected to DC %d (%s)...", m.session.DcID, m.session.Addr)
 	return nil
-}
-
-func (m *MTProto) reconnectLogged() {
-	m.log.Info("reconnecting...")
-	if !m.reconnSemaphore.TryAcquire(1) {
-		m.log.Info("reconnection already in progress, aborting")
-		return
-	}
-	defer func() { m.reconnSemaphore.Release(1) }()
-
-	for {
-		err := m.reconnect(0, true)
-		if err == nil {
-			return
-		}
-		m.log.Error(err, "failed to reconnect")
-		m.log.Info("retrying in 5 seconds")
-		time.Sleep(5 * time.Second)
-		// and trying to reconnect again
-	}
 }
 
 func (m *MTProto) Reconnect() error {
 	return m.reconnect(0, true)
 }
 
-func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
-	m.log.Info("reconnecting: DC %d -> %d", m.session.DcID, newDcID)
+func (m *MTProto) Disconnect() error {
+	if err := m.disconnect(true); err != nil {
+		return merry.Wrap(err)
+	}
+	m.log.Info("disconnected.")
+	return nil
+}
 
+func (m *MTProto) disconnect(clearPendingMsgs bool) error {
 	// stopping routines
 	m.log.Debug("stopping routines...")
 	for i := 0; i < ROUTINES_COUNT; i++ {
@@ -366,6 +352,44 @@ func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
 		default:
 			empty = true
 		}
+	}
+
+	if clearPendingMsgs {
+		m.mutex.Lock()
+		for id := range m.msgsByID {
+			delete(m.msgsByID, id)
+		}
+		m.mutex.Unlock()
+	}
+
+	return nil
+}
+
+func (m *MTProto) reconnectLogged() {
+	m.log.Info("reconnecting...")
+	if !m.reconnSemaphore.TryAcquire(1) {
+		m.log.Info("reconnection already in progress, aborting")
+		return
+	}
+	defer func() { m.reconnSemaphore.Release(1) }()
+
+	for {
+		err := m.reconnect(0, true)
+		if err == nil {
+			return
+		}
+		m.log.Error(err, "failed to reconnect")
+		m.log.Info("retrying in 5 seconds")
+		time.Sleep(5 * time.Second)
+		// and trying to reconnect again
+	}
+}
+
+func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
+	m.log.Info("reconnecting: DC %d -> %d", m.session.DcID, newDcID)
+
+	if err := m.disconnect(false); err != nil {
+		return merry.Wrap(err)
 	}
 
 	// saving IDs of messages from msgsByID[],
@@ -858,7 +882,17 @@ func (m *MTProto) queueTransferRoutine() {
 
 // Periodically checks messages in "msgsByID" and warns if they stay there too long
 func (m *MTProto) debugRoutine() {
+	defer func() {
+		m.log.Debug("debugRoutine done")
+		m.routinesWG.Done()
+	}()
 	for {
+		select {
+		case <-m.routinesStop:
+			return
+		case <-time.After(5 * time.Second):
+		}
+
 		m.mutex.Lock()
 		count := 0
 		for id := range m.msgsByID {
@@ -870,7 +904,6 @@ func (m *MTProto) debugRoutine() {
 		}
 		m.mutex.Unlock()
 		m.log.Debug("msgsByID: %d total", count)
-		time.Sleep(5 * time.Second)
 	}
 }
 
