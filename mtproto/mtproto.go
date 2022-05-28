@@ -144,7 +144,7 @@ func NewMTProtoExt(params MTParams) *MTProto {
 		} else {
 			exPath = filepath.Dir(ex)
 		}
-		params.SessStore = &SessFileStore{exPath + "/session.json"}
+		params.SessStore = &SessFileStore{exPath + "/tg.session"}
 	}
 
 	m := &MTProto{
