@@ -17,7 +17,7 @@ type SessionStore interface {
 type SessNoopStore struct{}
 
 func (s *SessNoopStore) Save(sess *SessionInfo) error { return nil }
-func (s *SessNoopStore) Load(sess *SessionInfo) error { return merry.New("can not load") }
+func (s *SessNoopStore) Load(sess *SessionInfo) error { return ErrNoSessionData.Here() }
 
 type SessFileStore struct {
 	FPath string
