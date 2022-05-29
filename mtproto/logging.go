@@ -24,6 +24,11 @@ type LogHandler interface {
 	Message(bool, TL, int64)
 }
 
+type NoopLogHandler struct{}
+
+func (h NoopLogHandler) Log(level LogLevel, err error, msg string, args ...interface{}) {}
+func (h NoopLogHandler) Message(isIncoming bool, msg TL, id int64)                      {}
+
 type SimpleLogHandler struct{}
 
 func (h SimpleLogHandler) TLName(obj interface{}) string {
