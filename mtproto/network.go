@@ -161,6 +161,9 @@ func (m *MTProto) read() (TL, error) {
 		if int(messageLen) > dbuf.size-32 {
 			return nil, merry.Errorf("Message len: %d (need <= %d)", messageLen, dbuf.size-32)
 		}
+		if int(messageLen) < 0 {
+			return nil, merry.Errorf("Wrong message len: %d (0x%08X)", messageLen, uint32(messageLen))
+		}
 		// DEBUG vvv
 		if dbuf.err != nil {
 			panic(dbuf.err)
