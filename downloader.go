@@ -27,6 +27,10 @@ type FileProgressHandler interface {
 	OnProgress(fileLocation mtproto.TL, offset, size int64)
 }
 
+type NoopFileProgressHandler struct{}
+
+func (h NoopFileProgressHandler) OnProgress(fileLocation mtproto.TL, offset, size int64) {}
+
 type FileResponse struct {
 	DcID int32
 	Data []byte
