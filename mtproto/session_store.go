@@ -9,6 +9,8 @@ import (
 	"github.com/ansel1/merry"
 )
 
+var ErrNoSessionData = merry.New("no session data")
+
 type SessionStore interface {
 	Save(*SessionInfo) error
 	Load(*SessionInfo) error
