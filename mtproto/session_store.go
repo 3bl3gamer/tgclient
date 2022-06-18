@@ -9,6 +9,8 @@ import (
 	"github.com/ansel1/merry"
 )
 
+var ErrNoSessionData = merry.New("no session data")
+
 type SessionStore interface {
 	Save(*SessionInfo) error
 	Load(*SessionInfo) error
@@ -48,7 +50,7 @@ func (s *SessFileStore) Save(sess *SessionInfo) (err error) {
 func (s *SessFileStore) Load(sess *SessionInfo) error {
 	f, err := os.Open(s.FPath)
 	if errors.Is(err, fs.ErrNotExist) {
-		return ErrNoSessionData.Here()
+		return ErrNoSessionData.Here().WithCause(err)
 	}
 	if err != nil {
 		return merry.Wrap(err)
@@ -59,4 +61,25 @@ func (s *SessFileStore) Load(sess *SessionInfo) error {
 		return merry.Wrap(err)
 	}
 	return nil
+}
+
+type SessFileStoreExt struct {
+	SessFileStore
+	RequirePresent   bool // Session file must be already present
+	IgnoreUnreadable bool // Session file can be unreadable and will be overwritten, if unreadable and writeable
+}
+
+func (s *SessFileStoreExt) Load(sess *SessionInfo) error {
+	err := s.SessFileStore.Load(sess)
+	if s.RequirePresent && errors.Is(err, ErrNoSessionData) {
+		causeErr := merry.Cause(err)
+		if causeErr != nil {
+			return merry.Wrap(causeErr)
+		}
+		return merry.Wrap(err)
+	}
+	if s.IgnoreUnreadable && err != nil {
+		return ErrNoSessionData.Here()
+	}
+	return merry.Wrap(err)
 }

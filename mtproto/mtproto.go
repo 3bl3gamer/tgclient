@@ -22,8 +22,6 @@ import (
 
 const ROUTINES_COUNT = 5
 
-var ErrNoSessionData = merry.New("no session data")
-
 type SessionInfo struct {
 	DcID        int32  `json:"dc_id"`
 	AuthKey     []byte `json:"auth_key"`
