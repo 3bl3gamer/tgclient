@@ -38,10 +38,11 @@ type FileResponse struct {
 }
 
 type filePart struct {
-	dcID          int32
-	location      mtproto.TL
-	outChan       chan *FileResponse
-	offset, limit int32
+	dcID     int32
+	location mtproto.TL
+	outChan  chan *FileResponse
+	offset   int64
+	limit    int32
 }
 
 type FilePartsResult struct {
@@ -190,7 +191,7 @@ func (d *Downloader) ReqestFilePart(dcID int32, fileLocation mtproto.TL, offset,
 		location: fileLocation,
 		outChan:  make(chan *FileResponse, 1),
 		limit:    int32(limit),
-		offset:   int32(offset),
+		offset:   offset,
 	}
 	d.filePartsQueue <- part
 	return part.outChan
