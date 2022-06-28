@@ -597,21 +597,25 @@ type ScanfAuthDataProvider struct{}
 func (ap ScanfAuthDataProvider) PhoneNumber() (string, error) {
 	var phonenumber string
 	fmt.Print("Enter phone number: ")
-	fmt.Scanf("%s", &phonenumber)
+	// Explictly reading intil "\n".
+	// Otherwise on Windows (where Enter produces two characters "\r\n") the "\n"
+	// will not be read by current Scanf, and next Scanf will read empty string.
+	// https://github.com/golang/go/issues/23562#issuecomment-1006666338
+	fmt.Scanf("%s\n", &phonenumber)
 	return phonenumber, nil
 }
 
 func (ap ScanfAuthDataProvider) Code() (string, error) {
 	var code string
 	fmt.Print("Enter code: ")
-	fmt.Scanf("%s", &code)
+	fmt.Scanf("%s\n", &code)
 	return code, nil
 }
 
 func (ap ScanfAuthDataProvider) Password() (string, error) {
 	var passwd string
 	fmt.Print("Enter password: ")
-	fmt.Scanf("%s", &passwd)
+	fmt.Scanf("%s\n", &passwd)
 	return passwd, nil
 }
 
