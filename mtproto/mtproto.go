@@ -68,15 +68,19 @@ type MTProto struct {
 	reconnSemaphore  *semaphore.Weighted
 
 	encryptionReady    bool
-	lastMsgID          int64
-	lastSeqNo          int32
+	lastOutMsgID       int64
+	lastOutSeqNo       int32
 	msgsByID           map[int64]*packetToSend
-	seqNo              int32
-	msgId              int64
 	handleEvent        func(TL)
 	handleReconnection func() error
 
 	dcOptions []*TL_dcOption
+}
+
+type packetReceived struct {
+	msgID int64
+	seqNo int32
+	msg   TL
 }
 
 type packetToSend struct {
@@ -536,8 +540,8 @@ func (m *MTProto) SendSyncRetry(
 // Must be called only when sendRoutine and recvRoutine are stopped!
 func (m *MTProto) sendAndReadDirect(msg TLReq) (TL, error) {
 	resp := make(chan TL, 1)
-	packet := newPacket(msg, resp)
-	err := m.send(packet)
+	outPacket := newPacket(msg, resp)
+	err := m.send(outPacket)
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
@@ -569,17 +573,17 @@ func (m *MTProto) sendAndReadDirect(msg TLReq) (TL, error) {
 
 	// small version of readRoutine: just reads, processes and checks for error from sending
 	for {
-		data, err := m.read()
+		inPacket, err := m.read()
 		if err != nil {
-			m.clearPacketData(packet.msgID)
+			m.clearPacketData(outPacket.msgID)
 			return nil, merry.Wrap(err)
 		}
-		m.process(m.msgId, m.seqNo, data, false)
+		m.process(inPacket.msgID, inPacket.seqNo, inPacket.msg, false)
 		select {
 		case res := <-resp:
 			return res, nil
 		case err := <-sendErr:
-			m.clearPacketData(packet.msgID)
+			m.clearPacketData(outPacket.msgID)
 			return nil, err
 		default:
 			m.log.Debug("direct send: waiting for next packet")
@@ -846,7 +850,7 @@ func (m *MTProto) readRoutine() {
 		default:
 		}
 
-		data, err := m.read()
+		inPacket, err := m.read()
 		if IsClosedConnErr(err) {
 			continue //closed connection, should receive stop signal now
 		}
@@ -855,7 +859,7 @@ func (m *MTProto) readRoutine() {
 			go m.reconnectLogged()
 			return
 		}
-		m.process(m.msgId, m.seqNo, data, true)
+		m.process(inPacket.msgID, inPacket.seqNo, inPacket.msg, true)
 	}
 }
 

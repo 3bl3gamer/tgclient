@@ -38,11 +38,11 @@ func (m *MTProto) send(packet *packetToSend) error {
 		z.Long(packet.msgID)
 		if packet.seqNo == 0 {
 			if packet.needAck {
-				packet.seqNo = m.lastSeqNo | 1
+				packet.seqNo = m.lastOutSeqNo | 1
 			} else {
-				packet.seqNo = m.lastSeqNo
+				packet.seqNo = m.lastOutSeqNo
 			}
-			m.lastSeqNo += 2
+			m.lastOutSeqNo += 2
 		}
 		z.Int(packet.seqNo)
 		z.Int(int32(len(obj)))
@@ -89,11 +89,11 @@ func (m *MTProto) send(packet *packetToSend) error {
 	return nil
 }
 
-func (m *MTProto) read() (TL, error) {
+func (m *MTProto) read() (*packetReceived, error) {
 	var err error
 	var n int
 	var size int
-	var data TL
+	var packet packetReceived
 
 	err = m.conn.SetReadDeadline(time.Now().Add(90 * time.Second))
 	if err != nil {
@@ -134,14 +134,14 @@ func (m *MTProto) read() (TL, error) {
 
 	authKeyHash := dbuf.Bytes(8)
 	if binary.LittleEndian.Uint64(authKeyHash) == 0 {
-		m.msgId = dbuf.Long()
+		packet.msgID = dbuf.Long()
+		packet.seqNo = 0
 		messageLen := dbuf.Int()
 		if int(messageLen) != dbuf.size-20 {
 			return nil, merry.Errorf("Message len: %d (need %d)", messageLen, dbuf.size-20)
 		}
-		m.seqNo = 0
 
-		data = dbuf.Object()
+		packet.msg = dbuf.Object()
 		if dbuf.err != nil {
 			return nil, merry.Wrap(dbuf.err)
 		}
@@ -156,8 +156,8 @@ func (m *MTProto) read() (TL, error) {
 		dbuf = NewDecodeBuf(x)
 		_ = dbuf.Long() // salt
 		_ = dbuf.Long() // session_id
-		m.msgId = dbuf.Long()
-		m.seqNo = dbuf.Int()
+		packet.msgID = dbuf.Long()
+		packet.seqNo = dbuf.Int()
 		messageLen := dbuf.Int()
 		if int(messageLen) > dbuf.size-32 {
 			return nil, merry.Errorf("Message len: %d (need <= %d)", messageLen, dbuf.size-32)
@@ -184,18 +184,18 @@ func (m *MTProto) read() (TL, error) {
 		// }
 		// DEBUG ^^^
 
-		data = m.decodeMessage(dbuf, nil)
+		packet.msg = m.decodeMessage(dbuf, nil)
 		if dbuf.err != nil {
 			return nil, merry.Wrap(dbuf.err)
 		}
 	}
-	mod := m.msgId & 3
+	mod := packet.msgID & 3
 	if mod != 1 && mod != 3 {
 		return nil, merry.Errorf("Wrong bits of message_id: %d", mod)
 	}
 
-	m.log.Message(true, data, 0)
-	return data, nil
+	m.log.Message(true, packet.msg, packet.msgID)
+	return &packet, nil
 }
 
 func (m *MTProto) makeAuthKey() error {
@@ -372,11 +372,11 @@ func (m *MTProto) generateMessageId() int64 {
 
 	// "must increase monotonically"
 	// (Windows has a low time resolution, multiple UnixNano() may produce same result)
-	if id <= m.lastMsgID {
-		id = m.lastMsgID + 4
+	if id <= m.lastOutMsgID {
+		id = m.lastOutMsgID + 4
 	}
 
-	m.lastMsgID = id
+	m.lastOutMsgID = id
 	return id
 }
 
