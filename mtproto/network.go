@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+	"math/rand"
 	"time"
 
 	"github.com/ansel1/merry"
@@ -15,7 +16,7 @@ func (m *MTProto) justSend(msg TLReq) error {
 
 func (m *MTProto) send(packet *packetToSend) error {
 	if packet.msgID == 0 {
-		packet.msgID = GenerateMessageId()
+		packet.msgID = m.generateMessageId()
 	}
 	m.log.Message(false, packet.msg, packet.msgID)
 	obj := packet.msg.encode()
@@ -358,4 +359,29 @@ func (m *MTProto) makeAuthKey() error {
 		return merry.New("Handshake: Wrong new_nonce_hash1")
 	}
 	return nil
+}
+
+// https://core.telegram.org/mtproto/description#message-identifier-msg-id
+func (m *MTProto) generateMessageId() int64 {
+	const nano = 1000 * 1000 * 1000
+	unixnano := time.Now().UnixNano()
+	// "must approximately equal unixtime*2^32"
+	// "the lower 32 bits ... must present a fractional part of the time point when the message was created"
+	// "Client message identifiers are divisible by 4"
+	id := ((unixnano / nano) << 32) | ((unixnano % nano) & -4)
+
+	// "must increase monotonically"
+	// (Windows has a low time resolution, multiple UnixNano() may produce same result)
+	if id <= m.lastMsgID {
+		id = m.lastMsgID + 4
+	}
+
+	m.lastMsgID = id
+	return id
+}
+
+func GenerateNonce(size int) []byte {
+	b := make([]byte, size)
+	_, _ = rand.Read(b)
+	return b
 }

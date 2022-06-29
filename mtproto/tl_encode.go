@@ -1,25 +1,10 @@
 package mtproto
 
 import (
-	"crypto/rand"
 	"encoding/binary"
 	"math"
 	"math/big"
-	"time"
 )
-
-func GenerateNonce(size int) []byte {
-	b := make([]byte, size)
-	_, _ = rand.Read(b)
-	return b
-}
-
-func GenerateMessageId() int64 {
-	const nano = 1000 * 1000 * 1000
-	unixnano := time.Now().UnixNano()
-
-	return ((unixnano / nano) << 32) | ((unixnano % nano) & -4)
-}
 
 type EncodeBuf struct {
 	buf []byte

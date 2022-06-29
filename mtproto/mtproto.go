@@ -68,6 +68,7 @@ type MTProto struct {
 	reconnSemaphore  *semaphore.Weighted
 
 	encryptionReady    bool
+	lastMsgID          int64
 	lastSeqNo          int32
 	msgsByID           map[int64]*packetToSend
 	seqNo              int32
