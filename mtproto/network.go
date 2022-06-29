@@ -201,7 +201,7 @@ func (m *MTProto) read() (*packetReceived, error) {
 func (m *MTProto) makeAuthKey() error {
 	var x []byte
 	var err error
-	var data interface{}
+	var packet *packetReceived
 
 	// (send) req_pq
 	nonceFirst := GenerateNonce(16)
@@ -211,13 +211,13 @@ func (m *MTProto) makeAuthKey() error {
 	}
 
 	// (parse) resPQ
-	data, err = m.read()
+	packet, err = m.read()
 	if err != nil {
 		return merry.Wrap(err)
 	}
-	res, ok := data.(TL_resPQ)
+	res, ok := packet.msg.(TL_resPQ)
 	if !ok {
-		return merry.Errorf("Handshake: Need resPQ, got %#v", data)
+		return merry.Errorf("Handshake: Need resPQ, got %#v", packet.msg)
 	}
 	if !bytes.Equal(nonceFirst, res.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
@@ -251,13 +251,13 @@ func (m *MTProto) makeAuthKey() error {
 	}
 
 	// (parse) server_DH_params_{ok, fail}
-	data, err = m.read()
+	packet, err = m.read()
 	if err != nil {
 		return merry.Wrap(err)
 	}
-	dh, ok := data.(TL_server_DH_params_ok)
+	dh, ok := packet.msg.(TL_server_DH_params_ok)
 	if !ok {
-		return merry.Errorf("Handshake: Need server_DH_params_ok, got %#v", data)
+		return merry.Errorf("Handshake: Need server_DH_params_ok, got %#v", packet.msg)
 	}
 	if !bytes.Equal(nonceFirst, dh.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
@@ -296,11 +296,11 @@ func (m *MTProto) makeAuthKey() error {
 		return merry.Wrap(err)
 	}
 	innerbuf := NewDecodeBuf(decodedData[20:])
-	data = innerbuf.Object()
+	dhi_TL := innerbuf.Object()
 	if innerbuf.err != nil {
 		return merry.Wrap(innerbuf.err)
 	}
-	dhi, ok := data.(TL_server_DH_inner_data)
+	dhi, ok := dhi_TL.(TL_server_DH_inner_data)
 	if !ok {
 		return merry.New("Handshake: Need server_DH_inner_data")
 	}
@@ -341,13 +341,13 @@ func (m *MTProto) makeAuthKey() error {
 	}
 
 	// (parse) dh_gen_{ok, retry, fail}
-	data, err = m.read()
+	packet, err = m.read()
 	if err != nil {
 		return merry.Wrap(err)
 	}
-	dhg, ok := data.(TL_dh_gen_ok)
+	dhg, ok := packet.msg.(TL_dh_gen_ok)
 	if !ok {
-		return merry.Errorf("Handshake: Need dh_gen_ok, got %#v", data)
+		return merry.Errorf("Handshake: Need dh_gen_ok, got %#v", packet.msg)
 	}
 	if !bytes.Equal(nonceFirst, dhg.Nonce) {
 		return merry.New("Handshake: Wrong nonce")
