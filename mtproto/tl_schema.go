@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	TL_Layer                                                              = 143
+	TL_Layer                                                              = 158
 	CRC_resPQ                                                             = 0x05162463
 	CRC_p_q_inner_data                                                    = 0x83c95aec
 	CRC_p_q_inner_data_dc                                                 = 0xa9f55f95
@@ -59,6 +59,7 @@ const (
 	CRC_tlsBlockGrease                                                    = 0xe675a1c1
 	CRC_tlsBlockPublicKey                                                 = 0x9eb95b5c
 	CRC_tlsBlockScope                                                     = 0xe725d44f
+	CRC_tlsBlockPermutation                                               = 0xd51f148e
 	CRC_rpc_drop_answer                                                   = 0x58e4a740
 	CRC_get_future_salts                                                  = 0xb921bd04
 	CRC_ping                                                              = 0x7abe77ec
@@ -94,12 +95,12 @@ const (
 	CRC_inputMediaPhotoExternal                                           = 0xe5bbfe1a
 	CRC_inputMediaDocumentExternal                                        = 0xfb52dc99
 	CRC_inputMediaGame                                                    = 0xd33f43f3
-	CRC_inputMediaInvoice                                                 = 0xd9799874
+	CRC_inputMediaInvoice                                                 = 0x8eb5a6d5
 	CRC_inputMediaGeoLive                                                 = 0x971fa843
 	CRC_inputMediaPoll                                                    = 0x0f94e5f1
 	CRC_inputMediaDice                                                    = 0xe66fbf7b
 	CRC_inputChatPhotoEmpty                                               = 0x1ca48f57
-	CRC_inputChatUploadedPhoto                                            = 0xc642724e
+	CRC_inputChatUploadedPhoto                                            = 0xbdcdaec0
 	CRC_inputChatPhoto                                                    = 0x8953ad37
 	CRC_inputGeoPointEmpty                                                = 0xe4c123d6
 	CRC_inputGeoPoint                                                     = 0x48222faf
@@ -129,7 +130,7 @@ const (
 	CRC_storage_fileMp4                                                   = 0xb3cea0e4
 	CRC_storage_fileWebp                                                  = 0x1081464c
 	CRC_userEmpty                                                         = 0xd3bc4b7a
-	CRC_user                                                              = 0x3ff6ecb0
+	CRC_user                                                              = 0x8f97c628
 	CRC_userProfilePhotoEmpty                                             = 0x4f11bae1
 	CRC_userProfilePhoto                                                  = 0x82d1f706
 	CRC_userStatusEmpty                                                   = 0x09d05049
@@ -141,10 +142,10 @@ const (
 	CRC_chatEmpty                                                         = 0x29562865
 	CRC_chat                                                              = 0x41cbf256
 	CRC_chatForbidden                                                     = 0x6592a1a7
-	CRC_channel                                                           = 0x8261ac61
+	CRC_channel                                                           = 0x83259464
 	CRC_channelForbidden                                                  = 0x17d493d5
-	CRC_chatFull                                                          = 0xd18ee226
-	CRC_channelFull                                                       = 0xea68a619
+	CRC_chatFull                                                          = 0xc9d31138
+	CRC_channelFull                                                       = 0xf2355507
 	CRC_chatParticipant                                                   = 0xc02d4007
 	CRC_chatParticipantCreator                                            = 0xe46bcee4
 	CRC_chatParticipantAdmin                                              = 0xa0933f5b
@@ -164,7 +165,7 @@ const (
 	CRC_messageMediaWebPage                                               = 0xa32dd600
 	CRC_messageMediaVenue                                                 = 0x2ec0533f
 	CRC_messageMediaGame                                                  = 0xfdb19008
-	CRC_messageMediaInvoice                                               = 0x84551347
+	CRC_messageMediaInvoice                                               = 0xf6a548d3
 	CRC_messageMediaGeoLive                                               = 0xb940c666
 	CRC_messageMediaPoll                                                  = 0x4bd6e798
 	CRC_messageMediaDice                                                  = 0x3f7ee58b
@@ -187,20 +188,27 @@ const (
 	CRC_messageActionPhoneCall                                            = 0x80e11a7f
 	CRC_messageActionScreenshotTaken                                      = 0x4792929b
 	CRC_messageActionCustomAction                                         = 0xfae69f56
-	CRC_messageActionBotAllowed                                           = 0xabe9affe
+	CRC_messageActionBotAllowed                                           = 0xc516d679
 	CRC_messageActionSecureValuesSentMe                                   = 0x1b287353
 	CRC_messageActionSecureValuesSent                                     = 0xd95c6154
 	CRC_messageActionContactSignUp                                        = 0xf3f25f76
 	CRC_messageActionGeoProximityReached                                  = 0x98e0d697
 	CRC_messageActionGroupCall                                            = 0x7a0d7f42
 	CRC_messageActionInviteToGroupCall                                    = 0x502f92f7
-	CRC_messageActionSetMessagesTTL                                       = 0xaa1afbfd
+	CRC_messageActionSetMessagesTTL                                       = 0x3c134d7b
 	CRC_messageActionGroupCallScheduled                                   = 0xb3a07661
 	CRC_messageActionSetChatTheme                                         = 0xaa786345
 	CRC_messageActionChatJoinedByRequest                                  = 0xebbca3cb
 	CRC_messageActionWebViewDataSentMe                                    = 0x47dd8079
 	CRC_messageActionWebViewDataSent                                      = 0xb4c38cb5
-	CRC_dialog                                                            = 0xa8edd0f5
+	CRC_messageActionGiftPremium                                          = 0xc83d6aec
+	CRC_messageActionTopicCreate                                          = 0x0d999256
+	CRC_messageActionTopicEdit                                            = 0xc0944820
+	CRC_messageActionSuggestProfilePhoto                                  = 0x57de635e
+	CRC_messageActionRequestedPeer                                        = 0xfe77345d
+	CRC_messageActionSetChatWallPaper                                     = 0xbc44a927
+	CRC_messageActionSetSameChatWallPaper                                 = 0xc0787d6d
+	CRC_dialog                                                            = 0xd58a08c6
 	CRC_dialogFolder                                                      = 0x71bd134c
 	CRC_photoEmpty                                                        = 0x2331b22d
 	CRC_photo                                                             = 0xfb197a65
@@ -213,13 +221,15 @@ const (
 	CRC_geoPointEmpty                                                     = 0x1117dd5f
 	CRC_geoPoint                                                          = 0xb2a2f663
 	CRC_auth_sentCode                                                     = 0x5e002502
-	CRC_auth_authorization                                                = 0x33fb7bb8
+	CRC_auth_sentCodeSuccess                                              = 0x2390fe44
+	CRC_auth_authorization                                                = 0x2ea2c0d4
 	CRC_auth_authorizationSignUpRequired                                  = 0x44747e9a
 	CRC_auth_exportedAuthorization                                        = 0xb434e2b8
 	CRC_inputNotifyPeer                                                   = 0xb8bc5b0c
 	CRC_inputNotifyUsers                                                  = 0x193b4417
 	CRC_inputNotifyChats                                                  = 0x4a95e84e
 	CRC_inputNotifyBroadcasts                                             = 0xb1db7c7e
+	CRC_inputNotifyForumTopic                                             = 0x5c467992
 	CRC_inputPeerNotifySettings                                           = 0xdf1f002b
 	CRC_peerNotifySettings                                                = 0xa83b0426
 	CRC_peerSettings                                                      = 0xa518110d
@@ -235,7 +245,7 @@ const (
 	CRC_inputReportReasonFake                                             = 0xf5ddd6e7
 	CRC_inputReportReasonIllegalDrugs                                     = 0x0a8eb2be
 	CRC_inputReportReasonPersonalDetails                                  = 0x9ec7863d
-	CRC_userFull                                                          = 0x8c72ea81
+	CRC_userFull                                                          = 0x93eadb53
 	CRC_contact                                                           = 0x145ade0b
 	CRC_importedContact                                                   = 0xc13e3c50
 	CRC_contactStatus                                                     = 0x16d9703b
@@ -249,7 +259,7 @@ const (
 	CRC_messages_dialogsNotModified                                       = 0xf0e3e596
 	CRC_messages_messages                                                 = 0x8c718e87
 	CRC_messages_messagesSlice                                            = 0x3a54685e
-	CRC_messages_channelMessages                                          = 0x64479808
+	CRC_messages_channelMessages                                          = 0xc776ba4e
 	CRC_messages_messagesNotModified                                      = 0x74535f21
 	CRC_messages_chats                                                    = 0x64ff9fd5
 	CRC_messages_chatsSlice                                               = 0x9cd81144
@@ -279,8 +289,7 @@ const (
 	CRC_updateChatUserTyping                                              = 0x83487af0
 	CRC_updateChatParticipants                                            = 0x07761198
 	CRC_updateUserStatus                                                  = 0xe5bdf8de
-	CRC_updateUserName                                                    = 0xc3f202e0
-	CRC_updateUserPhoto                                                   = 0xf227868c
+	CRC_updateUserName                                                    = 0xa7848924
 	CRC_updateNewEncryptedMessage                                         = 0x12bcbd9a
 	CRC_updateEncryptedChatTyping                                         = 0x1710f156
 	CRC_updateEncryption                                                  = 0xb4a2e88d
@@ -305,7 +314,7 @@ const (
 	CRC_updateChatParticipantAdmin                                        = 0xd7ca61a2
 	CRC_updateNewStickerSet                                               = 0x688a30aa
 	CRC_updateStickerSetsOrder                                            = 0x0bb2d201
-	CRC_updateStickerSets                                                 = 0x43ae3dec
+	CRC_updateStickerSets                                                 = 0x31c24808
 	CRC_updateSavedGifs                                                   = 0x9375341e
 	CRC_updateBotInlineQuery                                              = 0x496f379c
 	CRC_updateBotInlineSend                                               = 0x12f12a07
@@ -314,7 +323,7 @@ const (
 	CRC_updateEditMessage                                                 = 0xe40370a3
 	CRC_updateInlineBotCallbackQuery                                      = 0x691e9052
 	CRC_updateReadChannelOutbox                                           = 0xb75f99a9
-	CRC_updateDraftMessage                                                = 0xee2bb969
+	CRC_updateDraftMessage                                                = 0x1b49ec6d
 	CRC_updateReadFeaturedStickers                                        = 0x571d2742
 	CRC_updateRecentStickers                                              = 0x9a422c20
 	CRC_updateConfig                                                      = 0xa229dd06
@@ -330,7 +339,7 @@ const (
 	CRC_updateLangPackTooLong                                             = 0x46560264
 	CRC_updateLangPack                                                    = 0x56022f4d
 	CRC_updateFavedStickers                                               = 0xe511996d
-	CRC_updateChannelReadMessagesContents                                 = 0x44bdd535
+	CRC_updateChannelReadMessagesContents                                 = 0xea29055d
 	CRC_updateContactsReset                                               = 0x7084a7be
 	CRC_updateChannelAvailableMessages                                    = 0xb23fc698
 	CRC_updateDialogUnreadMark                                            = 0xe16459c3
@@ -367,12 +376,23 @@ const (
 	CRC_updateBotCommands                                                 = 0x4d712f2e
 	CRC_updatePendingJoinRequests                                         = 0x7063c3db
 	CRC_updateBotChatInviteRequester                                      = 0x11dfa986
-	CRC_updateMessageReactions                                            = 0x154798c3
+	CRC_updateMessageReactions                                            = 0x5e1b3cb8
 	CRC_updateAttachMenuBots                                              = 0x17b7a20b
 	CRC_updateWebViewResultSent                                           = 0x1592b79d
 	CRC_updateBotMenuButton                                               = 0x14b85813
 	CRC_updateSavedRingtones                                              = 0x74d8be99
 	CRC_updateTranscribedAudio                                            = 0x0084cd5a
+	CRC_updateReadFeaturedEmojiStickers                                   = 0xfb4c496c
+	CRC_updateUserEmojiStatus                                             = 0x28373599
+	CRC_updateRecentEmojiStatuses                                         = 0x30f443db
+	CRC_updateRecentReactions                                             = 0x6f7863f4
+	CRC_updateMoveStickerSetToTop                                         = 0x86fccf85
+	CRC_updateMessageExtendedMedia                                        = 0x5a73a98c
+	CRC_updateChannelPinnedTopic                                          = 0x192efbe3
+	CRC_updateChannelPinnedTopics                                         = 0xfe198602
+	CRC_updateUser                                                        = 0x20529438
+	CRC_updateAutoSaveSettings                                            = 0xec05b097
+	CRC_updateGroupInvitePrivacyForbidden                                 = 0xccf08ad6
 	CRC_updates_state                                                     = 0xa56c2a3e
 	CRC_updates_differenceEmpty                                           = 0x5d75a138
 	CRC_updates_difference                                                = 0x00f49ca0
@@ -391,7 +411,7 @@ const (
 	CRC_upload_file                                                       = 0x096a18d5
 	CRC_upload_fileCdnRedirect                                            = 0xf18cda44
 	CRC_dcOption                                                          = 0x18b7a10d
-	CRC_config                                                            = 0x330b4067
+	CRC_config                                                            = 0xcc1a241e
 	CRC_nearestDc                                                         = 0x8e1a1775
 	CRC_help_appUpdate                                                    = 0xccbbce30
 	CRC_help_noAppUpdate                                                  = 0xc45a6536
@@ -423,6 +443,7 @@ const (
 	CRC_notifyUsers                                                       = 0xb4c83b4c
 	CRC_notifyChats                                                       = 0xc007cec3
 	CRC_notifyBroadcasts                                                  = 0xd612e8ef
+	CRC_notifyForumTopic                                                  = 0x226e6308
 	CRC_sendMessageTypingAction                                           = 0x16bf744e
 	CRC_sendMessageCancelAction                                           = 0xfd5ec8f5
 	CRC_sendMessageRecordVideoAction                                      = 0xa187d66f
@@ -450,6 +471,7 @@ const (
 	CRC_inputPrivacyKeyProfilePhoto                                       = 0x5719bacc
 	CRC_inputPrivacyKeyPhoneNumber                                        = 0x0352dafa
 	CRC_inputPrivacyKeyAddedByPhone                                       = 0xd1219bdd
+	CRC_inputPrivacyKeyVoiceMessages                                      = 0xaee69d68
 	CRC_privacyKeyStatusTimestamp                                         = 0xbc2eab30
 	CRC_privacyKeyChatInvite                                              = 0x500e6dfa
 	CRC_privacyKeyPhoneCall                                               = 0x3d662b7b
@@ -458,6 +480,7 @@ const (
 	CRC_privacyKeyProfilePhoto                                            = 0x96151fed
 	CRC_privacyKeyPhoneNumber                                             = 0xd19ae46d
 	CRC_privacyKeyAddedByPhone                                            = 0x42ffd42b
+	CRC_privacyKeyVoiceMessages                                           = 0x0697f414
 	CRC_inputPrivacyValueAllowContacts                                    = 0x0d09e07b
 	CRC_inputPrivacyValueAllowAll                                         = 0x184b35ce
 	CRC_inputPrivacyValueAllowUsers                                       = 0x131cc67f
@@ -483,6 +506,7 @@ const (
 	CRC_documentAttributeAudio                                            = 0x9852f9c6
 	CRC_documentAttributeFilename                                         = 0x15590068
 	CRC_documentAttributeHasStickers                                      = 0x9801d2f7
+	CRC_documentAttributeCustomEmoji                                      = 0xfd149899
 	CRC_messages_stickersNotModified                                      = 0xf1749a22
 	CRC_messages_stickers                                                 = 0x30a6ec7e
 	CRC_stickerPack                                                       = 0x12b299d4
@@ -495,7 +519,7 @@ const (
 	CRC_webPageNotModified                                                = 0x7311ca11
 	CRC_authorization                                                     = 0xad01d61d
 	CRC_account_authorizations                                            = 0x4bff8ea0
-	CRC_account_password                                                  = 0x185b184f
+	CRC_account_password                                                  = 0x957b50fb
 	CRC_account_passwordSettings                                          = 0x9a5c33e5
 	CRC_account_passwordInputSettings                                     = 0xc23727c9
 	CRC_auth_passwordRecovery                                             = 0x137948a5
@@ -511,8 +535,12 @@ const (
 	CRC_inputStickerSetAnimatedEmoji                                      = 0x028703c8
 	CRC_inputStickerSetDice                                               = 0xe67f520e
 	CRC_inputStickerSetAnimatedEmojiAnimations                            = 0x0cde3739
-	CRC_stickerSet                                                        = 0xd7df217a
-	CRC_messages_stickerSet                                               = 0xb60a24a6
+	CRC_inputStickerSetPremiumGifts                                       = 0xc88b3b02
+	CRC_inputStickerSetEmojiGenericAnimations                             = 0x04c4d4ce
+	CRC_inputStickerSetEmojiDefaultStatuses                               = 0x29d0f5ee
+	CRC_inputStickerSetEmojiDefaultTopicIcons                             = 0x44c1f8e9
+	CRC_stickerSet                                                        = 0x2dd14edc
+	CRC_messages_stickerSet                                               = 0x6e153f16
 	CRC_messages_stickerSetNotModified                                    = 0xd3f924eb
 	CRC_botCommand                                                        = 0xc27ac8c7
 	CRC_botInfo                                                           = 0x8f300b57
@@ -521,7 +549,7 @@ const (
 	CRC_keyboardButtonCallback                                            = 0x35bbdb6b
 	CRC_keyboardButtonRequestPhone                                        = 0xb16a6c29
 	CRC_keyboardButtonRequestGeoLocation                                  = 0xfc796b3f
-	CRC_keyboardButtonSwitchInline                                        = 0x0568a748
+	CRC_keyboardButtonSwitchInline                                        = 0x93b9fbb5
 	CRC_keyboardButtonGame                                                = 0x50f41ccf
 	CRC_keyboardButtonBuy                                                 = 0xafd93fbb
 	CRC_keyboardButtonUrlAuth                                             = 0x10b78d29
@@ -531,6 +559,7 @@ const (
 	CRC_keyboardButtonUserProfile                                         = 0x308660c1
 	CRC_keyboardButtonWebView                                             = 0x13767230
 	CRC_keyboardButtonSimpleWebView                                       = 0xa0c0505c
+	CRC_keyboardButtonRequestPeer                                         = 0x0d0b468c
 	CRC_keyboardButtonRow                                                 = 0x77608b83
 	CRC_replyKeyboardHide                                                 = 0xa03e5b85
 	CRC_replyKeyboardForceReply                                           = 0x86b40b08
@@ -556,6 +585,7 @@ const (
 	CRC_messageEntityBlockquote                                           = 0x020df5d0
 	CRC_messageEntityBankCard                                             = 0x761e6af4
 	CRC_messageEntitySpoiler                                              = 0x32ca960f
+	CRC_messageEntityCustomEmoji                                          = 0xc8cf05f8
 	CRC_inputChannelEmpty                                                 = 0xee8c1e86
 	CRC_inputChannel                                                      = 0xf35aec28
 	CRC_inputChannelFromMessage                                           = 0x5b934f9d
@@ -605,18 +635,23 @@ const (
 	CRC_botInlineMessageMediaInvoice                                      = 0x354a9b09
 	CRC_botInlineResult                                                   = 0x11965f3a
 	CRC_botInlineMediaResult                                              = 0x17db940b
-	CRC_messages_botResults                                               = 0x947ca848
+	CRC_messages_botResults                                               = 0xe021f2f6
 	CRC_exportedMessageLink                                               = 0x5dab1af4
 	CRC_messageFwdHeader                                                  = 0x5f777dce
 	CRC_auth_codeTypeSms                                                  = 0x72a3158c
 	CRC_auth_codeTypeCall                                                 = 0x741cd3e3
 	CRC_auth_codeTypeFlashCall                                            = 0x226ccefb
 	CRC_auth_codeTypeMissedCall                                           = 0xd61ad6ee
+	CRC_auth_codeTypeFragmentSms                                          = 0x06ed998c
 	CRC_auth_sentCodeTypeApp                                              = 0x3dbb5986
 	CRC_auth_sentCodeTypeSms                                              = 0xc000bba2
 	CRC_auth_sentCodeTypeCall                                             = 0x5353e5a7
 	CRC_auth_sentCodeTypeFlashCall                                        = 0xab03c6d9
 	CRC_auth_sentCodeTypeMissedCall                                       = 0x82006484
+	CRC_auth_sentCodeTypeEmailCode                                        = 0xf450f59b
+	CRC_auth_sentCodeTypeSetUpEmailRequired                               = 0xa5491dea
+	CRC_auth_sentCodeTypeFragmentSms                                      = 0xd9565c39
+	CRC_auth_sentCodeTypeFirebaseSms                                      = 0xe57b1432
 	CRC_messages_botCallbackAnswer                                        = 0x36585ea4
 	CRC_messages_messageEditData                                          = 0x26b5dde6
 	CRC_inputBotInlineMessageID                                           = 0x890c3d89
@@ -639,7 +674,7 @@ const (
 	CRC_draftMessageEmpty                                                 = 0x1b0c841a
 	CRC_draftMessage                                                      = 0xfd8e711f
 	CRC_messages_featuredStickersNotModified                              = 0xc6dc0c66
-	CRC_messages_featuredStickers                                         = 0x84c02310
+	CRC_messages_featuredStickers                                         = 0xbe382906
 	CRC_messages_recentStickersNotModified                                = 0x0b17f890
 	CRC_messages_recentStickers                                           = 0x88d37c56
 	CRC_messages_archivedStickers                                         = 0x4fcba9c8
@@ -647,6 +682,8 @@ const (
 	CRC_messages_stickerSetInstallResultArchive                           = 0x35e410a8
 	CRC_stickerSetCovered                                                 = 0x6410a5d2
 	CRC_stickerSetMultiCovered                                            = 0x3407e51b
+	CRC_stickerSetFullCovered                                             = 0x40d13c0e
+	CRC_stickerSetNoCovered                                               = 0x77b15d1c
 	CRC_maskCoords                                                        = 0xaed6dbb2
 	CRC_inputStickeredMediaPhoto                                          = 0x4a992157
 	CRC_inputStickeredMediaDocument                                       = 0x0438865b
@@ -716,8 +753,9 @@ const (
 	CRC_inputWebDocument                                                  = 0x9bed434d
 	CRC_inputWebFileLocation                                              = 0xc239d686
 	CRC_inputWebFileGeoPointLocation                                      = 0x9f2221c9
+	CRC_inputWebFileAudioAlbumThumbLocation                               = 0xf46fe924
 	CRC_upload_webFile                                                    = 0x21e753bc
-	CRC_payments_paymentForm                                              = 0xb0133b37
+	CRC_payments_paymentForm                                              = 0xa0058751
 	CRC_payments_validatedRequestedInfo                                   = 0xd1451883
 	CRC_payments_paymentResult                                            = 0x4e5f810d
 	CRC_payments_paymentVerificationNeeded                                = 0xd8411139
@@ -729,7 +767,7 @@ const (
 	CRC_inputPaymentCredentialsGooglePay                                  = 0x8ac32801
 	CRC_account_tmpPassword                                               = 0xdb64fd34
 	CRC_shippingOption                                                    = 0xb6213cdf
-	CRC_inputStickerSetItem                                               = 0xffa0a496
+	CRC_inputStickerSetItem                                               = 0x32da9e9c
 	CRC_inputPhoneCall                                                    = 0x1e36fded
 	CRC_phoneCallEmpty                                                    = 0x5366c915
 	CRC_phoneCallWaiting                                                  = 0xc5226f17
@@ -776,7 +814,7 @@ const (
 	CRC_channelAdminLogEventActionParticipantMute                         = 0xf92424d2
 	CRC_channelAdminLogEventActionParticipantUnmute                       = 0xe64429c0
 	CRC_channelAdminLogEventActionToggleGroupCallSetting                  = 0x56d6a247
-	CRC_channelAdminLogEventActionParticipantJoinByInvite                 = 0x5cdada77
+	CRC_channelAdminLogEventActionParticipantJoinByInvite                 = 0xfe9fc158
 	CRC_channelAdminLogEventActionExportedInviteDelete                    = 0x5a50fca4
 	CRC_channelAdminLogEventActionExportedInviteRevoke                    = 0x410a134e
 	CRC_channelAdminLogEventActionExportedInviteEdit                      = 0xe90ebb59
@@ -785,7 +823,14 @@ const (
 	CRC_channelAdminLogEventActionParticipantJoinByRequest                = 0xafb6144a
 	CRC_channelAdminLogEventActionToggleNoForwards                        = 0xcb2ac766
 	CRC_channelAdminLogEventActionSendMessage                             = 0x278f2868
-	CRC_channelAdminLogEventActionChangeAvailableReactions                = 0x9cf7f76a
+	CRC_channelAdminLogEventActionChangeAvailableReactions                = 0xbe4e0ef8
+	CRC_channelAdminLogEventActionChangeUsernames                         = 0xf04fb3a9
+	CRC_channelAdminLogEventActionToggleForum                             = 0x02cc6383
+	CRC_channelAdminLogEventActionCreateTopic                             = 0x58707d28
+	CRC_channelAdminLogEventActionEditTopic                               = 0xf06fe208
+	CRC_channelAdminLogEventActionDeleteTopic                             = 0xae168909
+	CRC_channelAdminLogEventActionPinTopic                                = 0x5d8d353b
+	CRC_channelAdminLogEventActionToggleAntiSpam                          = 0x64f36dfc
 	CRC_channelAdminLogEvent                                              = 0x1fad68cd
 	CRC_channels_adminLogResults                                          = 0xed8af74d
 	CRC_channelAdminLogEventsFilter                                       = 0xea107ae4
@@ -899,7 +944,7 @@ const (
 	CRC_inputWallPaperNoFile                                              = 0x967a462e
 	CRC_account_wallPapersNotModified                                     = 0x1c199183
 	CRC_account_wallPapers                                                = 0xcdc3858c
-	CRC_codeSettings                                                      = 0x8a6469c2
+	CRC_codeSettings                                                      = 0xad253d78
 	CRC_wallPaperSettings                                                 = 0x1dc1bca4
 	CRC_autoDownloadSettings                                              = 0x8efab953
 	CRC_account_autoDownloadSettings                                      = 0x63cacf26
@@ -946,6 +991,7 @@ const (
 	CRC_payments_bankCardData                                             = 0x3e24e573
 	CRC_dialogFilter                                                      = 0x7438f7e8
 	CRC_dialogFilterDefault                                               = 0x363293ae
+	CRC_dialogFilterChatlist                                              = 0xd64a04a8
 	CRC_dialogFilterSuggested                                             = 0x77744d4a
 	CRC_statsDateRangeDays                                                = 0xb637edaf
 	CRC_statsAbsValueAndPrev                                              = 0xcb43acde
@@ -958,6 +1004,8 @@ const (
 	CRC_help_promoDataEmpty                                               = 0x98f6ac75
 	CRC_help_promoData                                                    = 0x8c39793f
 	CRC_videoSize                                                         = 0xde33b094
+	CRC_videoSizeEmojiMarkup                                              = 0xf85c413c
+	CRC_videoSizeStickerMarkup                                            = 0x0da082fe
 	CRC_statsGroupTopPoster                                               = 0x9d04af9b
 	CRC_statsGroupTopAdmin                                                = 0xd7584c87
 	CRC_statsGroupTopInviter                                              = 0x535f779d
@@ -985,6 +1033,7 @@ const (
 	CRC_inlineQueryPeerTypeChat                                           = 0xd766c50a
 	CRC_inlineQueryPeerTypeMegagroup                                      = 0x5ec4be43
 	CRC_inlineQueryPeerTypeBroadcast                                      = 0x6334ee9a
+	CRC_inlineQueryPeerTypeBotPM                                          = 0x0e3b2d0c
 	CRC_messages_historyImport                                            = 0x1662af0b
 	CRC_messages_historyImportParsed                                      = 0x5e0fb7b9
 	CRC_messages_affectedFoundMessages                                    = 0xef8d3e6c
@@ -1011,25 +1060,24 @@ const (
 	CRC_account_resetPasswordFailedWait                                   = 0xe3779861
 	CRC_account_resetPasswordRequestedWait                                = 0xe9effc7d
 	CRC_account_resetPasswordOk                                           = 0xe926d63e
-	CRC_sponsoredMessage                                                  = 0x3a836df8
-	CRC_messages_sponsoredMessages                                        = 0x65a4c7d5
+	CRC_sponsoredMessage                                                  = 0xfc25b828
+	CRC_messages_sponsoredMessages                                        = 0xc9ee1d87
+	CRC_messages_sponsoredMessagesEmpty                                   = 0x1839490f
 	CRC_searchResultsCalendarPeriod                                       = 0xc9b0539f
 	CRC_messages_searchResultsCalendar                                    = 0x147ee23c
 	CRC_searchResultPosition                                              = 0x7f648b67
 	CRC_messages_searchResultsPositions                                   = 0x53b22baf
-	CRC_channels_sendAsPeers                                              = 0x8356cda9
+	CRC_channels_sendAsPeers                                              = 0xf496b0c6
 	CRC_users_userFull                                                    = 0x3b6d152e
 	CRC_messages_peerSettings                                             = 0x6880b94d
 	CRC_auth_loggedOut                                                    = 0xc3a2835f
-	CRC_reactionCount                                                     = 0x6fb250d1
+	CRC_reactionCount                                                     = 0xa3d1cb80
 	CRC_messageReactions                                                  = 0x4f2b9479
 	CRC_messages_messageReactionsList                                     = 0x31bd492d
 	CRC_availableReaction                                                 = 0xc077ec01
 	CRC_messages_availableReactionsNotModified                            = 0x9f071957
 	CRC_messages_availableReactions                                       = 0x768e3aad
-	CRC_messages_translateNoResult                                        = 0x67ca4737
-	CRC_messages_translateResultText                                      = 0xa214f7d0
-	CRC_messagePeerReaction                                               = 0x51b67eff
+	CRC_messagePeerReaction                                               = 0x8c79b63c
 	CRC_groupCallStreamChannel                                            = 0x80eb48af
 	CRC_phone_groupCallStreamChannels                                     = 0xd0e482b2
 	CRC_phone_groupCallStreamRtmpUrl                                      = 0x2dbf3432
@@ -1062,7 +1110,74 @@ const (
 	CRC_inputInvoiceSlug                                                  = 0xc326caef
 	CRC_payments_exportedInvoice                                          = 0xaed0cbd9
 	CRC_messages_transcribedAudio                                         = 0x93752c52
-	CRC_help_premiumPromo                                                 = 0x8a4f3c29
+	CRC_help_premiumPromo                                                 = 0x5334759c
+	CRC_inputStorePaymentPremiumSubscription                              = 0xa6751e66
+	CRC_inputStorePaymentGiftPremium                                      = 0x616f7fe8
+	CRC_premiumGiftOption                                                 = 0x74c34319
+	CRC_paymentFormMethod                                                 = 0x88f8f21b
+	CRC_emojiStatusEmpty                                                  = 0x2de11aae
+	CRC_emojiStatus                                                       = 0x929b619d
+	CRC_emojiStatusUntil                                                  = 0xfa30a8c7
+	CRC_account_emojiStatusesNotModified                                  = 0xd08ce645
+	CRC_account_emojiStatuses                                             = 0x90c467d1
+	CRC_reactionEmpty                                                     = 0x79f5d419
+	CRC_reactionEmoji                                                     = 0x1b2286b8
+	CRC_reactionCustomEmoji                                               = 0x8935fc73
+	CRC_chatReactionsNone                                                 = 0xeafc32bc
+	CRC_chatReactionsAll                                                  = 0x52928bca
+	CRC_chatReactionsSome                                                 = 0x661d4037
+	CRC_messages_reactionsNotModified                                     = 0xb06fdbdf
+	CRC_messages_reactions                                                = 0xeafdf716
+	CRC_emailVerifyPurposeLoginSetup                                      = 0x4345be73
+	CRC_emailVerifyPurposeLoginChange                                     = 0x527d22eb
+	CRC_emailVerifyPurposePassport                                        = 0xbbf51685
+	CRC_emailVerificationCode                                             = 0x922e55a9
+	CRC_emailVerificationGoogle                                           = 0xdb909ec2
+	CRC_emailVerificationApple                                            = 0x96d074fd
+	CRC_account_emailVerified                                             = 0x2b96cd1b
+	CRC_account_emailVerifiedLogin                                        = 0xe1bb0d61
+	CRC_premiumSubscriptionOption                                         = 0x5f2d1df2
+	CRC_sendAsPeer                                                        = 0xb81c7034
+	CRC_messageExtendedMediaPreview                                       = 0xad628cc8
+	CRC_messageExtendedMedia                                              = 0xee479c64
+	CRC_stickerKeyword                                                    = 0xfcfeb29c
+	CRC_username                                                          = 0xb4073647
+	CRC_forumTopicDeleted                                                 = 0x023f109b
+	CRC_forumTopic                                                        = 0x71701da9
+	CRC_messages_forumTopics                                              = 0x367617d3
+	CRC_defaultHistoryTTL                                                 = 0x43b46b20
+	CRC_exportedContactToken                                              = 0x41bf109b
+	CRC_requestPeerTypeUser                                               = 0x5f3b8a00
+	CRC_requestPeerTypeChat                                               = 0xc9f06e1b
+	CRC_requestPeerTypeBroadcast                                          = 0x339bef6c
+	CRC_emojiListNotModified                                              = 0x481eadfa
+	CRC_emojiList                                                         = 0x7a1e11d1
+	CRC_emojiGroup                                                        = 0x7a9abda9
+	CRC_messages_emojiGroupsNotModified                                   = 0x6fb4ad87
+	CRC_messages_emojiGroups                                              = 0x881fb94b
+	CRC_textWithEntities                                                  = 0x751f3146
+	CRC_messages_translateResult                                          = 0x33db32f8
+	CRC_autoSaveSettings                                                  = 0xc84834ce
+	CRC_autoSaveException                                                 = 0x81602d47
+	CRC_account_autoSaveSettings                                          = 0x4c3e069d
+	CRC_help_appConfigNotModified                                         = 0x7cde641d
+	CRC_help_appConfig                                                    = 0xdd18782e
+	CRC_inputBotAppID                                                     = 0xa920bd7a
+	CRC_inputBotAppShortName                                              = 0x908c0407
+	CRC_botAppNotModified                                                 = 0x5da674b7
+	CRC_botApp                                                            = 0x95fcd1d6
+	CRC_messages_botApp                                                   = 0xeb50adf5
+	CRC_appWebViewResultUrl                                               = 0x3c1b4f0d
+	CRC_inlineBotWebView                                                  = 0xb57295d5
+	CRC_readParticipantDate                                               = 0x4a4ff172
+	CRC_inputChatlistDialogFilter                                         = 0xf3e0da33
+	CRC_exportedChatlistInvite                                            = 0x0c5181ac
+	CRC_chatlists_exportedChatlistInvite                                  = 0x10e6e3a6
+	CRC_chatlists_exportedInvites                                         = 0x10ab6dc7
+	CRC_chatlists_chatlistInviteAlready                                   = 0xfa87f659
+	CRC_chatlists_chatlistInvite                                          = 0x1dcd839d
+	CRC_chatlists_chatlistUpdates                                         = 0x93bd878d
+	CRC_bots_botInfo                                                      = 0xe8a775b0
 	CRC_invokeAfterMsg                                                    = 0xcb9f372d
 	CRC_invokeAfterMsgs                                                   = 0x3dc4b4f0
 	CRC_initConnection                                                    = 0xc1cd5ea9
@@ -1072,7 +1187,7 @@ const (
 	CRC_invokeWithTakeout                                                 = 0xaca9fd2e
 	CRC_auth_sendCode                                                     = 0xa677244f
 	CRC_auth_signUp                                                       = 0x80eee427
-	CRC_auth_signIn                                                       = 0xbcd51581
+	CRC_auth_signIn                                                       = 0x8d52a951
 	CRC_auth_logOut                                                       = 0x3e72ba19
 	CRC_auth_resetAuthorizations                                          = 0x9fab0d1a
 	CRC_auth_exportAuthorization                                          = 0xe5bfffcd
@@ -1089,6 +1204,9 @@ const (
 	CRC_auth_importLoginToken                                             = 0x95ac5ce4
 	CRC_auth_acceptLoginToken                                             = 0xe894ad4d
 	CRC_auth_checkRecoveryPassword                                        = 0x0d36bf79
+	CRC_auth_importWebTokenAuthorization                                  = 0x2db873a9
+	CRC_auth_requestFirebaseSms                                           = 0x89464b50
+	CRC_auth_resetLoginEmail                                              = 0x7e960193
 	CRC_account_registerDevice                                            = 0xec86017a
 	CRC_account_unregisterDevice                                          = 0x6a0d3206
 	CRC_account_updateNotifySettings                                      = 0x84be5b93
@@ -1102,7 +1220,7 @@ const (
 	CRC_account_updateUsername                                            = 0x3e0bdd7c
 	CRC_account_getPrivacy                                                = 0xdadbc950
 	CRC_account_setPrivacy                                                = 0xc9f81ce8
-	CRC_account_deleteAccount                                             = 0x418d4e0b
+	CRC_account_deleteAccount                                             = 0xa2c0cf74
 	CRC_account_getAccountTTL                                             = 0x08fc711d
 	CRC_account_setAccountTTL                                             = 0x2442485e
 	CRC_account_sendChangePhoneCode                                       = 0x82574ae5
@@ -1127,8 +1245,8 @@ const (
 	CRC_account_acceptAuthorization                                       = 0xf3ed4c73
 	CRC_account_sendVerifyPhoneCode                                       = 0xa5a356f9
 	CRC_account_verifyPhone                                               = 0x4dd3a7f6
-	CRC_account_sendVerifyEmailCode                                       = 0x7011509f
-	CRC_account_verifyEmail                                               = 0xecba39db
+	CRC_account_sendVerifyEmailCode                                       = 0x98e037bb
+	CRC_account_verifyEmail                                               = 0x032da4cf
 	CRC_account_initTakeoutSession                                        = 0x8ef3eab0
 	CRC_account_finishTakeoutSession                                      = 0x1d2652ee
 	CRC_account_confirmPasswordEmail                                      = 0x8fdf1920
@@ -1138,7 +1256,7 @@ const (
 	CRC_account_setContactSignUpNotification                              = 0xcff43f61
 	CRC_account_getNotifyExceptions                                       = 0x53577479
 	CRC_account_getWallPaper                                              = 0xfc8ddbea
-	CRC_account_uploadWallPaper                                           = 0xdd853661
+	CRC_account_uploadWallPaper                                           = 0xe39a8f03
 	CRC_account_saveWallPaper                                             = 0x6c5a5b37
 	CRC_account_installWallPaper                                          = 0xfeed5769
 	CRC_account_resetWallPapers                                           = 0xbb3b9804
@@ -1149,7 +1267,7 @@ const (
 	CRC_account_updateTheme                                               = 0x2bf40ccc
 	CRC_account_saveTheme                                                 = 0xf257106c
 	CRC_account_installTheme                                              = 0xc727bb3b
-	CRC_account_getTheme                                                  = 0x8d9d742b
+	CRC_account_getTheme                                                  = 0x3a5869ec
 	CRC_account_getThemes                                                 = 0x7206e458
 	CRC_account_setContentSettings                                        = 0xb574b16b
 	CRC_account_getContentSettings                                        = 0x8b9b4dae
@@ -1165,6 +1283,17 @@ const (
 	CRC_account_getSavedRingtones                                         = 0xe1902288
 	CRC_account_saveRingtone                                              = 0x3dea5b03
 	CRC_account_uploadRingtone                                            = 0x831a83a2
+	CRC_account_updateEmojiStatus                                         = 0xfbd3de6b
+	CRC_account_getDefaultEmojiStatuses                                   = 0xd6753386
+	CRC_account_getRecentEmojiStatuses                                    = 0x0f578105
+	CRC_account_clearRecentEmojiStatuses                                  = 0x18201aae
+	CRC_account_reorderUsernames                                          = 0xef500eab
+	CRC_account_toggleUsername                                            = 0x58d6b376
+	CRC_account_getDefaultProfilePhotoEmojis                              = 0xe2750328
+	CRC_account_getDefaultGroupPhotoEmojis                                = 0x915860ae
+	CRC_account_getAutoSaveSettings                                       = 0xadcbbcda
+	CRC_account_saveAutoSaveSettings                                      = 0xd69b8361
+	CRC_account_deleteAutoSaveExceptions                                  = 0x53bc0020
 	CRC_users_getUsers                                                    = 0x0d91a548
 	CRC_users_getFullUser                                                 = 0xb60f5918
 	CRC_users_setSecureValueErrors                                        = 0x90c894b5
@@ -1189,6 +1318,8 @@ const (
 	CRC_contacts_getLocated                                               = 0xd348bc44
 	CRC_contacts_blockFromReplies                                         = 0x29a8962c
 	CRC_contacts_resolvePhone                                             = 0x8af94344
+	CRC_contacts_exportContactToken                                       = 0xf8654027
+	CRC_contacts_importContactToken                                       = 0x13005788
 	CRC_messages_getMessages                                              = 0x63c66506
 	CRC_messages_getDialogs                                               = 0xa0f4cb4f
 	CRC_messages_getHistory                                               = 0x4423e6c5
@@ -1198,9 +1329,9 @@ const (
 	CRC_messages_deleteMessages                                           = 0xe58e95d2
 	CRC_messages_receivedMessages                                         = 0x05a954c0
 	CRC_messages_setTyping                                                = 0x58943ee2
-	CRC_messages_sendMessage                                              = 0x0d9d75a4
-	CRC_messages_sendMedia                                                = 0xe25ff8e0
-	CRC_messages_forwardMessages                                          = 0xcc30290b
+	CRC_messages_sendMessage                                              = 0x1cc20387
+	CRC_messages_sendMedia                                                = 0x7547c966
+	CRC_messages_forwardMessages                                          = 0xc661bbc4
 	CRC_messages_reportSpam                                               = 0xcf1592db
 	CRC_messages_getPeerSettings                                          = 0xefd9a6a2
 	CRC_messages_report                                                   = 0x8953ab4e
@@ -1210,7 +1341,7 @@ const (
 	CRC_messages_editChatPhoto                                            = 0x35ddd674
 	CRC_messages_addChatUser                                              = 0xf24753e3
 	CRC_messages_deleteChatUser                                           = 0xa2185cab
-	CRC_messages_createChat                                               = 0x09cb126e
+	CRC_messages_createChat                                               = 0x0034a818
 	CRC_messages_getDhConfig                                              = 0x26cf8950
 	CRC_messages_requestEncryption                                        = 0xf64daf43
 	CRC_messages_acceptEncryption                                         = 0x3dbc0415
@@ -1242,15 +1373,15 @@ const (
 	CRC_messages_getSavedGifs                                             = 0x5cf09635
 	CRC_messages_saveGif                                                  = 0x327a30cb
 	CRC_messages_getInlineBotResults                                      = 0x514e999d
-	CRC_messages_setInlineBotResults                                      = 0xeb5ea206
-	CRC_messages_sendInlineBotResult                                      = 0x7aa11297
+	CRC_messages_setInlineBotResults                                      = 0xbb12a419
+	CRC_messages_sendInlineBotResult                                      = 0xd3fbdccb
 	CRC_messages_getMessageEditData                                       = 0xfda68d36
 	CRC_messages_editMessage                                              = 0x48f71778
 	CRC_messages_editInlineBotMessage                                     = 0x83557dba
 	CRC_messages_getBotCallbackAnswer                                     = 0x9342ca07
 	CRC_messages_setBotCallbackAnswer                                     = 0xd58f130a
 	CRC_messages_getPeerDialogs                                           = 0xe470bcfd
-	CRC_messages_saveDraft                                                = 0xbc39e14b
+	CRC_messages_saveDraft                                                = 0xb4331e3f
 	CRC_messages_getAllDrafts                                             = 0x6a3f8d65
 	CRC_messages_getFeaturedStickers                                      = 0x64780b14
 	CRC_messages_readFeaturedStickers                                     = 0x5b118126
@@ -1276,10 +1407,10 @@ const (
 	CRC_messages_sendScreenshotNotification                               = 0xc97df020
 	CRC_messages_getFavedStickers                                         = 0x04f1aaa9
 	CRC_messages_faveSticker                                              = 0xb9ffc55b
-	CRC_messages_getUnreadMentions                                        = 0x46578472
-	CRC_messages_readMentions                                             = 0x0f0189d3
+	CRC_messages_getUnreadMentions                                        = 0xf107e790
+	CRC_messages_readMentions                                             = 0x36e5bf4d
 	CRC_messages_getRecentLocations                                       = 0x702a40e0
-	CRC_messages_sendMultiMedia                                           = 0xf803138f
+	CRC_messages_sendMultiMedia                                           = 0xb6f11a1c
 	CRC_messages_uploadEncryptedFile                                      = 0x5057c497
 	CRC_messages_searchStickerSets                                        = 0x35705b8a
 	CRC_messages_getSplitRanges                                           = 0x1cff7e08
@@ -1296,7 +1427,7 @@ const (
 	CRC_messages_getEmojiKeywordsDifference                               = 0x1508b6af
 	CRC_messages_getEmojiKeywordsLanguages                                = 0x4e9963b2
 	CRC_messages_getEmojiURL                                              = 0xd5b10c26
-	CRC_messages_getSearchCounters                                        = 0x732eef00
+	CRC_messages_getSearchCounters                                        = 0x00ae7cc1
 	CRC_messages_requestUrlAuth                                           = 0x198fb446
 	CRC_messages_acceptUrlAuth                                            = 0xb12c7125
 	CRC_messages_hidePeerSettingsBar                                      = 0x4facb138
@@ -1314,7 +1445,7 @@ const (
 	CRC_messages_getReplies                                               = 0x22ddd30c
 	CRC_messages_getDiscussionMessage                                     = 0x446972fd
 	CRC_messages_readDiscussion                                           = 0xf731a9f4
-	CRC_messages_unpinAllMessages                                         = 0xf025bc8b
+	CRC_messages_unpinAllMessages                                         = 0xee22b9a8
 	CRC_messages_deleteChat                                               = 0x5bd0ee50
 	CRC_messages_deletePhoneCallHistory                                   = 0xf9cbe409
 	CRC_messages_checkHistoryImport                                       = 0x43fe19f3
@@ -1331,40 +1462,60 @@ const (
 	CRC_messages_setHistoryTTL                                            = 0xb80e5fe4
 	CRC_messages_checkHistoryImportPeer                                   = 0x5dc60f03
 	CRC_messages_setChatTheme                                             = 0xe63be13f
-	CRC_messages_getMessageReadParticipants                               = 0x2c6f97b7
+	CRC_messages_getMessageReadParticipants                               = 0x31c1c44f
 	CRC_messages_getSearchResultsCalendar                                 = 0x49f0bde9
 	CRC_messages_getSearchResultsPositions                                = 0x6e9583a3
 	CRC_messages_hideChatJoinRequest                                      = 0x7fe7e815
 	CRC_messages_hideAllChatJoinRequests                                  = 0xe085f4ea
 	CRC_messages_toggleNoForwards                                         = 0xb11eafa2
 	CRC_messages_saveDefaultSendAs                                        = 0xccfddf96
-	CRC_messages_sendReaction                                             = 0x25690ce4
+	CRC_messages_sendReaction                                             = 0xd30d78d4
 	CRC_messages_getMessagesReactions                                     = 0x8bba90e6
-	CRC_messages_getMessageReactionsList                                  = 0xe0ee6b77
-	CRC_messages_setChatAvailableReactions                                = 0x14050ea6
+	CRC_messages_getMessageReactionsList                                  = 0x461b3f48
+	CRC_messages_setChatAvailableReactions                                = 0xfeb16771
 	CRC_messages_getAvailableReactions                                    = 0x18dea0ac
-	CRC_messages_setDefaultReaction                                       = 0xd960c4d4
-	CRC_messages_translateText                                            = 0x24ce6dee
-	CRC_messages_getUnreadReactions                                       = 0xe85bae1a
-	CRC_messages_readReactions                                            = 0x82e251d7
+	CRC_messages_setDefaultReaction                                       = 0x4f47a016
+	CRC_messages_translateText                                            = 0x63183030
+	CRC_messages_getUnreadReactions                                       = 0x3223495b
+	CRC_messages_readReactions                                            = 0x54aa7f8e
 	CRC_messages_searchSentMedia                                          = 0x107e31a0
 	CRC_messages_getAttachMenuBots                                        = 0x16fcc2cb
 	CRC_messages_getAttachMenuBot                                         = 0x77216192
-	CRC_messages_toggleBotInAttachMenu                                    = 0x1aee33af
-	CRC_messages_requestWebView                                           = 0x91b15831
-	CRC_messages_prolongWebView                                           = 0xea5fbcce
-	CRC_messages_requestSimpleWebView                                     = 0x6abb2f73
+	CRC_messages_toggleBotInAttachMenu                                    = 0x69f59d69
+	CRC_messages_requestWebView                                           = 0x178b480b
+	CRC_messages_prolongWebView                                           = 0x7ff34309
+	CRC_messages_requestSimpleWebView                                     = 0x299bec8e
 	CRC_messages_sendWebViewResultMessage                                 = 0x0a4314f5
 	CRC_messages_sendWebViewData                                          = 0xdc0242c8
 	CRC_messages_transcribeAudio                                          = 0x269e9a49
 	CRC_messages_rateTranscribedAudio                                     = 0x7f1d072f
+	CRC_messages_getCustomEmojiDocuments                                  = 0xd9ab0f54
+	CRC_messages_getEmojiStickers                                         = 0xfbfca18f
+	CRC_messages_getFeaturedEmojiStickers                                 = 0x0ecf6736
+	CRC_messages_reportReaction                                           = 0x3f64c076
+	CRC_messages_getTopReactions                                          = 0xbb8125ba
+	CRC_messages_getRecentReactions                                       = 0x39461db2
+	CRC_messages_clearRecentReactions                                     = 0x9dfeefb4
+	CRC_messages_getExtendedMedia                                         = 0x84f80814
+	CRC_messages_setDefaultHistoryTTL                                     = 0x9eb51445
+	CRC_messages_getDefaultHistoryTTL                                     = 0x658b7188
+	CRC_messages_sendBotRequestedPeer                                     = 0xfe38d01b
+	CRC_messages_getEmojiGroups                                           = 0x7488ce5b
+	CRC_messages_getEmojiStatusGroups                                     = 0x2ecd56cd
+	CRC_messages_getEmojiProfilePhotoGroups                               = 0x21a548f3
+	CRC_messages_searchCustomEmoji                                        = 0x2c11c0d7
+	CRC_messages_togglePeerTranslations                                   = 0xe47cb579
+	CRC_messages_getBotApp                                                = 0x34fdc5c3
+	CRC_messages_requestAppWebView                                        = 0x8c5a3b3c
+	CRC_messages_setChatWallPaper                                         = 0x8ffacae1
 	CRC_updates_getState                                                  = 0xedd4882a
 	CRC_updates_getDifference                                             = 0x25939651
 	CRC_updates_getChannelDifference                                      = 0x03173d78
-	CRC_photos_updateProfilePhoto                                         = 0x72d4742c
-	CRC_photos_uploadProfilePhoto                                         = 0x89f30f69
+	CRC_photos_updateProfilePhoto                                         = 0x09e82039
+	CRC_photos_uploadProfilePhoto                                         = 0x0388a3b5
 	CRC_photos_deletePhotos                                               = 0x87cf7f2f
 	CRC_photos_getUserPhotos                                              = 0x91cd32a8
+	CRC_photos_uploadContactProfilePhoto                                  = 0xe14c4a71
 	CRC_upload_saveFilePart                                               = 0xb304a621
 	CRC_upload_getFile                                                    = 0xbe5335be
 	CRC_upload_saveBigFilePart                                            = 0xde7b673d
@@ -1385,7 +1536,7 @@ const (
 	CRC_help_getTermsOfServiceUpdate                                      = 0x2ca51fd1
 	CRC_help_acceptTermsOfService                                         = 0xee72f79a
 	CRC_help_getDeepLinkInfo                                              = 0x3fedc75f
-	CRC_help_getAppConfig                                                 = 0x98914110
+	CRC_help_getAppConfig                                                 = 0x61e3f854
 	CRC_help_saveAppLog                                                   = 0x6f02f748
 	CRC_help_getPassportConfig                                            = 0xc661ad08
 	CRC_help_getSupportName                                               = 0xd360e72c
@@ -1404,7 +1555,7 @@ const (
 	CRC_channels_getParticipant                                           = 0xa0ab6cc6
 	CRC_channels_getChannels                                              = 0x0a7f6bbb
 	CRC_channels_getFullChannel                                           = 0x08736a09
-	CRC_channels_createChannel                                            = 0x3d5fb10f
+	CRC_channels_createChannel                                            = 0x91006707
 	CRC_channels_editAdmin                                                = 0xd33c8902
 	CRC_channels_editTitle                                                = 0x566decd0
 	CRC_channels_editPhoto                                                = 0xf12e57c9
@@ -1437,6 +1588,20 @@ const (
 	CRC_channels_deleteParticipantHistory                                 = 0x367544db
 	CRC_channels_toggleJoinToSend                                         = 0xe4cb9580
 	CRC_channels_toggleJoinRequest                                        = 0x4c2985b6
+	CRC_channels_reorderUsernames                                         = 0xb45ced1d
+	CRC_channels_toggleUsername                                           = 0x50f24105
+	CRC_channels_deactivateAllUsernames                                   = 0x0a245dd3
+	CRC_channels_toggleForum                                              = 0xa4298b29
+	CRC_channels_createForumTopic                                         = 0xf40c0224
+	CRC_channels_getForumTopics                                           = 0x0de560d1
+	CRC_channels_getForumTopicsByID                                       = 0xb0831eb9
+	CRC_channels_editForumTopic                                           = 0xf4dfa185
+	CRC_channels_updatePinnedForumTopic                                   = 0x6c2d9026
+	CRC_channels_deleteTopicHistory                                       = 0x34435f2d
+	CRC_channels_reorderPinnedForumTopics                                 = 0x2950a18f
+	CRC_channels_toggleAntiSpam                                           = 0x68f3e4eb
+	CRC_channels_reportAntiSpamFalsePositive                              = 0xa850a693
+	CRC_channels_toggleParticipantsHidden                                 = 0x6a6e7854
 	CRC_bots_sendCustomRequest                                            = 0xaa2769ed
 	CRC_bots_answerWebhookJSONQuery                                       = 0xe6213f4d
 	CRC_bots_setBotCommands                                               = 0x0517165a
@@ -1446,6 +1611,10 @@ const (
 	CRC_bots_getBotMenuButton                                             = 0x9c60eb28
 	CRC_bots_setBotBroadcastDefaultAdminRights                            = 0x788464e1
 	CRC_bots_setBotGroupDefaultAdminRights                                = 0x925ec9ea
+	CRC_bots_setBotInfo                                                   = 0x10cf3123
+	CRC_bots_getBotInfo                                                   = 0xdcd914fd
+	CRC_bots_reorderUsernames                                             = 0x9709b1c2
+	CRC_bots_toggleUsername                                               = 0x053ca973
 	CRC_payments_getPaymentForm                                           = 0x37148dbb
 	CRC_payments_getPaymentReceipt                                        = 0x2478d1cc
 	CRC_payments_validateRequestedInfo                                    = 0xb6c8f12b
@@ -1454,18 +1623,19 @@ const (
 	CRC_payments_clearSavedInfo                                           = 0xd83d70c1
 	CRC_payments_getBankCardData                                          = 0x2e79d779
 	CRC_payments_exportInvoice                                            = 0x0f91b065
-	CRC_payments_assignAppStoreTransaction                                = 0x0fec13c6
-	CRC_payments_assignPlayMarketTransaction                              = 0x4faa4aed
-	CRC_payments_restorePlayMarketReceipt                                 = 0xd164e36a
-	CRC_payments_canPurchasePremium                                       = 0xaa6a90c8
-	CRC_payments_requestRecurringPayment                                  = 0x146e958d
+	CRC_payments_assignAppStoreTransaction                                = 0x80ed747d
+	CRC_payments_assignPlayMarketTransaction                              = 0xdffd50d3
+	CRC_payments_canPurchasePremium                                       = 0x9fc19eb6
 	CRC_stickers_createStickerSet                                         = 0x9021ab67
 	CRC_stickers_removeStickerFromSet                                     = 0xf7760f51
 	CRC_stickers_changeStickerPosition                                    = 0xffb6d4ca
 	CRC_stickers_addStickerToSet                                          = 0x8653febe
-	CRC_stickers_setStickerSetThumb                                       = 0x9a364e30
+	CRC_stickers_setStickerSetThumb                                       = 0xa76a5392
 	CRC_stickers_checkShortName                                           = 0x284b3639
 	CRC_stickers_suggestShortName                                         = 0x4dafc503
+	CRC_stickers_changeSticker                                            = 0xf5537ebc
+	CRC_stickers_renameStickerSet                                         = 0x124b1c00
+	CRC_stickers_deleteStickerSet                                         = 0x87704394
 	CRC_phone_getCallConfig                                               = 0x55451fa9
 	CRC_phone_requestCall                                                 = 0x42ff96ed
 	CRC_phone_acceptCall                                                  = 0x3bd2b4a0
@@ -1503,12 +1673,22 @@ const (
 	CRC_langpack_getLanguages                                             = 0x42c6978f
 	CRC_langpack_getLanguage                                              = 0x6a596502
 	CRC_folders_editPeerFolders                                           = 0x6847d0ab
-	CRC_folders_deleteFolder                                              = 0x1c295881
 	CRC_stats_getBroadcastStats                                           = 0xab42441a
 	CRC_stats_loadAsyncGraph                                              = 0x621d5fa0
 	CRC_stats_getMegagroupStats                                           = 0xdcdf8607
 	CRC_stats_getMessagePublicForwards                                    = 0x5630281b
 	CRC_stats_getMessageStats                                             = 0xb6e0a3f5
+	CRC_chatlists_exportChatlistInvite                                    = 0x8472478e
+	CRC_chatlists_deleteExportedInvite                                    = 0x719c5c5e
+	CRC_chatlists_editExportedInvite                                      = 0x653db63d
+	CRC_chatlists_getExportedInvites                                      = 0xce03da83
+	CRC_chatlists_checkChatlistInvite                                     = 0x41c10fff
+	CRC_chatlists_joinChatlistInvite                                      = 0xa6b1e39a
+	CRC_chatlists_getChatlistUpdates                                      = 0x89419521
+	CRC_chatlists_joinChatlistUpdates                                     = 0xe089f8f5
+	CRC_chatlists_hideChatlistUpdates                                     = 0x66e486fb
+	CRC_chatlists_getLeaveChatlistSuggestions                             = 0xfdbcd714
+	CRC_chatlists_leaveChatlist                                           = 0x74fae13a
 )
 
 type TL_resPQ struct {
@@ -1802,6 +1982,10 @@ type TL_tlsBlockScope struct {
 	Entries []TL // TlsBlock
 }
 
+type TL_tlsBlockPermutation struct {
+	Entries []TL // Vector<TlsBlock>
+}
+
 type TL_rpc_drop_answer struct {
 	ReqMsgID int64
 }
@@ -1914,6 +2098,7 @@ type TL_inputMediaEmpty struct {
 
 type TL_inputMediaUploadedPhoto struct {
 	Flags      int32
+	Spoiler    bool  //flag
 	File       TL    // InputFile
 	Stickers   []TL  // InputDocument //flag
 	TtlSeconds int32 //flag
@@ -1921,6 +2106,7 @@ type TL_inputMediaUploadedPhoto struct {
 
 type TL_inputMediaPhoto struct {
 	Flags      int32
+	Spoiler    bool  //flag
 	ID         TL    // InputPhoto
 	TtlSeconds int32 //flag
 }
@@ -1940,6 +2126,7 @@ type TL_inputMediaUploadedDocument struct {
 	Flags        int32
 	NosoundVideo bool //flag
 	ForceFile    bool //flag
+	Spoiler      bool //flag
 	File         TL   // InputFile
 	Thumb        TL   // InputFile //flag
 	MimeType     string
@@ -1950,6 +2137,7 @@ type TL_inputMediaUploadedDocument struct {
 
 type TL_inputMediaDocument struct {
 	Flags      int32
+	Spoiler    bool   //flag
 	ID         TL     // InputDocument
 	TtlSeconds int32  //flag
 	Query      string //flag
@@ -1966,12 +2154,14 @@ type TL_inputMediaVenue struct {
 
 type TL_inputMediaPhotoExternal struct {
 	Flags      int32
+	Spoiler    bool //flag
 	Url        string
 	TtlSeconds int32 //flag
 }
 
 type TL_inputMediaDocumentExternal struct {
 	Flags      int32
+	Spoiler    bool //flag
 	Url        string
 	TtlSeconds int32 //flag
 }
@@ -1981,15 +2171,16 @@ type TL_inputMediaGame struct {
 }
 
 type TL_inputMediaInvoice struct {
-	Flags        int32
-	Title        string
-	Description  string
-	Photo        TL // InputWebDocument //flag
-	Invoice      TL // Invoice
-	Payload      []byte
-	Provider     string
-	ProviderData TL     // DataJSON
-	StartParam   string //flag
+	Flags         int32
+	Title         string
+	Description   string
+	Photo         TL // InputWebDocument //flag
+	Invoice       TL // Invoice
+	Payload       []byte
+	Provider      string
+	ProviderData  TL     // DataJSON
+	StartParam    string //flag
+	ExtendedMedia TL     // InputMedia //flag
 }
 
 type TL_inputMediaGeoLive struct {
@@ -2017,10 +2208,11 @@ type TL_inputChatPhotoEmpty struct {
 }
 
 type TL_inputChatUploadedPhoto struct {
-	Flags        int32
-	File         TL      // InputFile //flag
-	Video        TL      // InputFile //flag
-	VideoStartTs float64 //flag
+	Flags            int32
+	File             TL      // InputFile //flag
+	Video            TL      // InputFile //flag
+	VideoStartTs     float64 //flag
+	VideoEmojiMarkup TL      // VideoSize //flag
 }
 
 type TL_inputChatPhoto struct {
@@ -2176,6 +2368,8 @@ type TL_user struct {
 	BotAttachMenu        bool //flag
 	Premium              bool //flag
 	AttachMenuEnabled    bool //flag
+	Flags2               int32
+	BotCanEdit           bool //flag
 	ID                   int64
 	AccessHash           int64  //flag
 	FirstName            string //flag
@@ -2188,6 +2382,8 @@ type TL_user struct {
 	RestrictionReason    []TL   // RestrictionReason //flag
 	BotInlinePlaceholder string //flag
 	LangCode             string //flag
+	EmojiStatus          TL     // EmojiStatus //flag
+	Usernames            []TL   // Username //flag
 }
 
 type TL_userProfilePhotoEmpty struct {
@@ -2196,6 +2392,7 @@ type TL_userProfilePhotoEmpty struct {
 type TL_userProfilePhoto struct {
 	Flags         int32
 	HasVideo      bool //flag
+	Personal      bool //flag
 	PhotoID       int64
 	StrippedThumb []byte //flag
 	DcID          int32
@@ -2270,6 +2467,8 @@ type TL_channel struct {
 	Noforwards          bool //flag
 	JoinToSend          bool //flag
 	JoinRequest         bool //flag
+	Forum               bool //flag
+	Flags2              int32
 	ID                  int64
 	AccessHash          int64 //flag
 	Title               string
@@ -2281,6 +2480,7 @@ type TL_channel struct {
 	BannedRights        TL    // ChatBannedRights //flag
 	DefaultBannedRights TL    // ChatBannedRights //flag
 	ParticipantsCount   int32 //flag
+	Usernames           []TL  // Username //flag
 }
 
 type TL_channelForbidden struct {
@@ -2297,22 +2497,23 @@ type TL_chatFull struct {
 	Flags                  int32
 	CanSetUsername         bool //flag
 	HasScheduled           bool //flag
+	TranslationsDisabled   bool //flag
 	ID                     int64
 	About                  string
-	Participants           TL       // ChatParticipants
-	ChatPhoto              TL       // Photo //flag
-	NotifySettings         TL       // PeerNotifySettings
-	ExportedInvite         TL       // ExportedChatInvite //flag
-	BotInfo                []TL     // BotInfo //flag
-	PinnedMsgID            int32    //flag
-	FolderID               int32    //flag
-	Call                   TL       // InputGroupCall //flag
-	TtlPeriod              int32    //flag
-	GroupcallDefaultJoinAs TL       // Peer //flag
-	ThemeEmoticon          string   //flag
-	RequestsPending        int32    //flag
-	RecentRequesters       []int64  //flag
-	AvailableReactions     []string //flag
+	Participants           TL      // ChatParticipants
+	ChatPhoto              TL      // Photo //flag
+	NotifySettings         TL      // PeerNotifySettings
+	ExportedInvite         TL      // ExportedChatInvite //flag
+	BotInfo                []TL    // BotInfo //flag
+	PinnedMsgID            int32   //flag
+	FolderID               int32   //flag
+	Call                   TL      // InputGroupCall //flag
+	TtlPeriod              int32   //flag
+	GroupcallDefaultJoinAs TL      // Peer //flag
+	ThemeEmoticon          string  //flag
+	RequestsPending        int32   //flag
+	RecentRequesters       []int64 //flag
+	AvailableReactions     TL      // ChatReactions //flag
 }
 
 type TL_channelFull struct {
@@ -2326,7 +2527,10 @@ type TL_channelFull struct {
 	CanViewStats           bool //flag
 	Blocked                bool //flag
 	Flags2                 int32
-	CanDeleteChannel       TL // flags2_0?true
+	CanDeleteChannel       bool //flag
+	Antispam               bool //flag
+	ParticipantsHidden     bool //flag
+	TranslationsDisabled   bool //flag
 	ID                     int64
 	About                  string
 	ParticipantsCount      int32 //flag
@@ -2361,7 +2565,7 @@ type TL_channelFull struct {
 	RequestsPending        int32    //flag
 	RecentRequesters       []int64  //flag
 	DefaultSendAs          TL       // Peer //flag
-	AvailableReactions     []string //flag
+	AvailableReactions     TL       // ChatReactions //flag
 }
 
 type TL_chatParticipant struct {
@@ -2465,6 +2669,7 @@ type TL_messageMediaEmpty struct {
 
 type TL_messageMediaPhoto struct {
 	Flags      int32
+	Spoiler    bool  //flag
 	Photo      TL    // Photo //flag
 	TtlSeconds int32 //flag
 }
@@ -2487,6 +2692,7 @@ type TL_messageMediaUnsupported struct {
 type TL_messageMediaDocument struct {
 	Flags      int32
 	Nopremium  bool  //flag
+	Spoiler    bool  //flag
 	Document   TL    // Document //flag
 	TtlSeconds int32 //flag
 }
@@ -2519,6 +2725,7 @@ type TL_messageMediaInvoice struct {
 	Currency                 string
 	TotalAmount              int64
 	StartParam               string
+	ExtendedMedia            TL // MessageExtendedMedia //flag
 }
 
 type TL_messageMediaGeoLive struct {
@@ -2631,7 +2838,10 @@ type TL_messageActionCustomAction struct {
 }
 
 type TL_messageActionBotAllowed struct {
-	Domain string
+	Flags      int32
+	AttachMenu bool   //flag
+	Domain     string //flag
+	App        TL     // BotApp //flag
 }
 
 type TL_messageActionSecureValuesSentMe struct {
@@ -2664,7 +2874,9 @@ type TL_messageActionInviteToGroupCall struct {
 }
 
 type TL_messageActionSetMessagesTTL struct {
-	Period int32
+	Flags           int32
+	Period          int32
+	AutoSettingFrom int64 //flag
 }
 
 type TL_messageActionGroupCallScheduled struct {
@@ -2688,6 +2900,47 @@ type TL_messageActionWebViewDataSent struct {
 	Text string
 }
 
+type TL_messageActionGiftPremium struct {
+	Flags          int32
+	Currency       string
+	Amount         int64
+	Months         int32
+	CryptoCurrency string //flag
+	CryptoAmount   int64  //flag
+}
+
+type TL_messageActionTopicCreate struct {
+	Flags       int32
+	Title       string
+	IconColor   int32
+	IconEmojiID int64 //flag
+}
+
+type TL_messageActionTopicEdit struct {
+	Flags       int32
+	Title       string //flag
+	IconEmojiID int64  //flag
+	Closed      TL     // Bool //flag
+	Hidden      TL     // Bool //flag
+}
+
+type TL_messageActionSuggestProfilePhoto struct {
+	Photo TL // Photo
+}
+
+type TL_messageActionRequestedPeer struct {
+	ButtonID int32
+	Peer     TL // Peer
+}
+
+type TL_messageActionSetChatWallPaper struct {
+	Wallpaper TL // WallPaper
+}
+
+type TL_messageActionSetSameChatWallPaper struct {
+	Wallpaper TL // WallPaper
+}
+
 type TL_dialog struct {
 	Flags                int32
 	Pinned               bool //flag
@@ -2703,6 +2956,7 @@ type TL_dialog struct {
 	Pts                  int32 //flag
 	Draft                TL    // DraftMessage //flag
 	FolderID             int32 //flag
+	TtlPeriod            int32 //flag
 }
 
 type TL_dialogFolder struct {
@@ -2787,12 +3041,17 @@ type TL_auth_sentCode struct {
 	Timeout       int32 //flag
 }
 
+type TL_auth_sentCodeSuccess struct {
+	Authorization TL // auth_Authorization
+}
+
 type TL_auth_authorization struct {
 	Flags                 int32
-	SetupPasswordRequired bool  //flag
-	OtherwiseReloginDays  int32 //flag
-	TmpSessions           int32 //flag
-	User                  TL    // User
+	SetupPasswordRequired bool   //flag
+	OtherwiseReloginDays  int32  //flag
+	TmpSessions           int32  //flag
+	FutureAuthToken       []byte //flag
+	User                  TL     // User
 }
 
 type TL_auth_authorizationSignUpRequired struct {
@@ -2816,6 +3075,11 @@ type TL_inputNotifyChats struct {
 }
 
 type TL_inputNotifyBroadcasts struct {
+}
+
+type TL_inputNotifyForumTopic struct {
+	Peer     TL // InputPeer
+	TopMsgID int32
 }
 
 type TL_inputPeerNotifySettings struct {
@@ -2911,10 +3175,14 @@ type TL_userFull struct {
 	CanPinMessage           bool //flag
 	HasScheduled            bool //flag
 	VideoCallsAvailable     bool //flag
+	VoiceMessagesForbidden  bool //flag
+	TranslationsDisabled    bool //flag
 	ID                      int64
 	About                   string //flag
 	Settings                TL     // PeerSettings
+	PersonalPhoto           TL     // Photo //flag
 	ProfilePhoto            TL     // Photo //flag
+	FallbackPhoto           TL     // Photo //flag
 	NotifySettings          TL     // PeerNotifySettings
 	BotInfo                 TL     // BotInfo //flag
 	PinnedMsgID             int32  //flag
@@ -2925,6 +3193,8 @@ type TL_userFull struct {
 	PrivateForwardName      string //flag
 	BotGroupAdminRights     TL     // ChatAdminRights //flag
 	BotBroadcastAdminRights TL     // ChatAdminRights //flag
+	PremiumGifts            []TL   // PremiumGiftOption //flag
+	Wallpaper               TL     // WallPaper //flag
 }
 
 type TL_contact struct {
@@ -3014,6 +3284,7 @@ type TL_messages_channelMessages struct {
 	Count          int32
 	OffsetIdOffset int32 //flag
 	Messages       []TL  // Message
+	Topics         []TL  // ForumTopic
 	Chats          []TL  // Chat
 	Users          []TL  // User
 }
@@ -3137,14 +3408,7 @@ type TL_updateUserName struct {
 	UserID    int64
 	FirstName string
 	LastName  string
-	Username  string
-}
-
-type TL_updateUserPhoto struct {
-	UserID   int64
-	Date     int32
-	Photo    TL // UserProfilePhoto
-	Previous TL // Bool
+	Usernames []TL // Username
 }
 
 type TL_updateNewEncryptedMessage struct {
@@ -3289,12 +3553,16 @@ type TL_updateNewStickerSet struct {
 }
 
 type TL_updateStickerSetsOrder struct {
-	Flags int32
-	Masks bool //flag
-	Order []int64
+	Flags  int32
+	Masks  bool //flag
+	Emojis bool //flag
+	Order  []int64
 }
 
 type TL_updateStickerSets struct {
+	Flags  int32
+	Masks  bool //flag
+	Emojis bool //flag
 }
 
 type TL_updateSavedGifs struct {
@@ -3358,8 +3626,10 @@ type TL_updateReadChannelOutbox struct {
 }
 
 type TL_updateDraftMessage struct {
-	Peer  TL // Peer
-	Draft TL // DraftMessage
+	Flags    int32
+	Peer     TL    // Peer
+	TopMsgID int32 //flag
+	Draft    TL    // DraftMessage
 }
 
 type TL_updateReadFeaturedStickers struct {
@@ -3438,7 +3708,9 @@ type TL_updateFavedStickers struct {
 }
 
 type TL_updateChannelReadMessagesContents struct {
+	Flags     int32
 	ChannelID int64
+	TopMsgID  int32 //flag
 	Messages  []int32
 }
 
@@ -3617,6 +3889,7 @@ type TL_updateChatParticipant struct {
 
 type TL_updateChannelParticipant struct {
 	Flags           int32
+	ViaChatlist     bool //flag
 	ChannelID       int64
 	Date            int32
 	ActorID         int64
@@ -3662,9 +3935,11 @@ type TL_updateBotChatInviteRequester struct {
 }
 
 type TL_updateMessageReactions struct {
+	Flags     int32
 	Peer      TL // Peer
 	MsgID     int32
-	Reactions TL // MessageReactions
+	TopMsgID  int32 //flag
+	Reactions TL    // MessageReactions
 }
 
 type TL_updateAttachMenuBots struct {
@@ -3689,6 +3964,57 @@ type TL_updateTranscribedAudio struct {
 	MsgID           int32
 	TranscriptionID int64
 	Text            string
+}
+
+type TL_updateReadFeaturedEmojiStickers struct {
+}
+
+type TL_updateUserEmojiStatus struct {
+	UserID      int64
+	EmojiStatus TL // EmojiStatus
+}
+
+type TL_updateRecentEmojiStatuses struct {
+}
+
+type TL_updateRecentReactions struct {
+}
+
+type TL_updateMoveStickerSetToTop struct {
+	Flags      int32
+	Masks      bool //flag
+	Emojis     bool //flag
+	Stickerset int64
+}
+
+type TL_updateMessageExtendedMedia struct {
+	Peer          TL // Peer
+	MsgID         int32
+	ExtendedMedia TL // MessageExtendedMedia
+}
+
+type TL_updateChannelPinnedTopic struct {
+	Flags     int32
+	Pinned    bool //flag
+	ChannelID int64
+	TopicID   int32
+}
+
+type TL_updateChannelPinnedTopics struct {
+	Flags     int32
+	ChannelID int64
+	Order     []int32 //flag
+}
+
+type TL_updateUser struct {
+	UserID int64
+}
+
+type TL_updateAutoSaveSettings struct {
+}
+
+type TL_updateGroupInvitePrivacyForbidden struct {
+	UserID int64
 }
 
 type TL_updates_state struct {
@@ -3848,13 +4174,10 @@ type TL_dcOption struct {
 
 type TL_config struct {
 	Flags                   int32
-	PhonecallsEnabled       bool //flag
 	DefaultP2pContacts      bool //flag
 	PreloadFeaturedStickers bool //flag
-	IgnorePhoneEntities     bool //flag
 	RevokePmInbox           bool //flag
 	BlockedMode             bool //flag
-	PfsEnabled              bool //flag
 	ForceTryIpv6            bool //flag
 	Date                    int32
 	Expires                 int32
@@ -3873,17 +4196,13 @@ type TL_config struct {
 	NotifyDefaultDelayMs    int32
 	PushChatPeriodMs        int32
 	PushChatLimit           int32
-	SavedGifsLimit          int32
 	EditTimeLimit           int32
 	RevokeTimeLimit         int32
 	RevokePmTimeLimit       int32
 	RatingEDecay            int32
 	StickersRecentLimit     int32
-	StickersFavedLimit      int32
 	ChannelsReadMediaPeriod int32
 	TmpSessions             int32 //flag
-	PinnedDialogsCountMax   int32
-	PinnedInfolderCountMax  int32
 	CallReceiveTimeoutMs    int32
 	CallRingTimeoutMs       int32
 	CallConnectTimeoutMs    int32
@@ -3900,6 +4219,8 @@ type TL_config struct {
 	SuggestedLangCode       string //flag
 	LangPackVersion         int32  //flag
 	BaseLangPackVersion     int32  //flag
+	ReactionsDefault        TL     // Reaction //flag
+	AutologinToken          string //flag
 }
 
 type TL_nearestDc struct {
@@ -4083,6 +4404,11 @@ type TL_notifyChats struct {
 type TL_notifyBroadcasts struct {
 }
 
+type TL_notifyForumTopic struct {
+	Peer     TL // Peer
+	TopMsgID int32
+}
+
 type TL_sendMessageTypingAction struct {
 }
 
@@ -4178,6 +4504,9 @@ type TL_inputPrivacyKeyPhoneNumber struct {
 type TL_inputPrivacyKeyAddedByPhone struct {
 }
 
+type TL_inputPrivacyKeyVoiceMessages struct {
+}
+
 type TL_privacyKeyStatusTimestamp struct {
 }
 
@@ -4200,6 +4529,9 @@ type TL_privacyKeyPhoneNumber struct {
 }
 
 type TL_privacyKeyAddedByPhone struct {
+}
+
+type TL_privacyKeyVoiceMessages struct {
 }
 
 type TL_inputPrivacyValueAllowContacts struct {
@@ -4309,6 +4641,14 @@ type TL_documentAttributeFilename struct {
 type TL_documentAttributeHasStickers struct {
 }
 
+type TL_documentAttributeCustomEmoji struct {
+	Flags      int32
+	Free       bool //flag
+	TextColor  bool //flag
+	Alt        string
+	Stickerset TL // InputStickerSet
+}
+
 type TL_messages_stickersNotModified struct {
 }
 
@@ -4410,7 +4750,8 @@ type TL_account_password struct {
 	NewAlgo                 TL     // PasswordKdfAlgo
 	NewSecureAlgo           TL     // SecurePasswordKdfAlgo
 	SecureRandom            []byte
-	PendingResetDate        int32 //flag
+	PendingResetDate        int32  //flag
+	LoginEmailPattern       string //flag
 }
 
 type TL_account_passwordSettings struct {
@@ -4501,28 +4842,43 @@ type TL_inputStickerSetDice struct {
 type TL_inputStickerSetAnimatedEmojiAnimations struct {
 }
 
+type TL_inputStickerSetPremiumGifts struct {
+}
+
+type TL_inputStickerSetEmojiGenericAnimations struct {
+}
+
+type TL_inputStickerSetEmojiDefaultStatuses struct {
+}
+
+type TL_inputStickerSetEmojiDefaultTopicIcons struct {
+}
+
 type TL_stickerSet struct {
-	Flags         int32
-	Archived      bool  //flag
-	Official      bool  //flag
-	Masks         bool  //flag
-	Animated      bool  //flag
-	Videos        bool  //flag
-	InstalledDate int32 //flag
-	ID            int64
-	AccessHash    int64
-	Title         string
-	ShortName     string
-	Thumbs        []TL  // PhotoSize //flag
-	ThumbDcID     int32 //flag
-	ThumbVersion  int32 //flag
-	Count         int32
-	Hash          int32
+	Flags           int32
+	Archived        bool  //flag
+	Official        bool  //flag
+	Masks           bool  //flag
+	Animated        bool  //flag
+	Videos          bool  //flag
+	Emojis          bool  //flag
+	InstalledDate   int32 //flag
+	ID              int64
+	AccessHash      int64
+	Title           string
+	ShortName       string
+	Thumbs          []TL  // PhotoSize //flag
+	ThumbDcID       int32 //flag
+	ThumbVersion    int32 //flag
+	ThumbDocumentID int64 //flag
+	Count           int32
+	Hash            int32
 }
 
 type TL_messages_stickerSet struct {
 	Set       TL   // StickerSet
 	Packs     []TL // StickerPack
+	Keywords  []TL // StickerKeyword
 	Documents []TL // Document
 }
 
@@ -4569,10 +4925,11 @@ type TL_keyboardButtonRequestGeoLocation struct {
 }
 
 type TL_keyboardButtonSwitchInline struct {
-	Flags    int32
-	SamePeer bool //flag
-	Text     string
-	Query    string
+	Flags     int32
+	SamePeer  bool //flag
+	Text      string
+	Query     string
+	PeerTypes []TL // InlineQueryPeerType //flag
 }
 
 type TL_keyboardButtonGame struct {
@@ -4626,6 +4983,12 @@ type TL_keyboardButtonSimpleWebView struct {
 	Url  string
 }
 
+type TL_keyboardButtonRequestPeer struct {
+	Text     string
+	ButtonID int32
+	PeerType TL // RequestPeerType
+}
+
 type TL_keyboardButtonRow struct {
 	Buttons []TL // KeyboardButton
 }
@@ -4647,6 +5010,7 @@ type TL_replyKeyboardMarkup struct {
 	Resize      bool   //flag
 	SingleUse   bool   //flag
 	Selective   bool   //flag
+	Persistent  bool   //flag
 	Rows        []TL   // KeyboardButtonRow
 	Placeholder string //flag
 }
@@ -4757,6 +5121,12 @@ type TL_messageEntityBankCard struct {
 type TL_messageEntitySpoiler struct {
 	Offset int32
 	Length int32
+}
+
+type TL_messageEntityCustomEmoji struct {
+	Offset     int32
+	Length     int32
+	DocumentID int64
 }
 
 type TL_inputChannelEmpty struct {
@@ -5106,14 +5476,15 @@ type TL_botInlineMediaResult struct {
 }
 
 type TL_messages_botResults struct {
-	Flags      int32
-	Gallery    bool //flag
-	QueryID    int64
-	NextOffset string //flag
-	SwitchPm   TL     // InlineBotSwitchPM //flag
-	Results    []TL   // BotInlineResult
-	CacheTime  int32
-	Users      []TL // User
+	Flags         int32
+	Gallery       bool //flag
+	QueryID       int64
+	NextOffset    string //flag
+	SwitchPm      TL     // InlineBotSwitchPM //flag
+	SwitchWebview TL     // InlineBotWebView //flag
+	Results       []TL   // BotInlineResult
+	CacheTime     int32
+	Users         []TL // User
 }
 
 type TL_exportedMessageLink struct {
@@ -5146,6 +5517,9 @@ type TL_auth_codeTypeFlashCall struct {
 type TL_auth_codeTypeMissedCall struct {
 }
 
+type TL_auth_codeTypeFragmentSms struct {
+}
+
 type TL_auth_sentCodeTypeApp struct {
 	Length int32
 }
@@ -5165,6 +5539,35 @@ type TL_auth_sentCodeTypeFlashCall struct {
 type TL_auth_sentCodeTypeMissedCall struct {
 	Prefix string
 	Length int32
+}
+
+type TL_auth_sentCodeTypeEmailCode struct {
+	Flags                int32
+	AppleSigninAllowed   bool //flag
+	GoogleSigninAllowed  bool //flag
+	EmailPattern         string
+	Length               int32
+	ResetAvailablePeriod int32 //flag
+	ResetPendingDate     int32 //flag
+}
+
+type TL_auth_sentCodeTypeSetUpEmailRequired struct {
+	Flags               int32
+	AppleSigninAllowed  bool //flag
+	GoogleSigninAllowed bool //flag
+}
+
+type TL_auth_sentCodeTypeFragmentSms struct {
+	Url    string
+	Length int32
+}
+
+type TL_auth_sentCodeTypeFirebaseSms struct {
+	Flags       int32
+	Nonce       []byte //flag
+	Receipt     string //flag
+	PushTimeout int32  //flag
+	Length      int32
 }
 
 type TL_messages_botCallbackAnswer struct {
@@ -5274,10 +5677,12 @@ type TL_messages_featuredStickersNotModified struct {
 }
 
 type TL_messages_featuredStickers struct {
-	Hash   int64
-	Count  int32
-	Sets   []TL // StickerSetCovered
-	Unread []int64
+	Flags   int32
+	Premium bool //flag
+	Hash    int64
+	Count   int32
+	Sets    []TL // StickerSetCovered
+	Unread  []int64
 }
 
 type TL_messages_recentStickersNotModified struct {
@@ -5310,6 +5715,17 @@ type TL_stickerSetCovered struct {
 type TL_stickerSetMultiCovered struct {
 	Set    TL   // StickerSet
 	Covers []TL // Document
+}
+
+type TL_stickerSetFullCovered struct {
+	Set       TL   // StickerSet
+	Packs     []TL // StickerPack
+	Keywords  []TL // StickerKeyword
+	Documents []TL // Document
+}
+
+type TL_stickerSetNoCovered struct {
+	Set TL // StickerSet
 }
 
 type TL_maskCoords struct {
@@ -5686,6 +6102,14 @@ type TL_inputWebFileGeoPointLocation struct {
 	Scale      int32
 }
 
+type TL_inputWebFileAudioAlbumThumbLocation struct {
+	Flags     int32
+	Small     bool   //flag
+	Document  TL     // InputDocument //flag
+	Title     string //flag
+	Performer string //flag
+}
+
 type TL_upload_webFile struct {
 	Size     int32
 	MimeType string
@@ -5708,8 +6132,9 @@ type TL_payments_paymentForm struct {
 	Url                string
 	NativeProvider     string //flag
 	NativeParams       TL     // DataJSON //flag
+	AdditionalMethods  []TL   // PaymentFormMethod //flag
 	SavedInfo          TL     // PaymentRequestedInfo //flag
-	SavedCredentials   TL     // PaymentSavedCredentials //flag
+	SavedCredentials   []TL   // PaymentSavedCredentials //flag
 	Users              []TL   // User
 }
 
@@ -5785,7 +6210,8 @@ type TL_inputStickerSetItem struct {
 	Flags      int32
 	Document   TL // InputDocument
 	Emoji      string
-	MaskCoords TL // MaskCoords //flag
+	MaskCoords TL     // MaskCoords //flag
+	Keywords   string //flag
 }
 
 type TL_inputPhoneCall struct {
@@ -6069,7 +6495,9 @@ type TL_channelAdminLogEventActionToggleGroupCallSetting struct {
 }
 
 type TL_channelAdminLogEventActionParticipantJoinByInvite struct {
-	Invite TL // ExportedChatInvite
+	Flags       int32
+	ViaChatlist bool //flag
+	Invite      TL   // ExportedChatInvite
 }
 
 type TL_channelAdminLogEventActionExportedInviteDelete struct {
@@ -6108,8 +6536,40 @@ type TL_channelAdminLogEventActionSendMessage struct {
 }
 
 type TL_channelAdminLogEventActionChangeAvailableReactions struct {
+	PrevValue TL // ChatReactions
+	NewValue  TL // ChatReactions
+}
+
+type TL_channelAdminLogEventActionChangeUsernames struct {
 	PrevValue []string
 	NewValue  []string
+}
+
+type TL_channelAdminLogEventActionToggleForum struct {
+	NewValue TL // Bool
+}
+
+type TL_channelAdminLogEventActionCreateTopic struct {
+	Topic TL // ForumTopic
+}
+
+type TL_channelAdminLogEventActionEditTopic struct {
+	PrevTopic TL // ForumTopic
+	NewTopic  TL // ForumTopic
+}
+
+type TL_channelAdminLogEventActionDeleteTopic struct {
+	Topic TL // ForumTopic
+}
+
+type TL_channelAdminLogEventActionPinTopic struct {
+	Flags     int32
+	PrevTopic TL // ForumTopic //flag
+	NewTopic  TL // ForumTopic //flag
+}
+
+type TL_channelAdminLogEventActionToggleAntiSpam struct {
+	NewValue TL // Bool
 }
 
 type TL_channelAdminLogEvent struct {
@@ -6144,6 +6604,7 @@ type TL_channelAdminLogEventsFilter struct {
 	GroupCall bool //flag
 	Invites   bool //flag
 	Send      bool //flag
+	Forums    bool //flag
 }
 
 type TL_popularContact struct {
@@ -6704,23 +7165,32 @@ type TL_chatAdminRights struct {
 	Anonymous      bool //flag
 	ManageCall     bool //flag
 	Other          bool //flag
+	ManageTopics   bool //flag
 }
 
 type TL_chatBannedRights struct {
-	Flags        int32
-	ViewMessages bool //flag
-	SendMessages bool //flag
-	SendMedia    bool //flag
-	SendStickers bool //flag
-	SendGifs     bool //flag
-	SendGames    bool //flag
-	SendInline   bool //flag
-	EmbedLinks   bool //flag
-	SendPolls    bool //flag
-	ChangeInfo   bool //flag
-	InviteUsers  bool //flag
-	PinMessages  bool //flag
-	UntilDate    int32
+	Flags           int32
+	ViewMessages    bool //flag
+	SendMessages    bool //flag
+	SendMedia       bool //flag
+	SendStickers    bool //flag
+	SendGifs        bool //flag
+	SendGames       bool //flag
+	SendInline      bool //flag
+	EmbedLinks      bool //flag
+	SendPolls       bool //flag
+	ChangeInfo      bool //flag
+	InviteUsers     bool //flag
+	PinMessages     bool //flag
+	ManageTopics    bool //flag
+	SendPhotos      bool //flag
+	SendVideos      bool //flag
+	SendRoundvideos bool //flag
+	SendAudios      bool //flag
+	SendVoices      bool //flag
+	SendDocs        bool //flag
+	SendPlain       bool //flag
+	UntilDate       int32
 }
 
 type TL_inputWallPaper struct {
@@ -6746,11 +7216,14 @@ type TL_account_wallPapers struct {
 
 type TL_codeSettings struct {
 	Flags           int32
-	AllowFlashcall  bool //flag
-	CurrentNumber   bool //flag
-	AllowAppHash    bool //flag
-	AllowMissedCall bool //flag
-	LogoutTokens    []TL // bytes //flag
+	AllowFlashcall  bool   //flag
+	CurrentNumber   bool   //flag
+	AllowAppHash    bool   //flag
+	AllowMissedCall bool   //flag
+	AllowFirebase   bool   //flag
+	LogoutTokens    []TL   // bytes //flag
+	Token           string //flag
+	AppSandbox      TL     // Bool //flag
 }
 
 type TL_wallPaperSettings struct {
@@ -7029,6 +7502,16 @@ type TL_dialogFilter struct {
 type TL_dialogFilterDefault struct {
 }
 
+type TL_dialogFilterChatlist struct {
+	Flags        int32
+	HasMyInvites bool //flag
+	ID           int32
+	Title        string
+	Emoticon     string //flag
+	PinnedPeers  []TL   // InputPeer
+	IncludePeers []TL   // InputPeer
+}
+
 type TL_dialogFilterSuggested struct {
 	Filter      TL // DialogFilter
 	Description string
@@ -7109,6 +7592,17 @@ type TL_videoSize struct {
 	H            int32
 	Size         int32
 	VideoStartTs float64 //flag
+}
+
+type TL_videoSizeEmojiMarkup struct {
+	EmojiID          int64
+	BackgroundColors []int32
+}
+
+type TL_videoSizeStickerMarkup struct {
+	Stickerset       TL // InputStickerSet
+	StickerID        int64
+	BackgroundColors []int32
 }
 
 type TL_statsGroupTopPoster struct {
@@ -7205,6 +7699,7 @@ type TL_messages_discussionMessage struct {
 type TL_messageReplyHeader struct {
 	Flags            int32
 	ReplyToScheduled bool //flag
+	ForumTopic       bool //flag
 	ReplyToMsgID     int32
 	ReplyToPeerID    TL    // Peer //flag
 	ReplyToTopID     int32 //flag
@@ -7318,6 +7813,9 @@ type TL_inlineQueryPeerTypeMegagroup struct {
 type TL_inlineQueryPeerTypeBroadcast struct {
 }
 
+type TL_inlineQueryPeerTypeBotPM struct {
+}
+
 type TL_messages_historyImport struct {
 	ID int64
 }
@@ -7337,12 +7835,13 @@ type TL_messages_affectedFoundMessages struct {
 }
 
 type TL_chatInviteImporter struct {
-	Flags      int32
-	Requested  bool //flag
-	UserID     int64
-	Date       int32
-	About      string //flag
-	ApprovedBy int64  //flag
+	Flags       int32
+	Requested   bool //flag
+	ViaChatlist bool //flag
+	UserID      int64
+	Date        int32
+	About       string //flag
+	ApprovedBy  int64  //flag
 }
 
 type TL_messages_exportedChatInvites struct {
@@ -7449,6 +7948,7 @@ type TL_account_resetPasswordOk struct {
 type TL_sponsoredMessage struct {
 	Flags          int32
 	Recommended    bool //flag
+	ShowPeerPhoto  bool //flag
 	RandomID       []byte
 	FromID         TL     // Peer //flag
 	ChatInvite     TL     // ChatInvite //flag
@@ -7456,13 +7956,20 @@ type TL_sponsoredMessage struct {
 	ChannelPost    int32  //flag
 	StartParam     string //flag
 	Message        string
-	Entities       []TL // MessageEntity //flag
+	Entities       []TL   // MessageEntity //flag
+	SponsorInfo    string //flag
+	AdditionalInfo string //flag
 }
 
 type TL_messages_sponsoredMessages struct {
-	Messages []TL // SponsoredMessage
-	Chats    []TL // Chat
-	Users    []TL // User
+	Flags        int32
+	PostsBetween int32 //flag
+	Messages     []TL  // SponsoredMessage
+	Chats        []TL  // Chat
+	Users        []TL  // User
+}
+
+type TL_messages_sponsoredMessagesEmpty struct {
 }
 
 type TL_searchResultsCalendarPeriod struct {
@@ -7497,7 +8004,7 @@ type TL_messages_searchResultsPositions struct {
 }
 
 type TL_channels_sendAsPeers struct {
-	Peers []TL // Peer
+	Peers []TL // SendAsPeer
 	Chats []TL // Chat
 	Users []TL // User
 }
@@ -7520,10 +8027,10 @@ type TL_auth_loggedOut struct {
 }
 
 type TL_reactionCount struct {
-	Flags    int32
-	Chosen   bool //flag
-	Reaction string
-	Count    int32
+	Flags       int32
+	ChosenOrder int32 //flag
+	Reaction    TL    // Reaction
+	Count       int32
 }
 
 type TL_messageReactions struct {
@@ -7566,19 +8073,13 @@ type TL_messages_availableReactions struct {
 	Reactions []TL // AvailableReaction
 }
 
-type TL_messages_translateNoResult struct {
-}
-
-type TL_messages_translateResultText struct {
-	Text string
-}
-
 type TL_messagePeerReaction struct {
 	Flags    int32
 	Big      bool //flag
 	Unread   bool //flag
 	PeerID   TL   // Peer
-	Reaction string
+	Date     int32
+	Reaction TL // Reaction
 }
 
 type TL_groupCallStreamChannel struct {
@@ -7609,13 +8110,14 @@ type TL_attachMenuBotIcon struct {
 }
 
 type TL_attachMenuBot struct {
-	Flags       int32
-	Inactive    bool //flag
-	HasSettings bool //flag
-	BotID       int64
-	ShortName   string
-	PeerTypes   []TL // AttachMenuPeerType
-	Icons       []TL // AttachMenuBotIcon
+	Flags              int32
+	Inactive           bool //flag
+	HasSettings        bool //flag
+	RequestWriteAccess bool //flag
+	BotID              int64
+	ShortName          string
+	PeerTypes          []TL // AttachMenuPeerType
+	Icons              []TL // AttachMenuBotIcon
 }
 
 type TL_attachMenuBotsNotModified struct {
@@ -7727,9 +8229,387 @@ type TL_help_premiumPromo struct {
 	StatusEntities []TL // MessageEntity
 	VideoSections  []string
 	Videos         []TL // Document
-	Currency       string
-	MonthlyAmount  int64
+	PeriodOptions  []TL // PremiumSubscriptionOption
 	Users          []TL // User
+}
+
+type TL_inputStorePaymentPremiumSubscription struct {
+	Flags   int32
+	Restore bool //flag
+	Upgrade bool //flag
+}
+
+type TL_inputStorePaymentGiftPremium struct {
+	UserID   TL // InputUser
+	Currency string
+	Amount   int64
+}
+
+type TL_premiumGiftOption struct {
+	Flags        int32
+	Months       int32
+	Currency     string
+	Amount       int64
+	BotUrl       string
+	StoreProduct string //flag
+}
+
+type TL_paymentFormMethod struct {
+	Url   string
+	Title string
+}
+
+type TL_emojiStatusEmpty struct {
+}
+
+type TL_emojiStatus struct {
+	DocumentID int64
+}
+
+type TL_emojiStatusUntil struct {
+	DocumentID int64
+	Until      int32
+}
+
+type TL_account_emojiStatusesNotModified struct {
+}
+
+type TL_account_emojiStatuses struct {
+	Hash     int64
+	Statuses []TL // EmojiStatus
+}
+
+type TL_reactionEmpty struct {
+}
+
+type TL_reactionEmoji struct {
+	Emoticon string
+}
+
+type TL_reactionCustomEmoji struct {
+	DocumentID int64
+}
+
+type TL_chatReactionsNone struct {
+}
+
+type TL_chatReactionsAll struct {
+	Flags       int32
+	AllowCustom bool //flag
+}
+
+type TL_chatReactionsSome struct {
+	Reactions []TL // Reaction
+}
+
+type TL_messages_reactionsNotModified struct {
+}
+
+type TL_messages_reactions struct {
+	Hash      int64
+	Reactions []TL // Reaction
+}
+
+type TL_emailVerifyPurposeLoginSetup struct {
+	PhoneNumber   string
+	PhoneCodeHash string
+}
+
+type TL_emailVerifyPurposeLoginChange struct {
+}
+
+type TL_emailVerifyPurposePassport struct {
+}
+
+type TL_emailVerificationCode struct {
+	Code string
+}
+
+type TL_emailVerificationGoogle struct {
+	Token string
+}
+
+type TL_emailVerificationApple struct {
+	Token string
+}
+
+type TL_account_emailVerified struct {
+	Email string
+}
+
+type TL_account_emailVerifiedLogin struct {
+	Email    string
+	SentCode TL // auth_SentCode
+}
+
+type TL_premiumSubscriptionOption struct {
+	Flags              int32
+	Current            bool   //flag
+	CanPurchaseUpgrade bool   //flag
+	Transaction        string //flag
+	Months             int32
+	Currency           string
+	Amount             int64
+	BotUrl             string
+	StoreProduct       string //flag
+}
+
+type TL_sendAsPeer struct {
+	Flags           int32
+	PremiumRequired bool //flag
+	Peer            TL   // Peer
+}
+
+type TL_messageExtendedMediaPreview struct {
+	Flags         int32
+	W             int32 //flag
+	H             int32 //flag
+	Thumb         TL    // PhotoSize //flag
+	VideoDuration int32 //flag
+}
+
+type TL_messageExtendedMedia struct {
+	Media TL // MessageMedia
+}
+
+type TL_stickerKeyword struct {
+	DocumentID int64
+	Keyword    []string
+}
+
+type TL_username struct {
+	Flags    int32
+	Editable bool //flag
+	Active   bool //flag
+	Username string
+}
+
+type TL_forumTopicDeleted struct {
+	ID int32
+}
+
+type TL_forumTopic struct {
+	Flags                int32
+	My                   bool //flag
+	Closed               bool //flag
+	Pinned               bool //flag
+	Short                bool //flag
+	Hidden               bool //flag
+	ID                   int32
+	Date                 int32
+	Title                string
+	IconColor            int32
+	IconEmojiID          int64 //flag
+	TopMessage           int32
+	ReadInboxMaxID       int32
+	ReadOutboxMaxID      int32
+	UnreadCount          int32
+	UnreadMentionsCount  int32
+	UnreadReactionsCount int32
+	FromID               TL // Peer
+	NotifySettings       TL // PeerNotifySettings
+	Draft                TL // DraftMessage //flag
+}
+
+type TL_messages_forumTopics struct {
+	Flags             int32
+	OrderByCreateDate bool //flag
+	Count             int32
+	Topics            []TL // ForumTopic
+	Messages          []TL // Message
+	Chats             []TL // Chat
+	Users             []TL // User
+	Pts               int32
+}
+
+type TL_defaultHistoryTTL struct {
+	Period int32
+}
+
+type TL_exportedContactToken struct {
+	Url     string
+	Expires int32
+}
+
+type TL_requestPeerTypeUser struct {
+	Flags   int32
+	Bot     TL // Bool //flag
+	Premium TL // Bool //flag
+}
+
+type TL_requestPeerTypeChat struct {
+	Flags           int32
+	Creator         bool //flag
+	BotParticipant  bool //flag
+	HasUsername     TL   // Bool //flag
+	Forum           TL   // Bool //flag
+	UserAdminRights TL   // ChatAdminRights //flag
+	BotAdminRights  TL   // ChatAdminRights //flag
+}
+
+type TL_requestPeerTypeBroadcast struct {
+	Flags           int32
+	Creator         bool //flag
+	HasUsername     TL   // Bool //flag
+	UserAdminRights TL   // ChatAdminRights //flag
+	BotAdminRights  TL   // ChatAdminRights //flag
+}
+
+type TL_emojiListNotModified struct {
+}
+
+type TL_emojiList struct {
+	Hash       int64
+	DocumentID []int64
+}
+
+type TL_emojiGroup struct {
+	Title       string
+	IconEmojiID int64
+	Emoticons   []string
+}
+
+type TL_messages_emojiGroupsNotModified struct {
+}
+
+type TL_messages_emojiGroups struct {
+	Hash   int32
+	Groups []TL // EmojiGroup
+}
+
+type TL_textWithEntities struct {
+	Text     string
+	Entities []TL // MessageEntity
+}
+
+type TL_messages_translateResult struct {
+	Result []TL // TextWithEntities
+}
+
+type TL_autoSaveSettings struct {
+	Flags        int32
+	Photos       bool  //flag
+	Videos       bool  //flag
+	VideoMaxSize int64 //flag
+}
+
+type TL_autoSaveException struct {
+	Peer     TL // Peer
+	Settings TL // AutoSaveSettings
+}
+
+type TL_account_autoSaveSettings struct {
+	UsersSettings      TL   // AutoSaveSettings
+	ChatsSettings      TL   // AutoSaveSettings
+	BroadcastsSettings TL   // AutoSaveSettings
+	Exceptions         []TL // AutoSaveException
+	Chats              []TL // Chat
+	Users              []TL // User
+}
+
+type TL_help_appConfigNotModified struct {
+}
+
+type TL_help_appConfig struct {
+	Hash   int32
+	Config TL // JSONValue
+}
+
+type TL_inputBotAppID struct {
+	ID         int64
+	AccessHash int64
+}
+
+type TL_inputBotAppShortName struct {
+	BotID     TL // InputUser
+	ShortName string
+}
+
+type TL_botAppNotModified struct {
+}
+
+type TL_botApp struct {
+	Flags       int32
+	ID          int64
+	AccessHash  int64
+	ShortName   string
+	Title       string
+	Description string
+	Photo       TL // Photo
+	Document    TL // Document //flag
+	Hash        int64
+}
+
+type TL_messages_botApp struct {
+	Flags              int32
+	Inactive           bool //flag
+	RequestWriteAccess bool //flag
+	App                TL   // BotApp
+}
+
+type TL_appWebViewResultUrl struct {
+	Url string
+}
+
+type TL_inlineBotWebView struct {
+	Text string
+	Url  string
+}
+
+type TL_readParticipantDate struct {
+	UserID int64
+	Date   int32
+}
+
+type TL_inputChatlistDialogFilter struct {
+	FilterID int32
+}
+
+type TL_exportedChatlistInvite struct {
+	Flags int32
+	Title string
+	Url   string
+	Peers []TL // Peer
+}
+
+type TL_chatlists_exportedChatlistInvite struct {
+	Filter TL // DialogFilter
+	Invite TL // ExportedChatlistInvite
+}
+
+type TL_chatlists_exportedInvites struct {
+	Invites []TL // ExportedChatlistInvite
+	Chats   []TL // Chat
+	Users   []TL // User
+}
+
+type TL_chatlists_chatlistInviteAlready struct {
+	FilterID     int32
+	MissingPeers []TL // Peer
+	AlreadyPeers []TL // Peer
+	Chats        []TL // Chat
+	Users        []TL // User
+}
+
+type TL_chatlists_chatlistInvite struct {
+	Flags    int32
+	Title    string
+	Emoticon string //flag
+	Peers    []TL   // Peer
+	Chats    []TL   // Chat
+	Users    []TL   // User
+}
+
+type TL_chatlists_chatlistUpdates struct {
+	MissingPeers []TL // Peer
+	Chats        []TL // Chat
+	Users        []TL // User
+}
+
+type TL_bots_botInfo struct {
+	Name        string
+	About       string
+	Description string
 }
 
 type TL_invokeAfterMsg struct {
@@ -7790,9 +8670,11 @@ type TL_auth_signUp struct {
 }
 
 type TL_auth_signIn struct {
-	PhoneNumber   string
-	PhoneCodeHash string
-	PhoneCode     string
+	Flags             int32
+	PhoneNumber       string
+	PhoneCodeHash     string
+	PhoneCode         string //flag
+	EmailVerification TL     // EmailVerification //flag
 }
 
 type TL_auth_logOut struct {
@@ -7869,6 +8751,25 @@ type TL_auth_checkRecoveryPassword struct {
 	Code string
 }
 
+type TL_auth_importWebTokenAuthorization struct {
+	ApiID        int32
+	ApiHash      string
+	WebAuthToken string
+}
+
+type TL_auth_requestFirebaseSms struct {
+	Flags          int32
+	PhoneNumber    string
+	PhoneCodeHash  string
+	SafetyNetToken string //flag
+	IosPushSecret  string //flag
+}
+
+type TL_auth_resetLoginEmail struct {
+	PhoneNumber   string
+	PhoneCodeHash string
+}
+
 type TL_account_registerDevice struct {
 	Flags      int32
 	NoMuted    bool //flag
@@ -7936,7 +8837,9 @@ type TL_account_setPrivacy struct {
 }
 
 type TL_account_deleteAccount struct {
-	Reason string
+	Flags    int32
+	Reason   string
+	Password TL // InputCheckPasswordSRP //flag
 }
 
 type TL_account_getAccountTTL struct {
@@ -8047,12 +8950,13 @@ type TL_account_verifyPhone struct {
 }
 
 type TL_account_sendVerifyEmailCode struct {
-	Email string
+	Purpose TL // EmailVerifyPurpose
+	Email   string
 }
 
 type TL_account_verifyEmail struct {
-	Email string
-	Code  string
+	Purpose      TL // EmailVerifyPurpose
+	Verification TL // EmailVerification
 }
 
 type TL_account_initTakeoutSession struct {
@@ -8099,7 +9003,9 @@ type TL_account_getWallPaper struct {
 }
 
 type TL_account_uploadWallPaper struct {
-	File     TL // InputFile
+	Flags    int32
+	ForChat  bool //flag
+	File     TL   // InputFile
 	MimeType string
 	Settings TL // WallPaperSettings
 }
@@ -8168,9 +9074,8 @@ type TL_account_installTheme struct {
 }
 
 type TL_account_getTheme struct {
-	Format     string
-	Theme      TL // InputTheme
-	DocumentID int64
+	Format string
+	Theme  TL // InputTheme
 }
 
 type TL_account_getThemes struct {
@@ -8238,6 +9143,53 @@ type TL_account_uploadRingtone struct {
 	File     TL // InputFile
 	FileName string
 	MimeType string
+}
+
+type TL_account_updateEmojiStatus struct {
+	EmojiStatus TL // EmojiStatus
+}
+
+type TL_account_getDefaultEmojiStatuses struct {
+	Hash int64
+}
+
+type TL_account_getRecentEmojiStatuses struct {
+	Hash int64
+}
+
+type TL_account_clearRecentEmojiStatuses struct {
+}
+
+type TL_account_reorderUsernames struct {
+	Order []string
+}
+
+type TL_account_toggleUsername struct {
+	Username string
+	Active   TL // Bool
+}
+
+type TL_account_getDefaultProfilePhotoEmojis struct {
+	Hash int64
+}
+
+type TL_account_getDefaultGroupPhotoEmojis struct {
+	Hash int64
+}
+
+type TL_account_getAutoSaveSettings struct {
+}
+
+type TL_account_saveAutoSaveSettings struct {
+	Flags      int32
+	Users      bool //flag
+	Chats      bool //flag
+	Broadcasts bool //flag
+	Peer       TL   // InputPeer //flag
+	Settings   TL   // AutoSaveSettings
+}
+
+type TL_account_deleteAutoSaveExceptions struct {
 }
 
 type TL_users_getUsers struct {
@@ -8360,6 +9312,13 @@ type TL_contacts_resolvePhone struct {
 	Phone string
 }
 
+type TL_contacts_exportContactToken struct {
+}
+
+type TL_contacts_importContactToken struct {
+	Token string
+}
+
 type TL_messages_getMessages struct {
 	ID []TL // InputMessage
 }
@@ -8436,37 +9395,41 @@ type TL_messages_setTyping struct {
 }
 
 type TL_messages_sendMessage struct {
-	Flags        int32
-	NoWebpage    bool  //flag
-	Silent       bool  //flag
-	Background   bool  //flag
-	ClearDraft   bool  //flag
-	Noforwards   bool  //flag
-	Peer         TL    // InputPeer
-	ReplyToMsgID int32 //flag
-	Message      string
-	RandomID     int64
-	ReplyMarkup  TL    // ReplyMarkup //flag
-	Entities     []TL  // MessageEntity //flag
-	ScheduleDate int32 //flag
-	SendAs       TL    // InputPeer //flag
+	Flags                  int32
+	NoWebpage              bool  //flag
+	Silent                 bool  //flag
+	Background             bool  //flag
+	ClearDraft             bool  //flag
+	Noforwards             bool  //flag
+	UpdateStickersetsOrder bool  //flag
+	Peer                   TL    // InputPeer
+	ReplyToMsgID           int32 //flag
+	TopMsgID               int32 //flag
+	Message                string
+	RandomID               int64
+	ReplyMarkup            TL    // ReplyMarkup //flag
+	Entities               []TL  // MessageEntity //flag
+	ScheduleDate           int32 //flag
+	SendAs                 TL    // InputPeer //flag
 }
 
 type TL_messages_sendMedia struct {
-	Flags        int32
-	Silent       bool  //flag
-	Background   bool  //flag
-	ClearDraft   bool  //flag
-	Noforwards   bool  //flag
-	Peer         TL    // InputPeer
-	ReplyToMsgID int32 //flag
-	Media        TL    // InputMedia
-	Message      string
-	RandomID     int64
-	ReplyMarkup  TL    // ReplyMarkup //flag
-	Entities     []TL  // MessageEntity //flag
-	ScheduleDate int32 //flag
-	SendAs       TL    // InputPeer //flag
+	Flags                  int32
+	Silent                 bool  //flag
+	Background             bool  //flag
+	ClearDraft             bool  //flag
+	Noforwards             bool  //flag
+	UpdateStickersetsOrder bool  //flag
+	Peer                   TL    // InputPeer
+	ReplyToMsgID           int32 //flag
+	TopMsgID               int32 //flag
+	Media                  TL    // InputMedia
+	Message                string
+	RandomID               int64
+	ReplyMarkup            TL    // ReplyMarkup //flag
+	Entities               []TL  // MessageEntity //flag
+	ScheduleDate           int32 //flag
+	SendAs                 TL    // InputPeer //flag
 }
 
 type TL_messages_forwardMessages struct {
@@ -8481,6 +9444,7 @@ type TL_messages_forwardMessages struct {
 	ID                []int32
 	RandomID          []int64
 	ToPeer            TL    // InputPeer
+	TopMsgID          int32 //flag
 	ScheduleDate      int32 //flag
 	SendAs            TL    // InputPeer //flag
 }
@@ -8532,8 +9496,10 @@ type TL_messages_deleteChatUser struct {
 }
 
 type TL_messages_createChat struct {
-	Users []TL // InputUser
-	Title string
+	Flags     int32
+	Users     []TL // InputUser
+	Title     string
+	TtlPeriod int32 //flag
 }
 
 type TL_messages_getDhConfig struct {
@@ -8688,9 +9654,10 @@ type TL_messages_searchGlobal struct {
 }
 
 type TL_messages_reorderStickerSets struct {
-	Flags int32
-	Masks bool //flag
-	Order []int64
+	Flags  int32
+	Masks  bool //flag
+	Emojis bool //flag
+	Order  []int64
 }
 
 type TL_messages_getDocumentByHash struct {
@@ -8718,14 +9685,15 @@ type TL_messages_getInlineBotResults struct {
 }
 
 type TL_messages_setInlineBotResults struct {
-	Flags      int32
-	Gallery    bool //flag
-	Private    bool //flag
-	QueryID    int64
-	Results    []TL // InputBotInlineResult
-	CacheTime  int32
-	NextOffset string //flag
-	SwitchPm   TL     // InlineBotSwitchPM //flag
+	Flags         int32
+	Gallery       bool //flag
+	Private       bool //flag
+	QueryID       int64
+	Results       []TL // InputBotInlineResult
+	CacheTime     int32
+	NextOffset    string //flag
+	SwitchPm      TL     // InlineBotSwitchPM //flag
+	SwitchWebview TL     // InlineBotWebView //flag
 }
 
 type TL_messages_sendInlineBotResult struct {
@@ -8736,6 +9704,7 @@ type TL_messages_sendInlineBotResult struct {
 	HideVia      bool  //flag
 	Peer         TL    // InputPeer
 	ReplyToMsgID int32 //flag
+	TopMsgID     int32 //flag
 	RandomID     int64
 	QueryID      int64
 	ID           string
@@ -8796,6 +9765,7 @@ type TL_messages_saveDraft struct {
 	Flags        int32
 	NoWebpage    bool  //flag
 	ReplyToMsgID int32 //flag
+	TopMsgID     int32 //flag
 	Peer         TL    // InputPeer
 	Message      string
 	Entities     []TL // MessageEntity //flag
@@ -8833,6 +9803,7 @@ type TL_messages_clearRecentStickers struct {
 type TL_messages_getArchivedStickers struct {
 	Flags    int32
 	Masks    bool //flag
+	Emojis   bool //flag
 	OffsetID int64
 	Limit    int32
 }
@@ -8942,7 +9913,9 @@ type TL_messages_faveSticker struct {
 }
 
 type TL_messages_getUnreadMentions struct {
-	Peer      TL // InputPeer
+	Flags     int32
+	Peer      TL    // InputPeer
+	TopMsgID  int32 //flag
 	OffsetID  int32
 	AddOffset int32
 	Limit     int32
@@ -8951,7 +9924,9 @@ type TL_messages_getUnreadMentions struct {
 }
 
 type TL_messages_readMentions struct {
-	Peer TL // InputPeer
+	Flags    int32
+	Peer     TL    // InputPeer
+	TopMsgID int32 //flag
 }
 
 type TL_messages_getRecentLocations struct {
@@ -8961,16 +9936,18 @@ type TL_messages_getRecentLocations struct {
 }
 
 type TL_messages_sendMultiMedia struct {
-	Flags        int32
-	Silent       bool  //flag
-	Background   bool  //flag
-	ClearDraft   bool  //flag
-	Noforwards   bool  //flag
-	Peer         TL    // InputPeer
-	ReplyToMsgID int32 //flag
-	MultiMedia   []TL  // InputSingleMedia
-	ScheduleDate int32 //flag
-	SendAs       TL    // InputPeer //flag
+	Flags                  int32
+	Silent                 bool  //flag
+	Background             bool  //flag
+	ClearDraft             bool  //flag
+	Noforwards             bool  //flag
+	UpdateStickersetsOrder bool  //flag
+	Peer                   TL    // InputPeer
+	ReplyToMsgID           int32 //flag
+	TopMsgID               int32 //flag
+	MultiMedia             []TL  // InputSingleMedia
+	ScheduleDate           int32 //flag
+	SendAs                 TL    // InputPeer //flag
 }
 
 type TL_messages_uploadEncryptedFile struct {
@@ -9052,8 +10029,10 @@ type TL_messages_getEmojiURL struct {
 }
 
 type TL_messages_getSearchCounters struct {
-	Peer    TL   // InputPeer
-	Filters []TL // MessagesFilter
+	Flags    int32
+	Peer     TL    // InputPeer
+	TopMsgID int32 //flag
+	Filters  []TL  // MessagesFilter
 }
 
 type TL_messages_requestUrlAuth struct {
@@ -9160,7 +10139,9 @@ type TL_messages_readDiscussion struct {
 }
 
 type TL_messages_unpinAllMessages struct {
-	Peer TL // InputPeer
+	Flags    int32
+	Peer     TL    // InputPeer
+	TopMsgID int32 //flag
 }
 
 type TL_messages_deleteChat struct {
@@ -9303,11 +10284,12 @@ type TL_messages_saveDefaultSendAs struct {
 }
 
 type TL_messages_sendReaction struct {
-	Flags    int32
-	Big      bool //flag
-	Peer     TL   // InputPeer
-	MsgID    int32
-	Reaction string //flag
+	Flags       int32
+	Big         bool //flag
+	AddToRecent bool //flag
+	Peer        TL   // InputPeer
+	MsgID       int32
+	Reaction    []TL // Reaction //flag
 }
 
 type TL_messages_getMessagesReactions struct {
@@ -9319,14 +10301,14 @@ type TL_messages_getMessageReactionsList struct {
 	Flags    int32
 	Peer     TL // InputPeer
 	ID       int32
-	Reaction string //flag
+	Reaction TL     // Reaction //flag
 	Offset   string //flag
 	Limit    int32
 }
 
 type TL_messages_setChatAvailableReactions struct {
 	Peer               TL // InputPeer
-	AvailableReactions []string
+	AvailableReactions TL // ChatReactions
 }
 
 type TL_messages_getAvailableReactions struct {
@@ -9334,20 +10316,21 @@ type TL_messages_getAvailableReactions struct {
 }
 
 type TL_messages_setDefaultReaction struct {
-	Reaction string
+	Reaction TL // Reaction
 }
 
 type TL_messages_translateText struct {
-	Flags    int32
-	Peer     TL     // InputPeer //flag
-	MsgID    int32  //flag
-	Text     string //flag
-	FromLang string //flag
-	ToLang   string
+	Flags  int32
+	Peer   TL      // InputPeer //flag
+	ID     []int32 //flag
+	Text   []TL    // TextWithEntities //flag
+	ToLang string
 }
 
 type TL_messages_getUnreadReactions struct {
-	Peer      TL // InputPeer
+	Flags     int32
+	Peer      TL    // InputPeer
+	TopMsgID  int32 //flag
 	OffsetID  int32
 	AddOffset int32
 	Limit     int32
@@ -9356,7 +10339,9 @@ type TL_messages_getUnreadReactions struct {
 }
 
 type TL_messages_readReactions struct {
-	Peer TL // InputPeer
+	Flags    int32
+	Peer     TL    // InputPeer
+	TopMsgID int32 //flag
 }
 
 type TL_messages_searchSentMedia struct {
@@ -9374,8 +10359,10 @@ type TL_messages_getAttachMenuBot struct {
 }
 
 type TL_messages_toggleBotInAttachMenu struct {
-	Bot     TL // InputUser
-	Enabled TL // Bool
+	Flags        int32
+	WriteAllowed bool //flag
+	Bot          TL   // InputUser
+	Enabled      TL   // Bool
 }
 
 type TL_messages_requestWebView struct {
@@ -9387,8 +10374,10 @@ type TL_messages_requestWebView struct {
 	Url          string //flag
 	StartParam   string //flag
 	ThemeParams  TL     // DataJSON //flag
-	ReplyToMsgID int32  //flag
-	SendAs       TL     // InputPeer //flag
+	Platform     string
+	ReplyToMsgID int32 //flag
+	TopMsgID     int32 //flag
+	SendAs       TL    // InputPeer //flag
 }
 
 type TL_messages_prolongWebView struct {
@@ -9398,14 +10387,17 @@ type TL_messages_prolongWebView struct {
 	Bot          TL   // InputUser
 	QueryID      int64
 	ReplyToMsgID int32 //flag
+	TopMsgID     int32 //flag
 	SendAs       TL    // InputPeer //flag
 }
 
 type TL_messages_requestSimpleWebView struct {
-	Flags       int32
-	Bot         TL // InputUser
-	Url         string
-	ThemeParams TL // DataJSON //flag
+	Flags             int32
+	FromSwitchWebview bool //flag
+	Bot               TL   // InputUser
+	Url               string
+	ThemeParams       TL // DataJSON //flag
+	Platform          string
 }
 
 type TL_messages_sendWebViewResultMessage struct {
@@ -9432,6 +10424,102 @@ type TL_messages_rateTranscribedAudio struct {
 	Good            TL // Bool
 }
 
+type TL_messages_getCustomEmojiDocuments struct {
+	DocumentID []int64
+}
+
+type TL_messages_getEmojiStickers struct {
+	Hash int64
+}
+
+type TL_messages_getFeaturedEmojiStickers struct {
+	Hash int64
+}
+
+type TL_messages_reportReaction struct {
+	Peer         TL // InputPeer
+	ID           int32
+	ReactionPeer TL // InputPeer
+}
+
+type TL_messages_getTopReactions struct {
+	Limit int32
+	Hash  int64
+}
+
+type TL_messages_getRecentReactions struct {
+	Limit int32
+	Hash  int64
+}
+
+type TL_messages_clearRecentReactions struct {
+}
+
+type TL_messages_getExtendedMedia struct {
+	Peer TL // InputPeer
+	ID   []int32
+}
+
+type TL_messages_setDefaultHistoryTTL struct {
+	Period int32
+}
+
+type TL_messages_getDefaultHistoryTTL struct {
+}
+
+type TL_messages_sendBotRequestedPeer struct {
+	Peer          TL // InputPeer
+	MsgID         int32
+	ButtonID      int32
+	RequestedPeer TL // InputPeer
+}
+
+type TL_messages_getEmojiGroups struct {
+	Hash int32
+}
+
+type TL_messages_getEmojiStatusGroups struct {
+	Hash int32
+}
+
+type TL_messages_getEmojiProfilePhotoGroups struct {
+	Hash int32
+}
+
+type TL_messages_searchCustomEmoji struct {
+	Emoticon string
+	Hash     int64
+}
+
+type TL_messages_togglePeerTranslations struct {
+	Flags    int32
+	Disabled bool //flag
+	Peer     TL   // InputPeer
+}
+
+type TL_messages_getBotApp struct {
+	App  TL // InputBotApp
+	Hash int64
+}
+
+type TL_messages_requestAppWebView struct {
+	Flags        int32
+	WriteAllowed bool   //flag
+	Peer         TL     // InputPeer
+	App          TL     // InputBotApp
+	StartParam   string //flag
+	ThemeParams  TL     // DataJSON //flag
+	Platform     string
+}
+
+type TL_messages_setChatWallPaper struct {
+	Flags     int32
+	Peer      TL    // InputPeer
+	Wallpaper TL    // InputWallPaper //flag
+	Settings  TL    // WallPaperSettings //flag
+	ID        int32 //flag
+}
+
 type TL_updates_getState struct {
 }
 
@@ -9453,14 +10541,20 @@ type TL_updates_getChannelDifference struct {
 }
 
 type TL_photos_updateProfilePhoto struct {
-	ID TL // InputPhoto
+	Flags    int32
+	Fallback bool //flag
+	Bot      TL   // InputUser //flag
+	ID       TL   // InputPhoto
 }
 
 type TL_photos_uploadProfilePhoto struct {
-	Flags        int32
-	File         TL      // InputFile //flag
-	Video        TL      // InputFile //flag
-	VideoStartTs float64 //flag
+	Flags            int32
+	Fallback         bool    //flag
+	Bot              TL      // InputUser //flag
+	File             TL      // InputFile //flag
+	Video            TL      // InputFile //flag
+	VideoStartTs     float64 //flag
+	VideoEmojiMarkup TL      // VideoSize //flag
 }
 
 type TL_photos_deletePhotos struct {
@@ -9472,6 +10566,17 @@ type TL_photos_getUserPhotos struct {
 	Offset int32
 	MaxID  int64
 	Limit  int32
+}
+
+type TL_photos_uploadContactProfilePhoto struct {
+	Flags            int32
+	Suggest          bool    //flag
+	Save             bool    //flag
+	UserID           TL      // InputUser
+	File             TL      // InputFile //flag
+	Video            TL      // InputFile //flag
+	VideoStartTs     float64 //flag
+	VideoEmojiMarkup TL      // VideoSize //flag
 }
 
 type TL_upload_saveFilePart struct {
@@ -9567,6 +10672,7 @@ type TL_help_getDeepLinkInfo struct {
 }
 
 type TL_help_getAppConfig struct {
+	Hash int32
 }
 
 type TL_help_saveAppLog struct {
@@ -9657,10 +10763,12 @@ type TL_channels_createChannel struct {
 	Broadcast bool //flag
 	Megagroup bool //flag
 	ForImport bool //flag
+	Forum     bool //flag
 	Title     string
 	About     string
 	GeoPoint  TL     // InputGeoPoint //flag
 	Address   string //flag
+	TtlPeriod int32  //flag
 }
 
 type TL_channels_editAdmin struct {
@@ -9829,6 +10937,94 @@ type TL_channels_toggleJoinRequest struct {
 	Enabled TL // Bool
 }
 
+type TL_channels_reorderUsernames struct {
+	Channel TL // InputChannel
+	Order   []string
+}
+
+type TL_channels_toggleUsername struct {
+	Channel  TL // InputChannel
+	Username string
+	Active   TL // Bool
+}
+
+type TL_channels_deactivateAllUsernames struct {
+	Channel TL // InputChannel
+}
+
+type TL_channels_toggleForum struct {
+	Channel TL // InputChannel
+	Enabled TL // Bool
+}
+
+type TL_channels_createForumTopic struct {
+	Flags       int32
+	Channel     TL // InputChannel
+	Title       string
+	IconColor   int32 //flag
+	IconEmojiID int64 //flag
+	RandomID    int64
+	SendAs      TL // InputPeer //flag
+}
+
+type TL_channels_getForumTopics struct {
+	Flags       int32
+	Channel     TL     // InputChannel
+	Q           string //flag
+	OffsetDate  int32
+	OffsetID    int32
+	OffsetTopic int32
+	Limit       int32
+}
+
+type TL_channels_getForumTopicsByID struct {
+	Channel TL // InputChannel
+	Topics  []int32
+}
+
+type TL_channels_editForumTopic struct {
+	Flags       int32
+	Channel     TL // InputChannel
+	TopicID     int32
+	Title       string //flag
+	IconEmojiID int64  //flag
+	Closed      TL     // Bool //flag
+	Hidden      TL     // Bool //flag
+}
+
+type TL_channels_updatePinnedForumTopic struct {
+	Channel TL // InputChannel
+	TopicID int32
+	Pinned  TL // Bool
+}
+
+type TL_channels_deleteTopicHistory struct {
+	Channel  TL // InputChannel
+	TopMsgID int32
+}
+
+type TL_channels_reorderPinnedForumTopics struct {
+	Flags   int32
+	Force   bool //flag
+	Channel TL   // InputChannel
+	Order   []int32
+}
+
+type TL_channels_toggleAntiSpam struct {
+	Channel TL // InputChannel
+	Enabled TL // Bool
+}
+
+type TL_channels_reportAntiSpamFalsePositive struct {
+	Channel TL // InputChannel
+	MsgID   int32
+}
+
+type TL_channels_toggleParticipantsHidden struct {
+	Channel TL // InputChannel
+	Enabled TL // Bool
+}
+
 type TL_bots_sendCustomRequest struct {
 	CustomMethod string
 	Params       TL // DataJSON
@@ -9870,6 +11066,32 @@ type TL_bots_setBotBroadcastDefaultAdminRights struct {
 
 type TL_bots_setBotGroupDefaultAdminRights struct {
 	AdminRights TL // ChatAdminRights
+}
+
+type TL_bots_setBotInfo struct {
+	Flags       int32
+	Bot         TL // InputUser //flag
+	LangCode    string
+	Name        string //flag
+	About       string //flag
+	Description string //flag
+}
+
+type TL_bots_getBotInfo struct {
+	Flags    int32
+	Bot      TL // InputUser //flag
+	LangCode string
+}
+
+type TL_bots_reorderUsernames struct {
+	Bot   TL // InputUser
+	Order []string
+}
+
+type TL_bots_toggleUsername struct {
+	Bot      TL // InputUser
+	Username string
+	Active   TL // Bool
 }
 
 type TL_payments_getPaymentForm struct {
@@ -9918,27 +11140,17 @@ type TL_payments_exportInvoice struct {
 }
 
 type TL_payments_assignAppStoreTransaction struct {
-	Flags         int32
-	Restore       bool //flag
-	TransactionID string
-	Receipt       []byte
+	Receipt []byte
+	Purpose TL // InputStorePaymentPurpose
 }
 
 type TL_payments_assignPlayMarketTransaction struct {
-	PurchaseToken string
-}
-
-type TL_payments_restorePlayMarketReceipt struct {
-	Receipt []byte
+	Receipt TL // DataJSON
+	Purpose TL // InputStorePaymentPurpose
 }
 
 type TL_payments_canPurchasePremium struct {
-}
-
-type TL_payments_requestRecurringPayment struct {
-	UserID              TL // InputUser
-	RecurringInitCharge string
-	InvoiceMedia        TL // InputMedia
+	Purpose TL // InputStorePaymentPurpose
 }
 
 type TL_stickers_createStickerSet struct {
@@ -9946,6 +11158,8 @@ type TL_stickers_createStickerSet struct {
 	Masks     bool //flag
 	Animated  bool //flag
 	Videos    bool //flag
+	Emojis    bool //flag
+	TextColor bool //flag
 	UserID    TL   // InputUser
 	Title     string
 	ShortName string
@@ -9969,8 +11183,10 @@ type TL_stickers_addStickerToSet struct {
 }
 
 type TL_stickers_setStickerSetThumb struct {
-	Stickerset TL // InputStickerSet
-	Thumb      TL // InputDocument
+	Flags           int32
+	Stickerset      TL    // InputStickerSet
+	Thumb           TL    // InputDocument //flag
+	ThumbDocumentID int64 //flag
 }
 
 type TL_stickers_checkShortName struct {
@@ -9979,6 +11195,23 @@ type TL_stickers_checkShortName struct {
 
 type TL_stickers_suggestShortName struct {
 	Title string
+}
+
+type TL_stickers_changeSticker struct {
+	Flags      int32
+	Sticker    TL     // InputDocument
+	Emoji      string //flag
+	MaskCoords TL     // MaskCoords //flag
+	Keywords   string //flag
+}
+
+type TL_stickers_renameStickerSet struct {
+	Stickerset TL // InputStickerSet
+	Title      string
+}
+
+type TL_stickers_deleteStickerSet struct {
+	Stickerset TL // InputStickerSet
 }
 
 type TL_phone_getCallConfig struct {
@@ -10198,10 +11431,6 @@ type TL_folders_editPeerFolders struct {
 	FolderPeers []TL // InputFolderPeer
 }
 
-type TL_folders_deleteFolder struct {
-	FolderID int32
-}
-
 type TL_stats_getBroadcastStats struct {
 	Flags   int32
 	Dark    bool //flag
@@ -10234,6 +11463,60 @@ type TL_stats_getMessageStats struct {
 	Dark    bool //flag
 	Channel TL   // InputChannel
 	MsgID   int32
+}
+
+type TL_chatlists_exportChatlistInvite struct {
+	Chatlist TL // InputChatlist
+	Title    string
+	Peers    []TL // InputPeer
+}
+
+type TL_chatlists_deleteExportedInvite struct {
+	Chatlist TL // InputChatlist
+	Slug     string
+}
+
+type TL_chatlists_editExportedInvite struct {
+	Flags    int32
+	Chatlist TL // InputChatlist
+	Slug     string
+	Title    string //flag
+	Peers    []TL   // InputPeer //flag
+}
+
+type TL_chatlists_getExportedInvites struct {
+	Chatlist TL // InputChatlist
+}
+
+type TL_chatlists_checkChatlistInvite struct {
+	Slug string
+}
+
+type TL_chatlists_joinChatlistInvite struct {
+	Slug  string
+	Peers []TL // InputPeer
+}
+
+type TL_chatlists_getChatlistUpdates struct {
+	Chatlist TL // InputChatlist
+}
+
+type TL_chatlists_joinChatlistUpdates struct {
+	Chatlist TL   // InputChatlist
+	Peers    []TL // InputPeer
+}
+
+type TL_chatlists_hideChatlistUpdates struct {
+	Chatlist TL // InputChatlist
+}
+
+type TL_chatlists_getLeaveChatlistSuggestions struct {
+	Chatlist TL // InputChatlist
+}
+
+type TL_chatlists_leaveChatlist struct {
+	Chatlist TL   // InputChatlist
+	Peers    []TL // InputPeer
 }
 
 func (e TL_resPQ) encode() []byte {
@@ -10686,6 +11969,13 @@ func (e TL_tlsBlockScope) encode() []byte {
 	return x.buf
 }
 
+func (e TL_tlsBlockPermutation) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_tlsBlockPermutation)
+	x.Vector(e.Entries)
+	return x.buf
+}
+
 func (e TL_rpc_drop_answer) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_rpc_drop_answer)
@@ -10875,6 +12165,7 @@ func (e TL_inputMediaUploadedPhoto) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaUploadedPhoto)
 	x.Int(e.Flags)
+	//flag Spoiler
 	x.Bytes(e.File.encode())
 	if e.Flags&1 != 0 {
 		x.Vector(e.Stickers)
@@ -10889,6 +12180,7 @@ func (e TL_inputMediaPhoto) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaPhoto)
 	x.Int(e.Flags)
+	//flag Spoiler
 	x.Bytes(e.ID.encode())
 	if e.Flags&1 != 0 {
 		x.Int(e.TtlSeconds)
@@ -10919,6 +12211,7 @@ func (e TL_inputMediaUploadedDocument) encode() []byte {
 	x.Int(e.Flags)
 	//flag NosoundVideo
 	//flag ForceFile
+	//flag Spoiler
 	x.Bytes(e.File.encode())
 	if e.Flags&4 != 0 {
 		x.Bytes(e.Thumb.encode())
@@ -10938,6 +12231,7 @@ func (e TL_inputMediaDocument) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaDocument)
 	x.Int(e.Flags)
+	//flag Spoiler
 	x.Bytes(e.ID.encode())
 	if e.Flags&1 != 0 {
 		x.Int(e.TtlSeconds)
@@ -10964,6 +12258,7 @@ func (e TL_inputMediaPhotoExternal) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaPhotoExternal)
 	x.Int(e.Flags)
+	//flag Spoiler
 	x.String(e.Url)
 	if e.Flags&1 != 0 {
 		x.Int(e.TtlSeconds)
@@ -10975,6 +12270,7 @@ func (e TL_inputMediaDocumentExternal) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaDocumentExternal)
 	x.Int(e.Flags)
+	//flag Spoiler
 	x.String(e.Url)
 	if e.Flags&1 != 0 {
 		x.Int(e.TtlSeconds)
@@ -11004,6 +12300,9 @@ func (e TL_inputMediaInvoice) encode() []byte {
 	x.Bytes(e.ProviderData.encode())
 	if e.Flags&2 != 0 {
 		x.String(e.StartParam)
+	}
+	if e.Flags&4 != 0 {
+		x.Bytes(e.ExtendedMedia.encode())
 	}
 	return x.buf
 }
@@ -11068,6 +12367,9 @@ func (e TL_inputChatUploadedPhoto) encode() []byte {
 	}
 	if e.Flags&4 != 0 {
 		x.Double(e.VideoStartTs)
+	}
+	if e.Flags&8 != 0 {
+		x.Bytes(e.VideoEmojiMarkup.encode())
 	}
 	return x.buf
 }
@@ -11320,6 +12622,8 @@ func (e TL_user) encode() []byte {
 	//flag BotAttachMenu
 	//flag Premium
 	//flag AttachMenuEnabled
+	x.Int(e.Flags2)
+	//flag BotCanEdit
 	x.Long(e.ID)
 	if e.Flags&1 != 0 {
 		x.Long(e.AccessHash)
@@ -11354,6 +12658,12 @@ func (e TL_user) encode() []byte {
 	if e.Flags&4194304 != 0 {
 		x.String(e.LangCode)
 	}
+	if e.Flags&1073741824 != 0 {
+		x.Bytes(e.EmojiStatus.encode())
+	}
+	if e.Flags2&1 != 0 {
+		x.Vector(e.Usernames)
+	}
 	return x.buf
 }
 
@@ -11368,6 +12678,7 @@ func (e TL_userProfilePhoto) encode() []byte {
 	x.UInt(CRC_userProfilePhoto)
 	x.Int(e.Flags)
 	//flag HasVideo
+	//flag Personal
 	x.Long(e.PhotoID)
 	if e.Flags&2 != 0 {
 		x.StringBytes(e.StrippedThumb)
@@ -11480,6 +12791,8 @@ func (e TL_channel) encode() []byte {
 	//flag Noforwards
 	//flag JoinToSend
 	//flag JoinRequest
+	//flag Forum
+	x.Int(e.Flags2)
 	x.Long(e.ID)
 	if e.Flags&8192 != 0 {
 		x.Long(e.AccessHash)
@@ -11505,6 +12818,9 @@ func (e TL_channel) encode() []byte {
 	if e.Flags&131072 != 0 {
 		x.Int(e.ParticipantsCount)
 	}
+	if e.Flags2&1 != 0 {
+		x.Vector(e.Usernames)
+	}
 	return x.buf
 }
 
@@ -11529,6 +12845,7 @@ func (e TL_chatFull) encode() []byte {
 	x.Int(e.Flags)
 	//flag CanSetUsername
 	//flag HasScheduled
+	//flag TranslationsDisabled
 	x.Long(e.ID)
 	x.String(e.About)
 	x.Bytes(e.Participants.encode())
@@ -11567,7 +12884,7 @@ func (e TL_chatFull) encode() []byte {
 		x.VectorLong(e.RecentRequesters)
 	}
 	if e.Flags&262144 != 0 {
-		x.VectorString(e.AvailableReactions)
+		x.Bytes(e.AvailableReactions.encode())
 	}
 	return x.buf
 }
@@ -11585,7 +12902,10 @@ func (e TL_channelFull) encode() []byte {
 	//flag CanViewStats
 	//flag Blocked
 	x.Int(e.Flags2)
-	x.Bytes(e.CanDeleteChannel.encode())
+	//flag CanDeleteChannel
+	//flag Antispam
+	//flag ParticipantsHidden
+	//flag TranslationsDisabled
 	x.Long(e.ID)
 	x.String(e.About)
 	if e.Flags&1 != 0 {
@@ -11671,7 +12991,7 @@ func (e TL_channelFull) encode() []byte {
 		x.Bytes(e.DefaultSendAs.encode())
 	}
 	if e.Flags&1073741824 != 0 {
-		x.VectorString(e.AvailableReactions)
+		x.Bytes(e.AvailableReactions.encode())
 	}
 	return x.buf
 }
@@ -11856,6 +13176,7 @@ func (e TL_messageMediaPhoto) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageMediaPhoto)
 	x.Int(e.Flags)
+	//flag Spoiler
 	if e.Flags&1 != 0 {
 		x.Bytes(e.Photo.encode())
 	}
@@ -11894,6 +13215,7 @@ func (e TL_messageMediaDocument) encode() []byte {
 	x.UInt(CRC_messageMediaDocument)
 	x.Int(e.Flags)
 	//flag Nopremium
+	//flag Spoiler
 	if e.Flags&1 != 0 {
 		x.Bytes(e.Document.encode())
 	}
@@ -11946,6 +13268,9 @@ func (e TL_messageMediaInvoice) encode() []byte {
 	x.String(e.Currency)
 	x.Long(e.TotalAmount)
 	x.String(e.StartParam)
+	if e.Flags&16 != 0 {
+		x.Bytes(e.ExtendedMedia.encode())
+	}
 	return x.buf
 }
 
@@ -12141,7 +13466,14 @@ func (e TL_messageActionCustomAction) encode() []byte {
 func (e TL_messageActionBotAllowed) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionBotAllowed)
-	x.String(e.Domain)
+	x.Int(e.Flags)
+	//flag AttachMenu
+	if e.Flags&1 != 0 {
+		x.String(e.Domain)
+	}
+	if e.Flags&4 != 0 {
+		x.Bytes(e.App.encode())
+	}
 	return x.buf
 }
 
@@ -12197,7 +13529,11 @@ func (e TL_messageActionInviteToGroupCall) encode() []byte {
 func (e TL_messageActionSetMessagesTTL) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionSetMessagesTTL)
+	x.Int(e.Flags)
 	x.Int(e.Period)
+	if e.Flags&1 != 0 {
+		x.Long(e.AutoSettingFrom)
+	}
 	return x.buf
 }
 
@@ -12237,6 +13573,82 @@ func (e TL_messageActionWebViewDataSent) encode() []byte {
 	return x.buf
 }
 
+func (e TL_messageActionGiftPremium) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionGiftPremium)
+	x.Int(e.Flags)
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	x.Int(e.Months)
+	if e.Flags&1 != 0 {
+		x.String(e.CryptoCurrency)
+	}
+	if e.Flags&1 != 0 {
+		x.Long(e.CryptoAmount)
+	}
+	return x.buf
+}
+
+func (e TL_messageActionTopicCreate) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionTopicCreate)
+	x.Int(e.Flags)
+	x.String(e.Title)
+	x.Int(e.IconColor)
+	if e.Flags&1 != 0 {
+		x.Long(e.IconEmojiID)
+	}
+	return x.buf
+}
+
+func (e TL_messageActionTopicEdit) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionTopicEdit)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.String(e.Title)
+	}
+	if e.Flags&2 != 0 {
+		x.Long(e.IconEmojiID)
+	}
+	if e.Flags&4 != 0 {
+		x.Bytes(e.Closed.encode())
+	}
+	if e.Flags&8 != 0 {
+		x.Bytes(e.Hidden.encode())
+	}
+	return x.buf
+}
+
+func (e TL_messageActionSuggestProfilePhoto) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionSuggestProfilePhoto)
+	x.Bytes(e.Photo.encode())
+	return x.buf
+}
+
+func (e TL_messageActionRequestedPeer) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionRequestedPeer)
+	x.Int(e.ButtonID)
+	x.Bytes(e.Peer.encode())
+	return x.buf
+}
+
+func (e TL_messageActionSetChatWallPaper) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionSetChatWallPaper)
+	x.Bytes(e.Wallpaper.encode())
+	return x.buf
+}
+
+func (e TL_messageActionSetSameChatWallPaper) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionSetSameChatWallPaper)
+	x.Bytes(e.Wallpaper.encode())
+	return x.buf
+}
+
 func (e TL_dialog) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_dialog)
@@ -12259,6 +13671,9 @@ func (e TL_dialog) encode() []byte {
 	}
 	if e.Flags&16 != 0 {
 		x.Int(e.FolderID)
+	}
+	if e.Flags&32 != 0 {
+		x.Int(e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -12389,6 +13804,13 @@ func (e TL_auth_sentCode) encode() []byte {
 	return x.buf
 }
 
+func (e TL_auth_sentCodeSuccess) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_sentCodeSuccess)
+	x.Bytes(e.Authorization.encode())
+	return x.buf
+}
+
 func (e TL_auth_authorization) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_auth_authorization)
@@ -12399,6 +13821,9 @@ func (e TL_auth_authorization) encode() []byte {
 	}
 	if e.Flags&1 != 0 {
 		x.Int(e.TmpSessions)
+	}
+	if e.Flags&4 != 0 {
+		x.StringBytes(e.FutureAuthToken)
 	}
 	x.Bytes(e.User.encode())
 	return x.buf
@@ -12444,6 +13869,14 @@ func (e TL_inputNotifyChats) encode() []byte {
 func (e TL_inputNotifyBroadcasts) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputNotifyBroadcasts)
+	return x.buf
+}
+
+func (e TL_inputNotifyForumTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputNotifyForumTopic)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.TopMsgID)
 	return x.buf
 }
 
@@ -12617,13 +14050,21 @@ func (e TL_userFull) encode() []byte {
 	//flag CanPinMessage
 	//flag HasScheduled
 	//flag VideoCallsAvailable
+	//flag VoiceMessagesForbidden
+	//flag TranslationsDisabled
 	x.Long(e.ID)
 	if e.Flags&2 != 0 {
 		x.String(e.About)
 	}
 	x.Bytes(e.Settings.encode())
+	if e.Flags&2097152 != 0 {
+		x.Bytes(e.PersonalPhoto.encode())
+	}
 	if e.Flags&4 != 0 {
 		x.Bytes(e.ProfilePhoto.encode())
+	}
+	if e.Flags&4194304 != 0 {
+		x.Bytes(e.FallbackPhoto.encode())
 	}
 	x.Bytes(e.NotifySettings.encode())
 	if e.Flags&8 != 0 {
@@ -12650,6 +14091,12 @@ func (e TL_userFull) encode() []byte {
 	}
 	if e.Flags&262144 != 0 {
 		x.Bytes(e.BotBroadcastAdminRights.encode())
+	}
+	if e.Flags&524288 != 0 {
+		x.Vector(e.PremiumGifts)
+	}
+	if e.Flags&16777216 != 0 {
+		x.Bytes(e.Wallpaper.encode())
 	}
 	return x.buf
 }
@@ -12788,6 +14235,7 @@ func (e TL_messages_channelMessages) encode() []byte {
 		x.Int(e.OffsetIdOffset)
 	}
 	x.Vector(e.Messages)
+	x.Vector(e.Topics)
 	x.Vector(e.Chats)
 	x.Vector(e.Users)
 	return x.buf
@@ -13001,17 +14449,7 @@ func (e TL_updateUserName) encode() []byte {
 	x.Long(e.UserID)
 	x.String(e.FirstName)
 	x.String(e.LastName)
-	x.String(e.Username)
-	return x.buf
-}
-
-func (e TL_updateUserPhoto) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_updateUserPhoto)
-	x.Long(e.UserID)
-	x.Int(e.Date)
-	x.Bytes(e.Photo.encode())
-	x.Bytes(e.Previous.encode())
+	x.Vector(e.Usernames)
 	return x.buf
 }
 
@@ -13238,6 +14676,7 @@ func (e TL_updateStickerSetsOrder) encode() []byte {
 	x.UInt(CRC_updateStickerSetsOrder)
 	x.Int(e.Flags)
 	//flag Masks
+	//flag Emojis
 	x.VectorLong(e.Order)
 	return x.buf
 }
@@ -13245,6 +14684,9 @@ func (e TL_updateStickerSetsOrder) encode() []byte {
 func (e TL_updateStickerSets) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateStickerSets)
+	x.Int(e.Flags)
+	//flag Masks
+	//flag Emojis
 	return x.buf
 }
 
@@ -13351,7 +14793,11 @@ func (e TL_updateReadChannelOutbox) encode() []byte {
 func (e TL_updateDraftMessage) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateDraftMessage)
+	x.Int(e.Flags)
 	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	x.Bytes(e.Draft.encode())
 	return x.buf
 }
@@ -13489,7 +14935,11 @@ func (e TL_updateFavedStickers) encode() []byte {
 func (e TL_updateChannelReadMessagesContents) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateChannelReadMessagesContents)
+	x.Int(e.Flags)
 	x.Long(e.ChannelID)
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	x.VectorInt(e.Messages)
 	return x.buf
 }
@@ -13779,6 +15229,7 @@ func (e TL_updateChannelParticipant) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateChannelParticipant)
 	x.Int(e.Flags)
+	//flag ViaChatlist
 	x.Long(e.ChannelID)
 	x.Int(e.Date)
 	x.Long(e.ActorID)
@@ -13848,8 +15299,12 @@ func (e TL_updateBotChatInviteRequester) encode() []byte {
 func (e TL_updateMessageReactions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateMessageReactions)
+	x.Int(e.Flags)
 	x.Bytes(e.Peer.encode())
 	x.Int(e.MsgID)
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	x.Bytes(e.Reactions.encode())
 	return x.buf
 }
@@ -13890,6 +15345,92 @@ func (e TL_updateTranscribedAudio) encode() []byte {
 	x.Int(e.MsgID)
 	x.Long(e.TranscriptionID)
 	x.String(e.Text)
+	return x.buf
+}
+
+func (e TL_updateReadFeaturedEmojiStickers) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateReadFeaturedEmojiStickers)
+	return x.buf
+}
+
+func (e TL_updateUserEmojiStatus) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateUserEmojiStatus)
+	x.Long(e.UserID)
+	x.Bytes(e.EmojiStatus.encode())
+	return x.buf
+}
+
+func (e TL_updateRecentEmojiStatuses) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateRecentEmojiStatuses)
+	return x.buf
+}
+
+func (e TL_updateRecentReactions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateRecentReactions)
+	return x.buf
+}
+
+func (e TL_updateMoveStickerSetToTop) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateMoveStickerSetToTop)
+	x.Int(e.Flags)
+	//flag Masks
+	//flag Emojis
+	x.Long(e.Stickerset)
+	return x.buf
+}
+
+func (e TL_updateMessageExtendedMedia) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateMessageExtendedMedia)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.MsgID)
+	x.Bytes(e.ExtendedMedia.encode())
+	return x.buf
+}
+
+func (e TL_updateChannelPinnedTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateChannelPinnedTopic)
+	x.Int(e.Flags)
+	//flag Pinned
+	x.Long(e.ChannelID)
+	x.Int(e.TopicID)
+	return x.buf
+}
+
+func (e TL_updateChannelPinnedTopics) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateChannelPinnedTopics)
+	x.Int(e.Flags)
+	x.Long(e.ChannelID)
+	if e.Flags&1 != 0 {
+		x.VectorInt(e.Order)
+	}
+	return x.buf
+}
+
+func (e TL_updateUser) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateUser)
+	x.Long(e.UserID)
+	return x.buf
+}
+
+func (e TL_updateAutoSaveSettings) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateAutoSaveSettings)
+	return x.buf
+}
+
+func (e TL_updateGroupInvitePrivacyForbidden) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateGroupInvitePrivacyForbidden)
+	x.Long(e.UserID)
 	return x.buf
 }
 
@@ -14134,13 +15675,10 @@ func (e TL_config) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_config)
 	x.Int(e.Flags)
-	//flag PhonecallsEnabled
 	//flag DefaultP2pContacts
 	//flag PreloadFeaturedStickers
-	//flag IgnorePhoneEntities
 	//flag RevokePmInbox
 	//flag BlockedMode
-	//flag PfsEnabled
 	//flag ForceTryIpv6
 	x.Int(e.Date)
 	x.Int(e.Expires)
@@ -14159,19 +15697,15 @@ func (e TL_config) encode() []byte {
 	x.Int(e.NotifyDefaultDelayMs)
 	x.Int(e.PushChatPeriodMs)
 	x.Int(e.PushChatLimit)
-	x.Int(e.SavedGifsLimit)
 	x.Int(e.EditTimeLimit)
 	x.Int(e.RevokeTimeLimit)
 	x.Int(e.RevokePmTimeLimit)
 	x.Int(e.RatingEDecay)
 	x.Int(e.StickersRecentLimit)
-	x.Int(e.StickersFavedLimit)
 	x.Int(e.ChannelsReadMediaPeriod)
 	if e.Flags&1 != 0 {
 		x.Int(e.TmpSessions)
 	}
-	x.Int(e.PinnedDialogsCountMax)
-	x.Int(e.PinnedInfolderCountMax)
 	x.Int(e.CallReceiveTimeoutMs)
 	x.Int(e.CallRingTimeoutMs)
 	x.Int(e.CallConnectTimeoutMs)
@@ -14203,6 +15737,12 @@ func (e TL_config) encode() []byte {
 	}
 	if e.Flags&4 != 0 {
 		x.Int(e.BaseLangPackVersion)
+	}
+	if e.Flags&32768 != 0 {
+		x.Bytes(e.ReactionsDefault.encode())
+	}
+	if e.Flags&65536 != 0 {
+		x.String(e.AutologinToken)
 	}
 	return x.buf
 }
@@ -14493,6 +16033,14 @@ func (e TL_notifyBroadcasts) encode() []byte {
 	return x.buf
 }
 
+func (e TL_notifyForumTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_notifyForumTopic)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.TopMsgID)
+	return x.buf
+}
+
 func (e TL_sendMessageTypingAction) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_sendMessageTypingAction)
@@ -14669,6 +16217,12 @@ func (e TL_inputPrivacyKeyAddedByPhone) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputPrivacyKeyVoiceMessages) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputPrivacyKeyVoiceMessages)
+	return x.buf
+}
+
 func (e TL_privacyKeyStatusTimestamp) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_privacyKeyStatusTimestamp)
@@ -14714,6 +16268,12 @@ func (e TL_privacyKeyPhoneNumber) encode() []byte {
 func (e TL_privacyKeyAddedByPhone) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_privacyKeyAddedByPhone)
+	return x.buf
+}
+
+func (e TL_privacyKeyVoiceMessages) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_privacyKeyVoiceMessages)
 	return x.buf
 }
 
@@ -14907,6 +16467,17 @@ func (e TL_documentAttributeHasStickers) encode() []byte {
 	return x.buf
 }
 
+func (e TL_documentAttributeCustomEmoji) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_documentAttributeCustomEmoji)
+	x.Int(e.Flags)
+	//flag Free
+	//flag TextColor
+	x.String(e.Alt)
+	x.Bytes(e.Stickerset.encode())
+	return x.buf
+}
+
 func (e TL_messages_stickersNotModified) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_stickersNotModified)
@@ -15089,6 +16660,9 @@ func (e TL_account_password) encode() []byte {
 	if e.Flags&32 != 0 {
 		x.Int(e.PendingResetDate)
 	}
+	if e.Flags&64 != 0 {
+		x.String(e.LoginEmailPattern)
+	}
 	return x.buf
 }
 
@@ -15255,6 +16829,30 @@ func (e TL_inputStickerSetAnimatedEmojiAnimations) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputStickerSetPremiumGifts) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStickerSetPremiumGifts)
+	return x.buf
+}
+
+func (e TL_inputStickerSetEmojiGenericAnimations) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStickerSetEmojiGenericAnimations)
+	return x.buf
+}
+
+func (e TL_inputStickerSetEmojiDefaultStatuses) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStickerSetEmojiDefaultStatuses)
+	return x.buf
+}
+
+func (e TL_inputStickerSetEmojiDefaultTopicIcons) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStickerSetEmojiDefaultTopicIcons)
+	return x.buf
+}
+
 func (e TL_stickerSet) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stickerSet)
@@ -15264,6 +16862,7 @@ func (e TL_stickerSet) encode() []byte {
 	//flag Masks
 	//flag Animated
 	//flag Videos
+	//flag Emojis
 	if e.Flags&1 != 0 {
 		x.Int(e.InstalledDate)
 	}
@@ -15280,6 +16879,9 @@ func (e TL_stickerSet) encode() []byte {
 	if e.Flags&16 != 0 {
 		x.Int(e.ThumbVersion)
 	}
+	if e.Flags&256 != 0 {
+		x.Long(e.ThumbDocumentID)
+	}
 	x.Int(e.Count)
 	x.Int(e.Hash)
 	return x.buf
@@ -15290,6 +16892,7 @@ func (e TL_messages_stickerSet) encode() []byte {
 	x.UInt(CRC_messages_stickerSet)
 	x.Bytes(e.Set.encode())
 	x.Vector(e.Packs)
+	x.Vector(e.Keywords)
 	x.Vector(e.Documents)
 	return x.buf
 }
@@ -15379,6 +16982,9 @@ func (e TL_keyboardButtonSwitchInline) encode() []byte {
 	//flag SamePeer
 	x.String(e.Text)
 	x.String(e.Query)
+	if e.Flags&2 != 0 {
+		x.Vector(e.PeerTypes)
+	}
 	return x.buf
 }
 
@@ -15466,6 +17072,15 @@ func (e TL_keyboardButtonSimpleWebView) encode() []byte {
 	return x.buf
 }
 
+func (e TL_keyboardButtonRequestPeer) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_keyboardButtonRequestPeer)
+	x.String(e.Text)
+	x.Int(e.ButtonID)
+	x.Bytes(e.PeerType.encode())
+	return x.buf
+}
+
 func (e TL_keyboardButtonRow) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_keyboardButtonRow)
@@ -15500,6 +17115,7 @@ func (e TL_replyKeyboardMarkup) encode() []byte {
 	//flag Resize
 	//flag SingleUse
 	//flag Selective
+	//flag Persistent
 	x.Vector(e.Rows)
 	if e.Flags&8 != 0 {
 		x.String(e.Placeholder)
@@ -15675,6 +17291,15 @@ func (e TL_messageEntitySpoiler) encode() []byte {
 	x.UInt(CRC_messageEntitySpoiler)
 	x.Int(e.Offset)
 	x.Int(e.Length)
+	return x.buf
+}
+
+func (e TL_messageEntityCustomEmoji) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageEntityCustomEmoji)
+	x.Int(e.Offset)
+	x.Int(e.Length)
+	x.Long(e.DocumentID)
 	return x.buf
 }
 
@@ -16283,6 +17908,9 @@ func (e TL_messages_botResults) encode() []byte {
 	if e.Flags&4 != 0 {
 		x.Bytes(e.SwitchPm.encode())
 	}
+	if e.Flags&8 != 0 {
+		x.Bytes(e.SwitchWebview.encode())
+	}
 	x.Vector(e.Results)
 	x.Int(e.CacheTime)
 	x.Vector(e.Users)
@@ -16351,6 +17979,12 @@ func (e TL_auth_codeTypeMissedCall) encode() []byte {
 	return x.buf
 }
 
+func (e TL_auth_codeTypeFragmentSms) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_codeTypeFragmentSms)
+	return x.buf
+}
+
 func (e TL_auth_sentCodeTypeApp) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_auth_sentCodeTypeApp)
@@ -16383,6 +18017,57 @@ func (e TL_auth_sentCodeTypeMissedCall) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_auth_sentCodeTypeMissedCall)
 	x.String(e.Prefix)
+	x.Int(e.Length)
+	return x.buf
+}
+
+func (e TL_auth_sentCodeTypeEmailCode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_sentCodeTypeEmailCode)
+	x.Int(e.Flags)
+	//flag AppleSigninAllowed
+	//flag GoogleSigninAllowed
+	x.String(e.EmailPattern)
+	x.Int(e.Length)
+	if e.Flags&8 != 0 {
+		x.Int(e.ResetAvailablePeriod)
+	}
+	if e.Flags&16 != 0 {
+		x.Int(e.ResetPendingDate)
+	}
+	return x.buf
+}
+
+func (e TL_auth_sentCodeTypeSetUpEmailRequired) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_sentCodeTypeSetUpEmailRequired)
+	x.Int(e.Flags)
+	//flag AppleSigninAllowed
+	//flag GoogleSigninAllowed
+	return x.buf
+}
+
+func (e TL_auth_sentCodeTypeFragmentSms) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_sentCodeTypeFragmentSms)
+	x.String(e.Url)
+	x.Int(e.Length)
+	return x.buf
+}
+
+func (e TL_auth_sentCodeTypeFirebaseSms) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_sentCodeTypeFirebaseSms)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.StringBytes(e.Nonce)
+	}
+	if e.Flags&2 != 0 {
+		x.String(e.Receipt)
+	}
+	if e.Flags&2 != 0 {
+		x.Int(e.PushTimeout)
+	}
 	x.Int(e.Length)
 	return x.buf
 }
@@ -16572,6 +18257,8 @@ func (e TL_messages_featuredStickersNotModified) encode() []byte {
 func (e TL_messages_featuredStickers) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_featuredStickers)
+	x.Int(e.Flags)
+	//flag Premium
 	x.Long(e.Hash)
 	x.Int(e.Count)
 	x.Vector(e.Sets)
@@ -16629,6 +18316,23 @@ func (e TL_stickerSetMultiCovered) encode() []byte {
 	x.UInt(CRC_stickerSetMultiCovered)
 	x.Bytes(e.Set.encode())
 	x.Vector(e.Covers)
+	return x.buf
+}
+
+func (e TL_stickerSetFullCovered) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stickerSetFullCovered)
+	x.Bytes(e.Set.encode())
+	x.Vector(e.Packs)
+	x.Vector(e.Keywords)
+	x.Vector(e.Documents)
+	return x.buf
+}
+
+func (e TL_stickerSetNoCovered) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stickerSetNoCovered)
+	x.Bytes(e.Set.encode())
 	return x.buf
 }
 
@@ -17243,6 +18947,23 @@ func (e TL_inputWebFileGeoPointLocation) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputWebFileAudioAlbumThumbLocation) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputWebFileAudioAlbumThumbLocation)
+	x.Int(e.Flags)
+	//flag Small
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Document.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.String(e.Title)
+	}
+	if e.Flags&2 != 0 {
+		x.String(e.Performer)
+	}
+	return x.buf
+}
+
 func (e TL_upload_webFile) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_upload_webFile)
@@ -17276,11 +18997,14 @@ func (e TL_payments_paymentForm) encode() []byte {
 	if e.Flags&16 != 0 {
 		x.Bytes(e.NativeParams.encode())
 	}
+	if e.Flags&64 != 0 {
+		x.Vector(e.AdditionalMethods)
+	}
 	if e.Flags&1 != 0 {
 		x.Bytes(e.SavedInfo.encode())
 	}
 	if e.Flags&2 != 0 {
-		x.Bytes(e.SavedCredentials.encode())
+		x.Vector(e.SavedCredentials)
 	}
 	x.Vector(e.Users)
 	return x.buf
@@ -17409,6 +19133,9 @@ func (e TL_inputStickerSetItem) encode() []byte {
 	x.String(e.Emoji)
 	if e.Flags&1 != 0 {
 		x.Bytes(e.MaskCoords.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.String(e.Keywords)
 	}
 	return x.buf
 }
@@ -17852,6 +19579,8 @@ func (e TL_channelAdminLogEventActionToggleGroupCallSetting) encode() []byte {
 func (e TL_channelAdminLogEventActionParticipantJoinByInvite) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionParticipantJoinByInvite)
+	x.Int(e.Flags)
+	//flag ViaChatlist
 	x.Bytes(e.Invite.encode())
 	return x.buf
 }
@@ -17918,8 +19647,65 @@ func (e TL_channelAdminLogEventActionSendMessage) encode() []byte {
 func (e TL_channelAdminLogEventActionChangeAvailableReactions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionChangeAvailableReactions)
+	x.Bytes(e.PrevValue.encode())
+	x.Bytes(e.NewValue.encode())
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionChangeUsernames) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionChangeUsernames)
 	x.VectorString(e.PrevValue)
 	x.VectorString(e.NewValue)
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionToggleForum) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionToggleForum)
+	x.Bytes(e.NewValue.encode())
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionCreateTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionCreateTopic)
+	x.Bytes(e.Topic.encode())
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionEditTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionEditTopic)
+	x.Bytes(e.PrevTopic.encode())
+	x.Bytes(e.NewTopic.encode())
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionDeleteTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionDeleteTopic)
+	x.Bytes(e.Topic.encode())
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionPinTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionPinTopic)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.PrevTopic.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.NewTopic.encode())
+	}
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionToggleAntiSpam) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionToggleAntiSpam)
+	x.Bytes(e.NewValue.encode())
 	return x.buf
 }
 
@@ -17963,6 +19749,7 @@ func (e TL_channelAdminLogEventsFilter) encode() []byte {
 	//flag GroupCall
 	//flag Invites
 	//flag Send
+	//flag Forums
 	return x.buf
 }
 
@@ -18901,6 +20688,7 @@ func (e TL_chatAdminRights) encode() []byte {
 	//flag Anonymous
 	//flag ManageCall
 	//flag Other
+	//flag ManageTopics
 	return x.buf
 }
 
@@ -18920,6 +20708,14 @@ func (e TL_chatBannedRights) encode() []byte {
 	//flag ChangeInfo
 	//flag InviteUsers
 	//flag PinMessages
+	//flag ManageTopics
+	//flag SendPhotos
+	//flag SendVideos
+	//flag SendRoundvideos
+	//flag SendAudios
+	//flag SendVoices
+	//flag SendDocs
+	//flag SendPlain
 	x.Int(e.UntilDate)
 	return x.buf
 }
@@ -18968,8 +20764,15 @@ func (e TL_codeSettings) encode() []byte {
 	//flag CurrentNumber
 	//flag AllowAppHash
 	//flag AllowMissedCall
+	//flag AllowFirebase
 	if e.Flags&64 != 0 {
 		x.Vector(e.LogoutTokens)
+	}
+	if e.Flags&256 != 0 {
+		x.String(e.Token)
+	}
+	if e.Flags&256 != 0 {
+		x.Bytes(e.AppSandbox.encode())
 	}
 	return x.buf
 }
@@ -19432,6 +21235,21 @@ func (e TL_dialogFilterDefault) encode() []byte {
 	return x.buf
 }
 
+func (e TL_dialogFilterChatlist) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_dialogFilterChatlist)
+	x.Int(e.Flags)
+	//flag HasMyInvites
+	x.Int(e.ID)
+	x.String(e.Title)
+	if e.Flags&33554432 != 0 {
+		x.String(e.Emoticon)
+	}
+	x.Vector(e.PinnedPeers)
+	x.Vector(e.IncludePeers)
+	return x.buf
+}
+
 func (e TL_dialogFilterSuggested) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_dialogFilterSuggested)
@@ -19555,6 +21373,23 @@ func (e TL_videoSize) encode() []byte {
 	if e.Flags&1 != 0 {
 		x.Double(e.VideoStartTs)
 	}
+	return x.buf
+}
+
+func (e TL_videoSizeEmojiMarkup) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_videoSizeEmojiMarkup)
+	x.Long(e.EmojiID)
+	x.VectorInt(e.BackgroundColors)
+	return x.buf
+}
+
+func (e TL_videoSizeStickerMarkup) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_videoSizeStickerMarkup)
+	x.Bytes(e.Stickerset.encode())
+	x.Long(e.StickerID)
+	x.VectorInt(e.BackgroundColors)
 	return x.buf
 }
 
@@ -19710,6 +21545,7 @@ func (e TL_messageReplyHeader) encode() []byte {
 	x.UInt(CRC_messageReplyHeader)
 	x.Int(e.Flags)
 	//flag ReplyToScheduled
+	//flag ForumTopic
 	x.Int(e.ReplyToMsgID)
 	if e.Flags&1 != 0 {
 		x.Bytes(e.ReplyToPeerID.encode())
@@ -19900,6 +21736,12 @@ func (e TL_inlineQueryPeerTypeBroadcast) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inlineQueryPeerTypeBotPM) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inlineQueryPeerTypeBotPM)
+	return x.buf
+}
+
 func (e TL_messages_historyImport) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_historyImport)
@@ -19934,6 +21776,7 @@ func (e TL_chatInviteImporter) encode() []byte {
 	x.UInt(CRC_chatInviteImporter)
 	x.Int(e.Flags)
 	//flag Requested
+	//flag ViaChatlist
 	x.Long(e.UserID)
 	x.Int(e.Date)
 	if e.Flags&4 != 0 {
@@ -20119,6 +21962,7 @@ func (e TL_sponsoredMessage) encode() []byte {
 	x.UInt(CRC_sponsoredMessage)
 	x.Int(e.Flags)
 	//flag Recommended
+	//flag ShowPeerPhoto
 	x.StringBytes(e.RandomID)
 	if e.Flags&8 != 0 {
 		x.Bytes(e.FromID.encode())
@@ -20139,15 +21983,31 @@ func (e TL_sponsoredMessage) encode() []byte {
 	if e.Flags&2 != 0 {
 		x.Vector(e.Entities)
 	}
+	if e.Flags&128 != 0 {
+		x.String(e.SponsorInfo)
+	}
+	if e.Flags&256 != 0 {
+		x.String(e.AdditionalInfo)
+	}
 	return x.buf
 }
 
 func (e TL_messages_sponsoredMessages) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_sponsoredMessages)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.Int(e.PostsBetween)
+	}
 	x.Vector(e.Messages)
 	x.Vector(e.Chats)
 	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_messages_sponsoredMessagesEmpty) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_sponsoredMessagesEmpty)
 	return x.buf
 }
 
@@ -20237,8 +22097,10 @@ func (e TL_reactionCount) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_reactionCount)
 	x.Int(e.Flags)
-	//flag Chosen
-	x.String(e.Reaction)
+	if e.Flags&1 != 0 {
+		x.Int(e.ChosenOrder)
+	}
+	x.Bytes(e.Reaction.encode())
 	x.Int(e.Count)
 	return x.buf
 }
@@ -20306,19 +22168,6 @@ func (e TL_messages_availableReactions) encode() []byte {
 	return x.buf
 }
 
-func (e TL_messages_translateNoResult) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_messages_translateNoResult)
-	return x.buf
-}
-
-func (e TL_messages_translateResultText) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_messages_translateResultText)
-	x.String(e.Text)
-	return x.buf
-}
-
 func (e TL_messagePeerReaction) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messagePeerReaction)
@@ -20326,7 +22175,8 @@ func (e TL_messagePeerReaction) encode() []byte {
 	//flag Big
 	//flag Unread
 	x.Bytes(e.PeerID.encode())
-	x.String(e.Reaction)
+	x.Int(e.Date)
+	x.Bytes(e.Reaction.encode())
 	return x.buf
 }
 
@@ -20380,6 +22230,7 @@ func (e TL_attachMenuBot) encode() []byte {
 	x.Int(e.Flags)
 	//flag Inactive
 	//flag HasSettings
+	//flag RequestWriteAccess
 	x.Long(e.BotID)
 	x.String(e.ShortName)
 	x.Vector(e.PeerTypes)
@@ -20578,9 +22429,630 @@ func (e TL_help_premiumPromo) encode() []byte {
 	x.Vector(e.StatusEntities)
 	x.VectorString(e.VideoSections)
 	x.Vector(e.Videos)
-	x.String(e.Currency)
-	x.Long(e.MonthlyAmount)
+	x.Vector(e.PeriodOptions)
 	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_inputStorePaymentPremiumSubscription) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStorePaymentPremiumSubscription)
+	x.Int(e.Flags)
+	//flag Restore
+	//flag Upgrade
+	return x.buf
+}
+
+func (e TL_inputStorePaymentGiftPremium) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStorePaymentGiftPremium)
+	x.Bytes(e.UserID.encode())
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	return x.buf
+}
+
+func (e TL_premiumGiftOption) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premiumGiftOption)
+	x.Int(e.Flags)
+	x.Int(e.Months)
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	x.String(e.BotUrl)
+	if e.Flags&1 != 0 {
+		x.String(e.StoreProduct)
+	}
+	return x.buf
+}
+
+func (e TL_paymentFormMethod) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_paymentFormMethod)
+	x.String(e.Url)
+	x.String(e.Title)
+	return x.buf
+}
+
+func (e TL_emojiStatusEmpty) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emojiStatusEmpty)
+	return x.buf
+}
+
+func (e TL_emojiStatus) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emojiStatus)
+	x.Long(e.DocumentID)
+	return x.buf
+}
+
+func (e TL_emojiStatusUntil) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emojiStatusUntil)
+	x.Long(e.DocumentID)
+	x.Int(e.Until)
+	return x.buf
+}
+
+func (e TL_account_emojiStatusesNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_emojiStatusesNotModified)
+	return x.buf
+}
+
+func (e TL_account_emojiStatuses) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_emojiStatuses)
+	x.Long(e.Hash)
+	x.Vector(e.Statuses)
+	return x.buf
+}
+
+func (e TL_reactionEmpty) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_reactionEmpty)
+	return x.buf
+}
+
+func (e TL_reactionEmoji) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_reactionEmoji)
+	x.String(e.Emoticon)
+	return x.buf
+}
+
+func (e TL_reactionCustomEmoji) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_reactionCustomEmoji)
+	x.Long(e.DocumentID)
+	return x.buf
+}
+
+func (e TL_chatReactionsNone) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatReactionsNone)
+	return x.buf
+}
+
+func (e TL_chatReactionsAll) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatReactionsAll)
+	x.Int(e.Flags)
+	//flag AllowCustom
+	return x.buf
+}
+
+func (e TL_chatReactionsSome) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatReactionsSome)
+	x.Vector(e.Reactions)
+	return x.buf
+}
+
+func (e TL_messages_reactionsNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_reactionsNotModified)
+	return x.buf
+}
+
+func (e TL_messages_reactions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_reactions)
+	x.Long(e.Hash)
+	x.Vector(e.Reactions)
+	return x.buf
+}
+
+func (e TL_emailVerifyPurposeLoginSetup) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emailVerifyPurposeLoginSetup)
+	x.String(e.PhoneNumber)
+	x.String(e.PhoneCodeHash)
+	return x.buf
+}
+
+func (e TL_emailVerifyPurposeLoginChange) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emailVerifyPurposeLoginChange)
+	return x.buf
+}
+
+func (e TL_emailVerifyPurposePassport) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emailVerifyPurposePassport)
+	return x.buf
+}
+
+func (e TL_emailVerificationCode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emailVerificationCode)
+	x.String(e.Code)
+	return x.buf
+}
+
+func (e TL_emailVerificationGoogle) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emailVerificationGoogle)
+	x.String(e.Token)
+	return x.buf
+}
+
+func (e TL_emailVerificationApple) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emailVerificationApple)
+	x.String(e.Token)
+	return x.buf
+}
+
+func (e TL_account_emailVerified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_emailVerified)
+	x.String(e.Email)
+	return x.buf
+}
+
+func (e TL_account_emailVerifiedLogin) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_emailVerifiedLogin)
+	x.String(e.Email)
+	x.Bytes(e.SentCode.encode())
+	return x.buf
+}
+
+func (e TL_premiumSubscriptionOption) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premiumSubscriptionOption)
+	x.Int(e.Flags)
+	//flag Current
+	//flag CanPurchaseUpgrade
+	if e.Flags&8 != 0 {
+		x.String(e.Transaction)
+	}
+	x.Int(e.Months)
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	x.String(e.BotUrl)
+	if e.Flags&1 != 0 {
+		x.String(e.StoreProduct)
+	}
+	return x.buf
+}
+
+func (e TL_sendAsPeer) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_sendAsPeer)
+	x.Int(e.Flags)
+	//flag PremiumRequired
+	x.Bytes(e.Peer.encode())
+	return x.buf
+}
+
+func (e TL_messageExtendedMediaPreview) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageExtendedMediaPreview)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.Int(e.W)
+	}
+	if e.Flags&1 != 0 {
+		x.Int(e.H)
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.Thumb.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.Int(e.VideoDuration)
+	}
+	return x.buf
+}
+
+func (e TL_messageExtendedMedia) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageExtendedMedia)
+	x.Bytes(e.Media.encode())
+	return x.buf
+}
+
+func (e TL_stickerKeyword) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stickerKeyword)
+	x.Long(e.DocumentID)
+	x.VectorString(e.Keyword)
+	return x.buf
+}
+
+func (e TL_username) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_username)
+	x.Int(e.Flags)
+	//flag Editable
+	//flag Active
+	x.String(e.Username)
+	return x.buf
+}
+
+func (e TL_forumTopicDeleted) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_forumTopicDeleted)
+	x.Int(e.ID)
+	return x.buf
+}
+
+func (e TL_forumTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_forumTopic)
+	x.Int(e.Flags)
+	//flag My
+	//flag Closed
+	//flag Pinned
+	//flag Short
+	//flag Hidden
+	x.Int(e.ID)
+	x.Int(e.Date)
+	x.String(e.Title)
+	x.Int(e.IconColor)
+	if e.Flags&1 != 0 {
+		x.Long(e.IconEmojiID)
+	}
+	x.Int(e.TopMessage)
+	x.Int(e.ReadInboxMaxID)
+	x.Int(e.ReadOutboxMaxID)
+	x.Int(e.UnreadCount)
+	x.Int(e.UnreadMentionsCount)
+	x.Int(e.UnreadReactionsCount)
+	x.Bytes(e.FromID.encode())
+	x.Bytes(e.NotifySettings.encode())
+	if e.Flags&16 != 0 {
+		x.Bytes(e.Draft.encode())
+	}
+	return x.buf
+}
+
+func (e TL_messages_forumTopics) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_forumTopics)
+	x.Int(e.Flags)
+	//flag OrderByCreateDate
+	x.Int(e.Count)
+	x.Vector(e.Topics)
+	x.Vector(e.Messages)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	x.Int(e.Pts)
+	return x.buf
+}
+
+func (e TL_defaultHistoryTTL) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_defaultHistoryTTL)
+	x.Int(e.Period)
+	return x.buf
+}
+
+func (e TL_exportedContactToken) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_exportedContactToken)
+	x.String(e.Url)
+	x.Int(e.Expires)
+	return x.buf
+}
+
+func (e TL_requestPeerTypeUser) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_requestPeerTypeUser)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Bot.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.Premium.encode())
+	}
+	return x.buf
+}
+
+func (e TL_requestPeerTypeChat) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_requestPeerTypeChat)
+	x.Int(e.Flags)
+	//flag Creator
+	//flag BotParticipant
+	if e.Flags&8 != 0 {
+		x.Bytes(e.HasUsername.encode())
+	}
+	if e.Flags&16 != 0 {
+		x.Bytes(e.Forum.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.UserAdminRights.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.Bytes(e.BotAdminRights.encode())
+	}
+	return x.buf
+}
+
+func (e TL_requestPeerTypeBroadcast) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_requestPeerTypeBroadcast)
+	x.Int(e.Flags)
+	//flag Creator
+	if e.Flags&8 != 0 {
+		x.Bytes(e.HasUsername.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.UserAdminRights.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.Bytes(e.BotAdminRights.encode())
+	}
+	return x.buf
+}
+
+func (e TL_emojiListNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emojiListNotModified)
+	return x.buf
+}
+
+func (e TL_emojiList) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emojiList)
+	x.Long(e.Hash)
+	x.VectorLong(e.DocumentID)
+	return x.buf
+}
+
+func (e TL_emojiGroup) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_emojiGroup)
+	x.String(e.Title)
+	x.Long(e.IconEmojiID)
+	x.VectorString(e.Emoticons)
+	return x.buf
+}
+
+func (e TL_messages_emojiGroupsNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_emojiGroupsNotModified)
+	return x.buf
+}
+
+func (e TL_messages_emojiGroups) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_emojiGroups)
+	x.Int(e.Hash)
+	x.Vector(e.Groups)
+	return x.buf
+}
+
+func (e TL_textWithEntities) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_textWithEntities)
+	x.String(e.Text)
+	x.Vector(e.Entities)
+	return x.buf
+}
+
+func (e TL_messages_translateResult) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_translateResult)
+	x.Vector(e.Result)
+	return x.buf
+}
+
+func (e TL_autoSaveSettings) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_autoSaveSettings)
+	x.Int(e.Flags)
+	//flag Photos
+	//flag Videos
+	if e.Flags&4 != 0 {
+		x.Long(e.VideoMaxSize)
+	}
+	return x.buf
+}
+
+func (e TL_autoSaveException) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_autoSaveException)
+	x.Bytes(e.Peer.encode())
+	x.Bytes(e.Settings.encode())
+	return x.buf
+}
+
+func (e TL_account_autoSaveSettings) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_autoSaveSettings)
+	x.Bytes(e.UsersSettings.encode())
+	x.Bytes(e.ChatsSettings.encode())
+	x.Bytes(e.BroadcastsSettings.encode())
+	x.Vector(e.Exceptions)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_help_appConfigNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_help_appConfigNotModified)
+	return x.buf
+}
+
+func (e TL_help_appConfig) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_help_appConfig)
+	x.Int(e.Hash)
+	x.Bytes(e.Config.encode())
+	return x.buf
+}
+
+func (e TL_inputBotAppID) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputBotAppID)
+	x.Long(e.ID)
+	x.Long(e.AccessHash)
+	return x.buf
+}
+
+func (e TL_inputBotAppShortName) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputBotAppShortName)
+	x.Bytes(e.BotID.encode())
+	x.String(e.ShortName)
+	return x.buf
+}
+
+func (e TL_botAppNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_botAppNotModified)
+	return x.buf
+}
+
+func (e TL_botApp) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_botApp)
+	x.Int(e.Flags)
+	x.Long(e.ID)
+	x.Long(e.AccessHash)
+	x.String(e.ShortName)
+	x.String(e.Title)
+	x.String(e.Description)
+	x.Bytes(e.Photo.encode())
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Document.encode())
+	}
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_botApp) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_botApp)
+	x.Int(e.Flags)
+	//flag Inactive
+	//flag RequestWriteAccess
+	x.Bytes(e.App.encode())
+	return x.buf
+}
+
+func (e TL_appWebViewResultUrl) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_appWebViewResultUrl)
+	x.String(e.Url)
+	return x.buf
+}
+
+func (e TL_inlineBotWebView) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inlineBotWebView)
+	x.String(e.Text)
+	x.String(e.Url)
+	return x.buf
+}
+
+func (e TL_readParticipantDate) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_readParticipantDate)
+	x.Long(e.UserID)
+	x.Int(e.Date)
+	return x.buf
+}
+
+func (e TL_inputChatlistDialogFilter) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputChatlistDialogFilter)
+	x.Int(e.FilterID)
+	return x.buf
+}
+
+func (e TL_exportedChatlistInvite) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_exportedChatlistInvite)
+	x.Int(e.Flags)
+	x.String(e.Title)
+	x.String(e.Url)
+	x.Vector(e.Peers)
+	return x.buf
+}
+
+func (e TL_chatlists_exportedChatlistInvite) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_exportedChatlistInvite)
+	x.Bytes(e.Filter.encode())
+	x.Bytes(e.Invite.encode())
+	return x.buf
+}
+
+func (e TL_chatlists_exportedInvites) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_exportedInvites)
+	x.Vector(e.Invites)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_chatlists_chatlistInviteAlready) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_chatlistInviteAlready)
+	x.Int(e.FilterID)
+	x.Vector(e.MissingPeers)
+	x.Vector(e.AlreadyPeers)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_chatlists_chatlistInvite) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_chatlistInvite)
+	x.Int(e.Flags)
+	x.String(e.Title)
+	if e.Flags&1 != 0 {
+		x.String(e.Emoticon)
+	}
+	x.Vector(e.Peers)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_chatlists_chatlistUpdates) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_chatlistUpdates)
+	x.Vector(e.MissingPeers)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_bots_botInfo) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_bots_botInfo)
+	x.String(e.Name)
+	x.String(e.About)
+	x.String(e.Description)
 	return x.buf
 }
 
@@ -20675,9 +23147,15 @@ func (e TL_auth_signUp) encode() []byte {
 func (e TL_auth_signIn) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_auth_signIn)
+	x.Int(e.Flags)
 	x.String(e.PhoneNumber)
 	x.String(e.PhoneCodeHash)
-	x.String(e.PhoneCode)
+	if e.Flags&1 != 0 {
+		x.String(e.PhoneCode)
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.EmailVerification.encode())
+	}
 	return x.buf
 }
 
@@ -20805,6 +23283,38 @@ func (e TL_auth_checkRecoveryPassword) encode() []byte {
 	return x.buf
 }
 
+func (e TL_auth_importWebTokenAuthorization) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_importWebTokenAuthorization)
+	x.Int(e.ApiID)
+	x.String(e.ApiHash)
+	x.String(e.WebAuthToken)
+	return x.buf
+}
+
+func (e TL_auth_requestFirebaseSms) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_requestFirebaseSms)
+	x.Int(e.Flags)
+	x.String(e.PhoneNumber)
+	x.String(e.PhoneCodeHash)
+	if e.Flags&1 != 0 {
+		x.String(e.SafetyNetToken)
+	}
+	if e.Flags&2 != 0 {
+		x.String(e.IosPushSecret)
+	}
+	return x.buf
+}
+
+func (e TL_auth_resetLoginEmail) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_resetLoginEmail)
+	x.String(e.PhoneNumber)
+	x.String(e.PhoneCodeHash)
+	return x.buf
+}
+
 func (e TL_account_registerDevice) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_registerDevice)
@@ -20919,7 +23429,11 @@ func (e TL_account_setPrivacy) encode() []byte {
 func (e TL_account_deleteAccount) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_deleteAccount)
+	x.Int(e.Flags)
 	x.String(e.Reason)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Password.encode())
+	}
 	return x.buf
 }
 
@@ -21105,6 +23619,7 @@ func (e TL_account_verifyPhone) encode() []byte {
 func (e TL_account_sendVerifyEmailCode) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_sendVerifyEmailCode)
+	x.Bytes(e.Purpose.encode())
 	x.String(e.Email)
 	return x.buf
 }
@@ -21112,8 +23627,8 @@ func (e TL_account_sendVerifyEmailCode) encode() []byte {
 func (e TL_account_verifyEmail) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_verifyEmail)
-	x.String(e.Email)
-	x.String(e.Code)
+	x.Bytes(e.Purpose.encode())
+	x.Bytes(e.Verification.encode())
 	return x.buf
 }
 
@@ -21194,6 +23709,8 @@ func (e TL_account_getWallPaper) encode() []byte {
 func (e TL_account_uploadWallPaper) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_uploadWallPaper)
+	x.Int(e.Flags)
+	//flag ForChat
 	x.Bytes(e.File.encode())
 	x.String(e.MimeType)
 	x.Bytes(e.Settings.encode())
@@ -21318,7 +23835,6 @@ func (e TL_account_getTheme) encode() []byte {
 	x.UInt(CRC_account_getTheme)
 	x.String(e.Format)
 	x.Bytes(e.Theme.encode())
-	x.Long(e.DocumentID)
 	return x.buf
 }
 
@@ -21435,6 +23951,88 @@ func (e TL_account_uploadRingtone) encode() []byte {
 	x.Bytes(e.File.encode())
 	x.String(e.FileName)
 	x.String(e.MimeType)
+	return x.buf
+}
+
+func (e TL_account_updateEmojiStatus) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_updateEmojiStatus)
+	x.Bytes(e.EmojiStatus.encode())
+	return x.buf
+}
+
+func (e TL_account_getDefaultEmojiStatuses) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_getDefaultEmojiStatuses)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_account_getRecentEmojiStatuses) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_getRecentEmojiStatuses)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_account_clearRecentEmojiStatuses) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_clearRecentEmojiStatuses)
+	return x.buf
+}
+
+func (e TL_account_reorderUsernames) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_reorderUsernames)
+	x.VectorString(e.Order)
+	return x.buf
+}
+
+func (e TL_account_toggleUsername) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_toggleUsername)
+	x.String(e.Username)
+	x.Bytes(e.Active.encode())
+	return x.buf
+}
+
+func (e TL_account_getDefaultProfilePhotoEmojis) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_getDefaultProfilePhotoEmojis)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_account_getDefaultGroupPhotoEmojis) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_getDefaultGroupPhotoEmojis)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_account_getAutoSaveSettings) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_getAutoSaveSettings)
+	return x.buf
+}
+
+func (e TL_account_saveAutoSaveSettings) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_saveAutoSaveSettings)
+	x.Int(e.Flags)
+	//flag Users
+	//flag Chats
+	//flag Broadcasts
+	if e.Flags&8 != 0 {
+		x.Bytes(e.Peer.encode())
+	}
+	x.Bytes(e.Settings.encode())
+	return x.buf
+}
+
+func (e TL_account_deleteAutoSaveExceptions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_deleteAutoSaveExceptions)
 	return x.buf
 }
 
@@ -21632,6 +24230,19 @@ func (e TL_contacts_resolvePhone) encode() []byte {
 	return x.buf
 }
 
+func (e TL_contacts_exportContactToken) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_contacts_exportContactToken)
+	return x.buf
+}
+
+func (e TL_contacts_importContactToken) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_contacts_importContactToken)
+	x.String(e.Token)
+	return x.buf
+}
+
 func (e TL_messages_getMessages) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getMessages)
@@ -21755,9 +24366,13 @@ func (e TL_messages_sendMessage) encode() []byte {
 	//flag Background
 	//flag ClearDraft
 	//flag Noforwards
+	//flag UpdateStickersetsOrder
 	x.Bytes(e.Peer.encode())
 	if e.Flags&1 != 0 {
 		x.Int(e.ReplyToMsgID)
+	}
+	if e.Flags&512 != 0 {
+		x.Int(e.TopMsgID)
 	}
 	x.String(e.Message)
 	x.Long(e.RandomID)
@@ -21784,9 +24399,13 @@ func (e TL_messages_sendMedia) encode() []byte {
 	//flag Background
 	//flag ClearDraft
 	//flag Noforwards
+	//flag UpdateStickersetsOrder
 	x.Bytes(e.Peer.encode())
 	if e.Flags&1 != 0 {
 		x.Int(e.ReplyToMsgID)
+	}
+	if e.Flags&512 != 0 {
+		x.Int(e.TopMsgID)
 	}
 	x.Bytes(e.Media.encode())
 	x.String(e.Message)
@@ -21820,6 +24439,9 @@ func (e TL_messages_forwardMessages) encode() []byte {
 	x.VectorInt(e.ID)
 	x.VectorLong(e.RandomID)
 	x.Bytes(e.ToPeer.encode())
+	if e.Flags&512 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	if e.Flags&1024 != 0 {
 		x.Int(e.ScheduleDate)
 	}
@@ -21905,8 +24527,12 @@ func (e TL_messages_deleteChatUser) encode() []byte {
 func (e TL_messages_createChat) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_createChat)
+	x.Int(e.Flags)
 	x.Vector(e.Users)
 	x.String(e.Title)
+	if e.Flags&1 != 0 {
+		x.Int(e.TtlPeriod)
+	}
 	return x.buf
 }
 
@@ -22154,6 +24780,7 @@ func (e TL_messages_reorderStickerSets) encode() []byte {
 	x.UInt(CRC_messages_reorderStickerSets)
 	x.Int(e.Flags)
 	//flag Masks
+	//flag Emojis
 	x.VectorLong(e.Order)
 	return x.buf
 }
@@ -22211,6 +24838,9 @@ func (e TL_messages_setInlineBotResults) encode() []byte {
 	if e.Flags&8 != 0 {
 		x.Bytes(e.SwitchPm.encode())
 	}
+	if e.Flags&16 != 0 {
+		x.Bytes(e.SwitchWebview.encode())
+	}
 	return x.buf
 }
 
@@ -22225,6 +24855,9 @@ func (e TL_messages_sendInlineBotResult) encode() []byte {
 	x.Bytes(e.Peer.encode())
 	if e.Flags&1 != 0 {
 		x.Int(e.ReplyToMsgID)
+	}
+	if e.Flags&512 != 0 {
+		x.Int(e.TopMsgID)
 	}
 	x.Long(e.RandomID)
 	x.Long(e.QueryID)
@@ -22339,6 +24972,9 @@ func (e TL_messages_saveDraft) encode() []byte {
 	if e.Flags&1 != 0 {
 		x.Int(e.ReplyToMsgID)
 	}
+	if e.Flags&4 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	x.Bytes(e.Peer.encode())
 	x.String(e.Message)
 	if e.Flags&8 != 0 {
@@ -22399,6 +25035,7 @@ func (e TL_messages_getArchivedStickers) encode() []byte {
 	x.UInt(CRC_messages_getArchivedStickers)
 	x.Int(e.Flags)
 	//flag Masks
+	//flag Emojis
 	x.Long(e.OffsetID)
 	x.Int(e.Limit)
 	return x.buf
@@ -22571,7 +25208,11 @@ func (e TL_messages_faveSticker) encode() []byte {
 func (e TL_messages_getUnreadMentions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getUnreadMentions)
+	x.Int(e.Flags)
 	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	x.Int(e.OffsetID)
 	x.Int(e.AddOffset)
 	x.Int(e.Limit)
@@ -22583,7 +25224,11 @@ func (e TL_messages_getUnreadMentions) encode() []byte {
 func (e TL_messages_readMentions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_readMentions)
+	x.Int(e.Flags)
 	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	return x.buf
 }
 
@@ -22604,9 +25249,13 @@ func (e TL_messages_sendMultiMedia) encode() []byte {
 	//flag Background
 	//flag ClearDraft
 	//flag Noforwards
+	//flag UpdateStickersetsOrder
 	x.Bytes(e.Peer.encode())
 	if e.Flags&1 != 0 {
 		x.Int(e.ReplyToMsgID)
+	}
+	if e.Flags&512 != 0 {
+		x.Int(e.TopMsgID)
 	}
 	x.Vector(e.MultiMedia)
 	if e.Flags&1024 != 0 {
@@ -22747,7 +25396,11 @@ func (e TL_messages_getEmojiURL) encode() []byte {
 func (e TL_messages_getSearchCounters) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getSearchCounters)
+	x.Int(e.Flags)
 	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	x.Vector(e.Filters)
 	return x.buf
 }
@@ -22931,7 +25584,11 @@ func (e TL_messages_readDiscussion) encode() []byte {
 func (e TL_messages_unpinAllMessages) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_unpinAllMessages)
+	x.Int(e.Flags)
 	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	return x.buf
 }
 
@@ -23166,10 +25823,11 @@ func (e TL_messages_sendReaction) encode() []byte {
 	x.UInt(CRC_messages_sendReaction)
 	x.Int(e.Flags)
 	//flag Big
+	//flag AddToRecent
 	x.Bytes(e.Peer.encode())
 	x.Int(e.MsgID)
 	if e.Flags&1 != 0 {
-		x.String(e.Reaction)
+		x.Vector(e.Reaction)
 	}
 	return x.buf
 }
@@ -23189,7 +25847,7 @@ func (e TL_messages_getMessageReactionsList) encode() []byte {
 	x.Bytes(e.Peer.encode())
 	x.Int(e.ID)
 	if e.Flags&1 != 0 {
-		x.String(e.Reaction)
+		x.Bytes(e.Reaction.encode())
 	}
 	if e.Flags&2 != 0 {
 		x.String(e.Offset)
@@ -23202,7 +25860,7 @@ func (e TL_messages_setChatAvailableReactions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_setChatAvailableReactions)
 	x.Bytes(e.Peer.encode())
-	x.VectorString(e.AvailableReactions)
+	x.Bytes(e.AvailableReactions.encode())
 	return x.buf
 }
 
@@ -23216,7 +25874,7 @@ func (e TL_messages_getAvailableReactions) encode() []byte {
 func (e TL_messages_setDefaultReaction) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_setDefaultReaction)
-	x.String(e.Reaction)
+	x.Bytes(e.Reaction.encode())
 	return x.buf
 }
 
@@ -23228,13 +25886,10 @@ func (e TL_messages_translateText) encode() []byte {
 		x.Bytes(e.Peer.encode())
 	}
 	if e.Flags&1 != 0 {
-		x.Int(e.MsgID)
+		x.VectorInt(e.ID)
 	}
 	if e.Flags&2 != 0 {
-		x.String(e.Text)
-	}
-	if e.Flags&4 != 0 {
-		x.String(e.FromLang)
+		x.Vector(e.Text)
 	}
 	x.String(e.ToLang)
 	return x.buf
@@ -23243,7 +25898,11 @@ func (e TL_messages_translateText) encode() []byte {
 func (e TL_messages_getUnreadReactions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getUnreadReactions)
+	x.Int(e.Flags)
 	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	x.Int(e.OffsetID)
 	x.Int(e.AddOffset)
 	x.Int(e.Limit)
@@ -23255,7 +25914,11 @@ func (e TL_messages_getUnreadReactions) encode() []byte {
 func (e TL_messages_readReactions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_readReactions)
+	x.Int(e.Flags)
 	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	return x.buf
 }
 
@@ -23285,6 +25948,8 @@ func (e TL_messages_getAttachMenuBot) encode() []byte {
 func (e TL_messages_toggleBotInAttachMenu) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_toggleBotInAttachMenu)
+	x.Int(e.Flags)
+	//flag WriteAllowed
 	x.Bytes(e.Bot.encode())
 	x.Bytes(e.Enabled.encode())
 	return x.buf
@@ -23307,8 +25972,12 @@ func (e TL_messages_requestWebView) encode() []byte {
 	if e.Flags&4 != 0 {
 		x.Bytes(e.ThemeParams.encode())
 	}
+	x.String(e.Platform)
 	if e.Flags&1 != 0 {
 		x.Int(e.ReplyToMsgID)
+	}
+	if e.Flags&512 != 0 {
+		x.Int(e.TopMsgID)
 	}
 	if e.Flags&8192 != 0 {
 		x.Bytes(e.SendAs.encode())
@@ -23327,6 +25996,9 @@ func (e TL_messages_prolongWebView) encode() []byte {
 	if e.Flags&1 != 0 {
 		x.Int(e.ReplyToMsgID)
 	}
+	if e.Flags&512 != 0 {
+		x.Int(e.TopMsgID)
+	}
 	if e.Flags&8192 != 0 {
 		x.Bytes(e.SendAs.encode())
 	}
@@ -23337,11 +26009,13 @@ func (e TL_messages_requestSimpleWebView) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_requestSimpleWebView)
 	x.Int(e.Flags)
+	//flag FromSwitchWebview
 	x.Bytes(e.Bot.encode())
 	x.String(e.Url)
 	if e.Flags&1 != 0 {
 		x.Bytes(e.ThemeParams.encode())
 	}
+	x.String(e.Platform)
 	return x.buf
 }
 
@@ -23381,6 +26055,169 @@ func (e TL_messages_rateTranscribedAudio) encode() []byte {
 	return x.buf
 }
 
+func (e TL_messages_getCustomEmojiDocuments) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getCustomEmojiDocuments)
+	x.VectorLong(e.DocumentID)
+	return x.buf
+}
+
+func (e TL_messages_getEmojiStickers) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getEmojiStickers)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_getFeaturedEmojiStickers) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getFeaturedEmojiStickers)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_reportReaction) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_reportReaction)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.ID)
+	x.Bytes(e.ReactionPeer.encode())
+	return x.buf
+}
+
+func (e TL_messages_getTopReactions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getTopReactions)
+	x.Int(e.Limit)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_getRecentReactions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getRecentReactions)
+	x.Int(e.Limit)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_clearRecentReactions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_clearRecentReactions)
+	return x.buf
+}
+
+func (e TL_messages_getExtendedMedia) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getExtendedMedia)
+	x.Bytes(e.Peer.encode())
+	x.VectorInt(e.ID)
+	return x.buf
+}
+
+func (e TL_messages_setDefaultHistoryTTL) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_setDefaultHistoryTTL)
+	x.Int(e.Period)
+	return x.buf
+}
+
+func (e TL_messages_getDefaultHistoryTTL) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getDefaultHistoryTTL)
+	return x.buf
+}
+
+func (e TL_messages_sendBotRequestedPeer) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_sendBotRequestedPeer)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.MsgID)
+	x.Int(e.ButtonID)
+	x.Bytes(e.RequestedPeer.encode())
+	return x.buf
+}
+
+func (e TL_messages_getEmojiGroups) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getEmojiGroups)
+	x.Int(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_getEmojiStatusGroups) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getEmojiStatusGroups)
+	x.Int(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_getEmojiProfilePhotoGroups) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getEmojiProfilePhotoGroups)
+	x.Int(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_searchCustomEmoji) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_searchCustomEmoji)
+	x.String(e.Emoticon)
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_togglePeerTranslations) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_togglePeerTranslations)
+	x.Int(e.Flags)
+	//flag Disabled
+	x.Bytes(e.Peer.encode())
+	return x.buf
+}
+
+func (e TL_messages_getBotApp) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getBotApp)
+	x.Bytes(e.App.encode())
+	x.Long(e.Hash)
+	return x.buf
+}
+
+func (e TL_messages_requestAppWebView) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_requestAppWebView)
+	x.Int(e.Flags)
+	//flag WriteAllowed
+	x.Bytes(e.Peer.encode())
+	x.Bytes(e.App.encode())
+	if e.Flags&2 != 0 {
+		x.String(e.StartParam)
+	}
+	if e.Flags&4 != 0 {
+		x.Bytes(e.ThemeParams.encode())
+	}
+	x.String(e.Platform)
+	return x.buf
+}
+
+func (e TL_messages_setChatWallPaper) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_setChatWallPaper)
+	x.Int(e.Flags)
+	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Wallpaper.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.Bytes(e.Settings.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.Int(e.ID)
+	}
+	return x.buf
+}
+
 func (e TL_updates_getState) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updates_getState)
@@ -23415,6 +26252,11 @@ func (e TL_updates_getChannelDifference) encode() []byte {
 func (e TL_photos_updateProfilePhoto) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_photos_updateProfilePhoto)
+	x.Int(e.Flags)
+	//flag Fallback
+	if e.Flags&2 != 0 {
+		x.Bytes(e.Bot.encode())
+	}
 	x.Bytes(e.ID.encode())
 	return x.buf
 }
@@ -23423,6 +26265,10 @@ func (e TL_photos_uploadProfilePhoto) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_photos_uploadProfilePhoto)
 	x.Int(e.Flags)
+	//flag Fallback
+	if e.Flags&32 != 0 {
+		x.Bytes(e.Bot.encode())
+	}
 	if e.Flags&1 != 0 {
 		x.Bytes(e.File.encode())
 	}
@@ -23431,6 +26277,9 @@ func (e TL_photos_uploadProfilePhoto) encode() []byte {
 	}
 	if e.Flags&4 != 0 {
 		x.Double(e.VideoStartTs)
+	}
+	if e.Flags&16 != 0 {
+		x.Bytes(e.VideoEmojiMarkup.encode())
 	}
 	return x.buf
 }
@@ -23449,6 +26298,28 @@ func (e TL_photos_getUserPhotos) encode() []byte {
 	x.Int(e.Offset)
 	x.Long(e.MaxID)
 	x.Int(e.Limit)
+	return x.buf
+}
+
+func (e TL_photos_uploadContactProfilePhoto) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_photos_uploadContactProfilePhoto)
+	x.Int(e.Flags)
+	//flag Suggest
+	//flag Save
+	x.Bytes(e.UserID.encode())
+	if e.Flags&1 != 0 {
+		x.Bytes(e.File.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.Video.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.Double(e.VideoStartTs)
+	}
+	if e.Flags&32 != 0 {
+		x.Bytes(e.VideoEmojiMarkup.encode())
+	}
 	return x.buf
 }
 
@@ -23607,6 +26478,7 @@ func (e TL_help_getDeepLinkInfo) encode() []byte {
 func (e TL_help_getAppConfig) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_help_getAppConfig)
+	x.Int(e.Hash)
 	return x.buf
 }
 
@@ -23754,6 +26626,7 @@ func (e TL_channels_createChannel) encode() []byte {
 	//flag Broadcast
 	//flag Megagroup
 	//flag ForImport
+	//flag Forum
 	x.String(e.Title)
 	x.String(e.About)
 	if e.Flags&4 != 0 {
@@ -23761,6 +26634,9 @@ func (e TL_channels_createChannel) encode() []byte {
 	}
 	if e.Flags&4 != 0 {
 		x.String(e.Address)
+	}
+	if e.Flags&16 != 0 {
+		x.Int(e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -24031,6 +26907,152 @@ func (e TL_channels_toggleJoinRequest) encode() []byte {
 	return x.buf
 }
 
+func (e TL_channels_reorderUsernames) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_reorderUsernames)
+	x.Bytes(e.Channel.encode())
+	x.VectorString(e.Order)
+	return x.buf
+}
+
+func (e TL_channels_toggleUsername) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_toggleUsername)
+	x.Bytes(e.Channel.encode())
+	x.String(e.Username)
+	x.Bytes(e.Active.encode())
+	return x.buf
+}
+
+func (e TL_channels_deactivateAllUsernames) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_deactivateAllUsernames)
+	x.Bytes(e.Channel.encode())
+	return x.buf
+}
+
+func (e TL_channels_toggleForum) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_toggleForum)
+	x.Bytes(e.Channel.encode())
+	x.Bytes(e.Enabled.encode())
+	return x.buf
+}
+
+func (e TL_channels_createForumTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_createForumTopic)
+	x.Int(e.Flags)
+	x.Bytes(e.Channel.encode())
+	x.String(e.Title)
+	if e.Flags&1 != 0 {
+		x.Int(e.IconColor)
+	}
+	if e.Flags&8 != 0 {
+		x.Long(e.IconEmojiID)
+	}
+	x.Long(e.RandomID)
+	if e.Flags&4 != 0 {
+		x.Bytes(e.SendAs.encode())
+	}
+	return x.buf
+}
+
+func (e TL_channels_getForumTopics) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_getForumTopics)
+	x.Int(e.Flags)
+	x.Bytes(e.Channel.encode())
+	if e.Flags&1 != 0 {
+		x.String(e.Q)
+	}
+	x.Int(e.OffsetDate)
+	x.Int(e.OffsetID)
+	x.Int(e.OffsetTopic)
+	x.Int(e.Limit)
+	return x.buf
+}
+
+func (e TL_channels_getForumTopicsByID) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_getForumTopicsByID)
+	x.Bytes(e.Channel.encode())
+	x.VectorInt(e.Topics)
+	return x.buf
+}
+
+func (e TL_channels_editForumTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_editForumTopic)
+	x.Int(e.Flags)
+	x.Bytes(e.Channel.encode())
+	x.Int(e.TopicID)
+	if e.Flags&1 != 0 {
+		x.String(e.Title)
+	}
+	if e.Flags&2 != 0 {
+		x.Long(e.IconEmojiID)
+	}
+	if e.Flags&4 != 0 {
+		x.Bytes(e.Closed.encode())
+	}
+	if e.Flags&8 != 0 {
+		x.Bytes(e.Hidden.encode())
+	}
+	return x.buf
+}
+
+func (e TL_channels_updatePinnedForumTopic) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_updatePinnedForumTopic)
+	x.Bytes(e.Channel.encode())
+	x.Int(e.TopicID)
+	x.Bytes(e.Pinned.encode())
+	return x.buf
+}
+
+func (e TL_channels_deleteTopicHistory) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_deleteTopicHistory)
+	x.Bytes(e.Channel.encode())
+	x.Int(e.TopMsgID)
+	return x.buf
+}
+
+func (e TL_channels_reorderPinnedForumTopics) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_reorderPinnedForumTopics)
+	x.Int(e.Flags)
+	//flag Force
+	x.Bytes(e.Channel.encode())
+	x.VectorInt(e.Order)
+	return x.buf
+}
+
+func (e TL_channels_toggleAntiSpam) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_toggleAntiSpam)
+	x.Bytes(e.Channel.encode())
+	x.Bytes(e.Enabled.encode())
+	return x.buf
+}
+
+func (e TL_channels_reportAntiSpamFalsePositive) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_reportAntiSpamFalsePositive)
+	x.Bytes(e.Channel.encode())
+	x.Int(e.MsgID)
+	return x.buf
+}
+
+func (e TL_channels_toggleParticipantsHidden) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_toggleParticipantsHidden)
+	x.Bytes(e.Channel.encode())
+	x.Bytes(e.Enabled.encode())
+	return x.buf
+}
+
 func (e TL_bots_sendCustomRequest) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_bots_sendCustomRequest)
@@ -24098,6 +27120,54 @@ func (e TL_bots_setBotGroupDefaultAdminRights) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_bots_setBotGroupDefaultAdminRights)
 	x.Bytes(e.AdminRights.encode())
+	return x.buf
+}
+
+func (e TL_bots_setBotInfo) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_bots_setBotInfo)
+	x.Int(e.Flags)
+	if e.Flags&4 != 0 {
+		x.Bytes(e.Bot.encode())
+	}
+	x.String(e.LangCode)
+	if e.Flags&8 != 0 {
+		x.String(e.Name)
+	}
+	if e.Flags&1 != 0 {
+		x.String(e.About)
+	}
+	if e.Flags&2 != 0 {
+		x.String(e.Description)
+	}
+	return x.buf
+}
+
+func (e TL_bots_getBotInfo) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_bots_getBotInfo)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Bot.encode())
+	}
+	x.String(e.LangCode)
+	return x.buf
+}
+
+func (e TL_bots_reorderUsernames) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_bots_reorderUsernames)
+	x.Bytes(e.Bot.encode())
+	x.VectorString(e.Order)
+	return x.buf
+}
+
+func (e TL_bots_toggleUsername) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_bots_toggleUsername)
+	x.Bytes(e.Bot.encode())
+	x.String(e.Username)
+	x.Bytes(e.Active.encode())
 	return x.buf
 }
 
@@ -24181,39 +27251,23 @@ func (e TL_payments_exportInvoice) encode() []byte {
 func (e TL_payments_assignAppStoreTransaction) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_assignAppStoreTransaction)
-	x.Int(e.Flags)
-	//flag Restore
-	x.String(e.TransactionID)
 	x.StringBytes(e.Receipt)
+	x.Bytes(e.Purpose.encode())
 	return x.buf
 }
 
 func (e TL_payments_assignPlayMarketTransaction) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_assignPlayMarketTransaction)
-	x.String(e.PurchaseToken)
-	return x.buf
-}
-
-func (e TL_payments_restorePlayMarketReceipt) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_payments_restorePlayMarketReceipt)
-	x.StringBytes(e.Receipt)
+	x.Bytes(e.Receipt.encode())
+	x.Bytes(e.Purpose.encode())
 	return x.buf
 }
 
 func (e TL_payments_canPurchasePremium) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_canPurchasePremium)
-	return x.buf
-}
-
-func (e TL_payments_requestRecurringPayment) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_payments_requestRecurringPayment)
-	x.Bytes(e.UserID.encode())
-	x.String(e.RecurringInitCharge)
-	x.Bytes(e.InvoiceMedia.encode())
+	x.Bytes(e.Purpose.encode())
 	return x.buf
 }
 
@@ -24224,6 +27278,8 @@ func (e TL_stickers_createStickerSet) encode() []byte {
 	//flag Masks
 	//flag Animated
 	//flag Videos
+	//flag Emojis
+	//flag TextColor
 	x.Bytes(e.UserID.encode())
 	x.String(e.Title)
 	x.String(e.ShortName)
@@ -24263,8 +27319,14 @@ func (e TL_stickers_addStickerToSet) encode() []byte {
 func (e TL_stickers_setStickerSetThumb) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stickers_setStickerSetThumb)
+	x.Int(e.Flags)
 	x.Bytes(e.Stickerset.encode())
-	x.Bytes(e.Thumb.encode())
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Thumb.encode())
+	}
+	if e.Flags&2 != 0 {
+		x.Long(e.ThumbDocumentID)
+	}
 	return x.buf
 }
 
@@ -24279,6 +27341,38 @@ func (e TL_stickers_suggestShortName) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stickers_suggestShortName)
 	x.String(e.Title)
+	return x.buf
+}
+
+func (e TL_stickers_changeSticker) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stickers_changeSticker)
+	x.Int(e.Flags)
+	x.Bytes(e.Sticker.encode())
+	if e.Flags&1 != 0 {
+		x.String(e.Emoji)
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.MaskCoords.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.String(e.Keywords)
+	}
+	return x.buf
+}
+
+func (e TL_stickers_renameStickerSet) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stickers_renameStickerSet)
+	x.Bytes(e.Stickerset.encode())
+	x.String(e.Title)
+	return x.buf
+}
+
+func (e TL_stickers_deleteStickerSet) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stickers_deleteStickerSet)
+	x.Bytes(e.Stickerset.encode())
 	return x.buf
 }
 
@@ -24634,13 +27728,6 @@ func (e TL_folders_editPeerFolders) encode() []byte {
 	return x.buf
 }
 
-func (e TL_folders_deleteFolder) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_folders_deleteFolder)
-	x.Int(e.FolderID)
-	return x.buf
-}
-
 func (e TL_stats_getBroadcastStats) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stats_getBroadcastStats)
@@ -24689,6 +27776,97 @@ func (e TL_stats_getMessageStats) encode() []byte {
 	//flag Dark
 	x.Bytes(e.Channel.encode())
 	x.Int(e.MsgID)
+	return x.buf
+}
+
+func (e TL_chatlists_exportChatlistInvite) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_exportChatlistInvite)
+	x.Bytes(e.Chatlist.encode())
+	x.String(e.Title)
+	x.Vector(e.Peers)
+	return x.buf
+}
+
+func (e TL_chatlists_deleteExportedInvite) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_deleteExportedInvite)
+	x.Bytes(e.Chatlist.encode())
+	x.String(e.Slug)
+	return x.buf
+}
+
+func (e TL_chatlists_editExportedInvite) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_editExportedInvite)
+	x.Int(e.Flags)
+	x.Bytes(e.Chatlist.encode())
+	x.String(e.Slug)
+	if e.Flags&2 != 0 {
+		x.String(e.Title)
+	}
+	if e.Flags&4 != 0 {
+		x.Vector(e.Peers)
+	}
+	return x.buf
+}
+
+func (e TL_chatlists_getExportedInvites) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_getExportedInvites)
+	x.Bytes(e.Chatlist.encode())
+	return x.buf
+}
+
+func (e TL_chatlists_checkChatlistInvite) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_checkChatlistInvite)
+	x.String(e.Slug)
+	return x.buf
+}
+
+func (e TL_chatlists_joinChatlistInvite) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_joinChatlistInvite)
+	x.String(e.Slug)
+	x.Vector(e.Peers)
+	return x.buf
+}
+
+func (e TL_chatlists_getChatlistUpdates) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_getChatlistUpdates)
+	x.Bytes(e.Chatlist.encode())
+	return x.buf
+}
+
+func (e TL_chatlists_joinChatlistUpdates) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_joinChatlistUpdates)
+	x.Bytes(e.Chatlist.encode())
+	x.Vector(e.Peers)
+	return x.buf
+}
+
+func (e TL_chatlists_hideChatlistUpdates) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_hideChatlistUpdates)
+	x.Bytes(e.Chatlist.encode())
+	return x.buf
+}
+
+func (e TL_chatlists_getLeaveChatlistSuggestions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_getLeaveChatlistSuggestions)
+	x.Bytes(e.Chatlist.encode())
+	return x.buf
+}
+
+func (e TL_chatlists_leaveChatlist) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_chatlists_leaveChatlist)
+	x.Bytes(e.Chatlist.encode())
+	x.Vector(e.Peers)
 	return x.buf
 }
 
@@ -25276,6 +28454,34 @@ func (e TL_messageActionWebViewDataSent) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_messageActionGiftPremium) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageActionTopicCreate) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageActionTopicEdit) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageActionSuggestProfilePhoto) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageActionRequestedPeer) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageActionSetChatWallPaper) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageActionSetSameChatWallPaper) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_dialog) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -25328,6 +28534,10 @@ func (e TL_auth_sentCode) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_auth_sentCodeSuccess) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_auth_authorization) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -25353,6 +28563,10 @@ func (e TL_inputNotifyChats) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_inputNotifyBroadcasts) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputNotifyForumTopic) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -25593,10 +28807,6 @@ func (e TL_updateUserStatus) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_updateUserName) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
-func (e TL_updateUserPhoto) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -25968,6 +29178,50 @@ func (e TL_updateTranscribedAudio) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_updateReadFeaturedEmojiStickers) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateUserEmojiStatus) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateRecentEmojiStatuses) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateRecentReactions) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateMoveStickerSetToTop) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateMessageExtendedMedia) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateChannelPinnedTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateChannelPinnedTopics) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateUser) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateAutoSaveSettings) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_updateGroupInvitePrivacyForbidden) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_updates_state) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -26168,6 +29422,10 @@ func (e TL_notifyBroadcasts) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_notifyForumTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_sendMessageTypingAction) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -26276,6 +29534,10 @@ func (e TL_inputPrivacyKeyAddedByPhone) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_inputPrivacyKeyVoiceMessages) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_privacyKeyStatusTimestamp) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -26305,6 +29567,10 @@ func (e TL_privacyKeyPhoneNumber) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_privacyKeyAddedByPhone) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_privacyKeyVoiceMessages) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -26405,6 +29671,10 @@ func (e TL_documentAttributeFilename) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_documentAttributeHasStickers) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_documentAttributeCustomEmoji) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -26520,6 +29790,22 @@ func (e TL_inputStickerSetAnimatedEmojiAnimations) decodeResponse(dbuf *DecodeBu
 	return dbuf.Object()
 }
 
+func (e TL_inputStickerSetPremiumGifts) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputStickerSetEmojiGenericAnimations) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputStickerSetEmojiDefaultStatuses) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputStickerSetEmojiDefaultTopicIcons) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_stickerSet) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -26597,6 +29883,10 @@ func (e TL_keyboardButtonWebView) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_keyboardButtonSimpleWebView) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_keyboardButtonRequestPeer) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -26697,6 +29987,10 @@ func (e TL_messageEntityBankCard) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_messageEntitySpoiler) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageEntityCustomEmoji) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -26924,6 +30218,10 @@ func (e TL_auth_codeTypeMissedCall) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_auth_codeTypeFragmentSms) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_auth_sentCodeTypeApp) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -26941,6 +30239,22 @@ func (e TL_auth_sentCodeTypeFlashCall) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_auth_sentCodeTypeMissedCall) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_auth_sentCodeTypeEmailCode) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_auth_sentCodeTypeSetUpEmailRequired) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_auth_sentCodeTypeFragmentSms) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_auth_sentCodeTypeFirebaseSms) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -27061,6 +30375,14 @@ func (e TL_stickerSetCovered) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_stickerSetMultiCovered) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stickerSetFullCovered) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stickerSetNoCovered) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -27337,6 +30659,10 @@ func (e TL_inputWebFileLocation) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_inputWebFileGeoPointLocation) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputWebFileAudioAlbumThumbLocation) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -27617,6 +30943,34 @@ func (e TL_channelAdminLogEventActionSendMessage) decodeResponse(dbuf *DecodeBuf
 }
 
 func (e TL_channelAdminLogEventActionChangeAvailableReactions) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channelAdminLogEventActionChangeUsernames) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channelAdminLogEventActionToggleForum) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channelAdminLogEventActionCreateTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channelAdminLogEventActionEditTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channelAdminLogEventActionDeleteTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channelAdminLogEventActionPinTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channelAdminLogEventActionToggleAntiSpam) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -28260,6 +31614,10 @@ func (e TL_dialogFilterDefault) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_dialogFilterChatlist) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_dialogFilterSuggested) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -28305,6 +31663,14 @@ func (e TL_help_promoData) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_videoSize) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_videoSizeEmojiMarkup) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_videoSizeStickerMarkup) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -28413,6 +31779,10 @@ func (e TL_inlineQueryPeerTypeMegagroup) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_inlineQueryPeerTypeBroadcast) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inlineQueryPeerTypeBotPM) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -28528,6 +31898,10 @@ func (e TL_messages_sponsoredMessages) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_messages_sponsoredMessagesEmpty) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_searchResultsCalendarPeriod) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -28581,14 +31955,6 @@ func (e TL_messages_availableReactionsNotModified) decodeResponse(dbuf *DecodeBu
 }
 
 func (e TL_messages_availableReactions) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
-func (e TL_messages_translateNoResult) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
-func (e TL_messages_translateResultText) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -28728,6 +32094,274 @@ func (e TL_help_premiumPromo) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_inputStorePaymentPremiumSubscription) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputStorePaymentGiftPremium) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_premiumGiftOption) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_paymentFormMethod) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emojiStatusEmpty) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emojiStatus) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emojiStatusUntil) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_emojiStatusesNotModified) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_emojiStatuses) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_reactionEmpty) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_reactionEmoji) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_reactionCustomEmoji) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatReactionsNone) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatReactionsAll) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatReactionsSome) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_reactionsNotModified) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_reactions) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emailVerifyPurposeLoginSetup) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emailVerifyPurposeLoginChange) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emailVerifyPurposePassport) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emailVerificationCode) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emailVerificationGoogle) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emailVerificationApple) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_emailVerified) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_emailVerifiedLogin) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_premiumSubscriptionOption) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_sendAsPeer) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageExtendedMediaPreview) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messageExtendedMedia) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stickerKeyword) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_username) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_forumTopicDeleted) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_forumTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_forumTopics) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_defaultHistoryTTL) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_exportedContactToken) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_requestPeerTypeUser) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_requestPeerTypeChat) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_requestPeerTypeBroadcast) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emojiListNotModified) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emojiList) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_emojiGroup) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_emojiGroupsNotModified) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_emojiGroups) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_textWithEntities) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_translateResult) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_autoSaveSettings) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_autoSaveException) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_autoSaveSettings) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_help_appConfigNotModified) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_help_appConfig) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputBotAppID) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputBotAppShortName) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_botAppNotModified) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_botApp) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_botApp) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_appWebViewResultUrl) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inlineBotWebView) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_readParticipantDate) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_inputChatlistDialogFilter) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_exportedChatlistInvite) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_exportedChatlistInvite) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_exportedInvites) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_chatlistInviteAlready) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_chatlistInvite) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_chatlistUpdates) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_bots_botInfo) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_invokeAfterMsg) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -28829,6 +32463,18 @@ func (e TL_auth_acceptLoginToken) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_auth_checkRecoveryPassword) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_auth_importWebTokenAuthorization) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_auth_requestFirebaseSms) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_auth_resetLoginEmail) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -29136,6 +32782,50 @@ func (e TL_account_uploadRingtone) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_account_updateEmojiStatus) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_getDefaultEmojiStatuses) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_getRecentEmojiStatuses) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_clearRecentEmojiStatuses) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_reorderUsernames) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_toggleUsername) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_getDefaultProfilePhotoEmojis) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_getDefaultGroupPhotoEmojis) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_getAutoSaveSettings) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_saveAutoSaveSettings) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_deleteAutoSaveExceptions) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_users_getUsers) decodeResponse(dbuf *DecodeBuf) TL {
 	return VectorObject(dbuf.Vector())
 }
@@ -29229,6 +32919,14 @@ func (e TL_contacts_blockFromReplies) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_contacts_resolvePhone) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_contacts_exportContactToken) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_contacts_importContactToken) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -29801,7 +33499,7 @@ func (e TL_messages_setChatTheme) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_messages_getMessageReadParticipants) decodeResponse(dbuf *DecodeBuf) TL {
-	return VectorLong(dbuf.VectorLong())
+	return VectorObject(dbuf.Vector())
 }
 
 func (e TL_messages_getSearchResultsCalendar) decodeResponse(dbuf *DecodeBuf) TL {
@@ -29908,6 +33606,82 @@ func (e TL_messages_rateTranscribedAudio) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_messages_getCustomEmojiDocuments) decodeResponse(dbuf *DecodeBuf) TL {
+	return VectorObject(dbuf.Vector())
+}
+
+func (e TL_messages_getEmojiStickers) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getFeaturedEmojiStickers) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_reportReaction) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getTopReactions) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getRecentReactions) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_clearRecentReactions) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getExtendedMedia) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_setDefaultHistoryTTL) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getDefaultHistoryTTL) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_sendBotRequestedPeer) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getEmojiGroups) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getEmojiStatusGroups) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getEmojiProfilePhotoGroups) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_searchCustomEmoji) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_togglePeerTranslations) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getBotApp) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_requestAppWebView) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_setChatWallPaper) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_updates_getState) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -29933,6 +33707,10 @@ func (e TL_photos_deletePhotos) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_photos_getUserPhotos) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_photos_uploadContactProfilePhoto) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -30224,6 +34002,62 @@ func (e TL_channels_toggleJoinRequest) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_channels_reorderUsernames) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_toggleUsername) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_deactivateAllUsernames) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_toggleForum) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_createForumTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_getForumTopics) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_getForumTopicsByID) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_editForumTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_updatePinnedForumTopic) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_deleteTopicHistory) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_reorderPinnedForumTopics) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_toggleAntiSpam) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_reportAntiSpamFalsePositive) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_toggleParticipantsHidden) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_bots_sendCustomRequest) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -30257,6 +34091,22 @@ func (e TL_bots_setBotBroadcastDefaultAdminRights) decodeResponse(dbuf *DecodeBu
 }
 
 func (e TL_bots_setBotGroupDefaultAdminRights) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_bots_setBotInfo) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_bots_getBotInfo) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_bots_reorderUsernames) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_bots_toggleUsername) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -30300,15 +34150,7 @@ func (e TL_payments_assignPlayMarketTransaction) decodeResponse(dbuf *DecodeBuf)
 	return dbuf.Object()
 }
 
-func (e TL_payments_restorePlayMarketReceipt) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
 func (e TL_payments_canPurchasePremium) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
-func (e TL_payments_requestRecurringPayment) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -30337,6 +34179,18 @@ func (e TL_stickers_checkShortName) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_stickers_suggestShortName) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stickers_changeSticker) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stickers_renameStickerSet) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stickers_deleteStickerSet) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -30488,10 +34342,6 @@ func (e TL_folders_editPeerFolders) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
-func (e TL_folders_deleteFolder) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
 func (e TL_stats_getBroadcastStats) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -30509,6 +34359,50 @@ func (e TL_stats_getMessagePublicForwards) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_stats_getMessageStats) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_exportChatlistInvite) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_deleteExportedInvite) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_editExportedInvite) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_getExportedInvites) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_checkChatlistInvite) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_joinChatlistInvite) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_getChatlistUpdates) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_joinChatlistUpdates) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_hideChatlistUpdates) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_chatlists_getLeaveChatlistSuggestions) decodeResponse(dbuf *DecodeBuf) TL {
+	return VectorObject(dbuf.Vector())
+}
+
+func (e TL_chatlists_leaveChatlist) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -30857,6 +34751,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Vector(),
 		}
 
+	case CRC_tlsBlockPermutation:
+		r = TL_tlsBlockPermutation{
+			m.Vector(),
+		}
+
 	case CRC_rpc_drop_answer:
 		r = TL_rpc_drop_answer{
 			m.Long(),
@@ -30987,6 +34886,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_inputMediaUploadedPhoto{
 			readFlags(m, &flags),
+			flags&4 != 0, //flag #2
 			m.Object(),
 			m.FlaggedVector(flags, 0),
 			m.FlaggedInt(flags, 1),
@@ -30996,6 +34896,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_inputMediaPhoto{
 			readFlags(m, &flags),
+			flags&2 != 0, //flag #1
 			m.Object(),
 			m.FlaggedInt(flags, 0),
 		}
@@ -31019,6 +34920,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			readFlags(m, &flags),
 			flags&8 != 0,  //flag #3
 			flags&16 != 0, //flag #4
+			flags&32 != 0, //flag #5
 			m.Object(),
 			m.FlaggedObject(flags, 2),
 			m.String(),
@@ -31031,6 +34933,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_inputMediaDocument{
 			readFlags(m, &flags),
+			flags&4 != 0, //flag #2
 			m.Object(),
 			m.FlaggedInt(flags, 0),
 			m.FlaggedString(flags, 1),
@@ -31050,6 +34953,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_inputMediaPhotoExternal{
 			readFlags(m, &flags),
+			flags&2 != 0, //flag #1
 			m.String(),
 			m.FlaggedInt(flags, 0),
 		}
@@ -31058,6 +34962,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_inputMediaDocumentExternal{
 			readFlags(m, &flags),
+			flags&2 != 0, //flag #1
 			m.String(),
 			m.FlaggedInt(flags, 0),
 		}
@@ -31079,6 +34984,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.Object(),
 			m.FlaggedString(flags, 1),
+			m.FlaggedObject(flags, 2),
 		}
 
 	case CRC_inputMediaGeoLive:
@@ -31117,6 +35023,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 1),
 			m.FlaggedDouble(flags, 2),
+			m.FlaggedObject(flags, 3),
 		}
 
 	case CRC_inputChatPhoto:
@@ -31272,7 +35179,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_user:
-		var flags int32
+		var flags, flags2 int32
 		r = TL_user{
 			readFlags(m, &flags),
 			flags&1024 != 0,      //flag #10
@@ -31293,6 +35200,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&134217728 != 0, //flag #27
 			flags&268435456 != 0, //flag #28
 			flags&536870912 != 0, //flag #29
+			readFlags(m, &flags2),
+			flags2&2 != 0, //flag #1
 			m.Long(),
 			m.FlaggedLong(flags, 0),
 			m.FlaggedString(flags, 1),
@@ -31305,6 +35214,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedVector(flags, 18),
 			m.FlaggedString(flags, 19),
 			m.FlaggedString(flags, 22),
+			m.FlaggedObject(flags, 30),
+			m.FlaggedVector(flags2, 0),
 		}
 
 	case CRC_userProfilePhotoEmpty:
@@ -31315,6 +35226,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_userProfilePhoto{
 			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
+			flags&4 != 0, //flag #2
 			m.Long(),
 			m.FlaggedStringBytes(flags, 1),
 			m.Int(),
@@ -31375,28 +35287,30 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channel:
-		var flags int32
+		var flags, flags2 int32
 		r = TL_channel{
 			readFlags(m, &flags),
-			flags&1 != 0,         //flag #0
-			flags&4 != 0,         //flag #2
-			flags&32 != 0,        //flag #5
-			flags&128 != 0,       //flag #7
-			flags&256 != 0,       //flag #8
-			flags&512 != 0,       //flag #9
-			flags&2048 != 0,      //flag #11
-			flags&4096 != 0,      //flag #12
-			flags&524288 != 0,    //flag #19
-			flags&1048576 != 0,   //flag #20
-			flags&2097152 != 0,   //flag #21
-			flags&4194304 != 0,   //flag #22
-			flags&8388608 != 0,   //flag #23
-			flags&16777216 != 0,  //flag #24
-			flags&33554432 != 0,  //flag #25
-			flags&67108864 != 0,  //flag #26
-			flags&134217728 != 0, //flag #27
-			flags&268435456 != 0, //flag #28
-			flags&536870912 != 0, //flag #29
+			flags&1 != 0,          //flag #0
+			flags&4 != 0,          //flag #2
+			flags&32 != 0,         //flag #5
+			flags&128 != 0,        //flag #7
+			flags&256 != 0,        //flag #8
+			flags&512 != 0,        //flag #9
+			flags&2048 != 0,       //flag #11
+			flags&4096 != 0,       //flag #12
+			flags&524288 != 0,     //flag #19
+			flags&1048576 != 0,    //flag #20
+			flags&2097152 != 0,    //flag #21
+			flags&4194304 != 0,    //flag #22
+			flags&8388608 != 0,    //flag #23
+			flags&16777216 != 0,   //flag #24
+			flags&33554432 != 0,   //flag #25
+			flags&67108864 != 0,   //flag #26
+			flags&134217728 != 0,  //flag #27
+			flags&268435456 != 0,  //flag #28
+			flags&536870912 != 0,  //flag #29
+			flags&1073741824 != 0, //flag #30
+			readFlags(m, &flags2),
 			m.Long(),
 			m.FlaggedLong(flags, 13),
 			m.String(),
@@ -31408,6 +35322,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 15),
 			m.FlaggedObject(flags, 18),
 			m.FlaggedInt(flags, 17),
+			m.FlaggedVector(flags2, 0),
 		}
 
 	case CRC_channelForbidden:
@@ -31426,8 +35341,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_chatFull{
 			readFlags(m, &flags),
-			flags&128 != 0, //flag #7
-			flags&256 != 0, //flag #8
+			flags&128 != 0,    //flag #7
+			flags&256 != 0,    //flag #8
+			flags&524288 != 0, //flag #19
 			m.Long(),
 			m.String(),
 			m.Object(),
@@ -31443,11 +35359,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedString(flags, 16),
 			m.FlaggedInt(flags, 17),
 			m.FlaggedVectorLong(flags, 17),
-			m.FlaggedVectorString(flags, 18),
+			m.FlaggedObject(flags, 18),
 		}
 
 	case CRC_channelFull:
-		var flags int32
+		var flags, flags2 int32
 		r = TL_channelFull{
 			readFlags(m, &flags),
 			flags&8 != 0,       //flag #3
@@ -31458,8 +35374,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&524288 != 0,  //flag #19
 			flags&1048576 != 0, //flag #20
 			flags&4194304 != 0, //flag #22
-			readFlags(m, &flags),
-			m.Object(),
+			readFlags(m, &flags2),
+			flags2&1 != 0, //flag #0
+			flags2&2 != 0, //flag #1
+			flags2&4 != 0, //flag #2
+			flags2&8 != 0, //flag #3
 			m.Long(),
 			m.String(),
 			m.FlaggedInt(flags, 0),
@@ -31494,7 +35413,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedInt(flags, 28),
 			m.FlaggedVectorLong(flags, 28),
 			m.FlaggedObject(flags, 29),
-			m.FlaggedVectorString(flags, 30),
+			m.FlaggedObject(flags, 30),
 		}
 
 	case CRC_chatParticipant:
@@ -31614,6 +35533,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_messageMediaPhoto{
 			readFlags(m, &flags),
+			flags&8 != 0, //flag #3
 			m.FlaggedObject(flags, 0),
 			m.FlaggedInt(flags, 2),
 		}
@@ -31639,7 +35559,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_messageMediaDocument{
 			readFlags(m, &flags),
-			flags&8 != 0, //flag #3
+			flags&8 != 0,  //flag #3
+			flags&16 != 0, //flag #4
 			m.FlaggedObject(flags, 0),
 			m.FlaggedInt(flags, 2),
 		}
@@ -31677,6 +35598,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.Long(),
 			m.String(),
+			m.FlaggedObject(flags, 4),
 		}
 
 	case CRC_messageMediaGeoLive:
@@ -31810,8 +35732,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messageActionBotAllowed:
+		var flags int32
 		r = TL_messageActionBotAllowed{
-			m.String(),
+			readFlags(m, &flags),
+			flags&2 != 0, //flag #1
+			m.FlaggedString(flags, 0),
+			m.FlaggedObject(flags, 2),
 		}
 
 	case CRC_messageActionSecureValuesSentMe:
@@ -31850,8 +35776,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messageActionSetMessagesTTL:
+		var flags int32
 		r = TL_messageActionSetMessagesTTL{
+			readFlags(m, &flags),
 			m.Int(),
+			m.FlaggedLong(flags, 0),
 		}
 
 	case CRC_messageActionGroupCallScheduled:
@@ -31879,6 +35808,57 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_messageActionGiftPremium:
+		var flags int32
+		r = TL_messageActionGiftPremium{
+			readFlags(m, &flags),
+			m.String(),
+			m.Long(),
+			m.Int(),
+			m.FlaggedString(flags, 0),
+			m.FlaggedLong(flags, 0),
+		}
+
+	case CRC_messageActionTopicCreate:
+		var flags int32
+		r = TL_messageActionTopicCreate{
+			readFlags(m, &flags),
+			m.String(),
+			m.Int(),
+			m.FlaggedLong(flags, 0),
+		}
+
+	case CRC_messageActionTopicEdit:
+		var flags int32
+		r = TL_messageActionTopicEdit{
+			readFlags(m, &flags),
+			m.FlaggedString(flags, 0),
+			m.FlaggedLong(flags, 1),
+			m.FlaggedObject(flags, 2),
+			m.FlaggedObject(flags, 3),
+		}
+
+	case CRC_messageActionSuggestProfilePhoto:
+		r = TL_messageActionSuggestProfilePhoto{
+			m.Object(),
+		}
+
+	case CRC_messageActionRequestedPeer:
+		r = TL_messageActionRequestedPeer{
+			m.Int(),
+			m.Object(),
+		}
+
+	case CRC_messageActionSetChatWallPaper:
+		r = TL_messageActionSetChatWallPaper{
+			m.Object(),
+		}
+
+	case CRC_messageActionSetSameChatWallPaper:
+		r = TL_messageActionSetSameChatWallPaper{
+			m.Object(),
+		}
+
 	case CRC_dialog:
 		var flags int32
 		r = TL_dialog{
@@ -31896,6 +35876,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedInt(flags, 0),
 			m.FlaggedObject(flags, 1),
 			m.FlaggedInt(flags, 4),
+			m.FlaggedInt(flags, 5),
 		}
 
 	case CRC_dialogFolder:
@@ -31995,6 +35976,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedInt(flags, 2),
 		}
 
+	case CRC_auth_sentCodeSuccess:
+		r = TL_auth_sentCodeSuccess{
+			m.Object(),
+		}
+
 	case CRC_auth_authorization:
 		var flags int32
 		r = TL_auth_authorization{
@@ -32002,6 +35988,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&2 != 0, //flag #1
 			m.FlaggedInt(flags, 1),
 			m.FlaggedInt(flags, 0),
+			m.FlaggedStringBytes(flags, 2),
 			m.Object(),
 		}
 
@@ -32031,6 +36018,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_inputNotifyBroadcasts:
 		r = TL_inputNotifyBroadcasts{}
+
+	case CRC_inputNotifyForumTopic:
+		r = TL_inputNotifyForumTopic{
+			m.Object(),
+			m.Int(),
+		}
 
 	case CRC_inputPeerNotifySettings:
 		var flags int32
@@ -32131,16 +36124,20 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_userFull{
 			readFlags(m, &flags),
-			flags&1 != 0,    //flag #0
-			flags&16 != 0,   //flag #4
-			flags&32 != 0,   //flag #5
-			flags&128 != 0,  //flag #7
-			flags&4096 != 0, //flag #12
-			flags&8192 != 0, //flag #13
+			flags&1 != 0,       //flag #0
+			flags&16 != 0,      //flag #4
+			flags&32 != 0,      //flag #5
+			flags&128 != 0,     //flag #7
+			flags&4096 != 0,    //flag #12
+			flags&8192 != 0,    //flag #13
+			flags&1048576 != 0, //flag #20
+			flags&8388608 != 0, //flag #23
 			m.Long(),
 			m.FlaggedString(flags, 1),
 			m.Object(),
+			m.FlaggedObject(flags, 21),
 			m.FlaggedObject(flags, 2),
+			m.FlaggedObject(flags, 22),
 			m.Object(),
 			m.FlaggedObject(flags, 3),
 			m.FlaggedInt(flags, 6),
@@ -32151,6 +36148,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedString(flags, 16),
 			m.FlaggedObject(flags, 17),
 			m.FlaggedObject(flags, 18),
+			m.FlaggedVector(flags, 19),
+			m.FlaggedObject(flags, 24),
 		}
 
 	case CRC_contact:
@@ -32254,6 +36253,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.Int(),
 			m.FlaggedInt(flags, 2),
+			m.Vector(),
 			m.Vector(),
 			m.Vector(),
 			m.Vector(),
@@ -32393,15 +36393,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Long(),
 			m.String(),
 			m.String(),
-			m.String(),
-		}
-
-	case CRC_updateUserPhoto:
-		r = TL_updateUserPhoto{
-			m.Long(),
-			m.Int(),
-			m.Object(),
-			m.Object(),
+			m.Vector(),
 		}
 
 	case CRC_updateNewEncryptedMessage:
@@ -32577,11 +36569,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_updateStickerSetsOrder{
 			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.VectorLong(),
 		}
 
 	case CRC_updateStickerSets:
-		r = TL_updateStickerSets{}
+		var flags int32
+		r = TL_updateStickerSets{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+		}
 
 	case CRC_updateSavedGifs:
 		r = TL_updateSavedGifs{}
@@ -32655,8 +36653,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateDraftMessage:
+		var flags int32
 		r = TL_updateDraftMessage{
+			readFlags(m, &flags),
 			m.Object(),
+			m.FlaggedInt(flags, 0),
 			m.Object(),
 		}
 
@@ -32749,8 +36750,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_updateFavedStickers{}
 
 	case CRC_updateChannelReadMessagesContents:
+		var flags int32
 		r = TL_updateChannelReadMessagesContents{
+			readFlags(m, &flags),
 			m.Long(),
+			m.FlaggedInt(flags, 0),
 			m.VectorInt(),
 		}
 
@@ -32967,6 +36971,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_updateChannelParticipant{
 			readFlags(m, &flags),
+			flags&8 != 0, //flag #3
 			m.Long(),
 			m.Int(),
 			m.Long(),
@@ -33018,9 +37023,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateMessageReactions:
+		var flags int32
 		r = TL_updateMessageReactions{
+			readFlags(m, &flags),
 			m.Object(),
 			m.Int(),
+			m.FlaggedInt(flags, 0),
 			m.Object(),
 		}
 
@@ -33050,6 +37058,67 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.Long(),
 			m.String(),
+		}
+
+	case CRC_updateReadFeaturedEmojiStickers:
+		r = TL_updateReadFeaturedEmojiStickers{}
+
+	case CRC_updateUserEmojiStatus:
+		r = TL_updateUserEmojiStatus{
+			m.Long(),
+			m.Object(),
+		}
+
+	case CRC_updateRecentEmojiStatuses:
+		r = TL_updateRecentEmojiStatuses{}
+
+	case CRC_updateRecentReactions:
+		r = TL_updateRecentReactions{}
+
+	case CRC_updateMoveStickerSetToTop:
+		var flags int32
+		r = TL_updateMoveStickerSetToTop{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			m.Long(),
+		}
+
+	case CRC_updateMessageExtendedMedia:
+		r = TL_updateMessageExtendedMedia{
+			m.Object(),
+			m.Int(),
+			m.Object(),
+		}
+
+	case CRC_updateChannelPinnedTopic:
+		var flags int32
+		r = TL_updateChannelPinnedTopic{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.Long(),
+			m.Int(),
+		}
+
+	case CRC_updateChannelPinnedTopics:
+		var flags int32
+		r = TL_updateChannelPinnedTopics{
+			readFlags(m, &flags),
+			m.Long(),
+			m.FlaggedVectorInt(flags, 0),
+		}
+
+	case CRC_updateUser:
+		r = TL_updateUser{
+			m.Long(),
+		}
+
+	case CRC_updateAutoSaveSettings:
+		r = TL_updateAutoSaveSettings{}
+
+	case CRC_updateGroupInvitePrivacyForbidden:
+		r = TL_updateGroupInvitePrivacyForbidden{
+			m.Long(),
 		}
 
 	case CRC_updates_state:
@@ -33232,13 +37301,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_config{
 			readFlags(m, &flags),
-			flags&2 != 0,     //flag #1
 			flags&8 != 0,     //flag #3
 			flags&16 != 0,    //flag #4
-			flags&32 != 0,    //flag #5
 			flags&64 != 0,    //flag #6
 			flags&256 != 0,   //flag #8
-			flags&8192 != 0,  //flag #13
 			flags&16384 != 0, //flag #14
 			m.Int(),
 			m.Int(),
@@ -33263,11 +37329,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.Int(),
 			m.Int(),
-			m.Int(),
-			m.Int(),
 			m.FlaggedInt(flags, 0),
-			m.Int(),
-			m.Int(),
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -33284,6 +37346,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedString(flags, 2),
 			m.FlaggedInt(flags, 2),
 			m.FlaggedInt(flags, 2),
+			m.FlaggedObject(flags, 15),
+			m.FlaggedString(flags, 16),
 		}
 
 	case CRC_nearestDc:
@@ -33495,6 +37559,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_notifyBroadcasts:
 		r = TL_notifyBroadcasts{}
 
+	case CRC_notifyForumTopic:
+		r = TL_notifyForumTopic{
+			m.Object(),
+			m.Int(),
+		}
+
 	case CRC_sendMessageTypingAction:
 		r = TL_sendMessageTypingAction{}
 
@@ -33599,6 +37669,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_inputPrivacyKeyAddedByPhone:
 		r = TL_inputPrivacyKeyAddedByPhone{}
 
+	case CRC_inputPrivacyKeyVoiceMessages:
+		r = TL_inputPrivacyKeyVoiceMessages{}
+
 	case CRC_privacyKeyStatusTimestamp:
 		r = TL_privacyKeyStatusTimestamp{}
 
@@ -33622,6 +37695,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_privacyKeyAddedByPhone:
 		r = TL_privacyKeyAddedByPhone{}
+
+	case CRC_privacyKeyVoiceMessages:
+		r = TL_privacyKeyVoiceMessages{}
 
 	case CRC_inputPrivacyValueAllowContacts:
 		r = TL_inputPrivacyValueAllowContacts{}
@@ -33748,6 +37824,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_documentAttributeHasStickers:
 		r = TL_documentAttributeHasStickers{}
 
+	case CRC_documentAttributeCustomEmoji:
+		var flags int32
+		r = TL_documentAttributeCustomEmoji{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			m.String(),
+			m.Object(),
+		}
+
 	case CRC_messages_stickersNotModified:
 		r = TL_messages_stickersNotModified{}
 
@@ -33865,6 +37951,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 			m.StringBytes(),
 			m.FlaggedInt(flags, 5),
+			m.FlaggedString(flags, 6),
 		}
 
 	case CRC_account_passwordSettings:
@@ -33970,15 +38057,28 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_inputStickerSetAnimatedEmojiAnimations:
 		r = TL_inputStickerSetAnimatedEmojiAnimations{}
 
+	case CRC_inputStickerSetPremiumGifts:
+		r = TL_inputStickerSetPremiumGifts{}
+
+	case CRC_inputStickerSetEmojiGenericAnimations:
+		r = TL_inputStickerSetEmojiGenericAnimations{}
+
+	case CRC_inputStickerSetEmojiDefaultStatuses:
+		r = TL_inputStickerSetEmojiDefaultStatuses{}
+
+	case CRC_inputStickerSetEmojiDefaultTopicIcons:
+		r = TL_inputStickerSetEmojiDefaultTopicIcons{}
+
 	case CRC_stickerSet:
 		var flags int32
 		r = TL_stickerSet{
 			readFlags(m, &flags),
-			flags&2 != 0,  //flag #1
-			flags&4 != 0,  //flag #2
-			flags&8 != 0,  //flag #3
-			flags&32 != 0, //flag #5
-			flags&64 != 0, //flag #6
+			flags&2 != 0,   //flag #1
+			flags&4 != 0,   //flag #2
+			flags&8 != 0,   //flag #3
+			flags&32 != 0,  //flag #5
+			flags&64 != 0,  //flag #6
+			flags&128 != 0, //flag #7
 			m.FlaggedInt(flags, 0),
 			m.Long(),
 			m.Long(),
@@ -33987,6 +38087,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedVector(flags, 4),
 			m.FlaggedInt(flags, 4),
 			m.FlaggedInt(flags, 4),
+			m.FlaggedLong(flags, 8),
 			m.Int(),
 			m.Int(),
 		}
@@ -33994,6 +38095,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_stickerSet:
 		r = TL_messages_stickerSet{
 			m.Object(),
+			m.Vector(),
 			m.Vector(),
 			m.Vector(),
 		}
@@ -34056,6 +38158,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&1 != 0, //flag #0
 			m.String(),
 			m.String(),
+			m.FlaggedVector(flags, 1),
 		}
 
 	case CRC_keyboardButtonGame:
@@ -34121,6 +38224,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_keyboardButtonRequestPeer:
+		r = TL_keyboardButtonRequestPeer{
+			m.String(),
+			m.Int(),
+			m.Object(),
+		}
+
 	case CRC_keyboardButtonRow:
 		r = TL_keyboardButtonRow{
 			m.Vector(),
@@ -34146,9 +38256,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_replyKeyboardMarkup{
 			readFlags(m, &flags),
-			flags&1 != 0, //flag #0
-			flags&2 != 0, //flag #1
-			flags&4 != 0, //flag #2
+			flags&1 != 0,  //flag #0
+			flags&2 != 0,  //flag #1
+			flags&4 != 0,  //flag #2
+			flags&16 != 0, //flag #4
 			m.Vector(),
 			m.FlaggedString(flags, 3),
 		}
@@ -34280,6 +38391,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messageEntitySpoiler{
 			m.Int(),
 			m.Int(),
+		}
+
+	case CRC_messageEntityCustomEmoji:
+		r = TL_messageEntityCustomEmoji{
+			m.Int(),
+			m.Int(),
+			m.Long(),
 		}
 
 	case CRC_inputChannelEmpty:
@@ -34705,6 +38823,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Long(),
 			m.FlaggedString(flags, 1),
 			m.FlaggedObject(flags, 2),
+			m.FlaggedObject(flags, 3),
 			m.Vector(),
 			m.Int(),
 			m.Vector(),
@@ -34743,6 +38862,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_auth_codeTypeMissedCall:
 		r = TL_auth_codeTypeMissedCall{}
 
+	case CRC_auth_codeTypeFragmentSms:
+		r = TL_auth_codeTypeFragmentSms{}
+
 	case CRC_auth_sentCodeTypeApp:
 		r = TL_auth_sentCodeTypeApp{
 			m.Int(),
@@ -34766,6 +38888,42 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_auth_sentCodeTypeMissedCall:
 		r = TL_auth_sentCodeTypeMissedCall{
 			m.String(),
+			m.Int(),
+		}
+
+	case CRC_auth_sentCodeTypeEmailCode:
+		var flags int32
+		r = TL_auth_sentCodeTypeEmailCode{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			m.String(),
+			m.Int(),
+			m.FlaggedInt(flags, 3),
+			m.FlaggedInt(flags, 4),
+		}
+
+	case CRC_auth_sentCodeTypeSetUpEmailRequired:
+		var flags int32
+		r = TL_auth_sentCodeTypeSetUpEmailRequired{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+		}
+
+	case CRC_auth_sentCodeTypeFragmentSms:
+		r = TL_auth_sentCodeTypeFragmentSms{
+			m.String(),
+			m.Int(),
+		}
+
+	case CRC_auth_sentCodeTypeFirebaseSms:
+		var flags int32
+		r = TL_auth_sentCodeTypeFirebaseSms{
+			readFlags(m, &flags),
+			m.FlaggedStringBytes(flags, 0),
+			m.FlaggedString(flags, 1),
+			m.FlaggedInt(flags, 1),
 			m.Int(),
 		}
 
@@ -34892,7 +39050,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_featuredStickers:
+		var flags int32
 		r = TL_messages_featuredStickers{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
 			m.Long(),
 			m.Int(),
 			m.Vector(),
@@ -34934,6 +39095,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_stickerSetMultiCovered{
 			m.Object(),
 			m.Vector(),
+		}
+
+	case CRC_stickerSetFullCovered:
+		r = TL_stickerSetFullCovered{
+			m.Object(),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_stickerSetNoCovered:
+		r = TL_stickerSetNoCovered{
+			m.Object(),
 		}
 
 	case CRC_maskCoords:
@@ -35380,6 +39554,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 		}
 
+	case CRC_inputWebFileAudioAlbumThumbLocation:
+		var flags int32
+		r = TL_inputWebFileAudioAlbumThumbLocation{
+			readFlags(m, &flags),
+			flags&4 != 0, //flag #2
+			m.FlaggedObject(flags, 0),
+			m.FlaggedString(flags, 1),
+			m.FlaggedString(flags, 1),
+		}
+
 	case CRC_upload_webFile:
 		r = TL_upload_webFile{
 			m.Int(),
@@ -35405,8 +39589,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.FlaggedString(flags, 4),
 			m.FlaggedObject(flags, 4),
+			m.FlaggedVector(flags, 6),
 			m.FlaggedObject(flags, 0),
-			m.FlaggedObject(flags, 1),
+			m.FlaggedVector(flags, 1),
 			m.Vector(),
 		}
 
@@ -35500,6 +39685,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
+			m.FlaggedString(flags, 1),
 		}
 
 	case CRC_inputPhoneCall:
@@ -35837,7 +40023,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_channelAdminLogEventActionParticipantJoinByInvite:
+		var flags int32
 		r = TL_channelAdminLogEventActionParticipantJoinByInvite{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
 			m.Object(),
 		}
 
@@ -35886,8 +40075,48 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_channelAdminLogEventActionChangeAvailableReactions:
 		r = TL_channelAdminLogEventActionChangeAvailableReactions{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_channelAdminLogEventActionChangeUsernames:
+		r = TL_channelAdminLogEventActionChangeUsernames{
 			m.VectorString(),
 			m.VectorString(),
+		}
+
+	case CRC_channelAdminLogEventActionToggleForum:
+		r = TL_channelAdminLogEventActionToggleForum{
+			m.Object(),
+		}
+
+	case CRC_channelAdminLogEventActionCreateTopic:
+		r = TL_channelAdminLogEventActionCreateTopic{
+			m.Object(),
+		}
+
+	case CRC_channelAdminLogEventActionEditTopic:
+		r = TL_channelAdminLogEventActionEditTopic{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_channelAdminLogEventActionDeleteTopic:
+		r = TL_channelAdminLogEventActionDeleteTopic{
+			m.Object(),
+		}
+
+	case CRC_channelAdminLogEventActionPinTopic:
+		var flags int32
+		r = TL_channelAdminLogEventActionPinTopic{
+			readFlags(m, &flags),
+			m.FlaggedObject(flags, 0),
+			m.FlaggedObject(flags, 1),
+		}
+
+	case CRC_channelAdminLogEventActionToggleAntiSpam:
+		r = TL_channelAdminLogEventActionToggleAntiSpam{
+			m.Object(),
 		}
 
 	case CRC_channelAdminLogEvent:
@@ -35909,23 +40138,24 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_channelAdminLogEventsFilter{
 			readFlags(m, &flags),
-			flags&1 != 0,     //flag #0
-			flags&2 != 0,     //flag #1
-			flags&4 != 0,     //flag #2
-			flags&8 != 0,     //flag #3
-			flags&16 != 0,    //flag #4
-			flags&32 != 0,    //flag #5
-			flags&64 != 0,    //flag #6
-			flags&128 != 0,   //flag #7
-			flags&256 != 0,   //flag #8
-			flags&512 != 0,   //flag #9
-			flags&1024 != 0,  //flag #10
-			flags&2048 != 0,  //flag #11
-			flags&4096 != 0,  //flag #12
-			flags&8192 != 0,  //flag #13
-			flags&16384 != 0, //flag #14
-			flags&32768 != 0, //flag #15
-			flags&65536 != 0, //flag #16
+			flags&1 != 0,      //flag #0
+			flags&2 != 0,      //flag #1
+			flags&4 != 0,      //flag #2
+			flags&8 != 0,      //flag #3
+			flags&16 != 0,     //flag #4
+			flags&32 != 0,     //flag #5
+			flags&64 != 0,     //flag #6
+			flags&128 != 0,    //flag #7
+			flags&256 != 0,    //flag #8
+			flags&512 != 0,    //flag #9
+			flags&1024 != 0,   //flag #10
+			flags&2048 != 0,   //flag #11
+			flags&4096 != 0,   //flag #12
+			flags&8192 != 0,   //flag #13
+			flags&16384 != 0,  //flag #14
+			flags&32768 != 0,  //flag #15
+			flags&65536 != 0,  //flag #16
+			flags&131072 != 0, //flag #17
 		}
 
 	case CRC_popularContact:
@@ -36579,24 +40809,33 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&1024 != 0, //flag #10
 			flags&2048 != 0, //flag #11
 			flags&4096 != 0, //flag #12
+			flags&8192 != 0, //flag #13
 		}
 
 	case CRC_chatBannedRights:
 		var flags int32
 		r = TL_chatBannedRights{
 			readFlags(m, &flags),
-			flags&1 != 0,      //flag #0
-			flags&2 != 0,      //flag #1
-			flags&4 != 0,      //flag #2
-			flags&8 != 0,      //flag #3
-			flags&16 != 0,     //flag #4
-			flags&32 != 0,     //flag #5
-			flags&64 != 0,     //flag #6
-			flags&128 != 0,    //flag #7
-			flags&256 != 0,    //flag #8
-			flags&1024 != 0,   //flag #10
-			flags&32768 != 0,  //flag #15
-			flags&131072 != 0, //flag #17
+			flags&1 != 0,        //flag #0
+			flags&2 != 0,        //flag #1
+			flags&4 != 0,        //flag #2
+			flags&8 != 0,        //flag #3
+			flags&16 != 0,       //flag #4
+			flags&32 != 0,       //flag #5
+			flags&64 != 0,       //flag #6
+			flags&128 != 0,      //flag #7
+			flags&256 != 0,      //flag #8
+			flags&1024 != 0,     //flag #10
+			flags&32768 != 0,    //flag #15
+			flags&131072 != 0,   //flag #17
+			flags&262144 != 0,   //flag #18
+			flags&524288 != 0,   //flag #19
+			flags&1048576 != 0,  //flag #20
+			flags&2097152 != 0,  //flag #21
+			flags&4194304 != 0,  //flag #22
+			flags&8388608 != 0,  //flag #23
+			flags&16777216 != 0, //flag #24
+			flags&33554432 != 0, //flag #25
 			m.Int(),
 		}
 
@@ -36629,11 +40868,14 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_codeSettings{
 			readFlags(m, &flags),
-			flags&1 != 0,  //flag #0
-			flags&2 != 0,  //flag #1
-			flags&16 != 0, //flag #4
-			flags&32 != 0, //flag #5
+			flags&1 != 0,   //flag #0
+			flags&2 != 0,   //flag #1
+			flags&16 != 0,  //flag #4
+			flags&32 != 0,  //flag #5
+			flags&128 != 0, //flag #7
 			m.FlaggedVector(flags, 6),
+			m.FlaggedString(flags, 8),
+			m.FlaggedObject(flags, 8),
 		}
 
 	case CRC_wallPaperSettings:
@@ -36961,6 +41203,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_dialogFilterDefault:
 		r = TL_dialogFilterDefault{}
 
+	case CRC_dialogFilterChatlist:
+		var flags int32
+		r = TL_dialogFilterChatlist{
+			readFlags(m, &flags),
+			flags&67108864 != 0, //flag #26
+			m.Int(),
+			m.String(),
+			m.FlaggedString(flags, 25),
+			m.Vector(),
+			m.Vector(),
+		}
+
 	case CRC_dialogFilterSuggested:
 		r = TL_dialogFilterSuggested{
 			m.Object(),
@@ -37056,6 +41310,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.Int(),
 			m.FlaggedDouble(flags, 0),
+		}
+
+	case CRC_videoSizeEmojiMarkup:
+		r = TL_videoSizeEmojiMarkup{
+			m.Long(),
+			m.VectorInt(),
+		}
+
+	case CRC_videoSizeStickerMarkup:
+		r = TL_videoSizeStickerMarkup{
+			m.Object(),
+			m.Long(),
+			m.VectorInt(),
 		}
 
 	case CRC_statsGroupTopPoster:
@@ -37170,6 +41437,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messageReplyHeader{
 			readFlags(m, &flags),
 			flags&4 != 0, //flag #2
+			flags&8 != 0, //flag #3
 			m.Int(),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedInt(flags, 1),
@@ -37295,6 +41563,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_inlineQueryPeerTypeBroadcast:
 		r = TL_inlineQueryPeerTypeBroadcast{}
 
+	case CRC_inlineQueryPeerTypeBotPM:
+		r = TL_inlineQueryPeerTypeBotPM{}
+
 	case CRC_messages_historyImport:
 		r = TL_messages_historyImport{
 			m.Long(),
@@ -37322,6 +41593,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_chatInviteImporter{
 			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
+			flags&8 != 0, //flag #3
 			m.Long(),
 			m.Int(),
 			m.FlaggedString(flags, 2),
@@ -37452,6 +41724,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_sponsoredMessage{
 			readFlags(m, &flags),
 			flags&32 != 0, //flag #5
+			flags&64 != 0, //flag #6
 			m.StringBytes(),
 			m.FlaggedObject(flags, 3),
 			m.FlaggedObject(flags, 4),
@@ -37460,14 +41733,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedString(flags, 0),
 			m.String(),
 			m.FlaggedVector(flags, 1),
+			m.FlaggedString(flags, 7),
+			m.FlaggedString(flags, 8),
 		}
 
 	case CRC_messages_sponsoredMessages:
+		var flags int32
 		r = TL_messages_sponsoredMessages{
+			readFlags(m, &flags),
+			m.FlaggedInt(flags, 0),
 			m.Vector(),
 			m.Vector(),
 			m.Vector(),
 		}
+
+	case CRC_messages_sponsoredMessagesEmpty:
+		r = TL_messages_sponsoredMessagesEmpty{}
 
 	case CRC_searchResultsCalendarPeriod:
 		r = TL_searchResultsCalendarPeriod{
@@ -37537,8 +41818,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_reactionCount{
 			readFlags(m, &flags),
-			flags&1 != 0, //flag #0
-			m.String(),
+			m.FlaggedInt(flags, 0),
+			m.Object(),
 			m.Int(),
 		}
 
@@ -37589,14 +41870,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Vector(),
 		}
 
-	case CRC_messages_translateNoResult:
-		r = TL_messages_translateNoResult{}
-
-	case CRC_messages_translateResultText:
-		r = TL_messages_translateResultText{
-			m.String(),
-		}
-
 	case CRC_messagePeerReaction:
 		var flags int32
 		r = TL_messagePeerReaction{
@@ -37604,7 +41877,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
 			m.Object(),
-			m.String(),
+			m.Int(),
+			m.Object(),
 		}
 
 	case CRC_groupCallStreamChannel:
@@ -37646,6 +41920,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
 			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
 			m.Long(),
 			m.String(),
 			m.Vector(),
@@ -37778,9 +42053,460 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Vector(),
 			m.VectorString(),
 			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_inputStorePaymentPremiumSubscription:
+		var flags int32
+		r = TL_inputStorePaymentPremiumSubscription{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+		}
+
+	case CRC_inputStorePaymentGiftPremium:
+		r = TL_inputStorePaymentGiftPremium{
+			m.Object(),
 			m.String(),
 			m.Long(),
+		}
+
+	case CRC_premiumGiftOption:
+		var flags int32
+		r = TL_premiumGiftOption{
+			readFlags(m, &flags),
+			m.Int(),
+			m.String(),
+			m.Long(),
+			m.String(),
+			m.FlaggedString(flags, 0),
+		}
+
+	case CRC_paymentFormMethod:
+		r = TL_paymentFormMethod{
+			m.String(),
+			m.String(),
+		}
+
+	case CRC_emojiStatusEmpty:
+		r = TL_emojiStatusEmpty{}
+
+	case CRC_emojiStatus:
+		r = TL_emojiStatus{
+			m.Long(),
+		}
+
+	case CRC_emojiStatusUntil:
+		r = TL_emojiStatusUntil{
+			m.Long(),
+			m.Int(),
+		}
+
+	case CRC_account_emojiStatusesNotModified:
+		r = TL_account_emojiStatusesNotModified{}
+
+	case CRC_account_emojiStatuses:
+		r = TL_account_emojiStatuses{
+			m.Long(),
 			m.Vector(),
+		}
+
+	case CRC_reactionEmpty:
+		r = TL_reactionEmpty{}
+
+	case CRC_reactionEmoji:
+		r = TL_reactionEmoji{
+			m.String(),
+		}
+
+	case CRC_reactionCustomEmoji:
+		r = TL_reactionCustomEmoji{
+			m.Long(),
+		}
+
+	case CRC_chatReactionsNone:
+		r = TL_chatReactionsNone{}
+
+	case CRC_chatReactionsAll:
+		var flags int32
+		r = TL_chatReactionsAll{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+		}
+
+	case CRC_chatReactionsSome:
+		r = TL_chatReactionsSome{
+			m.Vector(),
+		}
+
+	case CRC_messages_reactionsNotModified:
+		r = TL_messages_reactionsNotModified{}
+
+	case CRC_messages_reactions:
+		r = TL_messages_reactions{
+			m.Long(),
+			m.Vector(),
+		}
+
+	case CRC_emailVerifyPurposeLoginSetup:
+		r = TL_emailVerifyPurposeLoginSetup{
+			m.String(),
+			m.String(),
+		}
+
+	case CRC_emailVerifyPurposeLoginChange:
+		r = TL_emailVerifyPurposeLoginChange{}
+
+	case CRC_emailVerifyPurposePassport:
+		r = TL_emailVerifyPurposePassport{}
+
+	case CRC_emailVerificationCode:
+		r = TL_emailVerificationCode{
+			m.String(),
+		}
+
+	case CRC_emailVerificationGoogle:
+		r = TL_emailVerificationGoogle{
+			m.String(),
+		}
+
+	case CRC_emailVerificationApple:
+		r = TL_emailVerificationApple{
+			m.String(),
+		}
+
+	case CRC_account_emailVerified:
+		r = TL_account_emailVerified{
+			m.String(),
+		}
+
+	case CRC_account_emailVerifiedLogin:
+		r = TL_account_emailVerifiedLogin{
+			m.String(),
+			m.Object(),
+		}
+
+	case CRC_premiumSubscriptionOption:
+		var flags int32
+		r = TL_premiumSubscriptionOption{
+			readFlags(m, &flags),
+			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
+			m.FlaggedString(flags, 3),
+			m.Int(),
+			m.String(),
+			m.Long(),
+			m.String(),
+			m.FlaggedString(flags, 0),
+		}
+
+	case CRC_sendAsPeer:
+		var flags int32
+		r = TL_sendAsPeer{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.Object(),
+		}
+
+	case CRC_messageExtendedMediaPreview:
+		var flags int32
+		r = TL_messageExtendedMediaPreview{
+			readFlags(m, &flags),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedObject(flags, 1),
+			m.FlaggedInt(flags, 2),
+		}
+
+	case CRC_messageExtendedMedia:
+		r = TL_messageExtendedMedia{
+			m.Object(),
+		}
+
+	case CRC_stickerKeyword:
+		r = TL_stickerKeyword{
+			m.Long(),
+			m.VectorString(),
+		}
+
+	case CRC_username:
+		var flags int32
+		r = TL_username{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			m.String(),
+		}
+
+	case CRC_forumTopicDeleted:
+		r = TL_forumTopicDeleted{
+			m.Int(),
+		}
+
+	case CRC_forumTopic:
+		var flags int32
+		r = TL_forumTopic{
+			readFlags(m, &flags),
+			flags&2 != 0,  //flag #1
+			flags&4 != 0,  //flag #2
+			flags&8 != 0,  //flag #3
+			flags&32 != 0, //flag #5
+			flags&64 != 0, //flag #6
+			m.Int(),
+			m.Int(),
+			m.String(),
+			m.Int(),
+			m.FlaggedLong(flags, 0),
+			m.Int(),
+			m.Int(),
+			m.Int(),
+			m.Int(),
+			m.Int(),
+			m.Int(),
+			m.Object(),
+			m.Object(),
+			m.FlaggedObject(flags, 4),
+		}
+
+	case CRC_messages_forumTopics:
+		var flags int32
+		r = TL_messages_forumTopics{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.Int(),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+			m.Int(),
+		}
+
+	case CRC_defaultHistoryTTL:
+		r = TL_defaultHistoryTTL{
+			m.Int(),
+		}
+
+	case CRC_exportedContactToken:
+		r = TL_exportedContactToken{
+			m.String(),
+			m.Int(),
+		}
+
+	case CRC_requestPeerTypeUser:
+		var flags int32
+		r = TL_requestPeerTypeUser{
+			readFlags(m, &flags),
+			m.FlaggedObject(flags, 0),
+			m.FlaggedObject(flags, 1),
+		}
+
+	case CRC_requestPeerTypeChat:
+		var flags int32
+		r = TL_requestPeerTypeChat{
+			readFlags(m, &flags),
+			flags&1 != 0,  //flag #0
+			flags&32 != 0, //flag #5
+			m.FlaggedObject(flags, 3),
+			m.FlaggedObject(flags, 4),
+			m.FlaggedObject(flags, 1),
+			m.FlaggedObject(flags, 2),
+		}
+
+	case CRC_requestPeerTypeBroadcast:
+		var flags int32
+		r = TL_requestPeerTypeBroadcast{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.FlaggedObject(flags, 3),
+			m.FlaggedObject(flags, 1),
+			m.FlaggedObject(flags, 2),
+		}
+
+	case CRC_emojiListNotModified:
+		r = TL_emojiListNotModified{}
+
+	case CRC_emojiList:
+		r = TL_emojiList{
+			m.Long(),
+			m.VectorLong(),
+		}
+
+	case CRC_emojiGroup:
+		r = TL_emojiGroup{
+			m.String(),
+			m.Long(),
+			m.VectorString(),
+		}
+
+	case CRC_messages_emojiGroupsNotModified:
+		r = TL_messages_emojiGroupsNotModified{}
+
+	case CRC_messages_emojiGroups:
+		r = TL_messages_emojiGroups{
+			m.Int(),
+			m.Vector(),
+		}
+
+	case CRC_textWithEntities:
+		r = TL_textWithEntities{
+			m.String(),
+			m.Vector(),
+		}
+
+	case CRC_messages_translateResult:
+		r = TL_messages_translateResult{
+			m.Vector(),
+		}
+
+	case CRC_autoSaveSettings:
+		var flags int32
+		r = TL_autoSaveSettings{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			m.FlaggedLong(flags, 2),
+		}
+
+	case CRC_autoSaveException:
+		r = TL_autoSaveException{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_account_autoSaveSettings:
+		r = TL_account_autoSaveSettings{
+			m.Object(),
+			m.Object(),
+			m.Object(),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_help_appConfigNotModified:
+		r = TL_help_appConfigNotModified{}
+
+	case CRC_help_appConfig:
+		r = TL_help_appConfig{
+			m.Int(),
+			m.Object(),
+		}
+
+	case CRC_inputBotAppID:
+		r = TL_inputBotAppID{
+			m.Long(),
+			m.Long(),
+		}
+
+	case CRC_inputBotAppShortName:
+		r = TL_inputBotAppShortName{
+			m.Object(),
+			m.String(),
+		}
+
+	case CRC_botAppNotModified:
+		r = TL_botAppNotModified{}
+
+	case CRC_botApp:
+		var flags int32
+		r = TL_botApp{
+			readFlags(m, &flags),
+			m.Long(),
+			m.Long(),
+			m.String(),
+			m.String(),
+			m.String(),
+			m.Object(),
+			m.FlaggedObject(flags, 0),
+			m.Long(),
+		}
+
+	case CRC_messages_botApp:
+		var flags int32
+		r = TL_messages_botApp{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			m.Object(),
+		}
+
+	case CRC_appWebViewResultUrl:
+		r = TL_appWebViewResultUrl{
+			m.String(),
+		}
+
+	case CRC_inlineBotWebView:
+		r = TL_inlineBotWebView{
+			m.String(),
+			m.String(),
+		}
+
+	case CRC_readParticipantDate:
+		r = TL_readParticipantDate{
+			m.Long(),
+			m.Int(),
+		}
+
+	case CRC_inputChatlistDialogFilter:
+		r = TL_inputChatlistDialogFilter{
+			m.Int(),
+		}
+
+	case CRC_exportedChatlistInvite:
+		var flags int32
+		r = TL_exportedChatlistInvite{
+			readFlags(m, &flags),
+			m.String(),
+			m.String(),
+			m.Vector(),
+		}
+
+	case CRC_chatlists_exportedChatlistInvite:
+		r = TL_chatlists_exportedChatlistInvite{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_chatlists_exportedInvites:
+		r = TL_chatlists_exportedInvites{
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_chatlists_chatlistInviteAlready:
+		r = TL_chatlists_chatlistInviteAlready{
+			m.Int(),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_chatlists_chatlistInvite:
+		var flags int32
+		r = TL_chatlists_chatlistInvite{
+			readFlags(m, &flags),
+			m.String(),
+			m.FlaggedString(flags, 0),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_chatlists_chatlistUpdates:
+		r = TL_chatlists_chatlistUpdates{
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_bots_botInfo:
+		r = TL_bots_botInfo{
+			m.String(),
+			m.String(),
+			m.String(),
 		}
 
 	case CRC_invokeAfterMsg:
@@ -37851,10 +42577,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_auth_signIn:
+		var flags int32
 		r = TL_auth_signIn{
+			readFlags(m, &flags),
 			m.String(),
 			m.String(),
-			m.String(),
+			m.FlaggedString(flags, 0),
+			m.FlaggedObject(flags, 1),
 		}
 
 	case CRC_auth_logOut:
@@ -37945,6 +42674,29 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_auth_importWebTokenAuthorization:
+		r = TL_auth_importWebTokenAuthorization{
+			m.Int(),
+			m.String(),
+			m.String(),
+		}
+
+	case CRC_auth_requestFirebaseSms:
+		var flags int32
+		r = TL_auth_requestFirebaseSms{
+			readFlags(m, &flags),
+			m.String(),
+			m.String(),
+			m.FlaggedString(flags, 0),
+			m.FlaggedString(flags, 1),
+		}
+
+	case CRC_auth_resetLoginEmail:
+		r = TL_auth_resetLoginEmail{
+			m.String(),
+			m.String(),
+		}
+
 	case CRC_account_registerDevice:
 		var flags int32
 		r = TL_account_registerDevice{
@@ -38026,8 +42778,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_deleteAccount:
+		var flags int32
 		r = TL_account_deleteAccount{
+			readFlags(m, &flags),
 			m.String(),
+			m.FlaggedObject(flags, 0),
 		}
 
 	case CRC_account_getAccountTTL:
@@ -38157,13 +42912,14 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_account_sendVerifyEmailCode:
 		r = TL_account_sendVerifyEmailCode{
+			m.Object(),
 			m.String(),
 		}
 
 	case CRC_account_verifyEmail:
 		r = TL_account_verifyEmail{
-			m.String(),
-			m.String(),
+			m.Object(),
+			m.Object(),
 		}
 
 	case CRC_account_initTakeoutSession:
@@ -38219,7 +42975,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_account_uploadWallPaper:
+		var flags int32
 		r = TL_account_uploadWallPaper{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
 			m.Object(),
 			m.String(),
 			m.Object(),
@@ -38305,7 +43064,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_account_getTheme{
 			m.String(),
 			m.Object(),
-			m.Long(),
 		}
 
 	case CRC_account_getThemes:
@@ -38387,6 +43145,62 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.String(),
 		}
+
+	case CRC_account_updateEmojiStatus:
+		r = TL_account_updateEmojiStatus{
+			m.Object(),
+		}
+
+	case CRC_account_getDefaultEmojiStatuses:
+		r = TL_account_getDefaultEmojiStatuses{
+			m.Long(),
+		}
+
+	case CRC_account_getRecentEmojiStatuses:
+		r = TL_account_getRecentEmojiStatuses{
+			m.Long(),
+		}
+
+	case CRC_account_clearRecentEmojiStatuses:
+		r = TL_account_clearRecentEmojiStatuses{}
+
+	case CRC_account_reorderUsernames:
+		r = TL_account_reorderUsernames{
+			m.VectorString(),
+		}
+
+	case CRC_account_toggleUsername:
+		r = TL_account_toggleUsername{
+			m.String(),
+			m.Object(),
+		}
+
+	case CRC_account_getDefaultProfilePhotoEmojis:
+		r = TL_account_getDefaultProfilePhotoEmojis{
+			m.Long(),
+		}
+
+	case CRC_account_getDefaultGroupPhotoEmojis:
+		r = TL_account_getDefaultGroupPhotoEmojis{
+			m.Long(),
+		}
+
+	case CRC_account_getAutoSaveSettings:
+		r = TL_account_getAutoSaveSettings{}
+
+	case CRC_account_saveAutoSaveSettings:
+		var flags int32
+		r = TL_account_saveAutoSaveSettings{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
+			m.FlaggedObject(flags, 3),
+			m.Object(),
+		}
+
+	case CRC_account_deleteAutoSaveExceptions:
+		r = TL_account_deleteAutoSaveExceptions{}
 
 	case CRC_users_getUsers:
 		r = TL_users_getUsers{
@@ -38533,6 +43347,14 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_contacts_exportContactToken:
+		r = TL_contacts_exportContactToken{}
+
+	case CRC_contacts_importContactToken:
+		r = TL_contacts_importContactToken{
+			m.String(),
+		}
+
 	case CRC_messages_getMessages:
 		r = TL_messages_getMessages{
 			m.Vector(),
@@ -38631,8 +43453,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&64 != 0,    //flag #6
 			flags&128 != 0,   //flag #7
 			flags&16384 != 0, //flag #14
+			flags&32768 != 0, //flag #15
 			m.Object(),
 			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 9),
 			m.String(),
 			m.Long(),
 			m.FlaggedObject(flags, 2),
@@ -38649,8 +43473,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&64 != 0,    //flag #6
 			flags&128 != 0,   //flag #7
 			flags&16384 != 0, //flag #14
+			flags&32768 != 0, //flag #15
 			m.Object(),
 			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 9),
 			m.Object(),
 			m.String(),
 			m.Long(),
@@ -38674,6 +43500,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.VectorInt(),
 			m.VectorLong(),
 			m.Object(),
+			m.FlaggedInt(flags, 9),
 			m.FlaggedInt(flags, 10),
 			m.FlaggedObject(flags, 13),
 		}
@@ -38735,9 +43562,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_createChat:
+		var flags int32
 		r = TL_messages_createChat{
+			readFlags(m, &flags),
 			m.Vector(),
 			m.String(),
+			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_messages_getDhConfig:
@@ -38928,6 +43758,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_reorderStickerSets{
 			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.VectorLong(),
 		}
 
@@ -38971,6 +43802,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.FlaggedString(flags, 2),
 			m.FlaggedObject(flags, 3),
+			m.FlaggedObject(flags, 4),
 		}
 
 	case CRC_messages_sendInlineBotResult:
@@ -38983,6 +43815,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&2048 != 0, //flag #11
 			m.Object(),
 			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 9),
 			m.Long(),
 			m.Long(),
 			m.String(),
@@ -39055,6 +43888,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
 			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 2),
 			m.Object(),
 			m.String(),
 			m.FlaggedVector(flags, 3),
@@ -39102,6 +43936,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_getArchivedStickers{
 			readFlags(m, &flags),
 			flags&1 != 0, //flag #0
+			flags&2 != 0, //flag #1
 			m.Long(),
 			m.Int(),
 		}
@@ -39235,8 +44070,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getUnreadMentions:
+		var flags int32
 		r = TL_messages_getUnreadMentions{
+			readFlags(m, &flags),
 			m.Object(),
+			m.FlaggedInt(flags, 0),
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -39245,8 +44083,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_readMentions:
+		var flags int32
 		r = TL_messages_readMentions{
+			readFlags(m, &flags),
 			m.Object(),
+			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_messages_getRecentLocations:
@@ -39264,8 +44105,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&64 != 0,    //flag #6
 			flags&128 != 0,   //flag #7
 			flags&16384 != 0, //flag #14
+			flags&32768 != 0, //flag #15
 			m.Object(),
 			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 9),
 			m.Vector(),
 			m.FlaggedInt(flags, 10),
 			m.FlaggedObject(flags, 13),
@@ -39366,8 +44209,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_getSearchCounters:
+		var flags int32
 		r = TL_messages_getSearchCounters{
+			readFlags(m, &flags),
 			m.Object(),
+			m.FlaggedInt(flags, 0),
 			m.Vector(),
 		}
 
@@ -39495,8 +44341,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_unpinAllMessages:
+		var flags int32
 		r = TL_messages_unpinAllMessages{
+			readFlags(m, &flags),
 			m.Object(),
+			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_messages_deleteChat:
@@ -39672,9 +44521,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_sendReaction{
 			readFlags(m, &flags),
 			flags&2 != 0, //flag #1
+			flags&4 != 0, //flag #2
 			m.Object(),
 			m.Int(),
-			m.FlaggedString(flags, 0),
+			m.FlaggedVector(flags, 0),
 		}
 
 	case CRC_messages_getMessagesReactions:
@@ -39689,7 +44539,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			readFlags(m, &flags),
 			m.Object(),
 			m.Int(),
-			m.FlaggedString(flags, 0),
+			m.FlaggedObject(flags, 0),
 			m.FlaggedString(flags, 1),
 			m.Int(),
 		}
@@ -39697,7 +44547,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_setChatAvailableReactions:
 		r = TL_messages_setChatAvailableReactions{
 			m.Object(),
-			m.VectorString(),
+			m.Object(),
 		}
 
 	case CRC_messages_getAvailableReactions:
@@ -39707,7 +44557,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_messages_setDefaultReaction:
 		r = TL_messages_setDefaultReaction{
-			m.String(),
+			m.Object(),
 		}
 
 	case CRC_messages_translateText:
@@ -39715,15 +44565,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_translateText{
 			readFlags(m, &flags),
 			m.FlaggedObject(flags, 0),
-			m.FlaggedInt(flags, 0),
-			m.FlaggedString(flags, 1),
-			m.FlaggedString(flags, 2),
+			m.FlaggedVectorInt(flags, 0),
+			m.FlaggedVector(flags, 1),
 			m.String(),
 		}
 
 	case CRC_messages_getUnreadReactions:
+		var flags int32
 		r = TL_messages_getUnreadReactions{
+			readFlags(m, &flags),
 			m.Object(),
+			m.FlaggedInt(flags, 0),
 			m.Int(),
 			m.Int(),
 			m.Int(),
@@ -39732,8 +44584,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_readReactions:
+		var flags int32
 		r = TL_messages_readReactions{
+			readFlags(m, &flags),
 			m.Object(),
+			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_messages_searchSentMedia:
@@ -39754,7 +44609,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_messages_toggleBotInAttachMenu:
+		var flags int32
 		r = TL_messages_toggleBotInAttachMenu{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Object(),
 		}
@@ -39770,7 +44628,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedString(flags, 1),
 			m.FlaggedString(flags, 3),
 			m.FlaggedObject(flags, 2),
+			m.String(),
 			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 9),
 			m.FlaggedObject(flags, 13),
 		}
 
@@ -39783,6 +44643,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 			m.Long(),
 			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 9),
 			m.FlaggedObject(flags, 13),
 		}
 
@@ -39790,9 +44651,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_messages_requestSimpleWebView{
 			readFlags(m, &flags),
+			flags&2 != 0, //flag #1
 			m.Object(),
 			m.String(),
 			m.FlaggedObject(flags, 0),
+			m.String(),
 		}
 
 	case CRC_messages_sendWebViewResultMessage:
@@ -39823,6 +44686,122 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 		}
 
+	case CRC_messages_getCustomEmojiDocuments:
+		r = TL_messages_getCustomEmojiDocuments{
+			m.VectorLong(),
+		}
+
+	case CRC_messages_getEmojiStickers:
+		r = TL_messages_getEmojiStickers{
+			m.Long(),
+		}
+
+	case CRC_messages_getFeaturedEmojiStickers:
+		r = TL_messages_getFeaturedEmojiStickers{
+			m.Long(),
+		}
+
+	case CRC_messages_reportReaction:
+		r = TL_messages_reportReaction{
+			m.Object(),
+			m.Int(),
+			m.Object(),
+		}
+
+	case CRC_messages_getTopReactions:
+		r = TL_messages_getTopReactions{
+			m.Int(),
+			m.Long(),
+		}
+
+	case CRC_messages_getRecentReactions:
+		r = TL_messages_getRecentReactions{
+			m.Int(),
+			m.Long(),
+		}
+
+	case CRC_messages_clearRecentReactions:
+		r = TL_messages_clearRecentReactions{}
+
+	case CRC_messages_getExtendedMedia:
+		r = TL_messages_getExtendedMedia{
+			m.Object(),
+			m.VectorInt(),
+		}
+
+	case CRC_messages_setDefaultHistoryTTL:
+		r = TL_messages_setDefaultHistoryTTL{
+			m.Int(),
+		}
+
+	case CRC_messages_getDefaultHistoryTTL:
+		r = TL_messages_getDefaultHistoryTTL{}
+
+	case CRC_messages_sendBotRequestedPeer:
+		r = TL_messages_sendBotRequestedPeer{
+			m.Object(),
+			m.Int(),
+			m.Int(),
+			m.Object(),
+		}
+
+	case CRC_messages_getEmojiGroups:
+		r = TL_messages_getEmojiGroups{
+			m.Int(),
+		}
+
+	case CRC_messages_getEmojiStatusGroups:
+		r = TL_messages_getEmojiStatusGroups{
+			m.Int(),
+		}
+
+	case CRC_messages_getEmojiProfilePhotoGroups:
+		r = TL_messages_getEmojiProfilePhotoGroups{
+			m.Int(),
+		}
+
+	case CRC_messages_searchCustomEmoji:
+		r = TL_messages_searchCustomEmoji{
+			m.String(),
+			m.Long(),
+		}
+
+	case CRC_messages_togglePeerTranslations:
+		var flags int32
+		r = TL_messages_togglePeerTranslations{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.Object(),
+		}
+
+	case CRC_messages_getBotApp:
+		r = TL_messages_getBotApp{
+			m.Object(),
+			m.Long(),
+		}
+
+	case CRC_messages_requestAppWebView:
+		var flags int32
+		r = TL_messages_requestAppWebView{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.Object(),
+			m.Object(),
+			m.FlaggedString(flags, 1),
+			m.FlaggedObject(flags, 2),
+			m.String(),
+		}
+
+	case CRC_messages_setChatWallPaper:
+		var flags int32
+		r = TL_messages_setChatWallPaper{
+			readFlags(m, &flags),
+			m.Object(),
+			m.FlaggedObject(flags, 0),
+			m.FlaggedObject(flags, 2),
+			m.FlaggedInt(flags, 1),
+		}
+
 	case CRC_updates_getState:
 		r = TL_updates_getState{}
 
@@ -39848,7 +44827,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_photos_updateProfilePhoto:
+		var flags int32
 		r = TL_photos_updateProfilePhoto{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.FlaggedObject(flags, 1),
 			m.Object(),
 		}
 
@@ -39856,9 +44839,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_photos_uploadProfilePhoto{
 			readFlags(m, &flags),
+			flags&8 != 0, //flag #3
+			m.FlaggedObject(flags, 5),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 1),
 			m.FlaggedDouble(flags, 2),
+			m.FlaggedObject(flags, 4),
 		}
 
 	case CRC_photos_deletePhotos:
@@ -39872,6 +44858,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.Long(),
 			m.Int(),
+		}
+
+	case CRC_photos_uploadContactProfilePhoto:
+		var flags int32
+		r = TL_photos_uploadContactProfilePhoto{
+			readFlags(m, &flags),
+			flags&8 != 0,  //flag #3
+			flags&16 != 0, //flag #4
+			m.Object(),
+			m.FlaggedObject(flags, 0),
+			m.FlaggedObject(flags, 1),
+			m.FlaggedDouble(flags, 2),
+			m.FlaggedObject(flags, 5),
 		}
 
 	case CRC_upload_saveFilePart:
@@ -39982,7 +44981,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_help_getAppConfig:
-		r = TL_help_getAppConfig{}
+		r = TL_help_getAppConfig{
+			m.Int(),
+		}
 
 	case CRC_help_saveAppLog:
 		r = TL_help_saveAppLog{
@@ -40086,13 +45087,15 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_channels_createChannel{
 			readFlags(m, &flags),
-			flags&1 != 0, //flag #0
-			flags&2 != 0, //flag #1
-			flags&8 != 0, //flag #3
+			flags&1 != 0,  //flag #0
+			flags&2 != 0,  //flag #1
+			flags&8 != 0,  //flag #3
+			flags&32 != 0, //flag #5
 			m.String(),
 			m.String(),
 			m.FlaggedObject(flags, 2),
 			m.FlaggedString(flags, 2),
+			m.FlaggedInt(flags, 4),
 		}
 
 	case CRC_channels_editAdmin:
@@ -40295,6 +45298,112 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 		}
 
+	case CRC_channels_reorderUsernames:
+		r = TL_channels_reorderUsernames{
+			m.Object(),
+			m.VectorString(),
+		}
+
+	case CRC_channels_toggleUsername:
+		r = TL_channels_toggleUsername{
+			m.Object(),
+			m.String(),
+			m.Object(),
+		}
+
+	case CRC_channels_deactivateAllUsernames:
+		r = TL_channels_deactivateAllUsernames{
+			m.Object(),
+		}
+
+	case CRC_channels_toggleForum:
+		r = TL_channels_toggleForum{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_channels_createForumTopic:
+		var flags int32
+		r = TL_channels_createForumTopic{
+			readFlags(m, &flags),
+			m.Object(),
+			m.String(),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedLong(flags, 3),
+			m.Long(),
+			m.FlaggedObject(flags, 2),
+		}
+
+	case CRC_channels_getForumTopics:
+		var flags int32
+		r = TL_channels_getForumTopics{
+			readFlags(m, &flags),
+			m.Object(),
+			m.FlaggedString(flags, 0),
+			m.Int(),
+			m.Int(),
+			m.Int(),
+			m.Int(),
+		}
+
+	case CRC_channels_getForumTopicsByID:
+		r = TL_channels_getForumTopicsByID{
+			m.Object(),
+			m.VectorInt(),
+		}
+
+	case CRC_channels_editForumTopic:
+		var flags int32
+		r = TL_channels_editForumTopic{
+			readFlags(m, &flags),
+			m.Object(),
+			m.Int(),
+			m.FlaggedString(flags, 0),
+			m.FlaggedLong(flags, 1),
+			m.FlaggedObject(flags, 2),
+			m.FlaggedObject(flags, 3),
+		}
+
+	case CRC_channels_updatePinnedForumTopic:
+		r = TL_channels_updatePinnedForumTopic{
+			m.Object(),
+			m.Int(),
+			m.Object(),
+		}
+
+	case CRC_channels_deleteTopicHistory:
+		r = TL_channels_deleteTopicHistory{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_channels_reorderPinnedForumTopics:
+		var flags int32
+		r = TL_channels_reorderPinnedForumTopics{
+			readFlags(m, &flags),
+			flags&1 != 0, //flag #0
+			m.Object(),
+			m.VectorInt(),
+		}
+
+	case CRC_channels_toggleAntiSpam:
+		r = TL_channels_toggleAntiSpam{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_channels_reportAntiSpamFalsePositive:
+		r = TL_channels_reportAntiSpamFalsePositive{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_channels_toggleParticipantsHidden:
+		r = TL_channels_toggleParticipantsHidden{
+			m.Object(),
+			m.Object(),
+		}
+
 	case CRC_bots_sendCustomRequest:
 		r = TL_bots_sendCustomRequest{
 			m.String(),
@@ -40344,6 +45453,38 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_bots_setBotGroupDefaultAdminRights:
 		r = TL_bots_setBotGroupDefaultAdminRights{
+			m.Object(),
+		}
+
+	case CRC_bots_setBotInfo:
+		var flags int32
+		r = TL_bots_setBotInfo{
+			readFlags(m, &flags),
+			m.FlaggedObject(flags, 2),
+			m.String(),
+			m.FlaggedString(flags, 3),
+			m.FlaggedString(flags, 0),
+			m.FlaggedString(flags, 1),
+		}
+
+	case CRC_bots_getBotInfo:
+		var flags int32
+		r = TL_bots_getBotInfo{
+			readFlags(m, &flags),
+			m.FlaggedObject(flags, 0),
+			m.String(),
+		}
+
+	case CRC_bots_reorderUsernames:
+		r = TL_bots_reorderUsernames{
+			m.Object(),
+			m.VectorString(),
+		}
+
+	case CRC_bots_toggleUsername:
+		r = TL_bots_toggleUsername{
+			m.Object(),
+			m.String(),
 			m.Object(),
 		}
 
@@ -40404,31 +45545,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_payments_assignAppStoreTransaction:
-		var flags int32
 		r = TL_payments_assignAppStoreTransaction{
-			readFlags(m, &flags),
-			flags&1 != 0, //flag #0
-			m.String(),
 			m.StringBytes(),
+			m.Object(),
 		}
 
 	case CRC_payments_assignPlayMarketTransaction:
 		r = TL_payments_assignPlayMarketTransaction{
-			m.String(),
-		}
-
-	case CRC_payments_restorePlayMarketReceipt:
-		r = TL_payments_restorePlayMarketReceipt{
-			m.StringBytes(),
+			m.Object(),
+			m.Object(),
 		}
 
 	case CRC_payments_canPurchasePremium:
-		r = TL_payments_canPurchasePremium{}
-
-	case CRC_payments_requestRecurringPayment:
-		r = TL_payments_requestRecurringPayment{
-			m.Object(),
-			m.String(),
+		r = TL_payments_canPurchasePremium{
 			m.Object(),
 		}
 
@@ -40439,6 +45568,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&1 != 0,  //flag #0
 			flags&2 != 0,  //flag #1
 			flags&16 != 0, //flag #4
+			flags&32 != 0, //flag #5
+			flags&64 != 0, //flag #6
 			m.Object(),
 			m.String(),
 			m.String(),
@@ -40465,9 +45596,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_stickers_setStickerSetThumb:
+		var flags int32
 		r = TL_stickers_setStickerSetThumb{
+			readFlags(m, &flags),
 			m.Object(),
-			m.Object(),
+			m.FlaggedObject(flags, 0),
+			m.FlaggedLong(flags, 1),
 		}
 
 	case CRC_stickers_checkShortName:
@@ -40478,6 +45612,27 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_stickers_suggestShortName:
 		r = TL_stickers_suggestShortName{
 			m.String(),
+		}
+
+	case CRC_stickers_changeSticker:
+		var flags int32
+		r = TL_stickers_changeSticker{
+			readFlags(m, &flags),
+			m.Object(),
+			m.FlaggedString(flags, 0),
+			m.FlaggedObject(flags, 1),
+			m.FlaggedString(flags, 2),
+		}
+
+	case CRC_stickers_renameStickerSet:
+		r = TL_stickers_renameStickerSet{
+			m.Object(),
+			m.String(),
+		}
+
+	case CRC_stickers_deleteStickerSet:
+		r = TL_stickers_deleteStickerSet{
+			m.Object(),
 		}
 
 	case CRC_phone_getCallConfig:
@@ -40742,11 +45897,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Vector(),
 		}
 
-	case CRC_folders_deleteFolder:
-		r = TL_folders_deleteFolder{
-			m.Int(),
-		}
-
 	case CRC_stats_getBroadcastStats:
 		var flags int32
 		r = TL_stats_getBroadcastStats{
@@ -40788,6 +45938,72 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&1 != 0, //flag #0
 			m.Object(),
 			m.Int(),
+		}
+
+	case CRC_chatlists_exportChatlistInvite:
+		r = TL_chatlists_exportChatlistInvite{
+			m.Object(),
+			m.String(),
+			m.Vector(),
+		}
+
+	case CRC_chatlists_deleteExportedInvite:
+		r = TL_chatlists_deleteExportedInvite{
+			m.Object(),
+			m.String(),
+		}
+
+	case CRC_chatlists_editExportedInvite:
+		var flags int32
+		r = TL_chatlists_editExportedInvite{
+			readFlags(m, &flags),
+			m.Object(),
+			m.String(),
+			m.FlaggedString(flags, 1),
+			m.FlaggedVector(flags, 2),
+		}
+
+	case CRC_chatlists_getExportedInvites:
+		r = TL_chatlists_getExportedInvites{
+			m.Object(),
+		}
+
+	case CRC_chatlists_checkChatlistInvite:
+		r = TL_chatlists_checkChatlistInvite{
+			m.String(),
+		}
+
+	case CRC_chatlists_joinChatlistInvite:
+		r = TL_chatlists_joinChatlistInvite{
+			m.String(),
+			m.Vector(),
+		}
+
+	case CRC_chatlists_getChatlistUpdates:
+		r = TL_chatlists_getChatlistUpdates{
+			m.Object(),
+		}
+
+	case CRC_chatlists_joinChatlistUpdates:
+		r = TL_chatlists_joinChatlistUpdates{
+			m.Object(),
+			m.Vector(),
+		}
+
+	case CRC_chatlists_hideChatlistUpdates:
+		r = TL_chatlists_hideChatlistUpdates{
+			m.Object(),
+		}
+
+	case CRC_chatlists_getLeaveChatlistSuggestions:
+		r = TL_chatlists_getLeaveChatlistSuggestions{
+			m.Object(),
+		}
+
+	case CRC_chatlists_leaveChatlist:
+		r = TL_chatlists_leaveChatlist{
+			m.Object(),
+			m.Vector(),
 		}
 
 	default:

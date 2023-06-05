@@ -26,14 +26,15 @@ import (
 // Use decodeResponse of inner obj when decoding types like:
 //  invokeWithLayer#da9b0d0d {X:Type} layer:int query:!X = X;
 
+type Flag struct {
+	fieldName string
+	bit       int
+}
+
 type Field struct {
 	name     string
 	typeName string
-	flagBit  int
-}
-
-func (f Field) isFlag() bool {
-	return f.flagBit >= 0
+	flag     *Flag
 }
 
 type Combinator struct {
@@ -44,13 +45,14 @@ type Combinator struct {
 	isFunction bool
 }
 
-func (c Combinator) hasFlags() bool {
+func (c Combinator) getFlagFieldNames() []string {
+	var names []string
 	for _, f := range c.fields {
 		if f.typeName == "#" {
-			return true
+			names = append(names, f.name)
 		}
 	}
-	return false
+	return names
 }
 
 func normalize(s string) string {
@@ -81,7 +83,7 @@ func normalizeName(nameStr string) uint32 {
 	return uint32(nameInt)
 }
 
-func normalizeAttr(s string) string {
+func normalizeFieldName(s string) string {
 	s = strings.Replace(s, "_", " ", -1)
 	s = strings.Title(s)
 	s = strings.Replace(s, " ", "", -1)
@@ -91,28 +93,36 @@ func normalizeAttr(s string) string {
 	return s
 }
 
-func maybeFlagged(_type string, isFlag bool, flagBit int, args ...string) string {
+func maybeFlagged(_type string, flag *Flag, args ...string) string {
 	argsStr := strings.Join(args, ",")
-	if isFlag {
-		return fmt.Sprintf("m.Flagged%s(flags, %d, %s),\n", _type, flagBit, argsStr)
+	if flag != nil {
+		return fmt.Sprintf("m.Flagged%s(%s, %d, %s),\n", _type, flag.fieldName, flag.bit, argsStr)
 	} else {
 		return fmt.Sprintf("m.%s(%s),\n", _type, argsStr)
 	}
 }
 
-func makeField(name, typeName string) Field {
-	flagBit := -1
-	if strings.HasPrefix(typeName, "flags.") { //flags.2?string
-		var err error
-		qPos := strings.Index(typeName, "?")
-		dPos := strings.Index(typeName, ".")
-		flagBit, err = strconv.Atoi(typeName[dPos+1 : qPos])
-		typeName = typeName[qPos+1:]
-		if err != nil {
-			log.Fatalf("parsing %s: %s", typeName, err)
+func makeField(name, typeName string, knownFields []Field) Field {
+	var flag *Flag
+	for _, knownField := range knownFields {
+		if knownField.typeName == "#" {
+			// expecting smth like `flags.2?string`, assuming regular field names have no dots
+			if strings.HasPrefix(typeName, knownField.name+".") {
+				var err error
+				qPos := strings.Index(typeName, "?")
+				dPos := strings.Index(typeName, ".")
+				flagFieldName := typeName[:dPos]
+				flagBit, err := strconv.Atoi(typeName[dPos+1 : qPos])
+				typeName = typeName[qPos+1:]
+				flag = &Flag{fieldName: flagFieldName, bit: flagBit}
+				if err != nil {
+					log.Fatalf("parsing %s: %s", typeName, err)
+				}
+				break
+			}
 		}
 	}
-	return Field{normalize(name), normalize(typeName), flagBit}
+	return Field{normalize(name), normalize(typeName), flag}
 }
 
 var fieldsFixForCrcRegexp = regexp.MustCompile(`([Vv])ector<(.*?)>`)
@@ -141,7 +151,7 @@ func makeCombinatorDescription(id, fieldsStr, typeName string) string {
 	}
 	descr += " = " + typeName
 
-	// for come reason if type is "Vector<subtype>" crc32 will be calculated from "Vector subtype"
+	// for some reason if type is "Vector<subtype>" crc32 will be calculated from "Vector subtype"
 	// and SOME TIMES it is named "vector<subtype>" (with lower "v")
 	descr = fieldsFixForCrcRegexp.ReplaceAllString(descr, "${1}ector $2")
 	return descr
@@ -215,7 +225,7 @@ func parseTLSchema(fpath string) []*Combinator {
 				log.Fatalf("line %d: wrong field: %s", lineNum+1, fieldStr)
 			}
 			name, typeName := match[1], match[2]
-			fields = append(fields, makeField(name, typeName))
+			fields = append(fields, makeField(name, typeName, fields))
 		}
 
 		combinators = append(combinators, &Combinator{id, name, fields, typeName, isFunction})
@@ -266,7 +276,7 @@ import (
 	for _, c := range combinators {
 		write("type TL_%s struct {\n", c.id)
 		for _, t := range c.fields {
-			write("%s\t", normalizeAttr(t.name))
+			write("%s\t", normalizeFieldName(t.name))
 			switch t.typeName {
 			case "true": //flags only
 				write("bool")
@@ -303,7 +313,8 @@ import (
 					write("TL // %s", t.typeName)
 				}
 			}
-			if t.isFlag() {
+			if t.flag != nil {
+				// write(" //%s.%d", t.flag.fieldName, t.flag.Bit) TODO
 				write(" //flag")
 			}
 			write("\n")
@@ -317,47 +328,47 @@ import (
 		write("x := NewEncodeBuf(512)\n")
 		write("x.UInt(CRC_%s)\n", c.id)
 		for _, t := range c.fields {
-			attrName := normalizeAttr(t.name)
-			if t.isFlag() && t.typeName != "true" {
-				write("if e.Flags & %d != 0 {\n", 1<<uint(t.flagBit))
+			fieldName := normalizeFieldName(t.name)
+			if t.flag != nil && t.typeName != "true" {
+				write("if e.%s & %d != 0 {\n", normalizeFieldName(t.flag.fieldName), 1<<uint(t.flag.bit))
 			}
 			switch t.typeName {
 			case "true": //flags only
-				write("//flag %s\n", attrName)
+				write(" //flag %s\n", fieldName) //TODO
 			case "int", "#":
-				write("x.Int(e.%s)\n", attrName)
+				write("x.Int(e.%s)\n", fieldName)
 			case "long":
-				write("x.Long(e.%s)\n", attrName)
+				write("x.Long(e.%s)\n", fieldName)
 			case "int128":
-				write("x.Bytes(e.%s)\n", attrName)
+				write("x.Bytes(e.%s)\n", fieldName)
 			case "int256":
-				write("x.Bytes(e.%s)\n", attrName)
+				write("x.Bytes(e.%s)\n", fieldName)
 			case "string":
-				write("x.String(e.%s)\n", attrName)
+				write("x.String(e.%s)\n", fieldName)
 			case "double":
-				write("x.Double(e.%s)\n", attrName)
+				write("x.Double(e.%s)\n", fieldName)
 			case "bytes":
-				write("x.StringBytes(e.%s)\n", attrName)
+				write("x.StringBytes(e.%s)\n", fieldName)
 			case "Vector<int>":
-				write("x.VectorInt(e.%s)\n", attrName)
+				write("x.VectorInt(e.%s)\n", fieldName)
 			case "Vector<long>":
-				write("x.VectorLong(e.%s)\n", attrName)
+				write("x.VectorLong(e.%s)\n", fieldName)
 			case "Vector<string>":
-				write("x.VectorString(e.%s)\n", attrName)
+				write("x.VectorString(e.%s)\n", fieldName)
 			case "Vector<double>":
-				write("x.VectorDouble(e.%s)\n", attrName)
+				write("x.VectorDouble(e.%s)\n", fieldName)
 			case "!X":
-				write("x.Bytes(e.%s.encode())\n", attrName)
+				write("x.Bytes(e.%s.encode())\n", fieldName)
 			default:
 				var inner string
 				n, _ := fmt.Sscanf(t.typeName, "Vector<%s", &inner)
 				if n == 1 {
-					write("x.Vector(e.%s)\n", attrName)
+					write("x.Vector(e.%s)\n", fieldName)
 				} else {
-					write("x.Bytes(e.%s.encode())\n", attrName)
+					write("x.Bytes(e.%s.encode())\n", fieldName)
 				}
 			}
-			if t.isFlag() && t.typeName != "true" {
+			if t.flag != nil && t.typeName != "true" {
 				write("}\n")
 			}
 		}
@@ -396,48 +407,48 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	for _, c := range combinators {
 		write("case CRC_%s:\n", c.id)
-		if c.hasFlags() {
-			write("var flags int32\n")
+		flagNames := c.getFlagFieldNames()
+		if len(flagNames) > 0 {
+			write("var %s int32\n", strings.Join(flagNames, ","))
 		}
 		write("r = TL_%s{\n", c.id)
 		for _, t := range c.fields {
-			isFlag := t.isFlag()
 			switch t.typeName {
 			case "true": //flags only
-				write("flags & %d != 0, //flag #%d\n", 1<<uint(t.flagBit), t.flagBit)
+				write("%s & %d != 0, //flag #%d\n", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.bit)
 			case "#":
-				write("readFlags(m, &flags),\n")
+				write("readFlags(m, &%s),\n", t.name)
 			case "int":
-				write(maybeFlagged("Int", isFlag, t.flagBit))
+				write(maybeFlagged("Int", t.flag))
 			case "long":
-				write(maybeFlagged("Long", isFlag, t.flagBit))
+				write(maybeFlagged("Long", t.flag))
 			case "int128":
-				write(maybeFlagged("Bytes", isFlag, t.flagBit, "16"))
+				write(maybeFlagged("Bytes", t.flag, "16"))
 			case "int256":
-				write(maybeFlagged("Bytes", isFlag, t.flagBit, "32"))
+				write(maybeFlagged("Bytes", t.flag, "32"))
 			case "string":
-				write(maybeFlagged("String", isFlag, t.flagBit))
+				write(maybeFlagged("String", t.flag))
 			case "double":
-				write(maybeFlagged("Double", isFlag, t.flagBit))
+				write(maybeFlagged("Double", t.flag))
 			case "bytes":
-				write(maybeFlagged("StringBytes", isFlag, t.flagBit))
+				write(maybeFlagged("StringBytes", t.flag))
 			case "Vector<int>":
-				write(maybeFlagged("VectorInt", isFlag, t.flagBit))
+				write(maybeFlagged("VectorInt", t.flag))
 			case "Vector<long>":
-				write(maybeFlagged("VectorLong", isFlag, t.flagBit))
+				write(maybeFlagged("VectorLong", t.flag))
 			case "Vector<string>":
-				write(maybeFlagged("VectorString", isFlag, t.flagBit))
+				write(maybeFlagged("VectorString", t.flag))
 			case "Vector<double>":
-				write(maybeFlagged("VectorDouble", isFlag, t.flagBit))
+				write(maybeFlagged("VectorDouble", t.flag))
 			case "!X":
-				write(maybeFlagged("Object", isFlag, t.flagBit))
+				write(maybeFlagged("Object", t.flag))
 			default:
 				var inner string
 				n, _ := fmt.Sscanf(t.typeName, "Vector<%s", &inner)
 				if n == 1 {
-					write(maybeFlagged("Vector", isFlag, t.flagBit))
+					write(maybeFlagged("Vector", t.flag))
 				} else {
-					write(maybeFlagged("Object", isFlag, t.flagBit))
+					write(maybeFlagged("Object", t.flag))
 				}
 			}
 		}

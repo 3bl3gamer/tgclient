@@ -17,7 +17,7 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-//go:generate go run scheme/generate_tl_schema.go 143 scheme/tl-schema-143.tl tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 158 scheme/tl-schema-158.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 const ROUTINES_COUNT = 5
@@ -674,7 +674,13 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	}
 
 	//if authSentCode.Phone_registered
-	x := m.SendSync(TL_auth_signIn{phonenumber, authSentCode.PhoneCodeHash, code})
+	x := m.SendSync(TL_auth_signIn{
+		Flags:             1, // PhoneCode
+		PhoneNumber:       phonenumber,
+		PhoneCodeHash:     authSentCode.PhoneCodeHash,
+		PhoneCode:         code,
+		EmailVerification: nil,
+	})
 	if IsError(x, "SESSION_PASSWORD_NEEDED") {
 		x = m.SendSync(TL_account_getPassword{})
 		accPasswd, ok := x.(TL_account_password)
