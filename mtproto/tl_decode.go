@@ -9,7 +9,7 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/ansel1/merry"
+	"github.com/ansel1/merry/v2"
 )
 
 const ErrorBufStackKey = "mtproto_decode_err_buf_stack"
@@ -437,7 +437,7 @@ func (d *DecodeBuf) pushToErrBufStack(initialOffset int, constructor uint32) {
 		startOffset, startOffset, d.size, d.size,
 		hex.Dump(d.buf[startOffset:endOffset]), ellipsis,
 	)
-	d.err = merry.WithValue(d.err, ErrorBufStackKey, bufStack)
+	d.err = merry.Wrap(d.err, merry.WithValue(ErrorBufStackKey, bufStack))
 }
 
 func toBool(x TL) bool {
@@ -457,9 +457,11 @@ func big2str(val *big.Int) string {
 // then decodes remaining data by DecodeBuf or RLReq.decodeResponse().
 // This all could be done in DecodeBuf, but...
 // Some TL methods return bare vectors:
-//   account.getWallPapers#c04cfac2 = Vector<WallPaper>
-//   messages.getMessagesViews#c4c8a55d ... = Vector<int>
-//   photos.deletePhotos#87cf7f2f ... = Vector<long>
+//
+//	account.getWallPapers#c04cfac2 = Vector<WallPaper>
+//	messages.getMessagesViews#c4c8a55d ... = Vector<int>
+//	photos.deletePhotos#87cf7f2f ... = Vector<long>
+//
 // All this vectors will be received with same constructor ID: 0x1cb5c415.
 // To find out correct vector type, we need no find a request for this response.
 // Request message ID is in `rpc_result.reqMsgID`. So we have to decode everything

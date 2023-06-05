@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/ansel1/merry"
+	"github.com/ansel1/merry/v2"
 )
 
 func (m *MTProto) justSend(msg TLReq) error {

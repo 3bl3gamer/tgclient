@@ -262,7 +262,7 @@ func main() {
 	// constants
 	write(`package mtproto
 import (
-	"github.com/ansel1/merry"
+	"github.com/ansel1/merry/v2"
 )
 `)
 	write("const (\n")

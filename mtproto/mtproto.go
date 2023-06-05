@@ -2,6 +2,7 @@ package mtproto
 
 import (
 	cryptoRand "crypto/rand"
+	"errors"
 	"fmt"
 	"math/rand"
 	"net"
@@ -11,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ansel1/merry"
+	"github.com/ansel1/merry/v2"
 	"github.com/fatih/color"
 	"golang.org/x/net/proxy"
 	"golang.org/x/sync/semaphore"
@@ -184,7 +185,7 @@ func (m *MTProto) InitSession(sessEncrIsReady bool) error {
 	if m.session == nil {
 		m.session = &SessionInfo{}
 		err := m.sessionStore.Load(m.session)
-		if merry.Is(err, ErrNoSessionData) { //no data
+		if errors.Is(err, ErrNoSessionData) { //no data
 			m.session.Addr = "149.154.167.50:443" //"149.154.167.40"
 			m.encryptionReady = false
 		} else if err == nil { //got saved session

@@ -1,12 +1,13 @@
 package mtproto
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/ansel1/merry"
+	"github.com/ansel1/merry/v2"
 )
 
 // https://core.telegram.org/api/errors
@@ -50,5 +51,5 @@ func WrongRespError(obj TL) error {
 	if _, ok := obj.(TL_rpc_error); ok {
 		_type = "error"
 	}
-	return merry.Errorf(UnexpectedTL(_type, obj)).WithStackSkipping(1)
+	return merry.WrapSkipping(errors.New(UnexpectedTL(_type, obj)), 1)
 }

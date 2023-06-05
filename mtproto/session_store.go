@@ -6,10 +6,10 @@ import (
 	"io/fs"
 	"os"
 
-	"github.com/ansel1/merry"
+	"github.com/ansel1/merry/v2"
 )
 
-var ErrNoSessionData = merry.New("no session data")
+var ErrNoSessionData = merry.Sentinel("no session data")
 
 type SessionStore interface {
 	Save(*SessionInfo) error
@@ -19,7 +19,7 @@ type SessionStore interface {
 type SessNoopStore struct{}
 
 func (s *SessNoopStore) Save(sess *SessionInfo) error { return nil }
-func (s *SessNoopStore) Load(sess *SessionInfo) error { return ErrNoSessionData.Here() }
+func (s *SessNoopStore) Load(sess *SessionInfo) error { return merry.Wrap(ErrNoSessionData) }
 
 type SessFileStore struct {
 	FPath string
@@ -50,7 +50,7 @@ func (s *SessFileStore) Save(sess *SessionInfo) (err error) {
 func (s *SessFileStore) Load(sess *SessionInfo) error {
 	f, err := os.Open(s.FPath)
 	if errors.Is(err, fs.ErrNotExist) {
-		return ErrNoSessionData.Here().WithCause(err)
+		return merry.Wrap(ErrNoSessionData, merry.WithCause(err))
 	}
 	if err != nil {
 		return merry.Wrap(err)
@@ -79,7 +79,7 @@ func (s *SessFileStoreExt) Load(sess *SessionInfo) error {
 		return merry.Wrap(err)
 	}
 	if s.IgnoreUnreadable && err != nil {
-		return ErrNoSessionData.Here()
+		return merry.Wrap(ErrNoSessionData)
 	}
 	return merry.Wrap(err)
 }

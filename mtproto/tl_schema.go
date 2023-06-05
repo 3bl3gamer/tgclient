@@ -1,7 +1,7 @@
 package mtproto
 
 import (
-	"github.com/ansel1/merry"
+	"github.com/ansel1/merry/v2"
 )
 
 const (
