@@ -21,8 +21,6 @@ import (
 
 // TODO:
 // Pq Ids
-// Silent  bool //flag (add flag number)
-// Channel TL   // InputChannel (add possible types)
 // Use decodeResponse of inner obj when decoding types like:
 //  invokeWithLayer#da9b0d0d {X:Type} layer:int query:!X = X;
 
@@ -339,16 +337,14 @@ import (
 				}
 
 				write("%sTL", strings.Repeat("[]", vecNesting))
-				write(" // %s", innerTypeName)
-				// fieldComment += innerTypeName + ": " + strings.Join(constructorIDs, " | ") TODO
+				fieldComment += innerTypeName + ": " + strings.Join(constructorIDs, " | ")
 			}
 			if t.flag != nil {
-				write(" //flag")
-				// fieldComment = fmt.Sprintf("(%s.%d) %s", t.flag.fieldName, t.flag.bit, fieldComment) TODO
+				fieldComment = fmt.Sprintf("(%s.%d) %s", t.flag.fieldName, t.flag.bit, fieldComment)
 			}
 
 			if fieldComment != "" {
-				// write("// %s", strings.TrimSpace(fieldComment)) TODO
+				write("// %s", strings.TrimSpace(fieldComment))
 			}
 			write("\n")
 		}
@@ -367,8 +363,7 @@ import (
 			}
 			switch t.typeName {
 			case "true": //flags only
-				write(" //flag %s\n", fieldName)
-				// write("// %s.%d %s\n", t.flag.fieldName, t.flag.bit, fieldName) TODO
+				write("// %s.%d %s\n", t.flag.fieldName, t.flag.bit, fieldName)
 			case "int", "#":
 				write("x.Int(e.%s)\n", fieldName)
 			case "long":
@@ -452,8 +447,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		for _, t := range c.fields {
 			switch t.typeName {
 			case "true": //flags only
-				write("%s & %d != 0, //flag #%d\n", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.bit)
-				// write("%s & %d != 0, //%s.%d\n", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.fieldName, t.flag.bit) TODO
+				write("%s & %d != 0, //%s.%d\n", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.fieldName, t.flag.bit)
 			case "#":
 				write("readFlags(m, &%s),\n", t.name)
 			case "int":
