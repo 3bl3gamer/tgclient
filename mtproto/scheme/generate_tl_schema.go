@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-// https://github.com/telegramdesktop/tdesktop/tree/dev/Telegram/Resources/tl
+// https://github.com/telegramdesktop/tdesktop/tree/dev/Telegram/Resources/tl (merge two files into one separated by "---types---" line)
 // https://github.com/danog/MadelineProto/tree/master/src/danog/MadelineProto
 // https://github.com/tdlib/td/tree/master/td/generate/scheme
 
@@ -45,7 +45,7 @@ type Combinator struct {
 	isFunction bool
 }
 
-func (c Combinator) getFlagFieldNames() []string {
+func (c Combinator) flagFieldNames() []string {
 	var names []string
 	for _, f := range c.fields {
 		if f.typeName == "#" {
@@ -53,6 +53,29 @@ func (c Combinator) getFlagFieldNames() []string {
 		}
 	}
 	return names
+}
+
+func (c Combinator) structName() string {
+	return "TL_" + c.id
+}
+
+func findConstructorIDs(combinators []*Combinator, fieldType string) []string {
+	var constructorIDs []string
+	for _, comb := range combinators {
+		if !comb.isFunction && comb.typeName == fieldType {
+			constructorIDs = append(constructorIDs, comb.structName())
+		}
+	}
+	return constructorIDs
+}
+
+func parseVectorType(typeName string) (string, int, bool) {
+	nesting := 0
+	for strings.HasPrefix(typeName, "Vector<") || strings.HasPrefix(typeName, "vector<") {
+		typeName = typeName[len("Vector<") : len(typeName)-len(">")]
+		nesting += 1
+	}
+	return typeName, nesting, nesting > 0
 }
 
 func normalize(s string) string {
@@ -274,8 +297,9 @@ import (
 
 	// type structs
 	for _, c := range combinators {
-		write("type TL_%s struct {\n", c.id)
+		write("type %s struct {\n", c.structName())
 		for _, t := range c.fields {
+			fieldComment := ""
 			write("%s\t", normalizeFieldName(t.name))
 			switch t.typeName {
 			case "true": //flags only
@@ -302,20 +326,29 @@ import (
 				write("[]string")
 			case "Vector<double>":
 				write("[]float64")
+			case "Vector<bytes>":
+				write("[][]byte")
 			case "!X":
 				write("TL")
 			default:
-				var inner string
-				n, _ := fmt.Sscanf(t.typeName, "Vector<%s", &inner)
-				if n == 1 {
-					write("[]TL // %s", inner[:len(inner)-1])
-				} else {
-					write("TL // %s", t.typeName)
+				innerTypeName, vecNesting, _ := parseVectorType(t.typeName)
+
+				constructorIDs := findConstructorIDs(combinators, innerTypeName)
+				if len(constructorIDs) == 0 {
+					log.Printf("WARN: no constructors for type %s in %s { %s:%s }", innerTypeName, c.id, t.name, t.typeName)
 				}
+
+				write("%sTL", strings.Repeat("[]", vecNesting))
+				write(" // %s", innerTypeName)
+				// fieldComment += innerTypeName + ": " + strings.Join(constructorIDs, " | ") TODO
 			}
 			if t.flag != nil {
-				// write(" //%s.%d", t.flag.fieldName, t.flag.Bit) TODO
 				write(" //flag")
+				// fieldComment = fmt.Sprintf("(%s.%d) %s", t.flag.fieldName, t.flag.bit, fieldComment) TODO
+			}
+
+			if fieldComment != "" {
+				// write("// %s", strings.TrimSpace(fieldComment)) TODO
 			}
 			write("\n")
 		}
@@ -334,7 +367,8 @@ import (
 			}
 			switch t.typeName {
 			case "true": //flags only
-				write(" //flag %s\n", fieldName) //TODO
+				write(" //flag %s\n", fieldName)
+				// write("// %s.%d %s\n", t.flag.fieldName, t.flag.bit, fieldName) TODO
 			case "int", "#":
 				write("x.Int(e.%s)\n", fieldName)
 			case "long":
@@ -357,13 +391,16 @@ import (
 				write("x.VectorString(e.%s)\n", fieldName)
 			case "Vector<double>":
 				write("x.VectorDouble(e.%s)\n", fieldName)
+			case "Vector<bytes>":
+				write("x.VectorBytes(e.%s)\n", fieldName)
 			case "!X":
 				write("x.Bytes(e.%s.encode())\n", fieldName)
 			default:
-				var inner string
-				n, _ := fmt.Sscanf(t.typeName, "Vector<%s", &inner)
-				if n == 1 {
+				_, vecNesting, _ := parseVectorType(t.typeName)
+				if vecNesting == 1 {
 					write("x.Vector(e.%s)\n", fieldName)
+				} else if vecNesting == 2 {
+					write("x.Vector2d(e.%s)\n", fieldName)
 				} else {
 					write("x.Bytes(e.%s.encode())\n", fieldName)
 				}
@@ -402,12 +439,12 @@ func readFlags(m *DecodeBuf, flagsPtr *int32) int32 {
 }
 
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
-	initialOffset := m.off
+	objStartOffset := m.off - 4 //4 bytes of constructor name have been already read
 	switch constructor {`)
 
 	for _, c := range combinators {
 		write("case CRC_%s:\n", c.id)
-		flagNames := c.getFlagFieldNames()
+		flagNames := c.flagFieldNames()
 		if len(flagNames) > 0 {
 			write("var %s int32\n", strings.Join(flagNames, ","))
 		}
@@ -416,6 +453,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			switch t.typeName {
 			case "true": //flags only
 				write("%s & %d != 0, //flag #%d\n", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.bit)
+				// write("%s & %d != 0, //%s.%d\n", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.fieldName, t.flag.bit) TODO
 			case "#":
 				write("readFlags(m, &%s),\n", t.name)
 			case "int":
@@ -440,13 +478,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 				write(maybeFlagged("VectorString", t.flag))
 			case "Vector<double>":
 				write(maybeFlagged("VectorDouble", t.flag))
+			case "Vector<bytes>":
+				write(maybeFlagged("VectorBytes", t.flag))
 			case "!X":
 				write(maybeFlagged("Object", t.flag))
 			default:
-				var inner string
-				n, _ := fmt.Sscanf(t.typeName, "Vector<%s", &inner)
-				if n == 1 {
+				_, vecNesting, _ := parseVectorType(t.typeName)
+				if vecNesting == 1 {
 					write(maybeFlagged("Vector", t.flag))
+				} else if vecNesting == 2 {
+					write(maybeFlagged("Vector2d", t.flag))
 				} else {
 					write(maybeFlagged("Object", t.flag))
 				}
@@ -463,7 +504,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	}
 
 	if m.err != nil {
-		m.pushToErrBufStack(initialOffset, constructor)
+		m.pushToErrBufStack(objStartOffset, constructor)
 		return nil
 	}
 

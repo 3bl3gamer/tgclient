@@ -43,6 +43,20 @@ func (m *DecodeBuf) SeekBack(n int) {
 	}
 }
 
+func (m *DecodeBuf) Bool() bool {
+	constructor := m.UInt()
+	if m.err != nil {
+		return false
+	}
+	switch constructor {
+	case CRC_boolFalse:
+		return false
+	case CRC_boolTrue:
+		return true
+	}
+	return false
+}
+
 func (m *DecodeBuf) Long() int64 {
 	if m.err != nil {
 		return 0
@@ -227,20 +241,8 @@ func (m *DecodeBuf) FlaggedBigInt(flags, num int32) *big.Int {
 }
 
 func (m *DecodeBuf) VectorInt() []int32 {
-	constructor := m.UInt()
+	size := m.vectorHeader("DecodeVectorInt")
 	if m.err != nil {
-		return nil
-	}
-	if constructor != CRC_vector {
-		m.err = merry.Errorf("DecodeVectorInt: wrong constructor (0x%08x)", constructor)
-		return nil
-	}
-	size := m.Int()
-	if m.err != nil {
-		return nil
-	}
-	if size < 0 {
-		m.err = merry.Errorf("DecodeVectorInt: negative size: %d", size)
 		return nil
 	}
 	x := make([]int32, size)
@@ -265,20 +267,8 @@ func (m *DecodeBuf) FlaggedVectorInt(flags, num int32) []int32 {
 }
 
 func (m *DecodeBuf) VectorLong() []int64 {
-	constructor := m.UInt()
+	size := m.vectorHeader("DecodeVectorLong")
 	if m.err != nil {
-		return nil
-	}
-	if constructor != CRC_vector {
-		m.err = merry.Errorf("DecodeVectorLong: wrong constructor (0x%08x)", constructor)
-		return nil
-	}
-	size := m.Int()
-	if m.err != nil {
-		return nil
-	}
-	if size < 0 {
-		m.err = merry.Errorf("DecodeVectorLong: negative size: %d", size)
 		return nil
 	}
 	x := make([]int64, size)
@@ -303,20 +293,8 @@ func (m *DecodeBuf) FlaggedVectorLong(flags, num int32) []int64 {
 }
 
 func (m *DecodeBuf) VectorString() []string {
-	constructor := m.UInt()
+	size := m.vectorHeader("DecodeVectorString")
 	if m.err != nil {
-		return nil
-	}
-	if constructor != CRC_vector {
-		m.err = merry.Errorf("DecodeVectorString: wrong constructor (0x%08x)", constructor)
-		return nil
-	}
-	size := m.Int()
-	if m.err != nil {
-		return nil
-	}
-	if size < 0 {
-		m.err = merry.Errorf("DecodeVectorString: negative size: %d", size)
 		return nil
 	}
 	x := make([]string, size)
@@ -340,35 +318,35 @@ func (m *DecodeBuf) FlaggedVectorString(flags, num int32) []string {
 	return m.VectorString()
 }
 
-func (m *DecodeBuf) Bool() bool {
-	constructor := m.UInt()
+func (m *DecodeBuf) VectorBytes() [][]byte {
+	size := m.vectorHeader("DecodeVectorBytes")
 	if m.err != nil {
-		return false
+		return nil
 	}
-	switch constructor {
-	case CRC_boolFalse:
-		return false
-	case CRC_boolTrue:
-		return true
+	x := make([][]byte, size)
+	i := int32(0)
+	for i < size {
+		y := m.StringBytes()
+		if m.err != nil {
+			return nil
+		}
+		x[i] = y
+		i++
 	}
-	return false
+	return x
+}
+
+func (m *DecodeBuf) FlaggedVectorBytes(flags, num int32) [][]byte {
+	bit := int32(1 << uint(num))
+	if flags&bit == 0 {
+		return nil
+	}
+	return m.VectorBytes()
 }
 
 func (m *DecodeBuf) Vector() []TL {
-	constructor := m.UInt()
+	size := m.vectorHeader("DecodeVector")
 	if m.err != nil {
-		return nil
-	}
-	if constructor != CRC_vector {
-		m.err = merry.Errorf("DecodeVector: wrong constructor (0x%08x)", constructor)
-		return nil
-	}
-	size := m.Int()
-	if m.err != nil {
-		return nil
-	}
-	if size < 0 {
-		m.err = merry.Errorf("DecodeVector: negative size: %d", size)
 		return nil
 	}
 	x := make([]TL, size)
@@ -392,6 +370,32 @@ func (m *DecodeBuf) FlaggedVector(flags, num int32) []TL {
 	return m.Vector()
 }
 
+func (m *DecodeBuf) Vector2d() [][]TL {
+	size := m.vectorHeader("DecodeVector2d")
+	if m.err != nil {
+		return nil
+	}
+	x := make([][]TL, size)
+	i := int32(0)
+	for i < size {
+		y := m.Vector()
+		if m.err != nil {
+			return nil
+		}
+		x[i] = y
+		i++
+	}
+	return x
+}
+
+func (m *DecodeBuf) FlaggedVector2d(flags, num int32) [][]TL {
+	bit := int32(1 << uint(num))
+	if flags&bit == 0 {
+		return nil
+	}
+	return m.Vector2d()
+}
+
 func (m *DecodeBuf) Object() TL {
 	constructor := m.UInt()
 	if m.err != nil {
@@ -408,18 +412,42 @@ func (m *DecodeBuf) FlaggedObject(flags, num int32) TL {
 	return m.Object()
 }
 
+func (m *DecodeBuf) vectorHeader(errLabel string) int32 {
+	constructor := m.UInt()
+	if m.err != nil {
+		return 0
+	}
+	if constructor != CRC_vector {
+		m.err = merry.Errorf("%s: wrong constructor (0x%08x)", errLabel, constructor)
+		return 0
+	}
+	size := m.Int()
+	if m.err != nil {
+		return 0
+	}
+	if size < 0 {
+		m.err = merry.Errorf("%s: negative size: %d", errLabel, size)
+		return 0
+	}
+	return size
+}
+
 func (d *DecodeBuf) dump() {
 	fmt.Println(hex.Dump(d.buf[d.off:d.size]))
 }
 
-func (d *DecodeBuf) pushToErrBufStack(initialOffset int, constructor uint32) {
+func (d *DecodeBuf) pushToErrBufStack(objStartOffset int, constructor uint32) {
 	if d.err == nil {
 		return
 	}
+
+	constructorBytes := make([]byte, 4)
+	binary.LittleEndian.PutUint32(constructorBytes, constructor)
+
 	bufStack, _ := merry.Value(d.err, ErrorBufStackKey).(string)
 	startOffset := 0
-	if initialOffset-64 > 0 {
-		startOffset = initialOffset - 32
+	if objStartOffset-64 > 0 {
+		startOffset = objStartOffset - 32
 	}
 	endOffset := d.size
 	if d.off+64 < endOffset {
@@ -429,12 +457,21 @@ func (d *DecodeBuf) pushToErrBufStack(initialOffset int, constructor uint32) {
 	if endOffset < d.size {
 		ellipsis = "... ... ...\n"
 	}
+
 	bufStack += fmt.Sprintf(
-		"\nconstructor:        %08x\nobj decoded from:   %d 0x%x (absolute: %d 0x%x)\noffset after error: %d 0x%x (absolute: %d 0x%x)\nthis slice offset:  %d 0x%x\nfull buffer size:   %d 0x%x\n%s%s\n",
-		constructor,
-		initialOffset-startOffset, initialOffset-startOffset, initialOffset, initialOffset,
+		`
+constructor:        %08x (%02x %02x %02x %02x)
+obj decoded from:   %d 0x%x (absolute: %d 0x%x)
+offset after error: %d 0x%x (absolute: %d 0x%x)
+this slice offset:  %d 0x%x
+full buffer size:   %d 0x%x
+%s%s
+`,
+		constructor, constructorBytes[0], constructorBytes[1], constructorBytes[2], constructorBytes[3],
+		objStartOffset-startOffset, objStartOffset-startOffset, objStartOffset, objStartOffset,
 		d.off-startOffset, d.off-startOffset, d.off, d.off,
-		startOffset, startOffset, d.size, d.size,
+		startOffset, startOffset,
+		d.size, d.size,
 		hex.Dump(d.buf[startOffset:endOffset]), ellipsis,
 	)
 	d.err = merry.Wrap(d.err, merry.WithValue(ErrorBufStackKey, bufStack))

@@ -154,6 +154,8 @@ destroy_session#e7512126 session_id:long = DestroySessionRes;
 ///////// Main application API
 ///////////////////////////////
 
+---types---
+
 boolFalse#bc799737 = Bool;
 boolTrue#997275b5 = Bool;
 
