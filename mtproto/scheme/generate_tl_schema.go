@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-// https://github.com/telegramdesktop/tdesktop/tree/dev/Telegram/Resources/tl (merge two files into one separated by "---types---" line)
+// https://github.com/telegramdesktop/tdesktop/tree/dev/Telegram/SourceFiles/mtproto/scheme (merge two files into one separated by "---types---" line)
 // https://github.com/danog/MadelineProto/tree/master/src/danog/MadelineProto
 // https://github.com/tdlib/td/tree/master/td/generate/scheme
 

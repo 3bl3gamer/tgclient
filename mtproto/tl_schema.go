@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	TL_Layer                                                              = 158
+	TL_Layer                                                              = 166
 	CRC_resPQ                                                             = 0x05162463
 	CRC_p_q_inner_data                                                    = 0x83c95aec
 	CRC_p_q_inner_data_dc                                                 = 0xa9f55f95
@@ -99,6 +99,8 @@ const (
 	CRC_inputMediaGeoLive                                                 = 0x971fa843
 	CRC_inputMediaPoll                                                    = 0x0f94e5f1
 	CRC_inputMediaDice                                                    = 0xe66fbf7b
+	CRC_inputMediaStory                                                   = 0x89fdd778
+	CRC_inputMediaWebPage                                                 = 0xc21b8849
 	CRC_inputChatPhotoEmpty                                               = 0x1ca48f57
 	CRC_inputChatUploadedPhoto                                            = 0xbdcdaec0
 	CRC_inputChatPhoto                                                    = 0x8953ad37
@@ -130,7 +132,7 @@ const (
 	CRC_storage_fileMp4                                                   = 0xb3cea0e4
 	CRC_storage_fileWebp                                                  = 0x1081464c
 	CRC_userEmpty                                                         = 0xd3bc4b7a
-	CRC_user                                                              = 0x8f97c628
+	CRC_user                                                              = 0xeb602f25
 	CRC_userProfilePhotoEmpty                                             = 0x4f11bae1
 	CRC_userProfilePhoto                                                  = 0x82d1f706
 	CRC_userStatusEmpty                                                   = 0x09d05049
@@ -142,10 +144,10 @@ const (
 	CRC_chatEmpty                                                         = 0x29562865
 	CRC_chat                                                              = 0x41cbf256
 	CRC_chatForbidden                                                     = 0x6592a1a7
-	CRC_channel                                                           = 0x83259464
+	CRC_channel                                                           = 0x1981ea7e
 	CRC_channelForbidden                                                  = 0x17d493d5
 	CRC_chatFull                                                          = 0xc9d31138
-	CRC_channelFull                                                       = 0xf2355507
+	CRC_channelFull                                                       = 0x723027bd
 	CRC_chatParticipant                                                   = 0xc02d4007
 	CRC_chatParticipantCreator                                            = 0xe46bcee4
 	CRC_chatParticipantAdmin                                              = 0xa0933f5b
@@ -161,14 +163,16 @@ const (
 	CRC_messageMediaGeo                                                   = 0x56e0d474
 	CRC_messageMediaContact                                               = 0x70322949
 	CRC_messageMediaUnsupported                                           = 0x9f84f49e
-	CRC_messageMediaDocument                                              = 0x9cb070d7
-	CRC_messageMediaWebPage                                               = 0xa32dd600
+	CRC_messageMediaDocument                                              = 0x4cf4d72d
+	CRC_messageMediaWebPage                                               = 0xddf10c3b
 	CRC_messageMediaVenue                                                 = 0x2ec0533f
 	CRC_messageMediaGame                                                  = 0xfdb19008
 	CRC_messageMediaInvoice                                               = 0xf6a548d3
 	CRC_messageMediaGeoLive                                               = 0xb940c666
 	CRC_messageMediaPoll                                                  = 0x4bd6e798
 	CRC_messageMediaDice                                                  = 0x3f7ee58b
+	CRC_messageMediaStory                                                 = 0x68cb6283
+	CRC_messageMediaGiveaway                                              = 0x58260664
 	CRC_messageActionEmpty                                                = 0xb6aef7b0
 	CRC_messageActionChatCreate                                           = 0xbd47cbad
 	CRC_messageActionChatEditTitle                                        = 0xb5a1ce5a
@@ -208,6 +212,8 @@ const (
 	CRC_messageActionRequestedPeer                                        = 0xfe77345d
 	CRC_messageActionSetChatWallPaper                                     = 0xbc44a927
 	CRC_messageActionSetSameChatWallPaper                                 = 0xc0787d6d
+	CRC_messageActionGiftCode                                             = 0xd2cfdb0e
+	CRC_messageActionGiveawayLaunch                                       = 0x332ba9ed
 	CRC_dialog                                                            = 0xd58a08c6
 	CRC_dialogFolder                                                      = 0x71bd134c
 	CRC_photoEmpty                                                        = 0x2331b22d
@@ -230,8 +236,8 @@ const (
 	CRC_inputNotifyChats                                                  = 0x4a95e84e
 	CRC_inputNotifyBroadcasts                                             = 0xb1db7c7e
 	CRC_inputNotifyForumTopic                                             = 0x5c467992
-	CRC_inputPeerNotifySettings                                           = 0xdf1f002b
-	CRC_peerNotifySettings                                                = 0xa83b0426
+	CRC_inputPeerNotifySettings                                           = 0xcacb6ae2
+	CRC_peerNotifySettings                                                = 0x99622c0c
 	CRC_peerSettings                                                      = 0xa518110d
 	CRC_wallPaper                                                         = 0xa437c3ed
 	CRC_wallPaperNoFile                                                   = 0xe0804116
@@ -245,7 +251,7 @@ const (
 	CRC_inputReportReasonFake                                             = 0xf5ddd6e7
 	CRC_inputReportReasonIllegalDrugs                                     = 0x0a8eb2be
 	CRC_inputReportReasonPersonalDetails                                  = 0x9ec7863d
-	CRC_userFull                                                          = 0x93eadb53
+	CRC_userFull                                                          = 0xb9b12c6c
 	CRC_contact                                                           = 0x145ade0b
 	CRC_importedContact                                                   = 0xc13e3c50
 	CRC_contactStatus                                                     = 0x16d9703b
@@ -290,6 +296,7 @@ const (
 	CRC_updateChatParticipants                                            = 0x07761198
 	CRC_updateUserStatus                                                  = 0xe5bdf8de
 	CRC_updateUserName                                                    = 0xa7848924
+	CRC_updateNewAuthorization                                            = 0x8951abef
 	CRC_updateNewEncryptedMessage                                         = 0x12bcbd9a
 	CRC_updateEncryptedChatTyping                                         = 0x1710f156
 	CRC_updateEncryption                                                  = 0xb4a2e88d
@@ -304,7 +311,7 @@ const (
 	CRC_updateReadHistoryInbox                                            = 0x9c974fdf
 	CRC_updateReadHistoryOutbox                                           = 0x2f2f21bf
 	CRC_updateWebPage                                                     = 0x7f891213
-	CRC_updateReadMessagesContents                                        = 0x68c13933
+	CRC_updateReadMessagesContents                                        = 0xf8227181
 	CRC_updateChannelTooLong                                              = 0x108d941f
 	CRC_updateChannel                                                     = 0x635b4c09
 	CRC_updateNewChannelMessage                                           = 0x62ba04d9
@@ -353,7 +360,7 @@ const (
 	CRC_updateTheme                                                       = 0x8216fba3
 	CRC_updateGeoLiveViewed                                               = 0x871fb939
 	CRC_updateLoginToken                                                  = 0x564fe691
-	CRC_updateMessagePollVote                                             = 0x106395c9
+	CRC_updateMessagePollVote                                             = 0x24f40e77
 	CRC_updateDialogFilter                                                = 0x26ffde7d
 	CRC_updateDialogFilterOrder                                           = 0xa5d72105
 	CRC_updateDialogFilters                                               = 0x3504914f
@@ -361,7 +368,7 @@ const (
 	CRC_updateChannelMessageForwards                                      = 0xd29a27f4
 	CRC_updateReadChannelDiscussionInbox                                  = 0xd6b19546
 	CRC_updateReadChannelDiscussionOutbox                                 = 0x695c9e7c
-	CRC_updatePeerBlocked                                                 = 0x246a4b22
+	CRC_updatePeerBlocked                                                 = 0xebe07752
 	CRC_updateChannelUserTyping                                           = 0x8c88c923
 	CRC_updatePinnedMessages                                              = 0xed85eab5
 	CRC_updatePinnedChannelMessages                                       = 0x5bb98608
@@ -393,6 +400,11 @@ const (
 	CRC_updateUser                                                        = 0x20529438
 	CRC_updateAutoSaveSettings                                            = 0xec05b097
 	CRC_updateGroupInvitePrivacyForbidden                                 = 0xccf08ad6
+	CRC_updateStory                                                       = 0x75b3b798
+	CRC_updateReadStories                                                 = 0xf74e932b
+	CRC_updateStoryID                                                     = 0x1bf335b9
+	CRC_updateStoriesStealthMode                                          = 0x2c084dc1
+	CRC_updateSentStoryReaction                                           = 0x7d627683
 	CRC_updates_state                                                     = 0xa56c2a3e
 	CRC_updates_differenceEmpty                                           = 0x5d75a138
 	CRC_updates_difference                                                = 0x00f49ca0
@@ -472,6 +484,7 @@ const (
 	CRC_inputPrivacyKeyPhoneNumber                                        = 0x0352dafa
 	CRC_inputPrivacyKeyAddedByPhone                                       = 0xd1219bdd
 	CRC_inputPrivacyKeyVoiceMessages                                      = 0xaee69d68
+	CRC_inputPrivacyKeyAbout                                              = 0x3823cc40
 	CRC_privacyKeyStatusTimestamp                                         = 0xbc2eab30
 	CRC_privacyKeyChatInvite                                              = 0x500e6dfa
 	CRC_privacyKeyPhoneCall                                               = 0x3d662b7b
@@ -481,6 +494,7 @@ const (
 	CRC_privacyKeyPhoneNumber                                             = 0xd19ae46d
 	CRC_privacyKeyAddedByPhone                                            = 0x42ffd42b
 	CRC_privacyKeyVoiceMessages                                           = 0x0697f414
+	CRC_privacyKeyAbout                                                   = 0xa486b761
 	CRC_inputPrivacyValueAllowContacts                                    = 0x0d09e07b
 	CRC_inputPrivacyValueAllowAll                                         = 0x184b35ce
 	CRC_inputPrivacyValueAllowUsers                                       = 0x131cc67f
@@ -489,6 +503,7 @@ const (
 	CRC_inputPrivacyValueDisallowUsers                                    = 0x90110467
 	CRC_inputPrivacyValueAllowChatParticipants                            = 0x840649cf
 	CRC_inputPrivacyValueDisallowChatParticipants                         = 0xe94f0f86
+	CRC_inputPrivacyValueAllowCloseFriends                                = 0x2f453e49
 	CRC_privacyValueAllowContacts                                         = 0xfffe1bac
 	CRC_privacyValueAllowAll                                              = 0x65427b82
 	CRC_privacyValueAllowUsers                                            = 0xb8905fb2
@@ -497,12 +512,13 @@ const (
 	CRC_privacyValueDisallowUsers                                         = 0xe4621141
 	CRC_privacyValueAllowChatParticipants                                 = 0x6b134e8e
 	CRC_privacyValueDisallowChatParticipants                              = 0x41c87565
+	CRC_privacyValueAllowCloseFriends                                     = 0xf7e8d89b
 	CRC_account_privacyRules                                              = 0x50a04e45
 	CRC_accountDaysTTL                                                    = 0xb8d0afdf
 	CRC_documentAttributeImageSize                                        = 0x6c37c15c
 	CRC_documentAttributeAnimated                                         = 0x11b58939
 	CRC_documentAttributeSticker                                          = 0x6319d612
-	CRC_documentAttributeVideo                                            = 0x0ef02ce6
+	CRC_documentAttributeVideo                                            = 0xd38ff1c2
 	CRC_documentAttributeAudio                                            = 0x9852f9c6
 	CRC_documentAttributeFilename                                         = 0x15590068
 	CRC_documentAttributeHasStickers                                      = 0x9801d2f7
@@ -513,8 +529,8 @@ const (
 	CRC_messages_allStickersNotModified                                   = 0xe86602c3
 	CRC_messages_allStickers                                              = 0xcdbbcebb
 	CRC_messages_affectedMessages                                         = 0x84d19185
-	CRC_webPageEmpty                                                      = 0xeb1477e8
-	CRC_webPagePending                                                    = 0xc586da1c
+	CRC_webPageEmpty                                                      = 0x211a1788
+	CRC_webPagePending                                                    = 0xb0d13e47
 	CRC_webPage                                                           = 0xe89c45b2
 	CRC_webPageNotModified                                                = 0x7311ca11
 	CRC_authorization                                                     = 0xad01d61d
@@ -527,7 +543,7 @@ const (
 	CRC_chatInviteExported                                                = 0x0ab4a819
 	CRC_chatInvitePublicJoinRequests                                      = 0xed107ab7
 	CRC_chatInviteAlready                                                 = 0x5a686d7c
-	CRC_chatInvite                                                        = 0x300c44c1
+	CRC_chatInvite                                                        = 0xcde0ec40
 	CRC_chatInvitePeek                                                    = 0x61695cb0
 	CRC_inputStickerSetEmpty                                              = 0xffb62b95
 	CRC_inputStickerSetID                                                 = 0x9de7a269
@@ -582,10 +598,10 @@ const (
 	CRC_messageEntityCashtag                                              = 0x4c4e743f
 	CRC_messageEntityUnderline                                            = 0x9c4e7e8b
 	CRC_messageEntityStrike                                               = 0xbf0693d4
-	CRC_messageEntityBlockquote                                           = 0x020df5d0
 	CRC_messageEntityBankCard                                             = 0x761e6af4
 	CRC_messageEntitySpoiler                                              = 0x32ca960f
 	CRC_messageEntityCustomEmoji                                          = 0xc8cf05f8
+	CRC_messageEntityBlockquote                                           = 0x020df5d0
 	CRC_inputChannelEmpty                                                 = 0xee8c1e86
 	CRC_inputChannel                                                      = 0xf35aec28
 	CRC_inputChannelFromMessage                                           = 0x5b934f9d
@@ -623,6 +639,7 @@ const (
 	CRC_inputBotInlineMessageMediaContact                                 = 0xa6edbffd
 	CRC_inputBotInlineMessageGame                                         = 0x4b425864
 	CRC_inputBotInlineMessageMediaInvoice                                 = 0xd7e78225
+	CRC_inputBotInlineMessageMediaWebPage                                 = 0xbddcc510
 	CRC_inputBotInlineResult                                              = 0x88bf9319
 	CRC_inputBotInlineResultPhoto                                         = 0xa8d864a7
 	CRC_inputBotInlineResultDocument                                      = 0xfff8fdc4
@@ -633,6 +650,7 @@ const (
 	CRC_botInlineMessageMediaVenue                                        = 0x8a86659c
 	CRC_botInlineMessageMediaContact                                      = 0x18d1cdc2
 	CRC_botInlineMessageMediaInvoice                                      = 0x354a9b09
+	CRC_botInlineMessageMediaWebPage                                      = 0x809ad9a6
 	CRC_botInlineResult                                                   = 0x11965f3a
 	CRC_botInlineMediaResult                                              = 0x17db940b
 	CRC_messages_botResults                                               = 0xe021f2f6
@@ -672,7 +690,7 @@ const (
 	CRC_contacts_topPeers                                                 = 0x70b772a8
 	CRC_contacts_topPeersDisabled                                         = 0xb52c939d
 	CRC_draftMessageEmpty                                                 = 0x1b0c841a
-	CRC_draftMessage                                                      = 0xfd8e711f
+	CRC_draftMessage                                                      = 0x3fccf7ef
 	CRC_messages_featuredStickersNotModified                              = 0xc6dc0c66
 	CRC_messages_featuredStickers                                         = 0xbe382906
 	CRC_messages_recentStickersNotModified                                = 0x0b17f890
@@ -743,7 +761,7 @@ const (
 	CRC_phoneCallDiscardReasonBusy                                        = 0xfaf7e8c9
 	CRC_dataJSON                                                          = 0x7d748d04
 	CRC_labeledPrice                                                      = 0xcb296bf8
-	CRC_invoice                                                           = 0x3e85a91b
+	CRC_invoice                                                           = 0x5db95a15
 	CRC_paymentCharge                                                     = 0xea02c27e
 	CRC_postAddress                                                       = 0x1e8caaeb
 	CRC_paymentRequestedInfo                                              = 0x909c3f94
@@ -831,6 +849,8 @@ const (
 	CRC_channelAdminLogEventActionDeleteTopic                             = 0xae168909
 	CRC_channelAdminLogEventActionPinTopic                                = 0x5d8d353b
 	CRC_channelAdminLogEventActionToggleAntiSpam                          = 0x64f36dfc
+	CRC_channelAdminLogEventActionChangeColor                             = 0x3c2b247b
+	CRC_channelAdminLogEventActionChangeBackgroundEmoji                   = 0x445fc434
 	CRC_channelAdminLogEvent                                              = 0x1fad68cd
 	CRC_channels_adminLogResults                                          = 0xed8af74d
 	CRC_channelAdminLogEventsFilter                                       = 0xea107ae4
@@ -934,7 +954,7 @@ const (
 	CRC_pollAnswer                                                        = 0x6ca9c2e9
 	CRC_poll                                                              = 0x86e18161
 	CRC_pollAnswerVoters                                                  = 0x3b6ddad2
-	CRC_pollResults                                                       = 0xdcb82ea3
+	CRC_pollResults                                                       = 0x7adf2420
 	CRC_chatOnlines                                                       = 0xf041e250
 	CRC_statsURL                                                          = 0x47a971e0
 	CRC_chatAdminRights                                                   = 0x5fb224d5
@@ -946,7 +966,7 @@ const (
 	CRC_account_wallPapers                                                = 0xcdc3858c
 	CRC_codeSettings                                                      = 0xad253d78
 	CRC_wallPaperSettings                                                 = 0x1dc1bca4
-	CRC_autoDownloadSettings                                              = 0x8efab953
+	CRC_autoDownloadSettings                                              = 0xbaa57628
 	CRC_account_autoDownloadSettings                                      = 0x63cacf26
 	CRC_emojiKeyword                                                      = 0xd5b3b9f9
 	CRC_emojiKeywordDeleted                                               = 0x236df622
@@ -983,10 +1003,8 @@ const (
 	CRC_inputThemeSettings                                                = 0x8fde504f
 	CRC_themeSettings                                                     = 0xfa58b6d4
 	CRC_webPageAttributeTheme                                             = 0x54b56617
-	CRC_messageUserVote                                                   = 0x34d247b4
-	CRC_messageUserVoteInputOption                                        = 0x3ca5b0ec
-	CRC_messageUserVoteMultiple                                           = 0x8a65e557
-	CRC_messages_votesList                                                = 0x0823f649
+	CRC_webPageAttributeStory                                             = 0x2e94c3e7
+	CRC_messages_votesList                                                = 0x4899484e
 	CRC_bankCardOpenUrl                                                   = 0xf568028a
 	CRC_payments_bankCardData                                             = 0x3e24e573
 	CRC_dialogFilter                                                      = 0x7438f7e8
@@ -1010,7 +1028,7 @@ const (
 	CRC_statsGroupTopAdmin                                                = 0xd7584c87
 	CRC_statsGroupTopInviter                                              = 0x535f779d
 	CRC_stats_megagroupStats                                              = 0xef7ff916
-	CRC_globalPrivacySettings                                             = 0xbea2f424
+	CRC_globalPrivacySettings                                             = 0x734c4ccb
 	CRC_help_countryCode                                                  = 0x4203c5ef
 	CRC_help_country                                                      = 0xc3878e23
 	CRC_help_countriesListNotModified                                     = 0x93cc1f32
@@ -1018,7 +1036,8 @@ const (
 	CRC_messageViews                                                      = 0x455b853d
 	CRC_messages_messageViews                                             = 0xb6c4f543
 	CRC_messages_discussionMessage                                        = 0xa6341782
-	CRC_messageReplyHeader                                                = 0xa6d57763
+	CRC_messageReplyHeader                                                = 0x6eebcabd
+	CRC_messageReplyStoryHeader                                           = 0x9c98bfc1
 	CRC_messageReplies                                                    = 0x83d60fc2
 	CRC_peerBlocked                                                       = 0xe8fd8014
 	CRC_stats_messageStats                                                = 0x8999f295
@@ -1060,7 +1079,7 @@ const (
 	CRC_account_resetPasswordFailedWait                                   = 0xe3779861
 	CRC_account_resetPasswordRequestedWait                                = 0xe9effc7d
 	CRC_account_resetPasswordOk                                           = 0xe926d63e
-	CRC_sponsoredMessage                                                  = 0xfc25b828
+	CRC_sponsoredMessage                                                  = 0xdaafff6b
 	CRC_messages_sponsoredMessages                                        = 0xc9ee1d87
 	CRC_messages_sponsoredMessagesEmpty                                   = 0x1839490f
 	CRC_searchResultsCalendarPeriod                                       = 0xc9b0539f
@@ -1083,7 +1102,7 @@ const (
 	CRC_phone_groupCallStreamRtmpUrl                                      = 0x2dbf3432
 	CRC_attachMenuBotIconColor                                            = 0x4576f3f0
 	CRC_attachMenuBotIcon                                                 = 0xb2a7386b
-	CRC_attachMenuBot                                                     = 0xc8aa2cd2
+	CRC_attachMenuBot                                                     = 0xd90d8dfe
 	CRC_attachMenuBotsNotModified                                         = 0xf1d88a5c
 	CRC_attachMenuBots                                                    = 0x3c4301c0
 	CRC_attachMenuBotsBot                                                 = 0x93bf667f
@@ -1108,11 +1127,14 @@ const (
 	CRC_attachMenuPeerTypeBroadcast                                       = 0x7bfbdefc
 	CRC_inputInvoiceMessage                                               = 0xc5b56859
 	CRC_inputInvoiceSlug                                                  = 0xc326caef
+	CRC_inputInvoicePremiumGiftCode                                       = 0x98986c0d
 	CRC_payments_exportedInvoice                                          = 0xaed0cbd9
 	CRC_messages_transcribedAudio                                         = 0x93752c52
 	CRC_help_premiumPromo                                                 = 0x5334759c
 	CRC_inputStorePaymentPremiumSubscription                              = 0xa6751e66
 	CRC_inputStorePaymentGiftPremium                                      = 0x616f7fe8
+	CRC_inputStorePaymentPremiumGiftCode                                  = 0xa3805f3f
+	CRC_inputStorePaymentPremiumGiveaway                                  = 0x7c9375e6
 	CRC_premiumGiftOption                                                 = 0x74c34319
 	CRC_paymentFormMethod                                                 = 0x88f8f21b
 	CRC_emojiStatusEmpty                                                  = 0x2de11aae
@@ -1178,6 +1200,42 @@ const (
 	CRC_chatlists_chatlistInvite                                          = 0x1dcd839d
 	CRC_chatlists_chatlistUpdates                                         = 0x93bd878d
 	CRC_bots_botInfo                                                      = 0xe8a775b0
+	CRC_messagePeerVote                                                   = 0xb6cc2d5c
+	CRC_messagePeerVoteInputOption                                        = 0x74cda504
+	CRC_messagePeerVoteMultiple                                           = 0x4628f6e6
+	CRC_sponsoredWebPage                                                  = 0x3db8ec63
+	CRC_storyViews                                                        = 0x8d595cd6
+	CRC_storyItemDeleted                                                  = 0x51e6ee4f
+	CRC_storyItemSkipped                                                  = 0xffadc913
+	CRC_storyItem                                                         = 0x44c457ce
+	CRC_stories_allStoriesNotModified                                     = 0x1158fe3e
+	CRC_stories_allStories                                                = 0x6efc5e81
+	CRC_stories_stories                                                   = 0x5dd8c3c8
+	CRC_storyView                                                         = 0xb0bdeac5
+	CRC_stories_storyViewsList                                            = 0x46e9b9ec
+	CRC_stories_storyViews                                                = 0xde9eed1d
+	CRC_inputReplyToMessage                                               = 0x073ec805
+	CRC_inputReplyToStory                                                 = 0x15b0f283
+	CRC_exportedStoryLink                                                 = 0x3fc9053b
+	CRC_storiesStealthMode                                                = 0x712e27fd
+	CRC_mediaAreaCoordinates                                              = 0x03d1ea4e
+	CRC_mediaAreaVenue                                                    = 0xbe82db9c
+	CRC_inputMediaAreaVenue                                               = 0xb282217f
+	CRC_mediaAreaGeoPoint                                                 = 0xdf8b3b22
+	CRC_mediaAreaSuggestedReaction                                        = 0x14455871
+	CRC_peerStories                                                       = 0x9a35e999
+	CRC_stories_peerStories                                               = 0xcae68768
+	CRC_messages_webPage                                                  = 0xfd5e12bd
+	CRC_premiumGiftCodeOption                                             = 0x257e962b
+	CRC_payments_checkedGiftCode                                          = 0xb722f158
+	CRC_payments_giveawayInfo                                             = 0x4367daa0
+	CRC_payments_giveawayInfoResults                                      = 0x00cd5570
+	CRC_prepaidGiveaway                                                   = 0xb2539d54
+	CRC_boost                                                             = 0x2a1c8c71
+	CRC_premium_boostsList                                                = 0x86f8613c
+	CRC_myBoost                                                           = 0xc448415c
+	CRC_premium_myBoosts                                                  = 0x9ae228e2
+	CRC_premium_boostsStatus                                              = 0x4959427a
 	CRC_invokeAfterMsg                                                    = 0xcb9f372d
 	CRC_invokeAfterMsgs                                                   = 0x3dc4b4f0
 	CRC_initConnection                                                    = 0xc1cd5ea9
@@ -1294,6 +1352,9 @@ const (
 	CRC_account_getAutoSaveSettings                                       = 0xadcbbcda
 	CRC_account_saveAutoSaveSettings                                      = 0xd69b8361
 	CRC_account_deleteAutoSaveExceptions                                  = 0x53bc0020
+	CRC_account_invalidateSignInCodes                                     = 0xca8ae8ba
+	CRC_account_updateColor                                               = 0xa001cc43
+	CRC_account_getDefaultBackgroundEmojis                                = 0xa60ab9ce
 	CRC_users_getUsers                                                    = 0x0d91a548
 	CRC_users_getFullUser                                                 = 0xb60f5918
 	CRC_users_setSecureValueErrors                                        = 0x90c894b5
@@ -1303,9 +1364,9 @@ const (
 	CRC_contacts_importContacts                                           = 0x2c800be5
 	CRC_contacts_deleteContacts                                           = 0x096a0e00
 	CRC_contacts_deleteByPhones                                           = 0x1013fd9e
-	CRC_contacts_block                                                    = 0x68cc1411
-	CRC_contacts_unblock                                                  = 0xbea65d50
-	CRC_contacts_getBlocked                                               = 0xf57c350f
+	CRC_contacts_block                                                    = 0x2e2e8734
+	CRC_contacts_unblock                                                  = 0xb550d328
+	CRC_contacts_getBlocked                                               = 0x9a868f80
 	CRC_contacts_search                                                   = 0x11f812d8
 	CRC_contacts_resolveUsername                                          = 0xf93ccba3
 	CRC_contacts_getTopPeers                                              = 0x973478b6
@@ -1320,6 +1381,8 @@ const (
 	CRC_contacts_resolvePhone                                             = 0x8af94344
 	CRC_contacts_exportContactToken                                       = 0xf8654027
 	CRC_contacts_importContactToken                                       = 0x13005788
+	CRC_contacts_editCloseFriends                                         = 0xba6705f0
+	CRC_contacts_setBlocked                                               = 0x94c65c76
 	CRC_messages_getMessages                                              = 0x63c66506
 	CRC_messages_getDialogs                                               = 0xa0f4cb4f
 	CRC_messages_getHistory                                               = 0x4423e6c5
@@ -1329,8 +1392,8 @@ const (
 	CRC_messages_deleteMessages                                           = 0xe58e95d2
 	CRC_messages_receivedMessages                                         = 0x05a954c0
 	CRC_messages_setTyping                                                = 0x58943ee2
-	CRC_messages_sendMessage                                              = 0x1cc20387
-	CRC_messages_sendMedia                                                = 0x7547c966
+	CRC_messages_sendMessage                                              = 0x280d096f
+	CRC_messages_sendMedia                                                = 0x72ccc23d
 	CRC_messages_forwardMessages                                          = 0xc661bbc4
 	CRC_messages_reportSpam                                               = 0xcf1592db
 	CRC_messages_getPeerSettings                                          = 0xefd9a6a2
@@ -1374,14 +1437,14 @@ const (
 	CRC_messages_saveGif                                                  = 0x327a30cb
 	CRC_messages_getInlineBotResults                                      = 0x514e999d
 	CRC_messages_setInlineBotResults                                      = 0xbb12a419
-	CRC_messages_sendInlineBotResult                                      = 0xd3fbdccb
+	CRC_messages_sendInlineBotResult                                      = 0xf7bc68ba
 	CRC_messages_getMessageEditData                                       = 0xfda68d36
 	CRC_messages_editMessage                                              = 0x48f71778
 	CRC_messages_editInlineBotMessage                                     = 0x83557dba
 	CRC_messages_getBotCallbackAnswer                                     = 0x9342ca07
 	CRC_messages_setBotCallbackAnswer                                     = 0xd58f130a
 	CRC_messages_getPeerDialogs                                           = 0xe470bcfd
-	CRC_messages_saveDraft                                                = 0xb4331e3f
+	CRC_messages_saveDraft                                                = 0x7ff3b806
 	CRC_messages_getAllDrafts                                             = 0x6a3f8d65
 	CRC_messages_getFeaturedStickers                                      = 0x64780b14
 	CRC_messages_readFeaturedStickers                                     = 0x5b118126
@@ -1396,21 +1459,20 @@ const (
 	CRC_messages_getGameHighScores                                        = 0xe822649d
 	CRC_messages_getInlineGameHighScores                                  = 0x0f635e1b
 	CRC_messages_getCommonChats                                           = 0xe40ca104
-	CRC_messages_getAllChats                                              = 0x875f74be
-	CRC_messages_getWebPage                                               = 0x32ca8f91
+	CRC_messages_getWebPage                                               = 0x8d9692a3
 	CRC_messages_toggleDialogPin                                          = 0xa731e257
 	CRC_messages_reorderPinnedDialogs                                     = 0x3b1adf37
 	CRC_messages_getPinnedDialogs                                         = 0xd6b94df2
 	CRC_messages_setBotShippingResults                                    = 0xe5f672fa
 	CRC_messages_setBotPrecheckoutResults                                 = 0x09c2dd95
 	CRC_messages_uploadMedia                                              = 0x519bc2b1
-	CRC_messages_sendScreenshotNotification                               = 0xc97df020
+	CRC_messages_sendScreenshotNotification                               = 0xa1405817
 	CRC_messages_getFavedStickers                                         = 0x04f1aaa9
 	CRC_messages_faveSticker                                              = 0xb9ffc55b
 	CRC_messages_getUnreadMentions                                        = 0xf107e790
 	CRC_messages_readMentions                                             = 0x36e5bf4d
 	CRC_messages_getRecentLocations                                       = 0x702a40e0
-	CRC_messages_sendMultiMedia                                           = 0xb6f11a1c
+	CRC_messages_sendMultiMedia                                           = 0x456e8987
 	CRC_messages_uploadEncryptedFile                                      = 0x5057c497
 	CRC_messages_searchStickerSets                                        = 0x35705b8a
 	CRC_messages_getSplitRanges                                           = 0x1cff7e08
@@ -1482,9 +1544,9 @@ const (
 	CRC_messages_getAttachMenuBots                                        = 0x16fcc2cb
 	CRC_messages_getAttachMenuBot                                         = 0x77216192
 	CRC_messages_toggleBotInAttachMenu                                    = 0x69f59d69
-	CRC_messages_requestWebView                                           = 0x178b480b
-	CRC_messages_prolongWebView                                           = 0x7ff34309
-	CRC_messages_requestSimpleWebView                                     = 0x299bec8e
+	CRC_messages_requestWebView                                           = 0x269dc2c1
+	CRC_messages_prolongWebView                                           = 0xb0d81a83
+	CRC_messages_requestSimpleWebView                                     = 0x1a46500a
 	CRC_messages_sendWebViewResultMessage                                 = 0x0a4314f5
 	CRC_messages_sendWebViewData                                          = 0xdc0242c8
 	CRC_messages_transcribeAudio                                          = 0x269e9a49
@@ -1509,7 +1571,7 @@ const (
 	CRC_messages_requestAppWebView                                        = 0x8c5a3b3c
 	CRC_messages_setChatWallPaper                                         = 0x8ffacae1
 	CRC_updates_getState                                                  = 0xedd4882a
-	CRC_updates_getDifference                                             = 0x25939651
+	CRC_updates_getDifference                                             = 0x19c2f763
 	CRC_updates_getChannelDifference                                      = 0x03173d78
 	CRC_photos_updateProfilePhoto                                         = 0x09e82039
 	CRC_photos_uploadProfilePhoto                                         = 0x0388a3b5
@@ -1602,6 +1664,8 @@ const (
 	CRC_channels_toggleAntiSpam                                           = 0x68f3e4eb
 	CRC_channels_reportAntiSpamFalsePositive                              = 0xa850a693
 	CRC_channels_toggleParticipantsHidden                                 = 0x6a6e7854
+	CRC_channels_clickSponsoredMessage                                    = 0x18afbc93
+	CRC_channels_updateColor                                              = 0x621a201f
 	CRC_bots_sendCustomRequest                                            = 0xaa2769ed
 	CRC_bots_answerWebhookJSONQuery                                       = 0xe6213f4d
 	CRC_bots_setBotCommands                                               = 0x0517165a
@@ -1615,6 +1679,9 @@ const (
 	CRC_bots_getBotInfo                                                   = 0xdcd914fd
 	CRC_bots_reorderUsernames                                             = 0x9709b1c2
 	CRC_bots_toggleUsername                                               = 0x053ca973
+	CRC_bots_canSendMessage                                               = 0x1359f4e6
+	CRC_bots_allowSendMessage                                             = 0xf132e3ef
+	CRC_bots_invokeWebViewCustomMethod                                    = 0x087fc5e7
 	CRC_payments_getPaymentForm                                           = 0x37148dbb
 	CRC_payments_getPaymentReceipt                                        = 0x2478d1cc
 	CRC_payments_validateRequestedInfo                                    = 0xb6c8f12b
@@ -1626,6 +1693,11 @@ const (
 	CRC_payments_assignAppStoreTransaction                                = 0x80ed747d
 	CRC_payments_assignPlayMarketTransaction                              = 0xdffd50d3
 	CRC_payments_canPurchasePremium                                       = 0x9fc19eb6
+	CRC_payments_getPremiumGiftCodeOptions                                = 0x2757ba54
+	CRC_payments_checkGiftCode                                            = 0x8e51b4c1
+	CRC_payments_applyGiftCode                                            = 0xf6e26854
+	CRC_payments_getGiveawayInfo                                          = 0xf4239425
+	CRC_payments_launchPrepaidGiveaway                                    = 0x5ff58f20
 	CRC_stickers_createStickerSet                                         = 0x9021ab67
 	CRC_stickers_removeStickerFromSet                                     = 0xf7760f51
 	CRC_stickers_changeStickerPosition                                    = 0xffb6d4ca
@@ -1689,6 +1761,33 @@ const (
 	CRC_chatlists_hideChatlistUpdates                                     = 0x66e486fb
 	CRC_chatlists_getLeaveChatlistSuggestions                             = 0xfdbcd714
 	CRC_chatlists_leaveChatlist                                           = 0x74fae13a
+	CRC_stories_canSendStory                                              = 0xc7dfdfdd
+	CRC_stories_sendStory                                                 = 0xbcb73644
+	CRC_stories_editStory                                                 = 0xb583ba46
+	CRC_stories_deleteStories                                             = 0xae59db5f
+	CRC_stories_togglePinned                                              = 0x9a75a1ef
+	CRC_stories_getAllStories                                             = 0xeeb0d625
+	CRC_stories_getPinnedStories                                          = 0x5821a5dc
+	CRC_stories_getStoriesArchive                                         = 0xb4352016
+	CRC_stories_getStoriesByID                                            = 0x5774ca74
+	CRC_stories_toggleAllStoriesHidden                                    = 0x7c2557c4
+	CRC_stories_readStories                                               = 0xa556dac8
+	CRC_stories_incrementStoryViews                                       = 0xb2028afb
+	CRC_stories_getStoryViewsList                                         = 0x7ed23c57
+	CRC_stories_getStoriesViews                                           = 0x28e16cc8
+	CRC_stories_exportStoryLink                                           = 0x7b8def20
+	CRC_stories_report                                                    = 0x1923fa8c
+	CRC_stories_activateStealthMode                                       = 0x57bbd166
+	CRC_stories_sendReaction                                              = 0x7fd736b2
+	CRC_stories_getPeerStories                                            = 0x2c4ada50
+	CRC_stories_getAllReadPeerStories                                     = 0x9b5ae7f9
+	CRC_stories_getPeerMaxIDs                                             = 0x535983c3
+	CRC_stories_getChatsToSend                                            = 0xa56a8b60
+	CRC_stories_togglePeerStoriesHidden                                   = 0xbd0415c4
+	CRC_premium_getBoostsList                                             = 0x60f67660
+	CRC_premium_getMyBoosts                                               = 0x0be77b4a
+	CRC_premium_applyBoost                                                = 0x6b7da746
+	CRC_premium_getBoostsStatus                                           = 0x042f1f61
 )
 
 type TL_resPQ struct {
@@ -2180,7 +2279,7 @@ type TL_inputMediaInvoice struct {
 	Provider      string
 	ProviderData  TL     // DataJSON: TL_dataJSON
 	StartParam    string // (flags.1)
-	ExtendedMedia TL     // (flags.2) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice
+	ExtendedMedia TL     // (flags.2) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
 type TL_inputMediaGeoLive struct {
@@ -2197,11 +2296,24 @@ type TL_inputMediaPoll struct {
 	Poll             TL       // Poll: TL_poll
 	CorrectAnswers   [][]byte // (flags.0)
 	Solution         string   // (flags.1)
-	SolutionEntities []TL     // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	SolutionEntities []TL     // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_inputMediaDice struct {
 	Emoticon string
+}
+
+type TL_inputMediaStory struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID   int32
+}
+
+type TL_inputMediaWebPage struct {
+	Flags           int32
+	ForceLargeMedia bool // (flags.0)
+	ForceSmallMedia bool // (flags.1)
+	Optional        bool // (flags.2)
+	Url             string
 }
 
 type TL_inputChatPhotoEmpty struct {
@@ -2370,6 +2482,9 @@ type TL_user struct {
 	AttachMenuEnabled    bool // (flags.29)
 	Flags2               int32
 	BotCanEdit           bool // (flags2.1)
+	CloseFriend          bool // (flags2.2)
+	StoriesHidden        bool // (flags2.3)
+	StoriesUnavailable   bool // (flags2.4)
 	ID                   int64
 	AccessHash           int64  // (flags.0)
 	FirstName            string // (flags.1)
@@ -2384,6 +2499,9 @@ type TL_user struct {
 	LangCode             string // (flags.22)
 	EmojiStatus          TL     // (flags.30) EmojiStatus: TL_emojiStatusEmpty | TL_emojiStatus | TL_emojiStatusUntil
 	Usernames            []TL   // (flags2.0) Username: TL_username
+	StoriesMaxID         int32  // (flags2.5)
+	Color                int32  // (flags2.7)
+	BackgroundEmojiID    int64  // (flags2.6)
 }
 
 type TL_userProfilePhotoEmpty struct {
@@ -2469,6 +2587,9 @@ type TL_channel struct {
 	JoinRequest         bool // (flags.29)
 	Forum               bool // (flags.30)
 	Flags2              int32
+	StoriesHidden       bool // (flags2.1)
+	StoriesHiddenMin    bool // (flags2.2)
+	StoriesUnavailable  bool // (flags2.3)
 	ID                  int64
 	AccessHash          int64 // (flags.13)
 	Title               string
@@ -2481,6 +2602,9 @@ type TL_channel struct {
 	DefaultBannedRights TL    // (flags.18) ChatBannedRights: TL_chatBannedRights
 	ParticipantsCount   int32 // (flags.17)
 	Usernames           []TL  // (flags2.0) Username: TL_username
+	StoriesMaxID        int32 // (flags2.4)
+	Color               int32 // (flags2.6)
+	BackgroundEmojiID   int64 // (flags2.5)
 }
 
 type TL_channelForbidden struct {
@@ -2531,6 +2655,7 @@ type TL_channelFull struct {
 	Antispam               bool // (flags2.1)
 	ParticipantsHidden     bool // (flags2.2)
 	TranslationsDisabled   bool // (flags2.3)
+	StoriesPinnedAvailable bool // (flags2.5)
 	ID                     int64
 	About                  string
 	ParticipantsCount      int32 // (flags.0)
@@ -2566,6 +2691,7 @@ type TL_channelFull struct {
 	RecentRequesters       []int64  // (flags.28)
 	DefaultSendAs          TL       // (flags.29) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	AvailableReactions     TL       // (flags.30) ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
+	Stories                TL       // (flags2.4) PeerStories: TL_peerStories
 }
 
 type TL_chatParticipant struct {
@@ -2625,17 +2751,18 @@ type TL_message struct {
 	EditHide          bool // (flags.21)
 	Pinned            bool // (flags.24)
 	Noforwards        bool // (flags.26)
+	InvertMedia       bool // (flags.27)
 	ID                int32
 	FromID            TL    // (flags.8) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	PeerID            TL    // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	FwdFrom           TL    // (flags.2) MessageFwdHeader: TL_messageFwdHeader
 	ViaBotID          int64 // (flags.11)
-	ReplyTo           TL    // (flags.3) MessageReplyHeader: TL_messageReplyHeader
+	ReplyTo           TL    // (flags.3) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
 	Date              int32
 	Message           string
-	Media             TL     // (flags.9) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice
+	Media             TL     // (flags.9) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
 	ReplyMarkup       TL     // (flags.6) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities          []TL   // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities          []TL   // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	Views             int32  // (flags.10)
 	Forwards          int32  // (flags.10)
 	Replies           TL     // (flags.23) MessageReplies: TL_messageReplies
@@ -2658,9 +2785,9 @@ type TL_messageService struct {
 	ID          int32
 	FromID      TL // (flags.8) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	PeerID      TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	ReplyTo     TL // (flags.3) MessageReplyHeader: TL_messageReplyHeader
+	ReplyTo     TL // (flags.3) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
 	Date        int32
-	Action      TL    // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPinMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionSetSameChatWallPaper
+	Action      TL    // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPinMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionSetSameChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch
 	TtlPeriod   int32 // (flags.25)
 }
 
@@ -2690,15 +2817,21 @@ type TL_messageMediaUnsupported struct {
 }
 
 type TL_messageMediaDocument struct {
-	Flags      int32
-	Nopremium  bool  // (flags.3)
-	Spoiler    bool  // (flags.4)
-	Document   TL    // (flags.0) Document: TL_documentEmpty | TL_document
-	TtlSeconds int32 // (flags.2)
+	Flags       int32
+	Nopremium   bool  // (flags.3)
+	Spoiler     bool  // (flags.4)
+	Document    TL    // (flags.0) Document: TL_documentEmpty | TL_document
+	AltDocument TL    // (flags.5) Document: TL_documentEmpty | TL_document
+	TtlSeconds  int32 // (flags.2)
 }
 
 type TL_messageMediaWebPage struct {
-	Webpage TL // WebPage: TL_webPageEmpty | TL_webPagePending | TL_webPage | TL_webPageNotModified
+	Flags           int32
+	ForceLargeMedia bool // (flags.0)
+	ForceSmallMedia bool // (flags.1)
+	Manual          bool // (flags.3)
+	Safe            bool // (flags.4)
+	Webpage         TL   // WebPage: TL_webPageEmpty | TL_webPagePending | TL_webPage | TL_webPageNotModified
 }
 
 type TL_messageMediaVenue struct {
@@ -2744,6 +2877,24 @@ type TL_messageMediaPoll struct {
 type TL_messageMediaDice struct {
 	Value    int32
 	Emoticon string
+}
+
+type TL_messageMediaStory struct {
+	Flags      int32
+	ViaMention bool // (flags.1)
+	Peer       TL   // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	ID         int32
+	Story      TL // (flags.0) StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
+}
+
+type TL_messageMediaGiveaway struct {
+	Flags              int32
+	OnlyNewSubscribers bool // (flags.0)
+	Channels           []int64
+	CountriesIso2      []string // (flags.1)
+	Quantity           int32
+	Months             int32
+	UntilDate          int32
 }
 
 type TL_messageActionEmpty struct {
@@ -2838,10 +2989,11 @@ type TL_messageActionCustomAction struct {
 }
 
 type TL_messageActionBotAllowed struct {
-	Flags      int32
-	AttachMenu bool   // (flags.1)
-	Domain     string // (flags.0)
-	App        TL     // (flags.2) BotApp: TL_botAppNotModified | TL_botApp
+	Flags       int32
+	AttachMenu  bool   // (flags.1)
+	FromRequest bool   // (flags.3)
+	Domain      string // (flags.0)
+	App         TL     // (flags.2) BotApp: TL_botAppNotModified | TL_botApp
 }
 
 type TL_messageActionSecureValuesSentMe struct {
@@ -2939,6 +3091,18 @@ type TL_messageActionSetChatWallPaper struct {
 
 type TL_messageActionSetSameChatWallPaper struct {
 	Wallpaper TL // WallPaper: TL_wallPaper | TL_wallPaperNoFile
+}
+
+type TL_messageActionGiftCode struct {
+	Flags       int32
+	ViaGiveaway bool // (flags.0)
+	Unclaimed   bool // (flags.2)
+	BoostPeer   TL   // (flags.1) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Months      int32
+	Slug        string
+}
+
+type TL_messageActionGiveawayLaunch struct {
 }
 
 type TL_dialog struct {
@@ -3083,21 +3247,29 @@ type TL_inputNotifyForumTopic struct {
 }
 
 type TL_inputPeerNotifySettings struct {
-	Flags        int32
-	ShowPreviews TL    // (flags.0) Bool: TL_boolFalse | TL_boolTrue
-	Silent       TL    // (flags.1) Bool: TL_boolFalse | TL_boolTrue
-	MuteUntil    int32 // (flags.2)
-	Sound        TL    // (flags.3) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	Flags             int32
+	ShowPreviews      TL    // (flags.0) Bool: TL_boolFalse | TL_boolTrue
+	Silent            TL    // (flags.1) Bool: TL_boolFalse | TL_boolTrue
+	MuteUntil         int32 // (flags.2)
+	Sound             TL    // (flags.3) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	StoriesMuted      TL    // (flags.6) Bool: TL_boolFalse | TL_boolTrue
+	StoriesHideSender TL    // (flags.7) Bool: TL_boolFalse | TL_boolTrue
+	StoriesSound      TL    // (flags.8) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 }
 
 type TL_peerNotifySettings struct {
-	Flags        int32
-	ShowPreviews TL    // (flags.0) Bool: TL_boolFalse | TL_boolTrue
-	Silent       TL    // (flags.1) Bool: TL_boolFalse | TL_boolTrue
-	MuteUntil    int32 // (flags.2)
-	IosSound     TL    // (flags.3) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	AndroidSound TL    // (flags.4) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	OtherSound   TL    // (flags.5) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	Flags               int32
+	ShowPreviews        TL    // (flags.0) Bool: TL_boolFalse | TL_boolTrue
+	Silent              TL    // (flags.1) Bool: TL_boolFalse | TL_boolTrue
+	MuteUntil           int32 // (flags.2)
+	IosSound            TL    // (flags.3) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	AndroidSound        TL    // (flags.4) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	OtherSound          TL    // (flags.5) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	StoriesMuted        TL    // (flags.6) Bool: TL_boolFalse | TL_boolTrue
+	StoriesHideSender   TL    // (flags.7) Bool: TL_boolFalse | TL_boolTrue
+	StoriesIosSound     TL    // (flags.8) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	StoriesAndroidSound TL    // (flags.9) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	StoriesOtherSound   TL    // (flags.10) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 }
 
 type TL_peerSettings struct {
@@ -3177,6 +3349,8 @@ type TL_userFull struct {
 	VideoCallsAvailable     bool // (flags.13)
 	VoiceMessagesForbidden  bool // (flags.20)
 	TranslationsDisabled    bool // (flags.23)
+	StoriesPinnedAvailable  bool // (flags.26)
+	BlockedMyStoriesFrom    bool // (flags.27)
 	ID                      int64
 	About                   string // (flags.1)
 	Settings                TL     // PeerSettings: TL_peerSettings
@@ -3195,6 +3369,7 @@ type TL_userFull struct {
 	BotBroadcastAdminRights TL     // (flags.18) ChatAdminRights: TL_chatAdminRights
 	PremiumGifts            []TL   // (flags.19) PremiumGiftOption: TL_premiumGiftOption
 	Wallpaper               TL     // (flags.24) WallPaper: TL_wallPaper | TL_wallPaperNoFile
+	Stories                 TL     // (flags.25) PeerStories: TL_peerStories
 }
 
 type TL_contact struct {
@@ -3411,6 +3586,15 @@ type TL_updateUserName struct {
 	Usernames []TL // Username: TL_username
 }
 
+type TL_updateNewAuthorization struct {
+	Flags       int32
+	Unconfirmed bool // (flags.0)
+	Hash        int64
+	Date        int32  // (flags.0)
+	Device      string // (flags.0)
+	Location    string // (flags.0)
+}
+
 type TL_updateNewEncryptedMessage struct {
 	Message TL // EncryptedMessage: TL_encryptedMessage | TL_encryptedMessageService
 	Qts     int32
@@ -3455,18 +3639,19 @@ type TL_updateNotifySettings struct {
 }
 
 type TL_updateServiceNotification struct {
-	Flags     int32
-	Popup     bool  // (flags.0)
-	InboxDate int32 // (flags.1)
-	Type      string
-	Message   string
-	Media     TL   // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice
-	Entities  []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Flags       int32
+	Popup       bool  // (flags.0)
+	InvertMedia bool  // (flags.2)
+	InboxDate   int32 // (flags.1)
+	Type        string
+	Message     string
+	Media       TL   // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
+	Entities    []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_updatePrivacy struct {
-	Key   TL   // PrivacyKey: TL_privacyKeyStatusTimestamp | TL_privacyKeyChatInvite | TL_privacyKeyPhoneCall | TL_privacyKeyPhoneP2P | TL_privacyKeyForwards | TL_privacyKeyProfilePhoto | TL_privacyKeyPhoneNumber | TL_privacyKeyAddedByPhone | TL_privacyKeyVoiceMessages
-	Rules []TL // PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants
+	Key   TL   // PrivacyKey: TL_privacyKeyStatusTimestamp | TL_privacyKeyChatInvite | TL_privacyKeyPhoneCall | TL_privacyKeyPhoneP2P | TL_privacyKeyForwards | TL_privacyKeyProfilePhoto | TL_privacyKeyPhoneNumber | TL_privacyKeyAddedByPhone | TL_privacyKeyVoiceMessages | TL_privacyKeyAbout
+	Rules []TL // PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants | TL_privacyValueAllowCloseFriends
 }
 
 type TL_updateUserPhone struct {
@@ -3498,9 +3683,11 @@ type TL_updateWebPage struct {
 }
 
 type TL_updateReadMessagesContents struct {
+	Flags    int32
 	Messages []int32
 	Pts      int32
 	PtsCount int32
+	Date     int32 // (flags.0)
 }
 
 type TL_updateChannelTooLong struct {
@@ -3779,7 +3966,7 @@ type TL_updateLoginToken struct {
 
 type TL_updateMessagePollVote struct {
 	PollID  int64
-	UserID  int64
+	Peer    TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Options [][]byte
 	Qts     int32
 }
@@ -3824,8 +4011,10 @@ type TL_updateReadChannelDiscussionOutbox struct {
 }
 
 type TL_updatePeerBlocked struct {
-	PeerID  TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	Blocked TL // Bool: TL_boolFalse | TL_boolTrue
+	Flags                int32
+	Blocked              bool // (flags.0)
+	BlockedMyStoriesFrom bool // (flags.1)
+	PeerID               TL   // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
 type TL_updateChannelUserTyping struct {
@@ -4017,6 +4206,31 @@ type TL_updateGroupInvitePrivacyForbidden struct {
 	UserID int64
 }
 
+type TL_updateStory struct {
+	Peer  TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Story TL // StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
+}
+
+type TL_updateReadStories struct {
+	Peer  TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	MaxID int32
+}
+
+type TL_updateStoryID struct {
+	ID       int32
+	RandomID int64
+}
+
+type TL_updateStoriesStealthMode struct {
+	StealthMode TL // StoriesStealthMode: TL_storiesStealthMode
+}
+
+type TL_updateSentStoryReaction struct {
+	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	StoryID  int32
+	Reaction TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+}
+
 type TL_updates_state struct {
 	Pts         int32
 	Qts         int32
@@ -4033,7 +4247,7 @@ type TL_updates_differenceEmpty struct {
 type TL_updates_difference struct {
 	NewMessages          []TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	NewEncryptedMessages []TL // EncryptedMessage: TL_encryptedMessage | TL_encryptedMessageService
-	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden
+	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Chats                []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users                []TL // User: TL_userEmpty | TL_user
 	State                TL   // updates_State: TL_updates_state
@@ -4042,7 +4256,7 @@ type TL_updates_difference struct {
 type TL_updates_differenceSlice struct {
 	NewMessages          []TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	NewEncryptedMessages []TL // EncryptedMessage: TL_encryptedMessage | TL_encryptedMessageService
-	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden
+	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Chats                []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users                []TL // User: TL_userEmpty | TL_user
 	IntermediateState    TL   // updates_State: TL_updates_state
@@ -4069,8 +4283,8 @@ type TL_updateShortMessage struct {
 	Date        int32
 	FwdFrom     TL    // (flags.2) MessageFwdHeader: TL_messageFwdHeader
 	ViaBotID    int64 // (flags.11)
-	ReplyTo     TL    // (flags.3) MessageReplyHeader: TL_messageReplyHeader
-	Entities    []TL  // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	ReplyTo     TL    // (flags.3) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
+	Entities    []TL  // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	TtlPeriod   int32 // (flags.25)
 }
 
@@ -4089,18 +4303,18 @@ type TL_updateShortChatMessage struct {
 	Date        int32
 	FwdFrom     TL    // (flags.2) MessageFwdHeader: TL_messageFwdHeader
 	ViaBotID    int64 // (flags.11)
-	ReplyTo     TL    // (flags.3) MessageReplyHeader: TL_messageReplyHeader
-	Entities    []TL  // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	ReplyTo     TL    // (flags.3) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
+	Entities    []TL  // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	TtlPeriod   int32 // (flags.25)
 }
 
 type TL_updateShort struct {
-	Update TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden
+	Update TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Date   int32
 }
 
 type TL_updatesCombined struct {
-	Updates  []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden
+	Updates  []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Users    []TL // User: TL_userEmpty | TL_user
 	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Date     int32
@@ -4109,7 +4323,7 @@ type TL_updatesCombined struct {
 }
 
 type TL_updates struct {
-	Updates []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden
+	Updates []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Users   []TL // User: TL_userEmpty | TL_user
 	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Date    int32
@@ -4123,8 +4337,8 @@ type TL_updateShortSentMessage struct {
 	Pts       int32
 	PtsCount  int32
 	Date      int32
-	Media     TL    // (flags.9) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice
-	Entities  []TL  // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Media     TL    // (flags.9) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
+	Entities  []TL  // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	TtlPeriod int32 // (flags.25)
 }
 
@@ -4235,7 +4449,7 @@ type TL_help_appUpdate struct {
 	ID         int32
 	Version    string
 	Text       string
-	Entities   []TL   // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities   []TL   // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	Document   TL     // (flags.1) Document: TL_documentEmpty | TL_document
 	Url        string // (flags.2)
 	Sticker    TL     // (flags.3) Document: TL_documentEmpty | TL_document
@@ -4507,6 +4721,9 @@ type TL_inputPrivacyKeyAddedByPhone struct {
 type TL_inputPrivacyKeyVoiceMessages struct {
 }
 
+type TL_inputPrivacyKeyAbout struct {
+}
+
 type TL_privacyKeyStatusTimestamp struct {
 }
 
@@ -4532,6 +4749,9 @@ type TL_privacyKeyAddedByPhone struct {
 }
 
 type TL_privacyKeyVoiceMessages struct {
+}
+
+type TL_privacyKeyAbout struct {
 }
 
 type TL_inputPrivacyValueAllowContacts struct {
@@ -4562,6 +4782,9 @@ type TL_inputPrivacyValueDisallowChatParticipants struct {
 	Chats []int64
 }
 
+type TL_inputPrivacyValueAllowCloseFriends struct {
+}
+
 type TL_privacyValueAllowContacts struct {
 }
 
@@ -4590,8 +4813,11 @@ type TL_privacyValueDisallowChatParticipants struct {
 	Chats []int64
 }
 
+type TL_privacyValueAllowCloseFriends struct {
+}
+
 type TL_account_privacyRules struct {
-	Rules []TL // PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants
+	Rules []TL // PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants | TL_privacyValueAllowCloseFriends
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users []TL // User: TL_userEmpty | TL_user
 }
@@ -4620,9 +4846,11 @@ type TL_documentAttributeVideo struct {
 	Flags             int32
 	RoundMessage      bool // (flags.0)
 	SupportsStreaming bool // (flags.1)
-	Duration          int32
+	Nosound           bool // (flags.3)
+	Duration          float64
 	W                 int32
 	H                 int32
+	PreloadPrefixSize int32 // (flags.2)
 }
 
 type TL_documentAttributeAudio struct {
@@ -4676,34 +4904,39 @@ type TL_messages_affectedMessages struct {
 }
 
 type TL_webPageEmpty struct {
-	ID int64
+	Flags int32
+	ID    int64
+	Url   string // (flags.0)
 }
 
 type TL_webPagePending struct {
-	ID   int64
-	Date int32
+	Flags int32
+	ID    int64
+	Url   string // (flags.0)
+	Date  int32
 }
 
 type TL_webPage struct {
-	Flags       int32
-	ID          int64
-	Url         string
-	DisplayUrl  string
-	Hash        int32
-	Type        string // (flags.0)
-	SiteName    string // (flags.1)
-	Title       string // (flags.2)
-	Description string // (flags.3)
-	Photo       TL     // (flags.4) Photo: TL_photoEmpty | TL_photo
-	EmbedUrl    string // (flags.5)
-	EmbedType   string // (flags.5)
-	EmbedWidth  int32  // (flags.6)
-	EmbedHeight int32  // (flags.6)
-	Duration    int32  // (flags.7)
-	Author      string // (flags.8)
-	Document    TL     // (flags.9) Document: TL_documentEmpty | TL_document
-	CachedPage  TL     // (flags.10) Page: TL_page
-	Attributes  []TL   // (flags.12) WebPageAttribute: TL_webPageAttributeTheme
+	Flags         int32
+	HasLargeMedia bool // (flags.13)
+	ID            int64
+	Url           string
+	DisplayUrl    string
+	Hash          int32
+	Type          string // (flags.0)
+	SiteName      string // (flags.1)
+	Title         string // (flags.2)
+	Description   string // (flags.3)
+	Photo         TL     // (flags.4) Photo: TL_photoEmpty | TL_photo
+	EmbedUrl      string // (flags.5)
+	EmbedType     string // (flags.5)
+	EmbedWidth    int32  // (flags.6)
+	EmbedHeight   int32  // (flags.6)
+	Duration      int32  // (flags.7)
+	Author        string // (flags.8)
+	Document      TL     // (flags.9) Document: TL_documentEmpty | TL_document
+	CachedPage    TL     // (flags.10) Page: TL_page
+	Attributes    []TL   // (flags.12) WebPageAttribute: TL_webPageAttributeTheme | TL_webPageAttributeStory
 }
 
 type TL_webPageNotModified struct {
@@ -4718,6 +4951,7 @@ type TL_authorization struct {
 	PasswordPending           bool // (flags.2)
 	EncryptedRequestsDisabled bool // (flags.3)
 	CallRequestsDisabled      bool // (flags.4)
+	Unconfirmed               bool // (flags.5)
 	Hash                      int64
 	DeviceModel               string
 	Platform                  string
@@ -4808,11 +5042,15 @@ type TL_chatInvite struct {
 	Public            bool // (flags.2)
 	Megagroup         bool // (flags.3)
 	RequestNeeded     bool // (flags.6)
+	Verified          bool // (flags.7)
+	Scam              bool // (flags.8)
+	Fake              bool // (flags.9)
 	Title             string
 	About             string // (flags.5)
 	Photo             TL     // Photo: TL_photoEmpty | TL_photo
 	ParticipantsCount int32
 	Participants      []TL // (flags.4) User: TL_userEmpty | TL_user
+	Color             int32
 }
 
 type TL_chatInvitePeek struct {
@@ -4862,6 +5100,7 @@ type TL_stickerSet struct {
 	Animated        bool  // (flags.5)
 	Videos          bool  // (flags.6)
 	Emojis          bool  // (flags.7)
+	TextColor       bool  // (flags.9)
 	InstalledDate   int32 // (flags.0)
 	ID              int64
 	AccessHash      int64
@@ -5108,11 +5347,6 @@ type TL_messageEntityStrike struct {
 	Length int32
 }
 
-type TL_messageEntityBlockquote struct {
-	Offset int32
-	Length int32
-}
-
 type TL_messageEntityBankCard struct {
 	Offset int32
 	Length int32
@@ -5127,6 +5361,11 @@ type TL_messageEntityCustomEmoji struct {
 	Offset     int32
 	Length     int32
 	DocumentID int64
+}
+
+type TL_messageEntityBlockquote struct {
+	Offset int32
+	Length int32
 }
 
 type TL_inputChannelEmpty struct {
@@ -5177,7 +5416,7 @@ type TL_updates_channelDifference struct {
 	Pts          int32
 	Timeout      int32 // (flags.1)
 	NewMessages  []TL  // Message: TL_messageEmpty | TL_message | TL_messageService
-	OtherUpdates []TL  // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden
+	OtherUpdates []TL  // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Chats        []TL  // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users        []TL  // User: TL_userEmpty | TL_user
 }
@@ -5288,7 +5527,7 @@ type TL_help_termsOfService struct {
 	Popup         bool // (flags.0)
 	ID            TL   // DataJSON: TL_dataJSON
 	Text          string
-	Entities      []TL  // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities      []TL  // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	MinAgeConfirm int32 // (flags.1)
 }
 
@@ -5302,16 +5541,18 @@ type TL_messages_savedGifs struct {
 
 type TL_inputBotInlineMessageMediaAuto struct {
 	Flags       int32
+	InvertMedia bool // (flags.3)
 	Message     string
-	Entities    []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities    []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	ReplyMarkup TL   // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
 type TL_inputBotInlineMessageText struct {
 	Flags       int32
 	NoWebpage   bool // (flags.0)
+	InvertMedia bool // (flags.3)
 	Message     string
-	Entities    []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities    []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	ReplyMarkup TL   // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
@@ -5361,6 +5602,18 @@ type TL_inputBotInlineMessageMediaInvoice struct {
 	ReplyMarkup  TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+type TL_inputBotInlineMessageMediaWebPage struct {
+	Flags           int32
+	InvertMedia     bool // (flags.3)
+	ForceLargeMedia bool // (flags.4)
+	ForceSmallMedia bool // (flags.5)
+	Optional        bool // (flags.6)
+	Message         string
+	Entities        []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Url             string
+	ReplyMarkup     TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+}
+
 type TL_inputBotInlineResult struct {
 	Flags       int32
 	ID          string
@@ -5370,14 +5623,14 @@ type TL_inputBotInlineResult struct {
 	Url         string // (flags.3)
 	Thumb       TL     // (flags.4) InputWebDocument: TL_inputWebDocument
 	Content     TL     // (flags.5) InputWebDocument: TL_inputWebDocument
-	SendMessage TL     // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice
+	SendMessage TL     // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
 type TL_inputBotInlineResultPhoto struct {
 	ID          string
 	Type        string
 	Photo       TL // InputPhoto: TL_inputPhotoEmpty | TL_inputPhoto
-	SendMessage TL // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice
+	SendMessage TL // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
 type TL_inputBotInlineResultDocument struct {
@@ -5387,27 +5640,29 @@ type TL_inputBotInlineResultDocument struct {
 	Title       string // (flags.1)
 	Description string // (flags.2)
 	Document    TL     // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	SendMessage TL     // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice
+	SendMessage TL     // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
 type TL_inputBotInlineResultGame struct {
 	ID          string
 	ShortName   string
-	SendMessage TL // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice
+	SendMessage TL // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
 type TL_botInlineMessageMediaAuto struct {
 	Flags       int32
+	InvertMedia bool // (flags.3)
 	Message     string
-	Entities    []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities    []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	ReplyMarkup TL   // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
 type TL_botInlineMessageText struct {
 	Flags       int32
 	NoWebpage   bool // (flags.0)
+	InvertMedia bool // (flags.3)
 	Message     string
-	Entities    []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities    []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	ReplyMarkup TL   // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
@@ -5452,6 +5707,19 @@ type TL_botInlineMessageMediaInvoice struct {
 	ReplyMarkup              TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+type TL_botInlineMessageMediaWebPage struct {
+	Flags           int32
+	InvertMedia     bool // (flags.3)
+	ForceLargeMedia bool // (flags.4)
+	ForceSmallMedia bool // (flags.5)
+	Manual          bool // (flags.7)
+	Safe            bool // (flags.8)
+	Message         string
+	Entities        []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Url             string
+	ReplyMarkup     TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+}
+
 type TL_botInlineResult struct {
 	Flags       int32
 	ID          string
@@ -5461,7 +5729,7 @@ type TL_botInlineResult struct {
 	Url         string // (flags.3)
 	Thumb       TL     // (flags.4) WebDocument: TL_webDocument | TL_webDocumentNoProxy
 	Content     TL     // (flags.5) WebDocument: TL_webDocument | TL_webDocumentNoProxy
-	SendMessage TL     // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice
+	SendMessage TL     // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice | TL_botInlineMessageMediaWebPage
 }
 
 type TL_botInlineMediaResult struct {
@@ -5472,7 +5740,7 @@ type TL_botInlineMediaResult struct {
 	Document    TL     // (flags.1) Document: TL_documentEmpty | TL_document
 	Title       string // (flags.2)
 	Description string // (flags.3)
-	SendMessage TL     // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice
+	SendMessage TL     // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice | TL_botInlineMessageMediaWebPage
 }
 
 type TL_messages_botResults struct {
@@ -5664,12 +5932,14 @@ type TL_draftMessageEmpty struct {
 }
 
 type TL_draftMessage struct {
-	Flags        int32
-	NoWebpage    bool  // (flags.1)
-	ReplyToMsgID int32 // (flags.0)
-	Message      string
-	Entities     []TL // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
-	Date         int32
+	Flags       int32
+	NoWebpage   bool // (flags.1)
+	InvertMedia bool // (flags.6)
+	ReplyTo     TL   // (flags.4) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
+	Message     string
+	Entities    []TL // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Media       TL   // (flags.5) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
+	Date        int32
 }
 
 type TL_messages_featuredStickersNotModified struct {
@@ -6036,7 +6306,7 @@ type TL_invoice struct {
 	Prices                   []TL    // LabeledPrice: TL_labeledPrice
 	MaxTipAmount             int64   // (flags.8)
 	SuggestedTipAmounts      []int64 // (flags.8)
-	RecurringTermsUrl        string  // (flags.9)
+	TermsUrl                 string  // (flags.10)
 }
 
 type TL_paymentCharge struct {
@@ -6572,11 +6842,21 @@ type TL_channelAdminLogEventActionToggleAntiSpam struct {
 	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+type TL_channelAdminLogEventActionChangeColor struct {
+	PrevValue int32
+	NewValue  int32
+}
+
+type TL_channelAdminLogEventActionChangeBackgroundEmoji struct {
+	PrevValue int64
+	NewValue  int64
+}
+
 type TL_channelAdminLogEvent struct {
 	ID     int64
 	Date   int32
 	UserID int64
-	Action TL // ChannelAdminLogEventAction: TL_channelAdminLogEventActionChangeTitle | TL_channelAdminLogEventActionChangeAbout | TL_channelAdminLogEventActionChangeUsername | TL_channelAdminLogEventActionChangePhoto | TL_channelAdminLogEventActionToggleInvites | TL_channelAdminLogEventActionToggleSignatures | TL_channelAdminLogEventActionUpdatePinned | TL_channelAdminLogEventActionEditMessage | TL_channelAdminLogEventActionDeleteMessage | TL_channelAdminLogEventActionParticipantJoin | TL_channelAdminLogEventActionParticipantLeave | TL_channelAdminLogEventActionParticipantInvite | TL_channelAdminLogEventActionParticipantToggleBan | TL_channelAdminLogEventActionParticipantToggleAdmin | TL_channelAdminLogEventActionChangeStickerSet | TL_channelAdminLogEventActionTogglePreHistoryHidden | TL_channelAdminLogEventActionDefaultBannedRights | TL_channelAdminLogEventActionStopPoll | TL_channelAdminLogEventActionChangeLinkedChat | TL_channelAdminLogEventActionChangeLocation | TL_channelAdminLogEventActionToggleSlowMode | TL_channelAdminLogEventActionStartGroupCall | TL_channelAdminLogEventActionDiscardGroupCall | TL_channelAdminLogEventActionParticipantMute | TL_channelAdminLogEventActionParticipantUnmute | TL_channelAdminLogEventActionToggleGroupCallSetting | TL_channelAdminLogEventActionParticipantJoinByInvite | TL_channelAdminLogEventActionExportedInviteDelete | TL_channelAdminLogEventActionExportedInviteRevoke | TL_channelAdminLogEventActionExportedInviteEdit | TL_channelAdminLogEventActionParticipantVolume | TL_channelAdminLogEventActionChangeHistoryTTL | TL_channelAdminLogEventActionParticipantJoinByRequest | TL_channelAdminLogEventActionToggleNoForwards | TL_channelAdminLogEventActionSendMessage | TL_channelAdminLogEventActionChangeAvailableReactions | TL_channelAdminLogEventActionChangeUsernames | TL_channelAdminLogEventActionToggleForum | TL_channelAdminLogEventActionCreateTopic | TL_channelAdminLogEventActionEditTopic | TL_channelAdminLogEventActionDeleteTopic | TL_channelAdminLogEventActionPinTopic | TL_channelAdminLogEventActionToggleAntiSpam
+	Action TL // ChannelAdminLogEventAction: TL_channelAdminLogEventActionChangeTitle | TL_channelAdminLogEventActionChangeAbout | TL_channelAdminLogEventActionChangeUsername | TL_channelAdminLogEventActionChangePhoto | TL_channelAdminLogEventActionToggleInvites | TL_channelAdminLogEventActionToggleSignatures | TL_channelAdminLogEventActionUpdatePinned | TL_channelAdminLogEventActionEditMessage | TL_channelAdminLogEventActionDeleteMessage | TL_channelAdminLogEventActionParticipantJoin | TL_channelAdminLogEventActionParticipantLeave | TL_channelAdminLogEventActionParticipantInvite | TL_channelAdminLogEventActionParticipantToggleBan | TL_channelAdminLogEventActionParticipantToggleAdmin | TL_channelAdminLogEventActionChangeStickerSet | TL_channelAdminLogEventActionTogglePreHistoryHidden | TL_channelAdminLogEventActionDefaultBannedRights | TL_channelAdminLogEventActionStopPoll | TL_channelAdminLogEventActionChangeLinkedChat | TL_channelAdminLogEventActionChangeLocation | TL_channelAdminLogEventActionToggleSlowMode | TL_channelAdminLogEventActionStartGroupCall | TL_channelAdminLogEventActionDiscardGroupCall | TL_channelAdminLogEventActionParticipantMute | TL_channelAdminLogEventActionParticipantUnmute | TL_channelAdminLogEventActionToggleGroupCallSetting | TL_channelAdminLogEventActionParticipantJoinByInvite | TL_channelAdminLogEventActionExportedInviteDelete | TL_channelAdminLogEventActionExportedInviteRevoke | TL_channelAdminLogEventActionExportedInviteEdit | TL_channelAdminLogEventActionParticipantVolume | TL_channelAdminLogEventActionChangeHistoryTTL | TL_channelAdminLogEventActionParticipantJoinByRequest | TL_channelAdminLogEventActionToggleNoForwards | TL_channelAdminLogEventActionSendMessage | TL_channelAdminLogEventActionChangeAvailableReactions | TL_channelAdminLogEventActionChangeUsernames | TL_channelAdminLogEventActionToggleForum | TL_channelAdminLogEventActionCreateTopic | TL_channelAdminLogEventActionEditTopic | TL_channelAdminLogEventActionDeleteTopic | TL_channelAdminLogEventActionPinTopic | TL_channelAdminLogEventActionToggleAntiSpam | TL_channelAdminLogEventActionChangeColor | TL_channelAdminLogEventActionChangeBackgroundEmoji
 }
 
 type TL_channels_adminLogResults struct {
@@ -6653,10 +6933,10 @@ type TL_help_recentMeUrls struct {
 
 type TL_inputSingleMedia struct {
 	Flags    int32
-	Media    TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice
+	Media    TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 	RandomID int64
 	Message  string
-	Entities []TL // (flags.0) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities []TL // (flags.0) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_webAuthorization struct {
@@ -6927,7 +7207,7 @@ type TL_help_deepLinkInfo struct {
 	Flags     int32
 	UpdateApp bool // (flags.0)
 	Message   string
-	Entities  []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities  []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_savedPhoneContact struct {
@@ -7103,7 +7383,7 @@ type TL_help_userInfoEmpty struct {
 
 type TL_help_userInfo struct {
 	Message  string
-	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	Author   string
 	Date     int32
 }
@@ -7136,12 +7416,12 @@ type TL_pollAnswerVoters struct {
 
 type TL_pollResults struct {
 	Flags            int32
-	Min              bool    // (flags.0)
-	Results          []TL    // (flags.1) PollAnswerVoters: TL_pollAnswerVoters
-	TotalVoters      int32   // (flags.2)
-	RecentVoters     []int64 // (flags.3)
-	Solution         string  // (flags.4)
-	SolutionEntities []TL    // (flags.4) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Min              bool   // (flags.0)
+	Results          []TL   // (flags.1) PollAnswerVoters: TL_pollAnswerVoters
+	TotalVoters      int32  // (flags.2)
+	RecentVoters     []TL   // (flags.3) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Solution         string // (flags.4)
+	SolutionEntities []TL   // (flags.4) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_chatOnlines struct {
@@ -7166,6 +7446,9 @@ type TL_chatAdminRights struct {
 	ManageCall     bool // (flags.11)
 	Other          bool // (flags.12)
 	ManageTopics   bool // (flags.13)
+	PostStories    bool // (flags.14)
+	EditStories    bool // (flags.15)
+	DeleteStories  bool // (flags.16)
 }
 
 type TL_chatBannedRights struct {
@@ -7239,15 +7522,18 @@ type TL_wallPaperSettings struct {
 }
 
 type TL_autoDownloadSettings struct {
-	Flags                 int32
-	Disabled              bool // (flags.0)
-	VideoPreloadLarge     bool // (flags.1)
-	AudioPreloadNext      bool // (flags.2)
-	PhonecallsLessData    bool // (flags.3)
-	PhotoSizeMax          int32
-	VideoSizeMax          int64
-	FileSizeMax           int64
-	VideoUploadMaxbitrate int32
+	Flags                         int32
+	Disabled                      bool // (flags.0)
+	VideoPreloadLarge             bool // (flags.1)
+	AudioPreloadNext              bool // (flags.2)
+	PhonecallsLessData            bool // (flags.3)
+	StoriesPreload                bool // (flags.4)
+	PhotoSizeMax                  int32
+	VideoSizeMax                  int64
+	FileSizeMax                   int64
+	VideoUploadMaxbitrate         int32
+	SmallQueueActiveOperationsMax int32
+	LargeQueueActiveOperationsMax int32
 }
 
 type TL_account_autoDownloadSettings struct {
@@ -7446,27 +7732,18 @@ type TL_webPageAttributeTheme struct {
 	Settings  TL   // (flags.1) ThemeSettings: TL_themeSettings
 }
 
-type TL_messageUserVote struct {
-	UserID int64
-	Option []byte
-	Date   int32
-}
-
-type TL_messageUserVoteInputOption struct {
-	UserID int64
-	Date   int32
-}
-
-type TL_messageUserVoteMultiple struct {
-	UserID  int64
-	Options [][]byte
-	Date    int32
+type TL_webPageAttributeStory struct {
+	Flags int32
+	Peer  TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	ID    int32
+	Story TL // (flags.0) StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
 }
 
 type TL_messages_votesList struct {
 	Flags      int32
 	Count      int32
-	Votes      []TL   // MessageUserVote: TL_messageUserVote | TL_messageUserVoteInputOption | TL_messageUserVoteMultiple
+	Votes      []TL   // MessagePeerVote: TL_messagePeerVote | TL_messagePeerVoteInputOption | TL_messagePeerVoteMultiple
+	Chats      []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users      []TL   // User: TL_userEmpty | TL_user
 	NextOffset string // (flags.0)
 }
@@ -7645,7 +7922,9 @@ type TL_stats_megagroupStats struct {
 
 type TL_globalPrivacySettings struct {
 	Flags                            int32
-	ArchiveAndMuteNewNoncontactPeers TL // (flags.0) Bool: TL_boolFalse | TL_boolTrue
+	ArchiveAndMuteNewNoncontactPeers bool // (flags.0)
+	KeepArchivedUnmuted              bool // (flags.1)
+	KeepArchivedFolders              bool // (flags.2)
 }
 
 type TL_help_countryCode struct {
@@ -7698,11 +7977,21 @@ type TL_messages_discussionMessage struct {
 
 type TL_messageReplyHeader struct {
 	Flags            int32
-	ReplyToScheduled bool // (flags.2)
-	ForumTopic       bool // (flags.3)
-	ReplyToMsgID     int32
-	ReplyToPeerID    TL    // (flags.0) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	ReplyToTopID     int32 // (flags.1)
+	ReplyToScheduled bool   // (flags.2)
+	ForumTopic       bool   // (flags.3)
+	Quote            bool   // (flags.9)
+	ReplyToMsgID     int32  // (flags.4)
+	ReplyToPeerID    TL     // (flags.0) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	ReplyFrom        TL     // (flags.5) MessageFwdHeader: TL_messageFwdHeader
+	ReplyMedia       TL     // (flags.8) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
+	ReplyToTopID     int32  // (flags.1)
+	QuoteText        string // (flags.6)
+	QuoteEntities    []TL   // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+}
+
+type TL_messageReplyStoryHeader struct {
+	UserID  int64
+	StoryID int32
 }
 
 type TL_messageReplies struct {
@@ -7955,8 +8244,9 @@ type TL_sponsoredMessage struct {
 	ChatInviteHash string // (flags.4)
 	ChannelPost    int32  // (flags.2)
 	StartParam     string // (flags.0)
+	Webpage        TL     // (flags.9) SponsoredWebPage: TL_sponsoredWebPage
 	Message        string
-	Entities       []TL   // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities       []TL   // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	SponsorInfo    string // (flags.7)
 	AdditionalInfo string // (flags.8)
 }
@@ -8077,6 +8367,7 @@ type TL_messagePeerReaction struct {
 	Flags    int32
 	Big      bool // (flags.0)
 	Unread   bool // (flags.1)
+	My       bool // (flags.2)
 	PeerID   TL   // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Date     int32
 	Reaction TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
@@ -8110,14 +8401,17 @@ type TL_attachMenuBotIcon struct {
 }
 
 type TL_attachMenuBot struct {
-	Flags              int32
-	Inactive           bool // (flags.0)
-	HasSettings        bool // (flags.1)
-	RequestWriteAccess bool // (flags.2)
-	BotID              int64
-	ShortName          string
-	PeerTypes          []TL // AttachMenuPeerType: TL_attachMenuPeerTypeSameBotPM | TL_attachMenuPeerTypeBotPM | TL_attachMenuPeerTypePM | TL_attachMenuPeerTypeChat | TL_attachMenuPeerTypeBroadcast
-	Icons              []TL // AttachMenuBotIcon: TL_attachMenuBotIcon
+	Flags                    int32
+	Inactive                 bool // (flags.0)
+	HasSettings              bool // (flags.1)
+	RequestWriteAccess       bool // (flags.2)
+	ShowInAttachMenu         bool // (flags.3)
+	ShowInSideMenu           bool // (flags.4)
+	SideMenuDisclaimerNeeded bool // (flags.5)
+	BotID                    int64
+	ShortName                string
+	PeerTypes                []TL // (flags.3) AttachMenuPeerType: TL_attachMenuPeerTypeSameBotPM | TL_attachMenuPeerTypeBotPM | TL_attachMenuPeerTypePM | TL_attachMenuPeerTypeChat | TL_attachMenuPeerTypeBroadcast
+	Icons                    []TL // AttachMenuBotIcon: TL_attachMenuBotIcon
 }
 
 type TL_attachMenuBotsNotModified struct {
@@ -8213,6 +8507,11 @@ type TL_inputInvoiceSlug struct {
 	Slug string
 }
 
+type TL_inputInvoicePremiumGiftCode struct {
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
+	Option  TL // PremiumGiftCodeOption: TL_premiumGiftCodeOption
+}
+
 type TL_payments_exportedInvoice struct {
 	Url string
 }
@@ -8226,7 +8525,7 @@ type TL_messages_transcribedAudio struct {
 
 type TL_help_premiumPromo struct {
 	StatusText     string
-	StatusEntities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	StatusEntities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	VideoSections  []string
 	Videos         []TL // Document: TL_documentEmpty | TL_document
 	PeriodOptions  []TL // PremiumSubscriptionOption: TL_premiumSubscriptionOption
@@ -8243,6 +8542,26 @@ type TL_inputStorePaymentGiftPremium struct {
 	UserID   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Currency string
 	Amount   int64
+}
+
+type TL_inputStorePaymentPremiumGiftCode struct {
+	Flags     int32
+	Users     []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	BoostPeer TL   // (flags.0) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Currency  string
+	Amount    int64
+}
+
+type TL_inputStorePaymentPremiumGiveaway struct {
+	Flags              int32
+	OnlyNewSubscribers bool     // (flags.0)
+	BoostPeer          TL       // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	AdditionalPeers    []TL     // (flags.1) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	CountriesIso2      []string // (flags.2)
+	RandomID           int64
+	UntilDate          int32
+	Currency           string
+	Amount             int64
 }
 
 type TL_premiumGiftOption struct {
@@ -8369,7 +8688,7 @@ type TL_messageExtendedMediaPreview struct {
 }
 
 type TL_messageExtendedMedia struct {
-	Media TL // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice
+	Media TL // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
 }
 
 type TL_stickerKeyword struct {
@@ -8479,7 +8798,7 @@ type TL_messages_emojiGroups struct {
 
 type TL_textWithEntities struct {
 	Text     string
-	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_messages_translateResult struct {
@@ -8544,6 +8863,7 @@ type TL_messages_botApp struct {
 	Flags              int32
 	Inactive           bool // (flags.0)
 	RequestWriteAccess bool // (flags.1)
+	HasSettings        bool // (flags.2)
 	App                TL   // BotApp: TL_botAppNotModified | TL_botApp
 }
 
@@ -8610,6 +8930,304 @@ type TL_bots_botInfo struct {
 	Name        string
 	About       string
 	Description string
+}
+
+type TL_messagePeerVote struct {
+	Peer   TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Option []byte
+	Date   int32
+}
+
+type TL_messagePeerVoteInputOption struct {
+	Peer TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Date int32
+}
+
+type TL_messagePeerVoteMultiple struct {
+	Peer    TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Options [][]byte
+	Date    int32
+}
+
+type TL_sponsoredWebPage struct {
+	Flags    int32
+	Url      string
+	SiteName string
+	Photo    TL // (flags.0) Photo: TL_photoEmpty | TL_photo
+}
+
+type TL_storyViews struct {
+	Flags          int32
+	HasViewers     bool // (flags.1)
+	ViewsCount     int32
+	ForwardsCount  int32   // (flags.2)
+	Reactions      []TL    // (flags.3) ReactionCount: TL_reactionCount
+	ReactionsCount int32   // (flags.4)
+	RecentViewers  []int64 // (flags.0)
+}
+
+type TL_storyItemDeleted struct {
+	ID int32
+}
+
+type TL_storyItemSkipped struct {
+	Flags        int32
+	CloseFriends bool // (flags.8)
+	ID           int32
+	Date         int32
+	ExpireDate   int32
+}
+
+type TL_storyItem struct {
+	Flags            int32
+	Pinned           bool // (flags.5)
+	Public           bool // (flags.7)
+	CloseFriends     bool // (flags.8)
+	Min              bool // (flags.9)
+	Noforwards       bool // (flags.10)
+	Edited           bool // (flags.11)
+	Contacts         bool // (flags.12)
+	SelectedContacts bool // (flags.13)
+	Out              bool // (flags.16)
+	ID               int32
+	Date             int32
+	ExpireDate       int32
+	Caption          string // (flags.0)
+	Entities         []TL   // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Media            TL     // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
+	MediaAreas       []TL   // (flags.14) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
+	Privacy          []TL   // (flags.2) PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants | TL_privacyValueAllowCloseFriends
+	Views            TL     // (flags.3) StoryViews: TL_storyViews
+	SentReaction     TL     // (flags.15) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+}
+
+type TL_stories_allStoriesNotModified struct {
+	Flags       int32
+	State       string
+	StealthMode TL // StoriesStealthMode: TL_storiesStealthMode
+}
+
+type TL_stories_allStories struct {
+	Flags       int32
+	HasMore     bool // (flags.0)
+	Count       int32
+	State       string
+	PeerStories []TL // PeerStories: TL_peerStories
+	Chats       []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users       []TL // User: TL_userEmpty | TL_user
+	StealthMode TL   // StoriesStealthMode: TL_storiesStealthMode
+}
+
+type TL_stories_stories struct {
+	Count   int32
+	Stories []TL // StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
+	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users   []TL // User: TL_userEmpty | TL_user
+}
+
+type TL_storyView struct {
+	Flags                int32
+	Blocked              bool // (flags.0)
+	BlockedMyStoriesFrom bool // (flags.1)
+	UserID               int64
+	Date                 int32
+	Reaction             TL // (flags.2) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+}
+
+type TL_stories_storyViewsList struct {
+	Flags          int32
+	Count          int32
+	ReactionsCount int32
+	Views          []TL   // StoryView: TL_storyView
+	Users          []TL   // User: TL_userEmpty | TL_user
+	NextOffset     string // (flags.0)
+}
+
+type TL_stories_storyViews struct {
+	Views []TL // StoryViews: TL_storyViews
+	Users []TL // User: TL_userEmpty | TL_user
+}
+
+type TL_inputReplyToMessage struct {
+	Flags         int32
+	ReplyToMsgID  int32
+	TopMsgID      int32  // (flags.0)
+	ReplyToPeerID TL     // (flags.1) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	QuoteText     string // (flags.2)
+	QuoteEntities []TL   // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+}
+
+type TL_inputReplyToStory struct {
+	UserID  TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	StoryID int32
+}
+
+type TL_exportedStoryLink struct {
+	Link string
+}
+
+type TL_storiesStealthMode struct {
+	Flags             int32
+	ActiveUntilDate   int32 // (flags.0)
+	CooldownUntilDate int32 // (flags.1)
+}
+
+type TL_mediaAreaCoordinates struct {
+	X        float64
+	Y        float64
+	W        float64
+	H        float64
+	Rotation float64
+}
+
+type TL_mediaAreaVenue struct {
+	Coordinates TL // MediaAreaCoordinates: TL_mediaAreaCoordinates
+	Geo         TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
+	Title       string
+	Address     string
+	Provider    string
+	VenueID     string
+	VenueType   string
+}
+
+type TL_inputMediaAreaVenue struct {
+	Coordinates TL // MediaAreaCoordinates: TL_mediaAreaCoordinates
+	QueryID     int64
+	ResultID    string
+}
+
+type TL_mediaAreaGeoPoint struct {
+	Coordinates TL // MediaAreaCoordinates: TL_mediaAreaCoordinates
+	Geo         TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
+}
+
+type TL_mediaAreaSuggestedReaction struct {
+	Flags       int32
+	Dark        bool // (flags.0)
+	Flipped     bool // (flags.1)
+	Coordinates TL   // MediaAreaCoordinates: TL_mediaAreaCoordinates
+	Reaction    TL   // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+}
+
+type TL_peerStories struct {
+	Flags     int32
+	Peer      TL    // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	MaxReadID int32 // (flags.0)
+	Stories   []TL  // StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
+}
+
+type TL_stories_peerStories struct {
+	Stories TL   // PeerStories: TL_peerStories
+	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users   []TL // User: TL_userEmpty | TL_user
+}
+
+type TL_messages_webPage struct {
+	Webpage TL   // WebPage: TL_webPageEmpty | TL_webPagePending | TL_webPage | TL_webPageNotModified
+	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users   []TL // User: TL_userEmpty | TL_user
+}
+
+type TL_premiumGiftCodeOption struct {
+	Flags         int32
+	Users         int32
+	Months        int32
+	StoreProduct  string // (flags.0)
+	StoreQuantity int32  // (flags.1)
+	Currency      string
+	Amount        int64
+}
+
+type TL_payments_checkedGiftCode struct {
+	Flags         int32
+	ViaGiveaway   bool  // (flags.2)
+	FromID        TL    // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	GiveawayMsgID int32 // (flags.3)
+	ToID          int64 // (flags.0)
+	Date          int32
+	Months        int32
+	UsedDate      int32 // (flags.1)
+	Chats         []TL  // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users         []TL  // User: TL_userEmpty | TL_user
+}
+
+type TL_payments_giveawayInfo struct {
+	Flags                 int32
+	Participating         bool // (flags.0)
+	PreparingResults      bool // (flags.3)
+	StartDate             int32
+	JoinedTooEarlyDate    int32  // (flags.1)
+	AdminDisallowedChatID int64  // (flags.2)
+	DisallowedCountry     string // (flags.4)
+}
+
+type TL_payments_giveawayInfoResults struct {
+	Flags          int32
+	Winner         bool // (flags.0)
+	Refunded       bool // (flags.1)
+	StartDate      int32
+	GiftCodeSlug   string // (flags.0)
+	FinishDate     int32
+	WinnersCount   int32
+	ActivatedCount int32
+}
+
+type TL_prepaidGiveaway struct {
+	ID       int64
+	Months   int32
+	Quantity int32
+	Date     int32
+}
+
+type TL_boost struct {
+	Flags         int32
+	Gift          bool // (flags.1)
+	Giveaway      bool // (flags.2)
+	Unclaimed     bool // (flags.3)
+	ID            string
+	UserID        int64 // (flags.0)
+	GiveawayMsgID int32 // (flags.2)
+	Date          int32
+	Expires       int32
+	UsedGiftSlug  string // (flags.4)
+	Multiplier    int32  // (flags.5)
+}
+
+type TL_premium_boostsList struct {
+	Flags      int32
+	Count      int32
+	Boosts     []TL   // Boost: TL_boost
+	NextOffset string // (flags.0)
+	Users      []TL   // User: TL_userEmpty | TL_user
+}
+
+type TL_myBoost struct {
+	Flags             int32
+	Slot              int32
+	Peer              TL // (flags.0) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Date              int32
+	Expires           int32
+	CooldownUntilDate int32 // (flags.1)
+}
+
+type TL_premium_myBoosts struct {
+	MyBoosts []TL // MyBoost: TL_myBoost
+	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users    []TL // User: TL_userEmpty | TL_user
+}
+
+type TL_premium_boostsStatus struct {
+	Flags              int32
+	MyBoost            bool // (flags.2)
+	Level              int32
+	CurrentLevelBoosts int32
+	Boosts             int32
+	GiftBoosts         int32 // (flags.4)
+	NextLevelBoosts    int32 // (flags.0)
+	PremiumAudience    TL    // (flags.1) StatsPercentValue: TL_statsPercentValue
+	BoostUrl           string
+	PrepaidGiveaways   []TL    // (flags.3) PrepaidGiveaway: TL_prepaidGiveaway
+	MyBoostSlots       []int32 // (flags.2)
 }
 
 type TL_invokeAfterMsg struct {
@@ -8828,12 +9446,12 @@ type TL_account_updateUsername struct {
 }
 
 type TL_account_getPrivacy struct {
-	Key TL // InputPrivacyKey: TL_inputPrivacyKeyStatusTimestamp | TL_inputPrivacyKeyChatInvite | TL_inputPrivacyKeyPhoneCall | TL_inputPrivacyKeyPhoneP2P | TL_inputPrivacyKeyForwards | TL_inputPrivacyKeyProfilePhoto | TL_inputPrivacyKeyPhoneNumber | TL_inputPrivacyKeyAddedByPhone | TL_inputPrivacyKeyVoiceMessages
+	Key TL // InputPrivacyKey: TL_inputPrivacyKeyStatusTimestamp | TL_inputPrivacyKeyChatInvite | TL_inputPrivacyKeyPhoneCall | TL_inputPrivacyKeyPhoneP2P | TL_inputPrivacyKeyForwards | TL_inputPrivacyKeyProfilePhoto | TL_inputPrivacyKeyPhoneNumber | TL_inputPrivacyKeyAddedByPhone | TL_inputPrivacyKeyVoiceMessages | TL_inputPrivacyKeyAbout
 }
 
 type TL_account_setPrivacy struct {
-	Key   TL   // InputPrivacyKey: TL_inputPrivacyKeyStatusTimestamp | TL_inputPrivacyKeyChatInvite | TL_inputPrivacyKeyPhoneCall | TL_inputPrivacyKeyPhoneP2P | TL_inputPrivacyKeyForwards | TL_inputPrivacyKeyProfilePhoto | TL_inputPrivacyKeyPhoneNumber | TL_inputPrivacyKeyAddedByPhone | TL_inputPrivacyKeyVoiceMessages
-	Rules []TL // InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants
+	Key   TL   // InputPrivacyKey: TL_inputPrivacyKeyStatusTimestamp | TL_inputPrivacyKeyChatInvite | TL_inputPrivacyKeyPhoneCall | TL_inputPrivacyKeyPhoneP2P | TL_inputPrivacyKeyForwards | TL_inputPrivacyKeyProfilePhoto | TL_inputPrivacyKeyPhoneNumber | TL_inputPrivacyKeyAddedByPhone | TL_inputPrivacyKeyVoiceMessages | TL_inputPrivacyKeyAbout
+	Rules []TL // InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
 }
 
 type TL_account_deleteAccount struct {
@@ -8993,9 +9611,10 @@ type TL_account_setContactSignUpNotification struct {
 }
 
 type TL_account_getNotifyExceptions struct {
-	Flags        int32
-	CompareSound bool // (flags.1)
-	Peer         TL   // (flags.0) InputNotifyPeer: TL_inputNotifyPeer | TL_inputNotifyUsers | TL_inputNotifyChats | TL_inputNotifyBroadcasts | TL_inputNotifyForumTopic
+	Flags          int32
+	CompareSound   bool // (flags.1)
+	CompareStories bool // (flags.2)
+	Peer           TL   // (flags.0) InputNotifyPeer: TL_inputNotifyPeer | TL_inputNotifyUsers | TL_inputNotifyChats | TL_inputNotifyBroadcasts | TL_inputNotifyForumTopic
 }
 
 type TL_account_getWallPaper struct {
@@ -9125,6 +9744,7 @@ type TL_account_setAuthorizationTTL struct {
 
 type TL_account_changeAuthorizationSettings struct {
 	Flags                     int32
+	Confirmed                 bool // (flags.3)
 	Hash                      int64
 	EncryptedRequestsDisabled TL // (flags.0) Bool: TL_boolFalse | TL_boolTrue
 	CallRequestsDisabled      TL // (flags.1) Bool: TL_boolFalse | TL_boolTrue
@@ -9192,6 +9812,20 @@ type TL_account_saveAutoSaveSettings struct {
 type TL_account_deleteAutoSaveExceptions struct {
 }
 
+type TL_account_invalidateSignInCodes struct {
+	Codes []string
+}
+
+type TL_account_updateColor struct {
+	Flags             int32
+	Color             int32
+	BackgroundEmojiID int64 // (flags.0)
+}
+
+type TL_account_getDefaultBackgroundEmojis struct {
+	Hash int64
+}
+
 type TL_users_getUsers struct {
 	ID []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
@@ -9229,16 +9863,22 @@ type TL_contacts_deleteByPhones struct {
 }
 
 type TL_contacts_block struct {
-	ID TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Flags         int32
+	MyStoriesFrom bool // (flags.0)
+	ID            TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 type TL_contacts_unblock struct {
-	ID TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Flags         int32
+	MyStoriesFrom bool // (flags.0)
+	ID            TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 type TL_contacts_getBlocked struct {
-	Offset int32
-	Limit  int32
+	Flags         int32
+	MyStoriesFrom bool // (flags.0)
+	Offset        int32
+	Limit         int32
 }
 
 type TL_contacts_search struct {
@@ -9319,6 +9959,17 @@ type TL_contacts_importContactToken struct {
 	Token string
 }
 
+type TL_contacts_editCloseFriends struct {
+	ID []int64
+}
+
+type TL_contacts_setBlocked struct {
+	Flags         int32
+	MyStoriesFrom bool // (flags.0)
+	ID            []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Limit         int32
+}
+
 type TL_messages_getMessages struct {
 	ID []TL // InputMessage: TL_inputMessageID | TL_inputMessageReplyTo | TL_inputMessagePinned | TL_inputMessageCallbackQuery
 }
@@ -9396,38 +10047,38 @@ type TL_messages_setTyping struct {
 
 type TL_messages_sendMessage struct {
 	Flags                  int32
-	NoWebpage              bool  // (flags.1)
-	Silent                 bool  // (flags.5)
-	Background             bool  // (flags.6)
-	ClearDraft             bool  // (flags.7)
-	Noforwards             bool  // (flags.14)
-	UpdateStickersetsOrder bool  // (flags.15)
-	Peer                   TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	ReplyToMsgID           int32 // (flags.0)
-	TopMsgID               int32 // (flags.9)
+	NoWebpage              bool // (flags.1)
+	Silent                 bool // (flags.5)
+	Background             bool // (flags.6)
+	ClearDraft             bool // (flags.7)
+	Noforwards             bool // (flags.14)
+	UpdateStickersetsOrder bool // (flags.15)
+	InvertMedia            bool // (flags.16)
+	Peer                   TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ReplyTo                TL   // (flags.0) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	Message                string
 	RandomID               int64
 	ReplyMarkup            TL    // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities               []TL  // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities               []TL  // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	ScheduleDate           int32 // (flags.10)
 	SendAs                 TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 type TL_messages_sendMedia struct {
 	Flags                  int32
-	Silent                 bool  // (flags.5)
-	Background             bool  // (flags.6)
-	ClearDraft             bool  // (flags.7)
-	Noforwards             bool  // (flags.14)
-	UpdateStickersetsOrder bool  // (flags.15)
-	Peer                   TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	ReplyToMsgID           int32 // (flags.0)
-	TopMsgID               int32 // (flags.9)
-	Media                  TL    // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice
+	Silent                 bool // (flags.5)
+	Background             bool // (flags.6)
+	ClearDraft             bool // (flags.7)
+	Noforwards             bool // (flags.14)
+	UpdateStickersetsOrder bool // (flags.15)
+	InvertMedia            bool // (flags.16)
+	Peer                   TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ReplyTo                TL   // (flags.0) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
+	Media                  TL   // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 	Message                string
 	RandomID               int64
 	ReplyMarkup            TL    // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities               []TL  // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities               []TL  // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	ScheduleDate           int32 // (flags.10)
 	SendAs                 TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
@@ -9582,7 +10233,7 @@ type TL_messages_getAllStickers struct {
 type TL_messages_getWebPagePreview struct {
 	Flags    int32
 	Message  string
-	Entities []TL // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities []TL // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_messages_exportChatInvite struct {
@@ -9698,13 +10349,12 @@ type TL_messages_setInlineBotResults struct {
 
 type TL_messages_sendInlineBotResult struct {
 	Flags        int32
-	Silent       bool  // (flags.5)
-	Background   bool  // (flags.6)
-	ClearDraft   bool  // (flags.7)
-	HideVia      bool  // (flags.11)
-	Peer         TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	ReplyToMsgID int32 // (flags.0)
-	TopMsgID     int32 // (flags.9)
+	Silent       bool // (flags.5)
+	Background   bool // (flags.6)
+	ClearDraft   bool // (flags.7)
+	HideVia      bool // (flags.11)
+	Peer         TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ReplyTo      TL   // (flags.0) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	RandomID     int64
 	QueryID      int64
 	ID           string
@@ -9720,23 +10370,25 @@ type TL_messages_getMessageEditData struct {
 type TL_messages_editMessage struct {
 	Flags        int32
 	NoWebpage    bool // (flags.1)
+	InvertMedia  bool // (flags.16)
 	Peer         TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID           int32
 	Message      string // (flags.11)
-	Media        TL     // (flags.14) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice
+	Media        TL     // (flags.14) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 	ReplyMarkup  TL     // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities     []TL   // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities     []TL   // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 	ScheduleDate int32  // (flags.15)
 }
 
 type TL_messages_editInlineBotMessage struct {
 	Flags       int32
 	NoWebpage   bool   // (flags.1)
+	InvertMedia bool   // (flags.16)
 	ID          TL     // InputBotInlineMessageID: TL_inputBotInlineMessageID | TL_inputBotInlineMessageID64
 	Message     string // (flags.11)
-	Media       TL     // (flags.14) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice
+	Media       TL     // (flags.14) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 	ReplyMarkup TL     // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities    []TL   // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities    []TL   // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_messages_getBotCallbackAnswer struct {
@@ -9762,13 +10414,14 @@ type TL_messages_getPeerDialogs struct {
 }
 
 type TL_messages_saveDraft struct {
-	Flags        int32
-	NoWebpage    bool  // (flags.1)
-	ReplyToMsgID int32 // (flags.0)
-	TopMsgID     int32 // (flags.2)
-	Peer         TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Message      string
-	Entities     []TL // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Flags       int32
+	NoWebpage   bool // (flags.1)
+	InvertMedia bool // (flags.6)
+	ReplyTo     TL   // (flags.4) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
+	Peer        TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Message     string
+	Entities    []TL // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Media       TL   // (flags.5) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
 type TL_messages_getAllDrafts struct {
@@ -9852,10 +10505,6 @@ type TL_messages_getCommonChats struct {
 	Limit  int32
 }
 
-type TL_messages_getAllChats struct {
-	ExceptIds []int64
-}
-
 type TL_messages_getWebPage struct {
 	Url  string
 	Hash int32
@@ -9894,13 +10543,13 @@ type TL_messages_setBotPrecheckoutResults struct {
 
 type TL_messages_uploadMedia struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Media TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice
+	Media TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
 type TL_messages_sendScreenshotNotification struct {
-	Peer         TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	ReplyToMsgID int32
-	RandomID     int64
+	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ReplyTo  TL // InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
+	RandomID int64
 }
 
 type TL_messages_getFavedStickers struct {
@@ -9942,9 +10591,9 @@ type TL_messages_sendMultiMedia struct {
 	ClearDraft             bool  // (flags.7)
 	Noforwards             bool  // (flags.14)
 	UpdateStickersetsOrder bool  // (flags.15)
+	InvertMedia            bool  // (flags.16)
 	Peer                   TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	ReplyToMsgID           int32 // (flags.0)
-	TopMsgID               int32 // (flags.9)
+	ReplyTo                TL    // (flags.0) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	MultiMedia             []TL  // InputSingleMedia: TL_inputSingleMedia
 	ScheduleDate           int32 // (flags.10)
 	SendAs                 TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10167,7 +10816,7 @@ type TL_messages_uploadImportedMedia struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ImportID int64
 	FileName string
-	Media    TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice
+	Media    TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
 type TL_messages_startHistoryImport struct {
@@ -10366,37 +11015,37 @@ type TL_messages_toggleBotInAttachMenu struct {
 }
 
 type TL_messages_requestWebView struct {
-	Flags        int32
-	FromBotMenu  bool   // (flags.4)
-	Silent       bool   // (flags.5)
-	Peer         TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Bot          TL     // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	Url          string // (flags.1)
-	StartParam   string // (flags.3)
-	ThemeParams  TL     // (flags.2) DataJSON: TL_dataJSON
-	Platform     string
-	ReplyToMsgID int32 // (flags.0)
-	TopMsgID     int32 // (flags.9)
-	SendAs       TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Flags       int32
+	FromBotMenu bool   // (flags.4)
+	Silent      bool   // (flags.5)
+	Peer        TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Bot         TL     // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	Url         string // (flags.1)
+	StartParam  string // (flags.3)
+	ThemeParams TL     // (flags.2) DataJSON: TL_dataJSON
+	Platform    string
+	ReplyTo     TL // (flags.0) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
+	SendAs      TL // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 type TL_messages_prolongWebView struct {
-	Flags        int32
-	Silent       bool // (flags.5)
-	Peer         TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Bot          TL   // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	QueryID      int64
-	ReplyToMsgID int32 // (flags.0)
-	TopMsgID     int32 // (flags.9)
-	SendAs       TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Flags   int32
+	Silent  bool // (flags.5)
+	Peer    TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Bot     TL   // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	QueryID int64
+	ReplyTo TL // (flags.0) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
+	SendAs  TL // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 type TL_messages_requestSimpleWebView struct {
 	Flags             int32
-	FromSwitchWebview bool // (flags.1)
-	Bot               TL   // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	Url               string
-	ThemeParams       TL // (flags.0) DataJSON: TL_dataJSON
+	FromSwitchWebview bool   // (flags.1)
+	FromSideMenu      bool   // (flags.2)
+	Bot               TL     // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	Url               string // (flags.3)
+	StartParam        string // (flags.4)
+	ThemeParams       TL     // (flags.0) DataJSON: TL_dataJSON
 	Platform          string
 }
 
@@ -10526,9 +11175,11 @@ type TL_updates_getState struct {
 type TL_updates_getDifference struct {
 	Flags         int32
 	Pts           int32
+	PtsLimit      int32 // (flags.1)
 	PtsTotalLimit int32 // (flags.0)
 	Date          int32
 	Qts           int32
+	QtsLimit      int32 // (flags.2)
 }
 
 type TL_updates_getChannelDifference struct {
@@ -10693,7 +11344,7 @@ type TL_help_getUserInfo struct {
 type TL_help_editUserInfo struct {
 	UserID   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Message  string
-	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBlockquote | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji
+	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 type TL_help_getPromoData struct {
@@ -11025,6 +11676,18 @@ type TL_channels_toggleParticipantsHidden struct {
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+type TL_channels_clickSponsoredMessage struct {
+	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
+	RandomID []byte
+}
+
+type TL_channels_updateColor struct {
+	Flags             int32
+	Channel           TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
+	Color             int32
+	BackgroundEmojiID int64 // (flags.0)
+}
+
 type TL_bots_sendCustomRequest struct {
 	CustomMethod string
 	Params       TL // DataJSON: TL_dataJSON
@@ -11094,9 +11757,23 @@ type TL_bots_toggleUsername struct {
 	Active   TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+type TL_bots_canSendMessage struct {
+	Bot TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+}
+
+type TL_bots_allowSendMessage struct {
+	Bot TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+}
+
+type TL_bots_invokeWebViewCustomMethod struct {
+	Bot          TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	CustomMethod string
+	Params       TL // DataJSON: TL_dataJSON
+}
+
 type TL_payments_getPaymentForm struct {
 	Flags       int32
-	Invoice     TL // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug
+	Invoice     TL // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode
 	ThemeParams TL // (flags.0) DataJSON: TL_dataJSON
 }
 
@@ -11108,14 +11785,14 @@ type TL_payments_getPaymentReceipt struct {
 type TL_payments_validateRequestedInfo struct {
 	Flags   int32
 	Save    bool // (flags.0)
-	Invoice TL   // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug
+	Invoice TL   // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode
 	Info    TL   // PaymentRequestedInfo: TL_paymentRequestedInfo
 }
 
 type TL_payments_sendPaymentForm struct {
 	Flags            int32
 	FormID           int64
-	Invoice          TL     // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug
+	Invoice          TL     // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode
 	RequestedInfoID  string // (flags.0)
 	ShippingOptionID string // (flags.1)
 	Credentials      TL     // InputPaymentCredentials: TL_inputPaymentCredentialsSaved | TL_inputPaymentCredentials | TL_inputPaymentCredentialsApplePay | TL_inputPaymentCredentialsGooglePay
@@ -11136,21 +11813,45 @@ type TL_payments_getBankCardData struct {
 }
 
 type TL_payments_exportInvoice struct {
-	InvoiceMedia TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice
+	InvoiceMedia TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
 type TL_payments_assignAppStoreTransaction struct {
 	Receipt []byte
-	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
 }
 
 type TL_payments_assignPlayMarketTransaction struct {
 	Receipt TL // DataJSON: TL_dataJSON
-	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
 }
 
 type TL_payments_canPurchasePremium struct {
-	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
+}
+
+type TL_payments_getPremiumGiftCodeOptions struct {
+	Flags     int32
+	BoostPeer TL // (flags.0) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+}
+
+type TL_payments_checkGiftCode struct {
+	Slug string
+}
+
+type TL_payments_applyGiftCode struct {
+	Slug string
+}
+
+type TL_payments_getGiveawayInfo struct {
+	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	MsgID int32
+}
+
+type TL_payments_launchPrepaidGiveaway struct {
+	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	GiveawayID int64
+	Purpose    TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
 }
 
 type TL_stickers_createStickerSet struct {
@@ -11517,6 +12218,166 @@ type TL_chatlists_getLeaveChatlistSuggestions struct {
 type TL_chatlists_leaveChatlist struct {
 	Chatlist TL   // InputChatlist: TL_inputChatlistDialogFilter
 	Peers    []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+}
+
+type TL_stories_canSendStory struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+}
+
+type TL_stories_sendStory struct {
+	Flags        int32
+	Pinned       bool   // (flags.2)
+	Noforwards   bool   // (flags.4)
+	Peer         TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Media        TL     // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
+	MediaAreas   []TL   // (flags.5) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
+	Caption      string // (flags.0)
+	Entities     []TL   // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	PrivacyRules []TL   // InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
+	RandomID     int64
+	Period       int32 // (flags.3)
+}
+
+type TL_stories_editStory struct {
+	Flags        int32
+	Peer         TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID           int32
+	Media        TL     // (flags.0) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
+	MediaAreas   []TL   // (flags.3) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
+	Caption      string // (flags.1)
+	Entities     []TL   // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	PrivacyRules []TL   // (flags.2) InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
+}
+
+type TL_stories_deleteStories struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID   []int32
+}
+
+type TL_stories_togglePinned struct {
+	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID     []int32
+	Pinned TL // Bool: TL_boolFalse | TL_boolTrue
+}
+
+type TL_stories_getAllStories struct {
+	Flags  int32
+	Next   bool   // (flags.1)
+	Hidden bool   // (flags.2)
+	State  string // (flags.0)
+}
+
+type TL_stories_getPinnedStories struct {
+	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	OffsetID int32
+	Limit    int32
+}
+
+type TL_stories_getStoriesArchive struct {
+	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	OffsetID int32
+	Limit    int32
+}
+
+type TL_stories_getStoriesByID struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID   []int32
+}
+
+type TL_stories_toggleAllStoriesHidden struct {
+	Hidden TL // Bool: TL_boolFalse | TL_boolTrue
+}
+
+type TL_stories_readStories struct {
+	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	MaxID int32
+}
+
+type TL_stories_incrementStoryViews struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID   []int32
+}
+
+type TL_stories_getStoryViewsList struct {
+	Flags          int32
+	JustContacts   bool   // (flags.0)
+	ReactionsFirst bool   // (flags.2)
+	Peer           TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Q              string // (flags.1)
+	ID             int32
+	Offset         string
+	Limit          int32
+}
+
+type TL_stories_getStoriesViews struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID   []int32
+}
+
+type TL_stories_exportStoryLink struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID   int32
+}
+
+type TL_stories_report struct {
+	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ID      []int32
+	Reason  TL // ReportReason: TL_inputReportReasonSpam | TL_inputReportReasonViolence | TL_inputReportReasonPornography | TL_inputReportReasonChildAbuse | TL_inputReportReasonOther | TL_inputReportReasonCopyright | TL_inputReportReasonGeoIrrelevant | TL_inputReportReasonFake | TL_inputReportReasonIllegalDrugs | TL_inputReportReasonPersonalDetails
+	Message string
+}
+
+type TL_stories_activateStealthMode struct {
+	Flags  int32
+	Past   bool // (flags.0)
+	Future bool // (flags.1)
+}
+
+type TL_stories_sendReaction struct {
+	Flags       int32
+	AddToRecent bool // (flags.0)
+	Peer        TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	StoryID     int32
+	Reaction    TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+}
+
+type TL_stories_getPeerStories struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+}
+
+type TL_stories_getAllReadPeerStories struct {
+}
+
+type TL_stories_getPeerMaxIDs struct {
+	ID []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+}
+
+type TL_stories_getChatsToSend struct {
+}
+
+type TL_stories_togglePeerStoriesHidden struct {
+	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Hidden TL // Bool: TL_boolFalse | TL_boolTrue
+}
+
+type TL_premium_getBoostsList struct {
+	Flags  int32
+	Gifts  bool // (flags.0)
+	Peer   TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Offset string
+	Limit  int32
+}
+
+type TL_premium_getMyBoosts struct {
+}
+
+type TL_premium_applyBoost struct {
+	Flags int32
+	Slots []int32 // (flags.0)
+	Peer  TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+}
+
+type TL_premium_getBoostsStatus struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 func (e TL_resPQ) encode() []byte {
@@ -12349,6 +13210,25 @@ func (e TL_inputMediaDice) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputMediaStory) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputMediaStory)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.ID)
+	return x.buf
+}
+
+func (e TL_inputMediaWebPage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputMediaWebPage)
+	x.Int(e.Flags)
+	// flags.0 ForceLargeMedia
+	// flags.1 ForceSmallMedia
+	// flags.2 Optional
+	x.String(e.Url)
+	return x.buf
+}
+
 func (e TL_inputChatPhotoEmpty) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputChatPhotoEmpty)
@@ -12624,6 +13504,9 @@ func (e TL_user) encode() []byte {
 	// flags.29 AttachMenuEnabled
 	x.Int(e.Flags2)
 	// flags2.1 BotCanEdit
+	// flags2.2 CloseFriend
+	// flags2.3 StoriesHidden
+	// flags2.4 StoriesUnavailable
 	x.Long(e.ID)
 	if e.Flags&1 != 0 {
 		x.Long(e.AccessHash)
@@ -12663,6 +13546,15 @@ func (e TL_user) encode() []byte {
 	}
 	if e.Flags2&1 != 0 {
 		x.Vector(e.Usernames)
+	}
+	if e.Flags2&32 != 0 {
+		x.Int(e.StoriesMaxID)
+	}
+	if e.Flags2&128 != 0 {
+		x.Int(e.Color)
+	}
+	if e.Flags2&64 != 0 {
+		x.Long(e.BackgroundEmojiID)
 	}
 	return x.buf
 }
@@ -12793,6 +13685,9 @@ func (e TL_channel) encode() []byte {
 	// flags.29 JoinRequest
 	// flags.30 Forum
 	x.Int(e.Flags2)
+	// flags2.1 StoriesHidden
+	// flags2.2 StoriesHiddenMin
+	// flags2.3 StoriesUnavailable
 	x.Long(e.ID)
 	if e.Flags&8192 != 0 {
 		x.Long(e.AccessHash)
@@ -12820,6 +13715,15 @@ func (e TL_channel) encode() []byte {
 	}
 	if e.Flags2&1 != 0 {
 		x.Vector(e.Usernames)
+	}
+	if e.Flags2&16 != 0 {
+		x.Int(e.StoriesMaxID)
+	}
+	if e.Flags2&64 != 0 {
+		x.Int(e.Color)
+	}
+	if e.Flags2&32 != 0 {
+		x.Long(e.BackgroundEmojiID)
 	}
 	return x.buf
 }
@@ -12906,6 +13810,7 @@ func (e TL_channelFull) encode() []byte {
 	// flags2.1 Antispam
 	// flags2.2 ParticipantsHidden
 	// flags2.3 TranslationsDisabled
+	// flags2.5 StoriesPinnedAvailable
 	x.Long(e.ID)
 	x.String(e.About)
 	if e.Flags&1 != 0 {
@@ -12992,6 +13897,9 @@ func (e TL_channelFull) encode() []byte {
 	}
 	if e.Flags&1073741824 != 0 {
 		x.Bytes(e.AvailableReactions.encode())
+	}
+	if e.Flags2&16 != 0 {
+		x.Bytes(e.Stories.encode())
 	}
 	return x.buf
 }
@@ -13085,6 +13993,7 @@ func (e TL_message) encode() []byte {
 	// flags.21 EditHide
 	// flags.24 Pinned
 	// flags.26 Noforwards
+	// flags.27 InvertMedia
 	x.Int(e.ID)
 	if e.Flags&256 != 0 {
 		x.Bytes(e.FromID.encode())
@@ -13219,6 +14128,9 @@ func (e TL_messageMediaDocument) encode() []byte {
 	if e.Flags&1 != 0 {
 		x.Bytes(e.Document.encode())
 	}
+	if e.Flags&32 != 0 {
+		x.Bytes(e.AltDocument.encode())
+	}
 	if e.Flags&4 != 0 {
 		x.Int(e.TtlSeconds)
 	}
@@ -13228,6 +14140,11 @@ func (e TL_messageMediaDocument) encode() []byte {
 func (e TL_messageMediaWebPage) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageMediaWebPage)
+	x.Int(e.Flags)
+	// flags.0 ForceLargeMedia
+	// flags.1 ForceSmallMedia
+	// flags.3 Manual
+	// flags.4 Safe
 	x.Bytes(e.Webpage.encode())
 	return x.buf
 }
@@ -13302,6 +14219,34 @@ func (e TL_messageMediaDice) encode() []byte {
 	x.UInt(CRC_messageMediaDice)
 	x.Int(e.Value)
 	x.String(e.Emoticon)
+	return x.buf
+}
+
+func (e TL_messageMediaStory) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageMediaStory)
+	x.Int(e.Flags)
+	// flags.1 ViaMention
+	x.Bytes(e.Peer.encode())
+	x.Int(e.ID)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Story.encode())
+	}
+	return x.buf
+}
+
+func (e TL_messageMediaGiveaway) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageMediaGiveaway)
+	x.Int(e.Flags)
+	// flags.0 OnlyNewSubscribers
+	x.VectorLong(e.Channels)
+	if e.Flags&2 != 0 {
+		x.VectorString(e.CountriesIso2)
+	}
+	x.Int(e.Quantity)
+	x.Int(e.Months)
+	x.Int(e.UntilDate)
 	return x.buf
 }
 
@@ -13468,6 +14413,7 @@ func (e TL_messageActionBotAllowed) encode() []byte {
 	x.UInt(CRC_messageActionBotAllowed)
 	x.Int(e.Flags)
 	// flags.1 AttachMenu
+	// flags.3 FromRequest
 	if e.Flags&1 != 0 {
 		x.String(e.Domain)
 	}
@@ -13646,6 +14592,26 @@ func (e TL_messageActionSetSameChatWallPaper) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionSetSameChatWallPaper)
 	x.Bytes(e.Wallpaper.encode())
+	return x.buf
+}
+
+func (e TL_messageActionGiftCode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionGiftCode)
+	x.Int(e.Flags)
+	// flags.0 ViaGiveaway
+	// flags.2 Unclaimed
+	if e.Flags&2 != 0 {
+		x.Bytes(e.BoostPeer.encode())
+	}
+	x.Int(e.Months)
+	x.String(e.Slug)
+	return x.buf
+}
+
+func (e TL_messageActionGiveawayLaunch) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionGiveawayLaunch)
 	return x.buf
 }
 
@@ -13896,6 +14862,15 @@ func (e TL_inputPeerNotifySettings) encode() []byte {
 	if e.Flags&8 != 0 {
 		x.Bytes(e.Sound.encode())
 	}
+	if e.Flags&64 != 0 {
+		x.Bytes(e.StoriesMuted.encode())
+	}
+	if e.Flags&128 != 0 {
+		x.Bytes(e.StoriesHideSender.encode())
+	}
+	if e.Flags&256 != 0 {
+		x.Bytes(e.StoriesSound.encode())
+	}
 	return x.buf
 }
 
@@ -13920,6 +14895,21 @@ func (e TL_peerNotifySettings) encode() []byte {
 	}
 	if e.Flags&32 != 0 {
 		x.Bytes(e.OtherSound.encode())
+	}
+	if e.Flags&64 != 0 {
+		x.Bytes(e.StoriesMuted.encode())
+	}
+	if e.Flags&128 != 0 {
+		x.Bytes(e.StoriesHideSender.encode())
+	}
+	if e.Flags&256 != 0 {
+		x.Bytes(e.StoriesIosSound.encode())
+	}
+	if e.Flags&512 != 0 {
+		x.Bytes(e.StoriesAndroidSound.encode())
+	}
+	if e.Flags&1024 != 0 {
+		x.Bytes(e.StoriesOtherSound.encode())
 	}
 	return x.buf
 }
@@ -14052,6 +15042,8 @@ func (e TL_userFull) encode() []byte {
 	// flags.13 VideoCallsAvailable
 	// flags.20 VoiceMessagesForbidden
 	// flags.23 TranslationsDisabled
+	// flags.26 StoriesPinnedAvailable
+	// flags.27 BlockedMyStoriesFrom
 	x.Long(e.ID)
 	if e.Flags&2 != 0 {
 		x.String(e.About)
@@ -14097,6 +15089,9 @@ func (e TL_userFull) encode() []byte {
 	}
 	if e.Flags&16777216 != 0 {
 		x.Bytes(e.Wallpaper.encode())
+	}
+	if e.Flags&33554432 != 0 {
+		x.Bytes(e.Stories.encode())
 	}
 	return x.buf
 }
@@ -14453,6 +15448,24 @@ func (e TL_updateUserName) encode() []byte {
 	return x.buf
 }
 
+func (e TL_updateNewAuthorization) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateNewAuthorization)
+	x.Int(e.Flags)
+	// flags.0 Unconfirmed
+	x.Long(e.Hash)
+	if e.Flags&1 != 0 {
+		x.Int(e.Date)
+	}
+	if e.Flags&1 != 0 {
+		x.String(e.Device)
+	}
+	if e.Flags&1 != 0 {
+		x.String(e.Location)
+	}
+	return x.buf
+}
+
 func (e TL_updateNewEncryptedMessage) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateNewEncryptedMessage)
@@ -14525,6 +15538,7 @@ func (e TL_updateServiceNotification) encode() []byte {
 	x.UInt(CRC_updateServiceNotification)
 	x.Int(e.Flags)
 	// flags.0 Popup
+	// flags.2 InvertMedia
 	if e.Flags&2 != 0 {
 		x.Int(e.InboxDate)
 	}
@@ -14588,9 +15602,13 @@ func (e TL_updateWebPage) encode() []byte {
 func (e TL_updateReadMessagesContents) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateReadMessagesContents)
+	x.Int(e.Flags)
 	x.VectorInt(e.Messages)
 	x.Int(e.Pts)
 	x.Int(e.PtsCount)
+	if e.Flags&1 != 0 {
+		x.Int(e.Date)
+	}
 	return x.buf
 }
 
@@ -15052,7 +16070,7 @@ func (e TL_updateMessagePollVote) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateMessagePollVote)
 	x.Long(e.PollID)
-	x.Long(e.UserID)
+	x.Bytes(e.Peer.encode())
 	x.VectorBytes(e.Options)
 	x.Int(e.Qts)
 	return x.buf
@@ -15127,8 +16145,10 @@ func (e TL_updateReadChannelDiscussionOutbox) encode() []byte {
 func (e TL_updatePeerBlocked) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updatePeerBlocked)
+	x.Int(e.Flags)
+	// flags.0 Blocked
+	// flags.1 BlockedMyStoriesFrom
 	x.Bytes(e.PeerID.encode())
-	x.Bytes(e.Blocked.encode())
 	return x.buf
 }
 
@@ -15431,6 +16451,46 @@ func (e TL_updateGroupInvitePrivacyForbidden) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateGroupInvitePrivacyForbidden)
 	x.Long(e.UserID)
+	return x.buf
+}
+
+func (e TL_updateStory) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateStory)
+	x.Bytes(e.Peer.encode())
+	x.Bytes(e.Story.encode())
+	return x.buf
+}
+
+func (e TL_updateReadStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateReadStories)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.MaxID)
+	return x.buf
+}
+
+func (e TL_updateStoryID) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateStoryID)
+	x.Int(e.ID)
+	x.Long(e.RandomID)
+	return x.buf
+}
+
+func (e TL_updateStoriesStealthMode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateStoriesStealthMode)
+	x.Bytes(e.StealthMode.encode())
+	return x.buf
+}
+
+func (e TL_updateSentStoryReaction) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateSentStoryReaction)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.StoryID)
+	x.Bytes(e.Reaction.encode())
 	return x.buf
 }
 
@@ -16223,6 +17283,12 @@ func (e TL_inputPrivacyKeyVoiceMessages) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputPrivacyKeyAbout) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputPrivacyKeyAbout)
+	return x.buf
+}
+
 func (e TL_privacyKeyStatusTimestamp) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_privacyKeyStatusTimestamp)
@@ -16274,6 +17340,12 @@ func (e TL_privacyKeyAddedByPhone) encode() []byte {
 func (e TL_privacyKeyVoiceMessages) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_privacyKeyVoiceMessages)
+	return x.buf
+}
+
+func (e TL_privacyKeyAbout) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_privacyKeyAbout)
 	return x.buf
 }
 
@@ -16329,6 +17401,12 @@ func (e TL_inputPrivacyValueDisallowChatParticipants) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputPrivacyValueAllowCloseFriends) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputPrivacyValueAllowCloseFriends)
+	return x.buf
+}
+
 func (e TL_privacyValueAllowContacts) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_privacyValueAllowContacts)
@@ -16381,6 +17459,12 @@ func (e TL_privacyValueDisallowChatParticipants) encode() []byte {
 	return x.buf
 }
 
+func (e TL_privacyValueAllowCloseFriends) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_privacyValueAllowCloseFriends)
+	return x.buf
+}
+
 func (e TL_account_privacyRules) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_privacyRules)
@@ -16430,9 +17514,13 @@ func (e TL_documentAttributeVideo) encode() []byte {
 	x.Int(e.Flags)
 	// flags.0 RoundMessage
 	// flags.1 SupportsStreaming
-	x.Int(e.Duration)
+	// flags.3 Nosound
+	x.Double(e.Duration)
 	x.Int(e.W)
 	x.Int(e.H)
+	if e.Flags&4 != 0 {
+		x.Int(e.PreloadPrefixSize)
+	}
 	return x.buf
 }
 
@@ -16525,14 +17613,22 @@ func (e TL_messages_affectedMessages) encode() []byte {
 func (e TL_webPageEmpty) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_webPageEmpty)
+	x.Int(e.Flags)
 	x.Long(e.ID)
+	if e.Flags&1 != 0 {
+		x.String(e.Url)
+	}
 	return x.buf
 }
 
 func (e TL_webPagePending) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_webPagePending)
+	x.Int(e.Flags)
 	x.Long(e.ID)
+	if e.Flags&1 != 0 {
+		x.String(e.Url)
+	}
 	x.Int(e.Date)
 	return x.buf
 }
@@ -16541,6 +17637,7 @@ func (e TL_webPage) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_webPage)
 	x.Int(e.Flags)
+	// flags.13 HasLargeMedia
 	x.Long(e.ID)
 	x.String(e.Url)
 	x.String(e.DisplayUrl)
@@ -16609,6 +17706,7 @@ func (e TL_authorization) encode() []byte {
 	// flags.2 PasswordPending
 	// flags.3 EncryptedRequestsDisabled
 	// flags.4 CallRequestsDisabled
+	// flags.5 Unconfirmed
 	x.Long(e.Hash)
 	x.String(e.DeviceModel)
 	x.String(e.Platform)
@@ -16769,6 +17867,9 @@ func (e TL_chatInvite) encode() []byte {
 	// flags.2 Public
 	// flags.3 Megagroup
 	// flags.6 RequestNeeded
+	// flags.7 Verified
+	// flags.8 Scam
+	// flags.9 Fake
 	x.String(e.Title)
 	if e.Flags&32 != 0 {
 		x.String(e.About)
@@ -16778,6 +17879,7 @@ func (e TL_chatInvite) encode() []byte {
 	if e.Flags&16 != 0 {
 		x.Vector(e.Participants)
 	}
+	x.Int(e.Color)
 	return x.buf
 }
 
@@ -16863,6 +17965,7 @@ func (e TL_stickerSet) encode() []byte {
 	// flags.5 Animated
 	// flags.6 Videos
 	// flags.7 Emojis
+	// flags.9 TextColor
 	if e.Flags&1 != 0 {
 		x.Int(e.InstalledDate)
 	}
@@ -17270,14 +18373,6 @@ func (e TL_messageEntityStrike) encode() []byte {
 	return x.buf
 }
 
-func (e TL_messageEntityBlockquote) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_messageEntityBlockquote)
-	x.Int(e.Offset)
-	x.Int(e.Length)
-	return x.buf
-}
-
 func (e TL_messageEntityBankCard) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageEntityBankCard)
@@ -17300,6 +18395,14 @@ func (e TL_messageEntityCustomEmoji) encode() []byte {
 	x.Int(e.Offset)
 	x.Int(e.Length)
 	x.Long(e.DocumentID)
+	return x.buf
+}
+
+func (e TL_messageEntityBlockquote) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageEntityBlockquote)
+	x.Int(e.Offset)
+	x.Int(e.Length)
 	return x.buf
 }
 
@@ -17586,6 +18689,7 @@ func (e TL_inputBotInlineMessageMediaAuto) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputBotInlineMessageMediaAuto)
 	x.Int(e.Flags)
+	// flags.3 InvertMedia
 	x.String(e.Message)
 	if e.Flags&2 != 0 {
 		x.Vector(e.Entities)
@@ -17601,6 +18705,7 @@ func (e TL_inputBotInlineMessageText) encode() []byte {
 	x.UInt(CRC_inputBotInlineMessageText)
 	x.Int(e.Flags)
 	// flags.0 NoWebpage
+	// flags.3 InvertMedia
 	x.String(e.Message)
 	if e.Flags&2 != 0 {
 		x.Vector(e.Entities)
@@ -17690,6 +18795,25 @@ func (e TL_inputBotInlineMessageMediaInvoice) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputBotInlineMessageMediaWebPage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputBotInlineMessageMediaWebPage)
+	x.Int(e.Flags)
+	// flags.3 InvertMedia
+	// flags.4 ForceLargeMedia
+	// flags.5 ForceSmallMedia
+	// flags.6 Optional
+	x.String(e.Message)
+	if e.Flags&2 != 0 {
+		x.Vector(e.Entities)
+	}
+	x.String(e.Url)
+	if e.Flags&4 != 0 {
+		x.Bytes(e.ReplyMarkup.encode())
+	}
+	return x.buf
+}
+
 func (e TL_inputBotInlineResult) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputBotInlineResult)
@@ -17755,6 +18879,7 @@ func (e TL_botInlineMessageMediaAuto) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_botInlineMessageMediaAuto)
 	x.Int(e.Flags)
+	// flags.3 InvertMedia
 	x.String(e.Message)
 	if e.Flags&2 != 0 {
 		x.Vector(e.Entities)
@@ -17770,6 +18895,7 @@ func (e TL_botInlineMessageText) encode() []byte {
 	x.UInt(CRC_botInlineMessageText)
 	x.Int(e.Flags)
 	// flags.0 NoWebpage
+	// flags.3 InvertMedia
 	x.String(e.Message)
 	if e.Flags&2 != 0 {
 		x.Vector(e.Entities)
@@ -17843,6 +18969,26 @@ func (e TL_botInlineMessageMediaInvoice) encode() []byte {
 	}
 	x.String(e.Currency)
 	x.Long(e.TotalAmount)
+	if e.Flags&4 != 0 {
+		x.Bytes(e.ReplyMarkup.encode())
+	}
+	return x.buf
+}
+
+func (e TL_botInlineMessageMediaWebPage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_botInlineMessageMediaWebPage)
+	x.Int(e.Flags)
+	// flags.3 InvertMedia
+	// flags.4 ForceLargeMedia
+	// flags.5 ForceSmallMedia
+	// flags.7 Manual
+	// flags.8 Safe
+	x.String(e.Message)
+	if e.Flags&2 != 0 {
+		x.Vector(e.Entities)
+	}
+	x.String(e.Url)
 	if e.Flags&4 != 0 {
 		x.Bytes(e.ReplyMarkup.encode())
 	}
@@ -18236,12 +19382,16 @@ func (e TL_draftMessage) encode() []byte {
 	x.UInt(CRC_draftMessage)
 	x.Int(e.Flags)
 	// flags.1 NoWebpage
-	if e.Flags&1 != 0 {
-		x.Int(e.ReplyToMsgID)
+	// flags.6 InvertMedia
+	if e.Flags&16 != 0 {
+		x.Bytes(e.ReplyTo.encode())
 	}
 	x.String(e.Message)
 	if e.Flags&8 != 0 {
 		x.Vector(e.Entities)
+	}
+	if e.Flags&32 != 0 {
+		x.Bytes(e.Media.encode())
 	}
 	x.Int(e.Date)
 	return x.buf
@@ -18843,8 +19993,8 @@ func (e TL_invoice) encode() []byte {
 	if e.Flags&256 != 0 {
 		x.VectorLong(e.SuggestedTipAmounts)
 	}
-	if e.Flags&512 != 0 {
-		x.String(e.RecurringTermsUrl)
+	if e.Flags&1024 != 0 {
+		x.String(e.TermsUrl)
 	}
 	return x.buf
 }
@@ -19706,6 +20856,22 @@ func (e TL_channelAdminLogEventActionToggleAntiSpam) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionToggleAntiSpam)
 	x.Bytes(e.NewValue.encode())
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionChangeColor) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionChangeColor)
+	x.Int(e.PrevValue)
+	x.Int(e.NewValue)
+	return x.buf
+}
+
+func (e TL_channelAdminLogEventActionChangeBackgroundEmoji) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionChangeBackgroundEmoji)
+	x.Long(e.PrevValue)
+	x.Long(e.NewValue)
 	return x.buf
 }
 
@@ -20648,7 +21814,7 @@ func (e TL_pollResults) encode() []byte {
 		x.Int(e.TotalVoters)
 	}
 	if e.Flags&8 != 0 {
-		x.VectorLong(e.RecentVoters)
+		x.Vector(e.RecentVoters)
 	}
 	if e.Flags&16 != 0 {
 		x.String(e.Solution)
@@ -20689,6 +21855,9 @@ func (e TL_chatAdminRights) encode() []byte {
 	// flags.11 ManageCall
 	// flags.12 Other
 	// flags.13 ManageTopics
+	// flags.14 PostStories
+	// flags.15 EditStories
+	// flags.16 DeleteStories
 	return x.buf
 }
 
@@ -20812,10 +21981,13 @@ func (e TL_autoDownloadSettings) encode() []byte {
 	// flags.1 VideoPreloadLarge
 	// flags.2 AudioPreloadNext
 	// flags.3 PhonecallsLessData
+	// flags.4 StoriesPreload
 	x.Int(e.PhotoSizeMax)
 	x.Long(e.VideoSizeMax)
 	x.Long(e.FileSizeMax)
 	x.Int(e.VideoUploadMaxbitrate)
+	x.Int(e.SmallQueueActiveOperationsMax)
+	x.Int(e.LargeQueueActiveOperationsMax)
 	return x.buf
 }
 
@@ -21151,29 +22323,15 @@ func (e TL_webPageAttributeTheme) encode() []byte {
 	return x.buf
 }
 
-func (e TL_messageUserVote) encode() []byte {
+func (e TL_webPageAttributeStory) encode() []byte {
 	x := NewEncodeBuf(512)
-	x.UInt(CRC_messageUserVote)
-	x.Long(e.UserID)
-	x.StringBytes(e.Option)
-	x.Int(e.Date)
-	return x.buf
-}
-
-func (e TL_messageUserVoteInputOption) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_messageUserVoteInputOption)
-	x.Long(e.UserID)
-	x.Int(e.Date)
-	return x.buf
-}
-
-func (e TL_messageUserVoteMultiple) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_messageUserVoteMultiple)
-	x.Long(e.UserID)
-	x.VectorBytes(e.Options)
-	x.Int(e.Date)
+	x.UInt(CRC_webPageAttributeStory)
+	x.Int(e.Flags)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.ID)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Story.encode())
+	}
 	return x.buf
 }
 
@@ -21183,6 +22341,7 @@ func (e TL_messages_votesList) encode() []byte {
 	x.Int(e.Flags)
 	x.Int(e.Count)
 	x.Vector(e.Votes)
+	x.Vector(e.Chats)
 	x.Vector(e.Users)
 	if e.Flags&1 != 0 {
 		x.String(e.NextOffset)
@@ -21447,9 +22606,9 @@ func (e TL_globalPrivacySettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_globalPrivacySettings)
 	x.Int(e.Flags)
-	if e.Flags&1 != 0 {
-		x.Bytes(e.ArchiveAndMuteNewNoncontactPeers.encode())
-	}
+	// flags.0 ArchiveAndMuteNewNoncontactPeers
+	// flags.1 KeepArchivedUnmuted
+	// flags.2 KeepArchivedFolders
 	return x.buf
 }
 
@@ -21546,13 +22705,36 @@ func (e TL_messageReplyHeader) encode() []byte {
 	x.Int(e.Flags)
 	// flags.2 ReplyToScheduled
 	// flags.3 ForumTopic
-	x.Int(e.ReplyToMsgID)
+	// flags.9 Quote
+	if e.Flags&16 != 0 {
+		x.Int(e.ReplyToMsgID)
+	}
 	if e.Flags&1 != 0 {
 		x.Bytes(e.ReplyToPeerID.encode())
+	}
+	if e.Flags&32 != 0 {
+		x.Bytes(e.ReplyFrom.encode())
+	}
+	if e.Flags&256 != 0 {
+		x.Bytes(e.ReplyMedia.encode())
 	}
 	if e.Flags&2 != 0 {
 		x.Int(e.ReplyToTopID)
 	}
+	if e.Flags&64 != 0 {
+		x.String(e.QuoteText)
+	}
+	if e.Flags&128 != 0 {
+		x.Vector(e.QuoteEntities)
+	}
+	return x.buf
+}
+
+func (e TL_messageReplyStoryHeader) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageReplyStoryHeader)
+	x.Long(e.UserID)
+	x.Int(e.StoryID)
 	return x.buf
 }
 
@@ -21979,6 +23161,9 @@ func (e TL_sponsoredMessage) encode() []byte {
 	if e.Flags&1 != 0 {
 		x.String(e.StartParam)
 	}
+	if e.Flags&512 != 0 {
+		x.Bytes(e.Webpage.encode())
+	}
 	x.String(e.Message)
 	if e.Flags&2 != 0 {
 		x.Vector(e.Entities)
@@ -22174,6 +23359,7 @@ func (e TL_messagePeerReaction) encode() []byte {
 	x.Int(e.Flags)
 	// flags.0 Big
 	// flags.1 Unread
+	// flags.2 My
 	x.Bytes(e.PeerID.encode())
 	x.Int(e.Date)
 	x.Bytes(e.Reaction.encode())
@@ -22231,9 +23417,14 @@ func (e TL_attachMenuBot) encode() []byte {
 	// flags.0 Inactive
 	// flags.1 HasSettings
 	// flags.2 RequestWriteAccess
+	// flags.3 ShowInAttachMenu
+	// flags.4 ShowInSideMenu
+	// flags.5 SideMenuDisclaimerNeeded
 	x.Long(e.BotID)
 	x.String(e.ShortName)
-	x.Vector(e.PeerTypes)
+	if e.Flags&8 != 0 {
+		x.Vector(e.PeerTypes)
+	}
 	x.Vector(e.Icons)
 	return x.buf
 }
@@ -22405,6 +23596,14 @@ func (e TL_inputInvoiceSlug) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputInvoicePremiumGiftCode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputInvoicePremiumGiftCode)
+	x.Bytes(e.Purpose.encode())
+	x.Bytes(e.Option.encode())
+	return x.buf
+}
+
 func (e TL_payments_exportedInvoice) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_exportedInvoice)
@@ -22447,6 +23646,38 @@ func (e TL_inputStorePaymentGiftPremium) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputStorePaymentGiftPremium)
 	x.Bytes(e.UserID.encode())
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	return x.buf
+}
+
+func (e TL_inputStorePaymentPremiumGiftCode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStorePaymentPremiumGiftCode)
+	x.Int(e.Flags)
+	x.Vector(e.Users)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.BoostPeer.encode())
+	}
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	return x.buf
+}
+
+func (e TL_inputStorePaymentPremiumGiveaway) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStorePaymentPremiumGiveaway)
+	x.Int(e.Flags)
+	// flags.0 OnlyNewSubscribers
+	x.Bytes(e.BoostPeer.encode())
+	if e.Flags&2 != 0 {
+		x.Vector(e.AdditionalPeers)
+	}
+	if e.Flags&4 != 0 {
+		x.VectorString(e.CountriesIso2)
+	}
+	x.Long(e.RandomID)
+	x.Int(e.UntilDate)
 	x.String(e.Currency)
 	x.Long(e.Amount)
 	return x.buf
@@ -22952,6 +24183,7 @@ func (e TL_messages_botApp) encode() []byte {
 	x.Int(e.Flags)
 	// flags.0 Inactive
 	// flags.1 RequestWriteAccess
+	// flags.2 HasSettings
 	x.Bytes(e.App.encode())
 	return x.buf
 }
@@ -23053,6 +24285,494 @@ func (e TL_bots_botInfo) encode() []byte {
 	x.String(e.Name)
 	x.String(e.About)
 	x.String(e.Description)
+	return x.buf
+}
+
+func (e TL_messagePeerVote) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messagePeerVote)
+	x.Bytes(e.Peer.encode())
+	x.StringBytes(e.Option)
+	x.Int(e.Date)
+	return x.buf
+}
+
+func (e TL_messagePeerVoteInputOption) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messagePeerVoteInputOption)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.Date)
+	return x.buf
+}
+
+func (e TL_messagePeerVoteMultiple) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messagePeerVoteMultiple)
+	x.Bytes(e.Peer.encode())
+	x.VectorBytes(e.Options)
+	x.Int(e.Date)
+	return x.buf
+}
+
+func (e TL_sponsoredWebPage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_sponsoredWebPage)
+	x.Int(e.Flags)
+	x.String(e.Url)
+	x.String(e.SiteName)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Photo.encode())
+	}
+	return x.buf
+}
+
+func (e TL_storyViews) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_storyViews)
+	x.Int(e.Flags)
+	// flags.1 HasViewers
+	x.Int(e.ViewsCount)
+	if e.Flags&4 != 0 {
+		x.Int(e.ForwardsCount)
+	}
+	if e.Flags&8 != 0 {
+		x.Vector(e.Reactions)
+	}
+	if e.Flags&16 != 0 {
+		x.Int(e.ReactionsCount)
+	}
+	if e.Flags&1 != 0 {
+		x.VectorLong(e.RecentViewers)
+	}
+	return x.buf
+}
+
+func (e TL_storyItemDeleted) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_storyItemDeleted)
+	x.Int(e.ID)
+	return x.buf
+}
+
+func (e TL_storyItemSkipped) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_storyItemSkipped)
+	x.Int(e.Flags)
+	// flags.8 CloseFriends
+	x.Int(e.ID)
+	x.Int(e.Date)
+	x.Int(e.ExpireDate)
+	return x.buf
+}
+
+func (e TL_storyItem) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_storyItem)
+	x.Int(e.Flags)
+	// flags.5 Pinned
+	// flags.7 Public
+	// flags.8 CloseFriends
+	// flags.9 Min
+	// flags.10 Noforwards
+	// flags.11 Edited
+	// flags.12 Contacts
+	// flags.13 SelectedContacts
+	// flags.16 Out
+	x.Int(e.ID)
+	x.Int(e.Date)
+	x.Int(e.ExpireDate)
+	if e.Flags&1 != 0 {
+		x.String(e.Caption)
+	}
+	if e.Flags&2 != 0 {
+		x.Vector(e.Entities)
+	}
+	x.Bytes(e.Media.encode())
+	if e.Flags&16384 != 0 {
+		x.Vector(e.MediaAreas)
+	}
+	if e.Flags&4 != 0 {
+		x.Vector(e.Privacy)
+	}
+	if e.Flags&8 != 0 {
+		x.Bytes(e.Views.encode())
+	}
+	if e.Flags&32768 != 0 {
+		x.Bytes(e.SentReaction.encode())
+	}
+	return x.buf
+}
+
+func (e TL_stories_allStoriesNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_allStoriesNotModified)
+	x.Int(e.Flags)
+	x.String(e.State)
+	x.Bytes(e.StealthMode.encode())
+	return x.buf
+}
+
+func (e TL_stories_allStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_allStories)
+	x.Int(e.Flags)
+	// flags.0 HasMore
+	x.Int(e.Count)
+	x.String(e.State)
+	x.Vector(e.PeerStories)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	x.Bytes(e.StealthMode.encode())
+	return x.buf
+}
+
+func (e TL_stories_stories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_stories)
+	x.Int(e.Count)
+	x.Vector(e.Stories)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_storyView) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_storyView)
+	x.Int(e.Flags)
+	// flags.0 Blocked
+	// flags.1 BlockedMyStoriesFrom
+	x.Long(e.UserID)
+	x.Int(e.Date)
+	if e.Flags&4 != 0 {
+		x.Bytes(e.Reaction.encode())
+	}
+	return x.buf
+}
+
+func (e TL_stories_storyViewsList) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_storyViewsList)
+	x.Int(e.Flags)
+	x.Int(e.Count)
+	x.Int(e.ReactionsCount)
+	x.Vector(e.Views)
+	x.Vector(e.Users)
+	if e.Flags&1 != 0 {
+		x.String(e.NextOffset)
+	}
+	return x.buf
+}
+
+func (e TL_stories_storyViews) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_storyViews)
+	x.Vector(e.Views)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_inputReplyToMessage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputReplyToMessage)
+	x.Int(e.Flags)
+	x.Int(e.ReplyToMsgID)
+	if e.Flags&1 != 0 {
+		x.Int(e.TopMsgID)
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.ReplyToPeerID.encode())
+	}
+	if e.Flags&4 != 0 {
+		x.String(e.QuoteText)
+	}
+	if e.Flags&8 != 0 {
+		x.Vector(e.QuoteEntities)
+	}
+	return x.buf
+}
+
+func (e TL_inputReplyToStory) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputReplyToStory)
+	x.Bytes(e.UserID.encode())
+	x.Int(e.StoryID)
+	return x.buf
+}
+
+func (e TL_exportedStoryLink) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_exportedStoryLink)
+	x.String(e.Link)
+	return x.buf
+}
+
+func (e TL_storiesStealthMode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_storiesStealthMode)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.Int(e.ActiveUntilDate)
+	}
+	if e.Flags&2 != 0 {
+		x.Int(e.CooldownUntilDate)
+	}
+	return x.buf
+}
+
+func (e TL_mediaAreaCoordinates) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_mediaAreaCoordinates)
+	x.Double(e.X)
+	x.Double(e.Y)
+	x.Double(e.W)
+	x.Double(e.H)
+	x.Double(e.Rotation)
+	return x.buf
+}
+
+func (e TL_mediaAreaVenue) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_mediaAreaVenue)
+	x.Bytes(e.Coordinates.encode())
+	x.Bytes(e.Geo.encode())
+	x.String(e.Title)
+	x.String(e.Address)
+	x.String(e.Provider)
+	x.String(e.VenueID)
+	x.String(e.VenueType)
+	return x.buf
+}
+
+func (e TL_inputMediaAreaVenue) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputMediaAreaVenue)
+	x.Bytes(e.Coordinates.encode())
+	x.Long(e.QueryID)
+	x.String(e.ResultID)
+	return x.buf
+}
+
+func (e TL_mediaAreaGeoPoint) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_mediaAreaGeoPoint)
+	x.Bytes(e.Coordinates.encode())
+	x.Bytes(e.Geo.encode())
+	return x.buf
+}
+
+func (e TL_mediaAreaSuggestedReaction) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_mediaAreaSuggestedReaction)
+	x.Int(e.Flags)
+	// flags.0 Dark
+	// flags.1 Flipped
+	x.Bytes(e.Coordinates.encode())
+	x.Bytes(e.Reaction.encode())
+	return x.buf
+}
+
+func (e TL_peerStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_peerStories)
+	x.Int(e.Flags)
+	x.Bytes(e.Peer.encode())
+	if e.Flags&1 != 0 {
+		x.Int(e.MaxReadID)
+	}
+	x.Vector(e.Stories)
+	return x.buf
+}
+
+func (e TL_stories_peerStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_peerStories)
+	x.Bytes(e.Stories.encode())
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_messages_webPage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_webPage)
+	x.Bytes(e.Webpage.encode())
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_premiumGiftCodeOption) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premiumGiftCodeOption)
+	x.Int(e.Flags)
+	x.Int(e.Users)
+	x.Int(e.Months)
+	if e.Flags&1 != 0 {
+		x.String(e.StoreProduct)
+	}
+	if e.Flags&2 != 0 {
+		x.Int(e.StoreQuantity)
+	}
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	return x.buf
+}
+
+func (e TL_payments_checkedGiftCode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_checkedGiftCode)
+	x.Int(e.Flags)
+	// flags.2 ViaGiveaway
+	x.Bytes(e.FromID.encode())
+	if e.Flags&8 != 0 {
+		x.Int(e.GiveawayMsgID)
+	}
+	if e.Flags&1 != 0 {
+		x.Long(e.ToID)
+	}
+	x.Int(e.Date)
+	x.Int(e.Months)
+	if e.Flags&2 != 0 {
+		x.Int(e.UsedDate)
+	}
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_payments_giveawayInfo) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_giveawayInfo)
+	x.Int(e.Flags)
+	// flags.0 Participating
+	// flags.3 PreparingResults
+	x.Int(e.StartDate)
+	if e.Flags&2 != 0 {
+		x.Int(e.JoinedTooEarlyDate)
+	}
+	if e.Flags&4 != 0 {
+		x.Long(e.AdminDisallowedChatID)
+	}
+	if e.Flags&16 != 0 {
+		x.String(e.DisallowedCountry)
+	}
+	return x.buf
+}
+
+func (e TL_payments_giveawayInfoResults) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_giveawayInfoResults)
+	x.Int(e.Flags)
+	// flags.0 Winner
+	// flags.1 Refunded
+	x.Int(e.StartDate)
+	if e.Flags&1 != 0 {
+		x.String(e.GiftCodeSlug)
+	}
+	x.Int(e.FinishDate)
+	x.Int(e.WinnersCount)
+	x.Int(e.ActivatedCount)
+	return x.buf
+}
+
+func (e TL_prepaidGiveaway) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_prepaidGiveaway)
+	x.Long(e.ID)
+	x.Int(e.Months)
+	x.Int(e.Quantity)
+	x.Int(e.Date)
+	return x.buf
+}
+
+func (e TL_boost) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_boost)
+	x.Int(e.Flags)
+	// flags.1 Gift
+	// flags.2 Giveaway
+	// flags.3 Unclaimed
+	x.String(e.ID)
+	if e.Flags&1 != 0 {
+		x.Long(e.UserID)
+	}
+	if e.Flags&4 != 0 {
+		x.Int(e.GiveawayMsgID)
+	}
+	x.Int(e.Date)
+	x.Int(e.Expires)
+	if e.Flags&16 != 0 {
+		x.String(e.UsedGiftSlug)
+	}
+	if e.Flags&32 != 0 {
+		x.Int(e.Multiplier)
+	}
+	return x.buf
+}
+
+func (e TL_premium_boostsList) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premium_boostsList)
+	x.Int(e.Flags)
+	x.Int(e.Count)
+	x.Vector(e.Boosts)
+	if e.Flags&1 != 0 {
+		x.String(e.NextOffset)
+	}
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_myBoost) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_myBoost)
+	x.Int(e.Flags)
+	x.Int(e.Slot)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Peer.encode())
+	}
+	x.Int(e.Date)
+	x.Int(e.Expires)
+	if e.Flags&2 != 0 {
+		x.Int(e.CooldownUntilDate)
+	}
+	return x.buf
+}
+
+func (e TL_premium_myBoosts) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premium_myBoosts)
+	x.Vector(e.MyBoosts)
+	x.Vector(e.Chats)
+	x.Vector(e.Users)
+	return x.buf
+}
+
+func (e TL_premium_boostsStatus) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premium_boostsStatus)
+	x.Int(e.Flags)
+	// flags.2 MyBoost
+	x.Int(e.Level)
+	x.Int(e.CurrentLevelBoosts)
+	x.Int(e.Boosts)
+	if e.Flags&16 != 0 {
+		x.Int(e.GiftBoosts)
+	}
+	if e.Flags&1 != 0 {
+		x.Int(e.NextLevelBoosts)
+	}
+	if e.Flags&2 != 0 {
+		x.Bytes(e.PremiumAudience.encode())
+	}
+	x.String(e.BoostUrl)
+	if e.Flags&8 != 0 {
+		x.Vector(e.PrepaidGiveaways)
+	}
+	if e.Flags&4 != 0 {
+		x.VectorInt(e.MyBoostSlots)
+	}
 	return x.buf
 }
 
@@ -23693,6 +25413,7 @@ func (e TL_account_getNotifyExceptions) encode() []byte {
 	x.UInt(CRC_account_getNotifyExceptions)
 	x.Int(e.Flags)
 	// flags.1 CompareSound
+	// flags.2 CompareStories
 	if e.Flags&1 != 0 {
 		x.Bytes(e.Peer.encode())
 	}
@@ -23920,6 +25641,7 @@ func (e TL_account_changeAuthorizationSettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_changeAuthorizationSettings)
 	x.Int(e.Flags)
+	// flags.3 Confirmed
 	x.Long(e.Hash)
 	if e.Flags&1 != 0 {
 		x.Bytes(e.EncryptedRequestsDisabled.encode())
@@ -24036,6 +25758,31 @@ func (e TL_account_deleteAutoSaveExceptions) encode() []byte {
 	return x.buf
 }
 
+func (e TL_account_invalidateSignInCodes) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_invalidateSignInCodes)
+	x.VectorString(e.Codes)
+	return x.buf
+}
+
+func (e TL_account_updateColor) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_updateColor)
+	x.Int(e.Flags)
+	x.Int(e.Color)
+	if e.Flags&1 != 0 {
+		x.Long(e.BackgroundEmojiID)
+	}
+	return x.buf
+}
+
+func (e TL_account_getDefaultBackgroundEmojis) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_getDefaultBackgroundEmojis)
+	x.Long(e.Hash)
+	return x.buf
+}
+
 func (e TL_users_getUsers) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_users_getUsers)
@@ -24102,6 +25849,8 @@ func (e TL_contacts_deleteByPhones) encode() []byte {
 func (e TL_contacts_block) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_contacts_block)
+	x.Int(e.Flags)
+	// flags.0 MyStoriesFrom
 	x.Bytes(e.ID.encode())
 	return x.buf
 }
@@ -24109,6 +25858,8 @@ func (e TL_contacts_block) encode() []byte {
 func (e TL_contacts_unblock) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_contacts_unblock)
+	x.Int(e.Flags)
+	// flags.0 MyStoriesFrom
 	x.Bytes(e.ID.encode())
 	return x.buf
 }
@@ -24116,6 +25867,8 @@ func (e TL_contacts_unblock) encode() []byte {
 func (e TL_contacts_getBlocked) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_contacts_getBlocked)
+	x.Int(e.Flags)
+	// flags.0 MyStoriesFrom
 	x.Int(e.Offset)
 	x.Int(e.Limit)
 	return x.buf
@@ -24243,6 +25996,23 @@ func (e TL_contacts_importContactToken) encode() []byte {
 	return x.buf
 }
 
+func (e TL_contacts_editCloseFriends) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_contacts_editCloseFriends)
+	x.VectorLong(e.ID)
+	return x.buf
+}
+
+func (e TL_contacts_setBlocked) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_contacts_setBlocked)
+	x.Int(e.Flags)
+	// flags.0 MyStoriesFrom
+	x.Vector(e.ID)
+	x.Int(e.Limit)
+	return x.buf
+}
+
 func (e TL_messages_getMessages) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getMessages)
@@ -24367,12 +26137,10 @@ func (e TL_messages_sendMessage) encode() []byte {
 	// flags.7 ClearDraft
 	// flags.14 Noforwards
 	// flags.15 UpdateStickersetsOrder
+	// flags.16 InvertMedia
 	x.Bytes(e.Peer.encode())
 	if e.Flags&1 != 0 {
-		x.Int(e.ReplyToMsgID)
-	}
-	if e.Flags&512 != 0 {
-		x.Int(e.TopMsgID)
+		x.Bytes(e.ReplyTo.encode())
 	}
 	x.String(e.Message)
 	x.Long(e.RandomID)
@@ -24400,12 +26168,10 @@ func (e TL_messages_sendMedia) encode() []byte {
 	// flags.7 ClearDraft
 	// flags.14 Noforwards
 	// flags.15 UpdateStickersetsOrder
+	// flags.16 InvertMedia
 	x.Bytes(e.Peer.encode())
 	if e.Flags&1 != 0 {
-		x.Int(e.ReplyToMsgID)
-	}
-	if e.Flags&512 != 0 {
-		x.Int(e.TopMsgID)
+		x.Bytes(e.ReplyTo.encode())
 	}
 	x.Bytes(e.Media.encode())
 	x.String(e.Message)
@@ -24854,10 +26620,7 @@ func (e TL_messages_sendInlineBotResult) encode() []byte {
 	// flags.11 HideVia
 	x.Bytes(e.Peer.encode())
 	if e.Flags&1 != 0 {
-		x.Int(e.ReplyToMsgID)
-	}
-	if e.Flags&512 != 0 {
-		x.Int(e.TopMsgID)
+		x.Bytes(e.ReplyTo.encode())
 	}
 	x.Long(e.RandomID)
 	x.Long(e.QueryID)
@@ -24884,6 +26647,7 @@ func (e TL_messages_editMessage) encode() []byte {
 	x.UInt(CRC_messages_editMessage)
 	x.Int(e.Flags)
 	// flags.1 NoWebpage
+	// flags.16 InvertMedia
 	x.Bytes(e.Peer.encode())
 	x.Int(e.ID)
 	if e.Flags&2048 != 0 {
@@ -24909,6 +26673,7 @@ func (e TL_messages_editInlineBotMessage) encode() []byte {
 	x.UInt(CRC_messages_editInlineBotMessage)
 	x.Int(e.Flags)
 	// flags.1 NoWebpage
+	// flags.16 InvertMedia
 	x.Bytes(e.ID.encode())
 	if e.Flags&2048 != 0 {
 		x.String(e.Message)
@@ -24969,16 +26734,17 @@ func (e TL_messages_saveDraft) encode() []byte {
 	x.UInt(CRC_messages_saveDraft)
 	x.Int(e.Flags)
 	// flags.1 NoWebpage
-	if e.Flags&1 != 0 {
-		x.Int(e.ReplyToMsgID)
-	}
-	if e.Flags&4 != 0 {
-		x.Int(e.TopMsgID)
+	// flags.6 InvertMedia
+	if e.Flags&16 != 0 {
+		x.Bytes(e.ReplyTo.encode())
 	}
 	x.Bytes(e.Peer.encode())
 	x.String(e.Message)
 	if e.Flags&8 != 0 {
 		x.Vector(e.Entities)
+	}
+	if e.Flags&32 != 0 {
+		x.Bytes(e.Media.encode())
 	}
 	return x.buf
 }
@@ -25106,13 +26872,6 @@ func (e TL_messages_getCommonChats) encode() []byte {
 	return x.buf
 }
 
-func (e TL_messages_getAllChats) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_messages_getAllChats)
-	x.VectorLong(e.ExceptIds)
-	return x.buf
-}
-
 func (e TL_messages_getWebPage) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getWebPage)
@@ -25185,7 +26944,7 @@ func (e TL_messages_sendScreenshotNotification) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_sendScreenshotNotification)
 	x.Bytes(e.Peer.encode())
-	x.Int(e.ReplyToMsgID)
+	x.Bytes(e.ReplyTo.encode())
 	x.Long(e.RandomID)
 	return x.buf
 }
@@ -25250,12 +27009,10 @@ func (e TL_messages_sendMultiMedia) encode() []byte {
 	// flags.7 ClearDraft
 	// flags.14 Noforwards
 	// flags.15 UpdateStickersetsOrder
+	// flags.16 InvertMedia
 	x.Bytes(e.Peer.encode())
 	if e.Flags&1 != 0 {
-		x.Int(e.ReplyToMsgID)
-	}
-	if e.Flags&512 != 0 {
-		x.Int(e.TopMsgID)
+		x.Bytes(e.ReplyTo.encode())
 	}
 	x.Vector(e.MultiMedia)
 	if e.Flags&1024 != 0 {
@@ -25974,10 +27731,7 @@ func (e TL_messages_requestWebView) encode() []byte {
 	}
 	x.String(e.Platform)
 	if e.Flags&1 != 0 {
-		x.Int(e.ReplyToMsgID)
-	}
-	if e.Flags&512 != 0 {
-		x.Int(e.TopMsgID)
+		x.Bytes(e.ReplyTo.encode())
 	}
 	if e.Flags&8192 != 0 {
 		x.Bytes(e.SendAs.encode())
@@ -25994,10 +27748,7 @@ func (e TL_messages_prolongWebView) encode() []byte {
 	x.Bytes(e.Bot.encode())
 	x.Long(e.QueryID)
 	if e.Flags&1 != 0 {
-		x.Int(e.ReplyToMsgID)
-	}
-	if e.Flags&512 != 0 {
-		x.Int(e.TopMsgID)
+		x.Bytes(e.ReplyTo.encode())
 	}
 	if e.Flags&8192 != 0 {
 		x.Bytes(e.SendAs.encode())
@@ -26010,8 +27761,14 @@ func (e TL_messages_requestSimpleWebView) encode() []byte {
 	x.UInt(CRC_messages_requestSimpleWebView)
 	x.Int(e.Flags)
 	// flags.1 FromSwitchWebview
+	// flags.2 FromSideMenu
 	x.Bytes(e.Bot.encode())
-	x.String(e.Url)
+	if e.Flags&8 != 0 {
+		x.String(e.Url)
+	}
+	if e.Flags&16 != 0 {
+		x.String(e.StartParam)
+	}
 	if e.Flags&1 != 0 {
 		x.Bytes(e.ThemeParams.encode())
 	}
@@ -26229,11 +27986,17 @@ func (e TL_updates_getDifference) encode() []byte {
 	x.UInt(CRC_updates_getDifference)
 	x.Int(e.Flags)
 	x.Int(e.Pts)
+	if e.Flags&2 != 0 {
+		x.Int(e.PtsLimit)
+	}
 	if e.Flags&1 != 0 {
 		x.Int(e.PtsTotalLimit)
 	}
 	x.Int(e.Date)
 	x.Int(e.Qts)
+	if e.Flags&4 != 0 {
+		x.Int(e.QtsLimit)
+	}
 	return x.buf
 }
 
@@ -27053,6 +28816,26 @@ func (e TL_channels_toggleParticipantsHidden) encode() []byte {
 	return x.buf
 }
 
+func (e TL_channels_clickSponsoredMessage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_clickSponsoredMessage)
+	x.Bytes(e.Channel.encode())
+	x.StringBytes(e.RandomID)
+	return x.buf
+}
+
+func (e TL_channels_updateColor) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channels_updateColor)
+	x.Int(e.Flags)
+	x.Bytes(e.Channel.encode())
+	x.Int(e.Color)
+	if e.Flags&1 != 0 {
+		x.Long(e.BackgroundEmojiID)
+	}
+	return x.buf
+}
+
 func (e TL_bots_sendCustomRequest) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_bots_sendCustomRequest)
@@ -27171,6 +28954,29 @@ func (e TL_bots_toggleUsername) encode() []byte {
 	return x.buf
 }
 
+func (e TL_bots_canSendMessage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_bots_canSendMessage)
+	x.Bytes(e.Bot.encode())
+	return x.buf
+}
+
+func (e TL_bots_allowSendMessage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_bots_allowSendMessage)
+	x.Bytes(e.Bot.encode())
+	return x.buf
+}
+
+func (e TL_bots_invokeWebViewCustomMethod) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_bots_invokeWebViewCustomMethod)
+	x.Bytes(e.Bot.encode())
+	x.String(e.CustomMethod)
+	x.Bytes(e.Params.encode())
+	return x.buf
+}
+
 func (e TL_payments_getPaymentForm) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_getPaymentForm)
@@ -27267,6 +29073,47 @@ func (e TL_payments_assignPlayMarketTransaction) encode() []byte {
 func (e TL_payments_canPurchasePremium) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_canPurchasePremium)
+	x.Bytes(e.Purpose.encode())
+	return x.buf
+}
+
+func (e TL_payments_getPremiumGiftCodeOptions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_getPremiumGiftCodeOptions)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.BoostPeer.encode())
+	}
+	return x.buf
+}
+
+func (e TL_payments_checkGiftCode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_checkGiftCode)
+	x.String(e.Slug)
+	return x.buf
+}
+
+func (e TL_payments_applyGiftCode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_applyGiftCode)
+	x.String(e.Slug)
+	return x.buf
+}
+
+func (e TL_payments_getGiveawayInfo) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_getGiveawayInfo)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.MsgID)
+	return x.buf
+}
+
+func (e TL_payments_launchPrepaidGiveaway) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_launchPrepaidGiveaway)
+	x.Bytes(e.Peer.encode())
+	x.Long(e.GiveawayID)
 	x.Bytes(e.Purpose.encode())
 	return x.buf
 }
@@ -27870,6 +29717,271 @@ func (e TL_chatlists_leaveChatlist) encode() []byte {
 	return x.buf
 }
 
+func (e TL_stories_canSendStory) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_canSendStory)
+	x.Bytes(e.Peer.encode())
+	return x.buf
+}
+
+func (e TL_stories_sendStory) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_sendStory)
+	x.Int(e.Flags)
+	// flags.2 Pinned
+	// flags.4 Noforwards
+	x.Bytes(e.Peer.encode())
+	x.Bytes(e.Media.encode())
+	if e.Flags&32 != 0 {
+		x.Vector(e.MediaAreas)
+	}
+	if e.Flags&1 != 0 {
+		x.String(e.Caption)
+	}
+	if e.Flags&2 != 0 {
+		x.Vector(e.Entities)
+	}
+	x.Vector(e.PrivacyRules)
+	x.Long(e.RandomID)
+	if e.Flags&8 != 0 {
+		x.Int(e.Period)
+	}
+	return x.buf
+}
+
+func (e TL_stories_editStory) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_editStory)
+	x.Int(e.Flags)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.ID)
+	if e.Flags&1 != 0 {
+		x.Bytes(e.Media.encode())
+	}
+	if e.Flags&8 != 0 {
+		x.Vector(e.MediaAreas)
+	}
+	if e.Flags&2 != 0 {
+		x.String(e.Caption)
+	}
+	if e.Flags&2 != 0 {
+		x.Vector(e.Entities)
+	}
+	if e.Flags&4 != 0 {
+		x.Vector(e.PrivacyRules)
+	}
+	return x.buf
+}
+
+func (e TL_stories_deleteStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_deleteStories)
+	x.Bytes(e.Peer.encode())
+	x.VectorInt(e.ID)
+	return x.buf
+}
+
+func (e TL_stories_togglePinned) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_togglePinned)
+	x.Bytes(e.Peer.encode())
+	x.VectorInt(e.ID)
+	x.Bytes(e.Pinned.encode())
+	return x.buf
+}
+
+func (e TL_stories_getAllStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getAllStories)
+	x.Int(e.Flags)
+	// flags.1 Next
+	// flags.2 Hidden
+	if e.Flags&1 != 0 {
+		x.String(e.State)
+	}
+	return x.buf
+}
+
+func (e TL_stories_getPinnedStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getPinnedStories)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.OffsetID)
+	x.Int(e.Limit)
+	return x.buf
+}
+
+func (e TL_stories_getStoriesArchive) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getStoriesArchive)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.OffsetID)
+	x.Int(e.Limit)
+	return x.buf
+}
+
+func (e TL_stories_getStoriesByID) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getStoriesByID)
+	x.Bytes(e.Peer.encode())
+	x.VectorInt(e.ID)
+	return x.buf
+}
+
+func (e TL_stories_toggleAllStoriesHidden) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_toggleAllStoriesHidden)
+	x.Bytes(e.Hidden.encode())
+	return x.buf
+}
+
+func (e TL_stories_readStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_readStories)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.MaxID)
+	return x.buf
+}
+
+func (e TL_stories_incrementStoryViews) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_incrementStoryViews)
+	x.Bytes(e.Peer.encode())
+	x.VectorInt(e.ID)
+	return x.buf
+}
+
+func (e TL_stories_getStoryViewsList) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getStoryViewsList)
+	x.Int(e.Flags)
+	// flags.0 JustContacts
+	// flags.2 ReactionsFirst
+	x.Bytes(e.Peer.encode())
+	if e.Flags&2 != 0 {
+		x.String(e.Q)
+	}
+	x.Int(e.ID)
+	x.String(e.Offset)
+	x.Int(e.Limit)
+	return x.buf
+}
+
+func (e TL_stories_getStoriesViews) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getStoriesViews)
+	x.Bytes(e.Peer.encode())
+	x.VectorInt(e.ID)
+	return x.buf
+}
+
+func (e TL_stories_exportStoryLink) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_exportStoryLink)
+	x.Bytes(e.Peer.encode())
+	x.Int(e.ID)
+	return x.buf
+}
+
+func (e TL_stories_report) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_report)
+	x.Bytes(e.Peer.encode())
+	x.VectorInt(e.ID)
+	x.Bytes(e.Reason.encode())
+	x.String(e.Message)
+	return x.buf
+}
+
+func (e TL_stories_activateStealthMode) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_activateStealthMode)
+	x.Int(e.Flags)
+	// flags.0 Past
+	// flags.1 Future
+	return x.buf
+}
+
+func (e TL_stories_sendReaction) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_sendReaction)
+	x.Int(e.Flags)
+	// flags.0 AddToRecent
+	x.Bytes(e.Peer.encode())
+	x.Int(e.StoryID)
+	x.Bytes(e.Reaction.encode())
+	return x.buf
+}
+
+func (e TL_stories_getPeerStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getPeerStories)
+	x.Bytes(e.Peer.encode())
+	return x.buf
+}
+
+func (e TL_stories_getAllReadPeerStories) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getAllReadPeerStories)
+	return x.buf
+}
+
+func (e TL_stories_getPeerMaxIDs) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getPeerMaxIDs)
+	x.Vector(e.ID)
+	return x.buf
+}
+
+func (e TL_stories_getChatsToSend) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_getChatsToSend)
+	return x.buf
+}
+
+func (e TL_stories_togglePeerStoriesHidden) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_stories_togglePeerStoriesHidden)
+	x.Bytes(e.Peer.encode())
+	x.Bytes(e.Hidden.encode())
+	return x.buf
+}
+
+func (e TL_premium_getBoostsList) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premium_getBoostsList)
+	x.Int(e.Flags)
+	// flags.0 Gifts
+	x.Bytes(e.Peer.encode())
+	x.String(e.Offset)
+	x.Int(e.Limit)
+	return x.buf
+}
+
+func (e TL_premium_getMyBoosts) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premium_getMyBoosts)
+	return x.buf
+}
+
+func (e TL_premium_applyBoost) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premium_applyBoost)
+	x.Int(e.Flags)
+	if e.Flags&1 != 0 {
+		x.VectorInt(e.Slots)
+	}
+	x.Bytes(e.Peer.encode())
+	return x.buf
+}
+
+func (e TL_premium_getBoostsStatus) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_premium_getBoostsStatus)
+	x.Bytes(e.Peer.encode())
+	return x.buf
+}
+
 func (e TL_req_pq) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -28374,6 +30486,18 @@ func (e TL_account_deleteAutoSaveExceptions) decodeResponse(dbuf *DecodeBuf) TL 
 	return dbuf.Object()
 }
 
+func (e TL_account_invalidateSignInCodes) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_updateColor) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_getDefaultBackgroundEmojis) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_users_getUsers) decodeResponse(dbuf *DecodeBuf) TL {
 	return VectorObject(dbuf.Vector())
 }
@@ -28475,6 +30599,14 @@ func (e TL_contacts_exportContactToken) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_contacts_importContactToken) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_contacts_editCloseFriends) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_contacts_setBlocked) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -28779,10 +30911,6 @@ func (e TL_messages_getInlineGameHighScores) decodeResponse(dbuf *DecodeBuf) TL 
 }
 
 func (e TL_messages_getCommonChats) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
-func (e TL_messages_getAllChats) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -29606,6 +31734,14 @@ func (e TL_channels_toggleParticipantsHidden) decodeResponse(dbuf *DecodeBuf) TL
 	return dbuf.Object()
 }
 
+func (e TL_channels_clickSponsoredMessage) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_channels_updateColor) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_bots_sendCustomRequest) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -29658,6 +31794,18 @@ func (e TL_bots_toggleUsername) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_bots_canSendMessage) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_bots_allowSendMessage) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_bots_invokeWebViewCustomMethod) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_payments_getPaymentForm) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -29699,6 +31847,26 @@ func (e TL_payments_assignPlayMarketTransaction) decodeResponse(dbuf *DecodeBuf)
 }
 
 func (e TL_payments_canPurchasePremium) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_getPremiumGiftCodeOptions) decodeResponse(dbuf *DecodeBuf) TL {
+	return VectorObject(dbuf.Vector())
+}
+
+func (e TL_payments_checkGiftCode) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_applyGiftCode) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_getGiveawayInfo) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_launchPrepaidGiveaway) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -29951,6 +32119,114 @@ func (e TL_chatlists_getLeaveChatlistSuggestions) decodeResponse(dbuf *DecodeBuf
 }
 
 func (e TL_chatlists_leaveChatlist) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_canSendStory) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_sendStory) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_editStory) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_deleteStories) decodeResponse(dbuf *DecodeBuf) TL {
+	return VectorInt(dbuf.VectorInt())
+}
+
+func (e TL_stories_togglePinned) decodeResponse(dbuf *DecodeBuf) TL {
+	return VectorInt(dbuf.VectorInt())
+}
+
+func (e TL_stories_getAllStories) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_getPinnedStories) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_getStoriesArchive) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_getStoriesByID) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_toggleAllStoriesHidden) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_readStories) decodeResponse(dbuf *DecodeBuf) TL {
+	return VectorInt(dbuf.VectorInt())
+}
+
+func (e TL_stories_incrementStoryViews) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_getStoryViewsList) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_getStoriesViews) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_exportStoryLink) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_report) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_activateStealthMode) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_sendReaction) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_getPeerStories) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_getAllReadPeerStories) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_getPeerMaxIDs) decodeResponse(dbuf *DecodeBuf) TL {
+	return VectorInt(dbuf.VectorInt())
+}
+
+func (e TL_stories_getChatsToSend) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_stories_togglePeerStoriesHidden) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_premium_getBoostsList) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_premium_getMyBoosts) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_premium_applyBoost) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_premium_getBoostsStatus) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -30561,6 +32837,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_inputMediaStory:
+		r = TL_inputMediaStory{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_inputMediaWebPage:
+		var flags int32
+		r = TL_inputMediaWebPage{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&2 != 0, //flags.1
+			flags&4 != 0, //flags.2
+			m.String(),
+		}
+
 	case CRC_inputChatPhotoEmpty:
 		r = TL_inputChatPhotoEmpty{}
 
@@ -30749,7 +33041,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&268435456 != 0, //flags.28
 			flags&536870912 != 0, //flags.29
 			readFlags(m, &flags2),
-			flags2&2 != 0, //flags2.1
+			flags2&2 != 0,  //flags2.1
+			flags2&4 != 0,  //flags2.2
+			flags2&8 != 0,  //flags2.3
+			flags2&16 != 0, //flags2.4
 			m.Long(),
 			m.FlaggedLong(flags, 0),
 			m.FlaggedString(flags, 1),
@@ -30764,6 +33059,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedString(flags, 22),
 			m.FlaggedObject(flags, 30),
 			m.FlaggedVector(flags2, 0),
+			m.FlaggedInt(flags2, 5),
+			m.FlaggedInt(flags2, 7),
+			m.FlaggedLong(flags2, 6),
 		}
 
 	case CRC_userProfilePhotoEmpty:
@@ -30859,6 +33157,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&536870912 != 0,  //flags.29
 			flags&1073741824 != 0, //flags.30
 			readFlags(m, &flags2),
+			flags2&2 != 0, //flags2.1
+			flags2&4 != 0, //flags2.2
+			flags2&8 != 0, //flags2.3
 			m.Long(),
 			m.FlaggedLong(flags, 13),
 			m.String(),
@@ -30871,6 +33172,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 18),
 			m.FlaggedInt(flags, 17),
 			m.FlaggedVector(flags2, 0),
+			m.FlaggedInt(flags2, 4),
+			m.FlaggedInt(flags2, 6),
+			m.FlaggedLong(flags2, 5),
 		}
 
 	case CRC_channelForbidden:
@@ -30923,10 +33227,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&1048576 != 0, //flags.20
 			flags&4194304 != 0, //flags.22
 			readFlags(m, &flags2),
-			flags2&1 != 0, //flags2.0
-			flags2&2 != 0, //flags2.1
-			flags2&4 != 0, //flags2.2
-			flags2&8 != 0, //flags2.3
+			flags2&1 != 0,  //flags2.0
+			flags2&2 != 0,  //flags2.1
+			flags2&4 != 0,  //flags2.2
+			flags2&8 != 0,  //flags2.3
+			flags2&32 != 0, //flags2.5
 			m.Long(),
 			m.String(),
 			m.FlaggedInt(flags, 0),
@@ -30962,6 +33267,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedVectorLong(flags, 28),
 			m.FlaggedObject(flags, 29),
 			m.FlaggedObject(flags, 30),
+			m.FlaggedObject(flags2, 4),
 		}
 
 	case CRC_chatParticipant:
@@ -31023,16 +33329,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_message{
 			readFlags(m, &flags),
-			flags&2 != 0,        //flags.1
-			flags&16 != 0,       //flags.4
-			flags&32 != 0,       //flags.5
-			flags&8192 != 0,     //flags.13
-			flags&16384 != 0,    //flags.14
-			flags&262144 != 0,   //flags.18
-			flags&524288 != 0,   //flags.19
-			flags&2097152 != 0,  //flags.21
-			flags&16777216 != 0, //flags.24
-			flags&67108864 != 0, //flags.26
+			flags&2 != 0,         //flags.1
+			flags&16 != 0,        //flags.4
+			flags&32 != 0,        //flags.5
+			flags&8192 != 0,      //flags.13
+			flags&16384 != 0,     //flags.14
+			flags&262144 != 0,    //flags.18
+			flags&524288 != 0,    //flags.19
+			flags&2097152 != 0,   //flags.21
+			flags&16777216 != 0,  //flags.24
+			flags&67108864 != 0,  //flags.26
+			flags&134217728 != 0, //flags.27
 			m.Int(),
 			m.FlaggedObject(flags, 8),
 			m.Object(),
@@ -31110,11 +33417,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&8 != 0,  //flags.3
 			flags&16 != 0, //flags.4
 			m.FlaggedObject(flags, 0),
+			m.FlaggedObject(flags, 5),
 			m.FlaggedInt(flags, 2),
 		}
 
 	case CRC_messageMediaWebPage:
+		var flags int32
 		r = TL_messageMediaWebPage{
+			readFlags(m, &flags),
+			flags&1 != 0,  //flags.0
+			flags&2 != 0,  //flags.1
+			flags&8 != 0,  //flags.3
+			flags&16 != 0, //flags.4
 			m.Object(),
 		}
 
@@ -31169,6 +33483,28 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messageMediaDice{
 			m.Int(),
 			m.String(),
+		}
+
+	case CRC_messageMediaStory:
+		var flags int32
+		r = TL_messageMediaStory{
+			readFlags(m, &flags),
+			flags&2 != 0, //flags.1
+			m.Object(),
+			m.Int(),
+			m.FlaggedObject(flags, 0),
+		}
+
+	case CRC_messageMediaGiveaway:
+		var flags int32
+		r = TL_messageMediaGiveaway{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			m.VectorLong(),
+			m.FlaggedVectorString(flags, 1),
+			m.Int(),
+			m.Int(),
+			m.Int(),
 		}
 
 	case CRC_messageActionEmpty:
@@ -31284,6 +33620,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messageActionBotAllowed{
 			readFlags(m, &flags),
 			flags&2 != 0, //flags.1
+			flags&8 != 0, //flags.3
 			m.FlaggedString(flags, 0),
 			m.FlaggedObject(flags, 2),
 		}
@@ -31406,6 +33743,20 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messageActionSetSameChatWallPaper{
 			m.Object(),
 		}
+
+	case CRC_messageActionGiftCode:
+		var flags int32
+		r = TL_messageActionGiftCode{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&4 != 0, //flags.2
+			m.FlaggedObject(flags, 1),
+			m.Int(),
+			m.String(),
+		}
+
+	case CRC_messageActionGiveawayLaunch:
+		r = TL_messageActionGiveawayLaunch{}
 
 	case CRC_dialog:
 		var flags int32
@@ -31581,6 +33932,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 1),
 			m.FlaggedInt(flags, 2),
 			m.FlaggedObject(flags, 3),
+			m.FlaggedObject(flags, 6),
+			m.FlaggedObject(flags, 7),
+			m.FlaggedObject(flags, 8),
 		}
 
 	case CRC_peerNotifySettings:
@@ -31593,6 +33947,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 3),
 			m.FlaggedObject(flags, 4),
 			m.FlaggedObject(flags, 5),
+			m.FlaggedObject(flags, 6),
+			m.FlaggedObject(flags, 7),
+			m.FlaggedObject(flags, 8),
+			m.FlaggedObject(flags, 9),
+			m.FlaggedObject(flags, 10),
 		}
 
 	case CRC_peerSettings:
@@ -31672,14 +34031,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_userFull{
 			readFlags(m, &flags),
-			flags&1 != 0,       //flags.0
-			flags&16 != 0,      //flags.4
-			flags&32 != 0,      //flags.5
-			flags&128 != 0,     //flags.7
-			flags&4096 != 0,    //flags.12
-			flags&8192 != 0,    //flags.13
-			flags&1048576 != 0, //flags.20
-			flags&8388608 != 0, //flags.23
+			flags&1 != 0,         //flags.0
+			flags&16 != 0,        //flags.4
+			flags&32 != 0,        //flags.5
+			flags&128 != 0,       //flags.7
+			flags&4096 != 0,      //flags.12
+			flags&8192 != 0,      //flags.13
+			flags&1048576 != 0,   //flags.20
+			flags&8388608 != 0,   //flags.23
+			flags&67108864 != 0,  //flags.26
+			flags&134217728 != 0, //flags.27
 			m.Long(),
 			m.FlaggedString(flags, 1),
 			m.Object(),
@@ -31698,6 +34059,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 18),
 			m.FlaggedVector(flags, 19),
 			m.FlaggedObject(flags, 24),
+			m.FlaggedObject(flags, 25),
 		}
 
 	case CRC_contact:
@@ -31944,6 +34306,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Vector(),
 		}
 
+	case CRC_updateNewAuthorization:
+		var flags int32
+		r = TL_updateNewAuthorization{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			m.Long(),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedString(flags, 0),
+			m.FlaggedString(flags, 0),
+		}
+
 	case CRC_updateNewEncryptedMessage:
 		r = TL_updateNewEncryptedMessage{
 			m.Object(),
@@ -32000,6 +34373,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_updateServiceNotification{
 			readFlags(m, &flags),
 			flags&1 != 0, //flags.0
+			flags&4 != 0, //flags.2
 			m.FlaggedInt(flags, 1),
 			m.String(),
 			m.String(),
@@ -32047,10 +34421,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updateReadMessagesContents:
+		var flags int32
 		r = TL_updateReadMessagesContents{
+			readFlags(m, &flags),
 			m.VectorInt(),
 			m.Int(),
 			m.Int(),
+			m.FlaggedInt(flags, 0),
 		}
 
 	case CRC_updateChannelTooLong:
@@ -32385,7 +34762,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_updateMessagePollVote:
 		r = TL_updateMessagePollVote{
 			m.Long(),
-			m.Long(),
+			m.Object(),
 			m.VectorBytes(),
 			m.Int(),
 		}
@@ -32438,8 +34815,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_updatePeerBlocked:
+		var flags int32
 		r = TL_updatePeerBlocked{
-			m.Object(),
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&2 != 0, //flags.1
 			m.Object(),
 		}
 
@@ -32667,6 +35047,36 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_updateGroupInvitePrivacyForbidden:
 		r = TL_updateGroupInvitePrivacyForbidden{
 			m.Long(),
+		}
+
+	case CRC_updateStory:
+		r = TL_updateStory{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_updateReadStories:
+		r = TL_updateReadStories{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_updateStoryID:
+		r = TL_updateStoryID{
+			m.Int(),
+			m.Long(),
+		}
+
+	case CRC_updateStoriesStealthMode:
+		r = TL_updateStoriesStealthMode{
+			m.Object(),
+		}
+
+	case CRC_updateSentStoryReaction:
+		r = TL_updateSentStoryReaction{
+			m.Object(),
+			m.Int(),
+			m.Object(),
 		}
 
 	case CRC_updates_state:
@@ -33220,6 +35630,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_inputPrivacyKeyVoiceMessages:
 		r = TL_inputPrivacyKeyVoiceMessages{}
 
+	case CRC_inputPrivacyKeyAbout:
+		r = TL_inputPrivacyKeyAbout{}
+
 	case CRC_privacyKeyStatusTimestamp:
 		r = TL_privacyKeyStatusTimestamp{}
 
@@ -33246,6 +35659,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_privacyKeyVoiceMessages:
 		r = TL_privacyKeyVoiceMessages{}
+
+	case CRC_privacyKeyAbout:
+		r = TL_privacyKeyAbout{}
 
 	case CRC_inputPrivacyValueAllowContacts:
 		r = TL_inputPrivacyValueAllowContacts{}
@@ -33279,6 +35695,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.VectorLong(),
 		}
 
+	case CRC_inputPrivacyValueAllowCloseFriends:
+		r = TL_inputPrivacyValueAllowCloseFriends{}
+
 	case CRC_privacyValueAllowContacts:
 		r = TL_privacyValueAllowContacts{}
 
@@ -33310,6 +35729,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_privacyValueDisallowChatParticipants{
 			m.VectorLong(),
 		}
+
+	case CRC_privacyValueAllowCloseFriends:
+		r = TL_privacyValueAllowCloseFriends{}
 
 	case CRC_account_privacyRules:
 		r = TL_account_privacyRules{
@@ -33348,9 +35770,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			readFlags(m, &flags),
 			flags&1 != 0, //flags.0
 			flags&2 != 0, //flags.1
+			flags&8 != 0, //flags.3
+			m.Double(),
 			m.Int(),
 			m.Int(),
-			m.Int(),
+			m.FlaggedInt(flags, 2),
 		}
 
 	case CRC_documentAttributeAudio:
@@ -33413,13 +35837,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_webPageEmpty:
+		var flags int32
 		r = TL_webPageEmpty{
+			readFlags(m, &flags),
 			m.Long(),
+			m.FlaggedString(flags, 0),
 		}
 
 	case CRC_webPagePending:
+		var flags int32
 		r = TL_webPagePending{
+			readFlags(m, &flags),
 			m.Long(),
+			m.FlaggedString(flags, 0),
 			m.Int(),
 		}
 
@@ -33427,6 +35857,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_webPage{
 			readFlags(m, &flags),
+			flags&8192 != 0, //flags.13
 			m.Long(),
 			m.String(),
 			m.String(),
@@ -33463,6 +35894,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&4 != 0,  //flags.2
 			flags&8 != 0,  //flags.3
 			flags&16 != 0, //flags.4
+			flags&32 != 0, //flags.5
 			m.Long(),
 			m.String(),
 			m.String(),
@@ -33562,16 +35994,20 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_chatInvite{
 			readFlags(m, &flags),
-			flags&1 != 0,  //flags.0
-			flags&2 != 0,  //flags.1
-			flags&4 != 0,  //flags.2
-			flags&8 != 0,  //flags.3
-			flags&64 != 0, //flags.6
+			flags&1 != 0,   //flags.0
+			flags&2 != 0,   //flags.1
+			flags&4 != 0,   //flags.2
+			flags&8 != 0,   //flags.3
+			flags&64 != 0,  //flags.6
+			flags&128 != 0, //flags.7
+			flags&256 != 0, //flags.8
+			flags&512 != 0, //flags.9
 			m.String(),
 			m.FlaggedString(flags, 5),
 			m.Object(),
 			m.Int(),
 			m.FlaggedVector(flags, 4),
+			m.Int(),
 		}
 
 	case CRC_chatInvitePeek:
@@ -33627,6 +36063,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&32 != 0,  //flags.5
 			flags&64 != 0,  //flags.6
 			flags&128 != 0, //flags.7
+			flags&512 != 0, //flags.9
 			m.FlaggedInt(flags, 0),
 			m.Long(),
 			m.Long(),
@@ -33923,12 +36360,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 		}
 
-	case CRC_messageEntityBlockquote:
-		r = TL_messageEntityBlockquote{
-			m.Int(),
-			m.Int(),
-		}
-
 	case CRC_messageEntityBankCard:
 		r = TL_messageEntityBankCard{
 			m.Int(),
@@ -33946,6 +36377,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 			m.Int(),
 			m.Long(),
+		}
+
+	case CRC_messageEntityBlockquote:
+		r = TL_messageEntityBlockquote{
+			m.Int(),
+			m.Int(),
 		}
 
 	case CRC_inputChannelEmpty:
@@ -34156,6 +36593,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_inputBotInlineMessageMediaAuto{
 			readFlags(m, &flags),
+			flags&8 != 0, //flags.3
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedObject(flags, 2),
@@ -34166,6 +36604,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_inputBotInlineMessageText{
 			readFlags(m, &flags),
 			flags&1 != 0, //flags.0
+			flags&8 != 0, //flags.3
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedObject(flags, 2),
@@ -34227,6 +36666,20 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 2),
 		}
 
+	case CRC_inputBotInlineMessageMediaWebPage:
+		var flags int32
+		r = TL_inputBotInlineMessageMediaWebPage{
+			readFlags(m, &flags),
+			flags&8 != 0,  //flags.3
+			flags&16 != 0, //flags.4
+			flags&32 != 0, //flags.5
+			flags&64 != 0, //flags.6
+			m.String(),
+			m.FlaggedVector(flags, 1),
+			m.String(),
+			m.FlaggedObject(flags, 2),
+		}
+
 	case CRC_inputBotInlineResult:
 		var flags int32
 		r = TL_inputBotInlineResult{
@@ -34272,6 +36725,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_botInlineMessageMediaAuto{
 			readFlags(m, &flags),
+			flags&8 != 0, //flags.3
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedObject(flags, 2),
@@ -34282,6 +36736,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_botInlineMessageText{
 			readFlags(m, &flags),
 			flags&1 != 0, //flags.0
+			flags&8 != 0, //flags.3
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedObject(flags, 2),
@@ -34333,6 +36788,21 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 0),
 			m.String(),
 			m.Long(),
+			m.FlaggedObject(flags, 2),
+		}
+
+	case CRC_botInlineMessageMediaWebPage:
+		var flags int32
+		r = TL_botInlineMessageMediaWebPage{
+			readFlags(m, &flags),
+			flags&8 != 0,   //flags.3
+			flags&16 != 0,  //flags.4
+			flags&32 != 0,  //flags.5
+			flags&128 != 0, //flags.7
+			flags&256 != 0, //flags.8
+			m.String(),
+			m.FlaggedVector(flags, 1),
+			m.String(),
 			m.FlaggedObject(flags, 2),
 		}
 
@@ -34585,10 +37055,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_draftMessage{
 			readFlags(m, &flags),
-			flags&2 != 0, //flags.1
-			m.FlaggedInt(flags, 0),
+			flags&2 != 0,  //flags.1
+			flags&64 != 0, //flags.6
+			m.FlaggedObject(flags, 4),
 			m.String(),
 			m.FlaggedVector(flags, 3),
+			m.FlaggedObject(flags, 5),
 			m.Int(),
 		}
 
@@ -35026,7 +37498,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Vector(),
 			m.FlaggedLong(flags, 8),
 			m.FlaggedVectorLong(flags, 8),
-			m.FlaggedString(flags, 9),
+			m.FlaggedString(flags, 10),
 		}
 
 	case CRC_paymentCharge:
@@ -35665,6 +38137,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_channelAdminLogEventActionToggleAntiSpam:
 		r = TL_channelAdminLogEventActionToggleAntiSpam{
 			m.Object(),
+		}
+
+	case CRC_channelAdminLogEventActionChangeColor:
+		r = TL_channelAdminLogEventActionChangeColor{
+			m.Int(),
+			m.Int(),
+		}
+
+	case CRC_channelAdminLogEventActionChangeBackgroundEmoji:
+		r = TL_channelAdminLogEventActionChangeBackgroundEmoji{
+			m.Long(),
+			m.Long(),
 		}
 
 	case CRC_channelAdminLogEvent:
@@ -36327,7 +38811,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&1 != 0, //flags.0
 			m.FlaggedVector(flags, 1),
 			m.FlaggedInt(flags, 2),
-			m.FlaggedVectorLong(flags, 3),
+			m.FlaggedVector(flags, 3),
 			m.FlaggedString(flags, 4),
 			m.FlaggedVector(flags, 4),
 		}
@@ -36346,18 +38830,21 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_chatAdminRights{
 			readFlags(m, &flags),
-			flags&1 != 0,    //flags.0
-			flags&2 != 0,    //flags.1
-			flags&4 != 0,    //flags.2
-			flags&8 != 0,    //flags.3
-			flags&16 != 0,   //flags.4
-			flags&32 != 0,   //flags.5
-			flags&128 != 0,  //flags.7
-			flags&512 != 0,  //flags.9
-			flags&1024 != 0, //flags.10
-			flags&2048 != 0, //flags.11
-			flags&4096 != 0, //flags.12
-			flags&8192 != 0, //flags.13
+			flags&1 != 0,     //flags.0
+			flags&2 != 0,     //flags.1
+			flags&4 != 0,     //flags.2
+			flags&8 != 0,     //flags.3
+			flags&16 != 0,    //flags.4
+			flags&32 != 0,    //flags.5
+			flags&128 != 0,   //flags.7
+			flags&512 != 0,   //flags.9
+			flags&1024 != 0,  //flags.10
+			flags&2048 != 0,  //flags.11
+			flags&4096 != 0,  //flags.12
+			flags&8192 != 0,  //flags.13
+			flags&16384 != 0, //flags.14
+			flags&32768 != 0, //flags.15
+			flags&65536 != 0, //flags.16
 		}
 
 	case CRC_chatBannedRights:
@@ -36444,13 +38931,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_autoDownloadSettings{
 			readFlags(m, &flags),
-			flags&1 != 0, //flags.0
-			flags&2 != 0, //flags.1
-			flags&4 != 0, //flags.2
-			flags&8 != 0, //flags.3
+			flags&1 != 0,  //flags.0
+			flags&2 != 0,  //flags.1
+			flags&4 != 0,  //flags.2
+			flags&8 != 0,  //flags.3
+			flags&16 != 0, //flags.4
 			m.Int(),
 			m.Long(),
 			m.Long(),
+			m.Int(),
+			m.Int(),
 			m.Int(),
 		}
 
@@ -36686,24 +39176,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedObject(flags, 1),
 		}
 
-	case CRC_messageUserVote:
-		r = TL_messageUserVote{
-			m.Long(),
-			m.StringBytes(),
+	case CRC_webPageAttributeStory:
+		var flags int32
+		r = TL_webPageAttributeStory{
+			readFlags(m, &flags),
+			m.Object(),
 			m.Int(),
-		}
-
-	case CRC_messageUserVoteInputOption:
-		r = TL_messageUserVoteInputOption{
-			m.Long(),
-			m.Int(),
-		}
-
-	case CRC_messageUserVoteMultiple:
-		r = TL_messageUserVoteMultiple{
-			m.Long(),
-			m.VectorBytes(),
-			m.Int(),
+			m.FlaggedObject(flags, 0),
 		}
 
 	case CRC_messages_votesList:
@@ -36711,6 +39190,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_votesList{
 			readFlags(m, &flags),
 			m.Int(),
+			m.Vector(),
 			m.Vector(),
 			m.Vector(),
 			m.FlaggedString(flags, 0),
@@ -36919,7 +39399,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_globalPrivacySettings{
 			readFlags(m, &flags),
-			m.FlaggedObject(flags, 0),
+			flags&1 != 0, //flags.0
+			flags&2 != 0, //flags.1
+			flags&4 != 0, //flags.2
 		}
 
 	case CRC_help_countryCode:
@@ -36984,11 +39466,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_messageReplyHeader{
 			readFlags(m, &flags),
-			flags&4 != 0, //flags.2
-			flags&8 != 0, //flags.3
-			m.Int(),
+			flags&4 != 0,   //flags.2
+			flags&8 != 0,   //flags.3
+			flags&512 != 0, //flags.9
+			m.FlaggedInt(flags, 4),
 			m.FlaggedObject(flags, 0),
+			m.FlaggedObject(flags, 5),
+			m.FlaggedObject(flags, 8),
 			m.FlaggedInt(flags, 1),
+			m.FlaggedString(flags, 6),
+			m.FlaggedVector(flags, 7),
+		}
+
+	case CRC_messageReplyStoryHeader:
+		r = TL_messageReplyStoryHeader{
+			m.Long(),
+			m.Int(),
 		}
 
 	case CRC_messageReplies:
@@ -37279,6 +39772,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedString(flags, 4),
 			m.FlaggedInt(flags, 2),
 			m.FlaggedString(flags, 0),
+			m.FlaggedObject(flags, 9),
 			m.String(),
 			m.FlaggedVector(flags, 1),
 			m.FlaggedString(flags, 7),
@@ -37424,6 +39918,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			readFlags(m, &flags),
 			flags&1 != 0, //flags.0
 			flags&2 != 0, //flags.1
+			flags&4 != 0, //flags.2
 			m.Object(),
 			m.Int(),
 			m.Object(),
@@ -37466,12 +39961,15 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_attachMenuBot{
 			readFlags(m, &flags),
-			flags&1 != 0, //flags.0
-			flags&2 != 0, //flags.1
-			flags&4 != 0, //flags.2
+			flags&1 != 0,  //flags.0
+			flags&2 != 0,  //flags.1
+			flags&4 != 0,  //flags.2
+			flags&8 != 0,  //flags.3
+			flags&16 != 0, //flags.4
+			flags&32 != 0, //flags.5
 			m.Long(),
 			m.String(),
-			m.Vector(),
+			m.FlaggedVector(flags, 3),
 			m.Vector(),
 		}
 
@@ -37581,6 +40079,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 		}
 
+	case CRC_inputInvoicePremiumGiftCode:
+		r = TL_inputInvoicePremiumGiftCode{
+			m.Object(),
+			m.Object(),
+		}
+
 	case CRC_payments_exportedInvoice:
 		r = TL_payments_exportedInvoice{
 			m.String(),
@@ -37616,6 +40120,30 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_inputStorePaymentGiftPremium:
 		r = TL_inputStorePaymentGiftPremium{
 			m.Object(),
+			m.String(),
+			m.Long(),
+		}
+
+	case CRC_inputStorePaymentPremiumGiftCode:
+		var flags int32
+		r = TL_inputStorePaymentPremiumGiftCode{
+			readFlags(m, &flags),
+			m.Vector(),
+			m.FlaggedObject(flags, 0),
+			m.String(),
+			m.Long(),
+		}
+
+	case CRC_inputStorePaymentPremiumGiveaway:
+		var flags int32
+		r = TL_inputStorePaymentPremiumGiveaway{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			m.Object(),
+			m.FlaggedVector(flags, 1),
+			m.FlaggedVectorString(flags, 2),
+			m.Long(),
+			m.Int(),
 			m.String(),
 			m.Long(),
 		}
@@ -37976,6 +40504,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			readFlags(m, &flags),
 			flags&1 != 0, //flags.0
 			flags&2 != 0, //flags.1
+			flags&4 != 0, //flags.2
 			m.Object(),
 		}
 
@@ -38055,6 +40584,360 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.String(),
 			m.String(),
+		}
+
+	case CRC_messagePeerVote:
+		r = TL_messagePeerVote{
+			m.Object(),
+			m.StringBytes(),
+			m.Int(),
+		}
+
+	case CRC_messagePeerVoteInputOption:
+		r = TL_messagePeerVoteInputOption{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_messagePeerVoteMultiple:
+		r = TL_messagePeerVoteMultiple{
+			m.Object(),
+			m.VectorBytes(),
+			m.Int(),
+		}
+
+	case CRC_sponsoredWebPage:
+		var flags int32
+		r = TL_sponsoredWebPage{
+			readFlags(m, &flags),
+			m.String(),
+			m.String(),
+			m.FlaggedObject(flags, 0),
+		}
+
+	case CRC_storyViews:
+		var flags int32
+		r = TL_storyViews{
+			readFlags(m, &flags),
+			flags&2 != 0, //flags.1
+			m.Int(),
+			m.FlaggedInt(flags, 2),
+			m.FlaggedVector(flags, 3),
+			m.FlaggedInt(flags, 4),
+			m.FlaggedVectorLong(flags, 0),
+		}
+
+	case CRC_storyItemDeleted:
+		r = TL_storyItemDeleted{
+			m.Int(),
+		}
+
+	case CRC_storyItemSkipped:
+		var flags int32
+		r = TL_storyItemSkipped{
+			readFlags(m, &flags),
+			flags&256 != 0, //flags.8
+			m.Int(),
+			m.Int(),
+			m.Int(),
+		}
+
+	case CRC_storyItem:
+		var flags int32
+		r = TL_storyItem{
+			readFlags(m, &flags),
+			flags&32 != 0,    //flags.5
+			flags&128 != 0,   //flags.7
+			flags&256 != 0,   //flags.8
+			flags&512 != 0,   //flags.9
+			flags&1024 != 0,  //flags.10
+			flags&2048 != 0,  //flags.11
+			flags&4096 != 0,  //flags.12
+			flags&8192 != 0,  //flags.13
+			flags&65536 != 0, //flags.16
+			m.Int(),
+			m.Int(),
+			m.Int(),
+			m.FlaggedString(flags, 0),
+			m.FlaggedVector(flags, 1),
+			m.Object(),
+			m.FlaggedVector(flags, 14),
+			m.FlaggedVector(flags, 2),
+			m.FlaggedObject(flags, 3),
+			m.FlaggedObject(flags, 15),
+		}
+
+	case CRC_stories_allStoriesNotModified:
+		var flags int32
+		r = TL_stories_allStoriesNotModified{
+			readFlags(m, &flags),
+			m.String(),
+			m.Object(),
+		}
+
+	case CRC_stories_allStories:
+		var flags int32
+		r = TL_stories_allStories{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			m.Int(),
+			m.String(),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+			m.Object(),
+		}
+
+	case CRC_stories_stories:
+		r = TL_stories_stories{
+			m.Int(),
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_storyView:
+		var flags int32
+		r = TL_storyView{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&2 != 0, //flags.1
+			m.Long(),
+			m.Int(),
+			m.FlaggedObject(flags, 2),
+		}
+
+	case CRC_stories_storyViewsList:
+		var flags int32
+		r = TL_stories_storyViewsList{
+			readFlags(m, &flags),
+			m.Int(),
+			m.Int(),
+			m.Vector(),
+			m.Vector(),
+			m.FlaggedString(flags, 0),
+		}
+
+	case CRC_stories_storyViews:
+		r = TL_stories_storyViews{
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_inputReplyToMessage:
+		var flags int32
+		r = TL_inputReplyToMessage{
+			readFlags(m, &flags),
+			m.Int(),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedObject(flags, 1),
+			m.FlaggedString(flags, 2),
+			m.FlaggedVector(flags, 3),
+		}
+
+	case CRC_inputReplyToStory:
+		r = TL_inputReplyToStory{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_exportedStoryLink:
+		r = TL_exportedStoryLink{
+			m.String(),
+		}
+
+	case CRC_storiesStealthMode:
+		var flags int32
+		r = TL_storiesStealthMode{
+			readFlags(m, &flags),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedInt(flags, 1),
+		}
+
+	case CRC_mediaAreaCoordinates:
+		r = TL_mediaAreaCoordinates{
+			m.Double(),
+			m.Double(),
+			m.Double(),
+			m.Double(),
+			m.Double(),
+		}
+
+	case CRC_mediaAreaVenue:
+		r = TL_mediaAreaVenue{
+			m.Object(),
+			m.Object(),
+			m.String(),
+			m.String(),
+			m.String(),
+			m.String(),
+			m.String(),
+		}
+
+	case CRC_inputMediaAreaVenue:
+		r = TL_inputMediaAreaVenue{
+			m.Object(),
+			m.Long(),
+			m.String(),
+		}
+
+	case CRC_mediaAreaGeoPoint:
+		r = TL_mediaAreaGeoPoint{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_mediaAreaSuggestedReaction:
+		var flags int32
+		r = TL_mediaAreaSuggestedReaction{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&2 != 0, //flags.1
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_peerStories:
+		var flags int32
+		r = TL_peerStories{
+			readFlags(m, &flags),
+			m.Object(),
+			m.FlaggedInt(flags, 0),
+			m.Vector(),
+		}
+
+	case CRC_stories_peerStories:
+		r = TL_stories_peerStories{
+			m.Object(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_messages_webPage:
+		r = TL_messages_webPage{
+			m.Object(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_premiumGiftCodeOption:
+		var flags int32
+		r = TL_premiumGiftCodeOption{
+			readFlags(m, &flags),
+			m.Int(),
+			m.Int(),
+			m.FlaggedString(flags, 0),
+			m.FlaggedInt(flags, 1),
+			m.String(),
+			m.Long(),
+		}
+
+	case CRC_payments_checkedGiftCode:
+		var flags int32
+		r = TL_payments_checkedGiftCode{
+			readFlags(m, &flags),
+			flags&4 != 0, //flags.2
+			m.Object(),
+			m.FlaggedInt(flags, 3),
+			m.FlaggedLong(flags, 0),
+			m.Int(),
+			m.Int(),
+			m.FlaggedInt(flags, 1),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_payments_giveawayInfo:
+		var flags int32
+		r = TL_payments_giveawayInfo{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&8 != 0, //flags.3
+			m.Int(),
+			m.FlaggedInt(flags, 1),
+			m.FlaggedLong(flags, 2),
+			m.FlaggedString(flags, 4),
+		}
+
+	case CRC_payments_giveawayInfoResults:
+		var flags int32
+		r = TL_payments_giveawayInfoResults{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&2 != 0, //flags.1
+			m.Int(),
+			m.FlaggedString(flags, 0),
+			m.Int(),
+			m.Int(),
+			m.Int(),
+		}
+
+	case CRC_prepaidGiveaway:
+		r = TL_prepaidGiveaway{
+			m.Long(),
+			m.Int(),
+			m.Int(),
+			m.Int(),
+		}
+
+	case CRC_boost:
+		var flags int32
+		r = TL_boost{
+			readFlags(m, &flags),
+			flags&2 != 0, //flags.1
+			flags&4 != 0, //flags.2
+			flags&8 != 0, //flags.3
+			m.String(),
+			m.FlaggedLong(flags, 0),
+			m.FlaggedInt(flags, 2),
+			m.Int(),
+			m.Int(),
+			m.FlaggedString(flags, 4),
+			m.FlaggedInt(flags, 5),
+		}
+
+	case CRC_premium_boostsList:
+		var flags int32
+		r = TL_premium_boostsList{
+			readFlags(m, &flags),
+			m.Int(),
+			m.Vector(),
+			m.FlaggedString(flags, 0),
+			m.Vector(),
+		}
+
+	case CRC_myBoost:
+		var flags int32
+		r = TL_myBoost{
+			readFlags(m, &flags),
+			m.Int(),
+			m.FlaggedObject(flags, 0),
+			m.Int(),
+			m.Int(),
+			m.FlaggedInt(flags, 1),
+		}
+
+	case CRC_premium_myBoosts:
+		r = TL_premium_myBoosts{
+			m.Vector(),
+			m.Vector(),
+			m.Vector(),
+		}
+
+	case CRC_premium_boostsStatus:
+		var flags int32
+		r = TL_premium_boostsStatus{
+			readFlags(m, &flags),
+			flags&4 != 0, //flags.2
+			m.Int(),
+			m.Int(),
+			m.Int(),
+			m.FlaggedInt(flags, 4),
+			m.FlaggedInt(flags, 0),
+			m.FlaggedObject(flags, 1),
+			m.String(),
+			m.FlaggedVector(flags, 3),
+			m.FlaggedVectorInt(flags, 2),
 		}
 
 	case CRC_invokeAfterMsg:
@@ -38514,6 +41397,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_account_getNotifyExceptions{
 			readFlags(m, &flags),
 			flags&2 != 0, //flags.1
+			flags&4 != 0, //flags.2
 			m.FlaggedObject(flags, 0),
 		}
 
@@ -38671,6 +41555,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_account_changeAuthorizationSettings{
 			readFlags(m, &flags),
+			flags&8 != 0, //flags.3
 			m.Long(),
 			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 1),
@@ -38750,6 +41635,24 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_account_deleteAutoSaveExceptions:
 		r = TL_account_deleteAutoSaveExceptions{}
 
+	case CRC_account_invalidateSignInCodes:
+		r = TL_account_invalidateSignInCodes{
+			m.VectorString(),
+		}
+
+	case CRC_account_updateColor:
+		var flags int32
+		r = TL_account_updateColor{
+			readFlags(m, &flags),
+			m.Int(),
+			m.FlaggedLong(flags, 0),
+		}
+
+	case CRC_account_getDefaultBackgroundEmojis:
+		r = TL_account_getDefaultBackgroundEmojis{
+			m.Long(),
+		}
+
 	case CRC_users_getUsers:
 		r = TL_users_getUsers{
 			m.Vector(),
@@ -38795,17 +41698,26 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 
 	case CRC_contacts_block:
+		var flags int32
 		r = TL_contacts_block{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
 			m.Object(),
 		}
 
 	case CRC_contacts_unblock:
+		var flags int32
 		r = TL_contacts_unblock{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
 			m.Object(),
 		}
 
 	case CRC_contacts_getBlocked:
+		var flags int32
 		r = TL_contacts_getBlocked{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
 			m.Int(),
 			m.Int(),
 		}
@@ -38901,6 +41813,20 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_contacts_importContactToken:
 		r = TL_contacts_importContactToken{
 			m.String(),
+		}
+
+	case CRC_contacts_editCloseFriends:
+		r = TL_contacts_editCloseFriends{
+			m.VectorLong(),
+		}
+
+	case CRC_contacts_setBlocked:
+		var flags int32
+		r = TL_contacts_setBlocked{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			m.Vector(),
+			m.Int(),
 		}
 
 	case CRC_messages_getMessages:
@@ -39002,9 +41928,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&128 != 0,   //flags.7
 			flags&16384 != 0, //flags.14
 			flags&32768 != 0, //flags.15
+			flags&65536 != 0, //flags.16
 			m.Object(),
-			m.FlaggedInt(flags, 0),
-			m.FlaggedInt(flags, 9),
+			m.FlaggedObject(flags, 0),
 			m.String(),
 			m.Long(),
 			m.FlaggedObject(flags, 2),
@@ -39022,9 +41948,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&128 != 0,   //flags.7
 			flags&16384 != 0, //flags.14
 			flags&32768 != 0, //flags.15
+			flags&65536 != 0, //flags.16
 			m.Object(),
-			m.FlaggedInt(flags, 0),
-			m.FlaggedInt(flags, 9),
+			m.FlaggedObject(flags, 0),
 			m.Object(),
 			m.String(),
 			m.Long(),
@@ -39362,8 +42288,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&128 != 0,  //flags.7
 			flags&2048 != 0, //flags.11
 			m.Object(),
-			m.FlaggedInt(flags, 0),
-			m.FlaggedInt(flags, 9),
+			m.FlaggedObject(flags, 0),
 			m.Long(),
 			m.Long(),
 			m.String(),
@@ -39381,7 +42306,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_messages_editMessage{
 			readFlags(m, &flags),
-			flags&2 != 0, //flags.1
+			flags&2 != 0,     //flags.1
+			flags&65536 != 0, //flags.16
 			m.Object(),
 			m.Int(),
 			m.FlaggedString(flags, 11),
@@ -39395,7 +42321,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_messages_editInlineBotMessage{
 			readFlags(m, &flags),
-			flags&2 != 0, //flags.1
+			flags&2 != 0,     //flags.1
+			flags&65536 != 0, //flags.16
 			m.Object(),
 			m.FlaggedString(flags, 11),
 			m.FlaggedObject(flags, 14),
@@ -39434,12 +42361,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		var flags int32
 		r = TL_messages_saveDraft{
 			readFlags(m, &flags),
-			flags&2 != 0, //flags.1
-			m.FlaggedInt(flags, 0),
-			m.FlaggedInt(flags, 2),
+			flags&2 != 0,  //flags.1
+			flags&64 != 0, //flags.6
+			m.FlaggedObject(flags, 4),
 			m.Object(),
 			m.String(),
 			m.FlaggedVector(flags, 3),
+			m.FlaggedObject(flags, 5),
 		}
 
 	case CRC_messages_getAllDrafts:
@@ -39542,11 +42470,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Int(),
 		}
 
-	case CRC_messages_getAllChats:
-		r = TL_messages_getAllChats{
-			m.VectorLong(),
-		}
-
 	case CRC_messages_getWebPage:
 		r = TL_messages_getWebPage{
 			m.String(),
@@ -39602,7 +42525,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_sendScreenshotNotification:
 		r = TL_messages_sendScreenshotNotification{
 			m.Object(),
-			m.Int(),
+			m.Object(),
 			m.Long(),
 		}
 
@@ -39654,9 +42577,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			flags&128 != 0,   //flags.7
 			flags&16384 != 0, //flags.14
 			flags&32768 != 0, //flags.15
+			flags&65536 != 0, //flags.16
 			m.Object(),
-			m.FlaggedInt(flags, 0),
-			m.FlaggedInt(flags, 9),
+			m.FlaggedObject(flags, 0),
 			m.Vector(),
 			m.FlaggedInt(flags, 10),
 			m.FlaggedObject(flags, 13),
@@ -40177,8 +43100,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.FlaggedString(flags, 3),
 			m.FlaggedObject(flags, 2),
 			m.String(),
-			m.FlaggedInt(flags, 0),
-			m.FlaggedInt(flags, 9),
+			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 13),
 		}
 
@@ -40190,8 +43112,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 			m.Object(),
 			m.Long(),
-			m.FlaggedInt(flags, 0),
-			m.FlaggedInt(flags, 9),
+			m.FlaggedObject(flags, 0),
 			m.FlaggedObject(flags, 13),
 		}
 
@@ -40200,8 +43121,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_messages_requestSimpleWebView{
 			readFlags(m, &flags),
 			flags&2 != 0, //flags.1
+			flags&4 != 0, //flags.2
 			m.Object(),
-			m.String(),
+			m.FlaggedString(flags, 3),
+			m.FlaggedString(flags, 4),
 			m.FlaggedObject(flags, 0),
 			m.String(),
 		}
@@ -40358,9 +43281,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_updates_getDifference{
 			readFlags(m, &flags),
 			m.Int(),
+			m.FlaggedInt(flags, 1),
 			m.FlaggedInt(flags, 0),
 			m.Int(),
 			m.Int(),
+			m.FlaggedInt(flags, 2),
 		}
 
 	case CRC_updates_getChannelDifference:
@@ -40952,6 +43877,21 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 		}
 
+	case CRC_channels_clickSponsoredMessage:
+		r = TL_channels_clickSponsoredMessage{
+			m.Object(),
+			m.StringBytes(),
+		}
+
+	case CRC_channels_updateColor:
+		var flags int32
+		r = TL_channels_updateColor{
+			readFlags(m, &flags),
+			m.Object(),
+			m.Int(),
+			m.FlaggedLong(flags, 0),
+		}
+
 	case CRC_bots_sendCustomRequest:
 		r = TL_bots_sendCustomRequest{
 			m.String(),
@@ -41036,6 +43976,23 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.Object(),
 		}
 
+	case CRC_bots_canSendMessage:
+		r = TL_bots_canSendMessage{
+			m.Object(),
+		}
+
+	case CRC_bots_allowSendMessage:
+		r = TL_bots_allowSendMessage{
+			m.Object(),
+		}
+
+	case CRC_bots_invokeWebViewCustomMethod:
+		r = TL_bots_invokeWebViewCustomMethod{
+			m.Object(),
+			m.String(),
+			m.Object(),
+		}
+
 	case CRC_payments_getPaymentForm:
 		var flags int32
 		r = TL_payments_getPaymentForm{
@@ -41106,6 +44063,36 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_payments_canPurchasePremium:
 		r = TL_payments_canPurchasePremium{
+			m.Object(),
+		}
+
+	case CRC_payments_getPremiumGiftCodeOptions:
+		var flags int32
+		r = TL_payments_getPremiumGiftCodeOptions{
+			readFlags(m, &flags),
+			m.FlaggedObject(flags, 0),
+		}
+
+	case CRC_payments_checkGiftCode:
+		r = TL_payments_checkGiftCode{
+			m.String(),
+		}
+
+	case CRC_payments_applyGiftCode:
+		r = TL_payments_applyGiftCode{
+			m.String(),
+		}
+
+	case CRC_payments_getGiveawayInfo:
+		r = TL_payments_getGiveawayInfo{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_payments_launchPrepaidGiveaway:
+		r = TL_payments_launchPrepaidGiveaway{
+			m.Object(),
+			m.Long(),
 			m.Object(),
 		}
 
@@ -41552,6 +44539,198 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = TL_chatlists_leaveChatlist{
 			m.Object(),
 			m.Vector(),
+		}
+
+	case CRC_stories_canSendStory:
+		r = TL_stories_canSendStory{
+			m.Object(),
+		}
+
+	case CRC_stories_sendStory:
+		var flags int32
+		r = TL_stories_sendStory{
+			readFlags(m, &flags),
+			flags&4 != 0,  //flags.2
+			flags&16 != 0, //flags.4
+			m.Object(),
+			m.Object(),
+			m.FlaggedVector(flags, 5),
+			m.FlaggedString(flags, 0),
+			m.FlaggedVector(flags, 1),
+			m.Vector(),
+			m.Long(),
+			m.FlaggedInt(flags, 3),
+		}
+
+	case CRC_stories_editStory:
+		var flags int32
+		r = TL_stories_editStory{
+			readFlags(m, &flags),
+			m.Object(),
+			m.Int(),
+			m.FlaggedObject(flags, 0),
+			m.FlaggedVector(flags, 3),
+			m.FlaggedString(flags, 1),
+			m.FlaggedVector(flags, 1),
+			m.FlaggedVector(flags, 2),
+		}
+
+	case CRC_stories_deleteStories:
+		r = TL_stories_deleteStories{
+			m.Object(),
+			m.VectorInt(),
+		}
+
+	case CRC_stories_togglePinned:
+		r = TL_stories_togglePinned{
+			m.Object(),
+			m.VectorInt(),
+			m.Object(),
+		}
+
+	case CRC_stories_getAllStories:
+		var flags int32
+		r = TL_stories_getAllStories{
+			readFlags(m, &flags),
+			flags&2 != 0, //flags.1
+			flags&4 != 0, //flags.2
+			m.FlaggedString(flags, 0),
+		}
+
+	case CRC_stories_getPinnedStories:
+		r = TL_stories_getPinnedStories{
+			m.Object(),
+			m.Int(),
+			m.Int(),
+		}
+
+	case CRC_stories_getStoriesArchive:
+		r = TL_stories_getStoriesArchive{
+			m.Object(),
+			m.Int(),
+			m.Int(),
+		}
+
+	case CRC_stories_getStoriesByID:
+		r = TL_stories_getStoriesByID{
+			m.Object(),
+			m.VectorInt(),
+		}
+
+	case CRC_stories_toggleAllStoriesHidden:
+		r = TL_stories_toggleAllStoriesHidden{
+			m.Object(),
+		}
+
+	case CRC_stories_readStories:
+		r = TL_stories_readStories{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_stories_incrementStoryViews:
+		r = TL_stories_incrementStoryViews{
+			m.Object(),
+			m.VectorInt(),
+		}
+
+	case CRC_stories_getStoryViewsList:
+		var flags int32
+		r = TL_stories_getStoryViewsList{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&4 != 0, //flags.2
+			m.Object(),
+			m.FlaggedString(flags, 1),
+			m.Int(),
+			m.String(),
+			m.Int(),
+		}
+
+	case CRC_stories_getStoriesViews:
+		r = TL_stories_getStoriesViews{
+			m.Object(),
+			m.VectorInt(),
+		}
+
+	case CRC_stories_exportStoryLink:
+		r = TL_stories_exportStoryLink{
+			m.Object(),
+			m.Int(),
+		}
+
+	case CRC_stories_report:
+		r = TL_stories_report{
+			m.Object(),
+			m.VectorInt(),
+			m.Object(),
+			m.String(),
+		}
+
+	case CRC_stories_activateStealthMode:
+		var flags int32
+		r = TL_stories_activateStealthMode{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			flags&2 != 0, //flags.1
+		}
+
+	case CRC_stories_sendReaction:
+		var flags int32
+		r = TL_stories_sendReaction{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			m.Object(),
+			m.Int(),
+			m.Object(),
+		}
+
+	case CRC_stories_getPeerStories:
+		r = TL_stories_getPeerStories{
+			m.Object(),
+		}
+
+	case CRC_stories_getAllReadPeerStories:
+		r = TL_stories_getAllReadPeerStories{}
+
+	case CRC_stories_getPeerMaxIDs:
+		r = TL_stories_getPeerMaxIDs{
+			m.Vector(),
+		}
+
+	case CRC_stories_getChatsToSend:
+		r = TL_stories_getChatsToSend{}
+
+	case CRC_stories_togglePeerStoriesHidden:
+		r = TL_stories_togglePeerStoriesHidden{
+			m.Object(),
+			m.Object(),
+		}
+
+	case CRC_premium_getBoostsList:
+		var flags int32
+		r = TL_premium_getBoostsList{
+			readFlags(m, &flags),
+			flags&1 != 0, //flags.0
+			m.Object(),
+			m.String(),
+			m.Int(),
+		}
+
+	case CRC_premium_getMyBoosts:
+		r = TL_premium_getMyBoosts{}
+
+	case CRC_premium_applyBoost:
+		var flags int32
+		r = TL_premium_applyBoost{
+			readFlags(m, &flags),
+			m.FlaggedVectorInt(flags, 0),
+			m.Object(),
+		}
+
+	case CRC_premium_getBoostsStatus:
+		r = TL_premium_getBoostsStatus{
+			m.Object(),
 		}
 
 	default:

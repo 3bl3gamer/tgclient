@@ -4,7 +4,7 @@ It is a pure-Golang MTProto client for Telegram API.
 
 Initially based on https://github.com/sdidyk/mtproto and https://github.com/ronaksoft/mtproto.
 
-TL layer: 158
+TL layer: 166
 
 Consists of two parts:
   * mtproto — core part for API interaction;
@@ -132,7 +132,9 @@ Update `//go:generate` command in `mtproto/mtproto.go`. It should be
 //go:generate go run scheme/generate_tl_schema.go <layer> scheme/<file>.tl tl_schema.go
 ```
 
-Then run `go generate` in `mtproto` folder.
+Run `go generate` in `mtproto` folder.
+
+Update this README.
 
 
 ## TODO
