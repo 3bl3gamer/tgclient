@@ -1790,6 +1790,7 @@ const (
 	CRC_premium_getBoostsStatus                                           = 0x042f1f61
 )
 
+// Constructs ResPQ
 type TL_resPQ struct {
 	Nonce                       []byte
 	ServerNonce                 []byte
@@ -1797,6 +1798,7 @@ type TL_resPQ struct {
 	ServerPublicKeyFingerprints []int64
 }
 
+// Constructs P_Q_inner_data
 type TL_p_q_inner_data struct {
 	Pq          string
 	P           string
@@ -1806,6 +1808,7 @@ type TL_p_q_inner_data struct {
 	NewNonce    []byte
 }
 
+// Constructs P_Q_inner_data
 type TL_p_q_inner_data_dc struct {
 	Pq          string
 	P           string
@@ -1816,6 +1819,7 @@ type TL_p_q_inner_data_dc struct {
 	Dc          int32
 }
 
+// Constructs P_Q_inner_data
 type TL_p_q_inner_data_temp struct {
 	Pq          string
 	P           string
@@ -1826,6 +1830,7 @@ type TL_p_q_inner_data_temp struct {
 	ExpiresIn   int32
 }
 
+// Constructs P_Q_inner_data
 type TL_p_q_inner_data_temp_dc struct {
 	Pq          string
 	P           string
@@ -1837,6 +1842,7 @@ type TL_p_q_inner_data_temp_dc struct {
 	ExpiresIn   int32
 }
 
+// Constructs BindAuthKeyInner
 type TL_bind_auth_key_inner struct {
 	Nonce         int64
 	TempAuthKeyID int64
@@ -1845,18 +1851,21 @@ type TL_bind_auth_key_inner struct {
 	ExpiresAt     int32
 }
 
+// Constructs Server_DH_Params
 type TL_server_DH_params_fail struct {
 	Nonce        []byte
 	ServerNonce  []byte
 	NewNonceHash []byte
 }
 
+// Constructs Server_DH_Params
 type TL_server_DH_params_ok struct {
 	Nonce           []byte
 	ServerNonce     []byte
 	EncryptedAnswer string
 }
 
+// Constructs Server_DH_inner_data
 type TL_server_DH_inner_data struct {
 	Nonce       []byte
 	ServerNonce []byte
@@ -1866,6 +1875,7 @@ type TL_server_DH_inner_data struct {
 	ServerTime  int32
 }
 
+// Constructs Client_DH_Inner_Data
 type TL_client_DH_inner_data struct {
 	Nonce       []byte
 	ServerNonce []byte
@@ -1873,41 +1883,50 @@ type TL_client_DH_inner_data struct {
 	GB          string
 }
 
+// Constructs Set_client_DH_params_answer
 type TL_dh_gen_ok struct {
 	Nonce         []byte
 	ServerNonce   []byte
 	NewNonceHash1 []byte
 }
 
+// Constructs Set_client_DH_params_answer
 type TL_dh_gen_retry struct {
 	Nonce         []byte
 	ServerNonce   []byte
 	NewNonceHash2 []byte
 }
 
+// Constructs Set_client_DH_params_answer
 type TL_dh_gen_fail struct {
 	Nonce         []byte
 	ServerNonce   []byte
 	NewNonceHash3 []byte
 }
 
+// Constructs DestroyAuthKeyRes
 type TL_destroy_auth_key_ok struct {
 }
 
+// Constructs DestroyAuthKeyRes
 type TL_destroy_auth_key_none struct {
 }
 
+// Constructs DestroyAuthKeyRes
 type TL_destroy_auth_key_fail struct {
 }
 
+// Returns ResPQ: TL_resPQ
 type TL_req_pq struct {
 	Nonce []byte
 }
 
+// Returns ResPQ: TL_resPQ
 type TL_req_pq_multi struct {
 	Nonce []byte
 }
 
+// Returns Server_DH_Params: TL_server_DH_params_fail | TL_server_DH_params_ok
 type TL_req_DH_params struct {
 	Nonce                []byte
 	ServerNonce          []byte
@@ -1917,25 +1936,30 @@ type TL_req_DH_params struct {
 	EncryptedData        string
 }
 
+// Returns Set_client_DH_params_answer: TL_dh_gen_ok | TL_dh_gen_retry | TL_dh_gen_fail
 type TL_set_client_DH_params struct {
 	Nonce         []byte
 	ServerNonce   []byte
 	EncryptedData string
 }
 
+// Returns DestroyAuthKeyRes: TL_destroy_auth_key_ok | TL_destroy_auth_key_none | TL_destroy_auth_key_fail
 type TL_destroy_auth_key struct {
 }
 
+// Constructs MsgsAck
 type TL_msgs_ack struct {
 	MsgIds []int64
 }
 
+// Constructs BadMsgNotification
 type TL_bad_msg_notification struct {
 	BadMsgID    int64
 	BadMsgSeqno int32
 	ErrorCode   int32
 }
 
+// Constructs BadMsgNotification
 type TL_bad_server_salt struct {
 	BadMsgID      int64
 	BadMsgSeqno   int32
@@ -1943,20 +1967,24 @@ type TL_bad_server_salt struct {
 	NewServerSalt int64
 }
 
+// Constructs MsgsStateReq
 type TL_msgs_state_req struct {
 	MsgIds []int64
 }
 
+// Constructs MsgsStateInfo
 type TL_msgs_state_info struct {
 	ReqMsgID int64
 	Info     string
 }
 
+// Constructs MsgsAllInfo
 type TL_msgs_all_info struct {
 	MsgIds []int64
 	Info   string
 }
 
+// Constructs MsgDetailedInfo
 type TL_msg_detailed_info struct {
 	MsgID       int64
 	AnswerMsgID int64
@@ -1964,214 +1992,262 @@ type TL_msg_detailed_info struct {
 	Status      int32
 }
 
+// Constructs MsgDetailedInfo
 type TL_msg_new_detailed_info struct {
 	AnswerMsgID int64
 	Bytes       int32
 	Status      int32
 }
 
+// Constructs MsgResendReq
 type TL_msg_resend_req struct {
 	MsgIds []int64
 }
 
+// Constructs RpcError
 type TL_rpc_error struct {
 	ErrorCode    int32
 	ErrorMessage string
 }
 
+// Constructs RpcDropAnswer
 type TL_rpc_answer_unknown struct {
 }
 
+// Constructs RpcDropAnswer
 type TL_rpc_answer_dropped_running struct {
 }
 
+// Constructs RpcDropAnswer
 type TL_rpc_answer_dropped struct {
 	MsgID int64
 	SeqNo int32
 	Bytes int32
 }
 
+// Constructs FutureSalt
 type TL_future_salt struct {
 	ValidSince int32
 	ValidUntil int32
 	Salt       int64
 }
 
+// Constructs FutureSalts
 type TL_future_salts struct {
 	ReqMsgID int64
 	Now      int32
 	Salts    []TL // future_salt:
 }
 
+// Constructs Pong
 type TL_pong struct {
 	MsgID  int64
 	PingID int64
 }
 
+// Constructs DestroySessionRes
 type TL_destroy_session_ok struct {
 	SessionID int64
 }
 
+// Constructs DestroySessionRes
 type TL_destroy_session_none struct {
 	SessionID int64
 }
 
+// Constructs NewSession
 type TL_new_session_created struct {
 	FirstMsgID int64
 	UniqueID   int64
 	ServerSalt int64
 }
 
+// Constructs HttpWait
 type TL_http_wait struct {
 	MaxDelay  int32
 	WaitAfter int32
 	MaxWait   int32
 }
 
+// Constructs IpPort
 type TL_ipPort struct {
 	Ipv4 int32
 	Port int32
 }
 
+// Constructs IpPort
 type TL_ipPortSecret struct {
 	Ipv4   int32
 	Port   int32
 	Secret []byte
 }
 
+// Constructs AccessPointRule
 type TL_accessPointRule struct {
 	PhonePrefixRules string
 	DcID             int32
 	Ips              []TL // IpPort: TL_ipPort | TL_ipPortSecret
 }
 
+// Constructs help.ConfigSimple
 type TL_help_configSimple struct {
 	Date    int32
 	Expires int32
 	Rules   []TL // AccessPointRule: TL_accessPointRule
 }
 
+// Constructs TlsClientHello
 type TL_tlsClientHello struct {
 	Blocks []TL // TlsBlock: TL_tlsBlockString | TL_tlsBlockRandom | TL_tlsBlockZero | TL_tlsBlockDomain | TL_tlsBlockGrease | TL_tlsBlockPublicKey | TL_tlsBlockScope | TL_tlsBlockPermutation
 }
 
+// Constructs TlsBlock
 type TL_tlsBlockString struct {
 	Data string
 }
 
+// Constructs TlsBlock
 type TL_tlsBlockRandom struct {
 	Length int32
 }
 
+// Constructs TlsBlock
 type TL_tlsBlockZero struct {
 	Length int32
 }
 
+// Constructs TlsBlock
 type TL_tlsBlockDomain struct {
 }
 
+// Constructs TlsBlock
 type TL_tlsBlockGrease struct {
 	Seed int32
 }
 
+// Constructs TlsBlock
 type TL_tlsBlockPublicKey struct {
 }
 
+// Constructs TlsBlock
 type TL_tlsBlockScope struct {
 	Entries []TL // TlsBlock: TL_tlsBlockString | TL_tlsBlockRandom | TL_tlsBlockZero | TL_tlsBlockDomain | TL_tlsBlockGrease | TL_tlsBlockPublicKey | TL_tlsBlockScope | TL_tlsBlockPermutation
 }
 
+// Constructs TlsBlock
 type TL_tlsBlockPermutation struct {
 	Entries [][]TL // TlsBlock: TL_tlsBlockString | TL_tlsBlockRandom | TL_tlsBlockZero | TL_tlsBlockDomain | TL_tlsBlockGrease | TL_tlsBlockPublicKey | TL_tlsBlockScope | TL_tlsBlockPermutation
 }
 
+// Returns RpcDropAnswer: TL_rpc_answer_unknown | TL_rpc_answer_dropped_running | TL_rpc_answer_dropped
 type TL_rpc_drop_answer struct {
 	ReqMsgID int64
 }
 
+// Returns FutureSalts: TL_future_salts
 type TL_get_future_salts struct {
 	Num int32
 }
 
+// Returns Pong: TL_pong
 type TL_ping struct {
 	PingID int64
 }
 
+// Returns Pong: TL_pong
 type TL_ping_delay_disconnect struct {
 	PingID          int64
 	DisconnectDelay int32
 }
 
+// Returns DestroySessionRes: TL_destroy_session_ok | TL_destroy_session_none
 type TL_destroy_session struct {
 	SessionID int64
 }
 
+// Constructs Bool
 type TL_boolFalse struct {
 }
 
+// Constructs Bool
 type TL_boolTrue struct {
 }
 
+// Constructs True
 type TL_true struct {
 }
 
+// Constructs Error
 type TL_error struct {
 	Code int32
 	Text string
 }
 
+// Constructs Null
 type TL_null struct {
 }
 
+// Constructs InputPeer
 type TL_inputPeerEmpty struct {
 }
 
+// Constructs InputPeer
 type TL_inputPeerSelf struct {
 }
 
+// Constructs InputPeer
 type TL_inputPeerChat struct {
 	ChatID int64
 }
 
+// Constructs InputPeer
 type TL_inputPeerUser struct {
 	UserID     int64
 	AccessHash int64
 }
 
+// Constructs InputPeer
 type TL_inputPeerChannel struct {
 	ChannelID  int64
 	AccessHash int64
 }
 
+// Constructs InputPeer
 type TL_inputPeerUserFromMessage struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID  int32
 	UserID int64
 }
 
+// Constructs InputPeer
 type TL_inputPeerChannelFromMessage struct {
 	Peer      TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID     int32
 	ChannelID int64
 }
 
+// Constructs InputUser
 type TL_inputUserEmpty struct {
 }
 
+// Constructs InputUser
 type TL_inputUserSelf struct {
 }
 
+// Constructs InputUser
 type TL_inputUser struct {
 	UserID     int64
 	AccessHash int64
 }
 
+// Constructs InputUser
 type TL_inputUserFromMessage struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID  int32
 	UserID int64
 }
 
+// Constructs InputContact
 type TL_inputPhoneContact struct {
 	ClientID  int64
 	Phone     string
@@ -2179,6 +2255,7 @@ type TL_inputPhoneContact struct {
 	LastName  string
 }
 
+// Constructs InputFile
 type TL_inputFile struct {
 	ID          int64
 	Parts       int32
@@ -2186,15 +2263,18 @@ type TL_inputFile struct {
 	Md5Checksum string
 }
 
+// Constructs InputFile
 type TL_inputFileBig struct {
 	ID    int64
 	Parts int32
 	Name  string
 }
 
+// Constructs InputMedia
 type TL_inputMediaEmpty struct {
 }
 
+// Constructs InputMedia
 type TL_inputMediaUploadedPhoto struct {
 	Flags      int32
 	Spoiler    bool  // (flags.2)
@@ -2203,6 +2283,7 @@ type TL_inputMediaUploadedPhoto struct {
 	TtlSeconds int32 // (flags.1)
 }
 
+// Constructs InputMedia
 type TL_inputMediaPhoto struct {
 	Flags      int32
 	Spoiler    bool  // (flags.1)
@@ -2210,10 +2291,12 @@ type TL_inputMediaPhoto struct {
 	TtlSeconds int32 // (flags.0)
 }
 
+// Constructs InputMedia
 type TL_inputMediaGeoPoint struct {
 	GeoPoint TL // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
 }
 
+// Constructs InputMedia
 type TL_inputMediaContact struct {
 	PhoneNumber string
 	FirstName   string
@@ -2221,6 +2304,7 @@ type TL_inputMediaContact struct {
 	Vcard       string
 }
 
+// Constructs InputMedia
 type TL_inputMediaUploadedDocument struct {
 	Flags        int32
 	NosoundVideo bool // (flags.3)
@@ -2234,6 +2318,7 @@ type TL_inputMediaUploadedDocument struct {
 	TtlSeconds   int32 // (flags.1)
 }
 
+// Constructs InputMedia
 type TL_inputMediaDocument struct {
 	Flags      int32
 	Spoiler    bool   // (flags.2)
@@ -2242,6 +2327,7 @@ type TL_inputMediaDocument struct {
 	Query      string // (flags.1)
 }
 
+// Constructs InputMedia
 type TL_inputMediaVenue struct {
 	GeoPoint  TL // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
 	Title     string
@@ -2251,6 +2337,7 @@ type TL_inputMediaVenue struct {
 	VenueType string
 }
 
+// Constructs InputMedia
 type TL_inputMediaPhotoExternal struct {
 	Flags      int32
 	Spoiler    bool // (flags.1)
@@ -2258,6 +2345,7 @@ type TL_inputMediaPhotoExternal struct {
 	TtlSeconds int32 // (flags.0)
 }
 
+// Constructs InputMedia
 type TL_inputMediaDocumentExternal struct {
 	Flags      int32
 	Spoiler    bool // (flags.1)
@@ -2265,10 +2353,12 @@ type TL_inputMediaDocumentExternal struct {
 	TtlSeconds int32 // (flags.0)
 }
 
+// Constructs InputMedia
 type TL_inputMediaGame struct {
 	ID TL // InputGame: TL_inputGameID | TL_inputGameShortName
 }
 
+// Constructs InputMedia
 type TL_inputMediaInvoice struct {
 	Flags         int32
 	Title         string
@@ -2282,6 +2372,7 @@ type TL_inputMediaInvoice struct {
 	ExtendedMedia TL     // (flags.2) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
+// Constructs InputMedia
 type TL_inputMediaGeoLive struct {
 	Flags                       int32
 	Stopped                     bool  // (flags.0)
@@ -2291,6 +2382,7 @@ type TL_inputMediaGeoLive struct {
 	ProximityNotificationRadius int32 // (flags.3)
 }
 
+// Constructs InputMedia
 type TL_inputMediaPoll struct {
 	Flags            int32
 	Poll             TL       // Poll: TL_poll
@@ -2299,15 +2391,18 @@ type TL_inputMediaPoll struct {
 	SolutionEntities []TL     // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Constructs InputMedia
 type TL_inputMediaDice struct {
 	Emoticon string
 }
 
+// Constructs InputMedia
 type TL_inputMediaStory struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   int32
 }
 
+// Constructs InputMedia
 type TL_inputMediaWebPage struct {
 	Flags           int32
 	ForceLargeMedia bool // (flags.0)
@@ -2316,9 +2411,11 @@ type TL_inputMediaWebPage struct {
 	Url             string
 }
 
+// Constructs InputChatPhoto
 type TL_inputChatPhotoEmpty struct {
 }
 
+// Constructs InputChatPhoto
 type TL_inputChatUploadedPhoto struct {
 	Flags            int32
 	File             TL      // (flags.0) InputFile: TL_inputFile | TL_inputFileBig
@@ -2327,13 +2424,16 @@ type TL_inputChatUploadedPhoto struct {
 	VideoEmojiMarkup TL      // (flags.3) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
 }
 
+// Constructs InputChatPhoto
 type TL_inputChatPhoto struct {
 	ID TL // InputPhoto: TL_inputPhotoEmpty | TL_inputPhoto
 }
 
+// Constructs InputGeoPoint
 type TL_inputGeoPointEmpty struct {
 }
 
+// Constructs InputGeoPoint
 type TL_inputGeoPoint struct {
 	Flags          int32
 	Lat            float64
@@ -2341,15 +2441,18 @@ type TL_inputGeoPoint struct {
 	AccuracyRadius int32 // (flags.0)
 }
 
+// Constructs InputPhoto
 type TL_inputPhotoEmpty struct {
 }
 
+// Constructs InputPhoto
 type TL_inputPhoto struct {
 	ID            int64
 	AccessHash    int64
 	FileReference []byte
 }
 
+// Constructs InputFileLocation
 type TL_inputFileLocation struct {
 	VolumeID      int64
 	LocalID       int32
@@ -2357,11 +2460,13 @@ type TL_inputFileLocation struct {
 	FileReference []byte
 }
 
+// Constructs InputFileLocation
 type TL_inputEncryptedFileLocation struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputFileLocation
 type TL_inputDocumentFileLocation struct {
 	ID            int64
 	AccessHash    int64
@@ -2369,14 +2474,17 @@ type TL_inputDocumentFileLocation struct {
 	ThumbSize     string
 }
 
+// Constructs InputFileLocation
 type TL_inputSecureFileLocation struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputFileLocation
 type TL_inputTakeoutFileLocation struct {
 }
 
+// Constructs InputFileLocation
 type TL_inputPhotoFileLocation struct {
 	ID            int64
 	AccessHash    int64
@@ -2384,6 +2492,7 @@ type TL_inputPhotoFileLocation struct {
 	ThumbSize     string
 }
 
+// Constructs InputFileLocation
 type TL_inputPhotoLegacyFileLocation struct {
 	ID            int64
 	AccessHash    int64
@@ -2393,6 +2502,7 @@ type TL_inputPhotoLegacyFileLocation struct {
 	Secret        int64
 }
 
+// Constructs InputFileLocation
 type TL_inputPeerPhotoFileLocation struct {
 	Flags   int32
 	Big     bool // (flags.0)
@@ -2400,11 +2510,13 @@ type TL_inputPeerPhotoFileLocation struct {
 	PhotoID int64
 }
 
+// Constructs InputFileLocation
 type TL_inputStickerSetThumb struct {
 	Stickerset   TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 	ThumbVersion int32
 }
 
+// Constructs InputFileLocation
 type TL_inputGroupCallStream struct {
 	Flags        int32
 	Call         TL // InputGroupCall: TL_inputGroupCall
@@ -2414,52 +2526,67 @@ type TL_inputGroupCallStream struct {
 	VideoQuality int32 // (flags.0)
 }
 
+// Constructs Peer
 type TL_peerUser struct {
 	UserID int64
 }
 
+// Constructs Peer
 type TL_peerChat struct {
 	ChatID int64
 }
 
+// Constructs Peer
 type TL_peerChannel struct {
 	ChannelID int64
 }
 
+// Constructs storage.FileType
 type TL_storage_fileUnknown struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_filePartial struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_fileJpeg struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_fileGif struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_filePng struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_filePdf struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_fileMp3 struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_fileMov struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_fileMp4 struct {
 }
 
+// Constructs storage.FileType
 type TL_storage_fileWebp struct {
 }
 
+// Constructs User
 type TL_userEmpty struct {
 	ID int64
 }
 
+// Constructs User
 type TL_user struct {
 	Flags                int32
 	Self                 bool // (flags.10)
@@ -2504,9 +2631,11 @@ type TL_user struct {
 	BackgroundEmojiID    int64  // (flags2.6)
 }
 
+// Constructs UserProfilePhoto
 type TL_userProfilePhotoEmpty struct {
 }
 
+// Constructs UserProfilePhoto
 type TL_userProfilePhoto struct {
 	Flags         int32
 	HasVideo      bool // (flags.0)
@@ -2516,30 +2645,38 @@ type TL_userProfilePhoto struct {
 	DcID          int32
 }
 
+// Constructs UserStatus
 type TL_userStatusEmpty struct {
 }
 
+// Constructs UserStatus
 type TL_userStatusOnline struct {
 	Expires int32
 }
 
+// Constructs UserStatus
 type TL_userStatusOffline struct {
 	WasOnline int32
 }
 
+// Constructs UserStatus
 type TL_userStatusRecently struct {
 }
 
+// Constructs UserStatus
 type TL_userStatusLastWeek struct {
 }
 
+// Constructs UserStatus
 type TL_userStatusLastMonth struct {
 }
 
+// Constructs Chat
 type TL_chatEmpty struct {
 	ID int64
 }
 
+// Constructs Chat
 type TL_chat struct {
 	Flags               int32
 	Creator             bool // (flags.0)
@@ -2559,11 +2696,13 @@ type TL_chat struct {
 	DefaultBannedRights TL // (flags.18) ChatBannedRights: TL_chatBannedRights
 }
 
+// Constructs Chat
 type TL_chatForbidden struct {
 	ID    int64
 	Title string
 }
 
+// Constructs Chat
 type TL_channel struct {
 	Flags               int32
 	Creator             bool // (flags.0)
@@ -2607,6 +2746,7 @@ type TL_channel struct {
 	BackgroundEmojiID   int64 // (flags2.5)
 }
 
+// Constructs Chat
 type TL_channelForbidden struct {
 	Flags      int32
 	Broadcast  bool // (flags.5)
@@ -2617,6 +2757,7 @@ type TL_channelForbidden struct {
 	UntilDate  int32 // (flags.16)
 }
 
+// Constructs ChatFull
 type TL_chatFull struct {
 	Flags                  int32
 	CanSetUsername         bool // (flags.7)
@@ -2640,6 +2781,7 @@ type TL_chatFull struct {
 	AvailableReactions     TL      // (flags.18) ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
 }
 
+// Constructs ChatFull
 type TL_channelFull struct {
 	Flags                  int32
 	CanViewParticipants    bool // (flags.3)
@@ -2694,37 +2836,44 @@ type TL_channelFull struct {
 	Stories                TL       // (flags2.4) PeerStories: TL_peerStories
 }
 
+// Constructs ChatParticipant
 type TL_chatParticipant struct {
 	UserID    int64
 	InviterID int64
 	Date      int32
 }
 
+// Constructs ChatParticipant
 type TL_chatParticipantCreator struct {
 	UserID int64
 }
 
+// Constructs ChatParticipant
 type TL_chatParticipantAdmin struct {
 	UserID    int64
 	InviterID int64
 	Date      int32
 }
 
+// Constructs ChatParticipants
 type TL_chatParticipantsForbidden struct {
 	Flags           int32
 	ChatID          int64
 	SelfParticipant TL // (flags.0) ChatParticipant: TL_chatParticipant | TL_chatParticipantCreator | TL_chatParticipantAdmin
 }
 
+// Constructs ChatParticipants
 type TL_chatParticipants struct {
 	ChatID       int64
 	Participants []TL // ChatParticipant: TL_chatParticipant | TL_chatParticipantCreator | TL_chatParticipantAdmin
 	Version      int32
 }
 
+// Constructs ChatPhoto
 type TL_chatPhotoEmpty struct {
 }
 
+// Constructs ChatPhoto
 type TL_chatPhoto struct {
 	Flags         int32
 	HasVideo      bool // (flags.0)
@@ -2733,12 +2882,14 @@ type TL_chatPhoto struct {
 	DcID          int32
 }
 
+// Constructs Message
 type TL_messageEmpty struct {
 	Flags  int32
 	ID     int32
 	PeerID TL // (flags.0) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
+// Constructs Message
 type TL_message struct {
 	Flags             int32
 	Out               bool // (flags.1)
@@ -2774,6 +2925,7 @@ type TL_message struct {
 	TtlPeriod         int32  // (flags.25)
 }
 
+// Constructs Message
 type TL_messageService struct {
 	Flags       int32
 	Out         bool // (flags.1)
@@ -2791,9 +2943,11 @@ type TL_messageService struct {
 	TtlPeriod   int32 // (flags.25)
 }
 
+// Constructs MessageMedia
 type TL_messageMediaEmpty struct {
 }
 
+// Constructs MessageMedia
 type TL_messageMediaPhoto struct {
 	Flags      int32
 	Spoiler    bool  // (flags.3)
@@ -2801,10 +2955,12 @@ type TL_messageMediaPhoto struct {
 	TtlSeconds int32 // (flags.2)
 }
 
+// Constructs MessageMedia
 type TL_messageMediaGeo struct {
 	Geo TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
 }
 
+// Constructs MessageMedia
 type TL_messageMediaContact struct {
 	PhoneNumber string
 	FirstName   string
@@ -2813,9 +2969,11 @@ type TL_messageMediaContact struct {
 	UserID      int64
 }
 
+// Constructs MessageMedia
 type TL_messageMediaUnsupported struct {
 }
 
+// Constructs MessageMedia
 type TL_messageMediaDocument struct {
 	Flags       int32
 	Nopremium   bool  // (flags.3)
@@ -2825,6 +2983,7 @@ type TL_messageMediaDocument struct {
 	TtlSeconds  int32 // (flags.2)
 }
 
+// Constructs MessageMedia
 type TL_messageMediaWebPage struct {
 	Flags           int32
 	ForceLargeMedia bool // (flags.0)
@@ -2834,6 +2993,7 @@ type TL_messageMediaWebPage struct {
 	Webpage         TL   // WebPage: TL_webPageEmpty | TL_webPagePending | TL_webPage | TL_webPageNotModified
 }
 
+// Constructs MessageMedia
 type TL_messageMediaVenue struct {
 	Geo       TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
 	Title     string
@@ -2843,10 +3003,12 @@ type TL_messageMediaVenue struct {
 	VenueType string
 }
 
+// Constructs MessageMedia
 type TL_messageMediaGame struct {
 	Game TL // Game: TL_game
 }
 
+// Constructs MessageMedia
 type TL_messageMediaInvoice struct {
 	Flags                    int32
 	ShippingAddressRequested bool // (flags.1)
@@ -2861,6 +3023,7 @@ type TL_messageMediaInvoice struct {
 	ExtendedMedia            TL // (flags.4) MessageExtendedMedia: TL_messageExtendedMediaPreview | TL_messageExtendedMedia
 }
 
+// Constructs MessageMedia
 type TL_messageMediaGeoLive struct {
 	Flags                       int32
 	Geo                         TL    // GeoPoint: TL_geoPointEmpty | TL_geoPoint
@@ -2869,16 +3032,19 @@ type TL_messageMediaGeoLive struct {
 	ProximityNotificationRadius int32 // (flags.1)
 }
 
+// Constructs MessageMedia
 type TL_messageMediaPoll struct {
 	Poll    TL // Poll: TL_poll
 	Results TL // PollResults: TL_pollResults
 }
 
+// Constructs MessageMedia
 type TL_messageMediaDice struct {
 	Value    int32
 	Emoticon string
 }
 
+// Constructs MessageMedia
 type TL_messageMediaStory struct {
 	Flags      int32
 	ViaMention bool // (flags.1)
@@ -2887,6 +3053,7 @@ type TL_messageMediaStory struct {
 	Story      TL // (flags.0) StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
 }
 
+// Constructs MessageMedia
 type TL_messageMediaGiveaway struct {
 	Flags              int32
 	OnlyNewSubscribers bool // (flags.0)
@@ -2897,61 +3064,76 @@ type TL_messageMediaGiveaway struct {
 	UntilDate          int32
 }
 
+// Constructs MessageAction
 type TL_messageActionEmpty struct {
 }
 
+// Constructs MessageAction
 type TL_messageActionChatCreate struct {
 	Title string
 	Users []int64
 }
 
+// Constructs MessageAction
 type TL_messageActionChatEditTitle struct {
 	Title string
 }
 
+// Constructs MessageAction
 type TL_messageActionChatEditPhoto struct {
 	Photo TL // Photo: TL_photoEmpty | TL_photo
 }
 
+// Constructs MessageAction
 type TL_messageActionChatDeletePhoto struct {
 }
 
+// Constructs MessageAction
 type TL_messageActionChatAddUser struct {
 	Users []int64
 }
 
+// Constructs MessageAction
 type TL_messageActionChatDeleteUser struct {
 	UserID int64
 }
 
+// Constructs MessageAction
 type TL_messageActionChatJoinedByLink struct {
 	InviterID int64
 }
 
+// Constructs MessageAction
 type TL_messageActionChannelCreate struct {
 	Title string
 }
 
+// Constructs MessageAction
 type TL_messageActionChatMigrateTo struct {
 	ChannelID int64
 }
 
+// Constructs MessageAction
 type TL_messageActionChannelMigrateFrom struct {
 	Title  string
 	ChatID int64
 }
 
+// Constructs MessageAction
 type TL_messageActionPinMessage struct {
 }
 
+// Constructs MessageAction
 type TL_messageActionHistoryClear struct {
 }
 
+// Constructs MessageAction
 type TL_messageActionGameScore struct {
 	GameID int64
 	Score  int32
 }
 
+// Constructs MessageAction
 type TL_messageActionPaymentSentMe struct {
 	Flags            int32
 	RecurringInit    bool // (flags.2)
@@ -2964,6 +3146,7 @@ type TL_messageActionPaymentSentMe struct {
 	Charge           TL     // PaymentCharge: TL_paymentCharge
 }
 
+// Constructs MessageAction
 type TL_messageActionPaymentSent struct {
 	Flags         int32
 	RecurringInit bool // (flags.2)
@@ -2973,6 +3156,7 @@ type TL_messageActionPaymentSent struct {
 	InvoiceSlug   string // (flags.0)
 }
 
+// Constructs MessageAction
 type TL_messageActionPhoneCall struct {
 	Flags    int32
 	Video    bool // (flags.2)
@@ -2981,13 +3165,16 @@ type TL_messageActionPhoneCall struct {
 	Duration int32 // (flags.1)
 }
 
+// Constructs MessageAction
 type TL_messageActionScreenshotTaken struct {
 }
 
+// Constructs MessageAction
 type TL_messageActionCustomAction struct {
 	Message string
 }
 
+// Constructs MessageAction
 type TL_messageActionBotAllowed struct {
 	Flags       int32
 	AttachMenu  bool   // (flags.1)
@@ -2996,62 +3183,75 @@ type TL_messageActionBotAllowed struct {
 	App         TL     // (flags.2) BotApp: TL_botAppNotModified | TL_botApp
 }
 
+// Constructs MessageAction
 type TL_messageActionSecureValuesSentMe struct {
 	Values      []TL // SecureValue: TL_secureValue
 	Credentials TL   // SecureCredentialsEncrypted: TL_secureCredentialsEncrypted
 }
 
+// Constructs MessageAction
 type TL_messageActionSecureValuesSent struct {
 	Types []TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 }
 
+// Constructs MessageAction
 type TL_messageActionContactSignUp struct {
 }
 
+// Constructs MessageAction
 type TL_messageActionGeoProximityReached struct {
 	FromID   TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	ToID     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Distance int32
 }
 
+// Constructs MessageAction
 type TL_messageActionGroupCall struct {
 	Flags    int32
 	Call     TL    // InputGroupCall: TL_inputGroupCall
 	Duration int32 // (flags.0)
 }
 
+// Constructs MessageAction
 type TL_messageActionInviteToGroupCall struct {
 	Call  TL // InputGroupCall: TL_inputGroupCall
 	Users []int64
 }
 
+// Constructs MessageAction
 type TL_messageActionSetMessagesTTL struct {
 	Flags           int32
 	Period          int32
 	AutoSettingFrom int64 // (flags.0)
 }
 
+// Constructs MessageAction
 type TL_messageActionGroupCallScheduled struct {
 	Call         TL // InputGroupCall: TL_inputGroupCall
 	ScheduleDate int32
 }
 
+// Constructs MessageAction
 type TL_messageActionSetChatTheme struct {
 	Emoticon string
 }
 
+// Constructs MessageAction
 type TL_messageActionChatJoinedByRequest struct {
 }
 
+// Constructs MessageAction
 type TL_messageActionWebViewDataSentMe struct {
 	Text string
 	Data string
 }
 
+// Constructs MessageAction
 type TL_messageActionWebViewDataSent struct {
 	Text string
 }
 
+// Constructs MessageAction
 type TL_messageActionGiftPremium struct {
 	Flags          int32
 	Currency       string
@@ -3061,6 +3261,7 @@ type TL_messageActionGiftPremium struct {
 	CryptoAmount   int64  // (flags.0)
 }
 
+// Constructs MessageAction
 type TL_messageActionTopicCreate struct {
 	Flags       int32
 	Title       string
@@ -3068,6 +3269,7 @@ type TL_messageActionTopicCreate struct {
 	IconEmojiID int64 // (flags.0)
 }
 
+// Constructs MessageAction
 type TL_messageActionTopicEdit struct {
 	Flags       int32
 	Title       string // (flags.0)
@@ -3076,23 +3278,28 @@ type TL_messageActionTopicEdit struct {
 	Hidden      TL     // (flags.3) Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs MessageAction
 type TL_messageActionSuggestProfilePhoto struct {
 	Photo TL // Photo: TL_photoEmpty | TL_photo
 }
 
+// Constructs MessageAction
 type TL_messageActionRequestedPeer struct {
 	ButtonID int32
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
+// Constructs MessageAction
 type TL_messageActionSetChatWallPaper struct {
 	Wallpaper TL // WallPaper: TL_wallPaper | TL_wallPaperNoFile
 }
 
+// Constructs MessageAction
 type TL_messageActionSetSameChatWallPaper struct {
 	Wallpaper TL // WallPaper: TL_wallPaper | TL_wallPaperNoFile
 }
 
+// Constructs MessageAction
 type TL_messageActionGiftCode struct {
 	Flags       int32
 	ViaGiveaway bool // (flags.0)
@@ -3102,9 +3309,11 @@ type TL_messageActionGiftCode struct {
 	Slug        string
 }
 
+// Constructs MessageAction
 type TL_messageActionGiveawayLaunch struct {
 }
 
+// Constructs Dialog
 type TL_dialog struct {
 	Flags                int32
 	Pinned               bool // (flags.2)
@@ -3123,6 +3332,7 @@ type TL_dialog struct {
 	TtlPeriod            int32 // (flags.5)
 }
 
+// Constructs Dialog
 type TL_dialogFolder struct {
 	Flags                      int32
 	Pinned                     bool // (flags.2)
@@ -3135,10 +3345,12 @@ type TL_dialogFolder struct {
 	UnreadUnmutedMessagesCount int32
 }
 
+// Constructs Photo
 type TL_photoEmpty struct {
 	ID int64
 }
 
+// Constructs Photo
 type TL_photo struct {
 	Flags         int32
 	HasStickers   bool // (flags.0)
@@ -3151,10 +3363,12 @@ type TL_photo struct {
 	DcID          int32
 }
 
+// Constructs PhotoSize
 type TL_photoSizeEmpty struct {
 	Type string
 }
 
+// Constructs PhotoSize
 type TL_photoSize struct {
 	Type string
 	W    int32
@@ -3162,6 +3376,7 @@ type TL_photoSize struct {
 	Size int32
 }
 
+// Constructs PhotoSize
 type TL_photoCachedSize struct {
 	Type  string
 	W     int32
@@ -3169,11 +3384,13 @@ type TL_photoCachedSize struct {
 	Bytes []byte
 }
 
+// Constructs PhotoSize
 type TL_photoStrippedSize struct {
 	Type  string
 	Bytes []byte
 }
 
+// Constructs PhotoSize
 type TL_photoSizeProgressive struct {
 	Type  string
 	W     int32
@@ -3181,14 +3398,17 @@ type TL_photoSizeProgressive struct {
 	Sizes []int32
 }
 
+// Constructs PhotoSize
 type TL_photoPathSize struct {
 	Type  string
 	Bytes []byte
 }
 
+// Constructs GeoPoint
 type TL_geoPointEmpty struct {
 }
 
+// Constructs GeoPoint
 type TL_geoPoint struct {
 	Flags          int32
 	Long           float64
@@ -3197,18 +3417,21 @@ type TL_geoPoint struct {
 	AccuracyRadius int32 // (flags.0)
 }
 
+// Constructs auth.SentCode
 type TL_auth_sentCode struct {
 	Flags         int32
-	Type          TL // auth_SentCodeType: TL_auth_sentCodeTypeApp | TL_auth_sentCodeTypeSms | TL_auth_sentCodeTypeCall | TL_auth_sentCodeTypeFlashCall | TL_auth_sentCodeTypeMissedCall | TL_auth_sentCodeTypeEmailCode | TL_auth_sentCodeTypeSetUpEmailRequired | TL_auth_sentCodeTypeFragmentSms | TL_auth_sentCodeTypeFirebaseSms
+	Type          TL // auth.SentCodeType: TL_auth_sentCodeTypeApp | TL_auth_sentCodeTypeSms | TL_auth_sentCodeTypeCall | TL_auth_sentCodeTypeFlashCall | TL_auth_sentCodeTypeMissedCall | TL_auth_sentCodeTypeEmailCode | TL_auth_sentCodeTypeSetUpEmailRequired | TL_auth_sentCodeTypeFragmentSms | TL_auth_sentCodeTypeFirebaseSms
 	PhoneCodeHash string
-	NextType      TL    // (flags.1) auth_CodeType: TL_auth_codeTypeSms | TL_auth_codeTypeCall | TL_auth_codeTypeFlashCall | TL_auth_codeTypeMissedCall | TL_auth_codeTypeFragmentSms
+	NextType      TL    // (flags.1) auth.CodeType: TL_auth_codeTypeSms | TL_auth_codeTypeCall | TL_auth_codeTypeFlashCall | TL_auth_codeTypeMissedCall | TL_auth_codeTypeFragmentSms
 	Timeout       int32 // (flags.2)
 }
 
+// Constructs auth.SentCode
 type TL_auth_sentCodeSuccess struct {
-	Authorization TL // auth_Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
+	Authorization TL // auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 }
 
+// Constructs auth.Authorization
 type TL_auth_authorization struct {
 	Flags                 int32
 	SetupPasswordRequired bool   // (flags.1)
@@ -3218,34 +3441,42 @@ type TL_auth_authorization struct {
 	User                  TL     // User: TL_userEmpty | TL_user
 }
 
+// Constructs auth.Authorization
 type TL_auth_authorizationSignUpRequired struct {
 	Flags          int32
-	TermsOfService TL // (flags.0) help_TermsOfService: TL_help_termsOfService
+	TermsOfService TL // (flags.0) help.TermsOfService: TL_help_termsOfService
 }
 
+// Constructs auth.ExportedAuthorization
 type TL_auth_exportedAuthorization struct {
 	ID    int64
 	Bytes []byte
 }
 
+// Constructs InputNotifyPeer
 type TL_inputNotifyPeer struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Constructs InputNotifyPeer
 type TL_inputNotifyUsers struct {
 }
 
+// Constructs InputNotifyPeer
 type TL_inputNotifyChats struct {
 }
 
+// Constructs InputNotifyPeer
 type TL_inputNotifyBroadcasts struct {
 }
 
+// Constructs InputNotifyPeer
 type TL_inputNotifyForumTopic struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	TopMsgID int32
 }
 
+// Constructs InputPeerNotifySettings
 type TL_inputPeerNotifySettings struct {
 	Flags             int32
 	ShowPreviews      TL    // (flags.0) Bool: TL_boolFalse | TL_boolTrue
@@ -3257,6 +3488,7 @@ type TL_inputPeerNotifySettings struct {
 	StoriesSound      TL    // (flags.8) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 }
 
+// Constructs PeerNotifySettings
 type TL_peerNotifySettings struct {
 	Flags               int32
 	ShowPreviews        TL    // (flags.0) Bool: TL_boolFalse | TL_boolTrue
@@ -3272,6 +3504,7 @@ type TL_peerNotifySettings struct {
 	StoriesOtherSound   TL    // (flags.10) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 }
 
+// Constructs PeerSettings
 type TL_peerSettings struct {
 	Flags                 int32
 	ReportSpam            bool   // (flags.0)
@@ -3288,6 +3521,7 @@ type TL_peerSettings struct {
 	RequestChatDate       int32  // (flags.9)
 }
 
+// Constructs WallPaper
 type TL_wallPaper struct {
 	ID         int64
 	Flags      int32
@@ -3301,6 +3535,7 @@ type TL_wallPaper struct {
 	Settings   TL // (flags.2) WallPaperSettings: TL_wallPaperSettings
 }
 
+// Constructs WallPaper
 type TL_wallPaperNoFile struct {
 	ID       int64
 	Flags    int32
@@ -3309,36 +3544,47 @@ type TL_wallPaperNoFile struct {
 	Settings TL   // (flags.2) WallPaperSettings: TL_wallPaperSettings
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonSpam struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonViolence struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonPornography struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonChildAbuse struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonOther struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonCopyright struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonGeoIrrelevant struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonFake struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonIllegalDrugs struct {
 }
 
+// Constructs ReportReason
 type TL_inputReportReasonPersonalDetails struct {
 }
 
+// Constructs UserFull
 type TL_userFull struct {
 	Flags                   int32
 	Blocked                 bool // (flags.0)
@@ -3372,30 +3618,36 @@ type TL_userFull struct {
 	Stories                 TL     // (flags.25) PeerStories: TL_peerStories
 }
 
+// Constructs Contact
 type TL_contact struct {
 	UserID int64
 	Mutual TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs ImportedContact
 type TL_importedContact struct {
 	UserID   int64
 	ClientID int64
 }
 
+// Constructs ContactStatus
 type TL_contactStatus struct {
 	UserID int64
 	Status TL // UserStatus: TL_userStatusEmpty | TL_userStatusOnline | TL_userStatusOffline | TL_userStatusRecently | TL_userStatusLastWeek | TL_userStatusLastMonth
 }
 
+// Constructs contacts.Contacts
 type TL_contacts_contactsNotModified struct {
 }
 
+// Constructs contacts.Contacts
 type TL_contacts_contacts struct {
 	Contacts   []TL // Contact: TL_contact
 	SavedCount int32
 	Users      []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs contacts.ImportedContacts
 type TL_contacts_importedContacts struct {
 	Imported       []TL // ImportedContact: TL_importedContact
 	PopularInvites []TL // PopularContact: TL_popularContact
@@ -3403,12 +3655,14 @@ type TL_contacts_importedContacts struct {
 	Users          []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs contacts.Blocked
 type TL_contacts_blocked struct {
 	Blocked []TL // PeerBlocked: TL_peerBlocked
 	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users   []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs contacts.Blocked
 type TL_contacts_blockedSlice struct {
 	Count   int32
 	Blocked []TL // PeerBlocked: TL_peerBlocked
@@ -3416,6 +3670,7 @@ type TL_contacts_blockedSlice struct {
 	Users   []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.Dialogs
 type TL_messages_dialogs struct {
 	Dialogs  []TL // Dialog: TL_dialog | TL_dialogFolder
 	Messages []TL // Message: TL_messageEmpty | TL_message | TL_messageService
@@ -3423,6 +3678,7 @@ type TL_messages_dialogs struct {
 	Users    []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.Dialogs
 type TL_messages_dialogsSlice struct {
 	Count    int32
 	Dialogs  []TL // Dialog: TL_dialog | TL_dialogFolder
@@ -3431,16 +3687,19 @@ type TL_messages_dialogsSlice struct {
 	Users    []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.Dialogs
 type TL_messages_dialogsNotModified struct {
 	Count int32
 }
 
+// Constructs messages.Messages
 type TL_messages_messages struct {
 	Messages []TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users    []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.Messages
 type TL_messages_messagesSlice struct {
 	Flags          int32
 	Inexact        bool // (flags.1)
@@ -3452,6 +3711,7 @@ type TL_messages_messagesSlice struct {
 	Users          []TL  // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.Messages
 type TL_messages_channelMessages struct {
 	Flags          int32
 	Inexact        bool // (flags.1)
@@ -3464,121 +3724,151 @@ type TL_messages_channelMessages struct {
 	Users          []TL  // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.Messages
 type TL_messages_messagesNotModified struct {
 	Count int32
 }
 
+// Constructs messages.Chats
 type TL_messages_chats struct {
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 }
 
+// Constructs messages.Chats
 type TL_messages_chatsSlice struct {
 	Count int32
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 }
 
+// Constructs messages.ChatFull
 type TL_messages_chatFull struct {
 	FullChat TL   // ChatFull: TL_chatFull | TL_channelFull
 	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users    []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.AffectedHistory
 type TL_messages_affectedHistory struct {
 	Pts      int32
 	PtsCount int32
 	Offset   int32
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterEmpty struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterPhotos struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterVideo struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterPhotoVideo struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterDocument struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterUrl struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterGif struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterVoice struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterMusic struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterChatPhotos struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterPhoneCalls struct {
 	Flags  int32
 	Missed bool // (flags.0)
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterRoundVoice struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterRoundVideo struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterMyMentions struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterGeo struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterContacts struct {
 }
 
+// Constructs MessagesFilter
 type TL_inputMessagesFilterPinned struct {
 }
 
+// Constructs Update
 type TL_updateNewMessage struct {
 	Message  TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	Pts      int32
 	PtsCount int32
 }
 
+// Constructs Update
 type TL_updateMessageID struct {
 	ID       int32
 	RandomID int64
 }
 
+// Constructs Update
 type TL_updateDeleteMessages struct {
 	Messages []int32
 	Pts      int32
 	PtsCount int32
 }
 
+// Constructs Update
 type TL_updateUserTyping struct {
 	UserID int64
 	Action TL // SendMessageAction: TL_sendMessageTypingAction | TL_sendMessageCancelAction | TL_sendMessageRecordVideoAction | TL_sendMessageUploadVideoAction | TL_sendMessageRecordAudioAction | TL_sendMessageUploadAudioAction | TL_sendMessageUploadPhotoAction | TL_sendMessageUploadDocumentAction | TL_sendMessageGeoLocationAction | TL_sendMessageChooseContactAction | TL_sendMessageGamePlayAction | TL_sendMessageRecordRoundAction | TL_sendMessageUploadRoundAction | TL_speakingInGroupCallAction | TL_sendMessageHistoryImportAction | TL_sendMessageChooseStickerAction | TL_sendMessageEmojiInteraction | TL_sendMessageEmojiInteractionSeen
 }
 
+// Constructs Update
 type TL_updateChatUserTyping struct {
 	ChatID int64
 	FromID TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Action TL // SendMessageAction: TL_sendMessageTypingAction | TL_sendMessageCancelAction | TL_sendMessageRecordVideoAction | TL_sendMessageUploadVideoAction | TL_sendMessageRecordAudioAction | TL_sendMessageUploadAudioAction | TL_sendMessageUploadPhotoAction | TL_sendMessageUploadDocumentAction | TL_sendMessageGeoLocationAction | TL_sendMessageChooseContactAction | TL_sendMessageGamePlayAction | TL_sendMessageRecordRoundAction | TL_sendMessageUploadRoundAction | TL_speakingInGroupCallAction | TL_sendMessageHistoryImportAction | TL_sendMessageChooseStickerAction | TL_sendMessageEmojiInteraction | TL_sendMessageEmojiInteractionSeen
 }
 
+// Constructs Update
 type TL_updateChatParticipants struct {
 	Participants TL // ChatParticipants: TL_chatParticipantsForbidden | TL_chatParticipants
 }
 
+// Constructs Update
 type TL_updateUserStatus struct {
 	UserID int64
 	Status TL // UserStatus: TL_userStatusEmpty | TL_userStatusOnline | TL_userStatusOffline | TL_userStatusRecently | TL_userStatusLastWeek | TL_userStatusLastMonth
 }
 
+// Constructs Update
 type TL_updateUserName struct {
 	UserID    int64
 	FirstName string
@@ -3586,6 +3876,7 @@ type TL_updateUserName struct {
 	Usernames []TL // Username: TL_username
 }
 
+// Constructs Update
 type TL_updateNewAuthorization struct {
 	Flags       int32
 	Unconfirmed bool // (flags.0)
@@ -3595,26 +3886,31 @@ type TL_updateNewAuthorization struct {
 	Location    string // (flags.0)
 }
 
+// Constructs Update
 type TL_updateNewEncryptedMessage struct {
 	Message TL // EncryptedMessage: TL_encryptedMessage | TL_encryptedMessageService
 	Qts     int32
 }
 
+// Constructs Update
 type TL_updateEncryptedChatTyping struct {
 	ChatID int32
 }
 
+// Constructs Update
 type TL_updateEncryption struct {
 	Chat TL // EncryptedChat: TL_encryptedChatEmpty | TL_encryptedChatWaiting | TL_encryptedChatRequested | TL_encryptedChat | TL_encryptedChatDiscarded
 	Date int32
 }
 
+// Constructs Update
 type TL_updateEncryptedMessagesRead struct {
 	ChatID  int32
 	MaxDate int32
 	Date    int32
 }
 
+// Constructs Update
 type TL_updateChatParticipantAdd struct {
 	ChatID    int64
 	UserID    int64
@@ -3623,21 +3919,25 @@ type TL_updateChatParticipantAdd struct {
 	Version   int32
 }
 
+// Constructs Update
 type TL_updateChatParticipantDelete struct {
 	ChatID  int64
 	UserID  int64
 	Version int32
 }
 
+// Constructs Update
 type TL_updateDcOptions struct {
 	DcOptions []TL // DcOption: TL_dcOption
 }
 
+// Constructs Update
 type TL_updateNotifySettings struct {
 	Peer           TL // NotifyPeer: TL_notifyPeer | TL_notifyUsers | TL_notifyChats | TL_notifyBroadcasts | TL_notifyForumTopic
 	NotifySettings TL // PeerNotifySettings: TL_peerNotifySettings
 }
 
+// Constructs Update
 type TL_updateServiceNotification struct {
 	Flags       int32
 	Popup       bool  // (flags.0)
@@ -3649,16 +3949,19 @@ type TL_updateServiceNotification struct {
 	Entities    []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Constructs Update
 type TL_updatePrivacy struct {
 	Key   TL   // PrivacyKey: TL_privacyKeyStatusTimestamp | TL_privacyKeyChatInvite | TL_privacyKeyPhoneCall | TL_privacyKeyPhoneP2P | TL_privacyKeyForwards | TL_privacyKeyProfilePhoto | TL_privacyKeyPhoneNumber | TL_privacyKeyAddedByPhone | TL_privacyKeyVoiceMessages | TL_privacyKeyAbout
 	Rules []TL // PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants | TL_privacyValueAllowCloseFriends
 }
 
+// Constructs Update
 type TL_updateUserPhone struct {
 	UserID int64
 	Phone  string
 }
 
+// Constructs Update
 type TL_updateReadHistoryInbox struct {
 	Flags            int32
 	FolderID         int32 // (flags.0)
@@ -3669,6 +3972,7 @@ type TL_updateReadHistoryInbox struct {
 	PtsCount         int32
 }
 
+// Constructs Update
 type TL_updateReadHistoryOutbox struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	MaxID    int32
@@ -3676,12 +3980,14 @@ type TL_updateReadHistoryOutbox struct {
 	PtsCount int32
 }
 
+// Constructs Update
 type TL_updateWebPage struct {
 	Webpage  TL // WebPage: TL_webPageEmpty | TL_webPagePending | TL_webPage | TL_webPageNotModified
 	Pts      int32
 	PtsCount int32
 }
 
+// Constructs Update
 type TL_updateReadMessagesContents struct {
 	Flags    int32
 	Messages []int32
@@ -3690,22 +3996,26 @@ type TL_updateReadMessagesContents struct {
 	Date     int32 // (flags.0)
 }
 
+// Constructs Update
 type TL_updateChannelTooLong struct {
 	Flags     int32
 	ChannelID int64
 	Pts       int32 // (flags.0)
 }
 
+// Constructs Update
 type TL_updateChannel struct {
 	ChannelID int64
 }
 
+// Constructs Update
 type TL_updateNewChannelMessage struct {
 	Message  TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	Pts      int32
 	PtsCount int32
 }
 
+// Constructs Update
 type TL_updateReadChannelInbox struct {
 	Flags            int32
 	FolderID         int32 // (flags.0)
@@ -3715,6 +4025,7 @@ type TL_updateReadChannelInbox struct {
 	Pts              int32
 }
 
+// Constructs Update
 type TL_updateDeleteChannelMessages struct {
 	ChannelID int64
 	Messages  []int32
@@ -3722,12 +4033,14 @@ type TL_updateDeleteChannelMessages struct {
 	PtsCount  int32
 }
 
+// Constructs Update
 type TL_updateChannelMessageViews struct {
 	ChannelID int64
 	ID        int32
 	Views     int32
 }
 
+// Constructs Update
 type TL_updateChatParticipantAdmin struct {
 	ChatID  int64
 	UserID  int64
@@ -3735,10 +4048,12 @@ type TL_updateChatParticipantAdmin struct {
 	Version int32
 }
 
+// Constructs Update
 type TL_updateNewStickerSet struct {
-	Stickerset TL // messages_StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
+	Stickerset TL // messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 }
 
+// Constructs Update
 type TL_updateStickerSetsOrder struct {
 	Flags  int32
 	Masks  bool // (flags.0)
@@ -3746,15 +4061,18 @@ type TL_updateStickerSetsOrder struct {
 	Order  []int64
 }
 
+// Constructs Update
 type TL_updateStickerSets struct {
 	Flags  int32
 	Masks  bool // (flags.0)
 	Emojis bool // (flags.1)
 }
 
+// Constructs Update
 type TL_updateSavedGifs struct {
 }
 
+// Constructs Update
 type TL_updateBotInlineQuery struct {
 	Flags    int32
 	QueryID  int64
@@ -3765,6 +4083,7 @@ type TL_updateBotInlineQuery struct {
 	Offset   string
 }
 
+// Constructs Update
 type TL_updateBotInlineSend struct {
 	Flags  int32
 	UserID int64
@@ -3774,12 +4093,14 @@ type TL_updateBotInlineSend struct {
 	MsgID  TL // (flags.1) InputBotInlineMessageID: TL_inputBotInlineMessageID | TL_inputBotInlineMessageID64
 }
 
+// Constructs Update
 type TL_updateEditChannelMessage struct {
 	Message  TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	Pts      int32
 	PtsCount int32
 }
 
+// Constructs Update
 type TL_updateBotCallbackQuery struct {
 	Flags         int32
 	QueryID       int64
@@ -3791,12 +4112,14 @@ type TL_updateBotCallbackQuery struct {
 	GameShortName string // (flags.1)
 }
 
+// Constructs Update
 type TL_updateEditMessage struct {
 	Message  TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	Pts      int32
 	PtsCount int32
 }
 
+// Constructs Update
 type TL_updateInlineBotCallbackQuery struct {
 	Flags         int32
 	QueryID       int64
@@ -3807,11 +4130,13 @@ type TL_updateInlineBotCallbackQuery struct {
 	GameShortName string // (flags.1)
 }
 
+// Constructs Update
 type TL_updateReadChannelOutbox struct {
 	ChannelID int64
 	MaxID     int32
 }
 
+// Constructs Update
 type TL_updateDraftMessage struct {
 	Flags    int32
 	Peer     TL    // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
@@ -3819,18 +4144,23 @@ type TL_updateDraftMessage struct {
 	Draft    TL    // DraftMessage: TL_draftMessageEmpty | TL_draftMessage
 }
 
+// Constructs Update
 type TL_updateReadFeaturedStickers struct {
 }
 
+// Constructs Update
 type TL_updateRecentStickers struct {
 }
 
+// Constructs Update
 type TL_updateConfig struct {
 }
 
+// Constructs Update
 type TL_updatePtsChanged struct {
 }
 
+// Constructs Update
 type TL_updateChannelWebPage struct {
 	ChannelID int64
 	Webpage   TL // WebPage: TL_webPageEmpty | TL_webPagePending | TL_webPage | TL_webPageNotModified
@@ -3838,6 +4168,7 @@ type TL_updateChannelWebPage struct {
 	PtsCount  int32
 }
 
+// Constructs Update
 type TL_updateDialogPinned struct {
 	Flags    int32
 	Pinned   bool  // (flags.0)
@@ -3845,22 +4176,26 @@ type TL_updateDialogPinned struct {
 	Peer     TL    // DialogPeer: TL_dialogPeer | TL_dialogPeerFolder
 }
 
+// Constructs Update
 type TL_updatePinnedDialogs struct {
 	Flags    int32
 	FolderID int32 // (flags.1)
 	Order    []TL  // (flags.0) DialogPeer: TL_dialogPeer | TL_dialogPeerFolder
 }
 
+// Constructs Update
 type TL_updateBotWebhookJSON struct {
 	Data TL // DataJSON: TL_dataJSON
 }
 
+// Constructs Update
 type TL_updateBotWebhookJSONQuery struct {
 	QueryID int64
 	Data    TL // DataJSON: TL_dataJSON
 	Timeout int32
 }
 
+// Constructs Update
 type TL_updateBotShippingQuery struct {
 	QueryID         int64
 	UserID          int64
@@ -3868,6 +4203,7 @@ type TL_updateBotShippingQuery struct {
 	ShippingAddress TL // PostAddress: TL_postAddress
 }
 
+// Constructs Update
 type TL_updateBotPrecheckoutQuery struct {
 	Flags            int32
 	QueryID          int64
@@ -3879,21 +4215,26 @@ type TL_updateBotPrecheckoutQuery struct {
 	TotalAmount      int64
 }
 
+// Constructs Update
 type TL_updatePhoneCall struct {
 	PhoneCall TL // PhoneCall: TL_phoneCallEmpty | TL_phoneCallWaiting | TL_phoneCallRequested | TL_phoneCallAccepted | TL_phoneCall | TL_phoneCallDiscarded
 }
 
+// Constructs Update
 type TL_updateLangPackTooLong struct {
 	LangCode string
 }
 
+// Constructs Update
 type TL_updateLangPack struct {
 	Difference TL // LangPackDifference: TL_langPackDifference
 }
 
+// Constructs Update
 type TL_updateFavedStickers struct {
 }
 
+// Constructs Update
 type TL_updateChannelReadMessagesContents struct {
 	Flags     int32
 	ChannelID int64
@@ -3901,20 +4242,24 @@ type TL_updateChannelReadMessagesContents struct {
 	Messages  []int32
 }
 
+// Constructs Update
 type TL_updateContactsReset struct {
 }
 
+// Constructs Update
 type TL_updateChannelAvailableMessages struct {
 	ChannelID      int64
 	AvailableMinID int32
 }
 
+// Constructs Update
 type TL_updateDialogUnreadMark struct {
 	Flags  int32
 	Unread bool // (flags.0)
 	Peer   TL   // DialogPeer: TL_dialogPeer | TL_dialogPeerFolder
 }
 
+// Constructs Update
 type TL_updateMessagePoll struct {
 	Flags   int32
 	PollID  int64
@@ -3922,48 +4267,58 @@ type TL_updateMessagePoll struct {
 	Results TL // PollResults: TL_pollResults
 }
 
+// Constructs Update
 type TL_updateChatDefaultBannedRights struct {
 	Peer                TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	DefaultBannedRights TL // ChatBannedRights: TL_chatBannedRights
 	Version             int32
 }
 
+// Constructs Update
 type TL_updateFolderPeers struct {
 	FolderPeers []TL // FolderPeer: TL_folderPeer
 	Pts         int32
 	PtsCount    int32
 }
 
+// Constructs Update
 type TL_updatePeerSettings struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Settings TL // PeerSettings: TL_peerSettings
 }
 
+// Constructs Update
 type TL_updatePeerLocated struct {
 	Peers []TL // PeerLocated: TL_peerLocated | TL_peerSelfLocated
 }
 
+// Constructs Update
 type TL_updateNewScheduledMessage struct {
 	Message TL // Message: TL_messageEmpty | TL_message | TL_messageService
 }
 
+// Constructs Update
 type TL_updateDeleteScheduledMessages struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Messages []int32
 }
 
+// Constructs Update
 type TL_updateTheme struct {
 	Theme TL // Theme: TL_theme
 }
 
+// Constructs Update
 type TL_updateGeoLiveViewed struct {
 	Peer  TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	MsgID int32
 }
 
+// Constructs Update
 type TL_updateLoginToken struct {
 }
 
+// Constructs Update
 type TL_updateMessagePollVote struct {
 	PollID  int64
 	Peer    TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
@@ -3971,30 +4326,36 @@ type TL_updateMessagePollVote struct {
 	Qts     int32
 }
 
+// Constructs Update
 type TL_updateDialogFilter struct {
 	Flags  int32
 	ID     int32
 	Filter TL // (flags.0) DialogFilter: TL_dialogFilter | TL_dialogFilterDefault | TL_dialogFilterChatlist
 }
 
+// Constructs Update
 type TL_updateDialogFilterOrder struct {
 	Order []int32
 }
 
+// Constructs Update
 type TL_updateDialogFilters struct {
 }
 
+// Constructs Update
 type TL_updatePhoneCallSignalingData struct {
 	PhoneCallID int64
 	Data        []byte
 }
 
+// Constructs Update
 type TL_updateChannelMessageForwards struct {
 	ChannelID int64
 	ID        int32
 	Forwards  int32
 }
 
+// Constructs Update
 type TL_updateReadChannelDiscussionInbox struct {
 	Flags         int32
 	ChannelID     int64
@@ -4004,12 +4365,14 @@ type TL_updateReadChannelDiscussionInbox struct {
 	BroadcastPost int32 // (flags.0)
 }
 
+// Constructs Update
 type TL_updateReadChannelDiscussionOutbox struct {
 	ChannelID int64
 	TopMsgID  int32
 	ReadMaxID int32
 }
 
+// Constructs Update
 type TL_updatePeerBlocked struct {
 	Flags                int32
 	Blocked              bool // (flags.0)
@@ -4017,6 +4380,7 @@ type TL_updatePeerBlocked struct {
 	PeerID               TL   // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
+// Constructs Update
 type TL_updateChannelUserTyping struct {
 	Flags     int32
 	ChannelID int64
@@ -4025,6 +4389,7 @@ type TL_updateChannelUserTyping struct {
 	Action    TL    // SendMessageAction: TL_sendMessageTypingAction | TL_sendMessageCancelAction | TL_sendMessageRecordVideoAction | TL_sendMessageUploadVideoAction | TL_sendMessageRecordAudioAction | TL_sendMessageUploadAudioAction | TL_sendMessageUploadPhotoAction | TL_sendMessageUploadDocumentAction | TL_sendMessageGeoLocationAction | TL_sendMessageChooseContactAction | TL_sendMessageGamePlayAction | TL_sendMessageRecordRoundAction | TL_sendMessageUploadRoundAction | TL_speakingInGroupCallAction | TL_sendMessageHistoryImportAction | TL_sendMessageChooseStickerAction | TL_sendMessageEmojiInteraction | TL_sendMessageEmojiInteractionSeen
 }
 
+// Constructs Update
 type TL_updatePinnedMessages struct {
 	Flags    int32
 	Pinned   bool // (flags.0)
@@ -4034,6 +4399,7 @@ type TL_updatePinnedMessages struct {
 	PtsCount int32
 }
 
+// Constructs Update
 type TL_updatePinnedChannelMessages struct {
 	Flags     int32
 	Pinned    bool // (flags.0)
@@ -4043,27 +4409,32 @@ type TL_updatePinnedChannelMessages struct {
 	PtsCount  int32
 }
 
+// Constructs Update
 type TL_updateChat struct {
 	ChatID int64
 }
 
+// Constructs Update
 type TL_updateGroupCallParticipants struct {
 	Call         TL   // InputGroupCall: TL_inputGroupCall
 	Participants []TL // GroupCallParticipant: TL_groupCallParticipant
 	Version      int32
 }
 
+// Constructs Update
 type TL_updateGroupCall struct {
 	ChatID int64
 	Call   TL // GroupCall: TL_groupCallDiscarded | TL_groupCall
 }
 
+// Constructs Update
 type TL_updatePeerHistoryTTL struct {
 	Flags     int32
 	Peer      TL    // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	TtlPeriod int32 // (flags.0)
 }
 
+// Constructs Update
 type TL_updateChatParticipant struct {
 	Flags           int32
 	ChatID          int64
@@ -4076,6 +4447,7 @@ type TL_updateChatParticipant struct {
 	Qts             int32
 }
 
+// Constructs Update
 type TL_updateChannelParticipant struct {
 	Flags           int32
 	ViaChatlist     bool // (flags.3)
@@ -4089,6 +4461,7 @@ type TL_updateChannelParticipant struct {
 	Qts             int32
 }
 
+// Constructs Update
 type TL_updateBotStopped struct {
 	UserID  int64
 	Date    int32
@@ -4096,24 +4469,28 @@ type TL_updateBotStopped struct {
 	Qts     int32
 }
 
+// Constructs Update
 type TL_updateGroupCallConnection struct {
 	Flags        int32
 	Presentation bool // (flags.0)
 	Params       TL   // DataJSON: TL_dataJSON
 }
 
+// Constructs Update
 type TL_updateBotCommands struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	BotID    int64
 	Commands []TL // BotCommand: TL_botCommand
 }
 
+// Constructs Update
 type TL_updatePendingJoinRequests struct {
 	Peer             TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	RequestsPending  int32
 	RecentRequesters []int64
 }
 
+// Constructs Update
 type TL_updateBotChatInviteRequester struct {
 	Peer   TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Date   int32
@@ -4123,6 +4500,7 @@ type TL_updateBotChatInviteRequester struct {
 	Qts    int32
 }
 
+// Constructs Update
 type TL_updateMessageReactions struct {
 	Flags     int32
 	Peer      TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
@@ -4131,21 +4509,26 @@ type TL_updateMessageReactions struct {
 	Reactions TL    // MessageReactions: TL_messageReactions
 }
 
+// Constructs Update
 type TL_updateAttachMenuBots struct {
 }
 
+// Constructs Update
 type TL_updateWebViewResultSent struct {
 	QueryID int64
 }
 
+// Constructs Update
 type TL_updateBotMenuButton struct {
 	BotID  int64
 	Button TL // BotMenuButton: TL_botMenuButtonDefault | TL_botMenuButtonCommands | TL_botMenuButton
 }
 
+// Constructs Update
 type TL_updateSavedRingtones struct {
 }
 
+// Constructs Update
 type TL_updateTranscribedAudio struct {
 	Flags           int32
 	Pending         bool // (flags.0)
@@ -4155,20 +4538,25 @@ type TL_updateTranscribedAudio struct {
 	Text            string
 }
 
+// Constructs Update
 type TL_updateReadFeaturedEmojiStickers struct {
 }
 
+// Constructs Update
 type TL_updateUserEmojiStatus struct {
 	UserID      int64
 	EmojiStatus TL // EmojiStatus: TL_emojiStatusEmpty | TL_emojiStatus | TL_emojiStatusUntil
 }
 
+// Constructs Update
 type TL_updateRecentEmojiStatuses struct {
 }
 
+// Constructs Update
 type TL_updateRecentReactions struct {
 }
 
+// Constructs Update
 type TL_updateMoveStickerSetToTop struct {
 	Flags      int32
 	Masks      bool // (flags.0)
@@ -4176,12 +4564,14 @@ type TL_updateMoveStickerSetToTop struct {
 	Stickerset int64
 }
 
+// Constructs Update
 type TL_updateMessageExtendedMedia struct {
 	Peer          TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	MsgID         int32
 	ExtendedMedia TL // MessageExtendedMedia: TL_messageExtendedMediaPreview | TL_messageExtendedMedia
 }
 
+// Constructs Update
 type TL_updateChannelPinnedTopic struct {
 	Flags     int32
 	Pinned    bool // (flags.0)
@@ -4189,48 +4579,58 @@ type TL_updateChannelPinnedTopic struct {
 	TopicID   int32
 }
 
+// Constructs Update
 type TL_updateChannelPinnedTopics struct {
 	Flags     int32
 	ChannelID int64
 	Order     []int32 // (flags.0)
 }
 
+// Constructs Update
 type TL_updateUser struct {
 	UserID int64
 }
 
+// Constructs Update
 type TL_updateAutoSaveSettings struct {
 }
 
+// Constructs Update
 type TL_updateGroupInvitePrivacyForbidden struct {
 	UserID int64
 }
 
+// Constructs Update
 type TL_updateStory struct {
 	Peer  TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Story TL // StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
 }
 
+// Constructs Update
 type TL_updateReadStories struct {
 	Peer  TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	MaxID int32
 }
 
+// Constructs Update
 type TL_updateStoryID struct {
 	ID       int32
 	RandomID int64
 }
 
+// Constructs Update
 type TL_updateStoriesStealthMode struct {
 	StealthMode TL // StoriesStealthMode: TL_storiesStealthMode
 }
 
+// Constructs Update
 type TL_updateSentStoryReaction struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	StoryID  int32
 	Reaction TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Constructs updates.State
 type TL_updates_state struct {
 	Pts         int32
 	Qts         int32
@@ -4239,36 +4639,42 @@ type TL_updates_state struct {
 	UnreadCount int32
 }
 
+// Constructs updates.Difference
 type TL_updates_differenceEmpty struct {
 	Date int32
 	Seq  int32
 }
 
+// Constructs updates.Difference
 type TL_updates_difference struct {
 	NewMessages          []TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	NewEncryptedMessages []TL // EncryptedMessage: TL_encryptedMessage | TL_encryptedMessageService
 	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Chats                []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users                []TL // User: TL_userEmpty | TL_user
-	State                TL   // updates_State: TL_updates_state
+	State                TL   // updates.State: TL_updates_state
 }
 
+// Constructs updates.Difference
 type TL_updates_differenceSlice struct {
 	NewMessages          []TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	NewEncryptedMessages []TL // EncryptedMessage: TL_encryptedMessage | TL_encryptedMessageService
 	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Chats                []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users                []TL // User: TL_userEmpty | TL_user
-	IntermediateState    TL   // updates_State: TL_updates_state
+	IntermediateState    TL   // updates.State: TL_updates_state
 }
 
+// Constructs updates.Difference
 type TL_updates_differenceTooLong struct {
 	Pts int32
 }
 
+// Constructs Updates
 type TL_updatesTooLong struct {
 }
 
+// Constructs Updates
 type TL_updateShortMessage struct {
 	Flags       int32
 	Out         bool // (flags.1)
@@ -4288,6 +4694,7 @@ type TL_updateShortMessage struct {
 	TtlPeriod   int32 // (flags.25)
 }
 
+// Constructs Updates
 type TL_updateShortChatMessage struct {
 	Flags       int32
 	Out         bool // (flags.1)
@@ -4308,11 +4715,13 @@ type TL_updateShortChatMessage struct {
 	TtlPeriod   int32 // (flags.25)
 }
 
+// Constructs Updates
 type TL_updateShort struct {
 	Update TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Date   int32
 }
 
+// Constructs Updates
 type TL_updatesCombined struct {
 	Updates  []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Users    []TL // User: TL_userEmpty | TL_user
@@ -4322,6 +4731,7 @@ type TL_updatesCombined struct {
 	Seq      int32
 }
 
+// Constructs Updates
 type TL_updates struct {
 	Updates []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
 	Users   []TL // User: TL_userEmpty | TL_user
@@ -4330,6 +4740,7 @@ type TL_updates struct {
 	Seq     int32
 }
 
+// Constructs Updates
 type TL_updateShortSentMessage struct {
 	Flags     int32
 	Out       bool // (flags.1)
@@ -4342,28 +4753,33 @@ type TL_updateShortSentMessage struct {
 	TtlPeriod int32 // (flags.25)
 }
 
+// Constructs photos.Photos
 type TL_photos_photos struct {
 	Photos []TL // Photo: TL_photoEmpty | TL_photo
 	Users  []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs photos.Photos
 type TL_photos_photosSlice struct {
 	Count  int32
 	Photos []TL // Photo: TL_photoEmpty | TL_photo
 	Users  []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs photos.Photo
 type TL_photos_photo struct {
 	Photo TL   // Photo: TL_photoEmpty | TL_photo
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs upload.File
 type TL_upload_file struct {
-	Type  TL // storage_FileType: TL_storage_fileUnknown | TL_storage_filePartial | TL_storage_fileJpeg | TL_storage_fileGif | TL_storage_filePng | TL_storage_filePdf | TL_storage_fileMp3 | TL_storage_fileMov | TL_storage_fileMp4 | TL_storage_fileWebp
+	Type  TL // storage.FileType: TL_storage_fileUnknown | TL_storage_filePartial | TL_storage_fileJpeg | TL_storage_fileGif | TL_storage_filePng | TL_storage_filePdf | TL_storage_fileMp3 | TL_storage_fileMov | TL_storage_fileMp4 | TL_storage_fileWebp
 	Mtime int32
 	Bytes []byte
 }
 
+// Constructs upload.File
 type TL_upload_fileCdnRedirect struct {
 	DcID          int32
 	FileToken     []byte
@@ -4372,6 +4788,7 @@ type TL_upload_fileCdnRedirect struct {
 	FileHashes    []TL // FileHash: TL_fileHash
 }
 
+// Constructs DcOption
 type TL_dcOption struct {
 	Flags        int32
 	Ipv6         bool // (flags.0)
@@ -4386,6 +4803,7 @@ type TL_dcOption struct {
 	Secret       []byte // (flags.10)
 }
 
+// Constructs Config
 type TL_config struct {
 	Flags                   int32
 	DefaultP2pContacts      bool // (flags.3)
@@ -4437,12 +4855,14 @@ type TL_config struct {
 	AutologinToken          string // (flags.16)
 }
 
+// Constructs NearestDc
 type TL_nearestDc struct {
 	Country   string
 	ThisDc    int32
 	NearestDc int32
 }
 
+// Constructs help.AppUpdate
 type TL_help_appUpdate struct {
 	Flags      int32
 	CanNotSkip bool // (flags.0)
@@ -4455,17 +4875,21 @@ type TL_help_appUpdate struct {
 	Sticker    TL     // (flags.3) Document: TL_documentEmpty | TL_document
 }
 
+// Constructs help.AppUpdate
 type TL_help_noAppUpdate struct {
 }
 
+// Constructs help.InviteText
 type TL_help_inviteText struct {
 	Message string
 }
 
+// Constructs EncryptedChat
 type TL_encryptedChatEmpty struct {
 	ID int32
 }
 
+// Constructs EncryptedChat
 type TL_encryptedChatWaiting struct {
 	ID            int32
 	AccessHash    int64
@@ -4474,6 +4898,7 @@ type TL_encryptedChatWaiting struct {
 	ParticipantID int64
 }
 
+// Constructs EncryptedChat
 type TL_encryptedChatRequested struct {
 	Flags         int32
 	FolderID      int32 // (flags.0)
@@ -4485,6 +4910,7 @@ type TL_encryptedChatRequested struct {
 	GA            []byte
 }
 
+// Constructs EncryptedChat
 type TL_encryptedChat struct {
 	ID             int32
 	AccessHash     int64
@@ -4495,20 +4921,24 @@ type TL_encryptedChat struct {
 	KeyFingerprint int64
 }
 
+// Constructs EncryptedChat
 type TL_encryptedChatDiscarded struct {
 	Flags          int32
 	HistoryDeleted bool // (flags.0)
 	ID             int32
 }
 
+// Constructs InputEncryptedChat
 type TL_inputEncryptedChat struct {
 	ChatID     int32
 	AccessHash int64
 }
 
+// Constructs EncryptedFile
 type TL_encryptedFileEmpty struct {
 }
 
+// Constructs EncryptedFile
 type TL_encryptedFile struct {
 	ID             int64
 	AccessHash     int64
@@ -4517,9 +4947,11 @@ type TL_encryptedFile struct {
 	KeyFingerprint int32
 }
 
+// Constructs InputEncryptedFile
 type TL_inputEncryptedFileEmpty struct {
 }
 
+// Constructs InputEncryptedFile
 type TL_inputEncryptedFileUploaded struct {
 	ID             int64
 	Parts          int32
@@ -4527,17 +4959,20 @@ type TL_inputEncryptedFileUploaded struct {
 	KeyFingerprint int32
 }
 
+// Constructs InputEncryptedFile
 type TL_inputEncryptedFile struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputEncryptedFile
 type TL_inputEncryptedFileBigUploaded struct {
 	ID             int64
 	Parts          int32
 	KeyFingerprint int32
 }
 
+// Constructs EncryptedMessage
 type TL_encryptedMessage struct {
 	RandomID int64
 	ChatID   int32
@@ -4546,6 +4981,7 @@ type TL_encryptedMessage struct {
 	File     TL // EncryptedFile: TL_encryptedFileEmpty | TL_encryptedFile
 }
 
+// Constructs EncryptedMessage
 type TL_encryptedMessageService struct {
 	RandomID int64
 	ChatID   int32
@@ -4553,10 +4989,12 @@ type TL_encryptedMessageService struct {
 	Bytes    []byte
 }
 
+// Constructs messages.DhConfig
 type TL_messages_dhConfigNotModified struct {
 	Random []byte
 }
 
+// Constructs messages.DhConfig
 type TL_messages_dhConfig struct {
 	G       int32
 	P       []byte
@@ -4564,28 +5002,34 @@ type TL_messages_dhConfig struct {
 	Random  []byte
 }
 
+// Constructs messages.SentEncryptedMessage
 type TL_messages_sentEncryptedMessage struct {
 	Date int32
 }
 
+// Constructs messages.SentEncryptedMessage
 type TL_messages_sentEncryptedFile struct {
 	Date int32
 	File TL // EncryptedFile: TL_encryptedFileEmpty | TL_encryptedFile
 }
 
+// Constructs InputDocument
 type TL_inputDocumentEmpty struct {
 }
 
+// Constructs InputDocument
 type TL_inputDocument struct {
 	ID            int64
 	AccessHash    int64
 	FileReference []byte
 }
 
+// Constructs Document
 type TL_documentEmpty struct {
 	ID int64
 }
 
+// Constructs Document
 type TL_document struct {
 	Flags         int32
 	ID            int64
@@ -4600,93 +5044,118 @@ type TL_document struct {
 	Attributes    []TL // DocumentAttribute: TL_documentAttributeImageSize | TL_documentAttributeAnimated | TL_documentAttributeSticker | TL_documentAttributeVideo | TL_documentAttributeAudio | TL_documentAttributeFilename | TL_documentAttributeHasStickers | TL_documentAttributeCustomEmoji
 }
 
+// Constructs help.Support
 type TL_help_support struct {
 	PhoneNumber string
 	User        TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs NotifyPeer
 type TL_notifyPeer struct {
 	Peer TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
+// Constructs NotifyPeer
 type TL_notifyUsers struct {
 }
 
+// Constructs NotifyPeer
 type TL_notifyChats struct {
 }
 
+// Constructs NotifyPeer
 type TL_notifyBroadcasts struct {
 }
 
+// Constructs NotifyPeer
 type TL_notifyForumTopic struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	TopMsgID int32
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageTypingAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageCancelAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageRecordVideoAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageUploadVideoAction struct {
 	Progress int32
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageRecordAudioAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageUploadAudioAction struct {
 	Progress int32
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageUploadPhotoAction struct {
 	Progress int32
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageUploadDocumentAction struct {
 	Progress int32
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageGeoLocationAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageChooseContactAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageGamePlayAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageRecordRoundAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageUploadRoundAction struct {
 	Progress int32
 }
 
+// Constructs SendMessageAction
 type TL_speakingInGroupCallAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageHistoryImportAction struct {
 	Progress int32
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageChooseStickerAction struct {
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageEmojiInteraction struct {
 	Emoticon    string
 	MsgID       int32
 	Interaction TL // DataJSON: TL_dataJSON
 }
 
+// Constructs SendMessageAction
 type TL_sendMessageEmojiInteractionSeen struct {
 	Emoticon string
 }
 
+// Constructs contacts.Found
 type TL_contacts_found struct {
 	MyResults []TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Results   []TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
@@ -4694,146 +5163,189 @@ type TL_contacts_found struct {
 	Users     []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyStatusTimestamp struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyChatInvite struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyPhoneCall struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyPhoneP2P struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyForwards struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyProfilePhoto struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyPhoneNumber struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyAddedByPhone struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyVoiceMessages struct {
 }
 
+// Constructs InputPrivacyKey
 type TL_inputPrivacyKeyAbout struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyStatusTimestamp struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyChatInvite struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyPhoneCall struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyPhoneP2P struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyForwards struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyProfilePhoto struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyPhoneNumber struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyAddedByPhone struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyVoiceMessages struct {
 }
 
+// Constructs PrivacyKey
 type TL_privacyKeyAbout struct {
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueAllowContacts struct {
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueAllowAll struct {
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueAllowUsers struct {
 	Users []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueDisallowContacts struct {
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueDisallowAll struct {
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueDisallowUsers struct {
 	Users []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueAllowChatParticipants struct {
 	Chats []int64
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueDisallowChatParticipants struct {
 	Chats []int64
 }
 
+// Constructs InputPrivacyRule
 type TL_inputPrivacyValueAllowCloseFriends struct {
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueAllowContacts struct {
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueAllowAll struct {
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueAllowUsers struct {
 	Users []int64
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueDisallowContacts struct {
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueDisallowAll struct {
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueDisallowUsers struct {
 	Users []int64
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueAllowChatParticipants struct {
 	Chats []int64
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueDisallowChatParticipants struct {
 	Chats []int64
 }
 
+// Constructs PrivacyRule
 type TL_privacyValueAllowCloseFriends struct {
 }
 
+// Constructs account.PrivacyRules
 type TL_account_privacyRules struct {
 	Rules []TL // PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants | TL_privacyValueAllowCloseFriends
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs AccountDaysTTL
 type TL_accountDaysTTL struct {
 	Days int32
 }
 
+// Constructs DocumentAttribute
 type TL_documentAttributeImageSize struct {
 	W int32
 	H int32
 }
 
+// Constructs DocumentAttribute
 type TL_documentAttributeAnimated struct {
 }
 
+// Constructs DocumentAttribute
 type TL_documentAttributeSticker struct {
 	Flags      int32
 	Mask       bool // (flags.1)
@@ -4842,6 +5354,7 @@ type TL_documentAttributeSticker struct {
 	MaskCoords TL // (flags.0) MaskCoords: TL_maskCoords
 }
 
+// Constructs DocumentAttribute
 type TL_documentAttributeVideo struct {
 	Flags             int32
 	RoundMessage      bool // (flags.0)
@@ -4853,6 +5366,7 @@ type TL_documentAttributeVideo struct {
 	PreloadPrefixSize int32 // (flags.2)
 }
 
+// Constructs DocumentAttribute
 type TL_documentAttributeAudio struct {
 	Flags     int32
 	Voice     bool // (flags.10)
@@ -4862,13 +5376,16 @@ type TL_documentAttributeAudio struct {
 	Waveform  []byte // (flags.2)
 }
 
+// Constructs DocumentAttribute
 type TL_documentAttributeFilename struct {
 	FileName string
 }
 
+// Constructs DocumentAttribute
 type TL_documentAttributeHasStickers struct {
 }
 
+// Constructs DocumentAttribute
 type TL_documentAttributeCustomEmoji struct {
 	Flags      int32
 	Free       bool // (flags.0)
@@ -4877,38 +5394,46 @@ type TL_documentAttributeCustomEmoji struct {
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 }
 
+// Constructs messages.Stickers
 type TL_messages_stickersNotModified struct {
 }
 
+// Constructs messages.Stickers
 type TL_messages_stickers struct {
 	Hash     int64
 	Stickers []TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs StickerPack
 type TL_stickerPack struct {
 	Emoticon  string
 	Documents []int64
 }
 
+// Constructs messages.AllStickers
 type TL_messages_allStickersNotModified struct {
 }
 
+// Constructs messages.AllStickers
 type TL_messages_allStickers struct {
 	Hash int64
 	Sets []TL // StickerSet: TL_stickerSet
 }
 
+// Constructs messages.AffectedMessages
 type TL_messages_affectedMessages struct {
 	Pts      int32
 	PtsCount int32
 }
 
+// Constructs WebPage
 type TL_webPageEmpty struct {
 	Flags int32
 	ID    int64
 	Url   string // (flags.0)
 }
 
+// Constructs WebPage
 type TL_webPagePending struct {
 	Flags int32
 	ID    int64
@@ -4916,6 +5441,7 @@ type TL_webPagePending struct {
 	Date  int32
 }
 
+// Constructs WebPage
 type TL_webPage struct {
 	Flags         int32
 	HasLargeMedia bool // (flags.13)
@@ -4939,11 +5465,13 @@ type TL_webPage struct {
 	Attributes    []TL   // (flags.12) WebPageAttribute: TL_webPageAttributeTheme | TL_webPageAttributeStory
 }
 
+// Constructs WebPage
 type TL_webPageNotModified struct {
 	Flags           int32
 	CachedPageViews int32 // (flags.0)
 }
 
+// Constructs Authorization
 type TL_authorization struct {
 	Flags                     int32
 	Current                   bool // (flags.0)
@@ -4966,11 +5494,13 @@ type TL_authorization struct {
 	Region                    string
 }
 
+// Constructs account.Authorizations
 type TL_account_authorizations struct {
 	AuthorizationTtlDays int32
 	Authorizations       []TL // Authorization: TL_authorization
 }
 
+// Constructs account.Password
 type TL_account_password struct {
 	Flags                   int32
 	HasRecovery             bool   // (flags.0)
@@ -4988,12 +5518,14 @@ type TL_account_password struct {
 	LoginEmailPattern       string // (flags.6)
 }
 
+// Constructs account.PasswordSettings
 type TL_account_passwordSettings struct {
 	Flags          int32
 	Email          string // (flags.0)
 	SecureSettings TL     // (flags.1) SecureSecretSettings: TL_secureSecretSettings
 }
 
+// Constructs account.PasswordInputSettings
 type TL_account_passwordInputSettings struct {
 	Flags             int32
 	NewAlgo           TL     // (flags.0) PasswordKdfAlgo: TL_passwordKdfAlgoUnknown | TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
@@ -5003,15 +5535,18 @@ type TL_account_passwordInputSettings struct {
 	NewSecureSettings TL     // (flags.2) SecureSecretSettings: TL_secureSecretSettings
 }
 
+// Constructs auth.PasswordRecovery
 type TL_auth_passwordRecovery struct {
 	EmailPattern string
 }
 
+// Constructs ReceivedNotifyMessage
 type TL_receivedNotifyMessage struct {
 	ID    int32
 	Flags int32
 }
 
+// Constructs ExportedChatInvite
 type TL_chatInviteExported struct {
 	Flags         int32
 	Revoked       bool // (flags.0)
@@ -5028,13 +5563,16 @@ type TL_chatInviteExported struct {
 	Title         string // (flags.8)
 }
 
+// Constructs ExportedChatInvite
 type TL_chatInvitePublicJoinRequests struct {
 }
 
+// Constructs ChatInvite
 type TL_chatInviteAlready struct {
 	Chat TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 }
 
+// Constructs ChatInvite
 type TL_chatInvite struct {
 	Flags             int32
 	Channel           bool // (flags.0)
@@ -5053,45 +5591,57 @@ type TL_chatInvite struct {
 	Color             int32
 }
 
+// Constructs ChatInvite
 type TL_chatInvitePeek struct {
 	Chat    TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Expires int32
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetEmpty struct {
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetID struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetShortName struct {
 	ShortName string
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetAnimatedEmoji struct {
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetDice struct {
 	Emoticon string
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetAnimatedEmojiAnimations struct {
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetPremiumGifts struct {
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetEmojiGenericAnimations struct {
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetEmojiDefaultStatuses struct {
 }
 
+// Constructs InputStickerSet
 type TL_inputStickerSetEmojiDefaultTopicIcons struct {
 }
 
+// Constructs StickerSet
 type TL_stickerSet struct {
 	Flags           int32
 	Archived        bool  // (flags.1)
@@ -5114,6 +5664,7 @@ type TL_stickerSet struct {
 	Hash            int32
 }
 
+// Constructs messages.StickerSet
 type TL_messages_stickerSet struct {
 	Set       TL   // StickerSet: TL_stickerSet
 	Packs     []TL // StickerPack: TL_stickerPack
@@ -5121,14 +5672,17 @@ type TL_messages_stickerSet struct {
 	Documents []TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs messages.StickerSet
 type TL_messages_stickerSetNotModified struct {
 }
 
+// Constructs BotCommand
 type TL_botCommand struct {
 	Command     string
 	Description string
 }
 
+// Constructs BotInfo
 type TL_botInfo struct {
 	Flags               int32
 	UserID              int64  // (flags.0)
@@ -5139,15 +5693,18 @@ type TL_botInfo struct {
 	MenuButton          TL     // (flags.3) BotMenuButton: TL_botMenuButtonDefault | TL_botMenuButtonCommands | TL_botMenuButton
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButton struct {
 	Text string
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonUrl struct {
 	Text string
 	Url  string
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonCallback struct {
 	Flags            int32
 	RequiresPassword bool // (flags.0)
@@ -5155,14 +5712,17 @@ type TL_keyboardButtonCallback struct {
 	Data             []byte
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonRequestPhone struct {
 	Text string
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonRequestGeoLocation struct {
 	Text string
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonSwitchInline struct {
 	Flags     int32
 	SamePeer  bool // (flags.0)
@@ -5171,14 +5731,17 @@ type TL_keyboardButtonSwitchInline struct {
 	PeerTypes []TL // (flags.1) InlineQueryPeerType: TL_inlineQueryPeerTypeSameBotPM | TL_inlineQueryPeerTypePM | TL_inlineQueryPeerTypeChat | TL_inlineQueryPeerTypeMegagroup | TL_inlineQueryPeerTypeBroadcast | TL_inlineQueryPeerTypeBotPM
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonGame struct {
 	Text string
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonBuy struct {
 	Text string
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonUrlAuth struct {
 	Flags    int32
 	Text     string
@@ -5187,6 +5750,7 @@ type TL_keyboardButtonUrlAuth struct {
 	ButtonID int32
 }
 
+// Constructs KeyboardButton
 type TL_inputKeyboardButtonUrlAuth struct {
 	Flags              int32
 	RequestWriteAccess bool // (flags.0)
@@ -5196,47 +5760,56 @@ type TL_inputKeyboardButtonUrlAuth struct {
 	Bot                TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonRequestPoll struct {
 	Flags int32
 	Quiz  TL // (flags.0) Bool: TL_boolFalse | TL_boolTrue
 	Text  string
 }
 
+// Constructs KeyboardButton
 type TL_inputKeyboardButtonUserProfile struct {
 	Text   string
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonUserProfile struct {
 	Text   string
 	UserID int64
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonWebView struct {
 	Text string
 	Url  string
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonSimpleWebView struct {
 	Text string
 	Url  string
 }
 
+// Constructs KeyboardButton
 type TL_keyboardButtonRequestPeer struct {
 	Text     string
 	ButtonID int32
 	PeerType TL // RequestPeerType: TL_requestPeerTypeUser | TL_requestPeerTypeChat | TL_requestPeerTypeBroadcast
 }
 
+// Constructs KeyboardButtonRow
 type TL_keyboardButtonRow struct {
 	Buttons []TL // KeyboardButton: TL_keyboardButton | TL_keyboardButtonUrl | TL_keyboardButtonCallback | TL_keyboardButtonRequestPhone | TL_keyboardButtonRequestGeoLocation | TL_keyboardButtonSwitchInline | TL_keyboardButtonGame | TL_keyboardButtonBuy | TL_keyboardButtonUrlAuth | TL_inputKeyboardButtonUrlAuth | TL_keyboardButtonRequestPoll | TL_inputKeyboardButtonUserProfile | TL_keyboardButtonUserProfile | TL_keyboardButtonWebView | TL_keyboardButtonSimpleWebView | TL_keyboardButtonRequestPeer
 }
 
+// Constructs ReplyMarkup
 type TL_replyKeyboardHide struct {
 	Flags     int32
 	Selective bool // (flags.2)
 }
 
+// Constructs ReplyMarkup
 type TL_replyKeyboardForceReply struct {
 	Flags       int32
 	SingleUse   bool   // (flags.1)
@@ -5244,6 +5817,7 @@ type TL_replyKeyboardForceReply struct {
 	Placeholder string // (flags.3)
 }
 
+// Constructs ReplyMarkup
 type TL_replyKeyboardMarkup struct {
 	Flags       int32
 	Resize      bool   // (flags.0)
@@ -5254,145 +5828,173 @@ type TL_replyKeyboardMarkup struct {
 	Placeholder string // (flags.3)
 }
 
+// Constructs ReplyMarkup
 type TL_replyInlineMarkup struct {
 	Rows []TL // KeyboardButtonRow: TL_keyboardButtonRow
 }
 
+// Constructs MessageEntity
 type TL_messageEntityUnknown struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityMention struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityHashtag struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityBotCommand struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityUrl struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityEmail struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityBold struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityItalic struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityCode struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityPre struct {
 	Offset   int32
 	Length   int32
 	Language string
 }
 
+// Constructs MessageEntity
 type TL_messageEntityTextUrl struct {
 	Offset int32
 	Length int32
 	Url    string
 }
 
+// Constructs MessageEntity
 type TL_messageEntityMentionName struct {
 	Offset int32
 	Length int32
 	UserID int64
 }
 
+// Constructs MessageEntity
 type TL_inputMessageEntityMentionName struct {
 	Offset int32
 	Length int32
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Constructs MessageEntity
 type TL_messageEntityPhone struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityCashtag struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityUnderline struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityStrike struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityBankCard struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntitySpoiler struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs MessageEntity
 type TL_messageEntityCustomEmoji struct {
 	Offset     int32
 	Length     int32
 	DocumentID int64
 }
 
+// Constructs MessageEntity
 type TL_messageEntityBlockquote struct {
 	Offset int32
 	Length int32
 }
 
+// Constructs InputChannel
 type TL_inputChannelEmpty struct {
 }
 
+// Constructs InputChannel
 type TL_inputChannel struct {
 	ChannelID  int64
 	AccessHash int64
 }
 
+// Constructs InputChannel
 type TL_inputChannelFromMessage struct {
 	Peer      TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID     int32
 	ChannelID int64
 }
 
+// Constructs contacts.ResolvedPeer
 type TL_contacts_resolvedPeer struct {
 	Peer  TL   // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs MessageRange
 type TL_messageRange struct {
 	MinID int32
 	MaxID int32
 }
 
+// Constructs updates.ChannelDifference
 type TL_updates_channelDifferenceEmpty struct {
 	Flags   int32
 	Final   bool // (flags.0)
@@ -5400,6 +6002,7 @@ type TL_updates_channelDifferenceEmpty struct {
 	Timeout int32 // (flags.1)
 }
 
+// Constructs updates.ChannelDifference
 type TL_updates_channelDifferenceTooLong struct {
 	Flags    int32
 	Final    bool  // (flags.0)
@@ -5410,6 +6013,7 @@ type TL_updates_channelDifferenceTooLong struct {
 	Users    []TL  // User: TL_userEmpty | TL_user
 }
 
+// Constructs updates.ChannelDifference
 type TL_updates_channelDifference struct {
 	Flags        int32
 	Final        bool // (flags.0)
@@ -5421,20 +6025,24 @@ type TL_updates_channelDifference struct {
 	Users        []TL  // User: TL_userEmpty | TL_user
 }
 
+// Constructs ChannelMessagesFilter
 type TL_channelMessagesFilterEmpty struct {
 }
 
+// Constructs ChannelMessagesFilter
 type TL_channelMessagesFilter struct {
 	Flags              int32
 	ExcludeNewMessages bool // (flags.1)
 	Ranges             []TL // MessageRange: TL_messageRange
 }
 
+// Constructs ChannelParticipant
 type TL_channelParticipant struct {
 	UserID int64
 	Date   int32
 }
 
+// Constructs ChannelParticipant
 type TL_channelParticipantSelf struct {
 	Flags      int32
 	ViaRequest bool // (flags.0)
@@ -5443,6 +6051,7 @@ type TL_channelParticipantSelf struct {
 	Date       int32
 }
 
+// Constructs ChannelParticipant
 type TL_channelParticipantCreator struct {
 	Flags       int32
 	UserID      int64
@@ -5450,6 +6059,7 @@ type TL_channelParticipantCreator struct {
 	Rank        string // (flags.0)
 }
 
+// Constructs ChannelParticipant
 type TL_channelParticipantAdmin struct {
 	Flags       int32
 	CanEdit     bool // (flags.0)
@@ -5462,6 +6072,7 @@ type TL_channelParticipantAdmin struct {
 	Rank        string // (flags.2)
 }
 
+// Constructs ChannelParticipant
 type TL_channelParticipantBanned struct {
 	Flags        int32
 	Left         bool // (flags.0)
@@ -5471,41 +6082,51 @@ type TL_channelParticipantBanned struct {
 	BannedRights TL // ChatBannedRights: TL_chatBannedRights
 }
 
+// Constructs ChannelParticipant
 type TL_channelParticipantLeft struct {
 	Peer TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
+// Constructs ChannelParticipantsFilter
 type TL_channelParticipantsRecent struct {
 }
 
+// Constructs ChannelParticipantsFilter
 type TL_channelParticipantsAdmins struct {
 }
 
+// Constructs ChannelParticipantsFilter
 type TL_channelParticipantsKicked struct {
 	Q string
 }
 
+// Constructs ChannelParticipantsFilter
 type TL_channelParticipantsBots struct {
 }
 
+// Constructs ChannelParticipantsFilter
 type TL_channelParticipantsBanned struct {
 	Q string
 }
 
+// Constructs ChannelParticipantsFilter
 type TL_channelParticipantsSearch struct {
 	Q string
 }
 
+// Constructs ChannelParticipantsFilter
 type TL_channelParticipantsContacts struct {
 	Q string
 }
 
+// Constructs ChannelParticipantsFilter
 type TL_channelParticipantsMentions struct {
 	Flags    int32
 	Q        string // (flags.0)
 	TopMsgID int32  // (flags.1)
 }
 
+// Constructs channels.ChannelParticipants
 type TL_channels_channelParticipants struct {
 	Count        int32
 	Participants []TL // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
@@ -5513,15 +6134,18 @@ type TL_channels_channelParticipants struct {
 	Users        []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs channels.ChannelParticipants
 type TL_channels_channelParticipantsNotModified struct {
 }
 
+// Constructs channels.ChannelParticipant
 type TL_channels_channelParticipant struct {
 	Participant TL   // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
 	Chats       []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users       []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs help.TermsOfService
 type TL_help_termsOfService struct {
 	Flags         int32
 	Popup         bool // (flags.0)
@@ -5531,14 +6155,17 @@ type TL_help_termsOfService struct {
 	MinAgeConfirm int32 // (flags.1)
 }
 
+// Constructs messages.SavedGifs
 type TL_messages_savedGifsNotModified struct {
 }
 
+// Constructs messages.SavedGifs
 type TL_messages_savedGifs struct {
 	Hash int64
 	Gifs []TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageMediaAuto struct {
 	Flags       int32
 	InvertMedia bool // (flags.3)
@@ -5547,6 +6174,7 @@ type TL_inputBotInlineMessageMediaAuto struct {
 	ReplyMarkup TL   // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageText struct {
 	Flags       int32
 	NoWebpage   bool // (flags.0)
@@ -5556,6 +6184,7 @@ type TL_inputBotInlineMessageText struct {
 	ReplyMarkup TL   // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageMediaGeo struct {
 	Flags                       int32
 	GeoPoint                    TL    // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
@@ -5565,6 +6194,7 @@ type TL_inputBotInlineMessageMediaGeo struct {
 	ReplyMarkup                 TL    // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageMediaVenue struct {
 	Flags       int32
 	GeoPoint    TL // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
@@ -5576,6 +6206,7 @@ type TL_inputBotInlineMessageMediaVenue struct {
 	ReplyMarkup TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageMediaContact struct {
 	Flags       int32
 	PhoneNumber string
@@ -5585,11 +6216,13 @@ type TL_inputBotInlineMessageMediaContact struct {
 	ReplyMarkup TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageGame struct {
 	Flags       int32
 	ReplyMarkup TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageMediaInvoice struct {
 	Flags        int32
 	Title        string
@@ -5602,6 +6235,7 @@ type TL_inputBotInlineMessageMediaInvoice struct {
 	ReplyMarkup  TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageMediaWebPage struct {
 	Flags           int32
 	InvertMedia     bool // (flags.3)
@@ -5614,6 +6248,7 @@ type TL_inputBotInlineMessageMediaWebPage struct {
 	ReplyMarkup     TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs InputBotInlineResult
 type TL_inputBotInlineResult struct {
 	Flags       int32
 	ID          string
@@ -5626,6 +6261,7 @@ type TL_inputBotInlineResult struct {
 	SendMessage TL     // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
+// Constructs InputBotInlineResult
 type TL_inputBotInlineResultPhoto struct {
 	ID          string
 	Type        string
@@ -5633,6 +6269,7 @@ type TL_inputBotInlineResultPhoto struct {
 	SendMessage TL // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
+// Constructs InputBotInlineResult
 type TL_inputBotInlineResultDocument struct {
 	Flags       int32
 	ID          string
@@ -5643,12 +6280,14 @@ type TL_inputBotInlineResultDocument struct {
 	SendMessage TL     // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
+// Constructs InputBotInlineResult
 type TL_inputBotInlineResultGame struct {
 	ID          string
 	ShortName   string
 	SendMessage TL // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
+// Constructs BotInlineMessage
 type TL_botInlineMessageMediaAuto struct {
 	Flags       int32
 	InvertMedia bool // (flags.3)
@@ -5657,6 +6296,7 @@ type TL_botInlineMessageMediaAuto struct {
 	ReplyMarkup TL   // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs BotInlineMessage
 type TL_botInlineMessageText struct {
 	Flags       int32
 	NoWebpage   bool // (flags.0)
@@ -5666,6 +6306,7 @@ type TL_botInlineMessageText struct {
 	ReplyMarkup TL   // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs BotInlineMessage
 type TL_botInlineMessageMediaGeo struct {
 	Flags                       int32
 	Geo                         TL    // GeoPoint: TL_geoPointEmpty | TL_geoPoint
@@ -5675,6 +6316,7 @@ type TL_botInlineMessageMediaGeo struct {
 	ReplyMarkup                 TL    // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs BotInlineMessage
 type TL_botInlineMessageMediaVenue struct {
 	Flags       int32
 	Geo         TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
@@ -5686,6 +6328,7 @@ type TL_botInlineMessageMediaVenue struct {
 	ReplyMarkup TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs BotInlineMessage
 type TL_botInlineMessageMediaContact struct {
 	Flags       int32
 	PhoneNumber string
@@ -5695,6 +6338,7 @@ type TL_botInlineMessageMediaContact struct {
 	ReplyMarkup TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs BotInlineMessage
 type TL_botInlineMessageMediaInvoice struct {
 	Flags                    int32
 	ShippingAddressRequested bool // (flags.1)
@@ -5707,6 +6351,7 @@ type TL_botInlineMessageMediaInvoice struct {
 	ReplyMarkup              TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs BotInlineMessage
 type TL_botInlineMessageMediaWebPage struct {
 	Flags           int32
 	InvertMedia     bool // (flags.3)
@@ -5720,6 +6365,7 @@ type TL_botInlineMessageMediaWebPage struct {
 	ReplyMarkup     TL // (flags.2) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
+// Constructs BotInlineResult
 type TL_botInlineResult struct {
 	Flags       int32
 	ID          string
@@ -5732,6 +6378,7 @@ type TL_botInlineResult struct {
 	SendMessage TL     // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice | TL_botInlineMessageMediaWebPage
 }
 
+// Constructs BotInlineResult
 type TL_botInlineMediaResult struct {
 	Flags       int32
 	ID          string
@@ -5743,6 +6390,7 @@ type TL_botInlineMediaResult struct {
 	SendMessage TL     // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice | TL_botInlineMessageMediaWebPage
 }
 
+// Constructs messages.BotResults
 type TL_messages_botResults struct {
 	Flags         int32
 	Gallery       bool // (flags.0)
@@ -5755,11 +6403,13 @@ type TL_messages_botResults struct {
 	Users         []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs ExportedMessageLink
 type TL_exportedMessageLink struct {
 	Link string
 	Html string
 }
 
+// Constructs MessageFwdHeader
 type TL_messageFwdHeader struct {
 	Flags          int32
 	Imported       bool   // (flags.7)
@@ -5773,42 +6423,53 @@ type TL_messageFwdHeader struct {
 	PsaType        string // (flags.6)
 }
 
+// Constructs auth.CodeType
 type TL_auth_codeTypeSms struct {
 }
 
+// Constructs auth.CodeType
 type TL_auth_codeTypeCall struct {
 }
 
+// Constructs auth.CodeType
 type TL_auth_codeTypeFlashCall struct {
 }
 
+// Constructs auth.CodeType
 type TL_auth_codeTypeMissedCall struct {
 }
 
+// Constructs auth.CodeType
 type TL_auth_codeTypeFragmentSms struct {
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeApp struct {
 	Length int32
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeSms struct {
 	Length int32
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeCall struct {
 	Length int32
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeFlashCall struct {
 	Pattern string
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeMissedCall struct {
 	Prefix string
 	Length int32
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeEmailCode struct {
 	Flags                int32
 	AppleSigninAllowed   bool // (flags.0)
@@ -5819,17 +6480,20 @@ type TL_auth_sentCodeTypeEmailCode struct {
 	ResetPendingDate     int32 // (flags.4)
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeSetUpEmailRequired struct {
 	Flags               int32
 	AppleSigninAllowed  bool // (flags.0)
 	GoogleSigninAllowed bool // (flags.1)
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeFragmentSms struct {
 	Url    string
 	Length int32
 }
 
+// Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeFirebaseSms struct {
 	Flags       int32
 	Nonce       []byte // (flags.0)
@@ -5838,6 +6502,7 @@ type TL_auth_sentCodeTypeFirebaseSms struct {
 	Length      int32
 }
 
+// Constructs messages.BotCallbackAnswer
 type TL_messages_botCallbackAnswer struct {
 	Flags     int32
 	Alert     bool   // (flags.1)
@@ -5848,17 +6513,20 @@ type TL_messages_botCallbackAnswer struct {
 	CacheTime int32
 }
 
+// Constructs messages.MessageEditData
 type TL_messages_messageEditData struct {
 	Flags   int32
 	Caption bool // (flags.0)
 }
 
+// Constructs InputBotInlineMessageID
 type TL_inputBotInlineMessageID struct {
 	DcID       int32
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputBotInlineMessageID
 type TL_inputBotInlineMessageID64 struct {
 	DcID       int32
 	OwnerID    int64
@@ -5866,71 +6534,88 @@ type TL_inputBotInlineMessageID64 struct {
 	AccessHash int64
 }
 
+// Constructs InlineBotSwitchPM
 type TL_inlineBotSwitchPM struct {
 	Text       string
 	StartParam string
 }
 
+// Constructs messages.PeerDialogs
 type TL_messages_peerDialogs struct {
 	Dialogs  []TL // Dialog: TL_dialog | TL_dialogFolder
 	Messages []TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users    []TL // User: TL_userEmpty | TL_user
-	State    TL   // updates_State: TL_updates_state
+	State    TL   // updates.State: TL_updates_state
 }
 
+// Constructs TopPeer
 type TL_topPeer struct {
 	Peer   TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Rating float64
 }
 
+// Constructs TopPeerCategory
 type TL_topPeerCategoryBotsPM struct {
 }
 
+// Constructs TopPeerCategory
 type TL_topPeerCategoryBotsInline struct {
 }
 
+// Constructs TopPeerCategory
 type TL_topPeerCategoryCorrespondents struct {
 }
 
+// Constructs TopPeerCategory
 type TL_topPeerCategoryGroups struct {
 }
 
+// Constructs TopPeerCategory
 type TL_topPeerCategoryChannels struct {
 }
 
+// Constructs TopPeerCategory
 type TL_topPeerCategoryPhoneCalls struct {
 }
 
+// Constructs TopPeerCategory
 type TL_topPeerCategoryForwardUsers struct {
 }
 
+// Constructs TopPeerCategory
 type TL_topPeerCategoryForwardChats struct {
 }
 
+// Constructs TopPeerCategoryPeers
 type TL_topPeerCategoryPeers struct {
 	Category TL // TopPeerCategory: TL_topPeerCategoryBotsPM | TL_topPeerCategoryBotsInline | TL_topPeerCategoryCorrespondents | TL_topPeerCategoryGroups | TL_topPeerCategoryChannels | TL_topPeerCategoryPhoneCalls | TL_topPeerCategoryForwardUsers | TL_topPeerCategoryForwardChats
 	Count    int32
 	Peers    []TL // TopPeer: TL_topPeer
 }
 
+// Constructs contacts.TopPeers
 type TL_contacts_topPeersNotModified struct {
 }
 
+// Constructs contacts.TopPeers
 type TL_contacts_topPeers struct {
 	Categories []TL // TopPeerCategoryPeers: TL_topPeerCategoryPeers
 	Chats      []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users      []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs contacts.TopPeers
 type TL_contacts_topPeersDisabled struct {
 }
 
+// Constructs DraftMessage
 type TL_draftMessageEmpty struct {
 	Flags int32
 	Date  int32 // (flags.0)
 }
 
+// Constructs DraftMessage
 type TL_draftMessage struct {
 	Flags       int32
 	NoWebpage   bool // (flags.1)
@@ -5942,10 +6627,12 @@ type TL_draftMessage struct {
 	Date        int32
 }
 
+// Constructs messages.FeaturedStickers
 type TL_messages_featuredStickersNotModified struct {
 	Count int32
 }
 
+// Constructs messages.FeaturedStickers
 type TL_messages_featuredStickers struct {
 	Flags   int32
 	Premium bool // (flags.0)
@@ -5955,9 +6642,11 @@ type TL_messages_featuredStickers struct {
 	Unread  []int64
 }
 
+// Constructs messages.RecentStickers
 type TL_messages_recentStickersNotModified struct {
 }
 
+// Constructs messages.RecentStickers
 type TL_messages_recentStickers struct {
 	Hash     int64
 	Packs    []TL // StickerPack: TL_stickerPack
@@ -5965,28 +6654,34 @@ type TL_messages_recentStickers struct {
 	Dates    []int32
 }
 
+// Constructs messages.ArchivedStickers
 type TL_messages_archivedStickers struct {
 	Count int32
 	Sets  []TL // StickerSetCovered: TL_stickerSetCovered | TL_stickerSetMultiCovered | TL_stickerSetFullCovered | TL_stickerSetNoCovered
 }
 
+// Constructs messages.StickerSetInstallResult
 type TL_messages_stickerSetInstallResultSuccess struct {
 }
 
+// Constructs messages.StickerSetInstallResult
 type TL_messages_stickerSetInstallResultArchive struct {
 	Sets []TL // StickerSetCovered: TL_stickerSetCovered | TL_stickerSetMultiCovered | TL_stickerSetFullCovered | TL_stickerSetNoCovered
 }
 
+// Constructs StickerSetCovered
 type TL_stickerSetCovered struct {
 	Set   TL // StickerSet: TL_stickerSet
 	Cover TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs StickerSetCovered
 type TL_stickerSetMultiCovered struct {
 	Set    TL   // StickerSet: TL_stickerSet
 	Covers []TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs StickerSetCovered
 type TL_stickerSetFullCovered struct {
 	Set       TL   // StickerSet: TL_stickerSet
 	Packs     []TL // StickerPack: TL_stickerPack
@@ -5994,10 +6689,12 @@ type TL_stickerSetFullCovered struct {
 	Documents []TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs StickerSetCovered
 type TL_stickerSetNoCovered struct {
 	Set TL // StickerSet: TL_stickerSet
 }
 
+// Constructs MaskCoords
 type TL_maskCoords struct {
 	N    int32
 	X    float64
@@ -6005,14 +6702,17 @@ type TL_maskCoords struct {
 	Zoom float64
 }
 
+// Constructs InputStickeredMedia
 type TL_inputStickeredMediaPhoto struct {
 	ID TL // InputPhoto: TL_inputPhotoEmpty | TL_inputPhoto
 }
 
+// Constructs InputStickeredMedia
 type TL_inputStickeredMediaDocument struct {
 	ID TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
 }
 
+// Constructs Game
 type TL_game struct {
 	Flags       int32
 	ID          int64
@@ -6024,155 +6724,190 @@ type TL_game struct {
 	Document    TL // (flags.0) Document: TL_documentEmpty | TL_document
 }
 
+// Constructs InputGame
 type TL_inputGameID struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputGame
 type TL_inputGameShortName struct {
 	BotID     TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	ShortName string
 }
 
+// Constructs HighScore
 type TL_highScore struct {
 	Pos    int32
 	UserID int64
 	Score  int32
 }
 
+// Constructs messages.HighScores
 type TL_messages_highScores struct {
 	Scores []TL // HighScore: TL_highScore
 	Users  []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs RichText
 type TL_textEmpty struct {
 }
 
+// Constructs RichText
 type TL_textPlain struct {
 	Text string
 }
 
+// Constructs RichText
 type TL_textBold struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textItalic struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textUnderline struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textStrike struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textFixed struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textUrl struct {
 	Text      TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Url       string
 	WebpageID int64
 }
 
+// Constructs RichText
 type TL_textEmail struct {
 	Text  TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Email string
 }
 
+// Constructs RichText
 type TL_textConcat struct {
 	Texts []TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textSubscript struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textSuperscript struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textMarked struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs RichText
 type TL_textPhone struct {
 	Text  TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Phone string
 }
 
+// Constructs RichText
 type TL_textImage struct {
 	DocumentID int64
 	W          int32
 	H          int32
 }
 
+// Constructs RichText
 type TL_textAnchor struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Name string
 }
 
+// Constructs PageBlock
 type TL_pageBlockUnsupported struct {
 }
 
+// Constructs PageBlock
 type TL_pageBlockTitle struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockSubtitle struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockAuthorDate struct {
 	Author        TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	PublishedDate int32
 }
 
+// Constructs PageBlock
 type TL_pageBlockHeader struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockSubheader struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockParagraph struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockPreformatted struct {
 	Text     TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Language string
 }
 
+// Constructs PageBlock
 type TL_pageBlockFooter struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockDivider struct {
 }
 
+// Constructs PageBlock
 type TL_pageBlockAnchor struct {
 	Name string
 }
 
+// Constructs PageBlock
 type TL_pageBlockList struct {
 	Items []TL // PageListItem: TL_pageListItemText | TL_pageListItemBlocks
 }
 
+// Constructs PageBlock
 type TL_pageBlockBlockquote struct {
 	Text    TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Caption TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockPullquote struct {
 	Text    TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Caption TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockPhoto struct {
 	Flags     int32
 	PhotoID   int64
@@ -6181,6 +6916,7 @@ type TL_pageBlockPhoto struct {
 	WebpageID int64  // (flags.0)
 }
 
+// Constructs PageBlock
 type TL_pageBlockVideo struct {
 	Flags    int32
 	Autoplay bool // (flags.0)
@@ -6189,10 +6925,12 @@ type TL_pageBlockVideo struct {
 	Caption  TL // PageCaption: TL_pageCaption
 }
 
+// Constructs PageBlock
 type TL_pageBlockCover struct {
 	Cover TL // PageBlock: TL_pageBlockUnsupported | TL_pageBlockTitle | TL_pageBlockSubtitle | TL_pageBlockAuthorDate | TL_pageBlockHeader | TL_pageBlockSubheader | TL_pageBlockParagraph | TL_pageBlockPreformatted | TL_pageBlockFooter | TL_pageBlockDivider | TL_pageBlockAnchor | TL_pageBlockList | TL_pageBlockBlockquote | TL_pageBlockPullquote | TL_pageBlockPhoto | TL_pageBlockVideo | TL_pageBlockCover | TL_pageBlockEmbed | TL_pageBlockEmbedPost | TL_pageBlockCollage | TL_pageBlockSlideshow | TL_pageBlockChannel | TL_pageBlockAudio | TL_pageBlockKicker | TL_pageBlockTable | TL_pageBlockOrderedList | TL_pageBlockDetails | TL_pageBlockRelatedArticles | TL_pageBlockMap
 }
 
+// Constructs PageBlock
 type TL_pageBlockEmbed struct {
 	Flags          int32
 	FullWidth      bool   // (flags.0)
@@ -6205,6 +6943,7 @@ type TL_pageBlockEmbed struct {
 	Caption        TL     // PageCaption: TL_pageCaption
 }
 
+// Constructs PageBlock
 type TL_pageBlockEmbedPost struct {
 	Url           string
 	WebpageID     int64
@@ -6215,29 +6954,35 @@ type TL_pageBlockEmbedPost struct {
 	Caption       TL   // PageCaption: TL_pageCaption
 }
 
+// Constructs PageBlock
 type TL_pageBlockCollage struct {
 	Items   []TL // PageBlock: TL_pageBlockUnsupported | TL_pageBlockTitle | TL_pageBlockSubtitle | TL_pageBlockAuthorDate | TL_pageBlockHeader | TL_pageBlockSubheader | TL_pageBlockParagraph | TL_pageBlockPreformatted | TL_pageBlockFooter | TL_pageBlockDivider | TL_pageBlockAnchor | TL_pageBlockList | TL_pageBlockBlockquote | TL_pageBlockPullquote | TL_pageBlockPhoto | TL_pageBlockVideo | TL_pageBlockCover | TL_pageBlockEmbed | TL_pageBlockEmbedPost | TL_pageBlockCollage | TL_pageBlockSlideshow | TL_pageBlockChannel | TL_pageBlockAudio | TL_pageBlockKicker | TL_pageBlockTable | TL_pageBlockOrderedList | TL_pageBlockDetails | TL_pageBlockRelatedArticles | TL_pageBlockMap
 	Caption TL   // PageCaption: TL_pageCaption
 }
 
+// Constructs PageBlock
 type TL_pageBlockSlideshow struct {
 	Items   []TL // PageBlock: TL_pageBlockUnsupported | TL_pageBlockTitle | TL_pageBlockSubtitle | TL_pageBlockAuthorDate | TL_pageBlockHeader | TL_pageBlockSubheader | TL_pageBlockParagraph | TL_pageBlockPreformatted | TL_pageBlockFooter | TL_pageBlockDivider | TL_pageBlockAnchor | TL_pageBlockList | TL_pageBlockBlockquote | TL_pageBlockPullquote | TL_pageBlockPhoto | TL_pageBlockVideo | TL_pageBlockCover | TL_pageBlockEmbed | TL_pageBlockEmbedPost | TL_pageBlockCollage | TL_pageBlockSlideshow | TL_pageBlockChannel | TL_pageBlockAudio | TL_pageBlockKicker | TL_pageBlockTable | TL_pageBlockOrderedList | TL_pageBlockDetails | TL_pageBlockRelatedArticles | TL_pageBlockMap
 	Caption TL   // PageCaption: TL_pageCaption
 }
 
+// Constructs PageBlock
 type TL_pageBlockChannel struct {
 	Channel TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 }
 
+// Constructs PageBlock
 type TL_pageBlockAudio struct {
 	AudioID int64
 	Caption TL // PageCaption: TL_pageCaption
 }
 
+// Constructs PageBlock
 type TL_pageBlockKicker struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockTable struct {
 	Flags    int32
 	Bordered bool // (flags.0)
@@ -6246,10 +6991,12 @@ type TL_pageBlockTable struct {
 	Rows     []TL // PageTableRow: TL_pageTableRow
 }
 
+// Constructs PageBlock
 type TL_pageBlockOrderedList struct {
 	Items []TL // PageListOrderedItem: TL_pageListOrderedItemText | TL_pageListOrderedItemBlocks
 }
 
+// Constructs PageBlock
 type TL_pageBlockDetails struct {
 	Flags  int32
 	Open   bool // (flags.0)
@@ -6257,11 +7004,13 @@ type TL_pageBlockDetails struct {
 	Title  TL   // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageBlock
 type TL_pageBlockRelatedArticles struct {
 	Title    TL   // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Articles []TL // PageRelatedArticle: TL_pageRelatedArticle
 }
 
+// Constructs PageBlock
 type TL_pageBlockMap struct {
 	Geo     TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
 	Zoom    int32
@@ -6270,27 +7019,34 @@ type TL_pageBlockMap struct {
 	Caption TL // PageCaption: TL_pageCaption
 }
 
+// Constructs PhoneCallDiscardReason
 type TL_phoneCallDiscardReasonMissed struct {
 }
 
+// Constructs PhoneCallDiscardReason
 type TL_phoneCallDiscardReasonDisconnect struct {
 }
 
+// Constructs PhoneCallDiscardReason
 type TL_phoneCallDiscardReasonHangup struct {
 }
 
+// Constructs PhoneCallDiscardReason
 type TL_phoneCallDiscardReasonBusy struct {
 }
 
+// Constructs DataJSON
 type TL_dataJSON struct {
 	Data string
 }
 
+// Constructs LabeledPrice
 type TL_labeledPrice struct {
 	Label  string
 	Amount int64
 }
 
+// Constructs Invoice
 type TL_invoice struct {
 	Flags                    int32
 	Test                     bool // (flags.0)
@@ -6309,11 +7065,13 @@ type TL_invoice struct {
 	TermsUrl                 string  // (flags.10)
 }
 
+// Constructs PaymentCharge
 type TL_paymentCharge struct {
 	ID               string
 	ProviderChargeID string
 }
 
+// Constructs PostAddress
 type TL_postAddress struct {
 	StreetLine1 string
 	StreetLine2 string
@@ -6323,6 +7081,7 @@ type TL_postAddress struct {
 	PostCode    string
 }
 
+// Constructs PaymentRequestedInfo
 type TL_paymentRequestedInfo struct {
 	Flags           int32
 	Name            string // (flags.0)
@@ -6331,11 +7090,13 @@ type TL_paymentRequestedInfo struct {
 	ShippingAddress TL     // (flags.3) PostAddress: TL_postAddress
 }
 
+// Constructs PaymentSavedCredentials
 type TL_paymentSavedCredentialsCard struct {
 	ID    string
 	Title string
 }
 
+// Constructs WebDocument
 type TL_webDocument struct {
 	Url        string
 	AccessHash int64
@@ -6344,6 +7105,7 @@ type TL_webDocument struct {
 	Attributes []TL // DocumentAttribute: TL_documentAttributeImageSize | TL_documentAttributeAnimated | TL_documentAttributeSticker | TL_documentAttributeVideo | TL_documentAttributeAudio | TL_documentAttributeFilename | TL_documentAttributeHasStickers | TL_documentAttributeCustomEmoji
 }
 
+// Constructs WebDocument
 type TL_webDocumentNoProxy struct {
 	Url        string
 	Size       int32
@@ -6351,6 +7113,7 @@ type TL_webDocumentNoProxy struct {
 	Attributes []TL // DocumentAttribute: TL_documentAttributeImageSize | TL_documentAttributeAnimated | TL_documentAttributeSticker | TL_documentAttributeVideo | TL_documentAttributeAudio | TL_documentAttributeFilename | TL_documentAttributeHasStickers | TL_documentAttributeCustomEmoji
 }
 
+// Constructs InputWebDocument
 type TL_inputWebDocument struct {
 	Url        string
 	Size       int32
@@ -6358,11 +7121,13 @@ type TL_inputWebDocument struct {
 	Attributes []TL // DocumentAttribute: TL_documentAttributeImageSize | TL_documentAttributeAnimated | TL_documentAttributeSticker | TL_documentAttributeVideo | TL_documentAttributeAudio | TL_documentAttributeFilename | TL_documentAttributeHasStickers | TL_documentAttributeCustomEmoji
 }
 
+// Constructs InputWebFileLocation
 type TL_inputWebFileLocation struct {
 	Url        string
 	AccessHash int64
 }
 
+// Constructs InputWebFileLocation
 type TL_inputWebFileGeoPointLocation struct {
 	GeoPoint   TL // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
 	AccessHash int64
@@ -6372,6 +7137,7 @@ type TL_inputWebFileGeoPointLocation struct {
 	Scale      int32
 }
 
+// Constructs InputWebFileLocation
 type TL_inputWebFileAudioAlbumThumbLocation struct {
 	Flags     int32
 	Small     bool   // (flags.2)
@@ -6380,14 +7146,16 @@ type TL_inputWebFileAudioAlbumThumbLocation struct {
 	Performer string // (flags.1)
 }
 
+// Constructs upload.WebFile
 type TL_upload_webFile struct {
 	Size     int32
 	MimeType string
-	FileType TL // storage_FileType: TL_storage_fileUnknown | TL_storage_filePartial | TL_storage_fileJpeg | TL_storage_fileGif | TL_storage_filePng | TL_storage_filePdf | TL_storage_fileMp3 | TL_storage_fileMov | TL_storage_fileMp4 | TL_storage_fileWebp
+	FileType TL // storage.FileType: TL_storage_fileUnknown | TL_storage_filePartial | TL_storage_fileJpeg | TL_storage_fileGif | TL_storage_filePng | TL_storage_filePdf | TL_storage_fileMp3 | TL_storage_fileMov | TL_storage_fileMp4 | TL_storage_fileWebp
 	Mtime    int32
 	Bytes    []byte
 }
 
+// Constructs payments.PaymentForm
 type TL_payments_paymentForm struct {
 	Flags              int32
 	CanSaveCredentials bool // (flags.2)
@@ -6408,20 +7176,24 @@ type TL_payments_paymentForm struct {
 	Users              []TL   // User: TL_userEmpty | TL_user
 }
 
+// Constructs payments.ValidatedRequestedInfo
 type TL_payments_validatedRequestedInfo struct {
 	Flags           int32
 	ID              string // (flags.0)
 	ShippingOptions []TL   // (flags.1) ShippingOption: TL_shippingOption
 }
 
+// Constructs payments.PaymentResult
 type TL_payments_paymentResult struct {
 	Updates TL // Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 }
 
+// Constructs payments.PaymentResult
 type TL_payments_paymentVerificationNeeded struct {
 	Url string
 }
 
+// Constructs payments.PaymentReceipt
 type TL_payments_paymentReceipt struct {
 	Flags            int32
 	Date             int32
@@ -6440,42 +7212,50 @@ type TL_payments_paymentReceipt struct {
 	Users            []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs payments.SavedInfo
 type TL_payments_savedInfo struct {
 	Flags               int32
 	HasSavedCredentials bool // (flags.1)
 	SavedInfo           TL   // (flags.0) PaymentRequestedInfo: TL_paymentRequestedInfo
 }
 
+// Constructs InputPaymentCredentials
 type TL_inputPaymentCredentialsSaved struct {
 	ID          string
 	TmpPassword []byte
 }
 
+// Constructs InputPaymentCredentials
 type TL_inputPaymentCredentials struct {
 	Flags int32
 	Save  bool // (flags.0)
 	Data  TL   // DataJSON: TL_dataJSON
 }
 
+// Constructs InputPaymentCredentials
 type TL_inputPaymentCredentialsApplePay struct {
 	PaymentData TL // DataJSON: TL_dataJSON
 }
 
+// Constructs InputPaymentCredentials
 type TL_inputPaymentCredentialsGooglePay struct {
 	PaymentToken TL // DataJSON: TL_dataJSON
 }
 
+// Constructs account.TmpPassword
 type TL_account_tmpPassword struct {
 	TmpPassword []byte
 	ValidUntil  int32
 }
 
+// Constructs ShippingOption
 type TL_shippingOption struct {
 	ID     string
 	Title  string
 	Prices []TL // LabeledPrice: TL_labeledPrice
 }
 
+// Constructs InputStickerSetItem
 type TL_inputStickerSetItem struct {
 	Flags      int32
 	Document   TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
@@ -6484,15 +7264,18 @@ type TL_inputStickerSetItem struct {
 	Keywords   string // (flags.1)
 }
 
+// Constructs InputPhoneCall
 type TL_inputPhoneCall struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs PhoneCall
 type TL_phoneCallEmpty struct {
 	ID int64
 }
 
+// Constructs PhoneCall
 type TL_phoneCallWaiting struct {
 	Flags         int32
 	Video         bool // (flags.6)
@@ -6505,6 +7288,7 @@ type TL_phoneCallWaiting struct {
 	ReceiveDate   int32 // (flags.0)
 }
 
+// Constructs PhoneCall
 type TL_phoneCallRequested struct {
 	Flags         int32
 	Video         bool // (flags.6)
@@ -6517,6 +7301,7 @@ type TL_phoneCallRequested struct {
 	Protocol      TL // PhoneCallProtocol: TL_phoneCallProtocol
 }
 
+// Constructs PhoneCall
 type TL_phoneCallAccepted struct {
 	Flags         int32
 	Video         bool // (flags.6)
@@ -6529,6 +7314,7 @@ type TL_phoneCallAccepted struct {
 	Protocol      TL // PhoneCallProtocol: TL_phoneCallProtocol
 }
 
+// Constructs PhoneCall
 type TL_phoneCall struct {
 	Flags          int32
 	P2pAllowed     bool // (flags.5)
@@ -6545,6 +7331,7 @@ type TL_phoneCall struct {
 	StartDate      int32
 }
 
+// Constructs PhoneCall
 type TL_phoneCallDiscarded struct {
 	Flags      int32
 	NeedRating bool // (flags.2)
@@ -6555,6 +7342,7 @@ type TL_phoneCallDiscarded struct {
 	Duration   int32 // (flags.1)
 }
 
+// Constructs PhoneConnection
 type TL_phoneConnection struct {
 	Flags   int32
 	Tcp     bool // (flags.0)
@@ -6565,6 +7353,7 @@ type TL_phoneConnection struct {
 	PeerTag []byte
 }
 
+// Constructs PhoneConnection
 type TL_phoneConnectionWebrtc struct {
 	Flags    int32
 	Turn     bool // (flags.0)
@@ -6577,6 +7366,7 @@ type TL_phoneConnectionWebrtc struct {
 	Password string
 }
 
+// Constructs PhoneCallProtocol
 type TL_phoneCallProtocol struct {
 	Flags           int32
 	UdpP2p          bool // (flags.0)
@@ -6586,33 +7376,40 @@ type TL_phoneCallProtocol struct {
 	LibraryVersions []string
 }
 
+// Constructs phone.PhoneCall
 type TL_phone_phoneCall struct {
 	PhoneCall TL   // PhoneCall: TL_phoneCallEmpty | TL_phoneCallWaiting | TL_phoneCallRequested | TL_phoneCallAccepted | TL_phoneCall | TL_phoneCallDiscarded
 	Users     []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs upload.CdnFile
 type TL_upload_cdnFileReuploadNeeded struct {
 	RequestToken []byte
 }
 
+// Constructs upload.CdnFile
 type TL_upload_cdnFile struct {
 	Bytes []byte
 }
 
+// Constructs CdnPublicKey
 type TL_cdnPublicKey struct {
 	DcID      int32
 	PublicKey string
 }
 
+// Constructs CdnConfig
 type TL_cdnConfig struct {
 	PublicKeys []TL // CdnPublicKey: TL_cdnPublicKey
 }
 
+// Constructs LangPackString
 type TL_langPackString struct {
 	Key   string
 	Value string
 }
 
+// Constructs LangPackString
 type TL_langPackStringPluralized struct {
 	Flags      int32
 	Key        string
@@ -6624,10 +7421,12 @@ type TL_langPackStringPluralized struct {
 	OtherValue string
 }
 
+// Constructs LangPackString
 type TL_langPackStringDeleted struct {
 	Key string
 }
 
+// Constructs LangPackDifference
 type TL_langPackDifference struct {
 	LangCode    string
 	FromVersion int32
@@ -6635,6 +7434,7 @@ type TL_langPackDifference struct {
 	Strings     []TL // LangPackString: TL_langPackString | TL_langPackStringPluralized | TL_langPackStringDeleted
 }
 
+// Constructs LangPackLanguage
 type TL_langPackLanguage struct {
 	Flags           int32
 	Official        bool // (flags.0)
@@ -6650,208 +7450,254 @@ type TL_langPackLanguage struct {
 	TranslationsUrl string
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeTitle struct {
 	PrevValue string
 	NewValue  string
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeAbout struct {
 	PrevValue string
 	NewValue  string
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeUsername struct {
 	PrevValue string
 	NewValue  string
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangePhoto struct {
 	PrevPhoto TL // Photo: TL_photoEmpty | TL_photo
 	NewPhoto  TL // Photo: TL_photoEmpty | TL_photo
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleInvites struct {
 	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleSignatures struct {
 	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionUpdatePinned struct {
 	Message TL // Message: TL_messageEmpty | TL_message | TL_messageService
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionEditMessage struct {
 	PrevMessage TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	NewMessage  TL // Message: TL_messageEmpty | TL_message | TL_messageService
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionDeleteMessage struct {
 	Message TL // Message: TL_messageEmpty | TL_message | TL_messageService
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantJoin struct {
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantLeave struct {
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantInvite struct {
 	Participant TL // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantToggleBan struct {
 	PrevParticipant TL // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
 	NewParticipant  TL // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantToggleAdmin struct {
 	PrevParticipant TL // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
 	NewParticipant  TL // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeStickerSet struct {
 	PrevStickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 	NewStickerset  TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionTogglePreHistoryHidden struct {
 	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionDefaultBannedRights struct {
 	PrevBannedRights TL // ChatBannedRights: TL_chatBannedRights
 	NewBannedRights  TL // ChatBannedRights: TL_chatBannedRights
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionStopPoll struct {
 	Message TL // Message: TL_messageEmpty | TL_message | TL_messageService
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeLinkedChat struct {
 	PrevValue int64
 	NewValue  int64
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeLocation struct {
 	PrevValue TL // ChannelLocation: TL_channelLocationEmpty | TL_channelLocation
 	NewValue  TL // ChannelLocation: TL_channelLocationEmpty | TL_channelLocation
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleSlowMode struct {
 	PrevValue int32
 	NewValue  int32
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionStartGroupCall struct {
 	Call TL // InputGroupCall: TL_inputGroupCall
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionDiscardGroupCall struct {
 	Call TL // InputGroupCall: TL_inputGroupCall
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantMute struct {
 	Participant TL // GroupCallParticipant: TL_groupCallParticipant
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantUnmute struct {
 	Participant TL // GroupCallParticipant: TL_groupCallParticipant
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleGroupCallSetting struct {
 	JoinMuted TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantJoinByInvite struct {
 	Flags       int32
 	ViaChatlist bool // (flags.0)
 	Invite      TL   // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionExportedInviteDelete struct {
 	Invite TL // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionExportedInviteRevoke struct {
 	Invite TL // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionExportedInviteEdit struct {
 	PrevInvite TL // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 	NewInvite  TL // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantVolume struct {
 	Participant TL // GroupCallParticipant: TL_groupCallParticipant
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeHistoryTTL struct {
 	PrevValue int32
 	NewValue  int32
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionParticipantJoinByRequest struct {
 	Invite     TL // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 	ApprovedBy int64
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleNoForwards struct {
 	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionSendMessage struct {
 	Message TL // Message: TL_messageEmpty | TL_message | TL_messageService
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeAvailableReactions struct {
 	PrevValue TL // ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
 	NewValue  TL // ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeUsernames struct {
 	PrevValue []string
 	NewValue  []string
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleForum struct {
 	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionCreateTopic struct {
 	Topic TL // ForumTopic: TL_forumTopicDeleted | TL_forumTopic
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionEditTopic struct {
 	PrevTopic TL // ForumTopic: TL_forumTopicDeleted | TL_forumTopic
 	NewTopic  TL // ForumTopic: TL_forumTopicDeleted | TL_forumTopic
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionDeleteTopic struct {
 	Topic TL // ForumTopic: TL_forumTopicDeleted | TL_forumTopic
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionPinTopic struct {
 	Flags     int32
 	PrevTopic TL // (flags.0) ForumTopic: TL_forumTopicDeleted | TL_forumTopic
 	NewTopic  TL // (flags.1) ForumTopic: TL_forumTopicDeleted | TL_forumTopic
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleAntiSpam struct {
 	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeColor struct {
 	PrevValue int32
 	NewValue  int32
 }
 
+// Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionChangeBackgroundEmoji struct {
 	PrevValue int64
 	NewValue  int64
 }
 
+// Constructs ChannelAdminLogEvent
 type TL_channelAdminLogEvent struct {
 	ID     int64
 	Date   int32
@@ -6859,12 +7705,14 @@ type TL_channelAdminLogEvent struct {
 	Action TL // ChannelAdminLogEventAction: TL_channelAdminLogEventActionChangeTitle | TL_channelAdminLogEventActionChangeAbout | TL_channelAdminLogEventActionChangeUsername | TL_channelAdminLogEventActionChangePhoto | TL_channelAdminLogEventActionToggleInvites | TL_channelAdminLogEventActionToggleSignatures | TL_channelAdminLogEventActionUpdatePinned | TL_channelAdminLogEventActionEditMessage | TL_channelAdminLogEventActionDeleteMessage | TL_channelAdminLogEventActionParticipantJoin | TL_channelAdminLogEventActionParticipantLeave | TL_channelAdminLogEventActionParticipantInvite | TL_channelAdminLogEventActionParticipantToggleBan | TL_channelAdminLogEventActionParticipantToggleAdmin | TL_channelAdminLogEventActionChangeStickerSet | TL_channelAdminLogEventActionTogglePreHistoryHidden | TL_channelAdminLogEventActionDefaultBannedRights | TL_channelAdminLogEventActionStopPoll | TL_channelAdminLogEventActionChangeLinkedChat | TL_channelAdminLogEventActionChangeLocation | TL_channelAdminLogEventActionToggleSlowMode | TL_channelAdminLogEventActionStartGroupCall | TL_channelAdminLogEventActionDiscardGroupCall | TL_channelAdminLogEventActionParticipantMute | TL_channelAdminLogEventActionParticipantUnmute | TL_channelAdminLogEventActionToggleGroupCallSetting | TL_channelAdminLogEventActionParticipantJoinByInvite | TL_channelAdminLogEventActionExportedInviteDelete | TL_channelAdminLogEventActionExportedInviteRevoke | TL_channelAdminLogEventActionExportedInviteEdit | TL_channelAdminLogEventActionParticipantVolume | TL_channelAdminLogEventActionChangeHistoryTTL | TL_channelAdminLogEventActionParticipantJoinByRequest | TL_channelAdminLogEventActionToggleNoForwards | TL_channelAdminLogEventActionSendMessage | TL_channelAdminLogEventActionChangeAvailableReactions | TL_channelAdminLogEventActionChangeUsernames | TL_channelAdminLogEventActionToggleForum | TL_channelAdminLogEventActionCreateTopic | TL_channelAdminLogEventActionEditTopic | TL_channelAdminLogEventActionDeleteTopic | TL_channelAdminLogEventActionPinTopic | TL_channelAdminLogEventActionToggleAntiSpam | TL_channelAdminLogEventActionChangeColor | TL_channelAdminLogEventActionChangeBackgroundEmoji
 }
 
+// Constructs channels.AdminLogResults
 type TL_channels_adminLogResults struct {
 	Events []TL // ChannelAdminLogEvent: TL_channelAdminLogEvent
 	Chats  []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users  []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs ChannelAdminLogEventsFilter
 type TL_channelAdminLogEventsFilter struct {
 	Flags     int32
 	Join      bool // (flags.0)
@@ -6887,50 +7735,60 @@ type TL_channelAdminLogEventsFilter struct {
 	Forums    bool // (flags.17)
 }
 
+// Constructs PopularContact
 type TL_popularContact struct {
 	ClientID  int64
 	Importers int32
 }
 
+// Constructs messages.FavedStickers
 type TL_messages_favedStickersNotModified struct {
 }
 
+// Constructs messages.FavedStickers
 type TL_messages_favedStickers struct {
 	Hash     int64
 	Packs    []TL // StickerPack: TL_stickerPack
 	Stickers []TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs RecentMeUrl
 type TL_recentMeUrlUnknown struct {
 	Url string
 }
 
+// Constructs RecentMeUrl
 type TL_recentMeUrlUser struct {
 	Url    string
 	UserID int64
 }
 
+// Constructs RecentMeUrl
 type TL_recentMeUrlChat struct {
 	Url    string
 	ChatID int64
 }
 
+// Constructs RecentMeUrl
 type TL_recentMeUrlChatInvite struct {
 	Url        string
 	ChatInvite TL // ChatInvite: TL_chatInviteAlready | TL_chatInvite | TL_chatInvitePeek
 }
 
+// Constructs RecentMeUrl
 type TL_recentMeUrlStickerSet struct {
 	Url string
 	Set TL // StickerSetCovered: TL_stickerSetCovered | TL_stickerSetMultiCovered | TL_stickerSetFullCovered | TL_stickerSetNoCovered
 }
 
+// Constructs help.RecentMeUrls
 type TL_help_recentMeUrls struct {
 	Urls  []TL // RecentMeUrl: TL_recentMeUrlUnknown | TL_recentMeUrlUser | TL_recentMeUrlChat | TL_recentMeUrlChatInvite | TL_recentMeUrlStickerSet
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs InputSingleMedia
 type TL_inputSingleMedia struct {
 	Flags    int32
 	Media    TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
@@ -6939,6 +7797,7 @@ type TL_inputSingleMedia struct {
 	Entities []TL // (flags.0) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Constructs WebAuthorization
 type TL_webAuthorization struct {
 	Hash        int64
 	BotID       int64
@@ -6951,71 +7810,87 @@ type TL_webAuthorization struct {
 	Region      string
 }
 
+// Constructs account.WebAuthorizations
 type TL_account_webAuthorizations struct {
 	Authorizations []TL // WebAuthorization: TL_webAuthorization
 	Users          []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs InputMessage
 type TL_inputMessageID struct {
 	ID int32
 }
 
+// Constructs InputMessage
 type TL_inputMessageReplyTo struct {
 	ID int32
 }
 
+// Constructs InputMessage
 type TL_inputMessagePinned struct {
 }
 
+// Constructs InputMessage
 type TL_inputMessageCallbackQuery struct {
 	ID      int32
 	QueryID int64
 }
 
+// Constructs InputDialogPeer
 type TL_inputDialogPeer struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Constructs InputDialogPeer
 type TL_inputDialogPeerFolder struct {
 	FolderID int32
 }
 
+// Constructs DialogPeer
 type TL_dialogPeer struct {
 	Peer TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
+// Constructs DialogPeer
 type TL_dialogPeerFolder struct {
 	FolderID int32
 }
 
+// Constructs messages.FoundStickerSets
 type TL_messages_foundStickerSetsNotModified struct {
 }
 
+// Constructs messages.FoundStickerSets
 type TL_messages_foundStickerSets struct {
 	Hash int64
 	Sets []TL // StickerSetCovered: TL_stickerSetCovered | TL_stickerSetMultiCovered | TL_stickerSetFullCovered | TL_stickerSetNoCovered
 }
 
+// Constructs FileHash
 type TL_fileHash struct {
 	Offset int64
 	Limit  int32
 	Hash   []byte
 }
 
+// Constructs InputClientProxy
 type TL_inputClientProxy struct {
 	Address string
 	Port    int32
 }
 
+// Constructs help.TermsOfServiceUpdate
 type TL_help_termsOfServiceUpdateEmpty struct {
 	Expires int32
 }
 
+// Constructs help.TermsOfServiceUpdate
 type TL_help_termsOfServiceUpdate struct {
 	Expires        int32
-	TermsOfService TL // help_TermsOfService: TL_help_termsOfService
+	TermsOfService TL // help.TermsOfService: TL_help_termsOfService
 }
 
+// Constructs InputSecureFile
 type TL_inputSecureFileUploaded struct {
 	ID          int64
 	Parts       int32
@@ -7024,14 +7899,17 @@ type TL_inputSecureFileUploaded struct {
 	Secret      []byte
 }
 
+// Constructs InputSecureFile
 type TL_inputSecureFile struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs SecureFile
 type TL_secureFileEmpty struct {
 }
 
+// Constructs SecureFile
 type TL_secureFile struct {
 	ID         int64
 	AccessHash int64
@@ -7042,59 +7920,76 @@ type TL_secureFile struct {
 	Secret     []byte
 }
 
+// Constructs SecureData
 type TL_secureData struct {
 	Data     []byte
 	DataHash []byte
 	Secret   []byte
 }
 
+// Constructs SecurePlainData
 type TL_securePlainPhone struct {
 	Phone string
 }
 
+// Constructs SecurePlainData
 type TL_securePlainEmail struct {
 	Email string
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypePersonalDetails struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypePassport struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeDriverLicense struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeIdentityCard struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeInternalPassport struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeAddress struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeUtilityBill struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeBankStatement struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeRentalAgreement struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypePassportRegistration struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeTemporaryRegistration struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypePhone struct {
 }
 
+// Constructs SecureValueType
 type TL_secureValueTypeEmail struct {
 }
 
+// Constructs SecureValue
 type TL_secureValue struct {
 	Flags       int32
 	Type        TL   // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
@@ -7108,6 +8003,7 @@ type TL_secureValue struct {
 	Hash        []byte
 }
 
+// Constructs InputSecureValue
 type TL_inputSecureValue struct {
 	Flags       int32
 	Type        TL   // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
@@ -7120,11 +8016,13 @@ type TL_inputSecureValue struct {
 	PlainData   TL   // (flags.5) SecurePlainData: TL_securePlainPhone | TL_securePlainEmail
 }
 
+// Constructs SecureValueHash
 type TL_secureValueHash struct {
 	Type TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	Hash []byte
 }
 
+// Constructs SecureValueError
 type TL_secureValueErrorData struct {
 	Type     TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	DataHash []byte
@@ -7132,60 +8030,70 @@ type TL_secureValueErrorData struct {
 	Text     string
 }
 
+// Constructs SecureValueError
 type TL_secureValueErrorFrontSide struct {
 	Type     TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	FileHash []byte
 	Text     string
 }
 
+// Constructs SecureValueError
 type TL_secureValueErrorReverseSide struct {
 	Type     TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	FileHash []byte
 	Text     string
 }
 
+// Constructs SecureValueError
 type TL_secureValueErrorSelfie struct {
 	Type     TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	FileHash []byte
 	Text     string
 }
 
+// Constructs SecureValueError
 type TL_secureValueErrorFile struct {
 	Type     TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	FileHash []byte
 	Text     string
 }
 
+// Constructs SecureValueError
 type TL_secureValueErrorFiles struct {
 	Type     TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	FileHash [][]byte
 	Text     string
 }
 
+// Constructs SecureValueError
 type TL_secureValueError struct {
 	Type TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	Hash []byte
 	Text string
 }
 
+// Constructs SecureValueError
 type TL_secureValueErrorTranslationFile struct {
 	Type     TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	FileHash []byte
 	Text     string
 }
 
+// Constructs SecureValueError
 type TL_secureValueErrorTranslationFiles struct {
 	Type     TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 	FileHash [][]byte
 	Text     string
 }
 
+// Constructs SecureCredentialsEncrypted
 type TL_secureCredentialsEncrypted struct {
 	Data   []byte
 	Hash   []byte
 	Secret []byte
 }
 
+// Constructs account.AuthorizationForm
 type TL_account_authorizationForm struct {
 	Flags            int32
 	RequiredTypes    []TL   // SecureRequiredType: TL_secureRequiredType | TL_secureRequiredTypeOneOf
@@ -7195,14 +8103,17 @@ type TL_account_authorizationForm struct {
 	PrivacyPolicyUrl string // (flags.0)
 }
 
+// Constructs account.SentEmailCode
 type TL_account_sentEmailCode struct {
 	EmailPattern string
 	Length       int32
 }
 
+// Constructs help.DeepLinkInfo
 type TL_help_deepLinkInfoEmpty struct {
 }
 
+// Constructs help.DeepLinkInfo
 type TL_help_deepLinkInfo struct {
 	Flags     int32
 	UpdateApp bool // (flags.0)
@@ -7210,6 +8121,7 @@ type TL_help_deepLinkInfo struct {
 	Entities  []TL // (flags.1) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Constructs SavedContact
 type TL_savedPhoneContact struct {
 	Phone     string
 	FirstName string
@@ -7217,13 +8129,16 @@ type TL_savedPhoneContact struct {
 	Date      int32
 }
 
+// Constructs account.Takeout
 type TL_account_takeout struct {
 	ID int64
 }
 
+// Constructs PasswordKdfAlgo
 type TL_passwordKdfAlgoUnknown struct {
 }
 
+// Constructs PasswordKdfAlgo
 type TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow struct {
 	Salt1 []byte
 	Salt2 []byte
@@ -7231,32 +8146,39 @@ type TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow struct
 	P     []byte
 }
 
+// Constructs SecurePasswordKdfAlgo
 type TL_securePasswordKdfAlgoUnknown struct {
 }
 
+// Constructs SecurePasswordKdfAlgo
 type TL_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000 struct {
 	Salt []byte
 }
 
+// Constructs SecurePasswordKdfAlgo
 type TL_securePasswordKdfAlgoSHA512 struct {
 	Salt []byte
 }
 
+// Constructs SecureSecretSettings
 type TL_secureSecretSettings struct {
 	SecureAlgo     TL // SecurePasswordKdfAlgo: TL_securePasswordKdfAlgoUnknown | TL_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000 | TL_securePasswordKdfAlgoSHA512
 	SecureSecret   []byte
 	SecureSecretID int64
 }
 
+// Constructs InputCheckPasswordSRP
 type TL_inputCheckPasswordEmpty struct {
 }
 
+// Constructs InputCheckPasswordSRP
 type TL_inputCheckPasswordSRP struct {
 	SrpID int64
 	A     []byte
 	M1    []byte
 }
 
+// Constructs SecureRequiredType
 type TL_secureRequiredType struct {
 	Flags               int32
 	NativeNames         bool // (flags.0)
@@ -7265,18 +8187,22 @@ type TL_secureRequiredType struct {
 	Type                TL   // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 }
 
+// Constructs SecureRequiredType
 type TL_secureRequiredTypeOneOf struct {
 	Types []TL // SecureRequiredType: TL_secureRequiredType | TL_secureRequiredTypeOneOf
 }
 
+// Constructs help.PassportConfig
 type TL_help_passportConfigNotModified struct {
 }
 
+// Constructs help.PassportConfig
 type TL_help_passportConfig struct {
 	Hash           int32
 	CountriesLangs TL // DataJSON: TL_dataJSON
 }
 
+// Constructs InputAppEvent
 type TL_inputAppEvent struct {
 	Time float64
 	Type string
@@ -7284,34 +8210,42 @@ type TL_inputAppEvent struct {
 	Data TL // JSONValue: TL_jsonNull | TL_jsonBool | TL_jsonNumber | TL_jsonString | TL_jsonArray | TL_jsonObject
 }
 
+// Constructs JSONObjectValue
 type TL_jsonObjectValue struct {
 	Key   string
 	Value TL // JSONValue: TL_jsonNull | TL_jsonBool | TL_jsonNumber | TL_jsonString | TL_jsonArray | TL_jsonObject
 }
 
+// Constructs JSONValue
 type TL_jsonNull struct {
 }
 
+// Constructs JSONValue
 type TL_jsonBool struct {
 	Value TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs JSONValue
 type TL_jsonNumber struct {
 	Value float64
 }
 
+// Constructs JSONValue
 type TL_jsonString struct {
 	Value string
 }
 
+// Constructs JSONValue
 type TL_jsonArray struct {
 	Value []TL // JSONValue: TL_jsonNull | TL_jsonBool | TL_jsonNumber | TL_jsonString | TL_jsonArray | TL_jsonObject
 }
 
+// Constructs JSONValue
 type TL_jsonObject struct {
 	Value []TL // JSONObjectValue: TL_jsonObjectValue
 }
 
+// Constructs PageTableCell
 type TL_pageTableCell struct {
 	Flags        int32
 	Header       bool  // (flags.0)
@@ -7324,33 +8258,40 @@ type TL_pageTableCell struct {
 	Rowspan      int32 // (flags.2)
 }
 
+// Constructs PageTableRow
 type TL_pageTableRow struct {
 	Cells []TL // PageTableCell: TL_pageTableCell
 }
 
+// Constructs PageCaption
 type TL_pageCaption struct {
 	Text   TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 	Credit TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageListItem
 type TL_pageListItemText struct {
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageListItem
 type TL_pageListItemBlocks struct {
 	Blocks []TL // PageBlock: TL_pageBlockUnsupported | TL_pageBlockTitle | TL_pageBlockSubtitle | TL_pageBlockAuthorDate | TL_pageBlockHeader | TL_pageBlockSubheader | TL_pageBlockParagraph | TL_pageBlockPreformatted | TL_pageBlockFooter | TL_pageBlockDivider | TL_pageBlockAnchor | TL_pageBlockList | TL_pageBlockBlockquote | TL_pageBlockPullquote | TL_pageBlockPhoto | TL_pageBlockVideo | TL_pageBlockCover | TL_pageBlockEmbed | TL_pageBlockEmbedPost | TL_pageBlockCollage | TL_pageBlockSlideshow | TL_pageBlockChannel | TL_pageBlockAudio | TL_pageBlockKicker | TL_pageBlockTable | TL_pageBlockOrderedList | TL_pageBlockDetails | TL_pageBlockRelatedArticles | TL_pageBlockMap
 }
 
+// Constructs PageListOrderedItem
 type TL_pageListOrderedItemText struct {
 	Num  string
 	Text TL // RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
 }
 
+// Constructs PageListOrderedItem
 type TL_pageListOrderedItemBlocks struct {
 	Num    string
 	Blocks []TL // PageBlock: TL_pageBlockUnsupported | TL_pageBlockTitle | TL_pageBlockSubtitle | TL_pageBlockAuthorDate | TL_pageBlockHeader | TL_pageBlockSubheader | TL_pageBlockParagraph | TL_pageBlockPreformatted | TL_pageBlockFooter | TL_pageBlockDivider | TL_pageBlockAnchor | TL_pageBlockList | TL_pageBlockBlockquote | TL_pageBlockPullquote | TL_pageBlockPhoto | TL_pageBlockVideo | TL_pageBlockCover | TL_pageBlockEmbed | TL_pageBlockEmbedPost | TL_pageBlockCollage | TL_pageBlockSlideshow | TL_pageBlockChannel | TL_pageBlockAudio | TL_pageBlockKicker | TL_pageBlockTable | TL_pageBlockOrderedList | TL_pageBlockDetails | TL_pageBlockRelatedArticles | TL_pageBlockMap
 }
 
+// Constructs PageRelatedArticle
 type TL_pageRelatedArticle struct {
 	Flags         int32
 	Url           string
@@ -7362,6 +8303,7 @@ type TL_pageRelatedArticle struct {
 	PublishedDate int32  // (flags.4)
 }
 
+// Constructs Page
 type TL_page struct {
 	Flags     int32
 	Part      bool // (flags.0)
@@ -7374,13 +8316,16 @@ type TL_page struct {
 	Views     int32 // (flags.3)
 }
 
+// Constructs help.SupportName
 type TL_help_supportName struct {
 	Name string
 }
 
+// Constructs help.UserInfo
 type TL_help_userInfoEmpty struct {
 }
 
+// Constructs help.UserInfo
 type TL_help_userInfo struct {
 	Message  string
 	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
@@ -7388,11 +8333,13 @@ type TL_help_userInfo struct {
 	Date     int32
 }
 
+// Constructs PollAnswer
 type TL_pollAnswer struct {
 	Text   string
 	Option []byte
 }
 
+// Constructs Poll
 type TL_poll struct {
 	ID             int64
 	Flags          int32
@@ -7406,6 +8353,7 @@ type TL_poll struct {
 	CloseDate      int32 // (flags.5)
 }
 
+// Constructs PollAnswerVoters
 type TL_pollAnswerVoters struct {
 	Flags   int32
 	Chosen  bool // (flags.0)
@@ -7414,6 +8362,7 @@ type TL_pollAnswerVoters struct {
 	Voters  int32
 }
 
+// Constructs PollResults
 type TL_pollResults struct {
 	Flags            int32
 	Min              bool   // (flags.0)
@@ -7424,14 +8373,17 @@ type TL_pollResults struct {
 	SolutionEntities []TL   // (flags.4) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Constructs ChatOnlines
 type TL_chatOnlines struct {
 	Onlines int32
 }
 
+// Constructs StatsURL
 type TL_statsURL struct {
 	Url string
 }
 
+// Constructs ChatAdminRights
 type TL_chatAdminRights struct {
 	Flags          int32
 	ChangeInfo     bool // (flags.0)
@@ -7451,6 +8403,7 @@ type TL_chatAdminRights struct {
 	DeleteStories  bool // (flags.16)
 }
 
+// Constructs ChatBannedRights
 type TL_chatBannedRights struct {
 	Flags           int32
 	ViewMessages    bool // (flags.0)
@@ -7476,27 +8429,33 @@ type TL_chatBannedRights struct {
 	UntilDate       int32
 }
 
+// Constructs InputWallPaper
 type TL_inputWallPaper struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputWallPaper
 type TL_inputWallPaperSlug struct {
 	Slug string
 }
 
+// Constructs InputWallPaper
 type TL_inputWallPaperNoFile struct {
 	ID int64
 }
 
+// Constructs account.WallPapers
 type TL_account_wallPapersNotModified struct {
 }
 
+// Constructs account.WallPapers
 type TL_account_wallPapers struct {
 	Hash       int64
 	Wallpapers []TL // WallPaper: TL_wallPaper | TL_wallPaperNoFile
 }
 
+// Constructs CodeSettings
 type TL_codeSettings struct {
 	Flags           int32
 	AllowFlashcall  bool     // (flags.0)
@@ -7509,6 +8468,7 @@ type TL_codeSettings struct {
 	AppSandbox      TL       // (flags.8) Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs WallPaperSettings
 type TL_wallPaperSettings struct {
 	Flags                 int32
 	Blur                  bool  // (flags.1)
@@ -7521,6 +8481,7 @@ type TL_wallPaperSettings struct {
 	Rotation              int32 // (flags.4)
 }
 
+// Constructs AutoDownloadSettings
 type TL_autoDownloadSettings struct {
 	Flags                         int32
 	Disabled                      bool // (flags.0)
@@ -7536,22 +8497,26 @@ type TL_autoDownloadSettings struct {
 	LargeQueueActiveOperationsMax int32
 }
 
+// Constructs account.AutoDownloadSettings
 type TL_account_autoDownloadSettings struct {
 	Low    TL // AutoDownloadSettings: TL_autoDownloadSettings
 	Medium TL // AutoDownloadSettings: TL_autoDownloadSettings
 	High   TL // AutoDownloadSettings: TL_autoDownloadSettings
 }
 
+// Constructs EmojiKeyword
 type TL_emojiKeyword struct {
 	Keyword   string
 	Emoticons []string
 }
 
+// Constructs EmojiKeyword
 type TL_emojiKeywordDeleted struct {
 	Keyword   string
 	Emoticons []string
 }
 
+// Constructs EmojiKeywordsDifference
 type TL_emojiKeywordsDifference struct {
 	LangCode    string
 	FromVersion int32
@@ -7559,14 +8524,17 @@ type TL_emojiKeywordsDifference struct {
 	Keywords    []TL // EmojiKeyword: TL_emojiKeyword | TL_emojiKeywordDeleted
 }
 
+// Constructs EmojiURL
 type TL_emojiURL struct {
 	Url string
 }
 
+// Constructs EmojiLanguage
 type TL_emojiLanguage struct {
 	LangCode string
 }
 
+// Constructs Folder
 type TL_folder struct {
 	Flags                     int32
 	AutofillNewBroadcasts     bool // (flags.0)
@@ -7577,16 +8545,19 @@ type TL_folder struct {
 	Photo                     TL // (flags.3) ChatPhoto: TL_chatPhotoEmpty | TL_chatPhoto
 }
 
+// Constructs InputFolderPeer
 type TL_inputFolderPeer struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	FolderID int32
 }
 
+// Constructs FolderPeer
 type TL_folderPeer struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	FolderID int32
 }
 
+// Constructs messages.SearchCounter
 type TL_messages_searchCounter struct {
 	Flags   int32
 	Inexact bool // (flags.1)
@@ -7594,6 +8565,7 @@ type TL_messages_searchCounter struct {
 	Count   int32
 }
 
+// Constructs UrlAuthResult
 type TL_urlAuthResultRequest struct {
 	Flags              int32
 	RequestWriteAccess bool // (flags.0)
@@ -7601,46 +8573,56 @@ type TL_urlAuthResultRequest struct {
 	Domain             string
 }
 
+// Constructs UrlAuthResult
 type TL_urlAuthResultAccepted struct {
 	Url string
 }
 
+// Constructs UrlAuthResult
 type TL_urlAuthResultDefault struct {
 }
 
+// Constructs ChannelLocation
 type TL_channelLocationEmpty struct {
 }
 
+// Constructs ChannelLocation
 type TL_channelLocation struct {
 	GeoPoint TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
 	Address  string
 }
 
+// Constructs PeerLocated
 type TL_peerLocated struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Expires  int32
 	Distance int32
 }
 
+// Constructs PeerLocated
 type TL_peerSelfLocated struct {
 	Expires int32
 }
 
+// Constructs RestrictionReason
 type TL_restrictionReason struct {
 	Platform string
 	Reason   string
 	Text     string
 }
 
+// Constructs InputTheme
 type TL_inputTheme struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputTheme
 type TL_inputThemeSlug struct {
 	Slug string
 }
 
+// Constructs Theme
 type TL_theme struct {
 	Flags         int32
 	Creator       bool // (flags.0)
@@ -7656,55 +8638,68 @@ type TL_theme struct {
 	InstallsCount int32  // (flags.4)
 }
 
+// Constructs account.Themes
 type TL_account_themesNotModified struct {
 }
 
+// Constructs account.Themes
 type TL_account_themes struct {
 	Hash   int64
 	Themes []TL // Theme: TL_theme
 }
 
+// Constructs auth.LoginToken
 type TL_auth_loginToken struct {
 	Expires int32
 	Token   []byte
 }
 
+// Constructs auth.LoginToken
 type TL_auth_loginTokenMigrateTo struct {
 	DcID  int32
 	Token []byte
 }
 
+// Constructs auth.LoginToken
 type TL_auth_loginTokenSuccess struct {
-	Authorization TL // auth_Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
+	Authorization TL // auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 }
 
+// Constructs account.ContentSettings
 type TL_account_contentSettings struct {
 	Flags              int32
 	SensitiveEnabled   bool // (flags.0)
 	SensitiveCanChange bool // (flags.1)
 }
 
+// Constructs messages.InactiveChats
 type TL_messages_inactiveChats struct {
 	Dates []int32
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs BaseTheme
 type TL_baseThemeClassic struct {
 }
 
+// Constructs BaseTheme
 type TL_baseThemeDay struct {
 }
 
+// Constructs BaseTheme
 type TL_baseThemeNight struct {
 }
 
+// Constructs BaseTheme
 type TL_baseThemeTinted struct {
 }
 
+// Constructs BaseTheme
 type TL_baseThemeArctic struct {
 }
 
+// Constructs InputThemeSettings
 type TL_inputThemeSettings struct {
 	Flags                 int32
 	MessageColorsAnimated bool // (flags.2)
@@ -7716,6 +8711,7 @@ type TL_inputThemeSettings struct {
 	WallpaperSettings     TL      // (flags.1) WallPaperSettings: TL_wallPaperSettings
 }
 
+// Constructs ThemeSettings
 type TL_themeSettings struct {
 	Flags                 int32
 	MessageColorsAnimated bool // (flags.2)
@@ -7726,12 +8722,14 @@ type TL_themeSettings struct {
 	Wallpaper             TL      // (flags.1) WallPaper: TL_wallPaper | TL_wallPaperNoFile
 }
 
+// Constructs WebPageAttribute
 type TL_webPageAttributeTheme struct {
 	Flags     int32
 	Documents []TL // (flags.0) Document: TL_documentEmpty | TL_document
 	Settings  TL   // (flags.1) ThemeSettings: TL_themeSettings
 }
 
+// Constructs WebPageAttribute
 type TL_webPageAttributeStory struct {
 	Flags int32
 	Peer  TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
@@ -7739,6 +8737,7 @@ type TL_webPageAttributeStory struct {
 	Story TL // (flags.0) StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
 }
 
+// Constructs messages.VotesList
 type TL_messages_votesList struct {
 	Flags      int32
 	Count      int32
@@ -7748,16 +8747,19 @@ type TL_messages_votesList struct {
 	NextOffset string // (flags.0)
 }
 
+// Constructs BankCardOpenUrl
 type TL_bankCardOpenUrl struct {
 	Url  string
 	Name string
 }
 
+// Constructs payments.BankCardData
 type TL_payments_bankCardData struct {
 	Title    string
 	OpenUrls []TL // BankCardOpenUrl: TL_bankCardOpenUrl
 }
 
+// Constructs DialogFilter
 type TL_dialogFilter struct {
 	Flags           int32
 	Contacts        bool // (flags.0)
@@ -7776,9 +8778,11 @@ type TL_dialogFilter struct {
 	ExcludePeers    []TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Constructs DialogFilter
 type TL_dialogFilterDefault struct {
 }
 
+// Constructs DialogFilter
 type TL_dialogFilterChatlist struct {
 	Flags        int32
 	HasMyInvites bool // (flags.26)
@@ -7789,46 +8793,55 @@ type TL_dialogFilterChatlist struct {
 	IncludePeers []TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Constructs DialogFilterSuggested
 type TL_dialogFilterSuggested struct {
 	Filter      TL // DialogFilter: TL_dialogFilter | TL_dialogFilterDefault | TL_dialogFilterChatlist
 	Description string
 }
 
+// Constructs StatsDateRangeDays
 type TL_statsDateRangeDays struct {
 	MinDate int32
 	MaxDate int32
 }
 
+// Constructs StatsAbsValueAndPrev
 type TL_statsAbsValueAndPrev struct {
 	Current  float64
 	Previous float64
 }
 
+// Constructs StatsPercentValue
 type TL_statsPercentValue struct {
 	Part  float64
 	Total float64
 }
 
+// Constructs StatsGraph
 type TL_statsGraphAsync struct {
 	Token string
 }
 
+// Constructs StatsGraph
 type TL_statsGraphError struct {
 	Error string
 }
 
+// Constructs StatsGraph
 type TL_statsGraph struct {
 	Flags     int32
 	Json      TL     // DataJSON: TL_dataJSON
 	ZoomToken string // (flags.0)
 }
 
+// Constructs MessageInteractionCounters
 type TL_messageInteractionCounters struct {
 	MsgID    int32
 	Views    int32
 	Forwards int32
 }
 
+// Constructs stats.BroadcastStats
 type TL_stats_broadcastStats struct {
 	Period                    TL   // StatsDateRangeDays: TL_statsDateRangeDays
 	Followers                 TL   // StatsAbsValueAndPrev: TL_statsAbsValueAndPrev
@@ -7847,10 +8860,12 @@ type TL_stats_broadcastStats struct {
 	RecentMessageInteractions []TL // MessageInteractionCounters: TL_messageInteractionCounters
 }
 
+// Constructs help.PromoData
 type TL_help_promoDataEmpty struct {
 	Expires int32
 }
 
+// Constructs help.PromoData
 type TL_help_promoData struct {
 	Flags      int32
 	Proxy      bool // (flags.0)
@@ -7862,6 +8877,7 @@ type TL_help_promoData struct {
 	PsaMessage string // (flags.2)
 }
 
+// Constructs VideoSize
 type TL_videoSize struct {
 	Flags        int32
 	Type         string
@@ -7871,23 +8887,27 @@ type TL_videoSize struct {
 	VideoStartTs float64 // (flags.0)
 }
 
+// Constructs VideoSize
 type TL_videoSizeEmojiMarkup struct {
 	EmojiID          int64
 	BackgroundColors []int32
 }
 
+// Constructs VideoSize
 type TL_videoSizeStickerMarkup struct {
 	Stickerset       TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 	StickerID        int64
 	BackgroundColors []int32
 }
 
+// Constructs StatsGroupTopPoster
 type TL_statsGroupTopPoster struct {
 	UserID   int64
 	Messages int32
 	AvgChars int32
 }
 
+// Constructs StatsGroupTopAdmin
 type TL_statsGroupTopAdmin struct {
 	UserID  int64
 	Deleted int32
@@ -7895,11 +8915,13 @@ type TL_statsGroupTopAdmin struct {
 	Banned  int32
 }
 
+// Constructs StatsGroupTopInviter
 type TL_statsGroupTopInviter struct {
 	UserID      int64
 	Invitations int32
 }
 
+// Constructs stats.MegagroupStats
 type TL_stats_megagroupStats struct {
 	Period                  TL   // StatsDateRangeDays: TL_statsDateRangeDays
 	Members                 TL   // StatsAbsValueAndPrev: TL_statsAbsValueAndPrev
@@ -7920,6 +8942,7 @@ type TL_stats_megagroupStats struct {
 	Users                   []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs GlobalPrivacySettings
 type TL_globalPrivacySettings struct {
 	Flags                            int32
 	ArchiveAndMuteNewNoncontactPeers bool // (flags.0)
@@ -7927,6 +8950,7 @@ type TL_globalPrivacySettings struct {
 	KeepArchivedFolders              bool // (flags.2)
 }
 
+// Constructs help.CountryCode
 type TL_help_countryCode struct {
 	Flags       int32
 	CountryCode string
@@ -7934,23 +8958,27 @@ type TL_help_countryCode struct {
 	Patterns    []string // (flags.1)
 }
 
+// Constructs help.Country
 type TL_help_country struct {
 	Flags        int32
 	Hidden       bool // (flags.0)
 	Iso2         string
 	DefaultName  string
 	Name         string // (flags.1)
-	CountryCodes []TL   // help_CountryCode: TL_help_countryCode
+	CountryCodes []TL   // help.CountryCode: TL_help_countryCode
 }
 
+// Constructs help.CountriesList
 type TL_help_countriesListNotModified struct {
 }
 
+// Constructs help.CountriesList
 type TL_help_countriesList struct {
-	Countries []TL // help_Country: TL_help_country
+	Countries []TL // help.Country: TL_help_country
 	Hash      int32
 }
 
+// Constructs MessageViews
 type TL_messageViews struct {
 	Flags    int32
 	Views    int32 // (flags.0)
@@ -7958,12 +8986,14 @@ type TL_messageViews struct {
 	Replies  TL    // (flags.2) MessageReplies: TL_messageReplies
 }
 
+// Constructs messages.MessageViews
 type TL_messages_messageViews struct {
 	Views []TL // MessageViews: TL_messageViews
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.DiscussionMessage
 type TL_messages_discussionMessage struct {
 	Flags           int32
 	Messages        []TL  // Message: TL_messageEmpty | TL_message | TL_messageService
@@ -7975,6 +9005,7 @@ type TL_messages_discussionMessage struct {
 	Users           []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs MessageReplyHeader
 type TL_messageReplyHeader struct {
 	Flags            int32
 	ReplyToScheduled bool   // (flags.2)
@@ -7989,11 +9020,13 @@ type TL_messageReplyHeader struct {
 	QuoteEntities    []TL   // (flags.7) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Constructs MessageReplyHeader
 type TL_messageReplyStoryHeader struct {
 	UserID  int64
 	StoryID int32
 }
 
+// Constructs MessageReplies
 type TL_messageReplies struct {
 	Flags          int32
 	Comments       bool // (flags.0)
@@ -8005,21 +9038,25 @@ type TL_messageReplies struct {
 	ReadMaxID      int32 // (flags.3)
 }
 
+// Constructs PeerBlocked
 type TL_peerBlocked struct {
 	PeerID TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Date   int32
 }
 
+// Constructs stats.MessageStats
 type TL_stats_messageStats struct {
 	ViewsGraph TL // StatsGraph: TL_statsGraphAsync | TL_statsGraphError | TL_statsGraph
 }
 
+// Constructs GroupCall
 type TL_groupCallDiscarded struct {
 	ID         int64
 	AccessHash int64
 	Duration   int32
 }
 
+// Constructs GroupCall
 type TL_groupCall struct {
 	Flags                   int32
 	JoinMuted               bool // (flags.1)
@@ -8042,11 +9079,13 @@ type TL_groupCall struct {
 	Version                 int32
 }
 
+// Constructs InputGroupCall
 type TL_inputGroupCall struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs GroupCallParticipant
 type TL_groupCallParticipant struct {
 	Flags           int32
 	Muted           bool // (flags.0)
@@ -8070,6 +9109,7 @@ type TL_groupCallParticipant struct {
 	Presentation    TL     // (flags.14) GroupCallParticipantVideo: TL_groupCallParticipantVideo
 }
 
+// Constructs phone.GroupCall
 type TL_phone_groupCall struct {
 	Call                   TL   // GroupCall: TL_groupCallDiscarded | TL_groupCall
 	Participants           []TL // GroupCallParticipant: TL_groupCallParticipant
@@ -8078,6 +9118,7 @@ type TL_phone_groupCall struct {
 	Users                  []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs phone.GroupParticipants
 type TL_phone_groupParticipants struct {
 	Count        int32
 	Participants []TL // GroupCallParticipant: TL_groupCallParticipant
@@ -8087,28 +9128,36 @@ type TL_phone_groupParticipants struct {
 	Version      int32
 }
 
+// Constructs InlineQueryPeerType
 type TL_inlineQueryPeerTypeSameBotPM struct {
 }
 
+// Constructs InlineQueryPeerType
 type TL_inlineQueryPeerTypePM struct {
 }
 
+// Constructs InlineQueryPeerType
 type TL_inlineQueryPeerTypeChat struct {
 }
 
+// Constructs InlineQueryPeerType
 type TL_inlineQueryPeerTypeMegagroup struct {
 }
 
+// Constructs InlineQueryPeerType
 type TL_inlineQueryPeerTypeBroadcast struct {
 }
 
+// Constructs InlineQueryPeerType
 type TL_inlineQueryPeerTypeBotPM struct {
 }
 
+// Constructs messages.HistoryImport
 type TL_messages_historyImport struct {
 	ID int64
 }
 
+// Constructs messages.HistoryImportParsed
 type TL_messages_historyImportParsed struct {
 	Flags int32
 	Pm    bool   // (flags.0)
@@ -8116,6 +9165,7 @@ type TL_messages_historyImportParsed struct {
 	Title string // (flags.2)
 }
 
+// Constructs messages.AffectedFoundMessages
 type TL_messages_affectedFoundMessages struct {
 	Pts      int32
 	PtsCount int32
@@ -8123,6 +9173,7 @@ type TL_messages_affectedFoundMessages struct {
 	Messages []int32
 }
 
+// Constructs ChatInviteImporter
 type TL_chatInviteImporter struct {
 	Flags       int32
 	Requested   bool // (flags.0)
@@ -8133,59 +9184,70 @@ type TL_chatInviteImporter struct {
 	ApprovedBy  int64  // (flags.1)
 }
 
+// Constructs messages.ExportedChatInvites
 type TL_messages_exportedChatInvites struct {
 	Count   int32
 	Invites []TL // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 	Users   []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.ExportedChatInvite
 type TL_messages_exportedChatInvite struct {
 	Invite TL   // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 	Users  []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.ExportedChatInvite
 type TL_messages_exportedChatInviteReplaced struct {
 	Invite    TL   // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 	NewInvite TL   // ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 	Users     []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.ChatInviteImporters
 type TL_messages_chatInviteImporters struct {
 	Count     int32
 	Importers []TL // ChatInviteImporter: TL_chatInviteImporter
 	Users     []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs ChatAdminWithInvites
 type TL_chatAdminWithInvites struct {
 	AdminID             int64
 	InvitesCount        int32
 	RevokedInvitesCount int32
 }
 
+// Constructs messages.ChatAdminsWithInvites
 type TL_messages_chatAdminsWithInvites struct {
 	Admins []TL // ChatAdminWithInvites: TL_chatAdminWithInvites
 	Users  []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.CheckedHistoryImportPeer
 type TL_messages_checkedHistoryImportPeer struct {
 	ConfirmText string
 }
 
+// Constructs phone.JoinAsPeers
 type TL_phone_joinAsPeers struct {
 	Peers []TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs phone.ExportedGroupCallInvite
 type TL_phone_exportedGroupCallInvite struct {
 	Link string
 }
 
+// Constructs GroupCallParticipantVideoSourceGroup
 type TL_groupCallParticipantVideoSourceGroup struct {
 	Semantics string
 	Sources   []int32
 }
 
+// Constructs GroupCallParticipantVideo
 type TL_groupCallParticipantVideo struct {
 	Flags        int32
 	Paused       bool // (flags.0)
@@ -8194,46 +9256,58 @@ type TL_groupCallParticipantVideo struct {
 	AudioSource  int32 // (flags.1)
 }
 
+// Constructs stickers.SuggestedShortName
 type TL_stickers_suggestedShortName struct {
 	ShortName string
 }
 
+// Constructs BotCommandScope
 type TL_botCommandScopeDefault struct {
 }
 
+// Constructs BotCommandScope
 type TL_botCommandScopeUsers struct {
 }
 
+// Constructs BotCommandScope
 type TL_botCommandScopeChats struct {
 }
 
+// Constructs BotCommandScope
 type TL_botCommandScopeChatAdmins struct {
 }
 
+// Constructs BotCommandScope
 type TL_botCommandScopePeer struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Constructs BotCommandScope
 type TL_botCommandScopePeerAdmins struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Constructs BotCommandScope
 type TL_botCommandScopePeerUser struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Constructs account.ResetPasswordResult
 type TL_account_resetPasswordFailedWait struct {
 	RetryDate int32
 }
 
+// Constructs account.ResetPasswordResult
 type TL_account_resetPasswordRequestedWait struct {
 	UntilDate int32
 }
 
+// Constructs account.ResetPasswordResult
 type TL_account_resetPasswordOk struct {
 }
 
+// Constructs SponsoredMessage
 type TL_sponsoredMessage struct {
 	Flags          int32
 	Recommended    bool // (flags.5)
@@ -8251,6 +9325,7 @@ type TL_sponsoredMessage struct {
 	AdditionalInfo string // (flags.8)
 }
 
+// Constructs messages.SponsoredMessages
 type TL_messages_sponsoredMessages struct {
 	Flags        int32
 	PostsBetween int32 // (flags.0)
@@ -8259,9 +9334,11 @@ type TL_messages_sponsoredMessages struct {
 	Users        []TL  // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.SponsoredMessages
 type TL_messages_sponsoredMessagesEmpty struct {
 }
 
+// Constructs SearchResultsCalendarPeriod
 type TL_searchResultsCalendarPeriod struct {
 	Date     int32
 	MinMsgID int32
@@ -8269,6 +9346,7 @@ type TL_searchResultsCalendarPeriod struct {
 	Count    int32
 }
 
+// Constructs messages.SearchResultsCalendar
 type TL_messages_searchResultsCalendar struct {
 	Flags          int32
 	Inexact        bool // (flags.0)
@@ -8282,40 +9360,47 @@ type TL_messages_searchResultsCalendar struct {
 	Users          []TL  // User: TL_userEmpty | TL_user
 }
 
+// Constructs SearchResultsPosition
 type TL_searchResultPosition struct {
 	MsgID  int32
 	Date   int32
 	Offset int32
 }
 
+// Constructs messages.SearchResultsPositions
 type TL_messages_searchResultsPositions struct {
 	Count     int32
 	Positions []TL // SearchResultsPosition: TL_searchResultPosition
 }
 
+// Constructs channels.SendAsPeers
 type TL_channels_sendAsPeers struct {
 	Peers []TL // SendAsPeer: TL_sendAsPeer
 	Chats []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs users.UserFull
 type TL_users_userFull struct {
 	FullUser TL   // UserFull: TL_userFull
 	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users    []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.PeerSettings
 type TL_messages_peerSettings struct {
 	Settings TL   // PeerSettings: TL_peerSettings
 	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users    []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs auth.LoggedOut
 type TL_auth_loggedOut struct {
 	Flags           int32
 	FutureAuthToken []byte // (flags.0)
 }
 
+// Constructs ReactionCount
 type TL_reactionCount struct {
 	Flags       int32
 	ChosenOrder int32 // (flags.0)
@@ -8323,6 +9408,7 @@ type TL_reactionCount struct {
 	Count       int32
 }
 
+// Constructs MessageReactions
 type TL_messageReactions struct {
 	Flags           int32
 	Min             bool // (flags.0)
@@ -8331,6 +9417,7 @@ type TL_messageReactions struct {
 	RecentReactions []TL // (flags.1) MessagePeerReaction: TL_messagePeerReaction
 }
 
+// Constructs messages.MessageReactionsList
 type TL_messages_messageReactionsList struct {
 	Flags      int32
 	Count      int32
@@ -8340,6 +9427,7 @@ type TL_messages_messageReactionsList struct {
 	NextOffset string // (flags.0)
 }
 
+// Constructs AvailableReaction
 type TL_availableReaction struct {
 	Flags             int32
 	Inactive          bool // (flags.0)
@@ -8355,14 +9443,17 @@ type TL_availableReaction struct {
 	CenterIcon        TL // (flags.1) Document: TL_documentEmpty | TL_document
 }
 
+// Constructs messages.AvailableReactions
 type TL_messages_availableReactionsNotModified struct {
 }
 
+// Constructs messages.AvailableReactions
 type TL_messages_availableReactions struct {
 	Hash      int32
 	Reactions []TL // AvailableReaction: TL_availableReaction
 }
 
+// Constructs MessagePeerReaction
 type TL_messagePeerReaction struct {
 	Flags    int32
 	Big      bool // (flags.0)
@@ -8373,26 +9464,31 @@ type TL_messagePeerReaction struct {
 	Reaction TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Constructs GroupCallStreamChannel
 type TL_groupCallStreamChannel struct {
 	Channel         int32
 	Scale           int32
 	LastTimestampMs int64
 }
 
+// Constructs phone.GroupCallStreamChannels
 type TL_phone_groupCallStreamChannels struct {
 	Channels []TL // GroupCallStreamChannel: TL_groupCallStreamChannel
 }
 
+// Constructs phone.GroupCallStreamRtmpUrl
 type TL_phone_groupCallStreamRtmpUrl struct {
 	Url string
 	Key string
 }
 
+// Constructs AttachMenuBotIconColor
 type TL_attachMenuBotIconColor struct {
 	Name  string
 	Color int32
 }
 
+// Constructs AttachMenuBotIcon
 type TL_attachMenuBotIcon struct {
 	Flags  int32
 	Name   string
@@ -8400,6 +9496,7 @@ type TL_attachMenuBotIcon struct {
 	Colors []TL // (flags.0) AttachMenuBotIconColor: TL_attachMenuBotIconColor
 }
 
+// Constructs AttachMenuBot
 type TL_attachMenuBot struct {
 	Flags                    int32
 	Inactive                 bool // (flags.0)
@@ -8414,108 +9511,135 @@ type TL_attachMenuBot struct {
 	Icons                    []TL // AttachMenuBotIcon: TL_attachMenuBotIcon
 }
 
+// Constructs AttachMenuBots
 type TL_attachMenuBotsNotModified struct {
 }
 
+// Constructs AttachMenuBots
 type TL_attachMenuBots struct {
 	Hash  int64
 	Bots  []TL // AttachMenuBot: TL_attachMenuBot
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs AttachMenuBotsBot
 type TL_attachMenuBotsBot struct {
 	Bot   TL   // AttachMenuBot: TL_attachMenuBot
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs WebViewResult
 type TL_webViewResultUrl struct {
 	QueryID int64
 	Url     string
 }
 
+// Constructs SimpleWebViewResult
 type TL_simpleWebViewResultUrl struct {
 	Url string
 }
 
+// Constructs WebViewMessageSent
 type TL_webViewMessageSent struct {
 	Flags int32
 	MsgID TL // (flags.0) InputBotInlineMessageID: TL_inputBotInlineMessageID | TL_inputBotInlineMessageID64
 }
 
+// Constructs BotMenuButton
 type TL_botMenuButtonDefault struct {
 }
 
+// Constructs BotMenuButton
 type TL_botMenuButtonCommands struct {
 }
 
+// Constructs BotMenuButton
 type TL_botMenuButton struct {
 	Text string
 	Url  string
 }
 
+// Constructs account.SavedRingtones
 type TL_account_savedRingtonesNotModified struct {
 }
 
+// Constructs account.SavedRingtones
 type TL_account_savedRingtones struct {
 	Hash      int64
 	Ringtones []TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs NotificationSound
 type TL_notificationSoundDefault struct {
 }
 
+// Constructs NotificationSound
 type TL_notificationSoundNone struct {
 }
 
+// Constructs NotificationSound
 type TL_notificationSoundLocal struct {
 	Title string
 	Data  string
 }
 
+// Constructs NotificationSound
 type TL_notificationSoundRingtone struct {
 	ID int64
 }
 
+// Constructs account.SavedRingtone
 type TL_account_savedRingtone struct {
 }
 
+// Constructs account.SavedRingtone
 type TL_account_savedRingtoneConverted struct {
 	Document TL // Document: TL_documentEmpty | TL_document
 }
 
+// Constructs AttachMenuPeerType
 type TL_attachMenuPeerTypeSameBotPM struct {
 }
 
+// Constructs AttachMenuPeerType
 type TL_attachMenuPeerTypeBotPM struct {
 }
 
+// Constructs AttachMenuPeerType
 type TL_attachMenuPeerTypePM struct {
 }
 
+// Constructs AttachMenuPeerType
 type TL_attachMenuPeerTypeChat struct {
 }
 
+// Constructs AttachMenuPeerType
 type TL_attachMenuPeerTypeBroadcast struct {
 }
 
+// Constructs InputInvoice
 type TL_inputInvoiceMessage struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID int32
 }
 
+// Constructs InputInvoice
 type TL_inputInvoiceSlug struct {
 	Slug string
 }
 
+// Constructs InputInvoice
 type TL_inputInvoicePremiumGiftCode struct {
 	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
 	Option  TL // PremiumGiftCodeOption: TL_premiumGiftCodeOption
 }
 
+// Constructs payments.ExportedInvoice
 type TL_payments_exportedInvoice struct {
 	Url string
 }
 
+// Constructs messages.TranscribedAudio
 type TL_messages_transcribedAudio struct {
 	Flags           int32
 	Pending         bool // (flags.0)
@@ -8523,6 +9647,7 @@ type TL_messages_transcribedAudio struct {
 	Text            string
 }
 
+// Constructs help.PremiumPromo
 type TL_help_premiumPromo struct {
 	StatusText     string
 	StatusEntities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
@@ -8532,18 +9657,21 @@ type TL_help_premiumPromo struct {
 	Users          []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs InputStorePaymentPurpose
 type TL_inputStorePaymentPremiumSubscription struct {
 	Flags   int32
 	Restore bool // (flags.0)
 	Upgrade bool // (flags.1)
 }
 
+// Constructs InputStorePaymentPurpose
 type TL_inputStorePaymentGiftPremium struct {
 	UserID   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Currency string
 	Amount   int64
 }
 
+// Constructs InputStorePaymentPurpose
 type TL_inputStorePaymentPremiumGiftCode struct {
 	Flags     int32
 	Users     []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
@@ -8552,6 +9680,7 @@ type TL_inputStorePaymentPremiumGiftCode struct {
 	Amount    int64
 }
 
+// Constructs InputStorePaymentPurpose
 type TL_inputStorePaymentPremiumGiveaway struct {
 	Flags              int32
 	OnlyNewSubscribers bool     // (flags.0)
@@ -8564,6 +9693,7 @@ type TL_inputStorePaymentPremiumGiveaway struct {
 	Amount             int64
 }
 
+// Constructs PremiumGiftOption
 type TL_premiumGiftOption struct {
 	Flags        int32
 	Months       int32
@@ -8573,94 +9703,117 @@ type TL_premiumGiftOption struct {
 	StoreProduct string // (flags.0)
 }
 
+// Constructs PaymentFormMethod
 type TL_paymentFormMethod struct {
 	Url   string
 	Title string
 }
 
+// Constructs EmojiStatus
 type TL_emojiStatusEmpty struct {
 }
 
+// Constructs EmojiStatus
 type TL_emojiStatus struct {
 	DocumentID int64
 }
 
+// Constructs EmojiStatus
 type TL_emojiStatusUntil struct {
 	DocumentID int64
 	Until      int32
 }
 
+// Constructs account.EmojiStatuses
 type TL_account_emojiStatusesNotModified struct {
 }
 
+// Constructs account.EmojiStatuses
 type TL_account_emojiStatuses struct {
 	Hash     int64
 	Statuses []TL // EmojiStatus: TL_emojiStatusEmpty | TL_emojiStatus | TL_emojiStatusUntil
 }
 
+// Constructs Reaction
 type TL_reactionEmpty struct {
 }
 
+// Constructs Reaction
 type TL_reactionEmoji struct {
 	Emoticon string
 }
 
+// Constructs Reaction
 type TL_reactionCustomEmoji struct {
 	DocumentID int64
 }
 
+// Constructs ChatReactions
 type TL_chatReactionsNone struct {
 }
 
+// Constructs ChatReactions
 type TL_chatReactionsAll struct {
 	Flags       int32
 	AllowCustom bool // (flags.0)
 }
 
+// Constructs ChatReactions
 type TL_chatReactionsSome struct {
 	Reactions []TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Constructs messages.Reactions
 type TL_messages_reactionsNotModified struct {
 }
 
+// Constructs messages.Reactions
 type TL_messages_reactions struct {
 	Hash      int64
 	Reactions []TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Constructs EmailVerifyPurpose
 type TL_emailVerifyPurposeLoginSetup struct {
 	PhoneNumber   string
 	PhoneCodeHash string
 }
 
+// Constructs EmailVerifyPurpose
 type TL_emailVerifyPurposeLoginChange struct {
 }
 
+// Constructs EmailVerifyPurpose
 type TL_emailVerifyPurposePassport struct {
 }
 
+// Constructs EmailVerification
 type TL_emailVerificationCode struct {
 	Code string
 }
 
+// Constructs EmailVerification
 type TL_emailVerificationGoogle struct {
 	Token string
 }
 
+// Constructs EmailVerification
 type TL_emailVerificationApple struct {
 	Token string
 }
 
+// Constructs account.EmailVerified
 type TL_account_emailVerified struct {
 	Email string
 }
 
+// Constructs account.EmailVerified
 type TL_account_emailVerifiedLogin struct {
 	Email    string
-	SentCode TL // auth_SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
+	SentCode TL // auth.SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
 }
 
+// Constructs PremiumSubscriptionOption
 type TL_premiumSubscriptionOption struct {
 	Flags              int32
 	Current            bool   // (flags.1)
@@ -8673,12 +9826,14 @@ type TL_premiumSubscriptionOption struct {
 	StoreProduct       string // (flags.0)
 }
 
+// Constructs SendAsPeer
 type TL_sendAsPeer struct {
 	Flags           int32
 	PremiumRequired bool // (flags.0)
 	Peer            TL   // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
+// Constructs MessageExtendedMedia
 type TL_messageExtendedMediaPreview struct {
 	Flags         int32
 	W             int32 // (flags.0)
@@ -8687,15 +9842,18 @@ type TL_messageExtendedMediaPreview struct {
 	VideoDuration int32 // (flags.2)
 }
 
+// Constructs MessageExtendedMedia
 type TL_messageExtendedMedia struct {
 	Media TL // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
 }
 
+// Constructs StickerKeyword
 type TL_stickerKeyword struct {
 	DocumentID int64
 	Keyword    []string
 }
 
+// Constructs Username
 type TL_username struct {
 	Flags    int32
 	Editable bool // (flags.0)
@@ -8703,10 +9861,12 @@ type TL_username struct {
 	Username string
 }
 
+// Constructs ForumTopic
 type TL_forumTopicDeleted struct {
 	ID int32
 }
 
+// Constructs ForumTopic
 type TL_forumTopic struct {
 	Flags                int32
 	My                   bool // (flags.1)
@@ -8730,6 +9890,7 @@ type TL_forumTopic struct {
 	Draft                TL // (flags.4) DraftMessage: TL_draftMessageEmpty | TL_draftMessage
 }
 
+// Constructs messages.ForumTopics
 type TL_messages_forumTopics struct {
 	Flags             int32
 	OrderByCreateDate bool // (flags.0)
@@ -8741,21 +9902,25 @@ type TL_messages_forumTopics struct {
 	Pts               int32
 }
 
+// Constructs DefaultHistoryTTL
 type TL_defaultHistoryTTL struct {
 	Period int32
 }
 
+// Constructs ExportedContactToken
 type TL_exportedContactToken struct {
 	Url     string
 	Expires int32
 }
 
+// Constructs RequestPeerType
 type TL_requestPeerTypeUser struct {
 	Flags   int32
 	Bot     TL // (flags.0) Bool: TL_boolFalse | TL_boolTrue
 	Premium TL // (flags.1) Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Constructs RequestPeerType
 type TL_requestPeerTypeChat struct {
 	Flags           int32
 	Creator         bool // (flags.0)
@@ -8766,6 +9931,7 @@ type TL_requestPeerTypeChat struct {
 	BotAdminRights  TL   // (flags.2) ChatAdminRights: TL_chatAdminRights
 }
 
+// Constructs RequestPeerType
 type TL_requestPeerTypeBroadcast struct {
 	Flags           int32
 	Creator         bool // (flags.0)
@@ -8774,37 +9940,45 @@ type TL_requestPeerTypeBroadcast struct {
 	BotAdminRights  TL   // (flags.2) ChatAdminRights: TL_chatAdminRights
 }
 
+// Constructs EmojiList
 type TL_emojiListNotModified struct {
 }
 
+// Constructs EmojiList
 type TL_emojiList struct {
 	Hash       int64
 	DocumentID []int64
 }
 
+// Constructs EmojiGroup
 type TL_emojiGroup struct {
 	Title       string
 	IconEmojiID int64
 	Emoticons   []string
 }
 
+// Constructs messages.EmojiGroups
 type TL_messages_emojiGroupsNotModified struct {
 }
 
+// Constructs messages.EmojiGroups
 type TL_messages_emojiGroups struct {
 	Hash   int32
 	Groups []TL // EmojiGroup: TL_emojiGroup
 }
 
+// Constructs TextWithEntities
 type TL_textWithEntities struct {
 	Text     string
 	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Constructs messages.TranslatedText
 type TL_messages_translateResult struct {
 	Result []TL // TextWithEntities: TL_textWithEntities
 }
 
+// Constructs AutoSaveSettings
 type TL_autoSaveSettings struct {
 	Flags        int32
 	Photos       bool  // (flags.0)
@@ -8812,11 +9986,13 @@ type TL_autoSaveSettings struct {
 	VideoMaxSize int64 // (flags.2)
 }
 
+// Constructs AutoSaveException
 type TL_autoSaveException struct {
 	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Settings TL // AutoSaveSettings: TL_autoSaveSettings
 }
 
+// Constructs account.AutoSaveSettings
 type TL_account_autoSaveSettings struct {
 	UsersSettings      TL   // AutoSaveSettings: TL_autoSaveSettings
 	ChatsSettings      TL   // AutoSaveSettings: TL_autoSaveSettings
@@ -8826,27 +10002,33 @@ type TL_account_autoSaveSettings struct {
 	Users              []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs help.AppConfig
 type TL_help_appConfigNotModified struct {
 }
 
+// Constructs help.AppConfig
 type TL_help_appConfig struct {
 	Hash   int32
 	Config TL // JSONValue: TL_jsonNull | TL_jsonBool | TL_jsonNumber | TL_jsonString | TL_jsonArray | TL_jsonObject
 }
 
+// Constructs InputBotApp
 type TL_inputBotAppID struct {
 	ID         int64
 	AccessHash int64
 }
 
+// Constructs InputBotApp
 type TL_inputBotAppShortName struct {
 	BotID     TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	ShortName string
 }
 
+// Constructs BotApp
 type TL_botAppNotModified struct {
 }
 
+// Constructs BotApp
 type TL_botApp struct {
 	Flags       int32
 	ID          int64
@@ -8859,6 +10041,7 @@ type TL_botApp struct {
 	Hash        int64
 }
 
+// Constructs messages.BotApp
 type TL_messages_botApp struct {
 	Flags              int32
 	Inactive           bool // (flags.0)
@@ -8867,24 +10050,29 @@ type TL_messages_botApp struct {
 	App                TL   // BotApp: TL_botAppNotModified | TL_botApp
 }
 
+// Constructs AppWebViewResult
 type TL_appWebViewResultUrl struct {
 	Url string
 }
 
+// Constructs InlineBotWebView
 type TL_inlineBotWebView struct {
 	Text string
 	Url  string
 }
 
+// Constructs ReadParticipantDate
 type TL_readParticipantDate struct {
 	UserID int64
 	Date   int32
 }
 
+// Constructs InputChatlist
 type TL_inputChatlistDialogFilter struct {
 	FilterID int32
 }
 
+// Constructs ExportedChatlistInvite
 type TL_exportedChatlistInvite struct {
 	Flags int32
 	Title string
@@ -8892,17 +10080,20 @@ type TL_exportedChatlistInvite struct {
 	Peers []TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 }
 
+// Constructs chatlists.ExportedChatlistInvite
 type TL_chatlists_exportedChatlistInvite struct {
 	Filter TL // DialogFilter: TL_dialogFilter | TL_dialogFilterDefault | TL_dialogFilterChatlist
 	Invite TL // ExportedChatlistInvite: TL_exportedChatlistInvite
 }
 
+// Constructs chatlists.ExportedInvites
 type TL_chatlists_exportedInvites struct {
 	Invites []TL // ExportedChatlistInvite: TL_exportedChatlistInvite
 	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users   []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs chatlists.ChatlistInvite
 type TL_chatlists_chatlistInviteAlready struct {
 	FilterID     int32
 	MissingPeers []TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
@@ -8911,6 +10102,7 @@ type TL_chatlists_chatlistInviteAlready struct {
 	Users        []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs chatlists.ChatlistInvite
 type TL_chatlists_chatlistInvite struct {
 	Flags    int32
 	Title    string
@@ -8920,35 +10112,41 @@ type TL_chatlists_chatlistInvite struct {
 	Users    []TL   // User: TL_userEmpty | TL_user
 }
 
+// Constructs chatlists.ChatlistUpdates
 type TL_chatlists_chatlistUpdates struct {
 	MissingPeers []TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Chats        []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users        []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs bots.BotInfo
 type TL_bots_botInfo struct {
 	Name        string
 	About       string
 	Description string
 }
 
+// Constructs MessagePeerVote
 type TL_messagePeerVote struct {
 	Peer   TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Option []byte
 	Date   int32
 }
 
+// Constructs MessagePeerVote
 type TL_messagePeerVoteInputOption struct {
 	Peer TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Date int32
 }
 
+// Constructs MessagePeerVote
 type TL_messagePeerVoteMultiple struct {
 	Peer    TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Options [][]byte
 	Date    int32
 }
 
+// Constructs SponsoredWebPage
 type TL_sponsoredWebPage struct {
 	Flags    int32
 	Url      string
@@ -8956,6 +10154,7 @@ type TL_sponsoredWebPage struct {
 	Photo    TL // (flags.0) Photo: TL_photoEmpty | TL_photo
 }
 
+// Constructs StoryViews
 type TL_storyViews struct {
 	Flags          int32
 	HasViewers     bool // (flags.1)
@@ -8966,10 +10165,12 @@ type TL_storyViews struct {
 	RecentViewers  []int64 // (flags.0)
 }
 
+// Constructs StoryItem
 type TL_storyItemDeleted struct {
 	ID int32
 }
 
+// Constructs StoryItem
 type TL_storyItemSkipped struct {
 	Flags        int32
 	CloseFriends bool // (flags.8)
@@ -8978,6 +10179,7 @@ type TL_storyItemSkipped struct {
 	ExpireDate   int32
 }
 
+// Constructs StoryItem
 type TL_storyItem struct {
 	Flags            int32
 	Pinned           bool // (flags.5)
@@ -9001,12 +10203,14 @@ type TL_storyItem struct {
 	SentReaction     TL     // (flags.15) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Constructs stories.AllStories
 type TL_stories_allStoriesNotModified struct {
 	Flags       int32
 	State       string
 	StealthMode TL // StoriesStealthMode: TL_storiesStealthMode
 }
 
+// Constructs stories.AllStories
 type TL_stories_allStories struct {
 	Flags       int32
 	HasMore     bool // (flags.0)
@@ -9018,6 +10222,7 @@ type TL_stories_allStories struct {
 	StealthMode TL   // StoriesStealthMode: TL_storiesStealthMode
 }
 
+// Constructs stories.Stories
 type TL_stories_stories struct {
 	Count   int32
 	Stories []TL // StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
@@ -9025,6 +10230,7 @@ type TL_stories_stories struct {
 	Users   []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs StoryView
 type TL_storyView struct {
 	Flags                int32
 	Blocked              bool // (flags.0)
@@ -9034,6 +10240,7 @@ type TL_storyView struct {
 	Reaction             TL // (flags.2) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Constructs stories.StoryViewsList
 type TL_stories_storyViewsList struct {
 	Flags          int32
 	Count          int32
@@ -9043,11 +10250,13 @@ type TL_stories_storyViewsList struct {
 	NextOffset     string // (flags.0)
 }
 
+// Constructs stories.StoryViews
 type TL_stories_storyViews struct {
 	Views []TL // StoryViews: TL_storyViews
 	Users []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs InputReplyTo
 type TL_inputReplyToMessage struct {
 	Flags         int32
 	ReplyToMsgID  int32
@@ -9057,21 +10266,25 @@ type TL_inputReplyToMessage struct {
 	QuoteEntities []TL   // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Constructs InputReplyTo
 type TL_inputReplyToStory struct {
 	UserID  TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	StoryID int32
 }
 
+// Constructs ExportedStoryLink
 type TL_exportedStoryLink struct {
 	Link string
 }
 
+// Constructs StoriesStealthMode
 type TL_storiesStealthMode struct {
 	Flags             int32
 	ActiveUntilDate   int32 // (flags.0)
 	CooldownUntilDate int32 // (flags.1)
 }
 
+// Constructs MediaAreaCoordinates
 type TL_mediaAreaCoordinates struct {
 	X        float64
 	Y        float64
@@ -9080,6 +10293,7 @@ type TL_mediaAreaCoordinates struct {
 	Rotation float64
 }
 
+// Constructs MediaArea
 type TL_mediaAreaVenue struct {
 	Coordinates TL // MediaAreaCoordinates: TL_mediaAreaCoordinates
 	Geo         TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
@@ -9090,17 +10304,20 @@ type TL_mediaAreaVenue struct {
 	VenueType   string
 }
 
+// Constructs MediaArea
 type TL_inputMediaAreaVenue struct {
 	Coordinates TL // MediaAreaCoordinates: TL_mediaAreaCoordinates
 	QueryID     int64
 	ResultID    string
 }
 
+// Constructs MediaArea
 type TL_mediaAreaGeoPoint struct {
 	Coordinates TL // MediaAreaCoordinates: TL_mediaAreaCoordinates
 	Geo         TL // GeoPoint: TL_geoPointEmpty | TL_geoPoint
 }
 
+// Constructs MediaArea
 type TL_mediaAreaSuggestedReaction struct {
 	Flags       int32
 	Dark        bool // (flags.0)
@@ -9109,6 +10326,7 @@ type TL_mediaAreaSuggestedReaction struct {
 	Reaction    TL   // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Constructs PeerStories
 type TL_peerStories struct {
 	Flags     int32
 	Peer      TL    // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
@@ -9116,18 +10334,21 @@ type TL_peerStories struct {
 	Stories   []TL  // StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
 }
 
+// Constructs stories.PeerStories
 type TL_stories_peerStories struct {
 	Stories TL   // PeerStories: TL_peerStories
 	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users   []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs messages.WebPage
 type TL_messages_webPage struct {
 	Webpage TL   // WebPage: TL_webPageEmpty | TL_webPagePending | TL_webPage | TL_webPageNotModified
 	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users   []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs PremiumGiftCodeOption
 type TL_premiumGiftCodeOption struct {
 	Flags         int32
 	Users         int32
@@ -9138,6 +10359,7 @@ type TL_premiumGiftCodeOption struct {
 	Amount        int64
 }
 
+// Constructs payments.CheckedGiftCode
 type TL_payments_checkedGiftCode struct {
 	Flags         int32
 	ViaGiveaway   bool  // (flags.2)
@@ -9151,6 +10373,7 @@ type TL_payments_checkedGiftCode struct {
 	Users         []TL  // User: TL_userEmpty | TL_user
 }
 
+// Constructs payments.GiveawayInfo
 type TL_payments_giveawayInfo struct {
 	Flags                 int32
 	Participating         bool // (flags.0)
@@ -9161,6 +10384,7 @@ type TL_payments_giveawayInfo struct {
 	DisallowedCountry     string // (flags.4)
 }
 
+// Constructs payments.GiveawayInfo
 type TL_payments_giveawayInfoResults struct {
 	Flags          int32
 	Winner         bool // (flags.0)
@@ -9172,6 +10396,7 @@ type TL_payments_giveawayInfoResults struct {
 	ActivatedCount int32
 }
 
+// Constructs PrepaidGiveaway
 type TL_prepaidGiveaway struct {
 	ID       int64
 	Months   int32
@@ -9179,6 +10404,7 @@ type TL_prepaidGiveaway struct {
 	Date     int32
 }
 
+// Constructs Boost
 type TL_boost struct {
 	Flags         int32
 	Gift          bool // (flags.1)
@@ -9193,6 +10419,7 @@ type TL_boost struct {
 	Multiplier    int32  // (flags.5)
 }
 
+// Constructs premium.BoostsList
 type TL_premium_boostsList struct {
 	Flags      int32
 	Count      int32
@@ -9201,6 +10428,7 @@ type TL_premium_boostsList struct {
 	Users      []TL   // User: TL_userEmpty | TL_user
 }
 
+// Constructs MyBoost
 type TL_myBoost struct {
 	Flags             int32
 	Slot              int32
@@ -9210,12 +10438,14 @@ type TL_myBoost struct {
 	CooldownUntilDate int32 // (flags.1)
 }
 
+// Constructs premium.MyBoosts
 type TL_premium_myBoosts struct {
 	MyBoosts []TL // MyBoost: TL_myBoost
 	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users    []TL // User: TL_userEmpty | TL_user
 }
 
+// Constructs premium.BoostsStatus
 type TL_premium_boostsStatus struct {
 	Flags              int32
 	MyBoost            bool // (flags.2)
@@ -9230,16 +10460,19 @@ type TL_premium_boostsStatus struct {
 	MyBoostSlots       []int32 // (flags.2)
 }
 
+// Returns X:
 type TL_invokeAfterMsg struct {
 	MsgID int64
 	Query TL
 }
 
+// Returns X:
 type TL_invokeAfterMsgs struct {
 	MsgIds []int64
 	Query  TL
 }
 
+// Returns X:
 type TL_initConnection struct {
 	Flags          int32
 	ApiID          int32
@@ -9254,25 +10487,30 @@ type TL_initConnection struct {
 	Query          TL
 }
 
+// Returns X:
 type TL_invokeWithLayer struct {
 	Layer int32
 	Query TL
 }
 
+// Returns X:
 type TL_invokeWithoutUpdates struct {
 	Query TL
 }
 
+// Returns X:
 type TL_invokeWithMessagesRange struct {
 	Range TL // MessageRange: TL_messageRange
 	Query TL
 }
 
+// Returns X:
 type TL_invokeWithTakeout struct {
 	TakeoutID int64
 	Query     TL
 }
 
+// Returns auth.SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
 type TL_auth_sendCode struct {
 	PhoneNumber string
 	ApiID       int32
@@ -9280,6 +10518,7 @@ type TL_auth_sendCode struct {
 	Settings    TL // CodeSettings: TL_codeSettings
 }
 
+// Returns auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 type TL_auth_signUp struct {
 	PhoneNumber   string
 	PhoneCodeHash string
@@ -9287,6 +10526,7 @@ type TL_auth_signUp struct {
 	LastName      string
 }
 
+// Returns auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 type TL_auth_signIn struct {
 	Flags             int32
 	PhoneNumber       string
@@ -9295,21 +10535,26 @@ type TL_auth_signIn struct {
 	EmailVerification TL     // (flags.1) EmailVerification: TL_emailVerificationCode | TL_emailVerificationGoogle | TL_emailVerificationApple
 }
 
+// Returns auth.LoggedOut: TL_auth_loggedOut
 type TL_auth_logOut struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_auth_resetAuthorizations struct {
 }
 
+// Returns auth.ExportedAuthorization: TL_auth_exportedAuthorization
 type TL_auth_exportAuthorization struct {
 	DcID int32
 }
 
+// Returns auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 type TL_auth_importAuthorization struct {
 	ID    int64
 	Bytes []byte
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_auth_bindTempAuthKey struct {
 	PermAuthKeyID    int64
 	Nonce            int64
@@ -9317,6 +10562,7 @@ type TL_auth_bindTempAuthKey struct {
 	EncryptedMessage []byte
 }
 
+// Returns auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 type TL_auth_importBotAuthorization struct {
 	Flags        int32
 	ApiID        int32
@@ -9324,57 +10570,69 @@ type TL_auth_importBotAuthorization struct {
 	BotAuthToken string
 }
 
+// Returns auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 type TL_auth_checkPassword struct {
 	Password TL // InputCheckPasswordSRP: TL_inputCheckPasswordEmpty | TL_inputCheckPasswordSRP
 }
 
+// Returns auth.PasswordRecovery: TL_auth_passwordRecovery
 type TL_auth_requestPasswordRecovery struct {
 }
 
+// Returns auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 type TL_auth_recoverPassword struct {
 	Flags       int32
 	Code        string
-	NewSettings TL // (flags.0) account_PasswordInputSettings: TL_account_passwordInputSettings
+	NewSettings TL // (flags.0) account.PasswordInputSettings: TL_account_passwordInputSettings
 }
 
+// Returns auth.SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
 type TL_auth_resendCode struct {
 	PhoneNumber   string
 	PhoneCodeHash string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_auth_cancelCode struct {
 	PhoneNumber   string
 	PhoneCodeHash string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_auth_dropTempAuthKeys struct {
 	ExceptAuthKeys []int64
 }
 
+// Returns auth.LoginToken: TL_auth_loginToken | TL_auth_loginTokenMigrateTo | TL_auth_loginTokenSuccess
 type TL_auth_exportLoginToken struct {
 	ApiID     int32
 	ApiHash   string
 	ExceptIds []int64
 }
 
+// Returns auth.LoginToken: TL_auth_loginToken | TL_auth_loginTokenMigrateTo | TL_auth_loginTokenSuccess
 type TL_auth_importLoginToken struct {
 	Token []byte
 }
 
+// Returns Authorization: TL_authorization
 type TL_auth_acceptLoginToken struct {
 	Token []byte
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_auth_checkRecoveryPassword struct {
 	Code string
 }
 
+// Returns auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
 type TL_auth_importWebTokenAuthorization struct {
 	ApiID        int32
 	ApiHash      string
 	WebAuthToken string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_auth_requestFirebaseSms struct {
 	Flags          int32
 	PhoneNumber    string
@@ -9383,11 +10641,13 @@ type TL_auth_requestFirebaseSms struct {
 	IosPushSecret  string // (flags.1)
 }
 
+// Returns auth.SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
 type TL_auth_resetLoginEmail struct {
 	PhoneNumber   string
 	PhoneCodeHash string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_registerDevice struct {
 	Flags      int32
 	NoMuted    bool // (flags.0)
@@ -9398,24 +10658,29 @@ type TL_account_registerDevice struct {
 	OtherUids  []int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_unregisterDevice struct {
 	TokenType int32
 	Token     string
 	OtherUids []int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_updateNotifySettings struct {
 	Peer     TL // InputNotifyPeer: TL_inputNotifyPeer | TL_inputNotifyUsers | TL_inputNotifyChats | TL_inputNotifyBroadcasts | TL_inputNotifyForumTopic
 	Settings TL // InputPeerNotifySettings: TL_inputPeerNotifySettings
 }
 
+// Returns PeerNotifySettings: TL_peerNotifySettings
 type TL_account_getNotifySettings struct {
 	Peer TL // InputNotifyPeer: TL_inputNotifyPeer | TL_inputNotifyUsers | TL_inputNotifyChats | TL_inputNotifyBroadcasts | TL_inputNotifyForumTopic
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_resetNotifySettings struct {
 }
 
+// Returns User: TL_userEmpty | TL_user
 type TL_account_updateProfile struct {
 	Flags     int32
 	FirstName string // (flags.0)
@@ -9423,131 +10688,161 @@ type TL_account_updateProfile struct {
 	About     string // (flags.2)
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_updateStatus struct {
 	Offline TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns account.WallPapers: TL_account_wallPapersNotModified | TL_account_wallPapers
 type TL_account_getWallPapers struct {
 	Hash int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_reportPeer struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Reason  TL // ReportReason: TL_inputReportReasonSpam | TL_inputReportReasonViolence | TL_inputReportReasonPornography | TL_inputReportReasonChildAbuse | TL_inputReportReasonOther | TL_inputReportReasonCopyright | TL_inputReportReasonGeoIrrelevant | TL_inputReportReasonFake | TL_inputReportReasonIllegalDrugs | TL_inputReportReasonPersonalDetails
 	Message string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_checkUsername struct {
 	Username string
 }
 
+// Returns User: TL_userEmpty | TL_user
 type TL_account_updateUsername struct {
 	Username string
 }
 
+// Returns account.PrivacyRules: TL_account_privacyRules
 type TL_account_getPrivacy struct {
 	Key TL // InputPrivacyKey: TL_inputPrivacyKeyStatusTimestamp | TL_inputPrivacyKeyChatInvite | TL_inputPrivacyKeyPhoneCall | TL_inputPrivacyKeyPhoneP2P | TL_inputPrivacyKeyForwards | TL_inputPrivacyKeyProfilePhoto | TL_inputPrivacyKeyPhoneNumber | TL_inputPrivacyKeyAddedByPhone | TL_inputPrivacyKeyVoiceMessages | TL_inputPrivacyKeyAbout
 }
 
+// Returns account.PrivacyRules: TL_account_privacyRules
 type TL_account_setPrivacy struct {
 	Key   TL   // InputPrivacyKey: TL_inputPrivacyKeyStatusTimestamp | TL_inputPrivacyKeyChatInvite | TL_inputPrivacyKeyPhoneCall | TL_inputPrivacyKeyPhoneP2P | TL_inputPrivacyKeyForwards | TL_inputPrivacyKeyProfilePhoto | TL_inputPrivacyKeyPhoneNumber | TL_inputPrivacyKeyAddedByPhone | TL_inputPrivacyKeyVoiceMessages | TL_inputPrivacyKeyAbout
 	Rules []TL // InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_deleteAccount struct {
 	Flags    int32
 	Reason   string
 	Password TL // (flags.0) InputCheckPasswordSRP: TL_inputCheckPasswordEmpty | TL_inputCheckPasswordSRP
 }
 
+// Returns AccountDaysTTL: TL_accountDaysTTL
 type TL_account_getAccountTTL struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_setAccountTTL struct {
 	Ttl TL // AccountDaysTTL: TL_accountDaysTTL
 }
 
+// Returns auth.SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
 type TL_account_sendChangePhoneCode struct {
 	PhoneNumber string
 	Settings    TL // CodeSettings: TL_codeSettings
 }
 
+// Returns User: TL_userEmpty | TL_user
 type TL_account_changePhone struct {
 	PhoneNumber   string
 	PhoneCodeHash string
 	PhoneCode     string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_updateDeviceLocked struct {
 	Period int32
 }
 
+// Returns account.Authorizations: TL_account_authorizations
 type TL_account_getAuthorizations struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_resetAuthorization struct {
 	Hash int64
 }
 
+// Returns account.Password: TL_account_password
 type TL_account_getPassword struct {
 }
 
+// Returns account.PasswordSettings: TL_account_passwordSettings
 type TL_account_getPasswordSettings struct {
 	Password TL // InputCheckPasswordSRP: TL_inputCheckPasswordEmpty | TL_inputCheckPasswordSRP
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_updatePasswordSettings struct {
 	Password    TL // InputCheckPasswordSRP: TL_inputCheckPasswordEmpty | TL_inputCheckPasswordSRP
-	NewSettings TL // account_PasswordInputSettings: TL_account_passwordInputSettings
+	NewSettings TL // account.PasswordInputSettings: TL_account_passwordInputSettings
 }
 
+// Returns auth.SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
 type TL_account_sendConfirmPhoneCode struct {
 	Hash     string
 	Settings TL // CodeSettings: TL_codeSettings
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_confirmPhone struct {
 	PhoneCodeHash string
 	PhoneCode     string
 }
 
+// Returns account.TmpPassword: TL_account_tmpPassword
 type TL_account_getTmpPassword struct {
 	Password TL // InputCheckPasswordSRP: TL_inputCheckPasswordEmpty | TL_inputCheckPasswordSRP
 	Period   int32
 }
 
+// Returns account.WebAuthorizations: TL_account_webAuthorizations
 type TL_account_getWebAuthorizations struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_resetWebAuthorization struct {
 	Hash int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_resetWebAuthorizations struct {
 }
 
+// Returns Vector<SecureValue>: TL_secureValue
 type TL_account_getAllSecureValues struct {
 }
 
+// Returns Vector<SecureValue>: TL_secureValue
 type TL_account_getSecureValue struct {
 	Types []TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 }
 
+// Returns SecureValue: TL_secureValue
 type TL_account_saveSecureValue struct {
 	Value          TL // InputSecureValue: TL_inputSecureValue
 	SecureSecretID int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_deleteSecureValue struct {
 	Types []TL // SecureValueType: TL_secureValueTypePersonalDetails | TL_secureValueTypePassport | TL_secureValueTypeDriverLicense | TL_secureValueTypeIdentityCard | TL_secureValueTypeInternalPassport | TL_secureValueTypeAddress | TL_secureValueTypeUtilityBill | TL_secureValueTypeBankStatement | TL_secureValueTypeRentalAgreement | TL_secureValueTypePassportRegistration | TL_secureValueTypeTemporaryRegistration | TL_secureValueTypePhone | TL_secureValueTypeEmail
 }
 
+// Returns account.AuthorizationForm: TL_account_authorizationForm
 type TL_account_getAuthorizationForm struct {
 	BotID     int64
 	Scope     string
 	PublicKey string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_acceptAuthorization struct {
 	BotID       int64
 	Scope       string
@@ -9556,27 +10851,32 @@ type TL_account_acceptAuthorization struct {
 	Credentials TL   // SecureCredentialsEncrypted: TL_secureCredentialsEncrypted
 }
 
+// Returns auth.SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
 type TL_account_sendVerifyPhoneCode struct {
 	PhoneNumber string
 	Settings    TL // CodeSettings: TL_codeSettings
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_verifyPhone struct {
 	PhoneNumber   string
 	PhoneCodeHash string
 	PhoneCode     string
 }
 
+// Returns account.SentEmailCode: TL_account_sentEmailCode
 type TL_account_sendVerifyEmailCode struct {
 	Purpose TL // EmailVerifyPurpose: TL_emailVerifyPurposeLoginSetup | TL_emailVerifyPurposeLoginChange | TL_emailVerifyPurposePassport
 	Email   string
 }
 
+// Returns account.EmailVerified: TL_account_emailVerified | TL_account_emailVerifiedLogin
 type TL_account_verifyEmail struct {
 	Purpose      TL // EmailVerifyPurpose: TL_emailVerifyPurposeLoginSetup | TL_emailVerifyPurposeLoginChange | TL_emailVerifyPurposePassport
 	Verification TL // EmailVerification: TL_emailVerificationCode | TL_emailVerificationGoogle | TL_emailVerificationApple
 }
 
+// Returns account.Takeout: TL_account_takeout
 type TL_account_initTakeoutSession struct {
 	Flags             int32
 	Contacts          bool  // (flags.0)
@@ -9588,28 +10888,35 @@ type TL_account_initTakeoutSession struct {
 	FileMaxSize       int64 // (flags.5)
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_finishTakeoutSession struct {
 	Flags   int32
 	Success bool // (flags.0)
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_confirmPasswordEmail struct {
 	Code string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_resendPasswordEmail struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_cancelPasswordEmail struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_getContactSignUpNotification struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_setContactSignUpNotification struct {
 	Silent TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_account_getNotifyExceptions struct {
 	Flags          int32
 	CompareSound   bool // (flags.1)
@@ -9617,10 +10924,12 @@ type TL_account_getNotifyExceptions struct {
 	Peer           TL   // (flags.0) InputNotifyPeer: TL_inputNotifyPeer | TL_inputNotifyUsers | TL_inputNotifyChats | TL_inputNotifyBroadcasts | TL_inputNotifyForumTopic
 }
 
+// Returns WallPaper: TL_wallPaper | TL_wallPaperNoFile
 type TL_account_getWallPaper struct {
 	Wallpaper TL // InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
 }
 
+// Returns WallPaper: TL_wallPaper | TL_wallPaperNoFile
 type TL_account_uploadWallPaper struct {
 	Flags    int32
 	ForChat  bool // (flags.0)
@@ -9629,23 +10938,28 @@ type TL_account_uploadWallPaper struct {
 	Settings TL // WallPaperSettings: TL_wallPaperSettings
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_saveWallPaper struct {
 	Wallpaper TL // InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
 	Unsave    TL // Bool: TL_boolFalse | TL_boolTrue
 	Settings  TL // WallPaperSettings: TL_wallPaperSettings
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_installWallPaper struct {
 	Wallpaper TL // InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
 	Settings  TL // WallPaperSettings: TL_wallPaperSettings
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_resetWallPapers struct {
 }
 
+// Returns account.AutoDownloadSettings: TL_account_autoDownloadSettings
 type TL_account_getAutoDownloadSettings struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_saveAutoDownloadSettings struct {
 	Flags    int32
 	Low      bool // (flags.0)
@@ -9653,6 +10967,7 @@ type TL_account_saveAutoDownloadSettings struct {
 	Settings TL   // AutoDownloadSettings: TL_autoDownloadSettings
 }
 
+// Returns Document: TL_documentEmpty | TL_document
 type TL_account_uploadTheme struct {
 	Flags    int32
 	File     TL // InputFile: TL_inputFile | TL_inputFileBig
@@ -9661,6 +10976,7 @@ type TL_account_uploadTheme struct {
 	MimeType string
 }
 
+// Returns Theme: TL_theme
 type TL_account_createTheme struct {
 	Flags    int32
 	Slug     string
@@ -9669,6 +10985,7 @@ type TL_account_createTheme struct {
 	Settings []TL // (flags.3) InputThemeSettings: TL_inputThemeSettings
 }
 
+// Returns Theme: TL_theme
 type TL_account_updateTheme struct {
 	Flags    int32
 	Format   string
@@ -9679,11 +10996,13 @@ type TL_account_updateTheme struct {
 	Settings []TL   // (flags.3) InputThemeSettings: TL_inputThemeSettings
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_saveTheme struct {
 	Theme  TL // InputTheme: TL_inputTheme | TL_inputThemeSlug
 	Unsave TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_installTheme struct {
 	Flags     int32
 	Dark      bool   // (flags.0)
@@ -9692,35 +11011,43 @@ type TL_account_installTheme struct {
 	BaseTheme TL     // (flags.3) BaseTheme: TL_baseThemeClassic | TL_baseThemeDay | TL_baseThemeNight | TL_baseThemeTinted | TL_baseThemeArctic
 }
 
+// Returns Theme: TL_theme
 type TL_account_getTheme struct {
 	Format string
 	Theme  TL // InputTheme: TL_inputTheme | TL_inputThemeSlug
 }
 
+// Returns account.Themes: TL_account_themesNotModified | TL_account_themes
 type TL_account_getThemes struct {
 	Format string
 	Hash   int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_setContentSettings struct {
 	Flags            int32
 	SensitiveEnabled bool // (flags.0)
 }
 
+// Returns account.ContentSettings: TL_account_contentSettings
 type TL_account_getContentSettings struct {
 }
 
+// Returns Vector<WallPaper>: TL_wallPaper | TL_wallPaperNoFile
 type TL_account_getMultiWallPapers struct {
 	Wallpapers []TL // InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
 }
 
+// Returns GlobalPrivacySettings: TL_globalPrivacySettings
 type TL_account_getGlobalPrivacySettings struct {
 }
 
+// Returns GlobalPrivacySettings: TL_globalPrivacySettings
 type TL_account_setGlobalPrivacySettings struct {
 	Settings TL // GlobalPrivacySettings: TL_globalPrivacySettings
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_reportProfilePhoto struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	PhotoID TL // InputPhoto: TL_inputPhotoEmpty | TL_inputPhoto
@@ -9728,20 +11055,25 @@ type TL_account_reportProfilePhoto struct {
 	Message string
 }
 
+// Returns account.ResetPasswordResult: TL_account_resetPasswordFailedWait | TL_account_resetPasswordRequestedWait | TL_account_resetPasswordOk
 type TL_account_resetPassword struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_declinePasswordReset struct {
 }
 
+// Returns account.Themes: TL_account_themesNotModified | TL_account_themes
 type TL_account_getChatThemes struct {
 	Hash int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_setAuthorizationTTL struct {
 	AuthorizationTtlDays int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_changeAuthorizationSettings struct {
 	Flags                     int32
 	Confirmed                 bool // (flags.3)
@@ -9750,56 +11082,69 @@ type TL_account_changeAuthorizationSettings struct {
 	CallRequestsDisabled      TL // (flags.1) Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns account.SavedRingtones: TL_account_savedRingtonesNotModified | TL_account_savedRingtones
 type TL_account_getSavedRingtones struct {
 	Hash int64
 }
 
+// Returns account.SavedRingtone: TL_account_savedRingtone | TL_account_savedRingtoneConverted
 type TL_account_saveRingtone struct {
 	ID     TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
 	Unsave TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Document: TL_documentEmpty | TL_document
 type TL_account_uploadRingtone struct {
 	File     TL // InputFile: TL_inputFile | TL_inputFileBig
 	FileName string
 	MimeType string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_updateEmojiStatus struct {
 	EmojiStatus TL // EmojiStatus: TL_emojiStatusEmpty | TL_emojiStatus | TL_emojiStatusUntil
 }
 
+// Returns account.EmojiStatuses: TL_account_emojiStatusesNotModified | TL_account_emojiStatuses
 type TL_account_getDefaultEmojiStatuses struct {
 	Hash int64
 }
 
+// Returns account.EmojiStatuses: TL_account_emojiStatusesNotModified | TL_account_emojiStatuses
 type TL_account_getRecentEmojiStatuses struct {
 	Hash int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_clearRecentEmojiStatuses struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_reorderUsernames struct {
 	Order []string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_toggleUsername struct {
 	Username string
 	Active   TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns EmojiList: TL_emojiListNotModified | TL_emojiList
 type TL_account_getDefaultProfilePhotoEmojis struct {
 	Hash int64
 }
 
+// Returns EmojiList: TL_emojiListNotModified | TL_emojiList
 type TL_account_getDefaultGroupPhotoEmojis struct {
 	Hash int64
 }
 
+// Returns account.AutoSaveSettings: TL_account_autoSaveSettings
 type TL_account_getAutoSaveSettings struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_saveAutoSaveSettings struct {
 	Flags      int32
 	Users      bool // (flags.0)
@@ -9809,71 +11154,87 @@ type TL_account_saveAutoSaveSettings struct {
 	Settings   TL   // AutoSaveSettings: TL_autoSaveSettings
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_deleteAutoSaveExceptions struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_invalidateSignInCodes struct {
 	Codes []string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_updateColor struct {
 	Flags             int32
 	Color             int32
 	BackgroundEmojiID int64 // (flags.0)
 }
 
+// Returns EmojiList: TL_emojiListNotModified | TL_emojiList
 type TL_account_getDefaultBackgroundEmojis struct {
 	Hash int64
 }
 
+// Returns Vector<User>: TL_userEmpty | TL_user
 type TL_users_getUsers struct {
 	ID []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns users.UserFull: TL_users_userFull
 type TL_users_getFullUser struct {
 	ID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_users_setSecureValueErrors struct {
 	ID     TL   // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Errors []TL // SecureValueError: TL_secureValueErrorData | TL_secureValueErrorFrontSide | TL_secureValueErrorReverseSide | TL_secureValueErrorSelfie | TL_secureValueErrorFile | TL_secureValueErrorFiles | TL_secureValueError | TL_secureValueErrorTranslationFile | TL_secureValueErrorTranslationFiles
 }
 
+// Returns Vector<int>:
 type TL_contacts_getContactIDs struct {
 	Hash int64
 }
 
+// Returns Vector<ContactStatus>: TL_contactStatus
 type TL_contacts_getStatuses struct {
 }
 
+// Returns contacts.Contacts: TL_contacts_contactsNotModified | TL_contacts_contacts
 type TL_contacts_getContacts struct {
 	Hash int64
 }
 
+// Returns contacts.ImportedContacts: TL_contacts_importedContacts
 type TL_contacts_importContacts struct {
 	Contacts []TL // InputContact: TL_inputPhoneContact
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_contacts_deleteContacts struct {
 	ID []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_deleteByPhones struct {
 	Phones []string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_block struct {
 	Flags         int32
 	MyStoriesFrom bool // (flags.0)
 	ID            TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_unblock struct {
 	Flags         int32
 	MyStoriesFrom bool // (flags.0)
 	ID            TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns contacts.Blocked: TL_contacts_blocked | TL_contacts_blockedSlice
 type TL_contacts_getBlocked struct {
 	Flags         int32
 	MyStoriesFrom bool // (flags.0)
@@ -9881,15 +11242,18 @@ type TL_contacts_getBlocked struct {
 	Limit         int32
 }
 
+// Returns contacts.Found: TL_contacts_found
 type TL_contacts_search struct {
 	Q     string
 	Limit int32
 }
 
+// Returns contacts.ResolvedPeer: TL_contacts_resolvedPeer
 type TL_contacts_resolveUsername struct {
 	Username string
 }
 
+// Returns contacts.TopPeers: TL_contacts_topPeersNotModified | TL_contacts_topPeers | TL_contacts_topPeersDisabled
 type TL_contacts_getTopPeers struct {
 	Flags          int32
 	Correspondents bool // (flags.0)
@@ -9905,21 +11269,26 @@ type TL_contacts_getTopPeers struct {
 	Hash           int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_resetTopPeerRating struct {
 	Category TL // TopPeerCategory: TL_topPeerCategoryBotsPM | TL_topPeerCategoryBotsInline | TL_topPeerCategoryCorrespondents | TL_topPeerCategoryGroups | TL_topPeerCategoryChannels | TL_topPeerCategoryPhoneCalls | TL_topPeerCategoryForwardUsers | TL_topPeerCategoryForwardChats
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_resetSaved struct {
 }
 
+// Returns Vector<SavedContact>: TL_savedPhoneContact
 type TL_contacts_getSaved struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_toggleTopPeers struct {
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_contacts_addContact struct {
 	Flags                    int32
 	AddPhonePrivacyException bool // (flags.0)
@@ -9929,10 +11298,12 @@ type TL_contacts_addContact struct {
 	Phone                    string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_contacts_acceptContact struct {
 	ID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_contacts_getLocated struct {
 	Flags       int32
 	Background  bool  // (flags.1)
@@ -9940,6 +11311,7 @@ type TL_contacts_getLocated struct {
 	SelfExpires int32 // (flags.0)
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_contacts_blockFromReplies struct {
 	Flags         int32
 	DeleteMessage bool // (flags.0)
@@ -9948,21 +11320,26 @@ type TL_contacts_blockFromReplies struct {
 	MsgID         int32
 }
 
+// Returns contacts.ResolvedPeer: TL_contacts_resolvedPeer
 type TL_contacts_resolvePhone struct {
 	Phone string
 }
 
+// Returns ExportedContactToken: TL_exportedContactToken
 type TL_contacts_exportContactToken struct {
 }
 
+// Returns User: TL_userEmpty | TL_user
 type TL_contacts_importContactToken struct {
 	Token string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_editCloseFriends struct {
 	ID []int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_setBlocked struct {
 	Flags         int32
 	MyStoriesFrom bool // (flags.0)
@@ -9970,10 +11347,12 @@ type TL_contacts_setBlocked struct {
 	Limit         int32
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getMessages struct {
 	ID []TL // InputMessage: TL_inputMessageID | TL_inputMessageReplyTo | TL_inputMessagePinned | TL_inputMessageCallbackQuery
 }
 
+// Returns messages.Dialogs: TL_messages_dialogs | TL_messages_dialogsSlice | TL_messages_dialogsNotModified
 type TL_messages_getDialogs struct {
 	Flags         int32
 	ExcludePinned bool  // (flags.0)
@@ -9985,6 +11364,7 @@ type TL_messages_getDialogs struct {
 	Hash          int64
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getHistory struct {
 	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	OffsetID   int32
@@ -9996,6 +11376,7 @@ type TL_messages_getHistory struct {
 	Hash       int64
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_search struct {
 	Flags     int32
 	Peer      TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10013,11 +11394,13 @@ type TL_messages_search struct {
 	Hash      int64
 }
 
+// Returns messages.AffectedMessages: TL_messages_affectedMessages
 type TL_messages_readHistory struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MaxID int32
 }
 
+// Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_messages_deleteHistory struct {
 	Flags     int32
 	JustClear bool // (flags.0)
@@ -10028,16 +11411,19 @@ type TL_messages_deleteHistory struct {
 	MaxDate   int32 // (flags.3)
 }
 
+// Returns messages.AffectedMessages: TL_messages_affectedMessages
 type TL_messages_deleteMessages struct {
 	Flags  int32
 	Revoke bool // (flags.0)
 	ID     []int32
 }
 
+// Returns Vector<ReceivedNotifyMessage>: TL_receivedNotifyMessage
 type TL_messages_receivedMessages struct {
 	MaxID int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setTyping struct {
 	Flags    int32
 	Peer     TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10045,6 +11431,7 @@ type TL_messages_setTyping struct {
 	Action   TL    // SendMessageAction: TL_sendMessageTypingAction | TL_sendMessageCancelAction | TL_sendMessageRecordVideoAction | TL_sendMessageUploadVideoAction | TL_sendMessageRecordAudioAction | TL_sendMessageUploadAudioAction | TL_sendMessageUploadPhotoAction | TL_sendMessageUploadDocumentAction | TL_sendMessageGeoLocationAction | TL_sendMessageChooseContactAction | TL_sendMessageGamePlayAction | TL_sendMessageRecordRoundAction | TL_sendMessageUploadRoundAction | TL_speakingInGroupCallAction | TL_sendMessageHistoryImportAction | TL_sendMessageChooseStickerAction | TL_sendMessageEmojiInteraction | TL_sendMessageEmojiInteractionSeen
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendMessage struct {
 	Flags                  int32
 	NoWebpage              bool // (flags.1)
@@ -10064,6 +11451,7 @@ type TL_messages_sendMessage struct {
 	SendAs                 TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendMedia struct {
 	Flags                  int32
 	Silent                 bool // (flags.5)
@@ -10083,6 +11471,7 @@ type TL_messages_sendMedia struct {
 	SendAs                 TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_forwardMessages struct {
 	Flags             int32
 	Silent            bool // (flags.5)
@@ -10100,14 +11489,17 @@ type TL_messages_forwardMessages struct {
 	SendAs            TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_reportSpam struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.PeerSettings: TL_messages_peerSettings
 type TL_messages_getPeerSettings struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_report struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID      []int32
@@ -10115,30 +11507,36 @@ type TL_messages_report struct {
 	Message string
 }
 
+// Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
 type TL_messages_getChats struct {
 	ID []int64
 }
 
+// Returns messages.ChatFull: TL_messages_chatFull
 type TL_messages_getFullChat struct {
 	ChatID int64
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_editChatTitle struct {
 	ChatID int64
 	Title  string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_editChatPhoto struct {
 	ChatID int64
 	Photo  TL // InputChatPhoto: TL_inputChatPhotoEmpty | TL_inputChatUploadedPhoto | TL_inputChatPhoto
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_addChatUser struct {
 	ChatID   int64
 	UserID   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	FwdLimit int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_deleteChatUser struct {
 	Flags         int32
 	RevokeHistory bool // (flags.0)
@@ -10146,6 +11544,7 @@ type TL_messages_deleteChatUser struct {
 	UserID        TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_createChat struct {
 	Flags     int32
 	Users     []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
@@ -10153,39 +11552,46 @@ type TL_messages_createChat struct {
 	TtlPeriod int32 // (flags.0)
 }
 
+// Returns messages.DhConfig: TL_messages_dhConfigNotModified | TL_messages_dhConfig
 type TL_messages_getDhConfig struct {
 	Version      int32
 	RandomLength int32
 }
 
+// Returns EncryptedChat: TL_encryptedChatEmpty | TL_encryptedChatWaiting | TL_encryptedChatRequested | TL_encryptedChat | TL_encryptedChatDiscarded
 type TL_messages_requestEncryption struct {
 	UserID   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	RandomID int32
 	GA       []byte
 }
 
+// Returns EncryptedChat: TL_encryptedChatEmpty | TL_encryptedChatWaiting | TL_encryptedChatRequested | TL_encryptedChat | TL_encryptedChatDiscarded
 type TL_messages_acceptEncryption struct {
 	Peer           TL // InputEncryptedChat: TL_inputEncryptedChat
 	GB             []byte
 	KeyFingerprint int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_discardEncryption struct {
 	Flags         int32
 	DeleteHistory bool // (flags.0)
 	ChatID        int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setEncryptedTyping struct {
 	Peer   TL // InputEncryptedChat: TL_inputEncryptedChat
 	Typing TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_readEncryptedHistory struct {
 	Peer    TL // InputEncryptedChat: TL_inputEncryptedChat
 	MaxDate int32
 }
 
+// Returns messages.SentEncryptedMessage: TL_messages_sentEncryptedMessage | TL_messages_sentEncryptedFile
 type TL_messages_sendEncrypted struct {
 	Flags    int32
 	Silent   bool // (flags.0)
@@ -10194,6 +11600,7 @@ type TL_messages_sendEncrypted struct {
 	Data     []byte
 }
 
+// Returns messages.SentEncryptedMessage: TL_messages_sentEncryptedMessage | TL_messages_sentEncryptedFile
 type TL_messages_sendEncryptedFile struct {
 	Flags    int32
 	Silent   bool // (flags.0)
@@ -10203,39 +11610,47 @@ type TL_messages_sendEncryptedFile struct {
 	File     TL // InputEncryptedFile: TL_inputEncryptedFileEmpty | TL_inputEncryptedFileUploaded | TL_inputEncryptedFile | TL_inputEncryptedFileBigUploaded
 }
 
+// Returns messages.SentEncryptedMessage: TL_messages_sentEncryptedMessage | TL_messages_sentEncryptedFile
 type TL_messages_sendEncryptedService struct {
 	Peer     TL // InputEncryptedChat: TL_inputEncryptedChat
 	RandomID int64
 	Data     []byte
 }
 
+// Returns Vector<long>:
 type TL_messages_receivedQueue struct {
 	MaxQts int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_reportEncryptedSpam struct {
 	Peer TL // InputEncryptedChat: TL_inputEncryptedChat
 }
 
+// Returns messages.AffectedMessages: TL_messages_affectedMessages
 type TL_messages_readMessageContents struct {
 	ID []int32
 }
 
+// Returns messages.Stickers: TL_messages_stickersNotModified | TL_messages_stickers
 type TL_messages_getStickers struct {
 	Emoticon string
 	Hash     int64
 }
 
+// Returns messages.AllStickers: TL_messages_allStickersNotModified | TL_messages_allStickers
 type TL_messages_getAllStickers struct {
 	Hash int64
 }
 
+// Returns MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
 type TL_messages_getWebPagePreview struct {
 	Flags    int32
 	Message  string
 	Entities []TL // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Returns ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
 type TL_messages_exportChatInvite struct {
 	Flags                 int32
 	LegacyRevokePermanent bool   // (flags.2)
@@ -10246,28 +11661,34 @@ type TL_messages_exportChatInvite struct {
 	Title                 string // (flags.4)
 }
 
+// Returns ChatInvite: TL_chatInviteAlready | TL_chatInvite | TL_chatInvitePeek
 type TL_messages_checkChatInvite struct {
 	Hash string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_importChatInvite struct {
 	Hash string
 }
 
+// Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_messages_getStickerSet struct {
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 	Hash       int32
 }
 
+// Returns messages.StickerSetInstallResult: TL_messages_stickerSetInstallResultSuccess | TL_messages_stickerSetInstallResultArchive
 type TL_messages_installStickerSet struct {
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 	Archived   TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_uninstallStickerSet struct {
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_startBot struct {
 	Bot        TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10275,22 +11696,26 @@ type TL_messages_startBot struct {
 	StartParam string
 }
 
+// Returns messages.MessageViews: TL_messages_messageViews
 type TL_messages_getMessagesViews struct {
 	Peer      TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID        []int32
 	Increment TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_editChatAdmin struct {
 	ChatID  int64
 	UserID  TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	IsAdmin TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_migrateChat struct {
 	ChatID int64
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_searchGlobal struct {
 	Flags      int32
 	FolderID   int32 // (flags.0)
@@ -10304,6 +11729,7 @@ type TL_messages_searchGlobal struct {
 	Limit      int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_reorderStickerSets struct {
 	Flags  int32
 	Masks  bool // (flags.0)
@@ -10311,21 +11737,25 @@ type TL_messages_reorderStickerSets struct {
 	Order  []int64
 }
 
+// Returns Document: TL_documentEmpty | TL_document
 type TL_messages_getDocumentByHash struct {
 	Sha256   []byte
 	Size     int64
 	MimeType string
 }
 
+// Returns messages.SavedGifs: TL_messages_savedGifsNotModified | TL_messages_savedGifs
 type TL_messages_getSavedGifs struct {
 	Hash int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_saveGif struct {
 	ID     TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
 	Unsave TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns messages.BotResults: TL_messages_botResults
 type TL_messages_getInlineBotResults struct {
 	Flags    int32
 	Bot      TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
@@ -10335,6 +11765,7 @@ type TL_messages_getInlineBotResults struct {
 	Offset   string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setInlineBotResults struct {
 	Flags         int32
 	Gallery       bool // (flags.0)
@@ -10347,6 +11778,7 @@ type TL_messages_setInlineBotResults struct {
 	SwitchWebview TL     // (flags.4) InlineBotWebView: TL_inlineBotWebView
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendInlineBotResult struct {
 	Flags        int32
 	Silent       bool // (flags.5)
@@ -10362,11 +11794,13 @@ type TL_messages_sendInlineBotResult struct {
 	SendAs       TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.MessageEditData: TL_messages_messageEditData
 type TL_messages_getMessageEditData struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_editMessage struct {
 	Flags        int32
 	NoWebpage    bool // (flags.1)
@@ -10380,6 +11814,7 @@ type TL_messages_editMessage struct {
 	ScheduleDate int32  // (flags.15)
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_editInlineBotMessage struct {
 	Flags       int32
 	NoWebpage   bool   // (flags.1)
@@ -10391,6 +11826,7 @@ type TL_messages_editInlineBotMessage struct {
 	Entities    []TL   // (flags.3) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Returns messages.BotCallbackAnswer: TL_messages_botCallbackAnswer
 type TL_messages_getBotCallbackAnswer struct {
 	Flags    int32
 	Game     bool // (flags.1)
@@ -10400,6 +11836,7 @@ type TL_messages_getBotCallbackAnswer struct {
 	Password TL     // (flags.2) InputCheckPasswordSRP: TL_inputCheckPasswordEmpty | TL_inputCheckPasswordSRP
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setBotCallbackAnswer struct {
 	Flags     int32
 	Alert     bool // (flags.1)
@@ -10409,10 +11846,12 @@ type TL_messages_setBotCallbackAnswer struct {
 	CacheTime int32
 }
 
+// Returns messages.PeerDialogs: TL_messages_peerDialogs
 type TL_messages_getPeerDialogs struct {
 	Peers []TL // InputDialogPeer: TL_inputDialogPeer | TL_inputDialogPeerFolder
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_saveDraft struct {
 	Flags       int32
 	NoWebpage   bool // (flags.1)
@@ -10424,23 +11863,28 @@ type TL_messages_saveDraft struct {
 	Media       TL   // (flags.5) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_getAllDrafts struct {
 }
 
+// Returns messages.FeaturedStickers: TL_messages_featuredStickersNotModified | TL_messages_featuredStickers
 type TL_messages_getFeaturedStickers struct {
 	Hash int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_readFeaturedStickers struct {
 	ID []int64
 }
 
+// Returns messages.RecentStickers: TL_messages_recentStickersNotModified | TL_messages_recentStickers
 type TL_messages_getRecentStickers struct {
 	Flags    int32
 	Attached bool // (flags.0)
 	Hash     int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_saveRecentSticker struct {
 	Flags    int32
 	Attached bool // (flags.0)
@@ -10448,11 +11892,13 @@ type TL_messages_saveRecentSticker struct {
 	Unsave   TL   // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_clearRecentStickers struct {
 	Flags    int32
 	Attached bool // (flags.0)
 }
 
+// Returns messages.ArchivedStickers: TL_messages_archivedStickers
 type TL_messages_getArchivedStickers struct {
 	Flags    int32
 	Masks    bool // (flags.0)
@@ -10461,14 +11907,17 @@ type TL_messages_getArchivedStickers struct {
 	Limit    int32
 }
 
+// Returns messages.AllStickers: TL_messages_allStickersNotModified | TL_messages_allStickers
 type TL_messages_getMaskStickers struct {
 	Hash int64
 }
 
+// Returns Vector<StickerSetCovered>: TL_stickerSetCovered | TL_stickerSetMultiCovered | TL_stickerSetFullCovered | TL_stickerSetNoCovered
 type TL_messages_getAttachedStickers struct {
 	Media TL // InputStickeredMedia: TL_inputStickeredMediaPhoto | TL_inputStickeredMediaDocument
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_setGameScore struct {
 	Flags       int32
 	EditMessage bool // (flags.0)
@@ -10479,6 +11928,7 @@ type TL_messages_setGameScore struct {
 	Score       int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setInlineGameScore struct {
 	Flags       int32
 	EditMessage bool // (flags.0)
@@ -10488,34 +11938,40 @@ type TL_messages_setInlineGameScore struct {
 	Score       int32
 }
 
+// Returns messages.HighScores: TL_messages_highScores
 type TL_messages_getGameHighScores struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID     int32
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns messages.HighScores: TL_messages_highScores
 type TL_messages_getInlineGameHighScores struct {
 	ID     TL // InputBotInlineMessageID: TL_inputBotInlineMessageID | TL_inputBotInlineMessageID64
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
 type TL_messages_getCommonChats struct {
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	MaxID  int64
 	Limit  int32
 }
 
+// Returns messages.WebPage: TL_messages_webPage
 type TL_messages_getWebPage struct {
 	Url  string
 	Hash int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_toggleDialogPin struct {
 	Flags  int32
 	Pinned bool // (flags.0)
 	Peer   TL   // InputDialogPeer: TL_inputDialogPeer | TL_inputDialogPeerFolder
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_reorderPinnedDialogs struct {
 	Flags    int32
 	Force    bool // (flags.0)
@@ -10523,10 +11979,12 @@ type TL_messages_reorderPinnedDialogs struct {
 	Order    []TL // InputDialogPeer: TL_inputDialogPeer | TL_inputDialogPeerFolder
 }
 
+// Returns messages.PeerDialogs: TL_messages_peerDialogs
 type TL_messages_getPinnedDialogs struct {
 	FolderID int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setBotShippingResults struct {
 	Flags           int32
 	QueryID         int64
@@ -10534,6 +11992,7 @@ type TL_messages_setBotShippingResults struct {
 	ShippingOptions []TL   // (flags.1) ShippingOption: TL_shippingOption
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setBotPrecheckoutResults struct {
 	Flags   int32
 	Success bool // (flags.1)
@@ -10541,26 +12000,31 @@ type TL_messages_setBotPrecheckoutResults struct {
 	Error   string // (flags.0)
 }
 
+// Returns MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
 type TL_messages_uploadMedia struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Media TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendScreenshotNotification struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ReplyTo  TL // InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	RandomID int64
 }
 
+// Returns messages.FavedStickers: TL_messages_favedStickersNotModified | TL_messages_favedStickers
 type TL_messages_getFavedStickers struct {
 	Hash int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_faveSticker struct {
 	ID     TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
 	Unfave TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getUnreadMentions struct {
 	Flags     int32
 	Peer      TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10572,18 +12036,21 @@ type TL_messages_getUnreadMentions struct {
 	MinID     int32
 }
 
+// Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_messages_readMentions struct {
 	Flags    int32
 	Peer     TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	TopMsgID int32 // (flags.0)
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getRecentLocations struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Limit int32
 	Hash  int64
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendMultiMedia struct {
 	Flags                  int32
 	Silent                 bool  // (flags.5)
@@ -10599,11 +12066,13 @@ type TL_messages_sendMultiMedia struct {
 	SendAs                 TL    // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns EncryptedFile: TL_encryptedFileEmpty | TL_encryptedFile
 type TL_messages_uploadEncryptedFile struct {
 	Peer TL // InputEncryptedChat: TL_inputEncryptedChat
 	File TL // InputEncryptedFile: TL_inputEncryptedFileEmpty | TL_inputEncryptedFileUploaded | TL_inputEncryptedFile | TL_inputEncryptedFileBigUploaded
 }
 
+// Returns messages.FoundStickerSets: TL_messages_foundStickerSetsNotModified | TL_messages_foundStickerSets
 type TL_messages_searchStickerSets struct {
 	Flags           int32
 	ExcludeFeatured bool // (flags.0)
@@ -10611,21 +12080,26 @@ type TL_messages_searchStickerSets struct {
 	Hash            int64
 }
 
+// Returns Vector<MessageRange>: TL_messageRange
 type TL_messages_getSplitRanges struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_markDialogUnread struct {
 	Flags  int32
 	Unread bool // (flags.0)
 	Peer   TL   // InputDialogPeer: TL_inputDialogPeer | TL_inputDialogPeerFolder
 }
 
+// Returns Vector<DialogPeer>: TL_dialogPeer | TL_dialogPeerFolder
 type TL_messages_getDialogUnreadMarks struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_clearAllDrafts struct {
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_updatePinnedMessage struct {
 	Flags     int32
 	Silent    bool // (flags.0)
@@ -10635,48 +12109,58 @@ type TL_messages_updatePinnedMessage struct {
 	ID        int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendVote struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID   int32
 	Options [][]byte
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_getPollResults struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID int32
 }
 
+// Returns ChatOnlines: TL_chatOnlines
 type TL_messages_getOnlines struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_editChatAbout struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	About string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_editChatDefaultBannedRights struct {
 	Peer         TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	BannedRights TL // ChatBannedRights: TL_chatBannedRights
 }
 
+// Returns EmojiKeywordsDifference: TL_emojiKeywordsDifference
 type TL_messages_getEmojiKeywords struct {
 	LangCode string
 }
 
+// Returns EmojiKeywordsDifference: TL_emojiKeywordsDifference
 type TL_messages_getEmojiKeywordsDifference struct {
 	LangCode    string
 	FromVersion int32
 }
 
+// Returns Vector<EmojiLanguage>: TL_emojiLanguage
 type TL_messages_getEmojiKeywordsLanguages struct {
 	LangCodes []string
 }
 
+// Returns EmojiURL: TL_emojiURL
 type TL_messages_getEmojiURL struct {
 	LangCode string
 }
 
+// Returns Vector<messages.SearchCounter>: TL_messages_searchCounter
 type TL_messages_getSearchCounters struct {
 	Flags    int32
 	Peer     TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10684,6 +12168,7 @@ type TL_messages_getSearchCounters struct {
 	Filters  []TL  // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
 }
 
+// Returns UrlAuthResult: TL_urlAuthResultRequest | TL_urlAuthResultAccepted | TL_urlAuthResultDefault
 type TL_messages_requestUrlAuth struct {
 	Flags    int32
 	Peer     TL     // (flags.1) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10692,6 +12177,7 @@ type TL_messages_requestUrlAuth struct {
 	Url      string // (flags.2)
 }
 
+// Returns UrlAuthResult: TL_urlAuthResultRequest | TL_urlAuthResultAccepted | TL_urlAuthResultDefault
 type TL_messages_acceptUrlAuth struct {
 	Flags        int32
 	WriteAllowed bool   // (flags.0)
@@ -10701,30 +12187,36 @@ type TL_messages_acceptUrlAuth struct {
 	Url          string // (flags.2)
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_hidePeerSettingsBar struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getScheduledHistory struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Hash int64
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getScheduledMessages struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendScheduledMessages struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_deleteScheduledMessages struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns messages.VotesList: TL_messages_votesList
 type TL_messages_getPollVotes struct {
 	Flags  int32
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10734,6 +12226,7 @@ type TL_messages_getPollVotes struct {
 	Limit  int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_toggleStickerSets struct {
 	Flags       int32
 	Uninstall   bool // (flags.0)
@@ -10742,28 +12235,34 @@ type TL_messages_toggleStickerSets struct {
 	Stickersets []TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 }
 
+// Returns Vector<DialogFilter>: TL_dialogFilter | TL_dialogFilterDefault | TL_dialogFilterChatlist
 type TL_messages_getDialogFilters struct {
 }
 
+// Returns Vector<DialogFilterSuggested>: TL_dialogFilterSuggested
 type TL_messages_getSuggestedDialogFilters struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_updateDialogFilter struct {
 	Flags  int32
 	ID     int32
 	Filter TL // (flags.0) DialogFilter: TL_dialogFilter | TL_dialogFilterDefault | TL_dialogFilterChatlist
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_updateDialogFiltersOrder struct {
 	Order []int32
 }
 
+// Returns messages.FeaturedStickers: TL_messages_featuredStickersNotModified | TL_messages_featuredStickers
 type TL_messages_getOldFeaturedStickers struct {
 	Offset int32
 	Limit  int32
 	Hash   int64
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getReplies struct {
 	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID      int32
@@ -10776,42 +12275,50 @@ type TL_messages_getReplies struct {
 	Hash       int64
 }
 
+// Returns messages.DiscussionMessage: TL_messages_discussionMessage
 type TL_messages_getDiscussionMessage struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_readDiscussion struct {
 	Peer      TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID     int32
 	ReadMaxID int32
 }
 
+// Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_messages_unpinAllMessages struct {
 	Flags    int32
 	Peer     TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	TopMsgID int32 // (flags.0)
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_deleteChat struct {
 	ChatID int64
 }
 
+// Returns messages.AffectedFoundMessages: TL_messages_affectedFoundMessages
 type TL_messages_deletePhoneCallHistory struct {
 	Flags  int32
 	Revoke bool // (flags.0)
 }
 
+// Returns messages.HistoryImportParsed: TL_messages_historyImportParsed
 type TL_messages_checkHistoryImport struct {
 	ImportHead string
 }
 
+// Returns messages.HistoryImport: TL_messages_historyImport
 type TL_messages_initHistoryImport struct {
 	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	File       TL // InputFile: TL_inputFile | TL_inputFileBig
 	MediaCount int32
 }
 
+// Returns MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
 type TL_messages_uploadImportedMedia struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ImportID int64
@@ -10819,11 +12326,13 @@ type TL_messages_uploadImportedMedia struct {
 	Media    TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_startHistoryImport struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ImportID int64
 }
 
+// Returns messages.ExportedChatInvites: TL_messages_exportedChatInvites
 type TL_messages_getExportedChatInvites struct {
 	Flags      int32
 	Revoked    bool   // (flags.3)
@@ -10834,11 +12343,13 @@ type TL_messages_getExportedChatInvites struct {
 	Limit      int32
 }
 
+// Returns messages.ExportedChatInvite: TL_messages_exportedChatInvite | TL_messages_exportedChatInviteReplaced
 type TL_messages_getExportedChatInvite struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Link string
 }
 
+// Returns messages.ExportedChatInvite: TL_messages_exportedChatInvite | TL_messages_exportedChatInviteReplaced
 type TL_messages_editExportedChatInvite struct {
 	Flags         int32
 	Revoked       bool // (flags.2)
@@ -10850,20 +12361,24 @@ type TL_messages_editExportedChatInvite struct {
 	Title         string // (flags.4)
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_deleteRevokedExportedChatInvites struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	AdminID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_deleteExportedChatInvite struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Link string
 }
 
+// Returns messages.ChatAdminsWithInvites: TL_messages_chatAdminsWithInvites
 type TL_messages_getAdminsWithInvites struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.ChatInviteImporters: TL_messages_chatInviteImporters
 type TL_messages_getChatInviteImporters struct {
 	Flags      int32
 	Requested  bool   // (flags.0)
@@ -10875,25 +12390,30 @@ type TL_messages_getChatInviteImporters struct {
 	Limit      int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_setHistoryTTL struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Period int32
 }
 
+// Returns messages.CheckedHistoryImportPeer: TL_messages_checkedHistoryImportPeer
 type TL_messages_checkHistoryImportPeer struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_setChatTheme struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Emoticon string
 }
 
+// Returns Vector<ReadParticipantDate>: TL_readParticipantDate
 type TL_messages_getMessageReadParticipants struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID int32
 }
 
+// Returns messages.SearchResultsCalendar: TL_messages_searchResultsCalendar
 type TL_messages_getSearchResultsCalendar struct {
 	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Filter     TL // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
@@ -10901,6 +12421,7 @@ type TL_messages_getSearchResultsCalendar struct {
 	OffsetDate int32
 }
 
+// Returns messages.SearchResultsPositions: TL_messages_searchResultsPositions
 type TL_messages_getSearchResultsPositions struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Filter   TL // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
@@ -10908,6 +12429,7 @@ type TL_messages_getSearchResultsPositions struct {
 	Limit    int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_hideChatJoinRequest struct {
 	Flags    int32
 	Approved bool // (flags.0)
@@ -10915,6 +12437,7 @@ type TL_messages_hideChatJoinRequest struct {
 	UserID   TL   // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_hideAllChatJoinRequests struct {
 	Flags    int32
 	Approved bool   // (flags.0)
@@ -10922,16 +12445,19 @@ type TL_messages_hideAllChatJoinRequests struct {
 	Link     string // (flags.1)
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_toggleNoForwards struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_saveDefaultSendAs struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	SendAs TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendReaction struct {
 	Flags       int32
 	Big         bool // (flags.1)
@@ -10941,11 +12467,13 @@ type TL_messages_sendReaction struct {
 	Reaction    []TL // (flags.0) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_getMessagesReactions struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns messages.MessageReactionsList: TL_messages_messageReactionsList
 type TL_messages_getMessageReactionsList struct {
 	Flags    int32
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10955,19 +12483,23 @@ type TL_messages_getMessageReactionsList struct {
 	Limit    int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_setChatAvailableReactions struct {
 	Peer               TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	AvailableReactions TL // ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
 }
 
+// Returns messages.AvailableReactions: TL_messages_availableReactionsNotModified | TL_messages_availableReactions
 type TL_messages_getAvailableReactions struct {
 	Hash int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setDefaultReaction struct {
 	Reaction TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Returns messages.TranslatedText: TL_messages_translateResult
 type TL_messages_translateText struct {
 	Flags  int32
 	Peer   TL      // (flags.0) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10976,6 +12508,7 @@ type TL_messages_translateText struct {
 	ToLang string
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getUnreadReactions struct {
 	Flags     int32
 	Peer      TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -10987,26 +12520,31 @@ type TL_messages_getUnreadReactions struct {
 	MinID     int32
 }
 
+// Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_messages_readReactions struct {
 	Flags    int32
 	Peer     TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	TopMsgID int32 // (flags.0)
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_searchSentMedia struct {
 	Q      string
 	Filter TL // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
 	Limit  int32
 }
 
+// Returns AttachMenuBots: TL_attachMenuBotsNotModified | TL_attachMenuBots
 type TL_messages_getAttachMenuBots struct {
 	Hash int64
 }
 
+// Returns AttachMenuBotsBot: TL_attachMenuBotsBot
 type TL_messages_getAttachMenuBot struct {
 	Bot TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_toggleBotInAttachMenu struct {
 	Flags        int32
 	WriteAllowed bool // (flags.0)
@@ -11014,6 +12552,7 @@ type TL_messages_toggleBotInAttachMenu struct {
 	Enabled      TL   // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns WebViewResult: TL_webViewResultUrl
 type TL_messages_requestWebView struct {
 	Flags       int32
 	FromBotMenu bool   // (flags.4)
@@ -11028,6 +12567,7 @@ type TL_messages_requestWebView struct {
 	SendAs      TL // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_prolongWebView struct {
 	Flags   int32
 	Silent  bool // (flags.5)
@@ -11038,6 +12578,7 @@ type TL_messages_prolongWebView struct {
 	SendAs  TL // (flags.13) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns SimpleWebViewResult: TL_simpleWebViewResultUrl
 type TL_messages_requestSimpleWebView struct {
 	Flags             int32
 	FromSwitchWebview bool   // (flags.1)
@@ -11049,11 +12590,13 @@ type TL_messages_requestSimpleWebView struct {
 	Platform          string
 }
 
+// Returns WebViewMessageSent: TL_webViewMessageSent
 type TL_messages_sendWebViewResultMessage struct {
 	BotQueryID string
 	Result     TL // InputBotInlineResult: TL_inputBotInlineResult | TL_inputBotInlineResultPhoto | TL_inputBotInlineResultDocument | TL_inputBotInlineResultGame
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendWebViewData struct {
 	Bot        TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	RandomID   int64
@@ -11061,11 +12604,13 @@ type TL_messages_sendWebViewData struct {
 	Data       string
 }
 
+// Returns messages.TranscribedAudio: TL_messages_transcribedAudio
 type TL_messages_transcribeAudio struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_rateTranscribedAudio struct {
 	Peer            TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID           int32
@@ -11073,49 +12618,60 @@ type TL_messages_rateTranscribedAudio struct {
 	Good            TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Vector<Document>: TL_documentEmpty | TL_document
 type TL_messages_getCustomEmojiDocuments struct {
 	DocumentID []int64
 }
 
+// Returns messages.AllStickers: TL_messages_allStickersNotModified | TL_messages_allStickers
 type TL_messages_getEmojiStickers struct {
 	Hash int64
 }
 
+// Returns messages.FeaturedStickers: TL_messages_featuredStickersNotModified | TL_messages_featuredStickers
 type TL_messages_getFeaturedEmojiStickers struct {
 	Hash int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_reportReaction struct {
 	Peer         TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID           int32
 	ReactionPeer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.Reactions: TL_messages_reactionsNotModified | TL_messages_reactions
 type TL_messages_getTopReactions struct {
 	Limit int32
 	Hash  int64
 }
 
+// Returns messages.Reactions: TL_messages_reactionsNotModified | TL_messages_reactions
 type TL_messages_getRecentReactions struct {
 	Limit int32
 	Hash  int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_clearRecentReactions struct {
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_getExtendedMedia struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setDefaultHistoryTTL struct {
 	Period int32
 }
 
+// Returns DefaultHistoryTTL: TL_defaultHistoryTTL
 type TL_messages_getDefaultHistoryTTL struct {
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendBotRequestedPeer struct {
 	Peer          TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID         int32
@@ -11123,34 +12679,41 @@ type TL_messages_sendBotRequestedPeer struct {
 	RequestedPeer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.EmojiGroups: TL_messages_emojiGroupsNotModified | TL_messages_emojiGroups
 type TL_messages_getEmojiGroups struct {
 	Hash int32
 }
 
+// Returns messages.EmojiGroups: TL_messages_emojiGroupsNotModified | TL_messages_emojiGroups
 type TL_messages_getEmojiStatusGroups struct {
 	Hash int32
 }
 
+// Returns messages.EmojiGroups: TL_messages_emojiGroupsNotModified | TL_messages_emojiGroups
 type TL_messages_getEmojiProfilePhotoGroups struct {
 	Hash int32
 }
 
+// Returns EmojiList: TL_emojiListNotModified | TL_emojiList
 type TL_messages_searchCustomEmoji struct {
 	Emoticon string
 	Hash     int64
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_togglePeerTranslations struct {
 	Flags    int32
 	Disabled bool // (flags.0)
 	Peer     TL   // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.BotApp: TL_messages_botApp
 type TL_messages_getBotApp struct {
 	App  TL // InputBotApp: TL_inputBotAppID | TL_inputBotAppShortName
 	Hash int64
 }
 
+// Returns AppWebViewResult: TL_appWebViewResultUrl
 type TL_messages_requestAppWebView struct {
 	Flags        int32
 	WriteAllowed bool   // (flags.0)
@@ -11161,6 +12724,7 @@ type TL_messages_requestAppWebView struct {
 	Platform     string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_setChatWallPaper struct {
 	Flags     int32
 	Peer      TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -11169,9 +12733,11 @@ type TL_messages_setChatWallPaper struct {
 	ID        int32 // (flags.1)
 }
 
+// Returns updates.State: TL_updates_state
 type TL_updates_getState struct {
 }
 
+// Returns updates.Difference: TL_updates_differenceEmpty | TL_updates_difference | TL_updates_differenceSlice | TL_updates_differenceTooLong
 type TL_updates_getDifference struct {
 	Flags         int32
 	Pts           int32
@@ -11182,6 +12748,7 @@ type TL_updates_getDifference struct {
 	QtsLimit      int32 // (flags.2)
 }
 
+// Returns updates.ChannelDifference: TL_updates_channelDifferenceEmpty | TL_updates_channelDifferenceTooLong | TL_updates_channelDifference
 type TL_updates_getChannelDifference struct {
 	Flags   int32
 	Force   bool // (flags.0)
@@ -11191,6 +12758,7 @@ type TL_updates_getChannelDifference struct {
 	Limit   int32
 }
 
+// Returns photos.Photo: TL_photos_photo
 type TL_photos_updateProfilePhoto struct {
 	Flags    int32
 	Fallback bool // (flags.0)
@@ -11198,6 +12766,7 @@ type TL_photos_updateProfilePhoto struct {
 	ID       TL   // InputPhoto: TL_inputPhotoEmpty | TL_inputPhoto
 }
 
+// Returns photos.Photo: TL_photos_photo
 type TL_photos_uploadProfilePhoto struct {
 	Flags            int32
 	Fallback         bool    // (flags.3)
@@ -11208,10 +12777,12 @@ type TL_photos_uploadProfilePhoto struct {
 	VideoEmojiMarkup TL      // (flags.4) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
 }
 
+// Returns Vector<long>:
 type TL_photos_deletePhotos struct {
 	ID []TL // InputPhoto: TL_inputPhotoEmpty | TL_inputPhoto
 }
 
+// Returns photos.Photos: TL_photos_photos | TL_photos_photosSlice
 type TL_photos_getUserPhotos struct {
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Offset int32
@@ -11219,6 +12790,7 @@ type TL_photos_getUserPhotos struct {
 	Limit  int32
 }
 
+// Returns photos.Photo: TL_photos_photo
 type TL_photos_uploadContactProfilePhoto struct {
 	Flags            int32
 	Suggest          bool    // (flags.3)
@@ -11230,12 +12802,14 @@ type TL_photos_uploadContactProfilePhoto struct {
 	VideoEmojiMarkup TL      // (flags.5) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_upload_saveFilePart struct {
 	FileID   int64
 	FilePart int32
 	Bytes    []byte
 }
 
+// Returns upload.File: TL_upload_file | TL_upload_fileCdnRedirect
 type TL_upload_getFile struct {
 	Flags        int32
 	Precise      bool // (flags.0)
@@ -11245,6 +12819,7 @@ type TL_upload_getFile struct {
 	Limit        int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_upload_saveBigFilePart struct {
 	FileID         int64
 	FilePart       int32
@@ -11252,142 +12827,175 @@ type TL_upload_saveBigFilePart struct {
 	Bytes          []byte
 }
 
+// Returns upload.WebFile: TL_upload_webFile
 type TL_upload_getWebFile struct {
 	Location TL // InputWebFileLocation: TL_inputWebFileLocation | TL_inputWebFileGeoPointLocation | TL_inputWebFileAudioAlbumThumbLocation
 	Offset   int32
 	Limit    int32
 }
 
+// Returns upload.CdnFile: TL_upload_cdnFileReuploadNeeded | TL_upload_cdnFile
 type TL_upload_getCdnFile struct {
 	FileToken []byte
 	Offset    int64
 	Limit     int32
 }
 
+// Returns Vector<FileHash>: TL_fileHash
 type TL_upload_reuploadCdnFile struct {
 	FileToken    []byte
 	RequestToken []byte
 }
 
+// Returns Vector<FileHash>: TL_fileHash
 type TL_upload_getCdnFileHashes struct {
 	FileToken []byte
 	Offset    int64
 }
 
+// Returns Vector<FileHash>: TL_fileHash
 type TL_upload_getFileHashes struct {
 	Location TL // InputFileLocation: TL_inputFileLocation | TL_inputEncryptedFileLocation | TL_inputDocumentFileLocation | TL_inputSecureFileLocation | TL_inputTakeoutFileLocation | TL_inputPhotoFileLocation | TL_inputPhotoLegacyFileLocation | TL_inputPeerPhotoFileLocation | TL_inputStickerSetThumb | TL_inputGroupCallStream
 	Offset   int64
 }
 
+// Returns Config: TL_config
 type TL_help_getConfig struct {
 }
 
+// Returns NearestDc: TL_nearestDc
 type TL_help_getNearestDc struct {
 }
 
+// Returns help.AppUpdate: TL_help_appUpdate | TL_help_noAppUpdate
 type TL_help_getAppUpdate struct {
 	Source string
 }
 
+// Returns help.InviteText: TL_help_inviteText
 type TL_help_getInviteText struct {
 }
 
+// Returns help.Support: TL_help_support
 type TL_help_getSupport struct {
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_help_getAppChangelog struct {
 	PrevAppVersion string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_help_setBotUpdatesStatus struct {
 	PendingUpdatesCount int32
 	Message             string
 }
 
+// Returns CdnConfig: TL_cdnConfig
 type TL_help_getCdnConfig struct {
 }
 
+// Returns help.RecentMeUrls: TL_help_recentMeUrls
 type TL_help_getRecentMeUrls struct {
 	Referer string
 }
 
+// Returns help.TermsOfServiceUpdate: TL_help_termsOfServiceUpdateEmpty | TL_help_termsOfServiceUpdate
 type TL_help_getTermsOfServiceUpdate struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_help_acceptTermsOfService struct {
 	ID TL // DataJSON: TL_dataJSON
 }
 
+// Returns help.DeepLinkInfo: TL_help_deepLinkInfoEmpty | TL_help_deepLinkInfo
 type TL_help_getDeepLinkInfo struct {
 	Path string
 }
 
+// Returns help.AppConfig: TL_help_appConfigNotModified | TL_help_appConfig
 type TL_help_getAppConfig struct {
 	Hash int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_help_saveAppLog struct {
 	Events []TL // InputAppEvent: TL_inputAppEvent
 }
 
+// Returns help.PassportConfig: TL_help_passportConfigNotModified | TL_help_passportConfig
 type TL_help_getPassportConfig struct {
 	Hash int32
 }
 
+// Returns help.SupportName: TL_help_supportName
 type TL_help_getSupportName struct {
 }
 
+// Returns help.UserInfo: TL_help_userInfoEmpty | TL_help_userInfo
 type TL_help_getUserInfo struct {
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns help.UserInfo: TL_help_userInfoEmpty | TL_help_userInfo
 type TL_help_editUserInfo struct {
 	UserID   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Message  string
 	Entities []TL // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
+// Returns help.PromoData: TL_help_promoDataEmpty | TL_help_promoData
 type TL_help_getPromoData struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_help_hidePromoData struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_help_dismissSuggestion struct {
 	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Suggestion string
 }
 
+// Returns help.CountriesList: TL_help_countriesListNotModified | TL_help_countriesList
 type TL_help_getCountriesList struct {
 	LangCode string
 	Hash     int32
 }
 
+// Returns help.PremiumPromo: TL_help_premiumPromo
 type TL_help_getPremiumPromo struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_readHistory struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	MaxID   int32
 }
 
+// Returns messages.AffectedMessages: TL_messages_affectedMessages
 type TL_channels_deleteMessages struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	ID      []int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_reportSpam struct {
 	Channel     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Participant TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID          []int32
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_channels_getMessages struct {
 	Channel TL   // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	ID      []TL // InputMessage: TL_inputMessageID | TL_inputMessageReplyTo | TL_inputMessagePinned | TL_inputMessageCallbackQuery
 }
 
+// Returns channels.ChannelParticipants: TL_channels_channelParticipants | TL_channels_channelParticipantsNotModified
 type TL_channels_getParticipants struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Filter  TL // ChannelParticipantsFilter: TL_channelParticipantsRecent | TL_channelParticipantsAdmins | TL_channelParticipantsKicked | TL_channelParticipantsBots | TL_channelParticipantsBanned | TL_channelParticipantsSearch | TL_channelParticipantsContacts | TL_channelParticipantsMentions
@@ -11396,19 +13004,23 @@ type TL_channels_getParticipants struct {
 	Hash    int64
 }
 
+// Returns channels.ChannelParticipant: TL_channels_channelParticipant
 type TL_channels_getParticipant struct {
 	Channel     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Participant TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
 type TL_channels_getChannels struct {
 	ID []TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns messages.ChatFull: TL_messages_chatFull
 type TL_channels_getFullChannel struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_createChannel struct {
 	Flags     int32
 	Broadcast bool // (flags.0)
@@ -11422,6 +13034,7 @@ type TL_channels_createChannel struct {
 	TtlPeriod int32  // (flags.4)
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_editAdmin struct {
 	Channel     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	UserID      TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
@@ -11429,43 +13042,52 @@ type TL_channels_editAdmin struct {
 	Rank        string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_editTitle struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Title   string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_editPhoto struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Photo   TL // InputChatPhoto: TL_inputChatPhotoEmpty | TL_inputChatUploadedPhoto | TL_inputChatPhoto
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_checkUsername struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Username string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_updateUsername struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Username string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_joinChannel struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_leaveChannel struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_inviteToChannel struct {
 	Channel TL   // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Users   []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_deleteChannel struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns ExportedMessageLink: TL_exportedMessageLink
 type TL_channels_exportMessageLink struct {
 	Flags   int32
 	Grouped bool // (flags.0)
@@ -11474,23 +13096,27 @@ type TL_channels_exportMessageLink struct {
 	ID      int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleSignatures struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
 type TL_channels_getAdminedPublicChannels struct {
 	Flags      int32
 	ByLocation bool // (flags.0)
 	CheckLimit bool // (flags.1)
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_editBanned struct {
 	Channel      TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Participant  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	BannedRights TL // ChatBannedRights: TL_chatBannedRights
 }
 
+// Returns channels.AdminLogResults: TL_channels_adminLogResults
 type TL_channels_getAdminLog struct {
 	Flags        int32
 	Channel      TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
@@ -11502,16 +13128,19 @@ type TL_channels_getAdminLog struct {
 	Limit        int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_setStickers struct {
 	Channel    TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_readMessageContents struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	ID      []int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_deleteHistory struct {
 	Flags       int32
 	ForEveryone bool // (flags.0)
@@ -11519,95 +13148,115 @@ type TL_channels_deleteHistory struct {
 	MaxID       int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_togglePreHistoryHidden struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
 type TL_channels_getLeftChannels struct {
 	Offset int32
 }
 
+// Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
 type TL_channels_getGroupsForDiscussion struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_setDiscussionGroup struct {
 	Broadcast TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Group     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_editCreator struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	UserID   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Password TL // InputCheckPasswordSRP: TL_inputCheckPasswordEmpty | TL_inputCheckPasswordSRP
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_editLocation struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	GeoPoint TL // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
 	Address  string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleSlowMode struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Seconds int32
 }
 
+// Returns messages.InactiveChats: TL_messages_inactiveChats
 type TL_channels_getInactiveChannels struct {
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_convertToGigagroup struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_viewSponsoredMessage struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	RandomID []byte
 }
 
+// Returns messages.SponsoredMessages: TL_messages_sponsoredMessages | TL_messages_sponsoredMessagesEmpty
 type TL_channels_getSponsoredMessages struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns channels.SendAsPeers: TL_channels_sendAsPeers
 type TL_channels_getSendAs struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_channels_deleteParticipantHistory struct {
 	Channel     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Participant TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleJoinToSend struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleJoinRequest struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_reorderUsernames struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Order   []string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_toggleUsername struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Username string
 	Active   TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_deactivateAllUsernames struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleForum struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_createForumTopic struct {
 	Flags       int32
 	Channel     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
@@ -11618,6 +13267,7 @@ type TL_channels_createForumTopic struct {
 	SendAs      TL // (flags.2) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.ForumTopics: TL_messages_forumTopics
 type TL_channels_getForumTopics struct {
 	Flags       int32
 	Channel     TL     // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
@@ -11628,11 +13278,13 @@ type TL_channels_getForumTopics struct {
 	Limit       int32
 }
 
+// Returns messages.ForumTopics: TL_messages_forumTopics
 type TL_channels_getForumTopicsByID struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Topics  []int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_editForumTopic struct {
 	Flags       int32
 	Channel     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
@@ -11643,17 +13295,20 @@ type TL_channels_editForumTopic struct {
 	Hidden      TL     // (flags.3) Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_updatePinnedForumTopic struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	TopicID int32
 	Pinned  TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_channels_deleteTopicHistory struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	TopMsgID int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_reorderPinnedForumTopics struct {
 	Flags   int32
 	Force   bool // (flags.0)
@@ -11661,26 +13316,31 @@ type TL_channels_reorderPinnedForumTopics struct {
 	Order   []int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleAntiSpam struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_reportAntiSpamFalsePositive struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	MsgID   int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleParticipantsHidden struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_channels_clickSponsoredMessage struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	RandomID []byte
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_updateColor struct {
 	Flags             int32
 	Channel           TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
@@ -11688,49 +13348,59 @@ type TL_channels_updateColor struct {
 	BackgroundEmojiID int64 // (flags.0)
 }
 
+// Returns DataJSON: TL_dataJSON
 type TL_bots_sendCustomRequest struct {
 	CustomMethod string
 	Params       TL // DataJSON: TL_dataJSON
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_answerWebhookJSONQuery struct {
 	QueryID int64
 	Data    TL // DataJSON: TL_dataJSON
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_setBotCommands struct {
 	Scope    TL // BotCommandScope: TL_botCommandScopeDefault | TL_botCommandScopeUsers | TL_botCommandScopeChats | TL_botCommandScopeChatAdmins | TL_botCommandScopePeer | TL_botCommandScopePeerAdmins | TL_botCommandScopePeerUser
 	LangCode string
 	Commands []TL // BotCommand: TL_botCommand
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_resetBotCommands struct {
 	Scope    TL // BotCommandScope: TL_botCommandScopeDefault | TL_botCommandScopeUsers | TL_botCommandScopeChats | TL_botCommandScopeChatAdmins | TL_botCommandScopePeer | TL_botCommandScopePeerAdmins | TL_botCommandScopePeerUser
 	LangCode string
 }
 
+// Returns Vector<BotCommand>: TL_botCommand
 type TL_bots_getBotCommands struct {
 	Scope    TL // BotCommandScope: TL_botCommandScopeDefault | TL_botCommandScopeUsers | TL_botCommandScopeChats | TL_botCommandScopeChatAdmins | TL_botCommandScopePeer | TL_botCommandScopePeerAdmins | TL_botCommandScopePeerUser
 	LangCode string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_setBotMenuButton struct {
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Button TL // BotMenuButton: TL_botMenuButtonDefault | TL_botMenuButtonCommands | TL_botMenuButton
 }
 
+// Returns BotMenuButton: TL_botMenuButtonDefault | TL_botMenuButtonCommands | TL_botMenuButton
 type TL_bots_getBotMenuButton struct {
 	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_setBotBroadcastDefaultAdminRights struct {
 	AdminRights TL // ChatAdminRights: TL_chatAdminRights
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_setBotGroupDefaultAdminRights struct {
 	AdminRights TL // ChatAdminRights: TL_chatAdminRights
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_setBotInfo struct {
 	Flags       int32
 	Bot         TL // (flags.2) InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
@@ -11740,48 +13410,57 @@ type TL_bots_setBotInfo struct {
 	Description string // (flags.1)
 }
 
+// Returns bots.BotInfo: TL_bots_botInfo
 type TL_bots_getBotInfo struct {
 	Flags    int32
 	Bot      TL // (flags.0) InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	LangCode string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_reorderUsernames struct {
 	Bot   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Order []string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_toggleUsername struct {
 	Bot      TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Username string
 	Active   TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_bots_canSendMessage struct {
 	Bot TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_bots_allowSendMessage struct {
 	Bot TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns DataJSON: TL_dataJSON
 type TL_bots_invokeWebViewCustomMethod struct {
 	Bot          TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	CustomMethod string
 	Params       TL // DataJSON: TL_dataJSON
 }
 
+// Returns payments.PaymentForm: TL_payments_paymentForm
 type TL_payments_getPaymentForm struct {
 	Flags       int32
 	Invoice     TL // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode
 	ThemeParams TL // (flags.0) DataJSON: TL_dataJSON
 }
 
+// Returns payments.PaymentReceipt: TL_payments_paymentReceipt
 type TL_payments_getPaymentReceipt struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID int32
 }
 
+// Returns payments.ValidatedRequestedInfo: TL_payments_validatedRequestedInfo
 type TL_payments_validateRequestedInfo struct {
 	Flags   int32
 	Save    bool // (flags.0)
@@ -11789,6 +13468,7 @@ type TL_payments_validateRequestedInfo struct {
 	Info    TL   // PaymentRequestedInfo: TL_paymentRequestedInfo
 }
 
+// Returns payments.PaymentResult: TL_payments_paymentResult | TL_payments_paymentVerificationNeeded
 type TL_payments_sendPaymentForm struct {
 	Flags            int32
 	FormID           int64
@@ -11799,61 +13479,74 @@ type TL_payments_sendPaymentForm struct {
 	TipAmount        int64  // (flags.2)
 }
 
+// Returns payments.SavedInfo: TL_payments_savedInfo
 type TL_payments_getSavedInfo struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_payments_clearSavedInfo struct {
 	Flags       int32
 	Credentials bool // (flags.0)
 	Info        bool // (flags.1)
 }
 
+// Returns payments.BankCardData: TL_payments_bankCardData
 type TL_payments_getBankCardData struct {
 	Number string
 }
 
+// Returns payments.ExportedInvoice: TL_payments_exportedInvoice
 type TL_payments_exportInvoice struct {
 	InvoiceMedia TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_payments_assignAppStoreTransaction struct {
 	Receipt []byte
 	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_payments_assignPlayMarketTransaction struct {
 	Receipt TL // DataJSON: TL_dataJSON
 	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_payments_canPurchasePremium struct {
 	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
 }
 
+// Returns Vector<PremiumGiftCodeOption>: TL_premiumGiftCodeOption
 type TL_payments_getPremiumGiftCodeOptions struct {
 	Flags     int32
 	BoostPeer TL // (flags.0) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns payments.CheckedGiftCode: TL_payments_checkedGiftCode
 type TL_payments_checkGiftCode struct {
 	Slug string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_payments_applyGiftCode struct {
 	Slug string
 }
 
+// Returns payments.GiveawayInfo: TL_payments_giveawayInfo | TL_payments_giveawayInfoResults
 type TL_payments_getGiveawayInfo struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_payments_launchPrepaidGiveaway struct {
 	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	GiveawayID int64
 	Purpose    TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway
 }
 
+// Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_createStickerSet struct {
 	Flags     int32
 	Masks     bool // (flags.0)
@@ -11869,20 +13562,24 @@ type TL_stickers_createStickerSet struct {
 	Software  string // (flags.3)
 }
 
+// Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_removeStickerFromSet struct {
 	Sticker TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
 }
 
+// Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_changeStickerPosition struct {
 	Sticker  TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
 	Position int32
 }
 
+// Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_addStickerToSet struct {
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 	Sticker    TL // InputStickerSetItem: TL_inputStickerSetItem
 }
 
+// Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_setStickerSetThumb struct {
 	Flags           int32
 	Stickerset      TL    // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
@@ -11890,14 +13587,17 @@ type TL_stickers_setStickerSetThumb struct {
 	ThumbDocumentID int64 // (flags.1)
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stickers_checkShortName struct {
 	ShortName string
 }
 
+// Returns stickers.SuggestedShortName: TL_stickers_suggestedShortName
 type TL_stickers_suggestShortName struct {
 	Title string
 }
 
+// Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_changeSticker struct {
 	Flags      int32
 	Sticker    TL     // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
@@ -11906,18 +13606,22 @@ type TL_stickers_changeSticker struct {
 	Keywords   string // (flags.2)
 }
 
+// Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_renameStickerSet struct {
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 	Title      string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stickers_deleteStickerSet struct {
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
 }
 
+// Returns DataJSON: TL_dataJSON
 type TL_phone_getCallConfig struct {
 }
 
+// Returns phone.PhoneCall: TL_phone_phoneCall
 type TL_phone_requestCall struct {
 	Flags    int32
 	Video    bool // (flags.0)
@@ -11927,12 +13631,14 @@ type TL_phone_requestCall struct {
 	Protocol TL // PhoneCallProtocol: TL_phoneCallProtocol
 }
 
+// Returns phone.PhoneCall: TL_phone_phoneCall
 type TL_phone_acceptCall struct {
 	Peer     TL // InputPhoneCall: TL_inputPhoneCall
 	GB       []byte
 	Protocol TL // PhoneCallProtocol: TL_phoneCallProtocol
 }
 
+// Returns phone.PhoneCall: TL_phone_phoneCall
 type TL_phone_confirmCall struct {
 	Peer           TL // InputPhoneCall: TL_inputPhoneCall
 	GA             []byte
@@ -11940,10 +13646,12 @@ type TL_phone_confirmCall struct {
 	Protocol       TL // PhoneCallProtocol: TL_phoneCallProtocol
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_phone_receivedCall struct {
 	Peer TL // InputPhoneCall: TL_inputPhoneCall
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_discardCall struct {
 	Flags        int32
 	Video        bool // (flags.0)
@@ -11953,6 +13661,7 @@ type TL_phone_discardCall struct {
 	ConnectionID int64
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_setCallRating struct {
 	Flags          int32
 	UserInitiative bool // (flags.0)
@@ -11961,16 +13670,19 @@ type TL_phone_setCallRating struct {
 	Comment        string
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_phone_saveCallDebug struct {
 	Peer  TL // InputPhoneCall: TL_inputPhoneCall
 	Debug TL // DataJSON: TL_dataJSON
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_phone_sendSignalingData struct {
 	Peer TL // InputPhoneCall: TL_inputPhoneCall
 	Data []byte
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_createGroupCall struct {
 	Flags        int32
 	RtmpStream   bool // (flags.2)
@@ -11980,6 +13692,7 @@ type TL_phone_createGroupCall struct {
 	ScheduleDate int32  // (flags.1)
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_joinGroupCall struct {
 	Flags        int32
 	Muted        bool   // (flags.0)
@@ -11990,20 +13703,24 @@ type TL_phone_joinGroupCall struct {
 	Params       TL     // DataJSON: TL_dataJSON
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_leaveGroupCall struct {
 	Call   TL // InputGroupCall: TL_inputGroupCall
 	Source int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_inviteToGroupCall struct {
 	Call  TL   // InputGroupCall: TL_inputGroupCall
 	Users []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_discardGroupCall struct {
 	Call TL // InputGroupCall: TL_inputGroupCall
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_toggleGroupCallSettings struct {
 	Flags           int32
 	ResetInviteHash bool // (flags.1)
@@ -12011,11 +13728,13 @@ type TL_phone_toggleGroupCallSettings struct {
 	JoinMuted       TL   // (flags.0) Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns phone.GroupCall: TL_phone_groupCall
 type TL_phone_getGroupCall struct {
 	Call  TL // InputGroupCall: TL_inputGroupCall
 	Limit int32
 }
 
+// Returns phone.GroupParticipants: TL_phone_groupParticipants
 type TL_phone_getGroupParticipants struct {
 	Call    TL   // InputGroupCall: TL_inputGroupCall
 	Ids     []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -12024,11 +13743,13 @@ type TL_phone_getGroupParticipants struct {
 	Limit   int32
 }
 
+// Returns Vector<int>:
 type TL_phone_checkGroupCall struct {
 	Call    TL // InputGroupCall: TL_inputGroupCall
 	Sources []int32
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_toggleGroupCallRecord struct {
 	Flags         int32
 	Start         bool   // (flags.0)
@@ -12038,6 +13759,7 @@ type TL_phone_toggleGroupCallRecord struct {
 	VideoPortrait TL     // (flags.2) Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_editGroupCallParticipant struct {
 	Flags              int32
 	Call               TL    // InputGroupCall: TL_inputGroupCall
@@ -12050,106 +13772,127 @@ type TL_phone_editGroupCallParticipant struct {
 	PresentationPaused TL    // (flags.5) Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_editGroupCallTitle struct {
 	Call  TL // InputGroupCall: TL_inputGroupCall
 	Title string
 }
 
+// Returns phone.JoinAsPeers: TL_phone_joinAsPeers
 type TL_phone_getGroupCallJoinAs struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns phone.ExportedGroupCallInvite: TL_phone_exportedGroupCallInvite
 type TL_phone_exportGroupCallInvite struct {
 	Flags         int32
 	CanSelfUnmute bool // (flags.0)
 	Call          TL   // InputGroupCall: TL_inputGroupCall
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_toggleGroupCallStartSubscription struct {
 	Call       TL // InputGroupCall: TL_inputGroupCall
 	Subscribed TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_startScheduledGroupCall struct {
 	Call TL // InputGroupCall: TL_inputGroupCall
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_phone_saveDefaultGroupCallJoinAs struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	JoinAs TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_joinGroupCallPresentation struct {
 	Call   TL // InputGroupCall: TL_inputGroupCall
 	Params TL // DataJSON: TL_dataJSON
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_leaveGroupCallPresentation struct {
 	Call TL // InputGroupCall: TL_inputGroupCall
 }
 
+// Returns phone.GroupCallStreamChannels: TL_phone_groupCallStreamChannels
 type TL_phone_getGroupCallStreamChannels struct {
 	Call TL // InputGroupCall: TL_inputGroupCall
 }
 
+// Returns phone.GroupCallStreamRtmpUrl: TL_phone_groupCallStreamRtmpUrl
 type TL_phone_getGroupCallStreamRtmpUrl struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Revoke TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_phone_saveCallLog struct {
 	Peer TL // InputPhoneCall: TL_inputPhoneCall
 	File TL // InputFile: TL_inputFile | TL_inputFileBig
 }
 
+// Returns LangPackDifference: TL_langPackDifference
 type TL_langpack_getLangPack struct {
 	LangPack string
 	LangCode string
 }
 
+// Returns Vector<LangPackString>: TL_langPackString | TL_langPackStringPluralized | TL_langPackStringDeleted
 type TL_langpack_getStrings struct {
 	LangPack string
 	LangCode string
 	Keys     []string
 }
 
+// Returns LangPackDifference: TL_langPackDifference
 type TL_langpack_getDifference struct {
 	LangPack    string
 	LangCode    string
 	FromVersion int32
 }
 
+// Returns Vector<LangPackLanguage>: TL_langPackLanguage
 type TL_langpack_getLanguages struct {
 	LangPack string
 }
 
+// Returns LangPackLanguage: TL_langPackLanguage
 type TL_langpack_getLanguage struct {
 	LangPack string
 	LangCode string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_folders_editPeerFolders struct {
 	FolderPeers []TL // InputFolderPeer: TL_inputFolderPeer
 }
 
+// Returns stats.BroadcastStats: TL_stats_broadcastStats
 type TL_stats_getBroadcastStats struct {
 	Flags   int32
 	Dark    bool // (flags.0)
 	Channel TL   // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns StatsGraph: TL_statsGraphAsync | TL_statsGraphError | TL_statsGraph
 type TL_stats_loadAsyncGraph struct {
 	Flags int32
 	Token string
 	X     int64 // (flags.0)
 }
 
+// Returns stats.MegagroupStats: TL_stats_megagroupStats
 type TL_stats_getMegagroupStats struct {
 	Flags   int32
 	Dark    bool // (flags.0)
 	Channel TL   // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
+// Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_stats_getMessagePublicForwards struct {
 	Channel    TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	MsgID      int32
@@ -12159,6 +13902,7 @@ type TL_stats_getMessagePublicForwards struct {
 	Limit      int32
 }
 
+// Returns stats.MessageStats: TL_stats_messageStats
 type TL_stats_getMessageStats struct {
 	Flags   int32
 	Dark    bool // (flags.0)
@@ -12166,17 +13910,20 @@ type TL_stats_getMessageStats struct {
 	MsgID   int32
 }
 
+// Returns chatlists.ExportedChatlistInvite: TL_chatlists_exportedChatlistInvite
 type TL_chatlists_exportChatlistInvite struct {
 	Chatlist TL // InputChatlist: TL_inputChatlistDialogFilter
 	Title    string
 	Peers    []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_chatlists_deleteExportedInvite struct {
 	Chatlist TL // InputChatlist: TL_inputChatlistDialogFilter
 	Slug     string
 }
 
+// Returns ExportedChatlistInvite: TL_exportedChatlistInvite
 type TL_chatlists_editExportedInvite struct {
 	Flags    int32
 	Chatlist TL // InputChatlist: TL_inputChatlistDialogFilter
@@ -12185,45 +13932,55 @@ type TL_chatlists_editExportedInvite struct {
 	Peers    []TL   // (flags.2) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns chatlists.ExportedInvites: TL_chatlists_exportedInvites
 type TL_chatlists_getExportedInvites struct {
 	Chatlist TL // InputChatlist: TL_inputChatlistDialogFilter
 }
 
+// Returns chatlists.ChatlistInvite: TL_chatlists_chatlistInviteAlready | TL_chatlists_chatlistInvite
 type TL_chatlists_checkChatlistInvite struct {
 	Slug string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_chatlists_joinChatlistInvite struct {
 	Slug  string
 	Peers []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns chatlists.ChatlistUpdates: TL_chatlists_chatlistUpdates
 type TL_chatlists_getChatlistUpdates struct {
 	Chatlist TL // InputChatlist: TL_inputChatlistDialogFilter
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_chatlists_joinChatlistUpdates struct {
 	Chatlist TL   // InputChatlist: TL_inputChatlistDialogFilter
 	Peers    []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_chatlists_hideChatlistUpdates struct {
 	Chatlist TL // InputChatlist: TL_inputChatlistDialogFilter
 }
 
+// Returns Vector<Peer>: TL_peerUser | TL_peerChat | TL_peerChannel
 type TL_chatlists_getLeaveChatlistSuggestions struct {
 	Chatlist TL // InputChatlist: TL_inputChatlistDialogFilter
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_chatlists_leaveChatlist struct {
 	Chatlist TL   // InputChatlist: TL_inputChatlistDialogFilter
 	Peers    []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stories_canSendStory struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_stories_sendStory struct {
 	Flags        int32
 	Pinned       bool   // (flags.2)
@@ -12238,6 +13995,7 @@ type TL_stories_sendStory struct {
 	Period       int32 // (flags.3)
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_stories_editStory struct {
 	Flags        int32
 	Peer         TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -12249,17 +14007,20 @@ type TL_stories_editStory struct {
 	PrivacyRules []TL   // (flags.2) InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
 }
 
+// Returns Vector<int>:
 type TL_stories_deleteStories struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns Vector<int>:
 type TL_stories_togglePinned struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID     []int32
 	Pinned TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns stories.AllStories: TL_stories_allStoriesNotModified | TL_stories_allStories
 type TL_stories_getAllStories struct {
 	Flags  int32
 	Next   bool   // (flags.1)
@@ -12267,37 +14028,44 @@ type TL_stories_getAllStories struct {
 	State  string // (flags.0)
 }
 
+// Returns stories.Stories: TL_stories_stories
 type TL_stories_getPinnedStories struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	OffsetID int32
 	Limit    int32
 }
 
+// Returns stories.Stories: TL_stories_stories
 type TL_stories_getStoriesArchive struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	OffsetID int32
 	Limit    int32
 }
 
+// Returns stories.Stories: TL_stories_stories
 type TL_stories_getStoriesByID struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stories_toggleAllStoriesHidden struct {
 	Hidden TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns Vector<int>:
 type TL_stories_readStories struct {
 	Peer  TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MaxID int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stories_incrementStoryViews struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns stories.StoryViewsList: TL_stories_storyViewsList
 type TL_stories_getStoryViewsList struct {
 	Flags          int32
 	JustContacts   bool   // (flags.0)
@@ -12309,16 +14077,19 @@ type TL_stories_getStoryViewsList struct {
 	Limit          int32
 }
 
+// Returns stories.StoryViews: TL_stories_storyViews
 type TL_stories_getStoriesViews struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   []int32
 }
 
+// Returns ExportedStoryLink: TL_exportedStoryLink
 type TL_stories_exportStoryLink struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID   int32
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stories_report struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID      []int32
@@ -12326,12 +14097,14 @@ type TL_stories_report struct {
 	Message string
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_stories_activateStealthMode struct {
 	Flags  int32
 	Past   bool // (flags.0)
 	Future bool // (flags.1)
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_stories_sendReaction struct {
 	Flags       int32
 	AddToRecent bool // (flags.0)
@@ -12340,25 +14113,31 @@ type TL_stories_sendReaction struct {
 	Reaction    TL // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
+// Returns stories.PeerStories: TL_stories_peerStories
 type TL_stories_getPeerStories struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_stories_getAllReadPeerStories struct {
 }
 
+// Returns Vector<int>:
 type TL_stories_getPeerMaxIDs struct {
 	ID []TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
 type TL_stories_getChatsToSend struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stories_togglePeerStoriesHidden struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Hidden TL // Bool: TL_boolFalse | TL_boolTrue
 }
 
+// Returns premium.BoostsList: TL_premium_boostsList
 type TL_premium_getBoostsList struct {
 	Flags  int32
 	Gifts  bool // (flags.0)
@@ -12367,15 +14146,18 @@ type TL_premium_getBoostsList struct {
 	Limit  int32
 }
 
+// Returns premium.MyBoosts: TL_premium_myBoosts
 type TL_premium_getMyBoosts struct {
 }
 
+// Returns premium.MyBoosts: TL_premium_myBoosts
 type TL_premium_applyBoost struct {
 	Flags int32
 	Slots []int32 // (flags.0)
 	Peer  TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
+// Returns premium.BoostsStatus: TL_premium_boostsStatus
 type TL_premium_getBoostsStatus struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }

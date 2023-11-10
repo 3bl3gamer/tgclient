@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -54,7 +55,7 @@ func (c Combinator) flagFieldNames() []string {
 }
 
 func (c Combinator) structName() string {
-	return "TL_" + c.id
+	return "TL_" + normalize(c.id)
 }
 
 func findConstructorIDs(combinators []*Combinator, fieldType string) []string {
@@ -143,7 +144,7 @@ func makeField(name, typeName string, knownFields []Field) Field {
 			}
 		}
 	}
-	return Field{normalize(name), normalize(typeName), flag}
+	return Field{name, typeName, flag}
 }
 
 var fieldsFixForCrcRegexp = regexp.MustCompile(`([Vv])ector<(.*?)>`)
@@ -229,9 +230,6 @@ func parseTLSchema(fpath string) []*Combinator {
 			log.Printf("WARN: line %d: wrong crc32 sum, expected %08x: %s", lineNum+1, crc32sum, line)
 		}
 
-		id = normalize(id)
-		typeName = normalize(typeName)
-
 		fields := make([]Field, 0, 16)
 		for _, fieldStr := range strings.Split(fieldsStr, " ") {
 			fieldStr = strings.TrimSpace(fieldStr)
@@ -289,12 +287,23 @@ import (
 	write("const (\n")
 	write("TL_Layer = %d\n", layer)
 	for _, c := range combinators {
-		write("CRC_%s = 0x%08x\n", c.id, c.name)
+		write("CRC_%s = 0x%08x\n", normalize(c.id), c.name)
 	}
 	write(")\n\n")
 
 	// type structs
 	for _, c := range combinators {
+		if c.isFunction {
+			innerTypeName, _, _ := parseVectorType(c.typeName)
+			constructorIDs := findConstructorIDs(combinators, innerTypeName)
+			if len(constructorIDs) == 0 && !slices.Contains([]string{"X", "int", "long"}, innerTypeName) {
+				log.Printf("WARN: no constructors for type %s", innerTypeName)
+			}
+			write("// Returns %s: %s\n", c.typeName, strings.Join(constructorIDs, " | "))
+		} else {
+			write("// Constructs %s\n", c.typeName)
+		}
+
 		write("type %s struct {\n", c.structName())
 		for _, t := range c.fields {
 			fieldComment := ""
@@ -353,9 +362,9 @@ import (
 
 	// encode funcs
 	for _, c := range combinators {
-		write("func (e TL_%s) encode() []byte {\n", c.id)
+		write("func (e TL_%s) encode() []byte {\n", normalize(c.id))
 		write("x := NewEncodeBuf(512)\n")
-		write("x.UInt(CRC_%s)\n", c.id)
+		write("x.UInt(CRC_%s)\n", normalize(c.id))
 		for _, t := range c.fields {
 			fieldName := normalizeFieldName(t.name)
 			if t.flag != nil && t.typeName != "true" {
@@ -411,7 +420,7 @@ import (
 	// request decode funcs (for funtions)
 	for _, c := range combinators {
 		if c.isFunction {
-			write("func (e TL_%s) decodeResponse(dbuf *DecodeBuf) TL {\n", c.id)
+			write("func (e TL_%s) decodeResponse(dbuf *DecodeBuf) TL {\n", normalize(c.id))
 			if c.typeName == "Vector<int>" {
 				write("return VectorInt(dbuf.VectorInt())\n")
 			} else if c.typeName == "Vector<long>" {
@@ -438,12 +447,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	switch constructor {`)
 
 	for _, c := range combinators {
-		write("case CRC_%s:\n", c.id)
+		write("case CRC_%s:\n", normalize(c.id))
 		flagNames := c.flagFieldNames()
 		if len(flagNames) > 0 {
 			write("var %s int32\n", strings.Join(flagNames, ","))
 		}
-		write("r = TL_%s{\n", c.id)
+		write("r = TL_%s{\n", normalize(c.id))
 		for _, t := range c.fields {
 			switch t.typeName {
 			case "true": //flags only
