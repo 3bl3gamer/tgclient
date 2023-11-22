@@ -118,9 +118,9 @@ func normalizeFieldName(s string) string {
 func maybeFlagged(_type string, flag *Flag, args ...string) string {
 	argsStr := strings.Join(args, ",")
 	if flag != nil {
-		return fmt.Sprintf("m.Flagged%s(%s, %d, %s),\n", _type, flag.fieldName, flag.bit, argsStr)
+		return fmt.Sprintf("m.Flagged%s(%s, %d, %s)", _type, flag.fieldName, flag.bit, argsStr)
 	} else {
-		return fmt.Sprintf("m.%s(%s),\n", _type, argsStr)
+		return fmt.Sprintf("m.%s(%s)", _type, argsStr)
 	}
 }
 
@@ -252,6 +252,90 @@ func parseTLSchema(fpath string) []*Combinator {
 	return combinators
 }
 
+type FieldType struct {
+	GoType   string
+	EncDec   string
+	EncoderF func(fieldName string, field Field) string
+	DecoderF func(field Field) string
+	UseOpt   bool
+}
+
+var simpleFieldTypeMap = map[string]FieldType{
+	"true": {
+		GoType: "bool",
+		EncoderF: func(fieldName string, t Field) string {
+			return fmt.Sprintf("// %s.%d %s", t.flag.fieldName, t.flag.bit, fieldName)
+		},
+		DecoderF: func(t Field) string {
+			return fmt.Sprintf("%s & %d != 0, //%s.%d", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.fieldName, t.flag.bit)
+		},
+	},
+	"#": {
+		GoType:   "int32",
+		EncDec:   "Int",
+		DecoderF: func(t Field) string { return fmt.Sprintf("readFlags(m, &%s),", t.name) },
+	},
+	"int": {
+		GoType: "int32",
+		EncDec: "Int",
+		UseOpt: true,
+	},
+	"long": {
+		GoType: "int64",
+		EncDec: "Long",
+		UseOpt: true,
+	},
+	"int128": {
+		GoType:   "[]byte",
+		EncDec:   "Bytes",
+		DecoderF: func(t Field) string { return maybeFlagged("Bytes", t.flag, "16") + "," },
+	},
+	"int256": {
+		GoType:   "[]byte",
+		EncDec:   "Bytes",
+		DecoderF: func(t Field) string { return maybeFlagged("Bytes", t.flag, "32") + "," },
+	},
+	"string": {
+		GoType: "string",
+		EncDec: "String",
+		UseOpt: true,
+	},
+	"double": {
+		GoType: "float64",
+		EncDec: "Double",
+		UseOpt: true,
+	},
+	"bytes": {
+		GoType: "[]byte",
+		EncDec: "StringBytes",
+	},
+	"Vector<int>": {
+		GoType: "[]int32",
+		EncDec: "VectorInt",
+	},
+	"Vector<long>": {
+		GoType: "[]int64",
+		EncDec: "VectorLong",
+	},
+	"Vector<string>": {
+		GoType: "[]string",
+		EncDec: "VectorString",
+	},
+	"Vector<double>": {
+		GoType: "[]float64",
+		EncDec: "VectorDouble",
+	},
+	"Vector<bytes>": {
+		GoType: "[][]byte",
+		EncDec: "VectorBytes",
+	},
+	"!X": {
+		GoType:   "TL",
+		EncDec:   "Object",
+		EncoderF: func(fieldName string, field Field) string { return "x.Bytes(e.Query.encode())" },
+	},
+}
+
 func main() {
 	if len(os.Args) != 4 {
 		println("Usage: " + os.Args[0] + " layer tl_schema.tl tl_schema.go")
@@ -308,36 +392,10 @@ import (
 		for _, t := range c.fields {
 			fieldComment := ""
 			write("%s\t", normalizeFieldName(t.name))
-			switch t.typeName {
-			case "true": //flags only
-				write("bool")
-			case "int", "#":
-				write("int32")
-			case "long":
-				write("int64")
-			case "int128":
-				write("[]byte")
-			case "int256":
-				write("[]byte")
-			case "string":
-				write("string")
-			case "double":
-				write("float64")
-			case "bytes":
-				write("[]byte")
-			case "Vector<int>":
-				write("[]int32")
-			case "Vector<long>":
-				write("[]int64")
-			case "Vector<string>":
-				write("[]string")
-			case "Vector<double>":
-				write("[]float64")
-			case "Vector<bytes>":
-				write("[][]byte")
-			case "!X":
-				write("TL")
-			default:
+
+			if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
+				write("%s", mapped.GoType)
+			} else {
 				innerTypeName, vecNesting, _ := parseVectorType(t.typeName)
 
 				constructorIDs := findConstructorIDs(combinators, innerTypeName)
@@ -348,6 +406,7 @@ import (
 				write("%sTL", strings.Repeat("[]", vecNesting))
 				fieldComment += innerTypeName + ": " + strings.Join(constructorIDs, " | ")
 			}
+
 			if t.flag != nil {
 				fieldComment = fmt.Sprintf("(%s.%d) %s", t.flag.fieldName, t.flag.bit, fieldComment)
 			}
@@ -370,36 +429,14 @@ import (
 			if t.flag != nil && t.typeName != "true" {
 				write("if e.%s & %d != 0 {\n", normalizeFieldName(t.flag.fieldName), 1<<uint(t.flag.bit))
 			}
-			switch t.typeName {
-			case "true": //flags only
-				write("// %s.%d %s\n", t.flag.fieldName, t.flag.bit, fieldName)
-			case "int", "#":
-				write("x.Int(e.%s)\n", fieldName)
-			case "long":
-				write("x.Long(e.%s)\n", fieldName)
-			case "int128":
-				write("x.Bytes(e.%s)\n", fieldName)
-			case "int256":
-				write("x.Bytes(e.%s)\n", fieldName)
-			case "string":
-				write("x.String(e.%s)\n", fieldName)
-			case "double":
-				write("x.Double(e.%s)\n", fieldName)
-			case "bytes":
-				write("x.StringBytes(e.%s)\n", fieldName)
-			case "Vector<int>":
-				write("x.VectorInt(e.%s)\n", fieldName)
-			case "Vector<long>":
-				write("x.VectorLong(e.%s)\n", fieldName)
-			case "Vector<string>":
-				write("x.VectorString(e.%s)\n", fieldName)
-			case "Vector<double>":
-				write("x.VectorDouble(e.%s)\n", fieldName)
-			case "Vector<bytes>":
-				write("x.VectorBytes(e.%s)\n", fieldName)
-			case "!X":
-				write("x.Bytes(e.%s.encode())\n", fieldName)
-			default:
+
+			if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
+				if mapped.EncoderF == nil {
+					write("x.%s(e.%s)\n", mapped.EncDec, fieldName)
+				} else {
+					write("%s\n", mapped.EncoderF(fieldName, t))
+				}
+			} else {
 				_, vecNesting, _ := parseVectorType(t.typeName)
 				if vecNesting == 1 {
 					write("x.Vector(e.%s)\n", fieldName)
@@ -409,6 +446,7 @@ import (
 					write("x.Bytes(e.%s.encode())\n", fieldName)
 				}
 			}
+
 			if t.flag != nil && t.typeName != "true" {
 				write("}\n")
 			}
@@ -452,47 +490,23 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		if len(flagNames) > 0 {
 			write("var %s int32\n", strings.Join(flagNames, ","))
 		}
+
 		write("r = TL_%s{\n", normalize(c.id))
 		for _, t := range c.fields {
-			switch t.typeName {
-			case "true": //flags only
-				write("%s & %d != 0, //%s.%d\n", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.fieldName, t.flag.bit)
-			case "#":
-				write("readFlags(m, &%s),\n", t.name)
-			case "int":
-				write(maybeFlagged("Int", t.flag))
-			case "long":
-				write(maybeFlagged("Long", t.flag))
-			case "int128":
-				write(maybeFlagged("Bytes", t.flag, "16"))
-			case "int256":
-				write(maybeFlagged("Bytes", t.flag, "32"))
-			case "string":
-				write(maybeFlagged("String", t.flag))
-			case "double":
-				write(maybeFlagged("Double", t.flag))
-			case "bytes":
-				write(maybeFlagged("StringBytes", t.flag))
-			case "Vector<int>":
-				write(maybeFlagged("VectorInt", t.flag))
-			case "Vector<long>":
-				write(maybeFlagged("VectorLong", t.flag))
-			case "Vector<string>":
-				write(maybeFlagged("VectorString", t.flag))
-			case "Vector<double>":
-				write(maybeFlagged("VectorDouble", t.flag))
-			case "Vector<bytes>":
-				write(maybeFlagged("VectorBytes", t.flag))
-			case "!X":
-				write(maybeFlagged("Object", t.flag))
-			default:
+			if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
+				if mapped.DecoderF == nil {
+					write("%s,\n", maybeFlagged(mapped.EncDec, t.flag))
+				} else {
+					write("%s\n", mapped.DecoderF(t))
+				}
+			} else {
 				_, vecNesting, _ := parseVectorType(t.typeName)
 				if vecNesting == 1 {
-					write(maybeFlagged("Vector", t.flag))
+					write("%s,\n", maybeFlagged("Vector", t.flag))
 				} else if vecNesting == 2 {
-					write(maybeFlagged("Vector2d", t.flag))
+					write("%s,\n", maybeFlagged("Vector2d", t.flag))
 				} else {
-					write(maybeFlagged("Object", t.flag))
+					write("%s,\n", maybeFlagged("Object", t.flag))
 				}
 			}
 		}
