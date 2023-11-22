@@ -124,15 +124,6 @@ func normalizeFieldName(s string) string {
 	return s
 }
 
-func maybeFlagged(_type string, flag *Flag, args ...string) string {
-	argsStr := strings.Join(args, ",")
-	if flag != nil {
-		return fmt.Sprintf("m.Flagged%s(%s, %d, %s)", _type, flag.fieldName, flag.bit, argsStr)
-	} else {
-		return fmt.Sprintf("m.%s(%s)", _type, argsStr)
-	}
-}
-
 func makeField(name, typeName string, knownFields []Field) Field {
 	var flag *Flag
 	for _, knownField := range knownFields {
@@ -514,6 +505,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		write("tl := TL_%s{}\n", normalize(c.id))
 		for _, t := range c.fields {
 			fieldName := normalizeFieldName(t.name)
+			if t.flag != nil && t.typeName != "true" {
+				write("if %s & (1<<%d) != 0 {\n", t.flag.fieldName, uint(t.flag.bit))
+			}
 
 			if t.typeName == "#" {
 				if c.flagIsUsed(t.name) {
@@ -524,16 +518,24 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			} else if t.typeName == "true" {
 				write("tl.%s = %s & (1<<%d) != 0\n", fieldName, t.flag.fieldName, uint(t.flag.bit))
 			} else if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
-				write("tl.%s = %s\n", fieldName, maybeFlagged(mapped.EncDec, t.flag))
+				val := fmt.Sprintf("m.%s()", mapped.EncDec)
+				if mapped.UseOpt && t.flag != nil {
+					val = "Some(" + val + ")"
+				}
+				write("tl.%s = %s\n", fieldName, val)
 			} else {
 				_, vecNesting, _ := parseVectorType(t.typeName)
 				if vecNesting == 1 {
-					write("tl.%s = %s\n", fieldName, maybeFlagged("Vector", t.flag))
+					write("tl.%s = m.%s()\n", fieldName, "Vector")
 				} else if vecNesting == 2 {
-					write("tl.%s = %s\n", fieldName, maybeFlagged("Vector2d", t.flag))
+					write("tl.%s = m.%s()\n", fieldName, "Vector2d")
 				} else {
-					write("tl.%s = %s\n", fieldName, maybeFlagged("Object", t.flag))
+					write("tl.%s = m.%s()\n", fieldName, "Object")
 				}
+			}
+
+			if t.flag != nil && t.typeName != "true" {
+				write("}\n")
 			}
 		}
 		write("r = tl\n")

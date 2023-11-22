@@ -70,14 +70,6 @@ func (m *DecodeBuf) Long() int64 {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedLong(flags, num int32) Option[int64] {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return None[int64]()
-	}
-	return Some(m.Long())
-}
-
 func (m *DecodeBuf) Double() float64 {
 	if m.err != nil {
 		return 0
@@ -89,14 +81,6 @@ func (m *DecodeBuf) Double() float64 {
 	x := math.Float64frombits(binary.LittleEndian.Uint64(m.buf[m.off : m.off+8]))
 	m.off += 8
 	return x
-}
-
-func (m *DecodeBuf) FlaggedDouble(flags, num int32) Option[float64] {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return None[float64]()
-	}
-	return Some(m.Double())
 }
 
 func (m *DecodeBuf) Int() int32 {
@@ -112,14 +96,6 @@ func (m *DecodeBuf) Int() int32 {
 	return int32(x)
 }
 
-func (m *DecodeBuf) FlaggedInt(flags, num int32) Option[int32] {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return None[int32]()
-	}
-	return Some(m.Int())
-}
-
 func (m *DecodeBuf) UInt() uint32 {
 	if m.err != nil {
 		return 0
@@ -131,14 +107,6 @@ func (m *DecodeBuf) UInt() uint32 {
 	x := binary.LittleEndian.Uint32(m.buf[m.off : m.off+4])
 	m.off += 4
 	return x
-}
-
-func (m *DecodeBuf) FlaggedUInt(flags, num int32) Option[uint32] {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return None[uint32]()
-	}
-	return Some(m.UInt())
 }
 
 func (m *DecodeBuf) Bytes(size int) []byte {
@@ -203,14 +171,6 @@ func (m *DecodeBuf) StringBytes() []byte {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedStringBytes(flags, num int32) []byte {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.StringBytes()
-}
-
 func (m *DecodeBuf) String() string {
 	b := m.StringBytes()
 	if m.err != nil {
@@ -218,14 +178,6 @@ func (m *DecodeBuf) String() string {
 	}
 	x := string(b)
 	return x
-}
-
-func (m *DecodeBuf) FlaggedString(flags, num int32) Option[string] {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return None[string]()
-	}
-	return Some(m.String())
 }
 
 func (m *DecodeBuf) BigInt() *big.Int {
@@ -258,14 +210,6 @@ func (m *DecodeBuf) VectorInt() []int32 {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedVectorInt(flags, num int32) []int32 {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.VectorInt()
-}
-
 func (m *DecodeBuf) VectorLong() []int64 {
 	size := m.vectorHeader("DecodeVectorLong")
 	if m.err != nil {
@@ -282,14 +226,6 @@ func (m *DecodeBuf) VectorLong() []int64 {
 		i++
 	}
 	return x
-}
-
-func (m *DecodeBuf) FlaggedVectorLong(flags, num int32) []int64 {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.VectorLong()
 }
 
 func (m *DecodeBuf) VectorString() []string {
@@ -310,14 +246,6 @@ func (m *DecodeBuf) VectorString() []string {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedVectorString(flags, num int32) []string {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.VectorString()
-}
-
 func (m *DecodeBuf) VectorBytes() [][]byte {
 	size := m.vectorHeader("DecodeVectorBytes")
 	if m.err != nil {
@@ -334,14 +262,6 @@ func (m *DecodeBuf) VectorBytes() [][]byte {
 		i++
 	}
 	return x
-}
-
-func (m *DecodeBuf) FlaggedVectorBytes(flags, num int32) [][]byte {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.VectorBytes()
 }
 
 func (m *DecodeBuf) Vector() []TL {
@@ -362,14 +282,6 @@ func (m *DecodeBuf) Vector() []TL {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedVector(flags, num int32) []TL {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.Vector()
-}
-
 func (m *DecodeBuf) Vector2d() [][]TL {
 	size := m.vectorHeader("DecodeVector2d")
 	if m.err != nil {
@@ -388,28 +300,12 @@ func (m *DecodeBuf) Vector2d() [][]TL {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedVector2d(flags, num int32) [][]TL {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.Vector2d()
-}
-
 func (m *DecodeBuf) Object() TL {
 	constructor := m.UInt()
 	if m.err != nil {
 		return nil
 	}
 	return m.ObjectGenerated(constructor)
-}
-
-func (m *DecodeBuf) FlaggedObject(flags, num int32) TL {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.Object()
 }
 
 func (m *DecodeBuf) vectorHeader(errLabel string) int32 {
