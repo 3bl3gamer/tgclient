@@ -258,7 +258,6 @@ func (m *MTProto) initConection() error {
 	x, err := m.sendAndReadDirect(TL_invokeWithLayer{
 		TL_Layer,
 		TL_initConnection{
-			Flags:          0,
 			ApiID:          m.appCfg.AppID,
 			DeviceModel:    m.appCfg.DeviceModel,
 			SystemVersion:  m.appCfg.SystemVersion,
@@ -266,7 +265,6 @@ func (m *MTProto) initConection() error {
 			SystemLangCode: m.appCfg.SystemLangCode,
 			LangPack:       m.appCfg.LangPack,
 			LangCode:       m.appCfg.LangCode,
-			Proxy:          nil, //flagged
 			Query:          TL_help_getConfig{},
 		},
 	})
@@ -645,7 +643,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 			PhoneNumber: phonenumber,
 			ApiID:       m.appCfg.AppID,
 			ApiHash:     m.appCfg.AppHash,
-			Settings:    TL_codeSettings{Flags: 1, CurrentNumber: true},
+			Settings:    TL_codeSettings{CurrentNumber: true},
 		})
 		switch x := x.(type) {
 		case TL_auth_sentCode:
@@ -683,10 +681,9 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 
 	//if authSentCode.Phone_registered
 	x := m.SendSync(TL_auth_signIn{
-		Flags:             1, // PhoneCode
 		PhoneNumber:       phonenumber,
 		PhoneCodeHash:     authSentCode.PhoneCodeHash,
-		PhoneCode:         code,
+		PhoneCode:         Some(code),
 		EmailVerification: nil,
 	})
 	if IsError(x, "SESSION_PASSWORD_NEEDED") {
@@ -720,7 +717,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 		return merry.Errorf("RPC: %#v", x)
 	}
 	userSelf := auth.User.(TL_user)
-	fmt.Printf("Signed in: id %d name <%s %s>\n", userSelf.ID, userSelf.FirstName, userSelf.LastName)
+	m.log.Info("Signed in: id %d name <%s %s>\n", userSelf.ID, userSelf.FirstName.Value, userSelf.LastName.Value)
 	return nil
 }
 
@@ -787,8 +784,8 @@ func (m *MTProto) GetContacts() error {
 			"%10d    %10t    %-30s    %-20s\n",
 			v.UserID,
 			toBool(v.Mutual),
-			fmt.Sprintf("%s %s", contacts[v.UserID].FirstName, contacts[v.UserID].LastName),
-			contacts[v.UserID].Username,
+			fmt.Sprintf("%s %s", contacts[v.UserID].FirstName.Value, contacts[v.UserID].LastName.Value),
+			contacts[v.UserID].Username.Value,
 		)
 	}
 

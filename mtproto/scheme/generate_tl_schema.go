@@ -54,6 +54,15 @@ func (c Combinator) flagFieldNames() []string {
 	return names
 }
 
+func (c Combinator) flagIsUsed(flagFieldName string) bool {
+	for _, f := range c.fields {
+		if f.flag != nil && f.flag.fieldName == flagFieldName {
+			return true
+		}
+	}
+	return false
+}
+
 func (c Combinator) structName() string {
 	return "TL_" + normalize(c.id)
 }
@@ -253,28 +262,12 @@ func parseTLSchema(fpath string) []*Combinator {
 }
 
 type FieldType struct {
-	GoType   string
-	EncDec   string
-	EncoderF func(fieldName string, field Field) string
-	DecoderF func(field Field) string
-	UseOpt   bool
+	GoType string
+	EncDec string
+	UseOpt bool
 }
 
 var simpleFieldTypeMap = map[string]FieldType{
-	"true": {
-		GoType: "bool",
-		EncoderF: func(fieldName string, t Field) string {
-			return fmt.Sprintf("// %s.%d %s", t.flag.fieldName, t.flag.bit, fieldName)
-		},
-		DecoderF: func(t Field) string {
-			return fmt.Sprintf("%s & %d != 0, //%s.%d", t.flag.fieldName, 1<<uint(t.flag.bit), t.flag.fieldName, t.flag.bit)
-		},
-	},
-	"#": {
-		GoType:   "int32",
-		EncDec:   "Int",
-		DecoderF: func(t Field) string { return fmt.Sprintf("readFlags(m, &%s),", t.name) },
-	},
 	"int": {
 		GoType: "int32",
 		EncDec: "Int",
@@ -288,10 +281,12 @@ var simpleFieldTypeMap = map[string]FieldType{
 	"int128": {
 		GoType: "[16]byte",
 		EncDec: "Bytes16",
+		UseOpt: true,
 	},
 	"int256": {
 		GoType: "[32]byte",
 		EncDec: "Bytes32",
+		UseOpt: true,
 	},
 	"string": {
 		GoType: "string",
@@ -328,10 +323,20 @@ var simpleFieldTypeMap = map[string]FieldType{
 		EncDec: "VectorBytes",
 	},
 	"!X": {
-		GoType:   "TL",
-		EncDec:   "Object",
-		EncoderF: func(fieldName string, field Field) string { return "x.Bytes(e.Query.encode())" },
+		GoType: "TL",
+		EncDec: "Object",
 	},
+}
+
+func flaggedValueCheck(typeName, varName string) string {
+	switch typeName {
+	case "true":
+		return varName
+	case "int", "long", "string", "double":
+		return varName + ".IsSet"
+	default:
+		return varName + " != nil"
+	}
 }
 
 func main() {
@@ -388,11 +393,21 @@ import (
 
 		write("type %s struct {\n", c.structName())
 		for _, t := range c.fields {
+			if t.typeName == "#" {
+				continue
+			}
+
 			fieldComment := ""
 			write("%s\t", normalizeFieldName(t.name))
 
-			if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
-				write("%s", mapped.GoType)
+			if t.typeName == "true" {
+				write("bool")
+			} else if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
+				type_ := mapped.GoType
+				if mapped.UseOpt && t.flag != nil {
+					type_ = "Option[" + type_ + "]"
+				}
+				write("%s", type_)
 			} else {
 				innerTypeName, vecNesting, _ := parseVectorType(t.typeName)
 
@@ -405,8 +420,8 @@ import (
 				fieldComment += innerTypeName + ": " + strings.Join(constructorIDs, " | ")
 			}
 
-			if t.flag != nil {
-				fieldComment = fmt.Sprintf("(%s.%d) %s", t.flag.fieldName, t.flag.bit, fieldComment)
+			if t.flag != nil && t.typeName != "true" {
+				fieldComment = "(optional) " + fieldComment
 			}
 
 			if fieldComment != "" {
@@ -420,20 +435,38 @@ import (
 	// encode funcs
 	for _, c := range combinators {
 		write("func (e TL_%s) encode() []byte {\n", normalize(c.id))
+
+		// filling flag values
+		flagNames := c.flagFieldNames()
+		if len(flagNames) > 0 {
+			write("var %s int32\n", strings.Join(flagNames, ","))
+		}
+		for _, t := range c.fields {
+			if t.flag != nil {
+				fieldName := normalizeFieldName(t.name)
+				write("if %s {%s |= (1<<%d)}\n", flaggedValueCheck(t.typeName, "e."+fieldName), t.flag.fieldName, uint(t.flag.bit))
+			}
+		}
+
+		// encoding attributes
 		write("x := NewEncodeBuf(512)\n")
 		write("x.UInt(CRC_%s)\n", normalize(c.id))
 		for _, t := range c.fields {
 			fieldName := normalizeFieldName(t.name)
 			if t.flag != nil && t.typeName != "true" {
-				write("if e.%s & %d != 0 {\n", normalizeFieldName(t.flag.fieldName), 1<<uint(t.flag.bit))
+				write("if %s {\n", flaggedValueCheck(t.typeName, "e."+fieldName))
 			}
 
-			if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
-				if mapped.EncoderF == nil {
-					write("x.%s(e.%s)\n", mapped.EncDec, fieldName)
-				} else {
-					write("%s\n", mapped.EncoderF(fieldName, t))
+			if t.typeName == "#" {
+				write("x.Int(%s)\n", t.name)
+			} else if t.typeName == "true" {
+				//
+			} else if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
+				valuePath := fieldName
+				if mapped.UseOpt && t.flag != nil {
+					valuePath += ".Value"
 				}
+				write("x.%s(e.%s)\n", mapped.EncDec, valuePath)
 			} else {
 				_, vecNesting, _ := parseVectorType(t.typeName)
 				if vecNesting == 1 {
@@ -441,7 +474,7 @@ import (
 				} else if vecNesting == 2 {
 					write("x.Vector2d(e.%s)\n", fieldName)
 				} else {
-					write("x.Bytes(e.%s.encode())\n", fieldName)
+					write("x.Object(e.%s)\n", fieldName)
 				}
 			}
 
@@ -472,43 +505,38 @@ import (
 
 	// decode funcs
 	write(`
-func readFlags(m *DecodeBuf, flagsPtr *int32) int32 {
-	flags := m.Int()
-	*flagsPtr = flags
-	return flags
-}
-
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	objStartOffset := m.off - 4 //4 bytes of constructor name have been already read
 	switch constructor {`)
 
 	for _, c := range combinators {
 		write("case CRC_%s:\n", normalize(c.id))
-		flagNames := c.flagFieldNames()
-		if len(flagNames) > 0 {
-			write("var %s int32\n", strings.Join(flagNames, ","))
-		}
-
-		write("r = TL_%s{\n", normalize(c.id))
+		write("tl := TL_%s{}\n", normalize(c.id))
 		for _, t := range c.fields {
-			if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
-				if mapped.DecoderF == nil {
-					write("%s,\n", maybeFlagged(mapped.EncDec, t.flag))
+			fieldName := normalizeFieldName(t.name)
+
+			if t.typeName == "#" {
+				if c.flagIsUsed(t.name) {
+					write("%s := m.Int()\n", t.name)
 				} else {
-					write("%s\n", mapped.DecoderF(t))
+					write("m.Int() //unused %s\n", t.name)
 				}
+			} else if t.typeName == "true" {
+				write("tl.%s = %s & (1<<%d) != 0\n", fieldName, t.flag.fieldName, uint(t.flag.bit))
+			} else if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
+				write("tl.%s = %s\n", fieldName, maybeFlagged(mapped.EncDec, t.flag))
 			} else {
 				_, vecNesting, _ := parseVectorType(t.typeName)
 				if vecNesting == 1 {
-					write("%s,\n", maybeFlagged("Vector", t.flag))
+					write("tl.%s = %s\n", fieldName, maybeFlagged("Vector", t.flag))
 				} else if vecNesting == 2 {
-					write("%s,\n", maybeFlagged("Vector2d", t.flag))
+					write("tl.%s = %s\n", fieldName, maybeFlagged("Vector2d", t.flag))
 				} else {
-					write("%s,\n", maybeFlagged("Object", t.flag))
+					write("tl.%s = %s\n", fieldName, maybeFlagged("Object", t.flag))
 				}
 			}
 		}
-		write("}\n\n")
+		write("r = tl\n")
 	}
 
 	write(`

@@ -136,3 +136,7 @@ func (e *EncodeBuf) Vector2d(v [][]TL) {
 		e.Vector(v)
 	}
 }
+
+func (e *EncodeBuf) Object(obj TL) {
+	e.Bytes(obj.encode())
+}

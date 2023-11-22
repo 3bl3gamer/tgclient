@@ -70,12 +70,12 @@ func (m *DecodeBuf) Long() int64 {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedLong(flags, num int32) int64 {
+func (m *DecodeBuf) FlaggedLong(flags, num int32) Option[int64] {
 	bit := int32(1 << uint(num))
 	if flags&bit == 0 {
-		return 0
+		return None[int64]()
 	}
-	return m.Long()
+	return Some(m.Long())
 }
 
 func (m *DecodeBuf) Double() float64 {
@@ -91,12 +91,12 @@ func (m *DecodeBuf) Double() float64 {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedDouble(flags, num int32) float64 {
+func (m *DecodeBuf) FlaggedDouble(flags, num int32) Option[float64] {
 	bit := int32(1 << uint(num))
 	if flags&bit == 0 {
-		return 0
+		return None[float64]()
 	}
-	return m.Double()
+	return Some(m.Double())
 }
 
 func (m *DecodeBuf) Int() int32 {
@@ -112,12 +112,12 @@ func (m *DecodeBuf) Int() int32 {
 	return int32(x)
 }
 
-func (m *DecodeBuf) FlaggedInt(flags, num int32) int32 {
+func (m *DecodeBuf) FlaggedInt(flags, num int32) Option[int32] {
 	bit := int32(1 << uint(num))
 	if flags&bit == 0 {
-		return 0
+		return None[int32]()
 	}
-	return m.Int()
+	return Some(m.Int())
 }
 
 func (m *DecodeBuf) UInt() uint32 {
@@ -133,12 +133,12 @@ func (m *DecodeBuf) UInt() uint32 {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedUInt(flags, num int32) uint32 {
+func (m *DecodeBuf) FlaggedUInt(flags, num int32) Option[uint32] {
 	bit := int32(1 << uint(num))
 	if flags&bit == 0 {
-		return 0
+		return None[uint32]()
 	}
-	return m.UInt()
+	return Some(m.UInt())
 }
 
 func (m *DecodeBuf) Bytes(size int) []byte {
@@ -220,12 +220,12 @@ func (m *DecodeBuf) String() string {
 	return x
 }
 
-func (m *DecodeBuf) FlaggedString(flags, num int32) string {
+func (m *DecodeBuf) FlaggedString(flags, num int32) Option[string] {
 	bit := int32(1 << uint(num))
 	if flags&bit == 0 {
-		return ""
+		return None[string]()
 	}
-	return m.String()
+	return Some(m.String())
 }
 
 func (m *DecodeBuf) BigInt() *big.Int {
@@ -238,14 +238,6 @@ func (m *DecodeBuf) BigInt() *big.Int {
 	copy(y[1:], b)
 	x := new(big.Int).SetBytes(y)
 	return x
-}
-
-func (m *DecodeBuf) FlaggedBigInt(flags, num int32) *big.Int {
-	bit := int32(1 << uint(num))
-	if flags&bit == 0 {
-		return nil
-	}
-	return m.BigInt()
 }
 
 func (m *DecodeBuf) VectorInt() []int32 {

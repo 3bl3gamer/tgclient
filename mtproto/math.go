@@ -357,5 +357,9 @@ func calcInputCheckPasswordSRP(
 	logDebug("ABuf:  %#v", ABuf)
 	logDebug("MBuf:  %#v", MBuf)
 
-	return TL_inputCheckPasswordSRP{SrpID: srpID, A: ABuf, M1: MBuf}, nil
+	if !srpID.IsSet {
+		return nil, merry.New("srpID is not set")
+	}
+
+	return TL_inputCheckPasswordSRP{SrpID: srpID.Value, A: ABuf, M1: MBuf}, nil
 }
