@@ -1,6 +1,6 @@
 module github.com/3bl3gamer/tgclient
 
-go 1.18
+go 1.20
 
 require (
 	github.com/ansel1/merry/v2 v2.2.0

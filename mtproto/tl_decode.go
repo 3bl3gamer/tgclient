@@ -155,6 +155,14 @@ func (m *DecodeBuf) Bytes(size int) []byte {
 	return x
 }
 
+func (m *DecodeBuf) Bytes16() [16]byte {
+	return [16]byte(m.Bytes(16))
+}
+
+func (m *DecodeBuf) Bytes32() [32]byte {
+	return [32]byte(m.Bytes(32))
+}
+
 func (m *DecodeBuf) StringBytes() []byte {
 	if m.err != nil {
 		return nil

@@ -2,9 +2,9 @@ package mtproto
 
 import (
 	"bytes"
+	"crypto/rand"
 	"encoding/binary"
 	"fmt"
-	"math/rand"
 	"time"
 
 	"github.com/ansel1/merry/v2"
@@ -204,7 +204,10 @@ func (m *MTProto) makeAuthKey() error {
 	var packet *packetReceived
 
 	// (send) req_pq
-	nonceFirst := GenerateNonce(16)
+	nonceFirst, err := generateNonce16()
+	if err != nil {
+		return merry.Wrap(err)
+	}
 	err = m.justSend(TL_req_pq{nonceFirst})
 	if err != nil {
 		return merry.Wrap(err)
@@ -219,7 +222,7 @@ func (m *MTProto) makeAuthKey() error {
 	if !ok {
 		return merry.Errorf("Handshake: Need resPQ, got %#v", packet.msg)
 	}
-	if !bytes.Equal(nonceFirst, res.Nonce) {
+	if nonceFirst != res.Nonce {
 		return merry.New("Handshake: Wrong nonce")
 	}
 	found := false
@@ -235,7 +238,10 @@ func (m *MTProto) makeAuthKey() error {
 
 	// (encoding) p_q_inner_data
 	p, q := splitPQ(str2big(res.Pq))
-	nonceSecond := GenerateNonce(32)
+	nonceSecond, err := generateNonce32()
+	if err != nil {
+		return merry.Wrap(err)
+	}
 	nonceServer := res.ServerNonce
 	innerData1 := (TL_p_q_inner_data{res.Pq, big2str(p), big2str(q), nonceFirst, nonceServer, nonceSecond}).encode()
 
@@ -259,25 +265,25 @@ func (m *MTProto) makeAuthKey() error {
 	if !ok {
 		return merry.Errorf("Handshake: Need server_DH_params_ok, got %#v", packet.msg)
 	}
-	if !bytes.Equal(nonceFirst, dh.Nonce) {
+	if nonceFirst != dh.Nonce {
 		return merry.New("Handshake: Wrong nonce")
 	}
-	if !bytes.Equal(nonceServer, dh.ServerNonce) {
+	if nonceServer != dh.ServerNonce {
 		return merry.New("Handshake: Wrong server_nonce")
 	}
 	t1 := make([]byte, 48)
-	copy(t1[0:], nonceSecond)
-	copy(t1[32:], nonceServer)
+	copy(t1[0:], nonceSecond[:])
+	copy(t1[32:], nonceServer[:])
 	hash1 := sha1(t1)
 
 	t2 := make([]byte, 48)
-	copy(t2[0:], nonceServer)
-	copy(t2[16:], nonceSecond)
+	copy(t2[0:], nonceServer[:])
+	copy(t2[16:], nonceSecond[:])
 	hash2 := sha1(t2)
 
 	t3 := make([]byte, 64)
-	copy(t3[0:], nonceSecond)
-	copy(t3[32:], nonceSecond)
+	copy(t3[0:], nonceSecond[:])
+	copy(t3[32:], nonceSecond[:])
 	hash3 := sha1(t3)
 
 	tmpAESKey := make([]byte, 32)
@@ -304,10 +310,10 @@ func (m *MTProto) makeAuthKey() error {
 	if !ok {
 		return merry.New("Handshake: Need server_DH_inner_data")
 	}
-	if !bytes.Equal(nonceFirst, dhi.Nonce) {
+	if nonceFirst != dhi.Nonce {
 		return merry.New("Handshake: Wrong nonce")
 	}
-	if !bytes.Equal(nonceServer, dhi.ServerNonce) {
+	if nonceServer != dhi.ServerNonce {
 		return merry.New("Handshake: Wrong server_nonce")
 	}
 
@@ -318,10 +324,10 @@ func (m *MTProto) makeAuthKey() error {
 	}
 	m.session.AuthKeyHash = sha1(m.session.AuthKey)[12:20]
 	t4 := make([]byte, 32+1+8)
-	copy(t4[0:], nonceSecond)
+	copy(t4[0:], nonceSecond[:])
 	t4[32] = 1
 	copy(t4[33:], sha1(m.session.AuthKey)[0:8])
-	nonceHash1 := sha1(t4)[4:20]
+	nonceHash1 := [16]byte(sha1(t4)[4:20])
 	saltBuf := make([]byte, 8)
 	copy(saltBuf, nonceSecond[:8])
 	xor(saltBuf, nonceServer[:8])
@@ -349,13 +355,13 @@ func (m *MTProto) makeAuthKey() error {
 	if !ok {
 		return merry.Errorf("Handshake: Need dh_gen_ok, got %#v", packet.msg)
 	}
-	if !bytes.Equal(nonceFirst, dhg.Nonce) {
+	if nonceFirst != dhg.Nonce {
 		return merry.New("Handshake: Wrong nonce")
 	}
-	if !bytes.Equal(nonceServer, dhg.ServerNonce) {
+	if nonceServer != dhg.ServerNonce {
 		return merry.New("Handshake: Wrong server_nonce")
 	}
-	if !bytes.Equal(nonceHash1, dhg.NewNonceHash1) {
+	if nonceHash1 != dhg.NewNonceHash1 {
 		return merry.New("Handshake: Wrong new_nonce_hash1")
 	}
 	return nil
@@ -380,8 +386,14 @@ func (m *MTProto) generateMessageId() int64 {
 	return id
 }
 
-func GenerateNonce(size int) []byte {
-	b := make([]byte, size)
-	_, _ = rand.Read(b)
-	return b
+func generateNonce16() ([16]byte, error) {
+	var b [16]byte
+	_, err := rand.Read(b[:])
+	return b, merry.Wrap(err)
+}
+
+func generateNonce32() ([32]byte, error) {
+	var b [32]byte
+	_, err := rand.Read(b[:])
+	return b, merry.Wrap(err)
 }

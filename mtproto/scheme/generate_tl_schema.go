@@ -286,14 +286,12 @@ var simpleFieldTypeMap = map[string]FieldType{
 		UseOpt: true,
 	},
 	"int128": {
-		GoType:   "[]byte",
-		EncDec:   "Bytes",
-		DecoderF: func(t Field) string { return maybeFlagged("Bytes", t.flag, "16") + "," },
+		GoType: "[16]byte",
+		EncDec: "Bytes16",
 	},
 	"int256": {
-		GoType:   "[]byte",
-		EncDec:   "Bytes",
-		DecoderF: func(t Field) string { return maybeFlagged("Bytes", t.flag, "32") + "," },
+		GoType: "[32]byte",
+		EncDec: "Bytes32",
 	},
 	"string": {
 		GoType: "string",

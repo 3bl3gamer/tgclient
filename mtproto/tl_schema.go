@@ -1792,8 +1792,8 @@ const (
 
 // Constructs ResPQ
 type TL_resPQ struct {
-	Nonce                       []byte
-	ServerNonce                 []byte
+	Nonce                       [16]byte
+	ServerNonce                 [16]byte
 	Pq                          string
 	ServerPublicKeyFingerprints []int64
 }
@@ -1803,9 +1803,9 @@ type TL_p_q_inner_data struct {
 	Pq          string
 	P           string
 	Q           string
-	Nonce       []byte
-	ServerNonce []byte
-	NewNonce    []byte
+	Nonce       [16]byte
+	ServerNonce [16]byte
+	NewNonce    [32]byte
 }
 
 // Constructs P_Q_inner_data
@@ -1813,9 +1813,9 @@ type TL_p_q_inner_data_dc struct {
 	Pq          string
 	P           string
 	Q           string
-	Nonce       []byte
-	ServerNonce []byte
-	NewNonce    []byte
+	Nonce       [16]byte
+	ServerNonce [16]byte
+	NewNonce    [32]byte
 	Dc          int32
 }
 
@@ -1824,9 +1824,9 @@ type TL_p_q_inner_data_temp struct {
 	Pq          string
 	P           string
 	Q           string
-	Nonce       []byte
-	ServerNonce []byte
-	NewNonce    []byte
+	Nonce       [16]byte
+	ServerNonce [16]byte
+	NewNonce    [32]byte
 	ExpiresIn   int32
 }
 
@@ -1835,9 +1835,9 @@ type TL_p_q_inner_data_temp_dc struct {
 	Pq          string
 	P           string
 	Q           string
-	Nonce       []byte
-	ServerNonce []byte
-	NewNonce    []byte
+	Nonce       [16]byte
+	ServerNonce [16]byte
+	NewNonce    [32]byte
 	Dc          int32
 	ExpiresIn   int32
 }
@@ -1853,22 +1853,22 @@ type TL_bind_auth_key_inner struct {
 
 // Constructs Server_DH_Params
 type TL_server_DH_params_fail struct {
-	Nonce        []byte
-	ServerNonce  []byte
-	NewNonceHash []byte
+	Nonce        [16]byte
+	ServerNonce  [16]byte
+	NewNonceHash [16]byte
 }
 
 // Constructs Server_DH_Params
 type TL_server_DH_params_ok struct {
-	Nonce           []byte
-	ServerNonce     []byte
+	Nonce           [16]byte
+	ServerNonce     [16]byte
 	EncryptedAnswer string
 }
 
 // Constructs Server_DH_inner_data
 type TL_server_DH_inner_data struct {
-	Nonce       []byte
-	ServerNonce []byte
+	Nonce       [16]byte
+	ServerNonce [16]byte
 	G           int32
 	DhPrime     string
 	GA          string
@@ -1877,31 +1877,31 @@ type TL_server_DH_inner_data struct {
 
 // Constructs Client_DH_Inner_Data
 type TL_client_DH_inner_data struct {
-	Nonce       []byte
-	ServerNonce []byte
+	Nonce       [16]byte
+	ServerNonce [16]byte
 	RetryID     int64
 	GB          string
 }
 
 // Constructs Set_client_DH_params_answer
 type TL_dh_gen_ok struct {
-	Nonce         []byte
-	ServerNonce   []byte
-	NewNonceHash1 []byte
+	Nonce         [16]byte
+	ServerNonce   [16]byte
+	NewNonceHash1 [16]byte
 }
 
 // Constructs Set_client_DH_params_answer
 type TL_dh_gen_retry struct {
-	Nonce         []byte
-	ServerNonce   []byte
-	NewNonceHash2 []byte
+	Nonce         [16]byte
+	ServerNonce   [16]byte
+	NewNonceHash2 [16]byte
 }
 
 // Constructs Set_client_DH_params_answer
 type TL_dh_gen_fail struct {
-	Nonce         []byte
-	ServerNonce   []byte
-	NewNonceHash3 []byte
+	Nonce         [16]byte
+	ServerNonce   [16]byte
+	NewNonceHash3 [16]byte
 }
 
 // Constructs DestroyAuthKeyRes
@@ -1918,18 +1918,18 @@ type TL_destroy_auth_key_fail struct {
 
 // Returns ResPQ: TL_resPQ
 type TL_req_pq struct {
-	Nonce []byte
+	Nonce [16]byte
 }
 
 // Returns ResPQ: TL_resPQ
 type TL_req_pq_multi struct {
-	Nonce []byte
+	Nonce [16]byte
 }
 
 // Returns Server_DH_Params: TL_server_DH_params_fail | TL_server_DH_params_ok
 type TL_req_DH_params struct {
-	Nonce                []byte
-	ServerNonce          []byte
+	Nonce                [16]byte
+	ServerNonce          [16]byte
 	P                    string
 	Q                    string
 	PublicKeyFingerprint int64
@@ -1938,8 +1938,8 @@ type TL_req_DH_params struct {
 
 // Returns Set_client_DH_params_answer: TL_dh_gen_ok | TL_dh_gen_retry | TL_dh_gen_fail
 type TL_set_client_DH_params struct {
-	Nonce         []byte
-	ServerNonce   []byte
+	Nonce         [16]byte
+	ServerNonce   [16]byte
 	EncryptedData string
 }
 
@@ -14165,8 +14165,8 @@ type TL_premium_getBoostsStatus struct {
 func (e TL_resPQ) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_resPQ)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
 	x.String(e.Pq)
 	x.VectorLong(e.ServerPublicKeyFingerprints)
 	return x.buf
@@ -14178,9 +14178,9 @@ func (e TL_p_q_inner_data) encode() []byte {
 	x.String(e.Pq)
 	x.String(e.P)
 	x.String(e.Q)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
-	x.Bytes(e.NewNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
+	x.Bytes32(e.NewNonce)
 	return x.buf
 }
 
@@ -14190,9 +14190,9 @@ func (e TL_p_q_inner_data_dc) encode() []byte {
 	x.String(e.Pq)
 	x.String(e.P)
 	x.String(e.Q)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
-	x.Bytes(e.NewNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
+	x.Bytes32(e.NewNonce)
 	x.Int(e.Dc)
 	return x.buf
 }
@@ -14203,9 +14203,9 @@ func (e TL_p_q_inner_data_temp) encode() []byte {
 	x.String(e.Pq)
 	x.String(e.P)
 	x.String(e.Q)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
-	x.Bytes(e.NewNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
+	x.Bytes32(e.NewNonce)
 	x.Int(e.ExpiresIn)
 	return x.buf
 }
@@ -14216,9 +14216,9 @@ func (e TL_p_q_inner_data_temp_dc) encode() []byte {
 	x.String(e.Pq)
 	x.String(e.P)
 	x.String(e.Q)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
-	x.Bytes(e.NewNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
+	x.Bytes32(e.NewNonce)
 	x.Int(e.Dc)
 	x.Int(e.ExpiresIn)
 	return x.buf
@@ -14238,17 +14238,17 @@ func (e TL_bind_auth_key_inner) encode() []byte {
 func (e TL_server_DH_params_fail) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_server_DH_params_fail)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
-	x.Bytes(e.NewNonceHash)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
+	x.Bytes16(e.NewNonceHash)
 	return x.buf
 }
 
 func (e TL_server_DH_params_ok) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_server_DH_params_ok)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
 	x.String(e.EncryptedAnswer)
 	return x.buf
 }
@@ -14256,8 +14256,8 @@ func (e TL_server_DH_params_ok) encode() []byte {
 func (e TL_server_DH_inner_data) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_server_DH_inner_data)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
 	x.Int(e.G)
 	x.String(e.DhPrime)
 	x.String(e.GA)
@@ -14268,8 +14268,8 @@ func (e TL_server_DH_inner_data) encode() []byte {
 func (e TL_client_DH_inner_data) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_client_DH_inner_data)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
 	x.Long(e.RetryID)
 	x.String(e.GB)
 	return x.buf
@@ -14278,27 +14278,27 @@ func (e TL_client_DH_inner_data) encode() []byte {
 func (e TL_dh_gen_ok) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_dh_gen_ok)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
-	x.Bytes(e.NewNonceHash1)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
+	x.Bytes16(e.NewNonceHash1)
 	return x.buf
 }
 
 func (e TL_dh_gen_retry) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_dh_gen_retry)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
-	x.Bytes(e.NewNonceHash2)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
+	x.Bytes16(e.NewNonceHash2)
 	return x.buf
 }
 
 func (e TL_dh_gen_fail) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_dh_gen_fail)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
-	x.Bytes(e.NewNonceHash3)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
+	x.Bytes16(e.NewNonceHash3)
 	return x.buf
 }
 
@@ -14323,22 +14323,22 @@ func (e TL_destroy_auth_key_fail) encode() []byte {
 func (e TL_req_pq) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_req_pq)
-	x.Bytes(e.Nonce)
+	x.Bytes16(e.Nonce)
 	return x.buf
 }
 
 func (e TL_req_pq_multi) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_req_pq_multi)
-	x.Bytes(e.Nonce)
+	x.Bytes16(e.Nonce)
 	return x.buf
 }
 
 func (e TL_req_DH_params) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_req_DH_params)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
 	x.String(e.P)
 	x.String(e.Q)
 	x.Long(e.PublicKeyFingerprint)
@@ -14349,8 +14349,8 @@ func (e TL_req_DH_params) encode() []byte {
 func (e TL_set_client_DH_params) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_set_client_DH_params)
-	x.Bytes(e.Nonce)
-	x.Bytes(e.ServerNonce)
+	x.Bytes16(e.Nonce)
+	x.Bytes16(e.ServerNonce)
 	x.String(e.EncryptedData)
 	return x.buf
 }
@@ -34023,8 +34023,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	switch constructor {
 	case CRC_resPQ:
 		r = TL_resPQ{
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
 			m.String(),
 			m.VectorLong(),
 		}
@@ -34034,9 +34034,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.String(),
 			m.String(),
-			m.Bytes(16),
-			m.Bytes(16),
-			m.Bytes(32),
+			m.Bytes16(),
+			m.Bytes16(),
+			m.Bytes32(),
 		}
 
 	case CRC_p_q_inner_data_dc:
@@ -34044,9 +34044,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.String(),
 			m.String(),
-			m.Bytes(16),
-			m.Bytes(16),
-			m.Bytes(32),
+			m.Bytes16(),
+			m.Bytes16(),
+			m.Bytes32(),
 			m.Int(),
 		}
 
@@ -34055,9 +34055,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.String(),
 			m.String(),
-			m.Bytes(16),
-			m.Bytes(16),
-			m.Bytes(32),
+			m.Bytes16(),
+			m.Bytes16(),
+			m.Bytes32(),
 			m.Int(),
 		}
 
@@ -34066,9 +34066,9 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			m.String(),
 			m.String(),
 			m.String(),
-			m.Bytes(16),
-			m.Bytes(16),
-			m.Bytes(32),
+			m.Bytes16(),
+			m.Bytes16(),
+			m.Bytes32(),
 			m.Int(),
 			m.Int(),
 		}
@@ -34084,22 +34084,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_server_DH_params_fail:
 		r = TL_server_DH_params_fail{
-			m.Bytes(16),
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
+			m.Bytes16(),
 		}
 
 	case CRC_server_DH_params_ok:
 		r = TL_server_DH_params_ok{
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
 			m.String(),
 		}
 
 	case CRC_server_DH_inner_data:
 		r = TL_server_DH_inner_data{
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
 			m.Int(),
 			m.String(),
 			m.String(),
@@ -34108,31 +34108,31 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_client_DH_inner_data:
 		r = TL_client_DH_inner_data{
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
 			m.Long(),
 			m.String(),
 		}
 
 	case CRC_dh_gen_ok:
 		r = TL_dh_gen_ok{
-			m.Bytes(16),
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
+			m.Bytes16(),
 		}
 
 	case CRC_dh_gen_retry:
 		r = TL_dh_gen_retry{
-			m.Bytes(16),
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
+			m.Bytes16(),
 		}
 
 	case CRC_dh_gen_fail:
 		r = TL_dh_gen_fail{
-			m.Bytes(16),
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
+			m.Bytes16(),
 		}
 
 	case CRC_destroy_auth_key_ok:
@@ -34146,18 +34146,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_req_pq:
 		r = TL_req_pq{
-			m.Bytes(16),
+			m.Bytes16(),
 		}
 
 	case CRC_req_pq_multi:
 		r = TL_req_pq_multi{
-			m.Bytes(16),
+			m.Bytes16(),
 		}
 
 	case CRC_req_DH_params:
 		r = TL_req_DH_params{
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
 			m.String(),
 			m.String(),
 			m.Long(),
@@ -34166,8 +34166,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 
 	case CRC_set_client_DH_params:
 		r = TL_set_client_DH_params{
-			m.Bytes(16),
-			m.Bytes(16),
+			m.Bytes16(),
+			m.Bytes16(),
 			m.String(),
 		}
 

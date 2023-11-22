@@ -65,6 +65,14 @@ func (e *EncodeBuf) Bytes(s []byte) {
 	e.buf = append(e.buf, s...)
 }
 
+func (e *EncodeBuf) Bytes16(s [16]byte) {
+	e.buf = append(e.buf, s[:]...)
+}
+
+func (e *EncodeBuf) Bytes32(s [32]byte) {
+	e.buf = append(e.buf, s[:]...)
+}
+
 func (e *EncodeBuf) VectorInt(v []int32) {
 	x := make([]byte, 4+4+len(v)*4)
 	binary.LittleEndian.PutUint32(x, CRC_vector)
