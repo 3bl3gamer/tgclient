@@ -783,7 +783,7 @@ func (m *MTProto) GetContacts() error {
 			color.Error,
 			"%10d    %10t    %-30s    %-20s\n",
 			v.UserID,
-			toBool(v.Mutual),
+			v.Mutual,
 			fmt.Sprintf("%s %s", contacts[v.UserID].FirstName.Value, contacts[v.UserID].LastName.Value),
 			contacts[v.UserID].Username.Value,
 		)

@@ -14,6 +14,14 @@ func NewEncodeBuf(cap int) *EncodeBuf {
 	return &EncodeBuf{make([]byte, 0, cap)}
 }
 
+func (e *EncodeBuf) Bool(s bool) {
+	var crc uint32 = CRC_boolFalse
+	if s {
+		crc = CRC_boolTrue
+	}
+	e.UInt(crc)
+}
+
 func (e *EncodeBuf) Int(s int32) {
 	e.buf = append(e.buf, 0, 0, 0, 0)
 	binary.LittleEndian.PutUint32(e.buf[len(e.buf)-4:], uint32(s))

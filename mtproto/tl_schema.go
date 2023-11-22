@@ -3229,8 +3229,8 @@ type TL_messageActionTopicCreate struct {
 type TL_messageActionTopicEdit struct {
 	Title       Option[string] // (optional)
 	IconEmojiID Option[int64]  // (optional)
-	Closed      TL             // (optional) Bool: TL_boolFalse | TL_boolTrue
-	Hidden      TL             // (optional) Bool: TL_boolFalse | TL_boolTrue
+	Closed      Option[bool]   // (optional)
+	Hidden      Option[bool]   // (optional)
 }
 
 // Constructs MessageAction
@@ -3425,25 +3425,25 @@ type TL_inputNotifyForumTopic struct {
 
 // Constructs InputPeerNotifySettings
 type TL_inputPeerNotifySettings struct {
-	ShowPreviews      TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
-	Silent            TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
+	ShowPreviews      Option[bool]  // (optional)
+	Silent            Option[bool]  // (optional)
 	MuteUntil         Option[int32] // (optional)
 	Sound             TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	StoriesMuted      TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
-	StoriesHideSender TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
+	StoriesMuted      Option[bool]  // (optional)
+	StoriesHideSender Option[bool]  // (optional)
 	StoriesSound      TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 }
 
 // Constructs PeerNotifySettings
 type TL_peerNotifySettings struct {
-	ShowPreviews        TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
-	Silent              TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
+	ShowPreviews        Option[bool]  // (optional)
+	Silent              Option[bool]  // (optional)
 	MuteUntil           Option[int32] // (optional)
 	IosSound            TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 	AndroidSound        TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 	OtherSound          TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	StoriesMuted        TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
-	StoriesHideSender   TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
+	StoriesMuted        Option[bool]  // (optional)
+	StoriesHideSender   Option[bool]  // (optional)
 	StoriesIosSound     TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 	StoriesAndroidSound TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 	StoriesOtherSound   TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
@@ -3562,7 +3562,7 @@ type TL_userFull struct {
 // Constructs Contact
 type TL_contact struct {
 	UserID int64
-	Mutual TL // Bool: TL_boolFalse | TL_boolTrue
+	Mutual bool
 }
 
 // Constructs ImportedContact
@@ -3976,7 +3976,7 @@ type TL_updateChannelMessageViews struct {
 type TL_updateChatParticipantAdmin struct {
 	ChatID  int64
 	UserID  int64
-	IsAdmin TL // Bool: TL_boolFalse | TL_boolTrue
+	IsAdmin bool
 	Version int32
 }
 
@@ -4375,7 +4375,7 @@ type TL_updateChannelParticipant struct {
 type TL_updateBotStopped struct {
 	UserID  int64
 	Date    int32
-	Stopped TL // Bool: TL_boolFalse | TL_boolTrue
+	Stopped bool
 	Qts     int32
 }
 
@@ -4712,7 +4712,7 @@ type TL_config struct {
 	ForceTryIpv6            bool
 	Date                    int32
 	Expires                 int32
-	TestMode                TL // Bool: TL_boolFalse | TL_boolTrue
+	TestMode                bool
 	ThisDc                  int32
 	DcOptions               []TL // DcOption: TL_dcOption
 	DcTxtDomainName         string
@@ -5637,7 +5637,7 @@ type TL_inputKeyboardButtonUrlAuth struct {
 
 // Constructs KeyboardButton
 type TL_keyboardButtonRequestPoll struct {
-	Quiz TL // (optional) Bool: TL_boolFalse | TL_boolTrue
+	Quiz Option[bool] // (optional)
 	Text string
 }
 
@@ -7283,12 +7283,12 @@ type TL_channelAdminLogEventActionChangePhoto struct {
 
 // Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleInvites struct {
-	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
+	NewValue bool
 }
 
 // Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleSignatures struct {
-	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
+	NewValue bool
 }
 
 // Constructs ChannelAdminLogEventAction
@@ -7340,7 +7340,7 @@ type TL_channelAdminLogEventActionChangeStickerSet struct {
 
 // Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionTogglePreHistoryHidden struct {
-	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
+	NewValue bool
 }
 
 // Constructs ChannelAdminLogEventAction
@@ -7394,7 +7394,7 @@ type TL_channelAdminLogEventActionParticipantUnmute struct {
 
 // Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleGroupCallSetting struct {
-	JoinMuted TL // Bool: TL_boolFalse | TL_boolTrue
+	JoinMuted bool
 }
 
 // Constructs ChannelAdminLogEventAction
@@ -7438,7 +7438,7 @@ type TL_channelAdminLogEventActionParticipantJoinByRequest struct {
 
 // Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleNoForwards struct {
-	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
+	NewValue bool
 }
 
 // Constructs ChannelAdminLogEventAction
@@ -7460,7 +7460,7 @@ type TL_channelAdminLogEventActionChangeUsernames struct {
 
 // Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleForum struct {
-	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
+	NewValue bool
 }
 
 // Constructs ChannelAdminLogEventAction
@@ -7487,7 +7487,7 @@ type TL_channelAdminLogEventActionPinTopic struct {
 
 // Constructs ChannelAdminLogEventAction
 type TL_channelAdminLogEventActionToggleAntiSpam struct {
-	NewValue TL // Bool: TL_boolFalse | TL_boolTrue
+	NewValue bool
 }
 
 // Constructs ChannelAdminLogEventAction
@@ -8020,7 +8020,7 @@ type TL_jsonNull struct {
 
 // Constructs JSONValue
 type TL_jsonBool struct {
-	Value TL // Bool: TL_boolFalse | TL_boolTrue
+	Value bool
 }
 
 // Constructs JSONValue
@@ -8254,7 +8254,7 @@ type TL_codeSettings struct {
 	AllowFirebase   bool
 	LogoutTokens    [][]byte       // (optional)
 	Token           Option[string] // (optional)
-	AppSandbox      TL             // (optional) Bool: TL_boolFalse | TL_boolTrue
+	AppSandbox      Option[bool]   // (optional)
 }
 
 // Constructs WallPaperSettings
@@ -9651,26 +9651,26 @@ type TL_exportedContactToken struct {
 
 // Constructs RequestPeerType
 type TL_requestPeerTypeUser struct {
-	Bot     TL // (optional) Bool: TL_boolFalse | TL_boolTrue
-	Premium TL // (optional) Bool: TL_boolFalse | TL_boolTrue
+	Bot     Option[bool] // (optional)
+	Premium Option[bool] // (optional)
 }
 
 // Constructs RequestPeerType
 type TL_requestPeerTypeChat struct {
 	Creator         bool
 	BotParticipant  bool
-	HasUsername     TL // (optional) Bool: TL_boolFalse | TL_boolTrue
-	Forum           TL // (optional) Bool: TL_boolFalse | TL_boolTrue
-	UserAdminRights TL // (optional) ChatAdminRights: TL_chatAdminRights
-	BotAdminRights  TL // (optional) ChatAdminRights: TL_chatAdminRights
+	HasUsername     Option[bool] // (optional)
+	Forum           Option[bool] // (optional)
+	UserAdminRights TL           // (optional) ChatAdminRights: TL_chatAdminRights
+	BotAdminRights  TL           // (optional) ChatAdminRights: TL_chatAdminRights
 }
 
 // Constructs RequestPeerType
 type TL_requestPeerTypeBroadcast struct {
 	Creator         bool
-	HasUsername     TL // (optional) Bool: TL_boolFalse | TL_boolTrue
-	UserAdminRights TL // (optional) ChatAdminRights: TL_chatAdminRights
-	BotAdminRights  TL // (optional) ChatAdminRights: TL_chatAdminRights
+	HasUsername     Option[bool] // (optional)
+	UserAdminRights TL           // (optional) ChatAdminRights: TL_chatAdminRights
+	BotAdminRights  TL           // (optional) ChatAdminRights: TL_chatAdminRights
 }
 
 // Constructs EmojiList
@@ -10356,7 +10356,7 @@ type TL_account_registerDevice struct {
 	NoMuted    bool
 	TokenType  int32
 	Token      string
-	AppSandbox TL // Bool: TL_boolFalse | TL_boolTrue
+	AppSandbox bool
 	Secret     []byte
 	OtherUids  []int64
 }
@@ -10392,7 +10392,7 @@ type TL_account_updateProfile struct {
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_updateStatus struct {
-	Offline TL // Bool: TL_boolFalse | TL_boolTrue
+	Offline bool
 }
 
 // Returns account.WallPapers: TL_account_wallPapersNotModified | TL_account_wallPapers
@@ -10612,7 +10612,7 @@ type TL_account_getContactSignUpNotification struct {
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_setContactSignUpNotification struct {
-	Silent TL // Bool: TL_boolFalse | TL_boolTrue
+	Silent bool
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -10638,7 +10638,7 @@ type TL_account_uploadWallPaper struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_saveWallPaper struct {
 	Wallpaper TL // InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
-	Unsave    TL // Bool: TL_boolFalse | TL_boolTrue
+	Unsave    bool
 	Settings  TL // WallPaperSettings: TL_wallPaperSettings
 }
 
@@ -10692,7 +10692,7 @@ type TL_account_updateTheme struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_saveTheme struct {
 	Theme  TL // InputTheme: TL_inputTheme | TL_inputThemeSlug
-	Unsave TL // Bool: TL_boolFalse | TL_boolTrue
+	Unsave bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -10768,8 +10768,8 @@ type TL_account_setAuthorizationTTL struct {
 type TL_account_changeAuthorizationSettings struct {
 	Confirmed                 bool
 	Hash                      int64
-	EncryptedRequestsDisabled TL // (optional) Bool: TL_boolFalse | TL_boolTrue
-	CallRequestsDisabled      TL // (optional) Bool: TL_boolFalse | TL_boolTrue
+	EncryptedRequestsDisabled Option[bool] // (optional)
+	CallRequestsDisabled      Option[bool] // (optional)
 }
 
 // Returns account.SavedRingtones: TL_account_savedRingtonesNotModified | TL_account_savedRingtones
@@ -10780,7 +10780,7 @@ type TL_account_getSavedRingtones struct {
 // Returns account.SavedRingtone: TL_account_savedRingtone | TL_account_savedRingtoneConverted
 type TL_account_saveRingtone struct {
 	ID     TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	Unsave TL // Bool: TL_boolFalse | TL_boolTrue
+	Unsave bool
 }
 
 // Returns Document: TL_documentEmpty | TL_document
@@ -10817,7 +10817,7 @@ type TL_account_reorderUsernames struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_toggleUsername struct {
 	Username string
-	Active   TL // Bool: TL_boolFalse | TL_boolTrue
+	Active   bool
 }
 
 // Returns EmojiList: TL_emojiListNotModified | TL_emojiList
@@ -10969,7 +10969,7 @@ type TL_contacts_getSaved struct {
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_contacts_toggleTopPeers struct {
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -11251,7 +11251,7 @@ type TL_messages_discardEncryption struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setEncryptedTyping struct {
 	Peer   TL // InputEncryptedChat: TL_inputEncryptedChat
-	Typing TL // Bool: TL_boolFalse | TL_boolTrue
+	Typing bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -11345,7 +11345,7 @@ type TL_messages_getStickerSet struct {
 // Returns messages.StickerSetInstallResult: TL_messages_stickerSetInstallResultSuccess | TL_messages_stickerSetInstallResultArchive
 type TL_messages_installStickerSet struct {
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
-	Archived   TL // Bool: TL_boolFalse | TL_boolTrue
+	Archived   bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -11365,14 +11365,14 @@ type TL_messages_startBot struct {
 type TL_messages_getMessagesViews struct {
 	Peer      TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID        []int32
-	Increment TL // Bool: TL_boolFalse | TL_boolTrue
+	Increment bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_editChatAdmin struct {
 	ChatID  int64
 	UserID  TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	IsAdmin TL // Bool: TL_boolFalse | TL_boolTrue
+	IsAdmin bool
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -11415,7 +11415,7 @@ type TL_messages_getSavedGifs struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_saveGif struct {
 	ID     TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	Unsave TL // Bool: TL_boolFalse | TL_boolTrue
+	Unsave bool
 }
 
 // Returns messages.BotResults: TL_messages_botResults
@@ -11542,7 +11542,7 @@ type TL_messages_getRecentStickers struct {
 type TL_messages_saveRecentSticker struct {
 	Attached bool
 	ID       TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	Unsave   TL // Bool: TL_boolFalse | TL_boolTrue
+	Unsave   bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -11666,7 +11666,7 @@ type TL_messages_getFavedStickers struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_faveSticker struct {
 	ID     TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	Unfave TL // Bool: TL_boolFalse | TL_boolTrue
+	Unfave bool
 }
 
 // Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
@@ -11986,7 +11986,7 @@ type TL_messages_editExportedChatInvite struct {
 	Link          string
 	ExpireDate    Option[int32]  // (optional)
 	UsageLimit    Option[int32]  // (optional)
-	RequestNeeded TL             // (optional) Bool: TL_boolFalse | TL_boolTrue
+	RequestNeeded Option[bool]   // (optional)
 	Title         Option[string] // (optional)
 }
 
@@ -12074,7 +12074,7 @@ type TL_messages_hideAllChatJoinRequests struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_toggleNoForwards struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -12169,7 +12169,7 @@ type TL_messages_getAttachMenuBot struct {
 type TL_messages_toggleBotInAttachMenu struct {
 	WriteAllowed bool
 	Bot          TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	Enabled      TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled      bool
 }
 
 // Returns WebViewResult: TL_webViewResultUrl
@@ -12232,7 +12232,7 @@ type TL_messages_rateTranscribedAudio struct {
 	Peer            TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID           int32
 	TranscriptionID int64
-	Good            TL // Bool: TL_boolFalse | TL_boolTrue
+	Good            bool
 }
 
 // Returns Vector<Document>: TL_documentEmpty | TL_document
@@ -12705,7 +12705,7 @@ type TL_channels_exportMessageLink struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleSignatures struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
@@ -12754,7 +12754,7 @@ type TL_channels_deleteHistory struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_togglePreHistoryHidden struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns messages.Chats: TL_messages_chats | TL_messages_chatsSlice
@@ -12826,13 +12826,13 @@ type TL_channels_deleteParticipantHistory struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleJoinToSend struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleJoinRequest struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -12845,7 +12845,7 @@ type TL_channels_reorderUsernames struct {
 type TL_channels_toggleUsername struct {
 	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Username string
-	Active   TL // Bool: TL_boolFalse | TL_boolTrue
+	Active   bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -12856,7 +12856,7 @@ type TL_channels_deactivateAllUsernames struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleForum struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -12891,15 +12891,15 @@ type TL_channels_editForumTopic struct {
 	TopicID     int32
 	Title       Option[string] // (optional)
 	IconEmojiID Option[int64]  // (optional)
-	Closed      TL             // (optional) Bool: TL_boolFalse | TL_boolTrue
-	Hidden      TL             // (optional) Bool: TL_boolFalse | TL_boolTrue
+	Closed      Option[bool]   // (optional)
+	Hidden      Option[bool]   // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_updatePinnedForumTopic struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	TopicID int32
-	Pinned  TL // Bool: TL_boolFalse | TL_boolTrue
+	Pinned  bool
 }
 
 // Returns messages.AffectedHistory: TL_messages_affectedHistory
@@ -12918,7 +12918,7 @@ type TL_channels_reorderPinnedForumTopics struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleAntiSpam struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -12930,7 +12930,7 @@ type TL_channels_reportAntiSpamFalsePositive struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_toggleParticipantsHidden struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Enabled TL // Bool: TL_boolFalse | TL_boolTrue
+	Enabled bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -13023,7 +13023,7 @@ type TL_bots_reorderUsernames struct {
 type TL_bots_toggleUsername struct {
 	Bot      TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Username string
-	Active   TL // Bool: TL_boolFalse | TL_boolTrue
+	Active   bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -13306,8 +13306,8 @@ type TL_phone_discardGroupCall struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_toggleGroupCallSettings struct {
 	ResetInviteHash bool
-	Call            TL // InputGroupCall: TL_inputGroupCall
-	JoinMuted       TL // (optional) Bool: TL_boolFalse | TL_boolTrue
+	Call            TL           // InputGroupCall: TL_inputGroupCall
+	JoinMuted       Option[bool] // (optional)
 }
 
 // Returns phone.GroupCall: TL_phone_groupCall
@@ -13337,19 +13337,19 @@ type TL_phone_toggleGroupCallRecord struct {
 	Video         bool
 	Call          TL             // InputGroupCall: TL_inputGroupCall
 	Title         Option[string] // (optional)
-	VideoPortrait TL             // (optional) Bool: TL_boolFalse | TL_boolTrue
+	VideoPortrait Option[bool]   // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_editGroupCallParticipant struct {
 	Call               TL            // InputGroupCall: TL_inputGroupCall
 	Participant        TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Muted              TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
+	Muted              Option[bool]  // (optional)
 	Volume             Option[int32] // (optional)
-	RaiseHand          TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
-	VideoStopped       TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
-	VideoPaused        TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
-	PresentationPaused TL            // (optional) Bool: TL_boolFalse | TL_boolTrue
+	RaiseHand          Option[bool]  // (optional)
+	VideoStopped       Option[bool]  // (optional)
+	VideoPaused        Option[bool]  // (optional)
+	PresentationPaused Option[bool]  // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -13372,7 +13372,7 @@ type TL_phone_exportGroupCallInvite struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_toggleGroupCallStartSubscription struct {
 	Call       TL // InputGroupCall: TL_inputGroupCall
-	Subscribed TL // Bool: TL_boolFalse | TL_boolTrue
+	Subscribed bool
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -13405,7 +13405,7 @@ type TL_phone_getGroupCallStreamChannels struct {
 // Returns phone.GroupCallStreamRtmpUrl: TL_phone_groupCallStreamRtmpUrl
 type TL_phone_getGroupCallStreamRtmpUrl struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Revoke TL // Bool: TL_boolFalse | TL_boolTrue
+	Revoke bool
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -13589,7 +13589,7 @@ type TL_stories_deleteStories struct {
 type TL_stories_togglePinned struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID     []int32
-	Pinned TL // Bool: TL_boolFalse | TL_boolTrue
+	Pinned bool
 }
 
 // Returns stories.AllStories: TL_stories_allStoriesNotModified | TL_stories_allStories
@@ -13621,7 +13621,7 @@ type TL_stories_getStoriesByID struct {
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stories_toggleAllStoriesHidden struct {
-	Hidden TL // Bool: TL_boolFalse | TL_boolTrue
+	Hidden bool
 }
 
 // Returns Vector<int>:
@@ -13702,7 +13702,7 @@ type TL_stories_getChatsToSend struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_stories_togglePeerStoriesHidden struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Hidden TL // Bool: TL_boolFalse | TL_boolTrue
+	Hidden bool
 }
 
 // Returns premium.BoostsList: TL_premium_boostsList
@@ -16613,10 +16613,10 @@ func (e TL_messageActionTopicEdit) encode() []byte {
 	if e.IconEmojiID.IsSet {
 		flags |= (1 << 1)
 	}
-	if e.Closed != nil {
+	if e.Closed.IsSet {
 		flags |= (1 << 2)
 	}
-	if e.Hidden != nil {
+	if e.Hidden.IsSet {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -16628,11 +16628,11 @@ func (e TL_messageActionTopicEdit) encode() []byte {
 	if e.IconEmojiID.IsSet {
 		x.Long(e.IconEmojiID.Value)
 	}
-	if e.Closed != nil {
-		x.Object(e.Closed)
+	if e.Closed.IsSet {
+		x.Bool(e.Closed.Value)
 	}
-	if e.Hidden != nil {
-		x.Object(e.Hidden)
+	if e.Hidden.IsSet {
+		x.Bool(e.Hidden.Value)
 	}
 	return x.buf
 }
@@ -16980,10 +16980,10 @@ func (e TL_inputNotifyForumTopic) encode() []byte {
 
 func (e TL_inputPeerNotifySettings) encode() []byte {
 	var flags int32
-	if e.ShowPreviews != nil {
+	if e.ShowPreviews.IsSet {
 		flags |= (1 << 0)
 	}
-	if e.Silent != nil {
+	if e.Silent.IsSet {
 		flags |= (1 << 1)
 	}
 	if e.MuteUntil.IsSet {
@@ -16992,10 +16992,10 @@ func (e TL_inputPeerNotifySettings) encode() []byte {
 	if e.Sound != nil {
 		flags |= (1 << 3)
 	}
-	if e.StoriesMuted != nil {
+	if e.StoriesMuted.IsSet {
 		flags |= (1 << 6)
 	}
-	if e.StoriesHideSender != nil {
+	if e.StoriesHideSender.IsSet {
 		flags |= (1 << 7)
 	}
 	if e.StoriesSound != nil {
@@ -17004,11 +17004,11 @@ func (e TL_inputPeerNotifySettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputPeerNotifySettings)
 	x.Int(flags)
-	if e.ShowPreviews != nil {
-		x.Object(e.ShowPreviews)
+	if e.ShowPreviews.IsSet {
+		x.Bool(e.ShowPreviews.Value)
 	}
-	if e.Silent != nil {
-		x.Object(e.Silent)
+	if e.Silent.IsSet {
+		x.Bool(e.Silent.Value)
 	}
 	if e.MuteUntil.IsSet {
 		x.Int(e.MuteUntil.Value)
@@ -17016,11 +17016,11 @@ func (e TL_inputPeerNotifySettings) encode() []byte {
 	if e.Sound != nil {
 		x.Object(e.Sound)
 	}
-	if e.StoriesMuted != nil {
-		x.Object(e.StoriesMuted)
+	if e.StoriesMuted.IsSet {
+		x.Bool(e.StoriesMuted.Value)
 	}
-	if e.StoriesHideSender != nil {
-		x.Object(e.StoriesHideSender)
+	if e.StoriesHideSender.IsSet {
+		x.Bool(e.StoriesHideSender.Value)
 	}
 	if e.StoriesSound != nil {
 		x.Object(e.StoriesSound)
@@ -17030,10 +17030,10 @@ func (e TL_inputPeerNotifySettings) encode() []byte {
 
 func (e TL_peerNotifySettings) encode() []byte {
 	var flags int32
-	if e.ShowPreviews != nil {
+	if e.ShowPreviews.IsSet {
 		flags |= (1 << 0)
 	}
-	if e.Silent != nil {
+	if e.Silent.IsSet {
 		flags |= (1 << 1)
 	}
 	if e.MuteUntil.IsSet {
@@ -17048,10 +17048,10 @@ func (e TL_peerNotifySettings) encode() []byte {
 	if e.OtherSound != nil {
 		flags |= (1 << 5)
 	}
-	if e.StoriesMuted != nil {
+	if e.StoriesMuted.IsSet {
 		flags |= (1 << 6)
 	}
-	if e.StoriesHideSender != nil {
+	if e.StoriesHideSender.IsSet {
 		flags |= (1 << 7)
 	}
 	if e.StoriesIosSound != nil {
@@ -17066,11 +17066,11 @@ func (e TL_peerNotifySettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_peerNotifySettings)
 	x.Int(flags)
-	if e.ShowPreviews != nil {
-		x.Object(e.ShowPreviews)
+	if e.ShowPreviews.IsSet {
+		x.Bool(e.ShowPreviews.Value)
 	}
-	if e.Silent != nil {
-		x.Object(e.Silent)
+	if e.Silent.IsSet {
+		x.Bool(e.Silent.Value)
 	}
 	if e.MuteUntil.IsSet {
 		x.Int(e.MuteUntil.Value)
@@ -17084,11 +17084,11 @@ func (e TL_peerNotifySettings) encode() []byte {
 	if e.OtherSound != nil {
 		x.Object(e.OtherSound)
 	}
-	if e.StoriesMuted != nil {
-		x.Object(e.StoriesMuted)
+	if e.StoriesMuted.IsSet {
+		x.Bool(e.StoriesMuted.Value)
 	}
-	if e.StoriesHideSender != nil {
-		x.Object(e.StoriesHideSender)
+	if e.StoriesHideSender.IsSet {
+		x.Bool(e.StoriesHideSender.Value)
 	}
 	if e.StoriesIosSound != nil {
 		x.Object(e.StoriesIosSound)
@@ -17402,7 +17402,7 @@ func (e TL_contact) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_contact)
 	x.Long(e.UserID)
-	x.Object(e.Mutual)
+	x.Bool(e.Mutual)
 	return x.buf
 }
 
@@ -18033,7 +18033,7 @@ func (e TL_updateChatParticipantAdmin) encode() []byte {
 	x.UInt(CRC_updateChatParticipantAdmin)
 	x.Long(e.ChatID)
 	x.Long(e.UserID)
-	x.Object(e.IsAdmin)
+	x.Bool(e.IsAdmin)
 	x.Int(e.Version)
 	return x.buf
 }
@@ -18753,7 +18753,7 @@ func (e TL_updateBotStopped) encode() []byte {
 	x.UInt(CRC_updateBotStopped)
 	x.Long(e.UserID)
 	x.Int(e.Date)
-	x.Object(e.Stopped)
+	x.Bool(e.Stopped)
 	x.Int(e.Qts)
 	return x.buf
 }
@@ -19365,7 +19365,7 @@ func (e TL_config) encode() []byte {
 	x.Int(flags)
 	x.Int(e.Date)
 	x.Int(e.Expires)
-	x.Object(e.TestMode)
+	x.Bool(e.TestMode)
 	x.Int(e.ThisDc)
 	x.Vector(e.DcOptions)
 	x.String(e.DcTxtDomainName)
@@ -21053,14 +21053,14 @@ func (e TL_inputKeyboardButtonUrlAuth) encode() []byte {
 
 func (e TL_keyboardButtonRequestPoll) encode() []byte {
 	var flags int32
-	if e.Quiz != nil {
+	if e.Quiz.IsSet {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_keyboardButtonRequestPoll)
 	x.Int(flags)
-	if e.Quiz != nil {
-		x.Object(e.Quiz)
+	if e.Quiz.IsSet {
+		x.Bool(e.Quiz.Value)
 	}
 	x.String(e.Text)
 	return x.buf
@@ -24082,14 +24082,14 @@ func (e TL_channelAdminLogEventActionChangePhoto) encode() []byte {
 func (e TL_channelAdminLogEventActionToggleInvites) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionToggleInvites)
-	x.Object(e.NewValue)
+	x.Bool(e.NewValue)
 	return x.buf
 }
 
 func (e TL_channelAdminLogEventActionToggleSignatures) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionToggleSignatures)
-	x.Object(e.NewValue)
+	x.Bool(e.NewValue)
 	return x.buf
 }
 
@@ -24161,7 +24161,7 @@ func (e TL_channelAdminLogEventActionChangeStickerSet) encode() []byte {
 func (e TL_channelAdminLogEventActionTogglePreHistoryHidden) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionTogglePreHistoryHidden)
-	x.Object(e.NewValue)
+	x.Bool(e.NewValue)
 	return x.buf
 }
 
@@ -24235,7 +24235,7 @@ func (e TL_channelAdminLogEventActionParticipantUnmute) encode() []byte {
 func (e TL_channelAdminLogEventActionToggleGroupCallSetting) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionToggleGroupCallSetting)
-	x.Object(e.JoinMuted)
+	x.Bool(e.JoinMuted)
 	return x.buf
 }
 
@@ -24299,7 +24299,7 @@ func (e TL_channelAdminLogEventActionParticipantJoinByRequest) encode() []byte {
 func (e TL_channelAdminLogEventActionToggleNoForwards) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionToggleNoForwards)
-	x.Object(e.NewValue)
+	x.Bool(e.NewValue)
 	return x.buf
 }
 
@@ -24329,7 +24329,7 @@ func (e TL_channelAdminLogEventActionChangeUsernames) encode() []byte {
 func (e TL_channelAdminLogEventActionToggleForum) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionToggleForum)
-	x.Object(e.NewValue)
+	x.Bool(e.NewValue)
 	return x.buf
 }
 
@@ -24378,7 +24378,7 @@ func (e TL_channelAdminLogEventActionPinTopic) encode() []byte {
 func (e TL_channelAdminLogEventActionToggleAntiSpam) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventActionToggleAntiSpam)
-	x.Object(e.NewValue)
+	x.Bool(e.NewValue)
 	return x.buf
 }
 
@@ -25226,7 +25226,7 @@ func (e TL_jsonNull) encode() []byte {
 func (e TL_jsonBool) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_jsonBool)
-	x.Object(e.Value)
+	x.Bool(e.Value)
 	return x.buf
 }
 
@@ -25729,7 +25729,7 @@ func (e TL_codeSettings) encode() []byte {
 	if e.Token.IsSet {
 		flags |= (1 << 8)
 	}
-	if e.AppSandbox != nil {
+	if e.AppSandbox.IsSet {
 		flags |= (1 << 8)
 	}
 	x := NewEncodeBuf(512)
@@ -25741,8 +25741,8 @@ func (e TL_codeSettings) encode() []byte {
 	if e.Token.IsSet {
 		x.String(e.Token.Value)
 	}
-	if e.AppSandbox != nil {
-		x.Object(e.AppSandbox)
+	if e.AppSandbox.IsSet {
+		x.Bool(e.AppSandbox.Value)
 	}
 	return x.buf
 }
@@ -28314,20 +28314,20 @@ func (e TL_exportedContactToken) encode() []byte {
 
 func (e TL_requestPeerTypeUser) encode() []byte {
 	var flags int32
-	if e.Bot != nil {
+	if e.Bot.IsSet {
 		flags |= (1 << 0)
 	}
-	if e.Premium != nil {
+	if e.Premium.IsSet {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_requestPeerTypeUser)
 	x.Int(flags)
-	if e.Bot != nil {
-		x.Object(e.Bot)
+	if e.Bot.IsSet {
+		x.Bool(e.Bot.Value)
 	}
-	if e.Premium != nil {
-		x.Object(e.Premium)
+	if e.Premium.IsSet {
+		x.Bool(e.Premium.Value)
 	}
 	return x.buf
 }
@@ -28340,10 +28340,10 @@ func (e TL_requestPeerTypeChat) encode() []byte {
 	if e.BotParticipant {
 		flags |= (1 << 5)
 	}
-	if e.HasUsername != nil {
+	if e.HasUsername.IsSet {
 		flags |= (1 << 3)
 	}
-	if e.Forum != nil {
+	if e.Forum.IsSet {
 		flags |= (1 << 4)
 	}
 	if e.UserAdminRights != nil {
@@ -28355,11 +28355,11 @@ func (e TL_requestPeerTypeChat) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_requestPeerTypeChat)
 	x.Int(flags)
-	if e.HasUsername != nil {
-		x.Object(e.HasUsername)
+	if e.HasUsername.IsSet {
+		x.Bool(e.HasUsername.Value)
 	}
-	if e.Forum != nil {
-		x.Object(e.Forum)
+	if e.Forum.IsSet {
+		x.Bool(e.Forum.Value)
 	}
 	if e.UserAdminRights != nil {
 		x.Object(e.UserAdminRights)
@@ -28375,7 +28375,7 @@ func (e TL_requestPeerTypeBroadcast) encode() []byte {
 	if e.Creator {
 		flags |= (1 << 0)
 	}
-	if e.HasUsername != nil {
+	if e.HasUsername.IsSet {
 		flags |= (1 << 3)
 	}
 	if e.UserAdminRights != nil {
@@ -28387,8 +28387,8 @@ func (e TL_requestPeerTypeBroadcast) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_requestPeerTypeBroadcast)
 	x.Int(flags)
-	if e.HasUsername != nil {
-		x.Object(e.HasUsername)
+	if e.HasUsername.IsSet {
+		x.Bool(e.HasUsername.Value)
 	}
 	if e.UserAdminRights != nil {
 		x.Object(e.UserAdminRights)
@@ -29646,7 +29646,7 @@ func (e TL_account_registerDevice) encode() []byte {
 	x.Int(flags)
 	x.Int(e.TokenType)
 	x.String(e.Token)
-	x.Object(e.AppSandbox)
+	x.Bool(e.AppSandbox)
 	x.StringBytes(e.Secret)
 	x.VectorLong(e.OtherUids)
 	return x.buf
@@ -29711,7 +29711,7 @@ func (e TL_account_updateProfile) encode() []byte {
 func (e TL_account_updateStatus) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_updateStatus)
-	x.Object(e.Offline)
+	x.Bool(e.Offline)
 	return x.buf
 }
 
@@ -30041,7 +30041,7 @@ func (e TL_account_getContactSignUpNotification) encode() []byte {
 func (e TL_account_setContactSignUpNotification) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_setContactSignUpNotification)
-	x.Object(e.Silent)
+	x.Bool(e.Silent)
 	return x.buf
 }
 
@@ -30090,7 +30090,7 @@ func (e TL_account_saveWallPaper) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_saveWallPaper)
 	x.Object(e.Wallpaper)
-	x.Object(e.Unsave)
+	x.Bool(e.Unsave)
 	x.Object(e.Settings)
 	return x.buf
 }
@@ -30207,7 +30207,7 @@ func (e TL_account_saveTheme) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_saveTheme)
 	x.Object(e.Theme)
-	x.Object(e.Unsave)
+	x.Bool(e.Unsave)
 	return x.buf
 }
 
@@ -30334,21 +30334,21 @@ func (e TL_account_changeAuthorizationSettings) encode() []byte {
 	if e.Confirmed {
 		flags |= (1 << 3)
 	}
-	if e.EncryptedRequestsDisabled != nil {
+	if e.EncryptedRequestsDisabled.IsSet {
 		flags |= (1 << 0)
 	}
-	if e.CallRequestsDisabled != nil {
+	if e.CallRequestsDisabled.IsSet {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_changeAuthorizationSettings)
 	x.Int(flags)
 	x.Long(e.Hash)
-	if e.EncryptedRequestsDisabled != nil {
-		x.Object(e.EncryptedRequestsDisabled)
+	if e.EncryptedRequestsDisabled.IsSet {
+		x.Bool(e.EncryptedRequestsDisabled.Value)
 	}
-	if e.CallRequestsDisabled != nil {
-		x.Object(e.CallRequestsDisabled)
+	if e.CallRequestsDisabled.IsSet {
+		x.Bool(e.CallRequestsDisabled.Value)
 	}
 	return x.buf
 }
@@ -30364,7 +30364,7 @@ func (e TL_account_saveRingtone) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_saveRingtone)
 	x.Object(e.ID)
-	x.Object(e.Unsave)
+	x.Bool(e.Unsave)
 	return x.buf
 }
 
@@ -30415,7 +30415,7 @@ func (e TL_account_toggleUsername) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_toggleUsername)
 	x.String(e.Username)
-	x.Object(e.Active)
+	x.Bool(e.Active)
 	return x.buf
 }
 
@@ -30671,7 +30671,7 @@ func (e TL_contacts_getSaved) encode() []byte {
 func (e TL_contacts_toggleTopPeers) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_contacts_toggleTopPeers)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -31222,7 +31222,7 @@ func (e TL_messages_setEncryptedTyping) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_setEncryptedTyping)
 	x.Object(e.Peer)
-	x.Object(e.Typing)
+	x.Bool(e.Typing)
 	return x.buf
 }
 
@@ -31382,7 +31382,7 @@ func (e TL_messages_installStickerSet) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_installStickerSet)
 	x.Object(e.Stickerset)
-	x.Object(e.Archived)
+	x.Bool(e.Archived)
 	return x.buf
 }
 
@@ -31408,7 +31408,7 @@ func (e TL_messages_getMessagesViews) encode() []byte {
 	x.UInt(CRC_messages_getMessagesViews)
 	x.Object(e.Peer)
 	x.VectorInt(e.ID)
-	x.Object(e.Increment)
+	x.Bool(e.Increment)
 	return x.buf
 }
 
@@ -31417,7 +31417,7 @@ func (e TL_messages_editChatAdmin) encode() []byte {
 	x.UInt(CRC_messages_editChatAdmin)
 	x.Long(e.ChatID)
 	x.Object(e.UserID)
-	x.Object(e.IsAdmin)
+	x.Bool(e.IsAdmin)
 	return x.buf
 }
 
@@ -31485,7 +31485,7 @@ func (e TL_messages_saveGif) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_saveGif)
 	x.Object(e.ID)
-	x.Object(e.Unsave)
+	x.Bool(e.Unsave)
 	return x.buf
 }
 
@@ -31809,7 +31809,7 @@ func (e TL_messages_saveRecentSticker) encode() []byte {
 	x.UInt(CRC_messages_saveRecentSticker)
 	x.Int(flags)
 	x.Object(e.ID)
-	x.Object(e.Unsave)
+	x.Bool(e.Unsave)
 	return x.buf
 }
 
@@ -32022,7 +32022,7 @@ func (e TL_messages_faveSticker) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_faveSticker)
 	x.Object(e.ID)
-	x.Object(e.Unfave)
+	x.Bool(e.Unfave)
 	return x.buf
 }
 
@@ -32605,7 +32605,7 @@ func (e TL_messages_editExportedChatInvite) encode() []byte {
 	if e.UsageLimit.IsSet {
 		flags |= (1 << 1)
 	}
-	if e.RequestNeeded != nil {
+	if e.RequestNeeded.IsSet {
 		flags |= (1 << 3)
 	}
 	if e.Title.IsSet {
@@ -32622,8 +32622,8 @@ func (e TL_messages_editExportedChatInvite) encode() []byte {
 	if e.UsageLimit.IsSet {
 		x.Int(e.UsageLimit.Value)
 	}
-	if e.RequestNeeded != nil {
-		x.Object(e.RequestNeeded)
+	if e.RequestNeeded.IsSet {
+		x.Bool(e.RequestNeeded.Value)
 	}
 	if e.Title.IsSet {
 		x.String(e.Title.Value)
@@ -32767,7 +32767,7 @@ func (e TL_messages_toggleNoForwards) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_toggleNoForwards)
 	x.Object(e.Peer)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -32948,7 +32948,7 @@ func (e TL_messages_toggleBotInAttachMenu) encode() []byte {
 	x.UInt(CRC_messages_toggleBotInAttachMenu)
 	x.Int(flags)
 	x.Object(e.Bot)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -33091,7 +33091,7 @@ func (e TL_messages_rateTranscribedAudio) encode() []byte {
 	x.Object(e.Peer)
 	x.Int(e.MsgID)
 	x.Long(e.TranscriptionID)
-	x.Object(e.Good)
+	x.Bool(e.Good)
 	return x.buf
 }
 
@@ -33877,7 +33877,7 @@ func (e TL_channels_toggleSignatures) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_toggleSignatures)
 	x.Object(e.Channel)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -33962,7 +33962,7 @@ func (e TL_channels_togglePreHistoryHidden) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_togglePreHistoryHidden)
 	x.Object(e.Channel)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -34060,7 +34060,7 @@ func (e TL_channels_toggleJoinToSend) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_toggleJoinToSend)
 	x.Object(e.Channel)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -34068,7 +34068,7 @@ func (e TL_channels_toggleJoinRequest) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_toggleJoinRequest)
 	x.Object(e.Channel)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -34085,7 +34085,7 @@ func (e TL_channels_toggleUsername) encode() []byte {
 	x.UInt(CRC_channels_toggleUsername)
 	x.Object(e.Channel)
 	x.String(e.Username)
-	x.Object(e.Active)
+	x.Bool(e.Active)
 	return x.buf
 }
 
@@ -34100,7 +34100,7 @@ func (e TL_channels_toggleForum) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_toggleForum)
 	x.Object(e.Channel)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -34168,10 +34168,10 @@ func (e TL_channels_editForumTopic) encode() []byte {
 	if e.IconEmojiID.IsSet {
 		flags |= (1 << 1)
 	}
-	if e.Closed != nil {
+	if e.Closed.IsSet {
 		flags |= (1 << 2)
 	}
-	if e.Hidden != nil {
+	if e.Hidden.IsSet {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -34185,11 +34185,11 @@ func (e TL_channels_editForumTopic) encode() []byte {
 	if e.IconEmojiID.IsSet {
 		x.Long(e.IconEmojiID.Value)
 	}
-	if e.Closed != nil {
-		x.Object(e.Closed)
+	if e.Closed.IsSet {
+		x.Bool(e.Closed.Value)
 	}
-	if e.Hidden != nil {
-		x.Object(e.Hidden)
+	if e.Hidden.IsSet {
+		x.Bool(e.Hidden.Value)
 	}
 	return x.buf
 }
@@ -34199,7 +34199,7 @@ func (e TL_channels_updatePinnedForumTopic) encode() []byte {
 	x.UInt(CRC_channels_updatePinnedForumTopic)
 	x.Object(e.Channel)
 	x.Int(e.TopicID)
-	x.Object(e.Pinned)
+	x.Bool(e.Pinned)
 	return x.buf
 }
 
@@ -34228,7 +34228,7 @@ func (e TL_channels_toggleAntiSpam) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_toggleAntiSpam)
 	x.Object(e.Channel)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -34244,7 +34244,7 @@ func (e TL_channels_toggleParticipantsHidden) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_toggleParticipantsHidden)
 	x.Object(e.Channel)
-	x.Object(e.Enabled)
+	x.Bool(e.Enabled)
 	return x.buf
 }
 
@@ -34403,7 +34403,7 @@ func (e TL_bots_toggleUsername) encode() []byte {
 	x.UInt(CRC_bots_toggleUsername)
 	x.Object(e.Bot)
 	x.String(e.Username)
-	x.Object(e.Active)
+	x.Bool(e.Active)
 	return x.buf
 }
 
@@ -34904,15 +34904,15 @@ func (e TL_phone_toggleGroupCallSettings) encode() []byte {
 	if e.ResetInviteHash {
 		flags |= (1 << 1)
 	}
-	if e.JoinMuted != nil {
+	if e.JoinMuted.IsSet {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_phone_toggleGroupCallSettings)
 	x.Int(flags)
 	x.Object(e.Call)
-	if e.JoinMuted != nil {
-		x.Object(e.JoinMuted)
+	if e.JoinMuted.IsSet {
+		x.Bool(e.JoinMuted.Value)
 	}
 	return x.buf
 }
@@ -34955,7 +34955,7 @@ func (e TL_phone_toggleGroupCallRecord) encode() []byte {
 	if e.Title.IsSet {
 		flags |= (1 << 1)
 	}
-	if e.VideoPortrait != nil {
+	if e.VideoPortrait.IsSet {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -34965,30 +34965,30 @@ func (e TL_phone_toggleGroupCallRecord) encode() []byte {
 	if e.Title.IsSet {
 		x.String(e.Title.Value)
 	}
-	if e.VideoPortrait != nil {
-		x.Object(e.VideoPortrait)
+	if e.VideoPortrait.IsSet {
+		x.Bool(e.VideoPortrait.Value)
 	}
 	return x.buf
 }
 
 func (e TL_phone_editGroupCallParticipant) encode() []byte {
 	var flags int32
-	if e.Muted != nil {
+	if e.Muted.IsSet {
 		flags |= (1 << 0)
 	}
 	if e.Volume.IsSet {
 		flags |= (1 << 1)
 	}
-	if e.RaiseHand != nil {
+	if e.RaiseHand.IsSet {
 		flags |= (1 << 2)
 	}
-	if e.VideoStopped != nil {
+	if e.VideoStopped.IsSet {
 		flags |= (1 << 3)
 	}
-	if e.VideoPaused != nil {
+	if e.VideoPaused.IsSet {
 		flags |= (1 << 4)
 	}
-	if e.PresentationPaused != nil {
+	if e.PresentationPaused.IsSet {
 		flags |= (1 << 5)
 	}
 	x := NewEncodeBuf(512)
@@ -34996,23 +34996,23 @@ func (e TL_phone_editGroupCallParticipant) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Call)
 	x.Object(e.Participant)
-	if e.Muted != nil {
-		x.Object(e.Muted)
+	if e.Muted.IsSet {
+		x.Bool(e.Muted.Value)
 	}
 	if e.Volume.IsSet {
 		x.Int(e.Volume.Value)
 	}
-	if e.RaiseHand != nil {
-		x.Object(e.RaiseHand)
+	if e.RaiseHand.IsSet {
+		x.Bool(e.RaiseHand.Value)
 	}
-	if e.VideoStopped != nil {
-		x.Object(e.VideoStopped)
+	if e.VideoStopped.IsSet {
+		x.Bool(e.VideoStopped.Value)
 	}
-	if e.VideoPaused != nil {
-		x.Object(e.VideoPaused)
+	if e.VideoPaused.IsSet {
+		x.Bool(e.VideoPaused.Value)
 	}
-	if e.PresentationPaused != nil {
-		x.Object(e.PresentationPaused)
+	if e.PresentationPaused.IsSet {
+		x.Bool(e.PresentationPaused.Value)
 	}
 	return x.buf
 }
@@ -35048,7 +35048,7 @@ func (e TL_phone_toggleGroupCallStartSubscription) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_phone_toggleGroupCallStartSubscription)
 	x.Object(e.Call)
-	x.Object(e.Subscribed)
+	x.Bool(e.Subscribed)
 	return x.buf
 }
 
@@ -35093,7 +35093,7 @@ func (e TL_phone_getGroupCallStreamRtmpUrl) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_phone_getGroupCallStreamRtmpUrl)
 	x.Object(e.Peer)
-	x.Object(e.Revoke)
+	x.Bool(e.Revoke)
 	return x.buf
 }
 
@@ -35417,7 +35417,7 @@ func (e TL_stories_togglePinned) encode() []byte {
 	x.UInt(CRC_stories_togglePinned)
 	x.Object(e.Peer)
 	x.VectorInt(e.ID)
-	x.Object(e.Pinned)
+	x.Bool(e.Pinned)
 	return x.buf
 }
 
@@ -35470,7 +35470,7 @@ func (e TL_stories_getStoriesByID) encode() []byte {
 func (e TL_stories_toggleAllStoriesHidden) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stories_toggleAllStoriesHidden)
-	x.Object(e.Hidden)
+	x.Bool(e.Hidden)
 	return x.buf
 }
 
@@ -35598,7 +35598,7 @@ func (e TL_stories_togglePeerStoriesHidden) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stories_togglePeerStoriesHidden)
 	x.Object(e.Peer)
-	x.Object(e.Hidden)
+	x.Bool(e.Hidden)
 	return x.buf
 }
 
@@ -39469,10 +39469,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.IconEmojiID = Some(m.Long())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Closed = m.Object()
+			tl.Closed = Some(m.Bool())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Hidden = m.Object()
+			tl.Hidden = Some(m.Bool())
 		}
 		r = tl
 	case CRC_messageActionSuggestProfilePhoto:
@@ -39675,10 +39675,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_inputPeerNotifySettings{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.ShowPreviews = m.Object()
+			tl.ShowPreviews = Some(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Silent = m.Object()
+			tl.Silent = Some(m.Bool())
 		}
 		if flags&(1<<2) != 0 {
 			tl.MuteUntil = Some(m.Int())
@@ -39687,10 +39687,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Sound = m.Object()
 		}
 		if flags&(1<<6) != 0 {
-			tl.StoriesMuted = m.Object()
+			tl.StoriesMuted = Some(m.Bool())
 		}
 		if flags&(1<<7) != 0 {
-			tl.StoriesHideSender = m.Object()
+			tl.StoriesHideSender = Some(m.Bool())
 		}
 		if flags&(1<<8) != 0 {
 			tl.StoriesSound = m.Object()
@@ -39700,10 +39700,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_peerNotifySettings{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.ShowPreviews = m.Object()
+			tl.ShowPreviews = Some(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Silent = m.Object()
+			tl.Silent = Some(m.Bool())
 		}
 		if flags&(1<<2) != 0 {
 			tl.MuteUntil = Some(m.Int())
@@ -39718,10 +39718,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.OtherSound = m.Object()
 		}
 		if flags&(1<<6) != 0 {
-			tl.StoriesMuted = m.Object()
+			tl.StoriesMuted = Some(m.Bool())
 		}
 		if flags&(1<<7) != 0 {
-			tl.StoriesHideSender = m.Object()
+			tl.StoriesHideSender = Some(m.Bool())
 		}
 		if flags&(1<<8) != 0 {
 			tl.StoriesIosSound = m.Object()
@@ -39876,7 +39876,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_contact:
 		tl := TL_contact{}
 		tl.UserID = m.Long()
-		tl.Mutual = m.Object()
+		tl.Mutual = m.Bool()
 		r = tl
 	case CRC_importedContact:
 		tl := TL_importedContact{}
@@ -40255,7 +40255,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_updateChatParticipantAdmin{}
 		tl.ChatID = m.Long()
 		tl.UserID = m.Long()
-		tl.IsAdmin = m.Object()
+		tl.IsAdmin = m.Bool()
 		tl.Version = m.Int()
 		r = tl
 	case CRC_updateNewStickerSet:
@@ -40670,7 +40670,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_updateBotStopped{}
 		tl.UserID = m.Long()
 		tl.Date = m.Int()
-		tl.Stopped = m.Object()
+		tl.Stopped = m.Bool()
 		tl.Qts = m.Int()
 		r = tl
 	case CRC_updateGroupCallConnection:
@@ -41005,7 +41005,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ForceTryIpv6 = flags&(1<<14) != 0
 		tl.Date = m.Int()
 		tl.Expires = m.Int()
-		tl.TestMode = m.Object()
+		tl.TestMode = m.Bool()
 		tl.ThisDc = m.Int()
 		tl.DcOptions = m.Vector()
 		tl.DcTxtDomainName = m.String()
@@ -41959,7 +41959,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_keyboardButtonRequestPoll{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Quiz = m.Object()
+			tl.Quiz = Some(m.Bool())
 		}
 		tl.Text = m.String()
 		r = tl
@@ -43671,11 +43671,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_channelAdminLogEventActionToggleInvites:
 		tl := TL_channelAdminLogEventActionToggleInvites{}
-		tl.NewValue = m.Object()
+		tl.NewValue = m.Bool()
 		r = tl
 	case CRC_channelAdminLogEventActionToggleSignatures:
 		tl := TL_channelAdminLogEventActionToggleSignatures{}
-		tl.NewValue = m.Object()
+		tl.NewValue = m.Bool()
 		r = tl
 	case CRC_channelAdminLogEventActionUpdatePinned:
 		tl := TL_channelAdminLogEventActionUpdatePinned{}
@@ -43717,7 +43717,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_channelAdminLogEventActionTogglePreHistoryHidden:
 		tl := TL_channelAdminLogEventActionTogglePreHistoryHidden{}
-		tl.NewValue = m.Object()
+		tl.NewValue = m.Bool()
 		r = tl
 	case CRC_channelAdminLogEventActionDefaultBannedRights:
 		tl := TL_channelAdminLogEventActionDefaultBannedRights{}
@@ -43761,7 +43761,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_channelAdminLogEventActionToggleGroupCallSetting:
 		tl := TL_channelAdminLogEventActionToggleGroupCallSetting{}
-		tl.JoinMuted = m.Object()
+		tl.JoinMuted = m.Bool()
 		r = tl
 	case CRC_channelAdminLogEventActionParticipantJoinByInvite:
 		tl := TL_channelAdminLogEventActionParticipantJoinByInvite{}
@@ -43798,7 +43798,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_channelAdminLogEventActionToggleNoForwards:
 		tl := TL_channelAdminLogEventActionToggleNoForwards{}
-		tl.NewValue = m.Object()
+		tl.NewValue = m.Bool()
 		r = tl
 	case CRC_channelAdminLogEventActionSendMessage:
 		tl := TL_channelAdminLogEventActionSendMessage{}
@@ -43816,7 +43816,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_channelAdminLogEventActionToggleForum:
 		tl := TL_channelAdminLogEventActionToggleForum{}
-		tl.NewValue = m.Object()
+		tl.NewValue = m.Bool()
 		r = tl
 	case CRC_channelAdminLogEventActionCreateTopic:
 		tl := TL_channelAdminLogEventActionCreateTopic{}
@@ -43843,7 +43843,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_channelAdminLogEventActionToggleAntiSpam:
 		tl := TL_channelAdminLogEventActionToggleAntiSpam{}
-		tl.NewValue = m.Object()
+		tl.NewValue = m.Bool()
 		r = tl
 	case CRC_channelAdminLogEventActionChangeColor:
 		tl := TL_channelAdminLogEventActionChangeColor{}
@@ -44331,7 +44331,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_jsonBool:
 		tl := TL_jsonBool{}
-		tl.Value = m.Object()
+		tl.Value = m.Bool()
 		r = tl
 	case CRC_jsonNumber:
 		tl := TL_jsonNumber{}
@@ -44581,7 +44581,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Token = Some(m.String())
 		}
 		if flags&(1<<8) != 0 {
-			tl.AppSandbox = m.Object()
+			tl.AppSandbox = Some(m.Bool())
 		}
 		r = tl
 	case CRC_wallPaperSettings:
@@ -46019,10 +46019,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_requestPeerTypeUser{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Bot = m.Object()
+			tl.Bot = Some(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Premium = m.Object()
+			tl.Premium = Some(m.Bool())
 		}
 		r = tl
 	case CRC_requestPeerTypeChat:
@@ -46031,10 +46031,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Creator = flags&(1<<0) != 0
 		tl.BotParticipant = flags&(1<<5) != 0
 		if flags&(1<<3) != 0 {
-			tl.HasUsername = m.Object()
+			tl.HasUsername = Some(m.Bool())
 		}
 		if flags&(1<<4) != 0 {
-			tl.Forum = m.Object()
+			tl.Forum = Some(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
 			tl.UserAdminRights = m.Object()
@@ -46048,7 +46048,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Creator = flags&(1<<0) != 0
 		if flags&(1<<3) != 0 {
-			tl.HasUsername = m.Object()
+			tl.HasUsername = Some(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
 			tl.UserAdminRights = m.Object()
@@ -46779,7 +46779,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.NoMuted = flags&(1<<0) != 0
 		tl.TokenType = m.Int()
 		tl.Token = m.String()
-		tl.AppSandbox = m.Object()
+		tl.AppSandbox = m.Bool()
 		tl.Secret = m.StringBytes()
 		tl.OtherUids = m.VectorLong()
 		r = tl
@@ -46816,7 +46816,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_account_updateStatus:
 		tl := TL_account_updateStatus{}
-		tl.Offline = m.Object()
+		tl.Offline = m.Bool()
 		r = tl
 	case CRC_account_getWallPapers:
 		tl := TL_account_getWallPapers{}
@@ -47003,7 +47003,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_account_setContactSignUpNotification:
 		tl := TL_account_setContactSignUpNotification{}
-		tl.Silent = m.Object()
+		tl.Silent = m.Bool()
 		r = tl
 	case CRC_account_getNotifyExceptions:
 		tl := TL_account_getNotifyExceptions{}
@@ -47029,7 +47029,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_account_saveWallPaper:
 		tl := TL_account_saveWallPaper{}
 		tl.Wallpaper = m.Object()
-		tl.Unsave = m.Object()
+		tl.Unsave = m.Bool()
 		tl.Settings = m.Object()
 		r = tl
 	case CRC_account_installWallPaper:
@@ -47093,7 +47093,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_account_saveTheme:
 		tl := TL_account_saveTheme{}
 		tl.Theme = m.Object()
-		tl.Unsave = m.Object()
+		tl.Unsave = m.Bool()
 		r = tl
 	case CRC_account_installTheme:
 		tl := TL_account_installTheme{}
@@ -47165,10 +47165,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Confirmed = flags&(1<<3) != 0
 		tl.Hash = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.EncryptedRequestsDisabled = m.Object()
+			tl.EncryptedRequestsDisabled = Some(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.CallRequestsDisabled = m.Object()
+			tl.CallRequestsDisabled = Some(m.Bool())
 		}
 		r = tl
 	case CRC_account_getSavedRingtones:
@@ -47178,7 +47178,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_account_saveRingtone:
 		tl := TL_account_saveRingtone{}
 		tl.ID = m.Object()
-		tl.Unsave = m.Object()
+		tl.Unsave = m.Bool()
 		r = tl
 	case CRC_account_uploadRingtone:
 		tl := TL_account_uploadRingtone{}
@@ -47208,7 +47208,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_account_toggleUsername:
 		tl := TL_account_toggleUsername{}
 		tl.Username = m.String()
-		tl.Active = m.Object()
+		tl.Active = m.Bool()
 		r = tl
 	case CRC_account_getDefaultProfilePhotoEmojis:
 		tl := TL_account_getDefaultProfilePhotoEmojis{}
@@ -47343,7 +47343,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_contacts_toggleTopPeers:
 		tl := TL_contacts_toggleTopPeers{}
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_contacts_addContact:
 		tl := TL_contacts_addContact{}
@@ -47646,7 +47646,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_setEncryptedTyping:
 		tl := TL_messages_setEncryptedTyping{}
 		tl.Peer = m.Object()
-		tl.Typing = m.Object()
+		tl.Typing = m.Bool()
 		r = tl
 	case CRC_messages_readEncryptedHistory:
 		tl := TL_messages_readEncryptedHistory{}
@@ -47737,7 +47737,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_installStickerSet:
 		tl := TL_messages_installStickerSet{}
 		tl.Stickerset = m.Object()
-		tl.Archived = m.Object()
+		tl.Archived = m.Bool()
 		r = tl
 	case CRC_messages_uninstallStickerSet:
 		tl := TL_messages_uninstallStickerSet{}
@@ -47754,13 +47754,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_messages_getMessagesViews{}
 		tl.Peer = m.Object()
 		tl.ID = m.VectorInt()
-		tl.Increment = m.Object()
+		tl.Increment = m.Bool()
 		r = tl
 	case CRC_messages_editChatAdmin:
 		tl := TL_messages_editChatAdmin{}
 		tl.ChatID = m.Long()
 		tl.UserID = m.Object()
-		tl.IsAdmin = m.Object()
+		tl.IsAdmin = m.Bool()
 		r = tl
 	case CRC_messages_migrateChat:
 		tl := TL_messages_migrateChat{}
@@ -47801,7 +47801,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_saveGif:
 		tl := TL_messages_saveGif{}
 		tl.ID = m.Object()
-		tl.Unsave = m.Object()
+		tl.Unsave = m.Bool()
 		r = tl
 	case CRC_messages_getInlineBotResults:
 		tl := TL_messages_getInlineBotResults{}
@@ -47969,7 +47969,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Attached = flags&(1<<0) != 0
 		tl.ID = m.Object()
-		tl.Unsave = m.Object()
+		tl.Unsave = m.Bool()
 		r = tl
 	case CRC_messages_clearRecentStickers:
 		tl := TL_messages_clearRecentStickers{}
@@ -48088,7 +48088,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_faveSticker:
 		tl := TL_messages_faveSticker{}
 		tl.ID = m.Object()
-		tl.Unfave = m.Object()
+		tl.Unfave = m.Bool()
 		r = tl
 	case CRC_messages_getUnreadMentions:
 		tl := TL_messages_getUnreadMentions{}
@@ -48421,7 +48421,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.UsageLimit = Some(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.RequestNeeded = m.Object()
+			tl.RequestNeeded = Some(m.Bool())
 		}
 		if flags&(1<<4) != 0 {
 			tl.Title = Some(m.String())
@@ -48508,7 +48508,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_messages_toggleNoForwards:
 		tl := TL_messages_toggleNoForwards{}
 		tl.Peer = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_messages_saveDefaultSendAs:
 		tl := TL_messages_saveDefaultSendAs{}
@@ -48611,7 +48611,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.WriteAllowed = flags&(1<<0) != 0
 		tl.Bot = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_messages_requestWebView:
 		tl := TL_messages_requestWebView{}
@@ -48690,7 +48690,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.MsgID = m.Int()
 		tl.TranscriptionID = m.Long()
-		tl.Good = m.Object()
+		tl.Good = m.Bool()
 		r = tl
 	case CRC_messages_getCustomEmojiDocuments:
 		tl := TL_messages_getCustomEmojiDocuments{}
@@ -49138,7 +49138,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_channels_toggleSignatures:
 		tl := TL_channels_toggleSignatures{}
 		tl.Channel = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_channels_getAdminedPublicChannels:
 		tl := TL_channels_getAdminedPublicChannels{}
@@ -49187,7 +49187,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_channels_togglePreHistoryHidden:
 		tl := TL_channels_togglePreHistoryHidden{}
 		tl.Channel = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_channels_getLeftChannels:
 		tl := TL_channels_getLeftChannels{}
@@ -49246,12 +49246,12 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_channels_toggleJoinToSend:
 		tl := TL_channels_toggleJoinToSend{}
 		tl.Channel = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_channels_toggleJoinRequest:
 		tl := TL_channels_toggleJoinRequest{}
 		tl.Channel = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_channels_reorderUsernames:
 		tl := TL_channels_reorderUsernames{}
@@ -49262,7 +49262,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_channels_toggleUsername{}
 		tl.Channel = m.Object()
 		tl.Username = m.String()
-		tl.Active = m.Object()
+		tl.Active = m.Bool()
 		r = tl
 	case CRC_channels_deactivateAllUsernames:
 		tl := TL_channels_deactivateAllUsernames{}
@@ -49271,7 +49271,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_channels_toggleForum:
 		tl := TL_channels_toggleForum{}
 		tl.Channel = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_channels_createForumTopic:
 		tl := TL_channels_createForumTopic{}
@@ -49318,17 +49318,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.IconEmojiID = Some(m.Long())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Closed = m.Object()
+			tl.Closed = Some(m.Bool())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Hidden = m.Object()
+			tl.Hidden = Some(m.Bool())
 		}
 		r = tl
 	case CRC_channels_updatePinnedForumTopic:
 		tl := TL_channels_updatePinnedForumTopic{}
 		tl.Channel = m.Object()
 		tl.TopicID = m.Int()
-		tl.Pinned = m.Object()
+		tl.Pinned = m.Bool()
 		r = tl
 	case CRC_channels_deleteTopicHistory:
 		tl := TL_channels_deleteTopicHistory{}
@@ -49345,7 +49345,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_channels_toggleAntiSpam:
 		tl := TL_channels_toggleAntiSpam{}
 		tl.Channel = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_channels_reportAntiSpamFalsePositive:
 		tl := TL_channels_reportAntiSpamFalsePositive{}
@@ -49355,7 +49355,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_channels_toggleParticipantsHidden:
 		tl := TL_channels_toggleParticipantsHidden{}
 		tl.Channel = m.Object()
-		tl.Enabled = m.Object()
+		tl.Enabled = m.Bool()
 		r = tl
 	case CRC_channels_clickSponsoredMessage:
 		tl := TL_channels_clickSponsoredMessage{}
@@ -49448,7 +49448,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_bots_toggleUsername{}
 		tl.Bot = m.Object()
 		tl.Username = m.String()
-		tl.Active = m.Object()
+		tl.Active = m.Bool()
 		r = tl
 	case CRC_bots_canSendMessage:
 		tl := TL_bots_canSendMessage{}
@@ -49733,7 +49733,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ResetInviteHash = flags&(1<<1) != 0
 		tl.Call = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.JoinMuted = m.Object()
+			tl.JoinMuted = Some(m.Bool())
 		}
 		r = tl
 	case CRC_phone_getGroupCall:
@@ -49764,7 +49764,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Title = Some(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.VideoPortrait = m.Object()
+			tl.VideoPortrait = Some(m.Bool())
 		}
 		r = tl
 	case CRC_phone_editGroupCallParticipant:
@@ -49773,22 +49773,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Call = m.Object()
 		tl.Participant = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Muted = m.Object()
+			tl.Muted = Some(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
 			tl.Volume = Some(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.RaiseHand = m.Object()
+			tl.RaiseHand = Some(m.Bool())
 		}
 		if flags&(1<<3) != 0 {
-			tl.VideoStopped = m.Object()
+			tl.VideoStopped = Some(m.Bool())
 		}
 		if flags&(1<<4) != 0 {
-			tl.VideoPaused = m.Object()
+			tl.VideoPaused = Some(m.Bool())
 		}
 		if flags&(1<<5) != 0 {
-			tl.PresentationPaused = m.Object()
+			tl.PresentationPaused = Some(m.Bool())
 		}
 		r = tl
 	case CRC_phone_editGroupCallTitle:
@@ -49809,7 +49809,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_phone_toggleGroupCallStartSubscription:
 		tl := TL_phone_toggleGroupCallStartSubscription{}
 		tl.Call = m.Object()
-		tl.Subscribed = m.Object()
+		tl.Subscribed = m.Bool()
 		r = tl
 	case CRC_phone_startScheduledGroupCall:
 		tl := TL_phone_startScheduledGroupCall{}
@@ -49836,7 +49836,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_phone_getGroupCallStreamRtmpUrl:
 		tl := TL_phone_getGroupCallStreamRtmpUrl{}
 		tl.Peer = m.Object()
-		tl.Revoke = m.Object()
+		tl.Revoke = m.Bool()
 		r = tl
 	case CRC_phone_saveCallLog:
 		tl := TL_phone_saveCallLog{}
@@ -50023,7 +50023,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_stories_togglePinned{}
 		tl.Peer = m.Object()
 		tl.ID = m.VectorInt()
-		tl.Pinned = m.Object()
+		tl.Pinned = m.Bool()
 		r = tl
 	case CRC_stories_getAllStories:
 		tl := TL_stories_getAllStories{}
@@ -50053,7 +50053,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = tl
 	case CRC_stories_toggleAllStoriesHidden:
 		tl := TL_stories_toggleAllStoriesHidden{}
-		tl.Hidden = m.Object()
+		tl.Hidden = m.Bool()
 		r = tl
 	case CRC_stories_readStories:
 		tl := TL_stories_readStories{}
@@ -50126,7 +50126,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	case CRC_stories_togglePeerStoriesHidden:
 		tl := TL_stories_togglePeerStoriesHidden{}
 		tl.Peer = m.Object()
-		tl.Hidden = m.Object()
+		tl.Hidden = m.Bool()
 		r = tl
 	case CRC_premium_getBoostsList:
 		tl := TL_premium_getBoostsList{}

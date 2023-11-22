@@ -373,11 +373,6 @@ full buffer size:   %d 0x%x
 	d.err = merry.Wrap(d.err, merry.WithValue(ErrorBufStackKey, bufStack))
 }
 
-func toBool(x TL) bool {
-	_, ok := x.(TL_boolTrue)
-	return ok
-}
-
 func str2big(str string) *big.Int {
 	return new(big.Int).SetBytes([]byte(str))
 }

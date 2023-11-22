@@ -259,6 +259,11 @@ type FieldType struct {
 }
 
 var simpleFieldTypeMap = map[string]FieldType{
+	"Bool": {
+		GoType: "bool",
+		EncDec: "Bool",
+		UseOpt: true,
+	},
 	"int": {
 		GoType: "int32",
 		EncDec: "Int",
@@ -320,14 +325,13 @@ var simpleFieldTypeMap = map[string]FieldType{
 }
 
 func flaggedValueCheck(typeName, varName string) string {
-	switch typeName {
-	case "true":
+	if typeName == "true" {
 		return varName
-	case "int", "long", "string", "double":
-		return varName + ".IsSet"
-	default:
-		return varName + " != nil"
 	}
+	if mapped, ok := simpleFieldTypeMap[typeName]; ok && mapped.UseOpt {
+		return varName + ".IsSet"
+	}
+	return varName + " != nil"
 }
 
 func main() {
