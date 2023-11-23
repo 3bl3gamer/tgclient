@@ -38353,7 +38353,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Title = m.String()
 		tl.Description = m.String()
 		if flags&(1<<0) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[*TL_inputWebDocument](m)
+			tl.Photo = Ref(DecodeBuf_GenericObject[TL_inputWebDocument](m))
 		}
 		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
 		tl.Payload = m.StringBytes()
@@ -38703,10 +38703,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.MigratedTo = DecodeBuf_GenericObject[TL](m)
 		}
 		if flags&(1<<14) != 0 {
-			tl.AdminRights = DecodeBuf_GenericObject[*TL_chatAdminRights](m)
+			tl.AdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
 		}
 		if flags&(1<<18) != 0 {
-			tl.DefaultBannedRights = DecodeBuf_GenericObject[*TL_chatBannedRights](m)
+			tl.DefaultBannedRights = Ref(DecodeBuf_GenericObject[TL_chatBannedRights](m))
 		}
 		r = tl
 	case CRC_chatForbidden:
@@ -38755,13 +38755,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.RestrictionReason = DecodeBuf_GenericVector[TL_restrictionReason](m)
 		}
 		if flags&(1<<14) != 0 {
-			tl.AdminRights = DecodeBuf_GenericObject[*TL_chatAdminRights](m)
+			tl.AdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
 		}
 		if flags&(1<<15) != 0 {
-			tl.BannedRights = DecodeBuf_GenericObject[*TL_chatBannedRights](m)
+			tl.BannedRights = Ref(DecodeBuf_GenericObject[TL_chatBannedRights](m))
 		}
 		if flags&(1<<18) != 0 {
-			tl.DefaultBannedRights = DecodeBuf_GenericObject[*TL_chatBannedRights](m)
+			tl.DefaultBannedRights = Ref(DecodeBuf_GenericObject[TL_chatBannedRights](m))
 		}
 		if flags&(1<<17) != 0 {
 			tl.ParticipantsCount = Ref(m.Int())
@@ -38817,7 +38817,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.FolderID = Ref(m.Int())
 		}
 		if flags&(1<<12) != 0 {
-			tl.Call = DecodeBuf_GenericObject[*TL_inputGroupCall](m)
+			tl.Call = Ref(DecodeBuf_GenericObject[TL_inputGroupCall](m))
 		}
 		if flags&(1<<14) != 0 {
 			tl.TTLPeriod = Ref(m.Int())
@@ -38891,7 +38891,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.PinnedMsgID = Ref(m.Int())
 		}
 		if flags&(1<<8) != 0 {
-			tl.Stickerset = DecodeBuf_GenericObject[*TL_stickerSet](m)
+			tl.Stickerset = Ref(DecodeBuf_GenericObject[TL_stickerSet](m))
 		}
 		if flags&(1<<9) != 0 {
 			tl.AvailableMinID = Ref(m.Int())
@@ -38916,7 +38916,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 		tl.PTS = m.Int()
 		if flags&(1<<21) != 0 {
-			tl.Call = DecodeBuf_GenericObject[*TL_inputGroupCall](m)
+			tl.Call = Ref(DecodeBuf_GenericObject[TL_inputGroupCall](m))
 		}
 		if flags&(1<<24) != 0 {
 			tl.TTLPeriod = Ref(m.Int())
@@ -38943,7 +38943,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.AvailableReactions = DecodeBuf_GenericObject[TL](m)
 		}
 		if flags2&(1<<4) != 0 {
-			tl.Stories = DecodeBuf_GenericObject[*TL_peerStories](m)
+			tl.Stories = Ref(DecodeBuf_GenericObject[TL_peerStories](m))
 		}
 		r = tl
 	case CRC_chatParticipant:
@@ -39017,7 +39017,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 		tl.PeerID = DecodeBuf_GenericObject[TL](m)
 		if flags&(1<<2) != 0 {
-			tl.FwdFrom = DecodeBuf_GenericObject[*TL_messageFwdHeader](m)
+			tl.FwdFrom = Ref(DecodeBuf_GenericObject[TL_messageFwdHeader](m))
 		}
 		if flags&(1<<11) != 0 {
 			tl.ViaBotID = Ref(m.Long())
@@ -39043,7 +39043,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Forwards = Ref(m.Int())
 		}
 		if flags&(1<<23) != 0 {
-			tl.Replies = DecodeBuf_GenericObject[*TL_messageReplies](m)
+			tl.Replies = Ref(DecodeBuf_GenericObject[TL_messageReplies](m))
 		}
 		if flags&(1<<15) != 0 {
 			tl.EditDate = Ref(m.Int())
@@ -39055,7 +39055,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.GroupedID = Ref(m.Long())
 		}
 		if flags&(1<<20) != 0 {
-			tl.Reactions = DecodeBuf_GenericObject[*TL_messageReactions](m)
+			tl.Reactions = Ref(DecodeBuf_GenericObject[TL_messageReactions](m))
 		}
 		if flags&(1<<22) != 0 {
 			tl.RestrictionReason = DecodeBuf_GenericVector[TL_restrictionReason](m)
@@ -39281,7 +39281,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.TotalAmount = m.Long()
 		tl.Payload = m.StringBytes()
 		if flags&(1<<0) != 0 {
-			tl.Info = DecodeBuf_GenericObject[*TL_paymentRequestedInfo](m)
+			tl.Info = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
 		}
 		if flags&(1<<1) != 0 {
 			tl.ShippingOptionID = Ref(m.String())
@@ -39598,7 +39598,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_auth_authorizationSignUpRequired{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.TermsOfService = DecodeBuf_GenericObject[*TL_help_termsOfService](m)
+			tl.TermsOfService = Ref(DecodeBuf_GenericObject[TL_help_termsOfService](m))
 		}
 		r = tl
 	case CRC_auth_exportedAuthorization:
@@ -39720,7 +39720,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Slug = m.String()
 		tl.Document = DecodeBuf_GenericObject[TL](m)
 		if flags&(1<<2) != 0 {
-			tl.Settings = DecodeBuf_GenericObject[*TL_wallPaperSettings](m)
+			tl.Settings = Ref(DecodeBuf_GenericObject[TL_wallPaperSettings](m))
 		}
 		r = tl
 	case CRC_wallPaperNoFile:
@@ -39730,7 +39730,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Default = flags&(1<<1) != 0
 		tl.Dark = flags&(1<<4) != 0
 		if flags&(1<<2) != 0 {
-			tl.Settings = DecodeBuf_GenericObject[*TL_wallPaperSettings](m)
+			tl.Settings = Ref(DecodeBuf_GenericObject[TL_wallPaperSettings](m))
 		}
 		r = tl
 	case CRC_inputReportReasonSpam:
@@ -39792,7 +39792,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 		tl.NotifySettings = DecodeBuf_GenericObject[TL_peerNotifySettings](m)
 		if flags&(1<<3) != 0 {
-			tl.BotInfo = DecodeBuf_GenericObject[*TL_botInfo](m)
+			tl.BotInfo = Ref(DecodeBuf_GenericObject[TL_botInfo](m))
 		}
 		if flags&(1<<6) != 0 {
 			tl.PinnedMsgID = Ref(m.Int())
@@ -39811,10 +39811,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.PrivateForwardName = Ref(m.String())
 		}
 		if flags&(1<<17) != 0 {
-			tl.BotGroupAdminRights = DecodeBuf_GenericObject[*TL_chatAdminRights](m)
+			tl.BotGroupAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
 		}
 		if flags&(1<<18) != 0 {
-			tl.BotBroadcastAdminRights = DecodeBuf_GenericObject[*TL_chatAdminRights](m)
+			tl.BotBroadcastAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
 		}
 		if flags&(1<<19) != 0 {
 			tl.PremiumGifts = DecodeBuf_GenericVector[TL_premiumGiftOption](m)
@@ -39823,7 +39823,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Wallpaper = DecodeBuf_GenericObject[TL](m)
 		}
 		if flags&(1<<25) != 0 {
-			tl.Stories = DecodeBuf_GenericObject[*TL_peerStories](m)
+			tl.Stories = Ref(DecodeBuf_GenericObject[TL_peerStories](m))
 		}
 		r = tl
 	case CRC_contact:
@@ -40375,7 +40375,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.UserID = m.Long()
 		tl.Payload = m.StringBytes()
 		if flags&(1<<0) != 0 {
-			tl.Info = DecodeBuf_GenericObject[*TL_paymentRequestedInfo](m)
+			tl.Info = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
 		}
 		if flags&(1<<1) != 0 {
 			tl.ShippingOptionID = Ref(m.String())
@@ -40426,7 +40426,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.PollID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Poll = DecodeBuf_GenericObject[*TL_poll](m)
+			tl.Poll = Ref(DecodeBuf_GenericObject[TL_poll](m))
 		}
 		tl.Results = DecodeBuf_GenericObject[TL_pollResults](m)
 		r = tl
@@ -40817,7 +40817,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.PTSCount = m.Int()
 		tl.Date = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.FwdFrom = DecodeBuf_GenericObject[*TL_messageFwdHeader](m)
+			tl.FwdFrom = Ref(DecodeBuf_GenericObject[TL_messageFwdHeader](m))
 		}
 		if flags&(1<<11) != 0 {
 			tl.ViaBotID = Ref(m.Long())
@@ -40847,7 +40847,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.PTSCount = m.Int()
 		tl.Date = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.FwdFrom = DecodeBuf_GenericObject[*TL_messageFwdHeader](m)
+			tl.FwdFrom = Ref(DecodeBuf_GenericObject[TL_messageFwdHeader](m))
 		}
 		if flags&(1<<11) != 0 {
 			tl.ViaBotID = Ref(m.Long())
@@ -41437,7 +41437,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Alt = m.String()
 		tl.Stickerset = DecodeBuf_GenericObject[TL](m)
 		if flags&(1<<0) != 0 {
-			tl.MaskCoords = DecodeBuf_GenericObject[*TL_maskCoords](m)
+			tl.MaskCoords = Ref(DecodeBuf_GenericObject[TL_maskCoords](m))
 		}
 		r = tl
 	case CRC_documentAttributeVideo:
@@ -41571,7 +41571,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Document = DecodeBuf_GenericObject[TL](m)
 		}
 		if flags&(1<<10) != 0 {
-			tl.CachedPage = DecodeBuf_GenericObject[*TL_page](m)
+			tl.CachedPage = Ref(DecodeBuf_GenericObject[TL_page](m))
 		}
 		if flags&(1<<12) != 0 {
 			tl.Attributes = DecodeBuf_GenericVector[TL](m)
@@ -41649,7 +41649,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Email = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.SecureSettings = DecodeBuf_GenericObject[*TL_secureSecretSettings](m)
+			tl.SecureSettings = Ref(DecodeBuf_GenericObject[TL_secureSecretSettings](m))
 		}
 		r = tl
 	case CRC_account_passwordInputSettings:
@@ -41668,7 +41668,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Email = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.NewSecureSettings = DecodeBuf_GenericObject[*TL_secureSecretSettings](m)
+			tl.NewSecureSettings = Ref(DecodeBuf_GenericObject[TL_secureSecretSettings](m))
 		}
 		r = tl
 	case CRC_auth_passwordRecovery:
@@ -42354,7 +42354,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Title = m.String()
 		tl.Description = m.String()
 		if flags&(1<<0) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[*TL_inputWebDocument](m)
+			tl.Photo = Ref(DecodeBuf_GenericObject[TL_inputWebDocument](m))
 		}
 		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
 		tl.Payload = m.StringBytes()
@@ -42395,10 +42395,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.URL = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.Thumb = DecodeBuf_GenericObject[*TL_inputWebDocument](m)
+			tl.Thumb = Ref(DecodeBuf_GenericObject[TL_inputWebDocument](m))
 		}
 		if flags&(1<<5) != 0 {
-			tl.Content = DecodeBuf_GenericObject[*TL_inputWebDocument](m)
+			tl.Content = Ref(DecodeBuf_GenericObject[TL_inputWebDocument](m))
 		}
 		tl.SendMessage = DecodeBuf_GenericObject[TL](m)
 		r = tl
@@ -42578,10 +42578,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.NextOffset = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.SwitchPM = DecodeBuf_GenericObject[*TL_inlineBotSwitchPM](m)
+			tl.SwitchPM = Ref(DecodeBuf_GenericObject[TL_inlineBotSwitchPM](m))
 		}
 		if flags&(1<<3) != 0 {
-			tl.SwitchWebview = DecodeBuf_GenericObject[*TL_inlineBotWebView](m)
+			tl.SwitchWebview = Ref(DecodeBuf_GenericObject[TL_inlineBotWebView](m))
 		}
 		tl.Results = DecodeBuf_GenericVector[TL](m)
 		tl.CacheTime = m.Int()
@@ -43226,7 +43226,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Email = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
-			tl.ShippingAddress = DecodeBuf_GenericObject[*TL_postAddress](m)
+			tl.ShippingAddress = Ref(DecodeBuf_GenericObject[TL_postAddress](m))
 		}
 		r = tl
 	case CRC_paymentSavedCredentialsCard:
@@ -43311,13 +43311,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.NativeProvider = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.NativeParams = DecodeBuf_GenericObject[*TL_dataJSON](m)
+			tl.NativeParams = Ref(DecodeBuf_GenericObject[TL_dataJSON](m))
 		}
 		if flags&(1<<6) != 0 {
 			tl.AdditionalMethods = DecodeBuf_GenericVector[TL_paymentFormMethod](m)
 		}
 		if flags&(1<<0) != 0 {
-			tl.SavedInfo = DecodeBuf_GenericObject[*TL_paymentRequestedInfo](m)
+			tl.SavedInfo = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
 		}
 		if flags&(1<<1) != 0 {
 			tl.SavedCredentials = DecodeBuf_GenericVector[TL_paymentSavedCredentialsCard](m)
@@ -43355,10 +43355,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
 		if flags&(1<<0) != 0 {
-			tl.Info = DecodeBuf_GenericObject[*TL_paymentRequestedInfo](m)
+			tl.Info = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
 		}
 		if flags&(1<<1) != 0 {
-			tl.Shipping = DecodeBuf_GenericObject[*TL_shippingOption](m)
+			tl.Shipping = Ref(DecodeBuf_GenericObject[TL_shippingOption](m))
 		}
 		if flags&(1<<3) != 0 {
 			tl.TipAmount = Ref(m.Long())
@@ -43373,7 +43373,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.HasSavedCredentials = flags&(1<<1) != 0
 		if flags&(1<<0) != 0 {
-			tl.SavedInfo = DecodeBuf_GenericObject[*TL_paymentRequestedInfo](m)
+			tl.SavedInfo = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
 		}
 		r = tl
 	case CRC_inputPaymentCredentialsSaved:
@@ -43412,7 +43412,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Document = DecodeBuf_GenericObject[TL](m)
 		tl.Emoji = m.String()
 		if flags&(1<<0) != 0 {
-			tl.MaskCoords = DecodeBuf_GenericObject[*TL_maskCoords](m)
+			tl.MaskCoords = Ref(DecodeBuf_GenericObject[TL_maskCoords](m))
 		}
 		if flags&(1<<1) != 0 {
 			tl.Keywords = Ref(m.String())
@@ -44058,7 +44058,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Type = DecodeBuf_GenericObject[TL](m)
 		if flags&(1<<0) != 0 {
-			tl.Data = DecodeBuf_GenericObject[*TL_secureData](m)
+			tl.Data = Ref(DecodeBuf_GenericObject[TL_secureData](m))
 		}
 		if flags&(1<<1) != 0 {
 			tl.FrontSide = DecodeBuf_GenericObject[TL](m)
@@ -44085,7 +44085,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Type = DecodeBuf_GenericObject[TL](m)
 		if flags&(1<<0) != 0 {
-			tl.Data = DecodeBuf_GenericObject[*TL_secureData](m)
+			tl.Data = Ref(DecodeBuf_GenericObject[TL_secureData](m))
 		}
 		if flags&(1<<1) != 0 {
 			tl.FrontSide = DecodeBuf_GenericObject[TL](m)
@@ -44771,7 +44771,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Wallpaper = DecodeBuf_GenericObject[TL](m)
 		}
 		if flags&(1<<1) != 0 {
-			tl.WallpaperSettings = DecodeBuf_GenericObject[*TL_wallPaperSettings](m)
+			tl.WallpaperSettings = Ref(DecodeBuf_GenericObject[TL_wallPaperSettings](m))
 		}
 		r = tl
 	case CRC_themeSettings:
@@ -44797,7 +44797,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Documents = DecodeBuf_GenericVector[TL](m)
 		}
 		if flags&(1<<1) != 0 {
-			tl.Settings = DecodeBuf_GenericObject[*TL_themeSettings](m)
+			tl.Settings = Ref(DecodeBuf_GenericObject[TL_themeSettings](m))
 		}
 		r = tl
 	case CRC_webPageAttributeStory:
@@ -45051,7 +45051,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Forwards = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Replies = DecodeBuf_GenericObject[*TL_messageReplies](m)
+			tl.Replies = Ref(DecodeBuf_GenericObject[TL_messageReplies](m))
 		}
 		r = tl
 	case CRC_messages_messageViews:
@@ -45090,7 +45090,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.ReplyToPeerID = DecodeBuf_GenericObject[TL](m)
 		}
 		if flags&(1<<5) != 0 {
-			tl.ReplyFrom = DecodeBuf_GenericObject[*TL_messageFwdHeader](m)
+			tl.ReplyFrom = Ref(DecodeBuf_GenericObject[TL_messageFwdHeader](m))
 		}
 		if flags&(1<<8) != 0 {
 			tl.ReplyMedia = DecodeBuf_GenericObject[TL](m)
@@ -45210,10 +45210,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.RaiseHandRating = Ref(m.Long())
 		}
 		if flags&(1<<6) != 0 {
-			tl.Video = DecodeBuf_GenericObject[*TL_groupCallParticipantVideo](m)
+			tl.Video = Ref(DecodeBuf_GenericObject[TL_groupCallParticipantVideo](m))
 		}
 		if flags&(1<<14) != 0 {
-			tl.Presentation = DecodeBuf_GenericObject[*TL_groupCallParticipantVideo](m)
+			tl.Presentation = Ref(DecodeBuf_GenericObject[TL_groupCallParticipantVideo](m))
 		}
 		r = tl
 	case CRC_phone_groupCall:
@@ -45410,7 +45410,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.StartParam = Ref(m.String())
 		}
 		if flags&(1<<9) != 0 {
-			tl.Webpage = DecodeBuf_GenericObject[*TL_sponsoredWebPage](m)
+			tl.Webpage = Ref(DecodeBuf_GenericObject[TL_sponsoredWebPage](m))
 		}
 		tl.Message = m.String()
 		if flags&(1<<1) != 0 {
@@ -45990,10 +45990,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Forum = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.UserAdminRights = DecodeBuf_GenericObject[*TL_chatAdminRights](m)
+			tl.UserAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
 		}
 		if flags&(1<<2) != 0 {
-			tl.BotAdminRights = DecodeBuf_GenericObject[*TL_chatAdminRights](m)
+			tl.BotAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
 		}
 		r = tl
 	case CRC_requestPeerTypeBroadcast:
@@ -46004,10 +46004,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.HasUsername = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.UserAdminRights = DecodeBuf_GenericObject[*TL_chatAdminRights](m)
+			tl.UserAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
 		}
 		if flags&(1<<2) != 0 {
-			tl.BotAdminRights = DecodeBuf_GenericObject[*TL_chatAdminRights](m)
+			tl.BotAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
 		}
 		r = tl
 	case CRC_emojiListNotModified:
@@ -46259,7 +46259,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Privacy = DecodeBuf_GenericVector[TL](m)
 		}
 		if flags&(1<<3) != 0 {
-			tl.Views = DecodeBuf_GenericObject[*TL_storyViews](m)
+			tl.Views = Ref(DecodeBuf_GenericObject[TL_storyViews](m))
 		}
 		if flags&(1<<15) != 0 {
 			tl.SentReaction = DecodeBuf_GenericObject[TL](m)
@@ -46544,7 +46544,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.NextLevelBoosts = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.PremiumAudience = DecodeBuf_GenericObject[*TL_statsPercentValue](m)
+			tl.PremiumAudience = Ref(DecodeBuf_GenericObject[TL_statsPercentValue](m))
 		}
 		tl.BoostURL = m.String()
 		if flags&(1<<3) != 0 {

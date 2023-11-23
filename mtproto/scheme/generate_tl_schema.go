@@ -621,9 +621,6 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 				typ := "TL"
 				if len(constructorIDs) == 1 {
 					typ = constructorIDs[0]
-					if vecNesting == 0 && t.flag != nil {
-						typ = "*" + typ
-					}
 				}
 
 				if vecNesting == 1 {
@@ -631,7 +628,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 				} else if vecNesting == 2 {
 					write("tl.%s = m.Vector2d()\n", fieldName)
 				} else {
-					write("tl.%s = DecodeBuf_GenericObject[%s](m)\n", fieldName, typ)
+					read := fmt.Sprintf("DecodeBuf_GenericObject[%s](m)", typ)
+					if len(constructorIDs) == 1 && vecNesting == 0 && t.flag != nil {
+						read = "Ref(" + read + ")"
+					}
+					write("tl.%s = %s\n", fieldName, read)
 				}
 			}
 
