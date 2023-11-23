@@ -273,9 +273,8 @@ func (m *MTProto) initConection() error {
 	}
 	if cfg, ok := x.(TL_config); ok {
 		m.session.DcID = cfg.ThisDc
-		for _, v := range cfg.DcOptions {
-			v := v.(TL_dcOption)
-			m.dcOptions = append(m.dcOptions, &v)
+		for _, option := range cfg.DcOptions {
+			m.dcOptions = append(m.dcOptions, &option)
 		}
 	} else {
 		return WrongRespError(x)
@@ -778,7 +777,6 @@ func (m *MTProto) GetContacts() error {
 		"id", "mutual", "name", "username",
 	)
 	for _, v := range list.Contacts {
-		v := v.(TL_contact)
 		fmt.Fprintf(
 			color.Error,
 			"%10d    %10t    %-30s    %-20s\n",

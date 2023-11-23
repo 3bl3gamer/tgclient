@@ -24,6 +24,12 @@ func notEnoughBytesErr(kind string, pos, inc, size int) error {
 	return merry.WrapSkipping(err, 1)
 }
 
+func unexpectedTypeErr[T TL](kind string, obj TL) error {
+	var dummy T
+	err := merry.Errorf("%s: expected item of type %T, got %T", kind, dummy, obj)
+	return merry.WrapSkipping(err, 1)
+}
+
 type DecodeBuf struct {
 	buf  []byte
 	off  int
@@ -264,22 +270,29 @@ func (m *DecodeBuf) VectorBytes() [][]byte {
 	return x
 }
 
-func (m *DecodeBuf) Vector() []TL {
+func DecodeBuf_GenericVector[T TL](m *DecodeBuf) []T {
 	size := m.vectorHeader("DecodeVector")
 	if m.err != nil {
 		return nil
 	}
-	x := make([]TL, size)
+	x := make([]T, size)
 	i := int32(0)
 	for i < size {
-		y := m.Object()
+		obj, ok := m.Object().(T)
+		if !ok {
+			m.err = unexpectedTypeErr[T]("GenericVector", obj)
+		}
 		if m.err != nil {
 			return nil
 		}
-		x[i] = y
+		x[i] = obj
 		i++
 	}
 	return x
+}
+
+func (m *DecodeBuf) Vector() []TL {
+	return DecodeBuf_GenericVector[TL](m)
 }
 
 func (m *DecodeBuf) Vector2d() [][]TL {
@@ -300,12 +313,23 @@ func (m *DecodeBuf) Vector2d() [][]TL {
 	return x
 }
 
-func (m *DecodeBuf) Object() TL {
+func DecodeBuf_GenericObject[T TL](m *DecodeBuf) T {
 	constructor := m.UInt()
 	if m.err != nil {
-		return nil
+		var blank T
+		return blank
 	}
-	return m.ObjectGenerated(constructor)
+	obj, ok := m.ObjectGenerated(constructor).(T)
+	if !ok {
+		m.err = unexpectedTypeErr[T]("GenericVector", obj)
+		var blank T
+		return blank
+	}
+	return obj
+}
+
+func (m *DecodeBuf) Object() TL {
+	return DecodeBuf_GenericObject[TL](m)
 }
 
 func (m *DecodeBuf) vectorHeader(errLabel string) int32 {

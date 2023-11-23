@@ -408,8 +408,16 @@ import (
 					log.Printf("WARN: no constructors for type %s in %s { %s:%s }", innerTypeName, c.id, t.name, t.typeName)
 				}
 
-				write("%sTL", strings.Repeat("[]", vecNesting))
-				fieldComment += innerTypeName + ": " + strings.Join(constructorIDs, " | ")
+				if len(constructorIDs) == 1 {
+					type_ := fmt.Sprintf("%s%s", strings.Repeat("[]", vecNesting), constructorIDs[0])
+					if vecNesting == 0 && t.flag != nil {
+						type_ = "*" + type_
+					}
+					write(type_)
+				} else {
+					write("%sTL", strings.Repeat("[]", vecNesting))
+					fieldComment += innerTypeName + ": " + strings.Join(constructorIDs, " | ")
+				}
 			}
 
 			if t.flag != nil && t.typeName != "true" {
@@ -462,7 +470,7 @@ import (
 			} else {
 				_, vecNesting, _ := parseVectorType(t.typeName)
 				if vecNesting == 1 {
-					write("x.Vector(e.%s)\n", fieldName)
+					write("EncodeBuf_GenericVector(x, e.%s)\n", fieldName)
 				} else if vecNesting == 2 {
 					write("x.Vector2d(e.%s)\n", fieldName)
 				} else {
@@ -525,13 +533,23 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 				}
 				write("tl.%s = %s\n", fieldName, val)
 			} else {
-				_, vecNesting, _ := parseVectorType(t.typeName)
+				innerTypeName, vecNesting, _ := parseVectorType(t.typeName)
+				constructorIDs := findConstructorIDs(combinators, innerTypeName)
+
+				typ := "TL"
+				if len(constructorIDs) == 1 {
+					typ = constructorIDs[0]
+					if vecNesting == 0 && t.flag != nil {
+						typ = "*" + typ
+					}
+				}
+
 				if vecNesting == 1 {
-					write("tl.%s = m.%s()\n", fieldName, "Vector")
+					write("tl.%s = DecodeBuf_GenericVector[%s](m)\n", fieldName, typ)
 				} else if vecNesting == 2 {
-					write("tl.%s = m.%s()\n", fieldName, "Vector2d")
+					write("tl.%s = m.Vector2d()\n", fieldName)
 				} else {
-					write("tl.%s = m.%s()\n", fieldName, "Object")
+					write("tl.%s = DecodeBuf_GenericObject[%s](m)\n", fieldName, typ)
 				}
 			}
 

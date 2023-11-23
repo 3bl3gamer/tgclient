@@ -125,7 +125,7 @@ func (e *EncodeBuf) VectorBytes(v [][]byte) {
 	}
 }
 
-func (e *EncodeBuf) Vector(v []TL) {
+func EncodeBuf_GenericVector[T TL](e *EncodeBuf, v []T) {
 	x := make([]byte, 8)
 	binary.LittleEndian.PutUint32(x, CRC_vector)
 	binary.LittleEndian.PutUint32(x[4:], uint32(len(v)))
@@ -133,6 +133,10 @@ func (e *EncodeBuf) Vector(v []TL) {
 	for _, v := range v {
 		e.buf = append(e.buf, v.encode()...)
 	}
+}
+
+func (e *EncodeBuf) Vector(v []TL) {
+	EncodeBuf_GenericVector(e, v)
 }
 
 func (e *EncodeBuf) Vector2d(v [][]TL) {
