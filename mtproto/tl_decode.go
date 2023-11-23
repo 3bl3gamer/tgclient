@@ -19,14 +19,14 @@ func init() {
 }
 
 func notEnoughBytesErr(kind string, pos, inc, size int) error {
-	err := merry.Errorf("%s: not enough bytes in buffer: expected %d + %d = %d, got %d",
+	err := fmt.Errorf("%s: not enough bytes in buffer: expected %d + %d = %d, got %d",
 		kind, pos, inc, pos+inc, size)
 	return merry.WrapSkipping(err, 1)
 }
 
 func unexpectedTypeErr[T TL](kind string, obj TL) error {
 	var dummy T
-	err := merry.Errorf("%s: expected item of type %T, got %T", kind, dummy, obj)
+	err := fmt.Errorf("%s: expected item of type %T, got %T", kind, dummy, obj)
 	return merry.WrapSkipping(err, 1)
 }
 
@@ -278,9 +278,13 @@ func DecodeBuf_GenericVector[T TL](m *DecodeBuf) []T {
 	x := make([]T, size)
 	i := int32(0)
 	for i < size {
-		obj, ok := m.Object().(T)
+		objTL := m.Object()
+		if m.err != nil {
+			return nil
+		}
+		obj, ok := objTL.(T)
 		if !ok {
-			m.err = unexpectedTypeErr[T]("GenericVector", obj)
+			m.err = unexpectedTypeErr[T]("GenericVector", objTL)
 		}
 		if m.err != nil {
 			return nil
@@ -319,9 +323,14 @@ func DecodeBuf_GenericObject[T TL](m *DecodeBuf) T {
 		var blank T
 		return blank
 	}
-	obj, ok := m.ObjectGenerated(constructor).(T)
+	objTL := m.ObjectGenerated(constructor)
+	if m.err != nil {
+		var blank T
+		return blank
+	}
+	obj, ok := objTL.(T)
 	if !ok {
-		m.err = unexpectedTypeErr[T]("GenericVector", obj)
+		m.err = unexpectedTypeErr[T]("GenericVector", objTL)
 		var blank T
 		return blank
 	}

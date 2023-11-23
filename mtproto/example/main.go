@@ -60,6 +60,27 @@ func start(appID int32, appHash string) error {
 		return merry.Wrap(err)
 	}
 
+	{
+		log.Println("Requesting self via TL_users_getUsers (vector response test)")
+		res := m.SendSync(mtproto.TL_users_getUsers{
+			ID: []mtproto.TL{mtproto.TL_inputUserSelf{}},
+		})
+		self := res.(mtproto.VectorObject)[0].(mtproto.TL_user)
+		log.Printf("done: #%d %s", self.ID, mtproto.DerefOr(self.FirstName, ""))
+	}
+
+	{
+		log.Println("Requesting self via TL_users_getUsers and TL_invokeWithLayer (polymorphic vector response test)")
+		res := m.SendSync(mtproto.TL_invokeWithLayer{
+			Layer: mtproto.TL_Layer,
+			Query: mtproto.TL_users_getUsers{
+				ID: []mtproto.TL{mtproto.TL_inputUserSelf{}},
+			},
+		})
+		self := res.(mtproto.VectorObject)[0].(mtproto.TL_user)
+		log.Printf("done: #%d %s", self.ID, mtproto.DerefOr(self.FirstName, ""))
+	}
+
 	<-chan bool(nil) //pausing forever
 	return nil
 }

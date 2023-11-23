@@ -20,11 +20,6 @@ import (
 // https://core.telegram.org/mtproto/TL-combinator
 // identifier#name attr:type attr:type = resultType;
 
-// TODO:
-// Pq Ids
-// Use decodeResponse of inner obj when decoding types like:
-//  invokeWithLayer#da9b0d0d {X:Type} layer:int query:!X = X;
-
 type Flag struct {
 	fieldName string
 	bit       int
@@ -61,6 +56,15 @@ func (c Combinator) flagIsUsed(flagFieldName string) bool {
 		}
 	}
 	return false
+}
+
+func (c Combinator) findFieldWithType(typeName string) (*Field, bool) {
+	for _, t := range c.fields {
+		if t.typeName == typeName || t.typeName == "!"+typeName {
+			return &t, true
+		}
+	}
+	return nil, false
 }
 
 func (c Combinator) crcName() string {
@@ -112,17 +116,11 @@ func capitalizeWithInitialisms(items []string) {
 		}
 	}
 
-	prevMapped := false
 	for i, item := range items {
 		if s, ok := initialismStylesMap[strings.ToLower(item)]; ok {
-			if prevMapped {
-				fmt.Println(items)
-			}
 			items[i] = s
-			prevMapped = true
 		} else {
 			items[i] = strings.ToTitle(string(item[0])) + item[1:] //not corect in general, but should work for latin
-			prevMapped = false
 		}
 	}
 }
@@ -143,7 +141,7 @@ func normalize(s string) string {
 	bytes := []byte(name)
 	startI := 0
 	hasNonUpper := false
-	for i, c := range bytes {
+	for i, c := range bytes { //not corect in general, but should work for latin
 		if c == '_' {
 			if i-startI == 1 && len(items) > 0 && len(items[len(items)-1]) == 1 {
 				items[len(items)-1] += string(bytes[startI:i]) //p_q_smth -> [pq smth]
@@ -385,7 +383,7 @@ var simpleFieldTypeMap = map[string]FieldType{
 		EncDec: "VectorBytes",
 	},
 	"!X": {
-		GoType: "TL",
+		GoType: "TLReq",
 		EncDec: "Object",
 	},
 }
@@ -440,11 +438,16 @@ import (
 	for _, c := range combinators {
 		if c.isFunction {
 			innerTypeName, _, _ := parseVectorType(c.typeName)
-			constructorIDs := findConstructorIDs(combinators, innerTypeName)
-			if len(constructorIDs) == 0 && !slices.Contains([]string{"X", "int", "long"}, innerTypeName) {
-				log.Printf("WARN: no constructors for type %s", innerTypeName)
+
+			if dependentField, ok := c.findFieldWithType(innerTypeName); ok && innerTypeName == "X" {
+				write("// Returns response to %s\n", normalizeFieldName(dependentField.name))
+			} else {
+				constructorIDs := findConstructorIDs(combinators, innerTypeName)
+				if len(constructorIDs) == 0 && !slices.Contains([]string{"int", "long"}, innerTypeName) {
+					log.Printf("WARN: no constructors for type %s", innerTypeName)
+				}
+				write("// Returns %s: %s\n", c.typeName, strings.Join(constructorIDs, " | "))
 			}
-			write("// Returns %s: %s\n", c.typeName, strings.Join(constructorIDs, " | "))
 		} else {
 			write("// Constructs %s\n", c.typeName)
 		}
@@ -552,19 +555,28 @@ import (
 		write("}\n\n")
 	}
 
-	// request decode funcs (for funtions)
+	// request functions response decoders
 	for _, c := range combinators {
 		if c.isFunction {
 			write("func (e %s) decodeResponse(dbuf *DecodeBuf) TL {\n", c.structName())
-			if c.typeName == "Vector<int>" {
-				write("return VectorInt(dbuf.VectorInt())\n")
-			} else if c.typeName == "Vector<long>" {
-				write("return VectorLong(dbuf.VectorLong())\n")
-			} else if strings.HasPrefix(c.typeName, "Vector<") {
-				write("return VectorObject(dbuf.Vector())\n")
+
+			innerTypeName, vecNesting, _ := parseVectorType(c.typeName)
+			if vecNesting == 0 {
+				if dependentField, ok := c.findFieldWithType(innerTypeName); ok && innerTypeName == "X" {
+					write("return e.%s.decodeResponse(dbuf)\n", normalizeFieldName(dependentField.name))
+				} else {
+					write("return dbuf.Object()\n")
+				}
+			} else if vecNesting == 1 {
+				if mapped, ok := simpleFieldTypeMap[c.typeName]; ok {
+					write("return %s(dbuf.%s())\n", mapped.EncDec, mapped.EncDec)
+				} else {
+					write("return VectorObject(dbuf.Vector())\n")
+				}
 			} else {
-				write("return dbuf.Object()\n")
+				panic(fmt.Sprintf("nested vectors in return types are not supported (%s)", c.id))
 			}
+
 			write("}\n\n")
 		}
 	}
@@ -576,6 +588,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	switch constructor {`)
 
 	for _, c := range combinators {
+		if c.isFunction {
+			continue //no need to generate RPC responses encoding
+		}
+
 		write("case %s:\n", c.crcName())
 		write("tl := %s{}\n", c.structName())
 		for _, t := range c.fields {
