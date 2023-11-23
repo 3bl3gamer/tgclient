@@ -27,12 +27,12 @@ func NewTGClient(appID int32, appHash string, logHnd mtproto.LogHandler) *TGClie
 	var exPath string
 	ex, err := os.Executable()
 	if err != nil {
-		mtproto.Logger{logHnd}.Error(err, "failed to get executable file path")
+		mtproto.Logger{Hnd: logHnd}.Error(err, "failed to get executable file path")
 		exPath = "."
 	} else {
 		exPath = filepath.Dir(ex)
 	}
-	sessStore := &mtproto.SessFileStore{exPath + "/tg.session"}
+	sessStore := &mtproto.SessFileStore{FPath: exPath + "/tg.session"}
 
 	cfg := &mtproto.AppConfig{
 		AppID:          appID,
@@ -58,7 +58,7 @@ func NewTGClientExt(cfg *mtproto.AppConfig, sessStore mtproto.SessionStore, logH
 	client := &TGClient{
 		mt:           mt,
 		updatesState: &mtproto.TL_updates_state{},
-		log:          mtproto.Logger{logHnd},
+		log:          mtproto.Logger{Hnd: logHnd},
 	}
 	client.extraData = *newExtraData(client)
 
@@ -101,12 +101,12 @@ func (c *TGClient) handleEvent(eventObj mtproto.TL) {
 		}
 	case mtproto.TL_updateShortMessage:
 		c.updatesState.Date = event.Date
-		c.updatesState.Pts = event.Pts
+		c.updatesState.PTS = event.PTS
 		// update.PtsCount
 		c.handleUpdate(event)
 	case mtproto.TL_updateShortChatMessage:
 		c.updatesState.Date = event.Date
-		c.updatesState.Pts = event.Pts
+		c.updatesState.PTS = event.PTS
 		// update.PtsCount
 		c.handleUpdate(event)
 	case mtproto.TL_updatesCombined:
@@ -119,7 +119,7 @@ func (c *TGClient) handleEvent(eventObj mtproto.TL) {
 			c.handleUpdate(u)
 		}
 	case mtproto.TL_updateShortSentMessage:
-		c.updatesState.Pts = event.Pts
+		c.updatesState.PTS = event.PTS
 		// update.PtsCount
 		c.handleUpdate(event)
 	default:
@@ -130,7 +130,7 @@ func (c *TGClient) handleEvent(eventObj mtproto.TL) {
 func (e *TGClient) handleUpdate(obj mtproto.TL) {
 	value := reflect.ValueOf(obj).FieldByName("Pts")
 	if value != (reflect.Value{}) {
-		e.updatesState.Pts = int32(value.Int())
+		e.updatesState.PTS = int32(value.Int())
 	}
 	if e.handleUpdateExternal != nil {
 		e.handleUpdateExternal(obj)

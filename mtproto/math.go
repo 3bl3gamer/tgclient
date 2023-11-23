@@ -265,7 +265,7 @@ func doAES256IGEdecrypt(data, key, iv []byte) ([]byte, error) {
 }
 
 func calcInputCheckPasswordSRP(
-	algo TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow,
+	algo TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow,
 	accPassword TL_account_password,
 	password string,
 	randFunc func([]byte) (int, error),

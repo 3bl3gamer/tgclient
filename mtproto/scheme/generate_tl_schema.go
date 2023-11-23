@@ -63,6 +63,10 @@ func (c Combinator) flagIsUsed(flagFieldName string) bool {
 	return false
 }
 
+func (c Combinator) crcName() string {
+	return "CRC_" + normalize(c.id)
+}
+
 func (c Combinator) structName() string {
 	return "TL_" + normalize(c.id)
 }
@@ -86,18 +90,84 @@ func parseVectorType(typeName string) (string, int, bool) {
 	return typeName, nesting, nesting > 0
 }
 
-func normalize(s string) string {
-	x := []byte(s)
-	for i, r := range x {
-		if r == '.' {
-			x[i] = '_'
+// https://github.com/golang/go/wiki/CodeReviewComments#initialisms
+// https://google.github.io/styleguide/go/decisions.html#initialisms
+var initialismStyles = []string{
+	"DC", "DH", "ID", "IP", "IV", "MS", "OK", "PM", "PQ", "TS", "UI",
+
+	"ACK", "API", "CDN", "GIF", "IDs", "IOS", "IPs", "KDF", "MD5", "MOV", "MP3", "MP4",
+	"P2P", "PDF", "PIN", "PNG", "PSA", "PTS", "QTS", "RPC", "RTL", "SMS",
+	"TCP", "TLS", "TTL", "TXT", "UDP", "URL",
+
+	"GIFs", "HTML", "HTTP", "IPv4", "IPv6", "ISO2", "JPEG", "JSON",
+	"MIME", "RTMP", "STUN", "TCPO", "UIDs", "URLs", "WEBP",
+}
+var initialismStylesMap map[string]string
+
+func capitalizeWithInitialisms(items []string) {
+	if initialismStylesMap == nil {
+		initialismStylesMap = make(map[string]string)
+		for _, init := range initialismStyles {
+			initialismStylesMap[strings.ToLower(init)] = init
 		}
 	}
-	y := string(x)
-	if y == "type" {
-		return "_type"
+
+	prevMapped := false
+	for i, item := range items {
+		if s, ok := initialismStylesMap[strings.ToLower(item)]; ok {
+			if prevMapped {
+				fmt.Println(items)
+			}
+			items[i] = s
+			prevMapped = true
+		} else {
+			items[i] = strings.ToTitle(string(item[0])) + item[1:] //not corect in general, but should work for latin
+			prevMapped = false
+		}
 	}
-	return y
+}
+
+func isCap(c byte) bool {
+	return c >= 'A' && c <= 'Z'
+}
+func normalize(s string) string {
+	prefix := ""
+	name := s
+	dotIndex := strings.Index(s, ".")
+	if dotIndex != -1 {
+		prefix = s[:dotIndex] + "_"
+		name = s[dotIndex+1:]
+	}
+
+	var items []string
+	bytes := []byte(name)
+	startI := 0
+	hasNonUpper := false
+	for i, c := range bytes {
+		if c == '_' {
+			if i-startI == 1 && len(items) > 0 && len(items[len(items)-1]) == 1 {
+				items[len(items)-1] += string(bytes[startI:i]) //p_q_smth -> [pq smth]
+			} else {
+				items = append(items, string(bytes[startI:i])) //snake_case -> [snake case]
+			}
+			startI = i + 1
+			hasNonUpper = false
+		} else if isCap(c) {
+			if hasNonUpper || //...SmthX... -> [... Smth X...]
+				i-startI >= 2 && i < len(bytes)-1 && !isCap(bytes[i+1]) { //TCPTo -> [TCP To]
+				items = append(items, string(bytes[startI:i]))
+				startI = i
+				hasNonUpper = false
+			}
+		} else {
+			hasNonUpper = true
+		}
+	}
+	items = append(items, string(bytes[startI:]))
+
+	capitalizeWithInitialisms(items[1:])
+	name = strings.Join(items, "")
+	return prefix + name
 }
 
 func normalizeName(nameStr string) uint32 {
@@ -115,13 +185,9 @@ func normalizeName(nameStr string) uint32 {
 }
 
 func normalizeFieldName(s string) string {
-	s = strings.Replace(s, "_", " ", -1)
-	s = strings.Title(s)
-	s = strings.Replace(s, " ", "", -1)
-	if strings.HasSuffix(s, "Id") {
-		s = s[:len(s)-2] + "ID"
-	}
-	return s
+	items := strings.Split(s, "_")
+	capitalizeWithInitialisms(items)
+	return strings.Join(items, "")
 }
 
 func makeField(name, typeName string, knownFields []Field) Field {
@@ -366,7 +432,7 @@ import (
 	write("const (\n")
 	write("TL_Layer = %d\n", layer)
 	for _, c := range combinators {
-		write("CRC_%s = 0x%08x\n", normalize(c.id), c.name)
+		write("%s = 0x%08x\n", c.crcName(), c.name)
 	}
 	write(")\n\n")
 
@@ -434,7 +500,7 @@ import (
 
 	// encode funcs
 	for _, c := range combinators {
-		write("func (e TL_%s) encode() []byte {\n", normalize(c.id))
+		write("func (e %s) encode() []byte {\n", c.structName())
 
 		// filling flag values
 		flagNames := c.flagFieldNames()
@@ -450,7 +516,7 @@ import (
 
 		// encoding attributes
 		write("x := NewEncodeBuf(512)\n")
-		write("x.UInt(CRC_%s)\n", normalize(c.id))
+		write("x.UInt(%s)\n", c.crcName())
 		for _, t := range c.fields {
 			fieldName := normalizeFieldName(t.name)
 			if t.flag != nil && t.typeName != "true" {
@@ -489,7 +555,7 @@ import (
 	// request decode funcs (for funtions)
 	for _, c := range combinators {
 		if c.isFunction {
-			write("func (e TL_%s) decodeResponse(dbuf *DecodeBuf) TL {\n", normalize(c.id))
+			write("func (e %s) decodeResponse(dbuf *DecodeBuf) TL {\n", c.structName())
 			if c.typeName == "Vector<int>" {
 				write("return VectorInt(dbuf.VectorInt())\n")
 			} else if c.typeName == "Vector<long>" {
@@ -510,8 +576,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	switch constructor {`)
 
 	for _, c := range combinators {
-		write("case CRC_%s:\n", normalize(c.id))
-		write("tl := TL_%s{}\n", normalize(c.id))
+		write("case %s:\n", c.crcName())
+		write("tl := %s{}\n", c.structName())
 		for _, t := range c.fields {
 			fieldName := normalizeFieldName(t.name)
 			if t.flag != nil && t.typeName != "true" {

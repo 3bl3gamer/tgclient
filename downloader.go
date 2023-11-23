@@ -218,9 +218,9 @@ func (d *Downloader) partsDownloadRoutine() {
 		switch res := resTL.(type) {
 		case mtproto.TL_upload_file:
 			fileResp.Data = res.Bytes
-		case mtproto.TL_upload_fileCdnRedirect:
+		case mtproto.TL_upload_fileCDNRedirect:
 			fileResp.Err = merry.New("cdn redirect: " + mtproto.Sprint(res))
-		case mtproto.TL_rpc_error:
+		case mtproto.TL_rpcError:
 			if strings.HasPrefix(res.ErrorMessage, "FILE_MIGRATE_") {
 				d.log.Warn("got %s, part DC is %d", res.ErrorMessage, part.dcID)
 				id, _ := strconv.Atoi(res.ErrorMessage[13:])

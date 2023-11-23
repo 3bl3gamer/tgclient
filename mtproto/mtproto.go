@@ -215,8 +215,8 @@ func (m *MTProto) SaveSessionLogged() {
 
 func (m *MTProto) DCAddr(dcID int32, ipv6 bool) (string, bool) {
 	for _, o := range m.dcOptions {
-		if o.ID == dcID && o.Ipv6 == ipv6 && !o.Cdn {
-			return fmt.Sprintf("%s:%d", o.IpAddress, o.Port), true
+		if o.ID == dcID && o.IPv6 == ipv6 && !o.CDN {
+			return fmt.Sprintf("%s:%d", o.IPAddress, o.Port), true
 		}
 	}
 	return "", false
@@ -258,7 +258,7 @@ func (m *MTProto) initConection() error {
 	x, err := m.sendAndReadDirect(TL_invokeWithLayer{
 		TL_Layer,
 		TL_initConnection{
-			ApiID:          m.appCfg.AppID,
+			APIID:          m.appCfg.AppID,
 			DeviceModel:    m.appCfg.DeviceModel,
 			SystemVersion:  m.appCfg.SystemVersion,
 			AppVersion:     m.appCfg.AppVersion,
@@ -272,8 +272,8 @@ func (m *MTProto) initConection() error {
 		return merry.Wrap(err)
 	}
 	if cfg, ok := x.(TL_config); ok {
-		m.session.DcID = cfg.ThisDc
-		for _, option := range cfg.DcOptions {
+		m.session.DcID = cfg.ThisDC
+		for _, option := range cfg.DCOptions {
 			m.dcOptions = append(m.dcOptions, &option)
 		}
 	} else {
@@ -478,7 +478,7 @@ func (m *MTProto) NewConnection(dcID int32) (*MTProto, error) {
 	}
 
 	if !isOnSameDC {
-		res := m.SendSync(TL_auth_exportAuthorization{DcID: dcID})
+		res := m.SendSync(TL_auth_exportAuthorization{DCID: dcID})
 		exported, ok := res.(TL_auth_exportedAuthorization)
 		if !ok {
 			return nil, merry.New(UnexpectedTL("auth export", res))
@@ -640,15 +640,15 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	for flag {
 		x := m.SendSync(TL_auth_sendCode{
 			PhoneNumber: phonenumber,
-			ApiID:       m.appCfg.AppID,
-			ApiHash:     m.appCfg.AppHash,
+			APIID:       m.appCfg.AppID,
+			APIHash:     m.appCfg.AppHash,
 			Settings:    TL_codeSettings{CurrentNumber: true},
 		})
 		switch x := x.(type) {
 		case TL_auth_sentCode:
 			authSentCode = x
 			flag = false
-		case TL_rpc_error:
+		case TL_rpcError:
 			if x.ErrorCode != TL_ErrSeeOther {
 				return WrongRespError(x)
 			}
@@ -697,7 +697,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 			return merry.Wrap(err)
 		}
 
-		algo, ok := accPasswd.CurrentAlgo.(TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow)
+		algo, ok := accPasswd.CurrentAlgo.(TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow)
 		if !ok {
 			return merry.Errorf("unknown password algo %T, application update is maybe needed to log in",
 				accPasswd.CurrentAlgo)
@@ -707,7 +707,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 			return merry.Wrap(err)
 		}
 		x = m.SendSync(TL_auth_checkPassword{passwdSRP})
-		if _, ok := x.(TL_rpc_error); ok {
+		if _, ok := x.(TL_rpcError); ok {
 			return WrongRespError(x)
 		}
 	}
@@ -957,18 +957,18 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 			m.process(v.MsgID, v.SeqNo, v.Data, true)
 		}
 
-	case TL_bad_server_salt:
+	case TL_badServerSalt:
 		m.session.ServerSalt = data.NewServerSalt
 		m.SaveSessionLogged()
 		m.resendPendingPackets()
 
-	case TL_bad_msg_notification:
+	case TL_badMsgNotification:
 		m.respAndClearPacketData(data.BadMsgID, data)
 
-	case TL_msgs_state_info:
+	case TL_msgsStateInfo:
 		m.respAndClearPacketData(data.ReqMsgID, data)
 
-	case TL_new_session_created:
+	case TL_newSessionCreated:
 		m.session.ServerSalt = data.ServerSalt
 		m.SaveSessionLogged()
 
@@ -978,9 +978,9 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 	case TL_pong:
 		// (ignore) TODO
 
-	case TL_msgs_ack:
+	case TL_msgsACK:
 		m.mutex.Lock()
-		for _, id := range data.MsgIds {
+		for _, id := range data.MsgIDs {
 			packet, ok := m.msgsByID[id]
 			if ok {
 				packet.needAck = false
@@ -1004,6 +1004,6 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 
 	// should acknowledge odd ids
 	if (seqNo & 1) == 1 {
-		m.sendQueue <- newPacket(TL_msgs_ack{[]int64{msgId}}, nil)
+		m.sendQueue <- newPacket(TL_msgsACK{[]int64{msgId}}, nil)
 	}
 }

@@ -52,14 +52,14 @@ func TestDoAES256IGEdecrypt(t *testing.T) {
 func TestCalcInputCheckPasswordSRP(t *testing.T) {
 	dummyDebugFunc := func(msg string, args ...interface{}) {}
 	tests := []struct {
-		algo        TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
+		algo        TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
 		accPassword TL_account_password
 		password    string
 		rand        []byte
 		dest        TL_inputCheckPasswordSRP
 	}{{
 		// tNum becomes positive
-		algo: TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{
+		algo: TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{
 			Salt1: hex2bytes("b6cb41e42a56054eb2e8320e30b215c0"),
 			Salt2: hex2bytes("f7951e1b4ac1d1ff6722d4adf1941577"),
 			G:     3,
@@ -78,7 +78,7 @@ func TestCalcInputCheckPasswordSRP(t *testing.T) {
 		},
 	}, {
 		// tNum becomes negative
-		algo: TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{
+		algo: TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{
 			Salt1: hex2bytes("b6cb41e42a56054eb2e8320e30b215c0"),
 			Salt2: hex2bytes("f7951e1b4ac1d1ff6722d4adf1941577"),
 			G:     3,
