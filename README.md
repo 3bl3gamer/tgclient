@@ -1,3 +1,5 @@
+**Attention!** v0.166.2 has some important changes, [check them out](https://github.com/3bl3gamer/tgclient/releases/tag/v0.166.2).
+
 # TG Client
 
 It is a pure-Golang MTProto client for Telegram API.
@@ -13,7 +15,7 @@ Consists of two parts:
 
 ## How to use it
 
-You may use [tg-history-dumper](https://github.com/3bl3gamer/tg-history-dumper) repo as an example, in particular this file: https://github.com/3bl3gamer/tg-history-dumper/blob/master/tg.go#L89
+You may use [tg-history-dumper](https://github.com/3bl3gamer/tg-history-dumper) repo as an example, in particular this file: https://github.com/3bl3gamer/tg-history-dumper/blob/master/tg.go#L67
 
 ### Create
 
