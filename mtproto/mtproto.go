@@ -24,7 +24,7 @@ import (
 const ROUTINES_COUNT = 5
 
 type SessionInfo struct {
-	DcID        int32  `json:"dc_id"`
+	DCID        int32  `json:"dc_id"`
 	AuthKey     []byte `json:"auth_key"`
 	AuthKeyHash []byte `json:"auth_key_hash"`
 	ServerSalt  int64  `json:"server_salt"`
@@ -75,7 +75,7 @@ type MTProto struct {
 	handleEvent        func(TL)
 	handleReconnection func() error
 
-	dcOptions []*TL_dcOption
+	dcOptions []TL_dcOption
 }
 
 type packetReceived struct {
@@ -231,7 +231,7 @@ func (m *MTProto) SetReconnectionHandler(handler func() error) {
 }
 
 func (m *MTProto) initConection() error {
-	m.log.Info("connecting to DC %d (%s)...", m.session.DcID, m.session.Addr)
+	m.log.Info("connecting to DC %d (%s)...", m.session.DCID, m.session.Addr)
 	var err error
 	m.conn, err = m.connDialer.Dial("tcp", m.session.Addr)
 	if err != nil {
@@ -272,10 +272,8 @@ func (m *MTProto) initConection() error {
 		return merry.Wrap(err)
 	}
 	if cfg, ok := x.(TL_config); ok {
-		m.session.DcID = cfg.ThisDC
-		for _, option := range cfg.DCOptions {
-			m.dcOptions = append(m.dcOptions, &option)
-		}
+		m.session.DCID = cfg.ThisDC
+		m.dcOptions = cfg.DCOptions
 	} else {
 		return WrongRespError(x)
 	}
@@ -311,7 +309,7 @@ func (m *MTProto) Connect() error {
 	go m.pingRoutine()          // starting keepalive pinging
 	go m.debugRoutine()
 
-	m.log.Info("connected to DC %d (%s)...", m.session.DcID, m.session.Addr)
+	m.log.Info("connected to DC %d (%s)...", m.session.DCID, m.session.Addr)
 	return nil
 }
 
@@ -387,7 +385,7 @@ func (m *MTProto) reconnectLogged() {
 }
 
 func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
-	m.log.Info("reconnecting: DC %d -> %d", m.session.DcID, newDcID)
+	m.log.Info("reconnecting: DC %d -> %d", m.session.DCID, newDcID)
 
 	if err := m.disconnect(false); err != nil {
 		return merry.Wrap(err)
@@ -405,7 +403,7 @@ func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
 
 	if newDcID != 0 {
 		// renewing connection
-		if newDcID != m.session.DcID {
+		if newDcID != m.session.DCID {
 			m.encryptionReady = false //TODO: export auth here (if authed)
 			//https://github.com/sochix/TLSharp/blob/0940d3d982e9c22adac96b6c81a435403802899a/TLSharp.Core/TelegramClient.cs#L84
 		}
@@ -413,7 +411,7 @@ func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
 		if !ok {
 			return merry.Errorf("wrong DC number: %d", newDcID)
 		}
-		m.session.DcID = newDcID
+		m.session.DCID = newDcID
 		m.session.Addr = newDcAddr
 	}
 
@@ -440,7 +438,7 @@ func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
 		m.mutex.Unlock()
 	}
 
-	m.log.Info("reconnected to DC %d (%s)", m.session.DcID, m.session.Addr)
+	m.log.Info("reconnected to DC %d (%s)", m.session.DCID, m.session.Addr)
 
 	if mayPassToHandler && m.handleReconnection != nil {
 		if err := m.handleReconnection(); err != nil {
@@ -453,13 +451,14 @@ func (m *MTProto) reconnect(newDcID int32, mayPassToHandler bool) error {
 
 func (m *MTProto) NewConnection(dcID int32) (*MTProto, error) {
 	session := m.CopySession()
-	m.log.Info("making new connection to DC %d (current: %d)", dcID, session.DcID)
-	isOnSameDC := session.DcID == dcID
+	m.log.Info("making new connection to DC %d (current: %d)", dcID, session.DCID)
+	isOnSameDC := session.DCID == dcID
 	encrIsReady := isOnSameDC
-	session.DcID = dcID
+	session.DCID = dcID
 	var ok bool
 	session.Addr, ok = m.DCAddr(dcID, false)
 	if !ok {
+		fmt.Printf("%#v\n", m.dcOptions)
 		return nil, merry.Errorf("unable find address for DC #%d", dcID)
 	}
 
@@ -952,7 +951,7 @@ func (m *MTProto) respAndClearPacketData(msgID int64, response TL) {
 
 func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler bool) {
 	switch data := dataTL.(type) {
-	case TL_msg_container:
+	case TL_msgContainer:
 		for _, v := range data.Items {
 			m.process(v.MsgID, v.SeqNo, v.Data, true)
 		}
@@ -992,7 +991,7 @@ func (m *MTProto) process(msgId int64, seqNo int32, dataTL TL, mayPassToHandler 
 		}
 		m.mutex.Unlock()
 
-	case TL_rpc_result:
+	case TL_rpcResult:
 		m.process(msgId, 0, data.obj, false)
 		m.respAndClearPacketData(data.reqMsgID, data.obj)
 

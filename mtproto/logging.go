@@ -62,13 +62,13 @@ func (h SimpleLogHandler) AddLevelPrevix(level LogLevel, text string) string {
 func (h SimpleLogHandler) StringifyMessage(isIncoming bool, msg TL, id int64) string {
 	var text string
 	switch x := msg.(type) {
-	case TL_msg_container:
+	case TL_msgContainer:
 		names := make([]string, len(x.Items))
 		for i, item := range x.Items {
 			names[i] = h.TLName(item)
 		}
 		text = h.TLName(x) + " -> [" + strings.Join(names, ", ") + "]"
-	case TL_rpc_result:
+	case TL_rpcResult:
 		text = h.TLName(x) + " -> " + h.TLName(x.obj)
 	default:
 		text = h.TLName(x)

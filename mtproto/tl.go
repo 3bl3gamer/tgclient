@@ -9,25 +9,25 @@ type TLReq interface {
 	decodeResponse(*DecodeBuf) TL
 }
 
-type TL_msg_container struct {
-	Items []TL_MT_message
+type TL_msgContainer struct {
+	Items []TL_mtMessage
 }
 
-func (e TL_msg_container) encode() []byte { return nil }
+func (e TL_msgContainer) encode() []byte { return nil }
 
-type TL_MT_message struct {
+type TL_mtMessage struct {
 	MsgID int64
 	SeqNo int32
 	Size  int32
 	Data  TL
 }
 
-type TL_rpc_result struct {
+type TL_rpcResult struct {
 	reqMsgID int64
 	obj      TL
 }
 
-func (e TL_rpc_result) encode() []byte { return nil }
+func (e TL_rpcResult) encode() []byte { return nil }
 
 type VectorInt []int32
 

@@ -436,14 +436,14 @@ func (m *MTProto) decodeMessage(dbuf *DecodeBuf, reqMsg TLReq) (r TL) {
 	switch constructor {
 	case CRC_msg_container:
 		size := dbuf.Int()
-		arr := make([]TL_MT_message, size)
+		arr := make([]TL_mtMessage, size)
 		for i := int32(0); i < size; i++ {
-			arr[i] = TL_MT_message{dbuf.Long(), dbuf.Int(), dbuf.Int(), m.decodeMessage(dbuf, reqMsg)}
+			arr[i] = TL_mtMessage{dbuf.Long(), dbuf.Int(), dbuf.Int(), m.decodeMessage(dbuf, reqMsg)}
 			if dbuf.err != nil {
 				return nil
 			}
 		}
-		r = TL_msg_container{arr}
+		r = TL_msgContainer{arr}
 
 	case CRC_rpc_result:
 		requestID := dbuf.Long()
@@ -462,7 +462,7 @@ func (m *MTProto) decodeMessage(dbuf *DecodeBuf, reqMsg TLReq) (r TL) {
 			r = m.decodeMessage(dbuf, nil)
 			m.log.Warn("got RPC result (%T) for unknown message #%d", r, requestID)
 		}
-		r = TL_rpc_result{requestID, r}
+		r = TL_rpcResult{requestID, r}
 
 	case CRC_gzip_packed:
 		obj := make([]byte, 0, 4096)

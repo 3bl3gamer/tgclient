@@ -183,6 +183,8 @@ func normalizeName(nameStr string) uint32 {
 }
 
 func normalizeFieldName(s string) string {
+	// TODO: maybe fix capitals in:
+	//   antispam botnochats noforwards noforwards nopremium nosound nosoundvideo stickerset wallpaper webpage
 	items := strings.Split(s, "_")
 	capitalizeWithInitialisms(items)
 	return strings.Join(items, "")
