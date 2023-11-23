@@ -683,7 +683,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	x := m.SendSync(TL_auth_signIn{
 		PhoneNumber:       phonenumber,
 		PhoneCodeHash:     authSentCode.PhoneCodeHash,
-		PhoneCode:         Some(code),
+		PhoneCode:         Ref(code),
 		EmailVerification: nil,
 	})
 	if IsError(x, "SESSION_PASSWORD_NEEDED") {
@@ -717,7 +717,7 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 		return merry.Errorf("RPC: %#v", x)
 	}
 	userSelf := auth.User.(TL_user)
-	m.log.Info("Signed in: id %d name <%s %s>\n", userSelf.ID, userSelf.FirstName.Value, userSelf.LastName.Value)
+	m.log.Info("Signed in: id %d name <%s %s>\n", userSelf.ID, DerefOr(userSelf.FirstName, ""), DerefOr(userSelf.LastName, ""))
 	return nil
 }
 
@@ -784,8 +784,8 @@ func (m *MTProto) GetContacts() error {
 			"%10d    %10t    %-30s    %-20s\n",
 			v.UserID,
 			v.Mutual,
-			fmt.Sprintf("%s %s", contacts[v.UserID].FirstName.Value, contacts[v.UserID].LastName.Value),
-			contacts[v.UserID].Username.Value,
+			fmt.Sprintf("%s %s", DerefOr(contacts[v.UserID].FirstName, ""), DerefOr(contacts[v.UserID].LastName, "")),
+			DerefOr(contacts[v.UserID].Username, "---"),
 		)
 	}
 

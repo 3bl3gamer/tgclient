@@ -328,9 +328,6 @@ func flaggedValueCheck(typeName, varName string) string {
 	if typeName == "true" {
 		return varName
 	}
-	if mapped, ok := simpleFieldTypeMap[typeName]; ok && mapped.UseOpt {
-		return varName + ".IsSet"
-	}
 	return varName + " != nil"
 }
 
@@ -400,7 +397,7 @@ import (
 			} else if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
 				type_ := mapped.GoType
 				if mapped.UseOpt && t.flag != nil {
-					type_ = "Option[" + type_ + "]"
+					type_ = "*" + type_
 				}
 				write("%s", type_)
 			} else {
@@ -457,11 +454,11 @@ import (
 			} else if t.typeName == "true" {
 				//
 			} else if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
-				valuePath := fieldName
+				valuePath := "e." + fieldName
 				if mapped.UseOpt && t.flag != nil {
-					valuePath += ".Value"
+					valuePath = "*" + valuePath
 				}
-				write("x.%s(e.%s)\n", mapped.EncDec, valuePath)
+				write("x.%s(%s)\n", mapped.EncDec, valuePath)
 			} else {
 				_, vecNesting, _ := parseVectorType(t.typeName)
 				if vecNesting == 1 {
@@ -524,7 +521,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			} else if mapped, ok := simpleFieldTypeMap[t.typeName]; ok {
 				val := fmt.Sprintf("m.%s()", mapped.EncDec)
 				if mapped.UseOpt && t.flag != nil {
-					val = "Some(" + val + ")"
+					val = "Ref(" + val + ")"
 				}
 				write("tl.%s = %s\n", fieldName, val)
 			} else {

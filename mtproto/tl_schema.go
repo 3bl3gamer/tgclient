@@ -2277,16 +2277,16 @@ type TL_inputMediaEmpty struct {
 // Constructs InputMedia
 type TL_inputMediaUploadedPhoto struct {
 	Spoiler    bool
-	File       TL            // InputFile: TL_inputFile | TL_inputFileBig
-	Stickers   []TL          // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	TtlSeconds Option[int32] // (optional)
+	File       TL     // InputFile: TL_inputFile | TL_inputFileBig
+	Stickers   []TL   // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	TtlSeconds *int32 // (optional)
 }
 
 // Constructs InputMedia
 type TL_inputMediaPhoto struct {
 	Spoiler    bool
-	ID         TL            // InputPhoto: TL_inputPhotoEmpty | TL_inputPhoto
-	TtlSeconds Option[int32] // (optional)
+	ID         TL     // InputPhoto: TL_inputPhotoEmpty | TL_inputPhoto
+	TtlSeconds *int32 // (optional)
 }
 
 // Constructs InputMedia
@@ -2310,17 +2310,17 @@ type TL_inputMediaUploadedDocument struct {
 	File         TL // InputFile: TL_inputFile | TL_inputFileBig
 	Thumb        TL // (optional) InputFile: TL_inputFile | TL_inputFileBig
 	MimeType     string
-	Attributes   []TL          // DocumentAttribute: TL_documentAttributeImageSize | TL_documentAttributeAnimated | TL_documentAttributeSticker | TL_documentAttributeVideo | TL_documentAttributeAudio | TL_documentAttributeFilename | TL_documentAttributeHasStickers | TL_documentAttributeCustomEmoji
-	Stickers     []TL          // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	TtlSeconds   Option[int32] // (optional)
+	Attributes   []TL   // DocumentAttribute: TL_documentAttributeImageSize | TL_documentAttributeAnimated | TL_documentAttributeSticker | TL_documentAttributeVideo | TL_documentAttributeAudio | TL_documentAttributeFilename | TL_documentAttributeHasStickers | TL_documentAttributeCustomEmoji
+	Stickers     []TL   // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	TtlSeconds   *int32 // (optional)
 }
 
 // Constructs InputMedia
 type TL_inputMediaDocument struct {
 	Spoiler    bool
-	ID         TL             // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	TtlSeconds Option[int32]  // (optional)
-	Query      Option[string] // (optional)
+	ID         TL      // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	TtlSeconds *int32  // (optional)
+	Query      *string // (optional)
 }
 
 // Constructs InputMedia
@@ -2337,14 +2337,14 @@ type TL_inputMediaVenue struct {
 type TL_inputMediaPhotoExternal struct {
 	Spoiler    bool
 	Url        string
-	TtlSeconds Option[int32] // (optional)
+	TtlSeconds *int32 // (optional)
 }
 
 // Constructs InputMedia
 type TL_inputMediaDocumentExternal struct {
 	Spoiler    bool
 	Url        string
-	TtlSeconds Option[int32] // (optional)
+	TtlSeconds *int32 // (optional)
 }
 
 // Constructs InputMedia
@@ -2360,26 +2360,26 @@ type TL_inputMediaInvoice struct {
 	Invoice       TL // Invoice: TL_invoice
 	Payload       []byte
 	Provider      string
-	ProviderData  TL             // DataJSON: TL_dataJSON
-	StartParam    Option[string] // (optional)
-	ExtendedMedia TL             // (optional) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
+	ProviderData  TL      // DataJSON: TL_dataJSON
+	StartParam    *string // (optional)
+	ExtendedMedia TL      // (optional) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 }
 
 // Constructs InputMedia
 type TL_inputMediaGeoLive struct {
 	Stopped                     bool
-	GeoPoint                    TL            // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
-	Heading                     Option[int32] // (optional)
-	Period                      Option[int32] // (optional)
-	ProximityNotificationRadius Option[int32] // (optional)
+	GeoPoint                    TL     // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
+	Heading                     *int32 // (optional)
+	Period                      *int32 // (optional)
+	ProximityNotificationRadius *int32 // (optional)
 }
 
 // Constructs InputMedia
 type TL_inputMediaPoll struct {
-	Poll             TL             // Poll: TL_poll
-	CorrectAnswers   [][]byte       // (optional)
-	Solution         Option[string] // (optional)
-	SolutionEntities []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Poll             TL       // Poll: TL_poll
+	CorrectAnswers   [][]byte // (optional)
+	Solution         *string  // (optional)
+	SolutionEntities []TL     // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 // Constructs InputMedia
@@ -2407,10 +2407,10 @@ type TL_inputChatPhotoEmpty struct {
 
 // Constructs InputChatPhoto
 type TL_inputChatUploadedPhoto struct {
-	File             TL              // (optional) InputFile: TL_inputFile | TL_inputFileBig
-	Video            TL              // (optional) InputFile: TL_inputFile | TL_inputFileBig
-	VideoStartTs     Option[float64] // (optional)
-	VideoEmojiMarkup TL              // (optional) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
+	File             TL       // (optional) InputFile: TL_inputFile | TL_inputFileBig
+	Video            TL       // (optional) InputFile: TL_inputFile | TL_inputFileBig
+	VideoStartTs     *float64 // (optional)
+	VideoEmojiMarkup TL       // (optional) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
 }
 
 // Constructs InputChatPhoto
@@ -2426,7 +2426,7 @@ type TL_inputGeoPointEmpty struct {
 type TL_inputGeoPoint struct {
 	Lat            float64
 	Long           float64
-	AccuracyRadius Option[int32] // (optional)
+	AccuracyRadius *int32 // (optional)
 }
 
 // Constructs InputPhoto
@@ -2508,8 +2508,8 @@ type TL_inputGroupCallStream struct {
 	Call         TL // InputGroupCall: TL_inputGroupCall
 	TimeMs       int64
 	Scale        int32
-	VideoChannel Option[int32] // (optional)
-	VideoQuality Option[int32] // (optional)
+	VideoChannel *int32 // (optional)
+	VideoQuality *int32 // (optional)
 }
 
 // Constructs Peer
@@ -2597,22 +2597,22 @@ type TL_user struct {
 	StoriesHidden        bool
 	StoriesUnavailable   bool
 	ID                   int64
-	AccessHash           Option[int64]  // (optional)
-	FirstName            Option[string] // (optional)
-	LastName             Option[string] // (optional)
-	Username             Option[string] // (optional)
-	Phone                Option[string] // (optional)
-	Photo                TL             // (optional) UserProfilePhoto: TL_userProfilePhotoEmpty | TL_userProfilePhoto
-	Status               TL             // (optional) UserStatus: TL_userStatusEmpty | TL_userStatusOnline | TL_userStatusOffline | TL_userStatusRecently | TL_userStatusLastWeek | TL_userStatusLastMonth
-	BotInfoVersion       Option[int32]  // (optional)
-	RestrictionReason    []TL           // (optional) RestrictionReason: TL_restrictionReason
-	BotInlinePlaceholder Option[string] // (optional)
-	LangCode             Option[string] // (optional)
-	EmojiStatus          TL             // (optional) EmojiStatus: TL_emojiStatusEmpty | TL_emojiStatus | TL_emojiStatusUntil
-	Usernames            []TL           // (optional) Username: TL_username
-	StoriesMaxID         Option[int32]  // (optional)
-	Color                Option[int32]  // (optional)
-	BackgroundEmojiID    Option[int64]  // (optional)
+	AccessHash           *int64  // (optional)
+	FirstName            *string // (optional)
+	LastName             *string // (optional)
+	Username             *string // (optional)
+	Phone                *string // (optional)
+	Photo                TL      // (optional) UserProfilePhoto: TL_userProfilePhotoEmpty | TL_userProfilePhoto
+	Status               TL      // (optional) UserStatus: TL_userStatusEmpty | TL_userStatusOnline | TL_userStatusOffline | TL_userStatusRecently | TL_userStatusLastWeek | TL_userStatusLastMonth
+	BotInfoVersion       *int32  // (optional)
+	RestrictionReason    []TL    // (optional) RestrictionReason: TL_restrictionReason
+	BotInlinePlaceholder *string // (optional)
+	LangCode             *string // (optional)
+	EmojiStatus          TL      // (optional) EmojiStatus: TL_emojiStatusEmpty | TL_emojiStatus | TL_emojiStatusUntil
+	Usernames            []TL    // (optional) Username: TL_username
+	StoriesMaxID         *int32  // (optional)
+	Color                *int32  // (optional)
+	BackgroundEmojiID    *int64  // (optional)
 }
 
 // Constructs UserProfilePhoto
@@ -2710,20 +2710,20 @@ type TL_channel struct {
 	StoriesHiddenMin    bool
 	StoriesUnavailable  bool
 	ID                  int64
-	AccessHash          Option[int64] // (optional)
+	AccessHash          *int64 // (optional)
 	Title               string
-	Username            Option[string] // (optional)
-	Photo               TL             // ChatPhoto: TL_chatPhotoEmpty | TL_chatPhoto
+	Username            *string // (optional)
+	Photo               TL      // ChatPhoto: TL_chatPhotoEmpty | TL_chatPhoto
 	Date                int32
-	RestrictionReason   []TL          // (optional) RestrictionReason: TL_restrictionReason
-	AdminRights         TL            // (optional) ChatAdminRights: TL_chatAdminRights
-	BannedRights        TL            // (optional) ChatBannedRights: TL_chatBannedRights
-	DefaultBannedRights TL            // (optional) ChatBannedRights: TL_chatBannedRights
-	ParticipantsCount   Option[int32] // (optional)
-	Usernames           []TL          // (optional) Username: TL_username
-	StoriesMaxID        Option[int32] // (optional)
-	Color               Option[int32] // (optional)
-	BackgroundEmojiID   Option[int64] // (optional)
+	RestrictionReason   []TL   // (optional) RestrictionReason: TL_restrictionReason
+	AdminRights         TL     // (optional) ChatAdminRights: TL_chatAdminRights
+	BannedRights        TL     // (optional) ChatBannedRights: TL_chatBannedRights
+	DefaultBannedRights TL     // (optional) ChatBannedRights: TL_chatBannedRights
+	ParticipantsCount   *int32 // (optional)
+	Usernames           []TL   // (optional) Username: TL_username
+	StoriesMaxID        *int32 // (optional)
+	Color               *int32 // (optional)
+	BackgroundEmojiID   *int64 // (optional)
 }
 
 // Constructs Chat
@@ -2733,7 +2733,7 @@ type TL_channelForbidden struct {
 	ID         int64
 	AccessHash int64
 	Title      string
-	UntilDate  Option[int32] // (optional)
+	UntilDate  *int32 // (optional)
 }
 
 // Constructs ChatFull
@@ -2743,20 +2743,20 @@ type TL_chatFull struct {
 	TranslationsDisabled   bool
 	ID                     int64
 	About                  string
-	Participants           TL             // ChatParticipants: TL_chatParticipantsForbidden | TL_chatParticipants
-	ChatPhoto              TL             // (optional) Photo: TL_photoEmpty | TL_photo
-	NotifySettings         TL             // PeerNotifySettings: TL_peerNotifySettings
-	ExportedInvite         TL             // (optional) ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
-	BotInfo                []TL           // (optional) BotInfo: TL_botInfo
-	PinnedMsgID            Option[int32]  // (optional)
-	FolderID               Option[int32]  // (optional)
-	Call                   TL             // (optional) InputGroupCall: TL_inputGroupCall
-	TtlPeriod              Option[int32]  // (optional)
-	GroupcallDefaultJoinAs TL             // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	ThemeEmoticon          Option[string] // (optional)
-	RequestsPending        Option[int32]  // (optional)
-	RecentRequesters       []int64        // (optional)
-	AvailableReactions     TL             // (optional) ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
+	Participants           TL      // ChatParticipants: TL_chatParticipantsForbidden | TL_chatParticipants
+	ChatPhoto              TL      // (optional) Photo: TL_photoEmpty | TL_photo
+	NotifySettings         TL      // PeerNotifySettings: TL_peerNotifySettings
+	ExportedInvite         TL      // (optional) ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
+	BotInfo                []TL    // (optional) BotInfo: TL_botInfo
+	PinnedMsgID            *int32  // (optional)
+	FolderID               *int32  // (optional)
+	Call                   TL      // (optional) InputGroupCall: TL_inputGroupCall
+	TtlPeriod              *int32  // (optional)
+	GroupcallDefaultJoinAs TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	ThemeEmoticon          *string // (optional)
+	RequestsPending        *int32  // (optional)
+	RecentRequesters       []int64 // (optional)
+	AvailableReactions     TL      // (optional) ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
 }
 
 // Constructs ChatFull
@@ -2776,40 +2776,40 @@ type TL_channelFull struct {
 	StoriesPinnedAvailable bool
 	ID                     int64
 	About                  string
-	ParticipantsCount      Option[int32] // (optional)
-	AdminsCount            Option[int32] // (optional)
-	KickedCount            Option[int32] // (optional)
-	BannedCount            Option[int32] // (optional)
-	OnlineCount            Option[int32] // (optional)
+	ParticipantsCount      *int32 // (optional)
+	AdminsCount            *int32 // (optional)
+	KickedCount            *int32 // (optional)
+	BannedCount            *int32 // (optional)
+	OnlineCount            *int32 // (optional)
 	ReadInboxMaxID         int32
 	ReadOutboxMaxID        int32
 	UnreadCount            int32
-	ChatPhoto              TL            // Photo: TL_photoEmpty | TL_photo
-	NotifySettings         TL            // PeerNotifySettings: TL_peerNotifySettings
-	ExportedInvite         TL            // (optional) ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
-	BotInfo                []TL          // BotInfo: TL_botInfo
-	MigratedFromChatID     Option[int64] // (optional)
-	MigratedFromMaxID      Option[int32] // (optional)
-	PinnedMsgID            Option[int32] // (optional)
-	Stickerset             TL            // (optional) StickerSet: TL_stickerSet
-	AvailableMinID         Option[int32] // (optional)
-	FolderID               Option[int32] // (optional)
-	LinkedChatID           Option[int64] // (optional)
-	Location               TL            // (optional) ChannelLocation: TL_channelLocationEmpty | TL_channelLocation
-	SlowmodeSeconds        Option[int32] // (optional)
-	SlowmodeNextSendDate   Option[int32] // (optional)
-	StatsDc                Option[int32] // (optional)
+	ChatPhoto              TL     // Photo: TL_photoEmpty | TL_photo
+	NotifySettings         TL     // PeerNotifySettings: TL_peerNotifySettings
+	ExportedInvite         TL     // (optional) ExportedChatInvite: TL_chatInviteExported | TL_chatInvitePublicJoinRequests
+	BotInfo                []TL   // BotInfo: TL_botInfo
+	MigratedFromChatID     *int64 // (optional)
+	MigratedFromMaxID      *int32 // (optional)
+	PinnedMsgID            *int32 // (optional)
+	Stickerset             TL     // (optional) StickerSet: TL_stickerSet
+	AvailableMinID         *int32 // (optional)
+	FolderID               *int32 // (optional)
+	LinkedChatID           *int64 // (optional)
+	Location               TL     // (optional) ChannelLocation: TL_channelLocationEmpty | TL_channelLocation
+	SlowmodeSeconds        *int32 // (optional)
+	SlowmodeNextSendDate   *int32 // (optional)
+	StatsDc                *int32 // (optional)
 	Pts                    int32
-	Call                   TL             // (optional) InputGroupCall: TL_inputGroupCall
-	TtlPeriod              Option[int32]  // (optional)
-	PendingSuggestions     []string       // (optional)
-	GroupcallDefaultJoinAs TL             // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	ThemeEmoticon          Option[string] // (optional)
-	RequestsPending        Option[int32]  // (optional)
-	RecentRequesters       []int64        // (optional)
-	DefaultSendAs          TL             // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	AvailableReactions     TL             // (optional) ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
-	Stories                TL             // (optional) PeerStories: TL_peerStories
+	Call                   TL       // (optional) InputGroupCall: TL_inputGroupCall
+	TtlPeriod              *int32   // (optional)
+	PendingSuggestions     []string // (optional)
+	GroupcallDefaultJoinAs TL       // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	ThemeEmoticon          *string  // (optional)
+	RequestsPending        *int32   // (optional)
+	RecentRequesters       []int64  // (optional)
+	DefaultSendAs          TL       // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	AvailableReactions     TL       // (optional) ChatReactions: TL_chatReactionsNone | TL_chatReactionsAll | TL_chatReactionsSome
+	Stories                TL       // (optional) PeerStories: TL_peerStories
 }
 
 // Constructs ChatParticipant
@@ -2876,25 +2876,25 @@ type TL_message struct {
 	Noforwards        bool
 	InvertMedia       bool
 	ID                int32
-	FromID            TL            // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	PeerID            TL            // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	FwdFrom           TL            // (optional) MessageFwdHeader: TL_messageFwdHeader
-	ViaBotID          Option[int64] // (optional)
-	ReplyTo           TL            // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
+	FromID            TL     // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	PeerID            TL     // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	FwdFrom           TL     // (optional) MessageFwdHeader: TL_messageFwdHeader
+	ViaBotID          *int64 // (optional)
+	ReplyTo           TL     // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
 	Date              int32
 	Message           string
-	Media             TL             // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
-	ReplyMarkup       TL             // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities          []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	Views             Option[int32]  // (optional)
-	Forwards          Option[int32]  // (optional)
-	Replies           TL             // (optional) MessageReplies: TL_messageReplies
-	EditDate          Option[int32]  // (optional)
-	PostAuthor        Option[string] // (optional)
-	GroupedID         Option[int64]  // (optional)
-	Reactions         TL             // (optional) MessageReactions: TL_messageReactions
-	RestrictionReason []TL           // (optional) RestrictionReason: TL_restrictionReason
-	TtlPeriod         Option[int32]  // (optional)
+	Media             TL      // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
+	ReplyMarkup       TL      // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+	Entities          []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Views             *int32  // (optional)
+	Forwards          *int32  // (optional)
+	Replies           TL      // (optional) MessageReplies: TL_messageReplies
+	EditDate          *int32  // (optional)
+	PostAuthor        *string // (optional)
+	GroupedID         *int64  // (optional)
+	Reactions         TL      // (optional) MessageReactions: TL_messageReactions
+	RestrictionReason []TL    // (optional) RestrictionReason: TL_restrictionReason
+	TtlPeriod         *int32  // (optional)
 }
 
 // Constructs Message
@@ -2910,8 +2910,8 @@ type TL_messageService struct {
 	PeerID      TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	ReplyTo     TL // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
 	Date        int32
-	Action      TL            // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPinMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionSetSameChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch
-	TtlPeriod   Option[int32] // (optional)
+	Action      TL     // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPinMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionSetSameChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch
+	TtlPeriod   *int32 // (optional)
 }
 
 // Constructs MessageMedia
@@ -2921,8 +2921,8 @@ type TL_messageMediaEmpty struct {
 // Constructs MessageMedia
 type TL_messageMediaPhoto struct {
 	Spoiler    bool
-	Photo      TL            // (optional) Photo: TL_photoEmpty | TL_photo
-	TtlSeconds Option[int32] // (optional)
+	Photo      TL     // (optional) Photo: TL_photoEmpty | TL_photo
+	TtlSeconds *int32 // (optional)
 }
 
 // Constructs MessageMedia
@@ -2947,9 +2947,9 @@ type TL_messageMediaUnsupported struct {
 type TL_messageMediaDocument struct {
 	Nopremium   bool
 	Spoiler     bool
-	Document    TL            // (optional) Document: TL_documentEmpty | TL_document
-	AltDocument TL            // (optional) Document: TL_documentEmpty | TL_document
-	TtlSeconds  Option[int32] // (optional)
+	Document    TL     // (optional) Document: TL_documentEmpty | TL_document
+	AltDocument TL     // (optional) Document: TL_documentEmpty | TL_document
+	TtlSeconds  *int32 // (optional)
 }
 
 // Constructs MessageMedia
@@ -2982,8 +2982,8 @@ type TL_messageMediaInvoice struct {
 	Test                     bool
 	Title                    string
 	Description              string
-	Photo                    TL            // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
-	ReceiptMsgID             Option[int32] // (optional)
+	Photo                    TL     // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
+	ReceiptMsgID             *int32 // (optional)
 	Currency                 string
 	TotalAmount              int64
 	StartParam               string
@@ -2992,10 +2992,10 @@ type TL_messageMediaInvoice struct {
 
 // Constructs MessageMedia
 type TL_messageMediaGeoLive struct {
-	Geo                         TL            // GeoPoint: TL_geoPointEmpty | TL_geoPoint
-	Heading                     Option[int32] // (optional)
+	Geo                         TL     // GeoPoint: TL_geoPointEmpty | TL_geoPoint
+	Heading                     *int32 // (optional)
 	Period                      int32
-	ProximityNotificationRadius Option[int32] // (optional)
+	ProximityNotificationRadius *int32 // (optional)
 }
 
 // Constructs MessageMedia
@@ -3104,9 +3104,9 @@ type TL_messageActionPaymentSentMe struct {
 	Currency         string
 	TotalAmount      int64
 	Payload          []byte
-	Info             TL             // (optional) PaymentRequestedInfo: TL_paymentRequestedInfo
-	ShippingOptionID Option[string] // (optional)
-	Charge           TL             // PaymentCharge: TL_paymentCharge
+	Info             TL      // (optional) PaymentRequestedInfo: TL_paymentRequestedInfo
+	ShippingOptionID *string // (optional)
+	Charge           TL      // PaymentCharge: TL_paymentCharge
 }
 
 // Constructs MessageAction
@@ -3115,15 +3115,15 @@ type TL_messageActionPaymentSent struct {
 	RecurringUsed bool
 	Currency      string
 	TotalAmount   int64
-	InvoiceSlug   Option[string] // (optional)
+	InvoiceSlug   *string // (optional)
 }
 
 // Constructs MessageAction
 type TL_messageActionPhoneCall struct {
 	Video    bool
 	CallID   int64
-	Reason   TL            // (optional) PhoneCallDiscardReason: TL_phoneCallDiscardReasonMissed | TL_phoneCallDiscardReasonDisconnect | TL_phoneCallDiscardReasonHangup | TL_phoneCallDiscardReasonBusy
-	Duration Option[int32] // (optional)
+	Reason   TL     // (optional) PhoneCallDiscardReason: TL_phoneCallDiscardReasonMissed | TL_phoneCallDiscardReasonDisconnect | TL_phoneCallDiscardReasonHangup | TL_phoneCallDiscardReasonBusy
+	Duration *int32 // (optional)
 }
 
 // Constructs MessageAction
@@ -3139,8 +3139,8 @@ type TL_messageActionCustomAction struct {
 type TL_messageActionBotAllowed struct {
 	AttachMenu  bool
 	FromRequest bool
-	Domain      Option[string] // (optional)
-	App         TL             // (optional) BotApp: TL_botAppNotModified | TL_botApp
+	Domain      *string // (optional)
+	App         TL      // (optional) BotApp: TL_botAppNotModified | TL_botApp
 }
 
 // Constructs MessageAction
@@ -3167,8 +3167,8 @@ type TL_messageActionGeoProximityReached struct {
 
 // Constructs MessageAction
 type TL_messageActionGroupCall struct {
-	Call     TL            // InputGroupCall: TL_inputGroupCall
-	Duration Option[int32] // (optional)
+	Call     TL     // InputGroupCall: TL_inputGroupCall
+	Duration *int32 // (optional)
 }
 
 // Constructs MessageAction
@@ -3180,7 +3180,7 @@ type TL_messageActionInviteToGroupCall struct {
 // Constructs MessageAction
 type TL_messageActionSetMessagesTTL struct {
 	Period          int32
-	AutoSettingFrom Option[int64] // (optional)
+	AutoSettingFrom *int64 // (optional)
 }
 
 // Constructs MessageAction
@@ -3214,23 +3214,23 @@ type TL_messageActionGiftPremium struct {
 	Currency       string
 	Amount         int64
 	Months         int32
-	CryptoCurrency Option[string] // (optional)
-	CryptoAmount   Option[int64]  // (optional)
+	CryptoCurrency *string // (optional)
+	CryptoAmount   *int64  // (optional)
 }
 
 // Constructs MessageAction
 type TL_messageActionTopicCreate struct {
 	Title       string
 	IconColor   int32
-	IconEmojiID Option[int64] // (optional)
+	IconEmojiID *int64 // (optional)
 }
 
 // Constructs MessageAction
 type TL_messageActionTopicEdit struct {
-	Title       Option[string] // (optional)
-	IconEmojiID Option[int64]  // (optional)
-	Closed      Option[bool]   // (optional)
-	Hidden      Option[bool]   // (optional)
+	Title       *string // (optional)
+	IconEmojiID *int64  // (optional)
+	Closed      *bool   // (optional)
+	Hidden      *bool   // (optional)
 }
 
 // Constructs MessageAction
@@ -3278,11 +3278,11 @@ type TL_dialog struct {
 	UnreadCount          int32
 	UnreadMentionsCount  int32
 	UnreadReactionsCount int32
-	NotifySettings       TL            // PeerNotifySettings: TL_peerNotifySettings
-	Pts                  Option[int32] // (optional)
-	Draft                TL            // (optional) DraftMessage: TL_draftMessageEmpty | TL_draftMessage
-	FolderID             Option[int32] // (optional)
-	TtlPeriod            Option[int32] // (optional)
+	NotifySettings       TL     // PeerNotifySettings: TL_peerNotifySettings
+	Pts                  *int32 // (optional)
+	Draft                TL     // (optional) DraftMessage: TL_draftMessageEmpty | TL_draftMessage
+	FolderID             *int32 // (optional)
+	TtlPeriod            *int32 // (optional)
 }
 
 // Constructs Dialog
@@ -3364,15 +3364,15 @@ type TL_geoPoint struct {
 	Long           float64
 	Lat            float64
 	AccessHash     int64
-	AccuracyRadius Option[int32] // (optional)
+	AccuracyRadius *int32 // (optional)
 }
 
 // Constructs auth.SentCode
 type TL_auth_sentCode struct {
 	Type          TL // auth.SentCodeType: TL_auth_sentCodeTypeApp | TL_auth_sentCodeTypeSms | TL_auth_sentCodeTypeCall | TL_auth_sentCodeTypeFlashCall | TL_auth_sentCodeTypeMissedCall | TL_auth_sentCodeTypeEmailCode | TL_auth_sentCodeTypeSetUpEmailRequired | TL_auth_sentCodeTypeFragmentSms | TL_auth_sentCodeTypeFirebaseSms
 	PhoneCodeHash string
-	NextType      TL            // (optional) auth.CodeType: TL_auth_codeTypeSms | TL_auth_codeTypeCall | TL_auth_codeTypeFlashCall | TL_auth_codeTypeMissedCall | TL_auth_codeTypeFragmentSms
-	Timeout       Option[int32] // (optional)
+	NextType      TL     // (optional) auth.CodeType: TL_auth_codeTypeSms | TL_auth_codeTypeCall | TL_auth_codeTypeFlashCall | TL_auth_codeTypeMissedCall | TL_auth_codeTypeFragmentSms
+	Timeout       *int32 // (optional)
 }
 
 // Constructs auth.SentCode
@@ -3383,10 +3383,10 @@ type TL_auth_sentCodeSuccess struct {
 // Constructs auth.Authorization
 type TL_auth_authorization struct {
 	SetupPasswordRequired bool
-	OtherwiseReloginDays  Option[int32] // (optional)
-	TmpSessions           Option[int32] // (optional)
-	FutureAuthToken       []byte        // (optional)
-	User                  TL            // User: TL_userEmpty | TL_user
+	OtherwiseReloginDays  *int32 // (optional)
+	TmpSessions           *int32 // (optional)
+	FutureAuthToken       []byte // (optional)
+	User                  TL     // User: TL_userEmpty | TL_user
 }
 
 // Constructs auth.Authorization
@@ -3425,28 +3425,28 @@ type TL_inputNotifyForumTopic struct {
 
 // Constructs InputPeerNotifySettings
 type TL_inputPeerNotifySettings struct {
-	ShowPreviews      Option[bool]  // (optional)
-	Silent            Option[bool]  // (optional)
-	MuteUntil         Option[int32] // (optional)
-	Sound             TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	StoriesMuted      Option[bool]  // (optional)
-	StoriesHideSender Option[bool]  // (optional)
-	StoriesSound      TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	ShowPreviews      *bool  // (optional)
+	Silent            *bool  // (optional)
+	MuteUntil         *int32 // (optional)
+	Sound             TL     // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	StoriesMuted      *bool  // (optional)
+	StoriesHideSender *bool  // (optional)
+	StoriesSound      TL     // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 }
 
 // Constructs PeerNotifySettings
 type TL_peerNotifySettings struct {
-	ShowPreviews        Option[bool]  // (optional)
-	Silent              Option[bool]  // (optional)
-	MuteUntil           Option[int32] // (optional)
-	IosSound            TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	AndroidSound        TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	OtherSound          TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	StoriesMuted        Option[bool]  // (optional)
-	StoriesHideSender   Option[bool]  // (optional)
-	StoriesIosSound     TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	StoriesAndroidSound TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
-	StoriesOtherSound   TL            // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	ShowPreviews        *bool  // (optional)
+	Silent              *bool  // (optional)
+	MuteUntil           *int32 // (optional)
+	IosSound            TL     // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	AndroidSound        TL     // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	OtherSound          TL     // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	StoriesMuted        *bool  // (optional)
+	StoriesHideSender   *bool  // (optional)
+	StoriesIosSound     TL     // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	StoriesAndroidSound TL     // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
+	StoriesOtherSound   TL     // (optional) NotificationSound: TL_notificationSoundDefault | TL_notificationSoundNone | TL_notificationSoundLocal | TL_notificationSoundRingtone
 }
 
 // Constructs PeerSettings
@@ -3460,9 +3460,9 @@ type TL_peerSettings struct {
 	Autoarchived          bool
 	InviteMembers         bool
 	RequestChatBroadcast  bool
-	GeoDistance           Option[int32]  // (optional)
-	RequestChatTitle      Option[string] // (optional)
-	RequestChatDate       Option[int32]  // (optional)
+	GeoDistance           *int32  // (optional)
+	RequestChatTitle      *string // (optional)
+	RequestChatDate       *int32  // (optional)
 }
 
 // Constructs WallPaper
@@ -3539,24 +3539,24 @@ type TL_userFull struct {
 	StoriesPinnedAvailable  bool
 	BlockedMyStoriesFrom    bool
 	ID                      int64
-	About                   Option[string] // (optional)
-	Settings                TL             // PeerSettings: TL_peerSettings
-	PersonalPhoto           TL             // (optional) Photo: TL_photoEmpty | TL_photo
-	ProfilePhoto            TL             // (optional) Photo: TL_photoEmpty | TL_photo
-	FallbackPhoto           TL             // (optional) Photo: TL_photoEmpty | TL_photo
-	NotifySettings          TL             // PeerNotifySettings: TL_peerNotifySettings
-	BotInfo                 TL             // (optional) BotInfo: TL_botInfo
-	PinnedMsgID             Option[int32]  // (optional)
+	About                   *string // (optional)
+	Settings                TL      // PeerSettings: TL_peerSettings
+	PersonalPhoto           TL      // (optional) Photo: TL_photoEmpty | TL_photo
+	ProfilePhoto            TL      // (optional) Photo: TL_photoEmpty | TL_photo
+	FallbackPhoto           TL      // (optional) Photo: TL_photoEmpty | TL_photo
+	NotifySettings          TL      // PeerNotifySettings: TL_peerNotifySettings
+	BotInfo                 TL      // (optional) BotInfo: TL_botInfo
+	PinnedMsgID             *int32  // (optional)
 	CommonChatsCount        int32
-	FolderID                Option[int32]  // (optional)
-	TtlPeriod               Option[int32]  // (optional)
-	ThemeEmoticon           Option[string] // (optional)
-	PrivateForwardName      Option[string] // (optional)
-	BotGroupAdminRights     TL             // (optional) ChatAdminRights: TL_chatAdminRights
-	BotBroadcastAdminRights TL             // (optional) ChatAdminRights: TL_chatAdminRights
-	PremiumGifts            []TL           // (optional) PremiumGiftOption: TL_premiumGiftOption
-	Wallpaper               TL             // (optional) WallPaper: TL_wallPaper | TL_wallPaperNoFile
-	Stories                 TL             // (optional) PeerStories: TL_peerStories
+	FolderID                *int32  // (optional)
+	TtlPeriod               *int32  // (optional)
+	ThemeEmoticon           *string // (optional)
+	PrivateForwardName      *string // (optional)
+	BotGroupAdminRights     TL      // (optional) ChatAdminRights: TL_chatAdminRights
+	BotBroadcastAdminRights TL      // (optional) ChatAdminRights: TL_chatAdminRights
+	PremiumGifts            []TL    // (optional) PremiumGiftOption: TL_premiumGiftOption
+	Wallpaper               TL      // (optional) WallPaper: TL_wallPaper | TL_wallPaperNoFile
+	Stories                 TL      // (optional) PeerStories: TL_peerStories
 }
 
 // Constructs Contact
@@ -3644,11 +3644,11 @@ type TL_messages_messages struct {
 type TL_messages_messagesSlice struct {
 	Inexact        bool
 	Count          int32
-	NextRate       Option[int32] // (optional)
-	OffsetIdOffset Option[int32] // (optional)
-	Messages       []TL          // Message: TL_messageEmpty | TL_message | TL_messageService
-	Chats          []TL          // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users          []TL          // User: TL_userEmpty | TL_user
+	NextRate       *int32 // (optional)
+	OffsetIdOffset *int32 // (optional)
+	Messages       []TL   // Message: TL_messageEmpty | TL_message | TL_messageService
+	Chats          []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users          []TL   // User: TL_userEmpty | TL_user
 }
 
 // Constructs messages.Messages
@@ -3656,11 +3656,11 @@ type TL_messages_channelMessages struct {
 	Inexact        bool
 	Pts            int32
 	Count          int32
-	OffsetIdOffset Option[int32] // (optional)
-	Messages       []TL          // Message: TL_messageEmpty | TL_message | TL_messageService
-	Topics         []TL          // ForumTopic: TL_forumTopicDeleted | TL_forumTopic
-	Chats          []TL          // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users          []TL          // User: TL_userEmpty | TL_user
+	OffsetIdOffset *int32 // (optional)
+	Messages       []TL   // Message: TL_messageEmpty | TL_message | TL_messageService
+	Topics         []TL   // ForumTopic: TL_forumTopicDeleted | TL_forumTopic
+	Chats          []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users          []TL   // User: TL_userEmpty | TL_user
 }
 
 // Constructs messages.Messages
@@ -3818,9 +3818,9 @@ type TL_updateUserName struct {
 type TL_updateNewAuthorization struct {
 	Unconfirmed bool
 	Hash        int64
-	Date        Option[int32]  // (optional)
-	Device      Option[string] // (optional)
-	Location    Option[string] // (optional)
+	Date        *int32  // (optional)
+	Device      *string // (optional)
+	Location    *string // (optional)
 }
 
 // Constructs Update
@@ -3878,7 +3878,7 @@ type TL_updateNotifySettings struct {
 type TL_updateServiceNotification struct {
 	Popup       bool
 	InvertMedia bool
-	InboxDate   Option[int32] // (optional)
+	InboxDate   *int32 // (optional)
 	Type        string
 	Message     string
 	Media       TL   // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
@@ -3899,8 +3899,8 @@ type TL_updateUserPhone struct {
 
 // Constructs Update
 type TL_updateReadHistoryInbox struct {
-	FolderID         Option[int32] // (optional)
-	Peer             TL            // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	FolderID         *int32 // (optional)
+	Peer             TL     // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	MaxID            int32
 	StillUnreadCount int32
 	Pts              int32
@@ -3927,13 +3927,13 @@ type TL_updateReadMessagesContents struct {
 	Messages []int32
 	Pts      int32
 	PtsCount int32
-	Date     Option[int32] // (optional)
+	Date     *int32 // (optional)
 }
 
 // Constructs Update
 type TL_updateChannelTooLong struct {
 	ChannelID int64
-	Pts       Option[int32] // (optional)
+	Pts       *int32 // (optional)
 }
 
 // Constructs Update
@@ -3950,7 +3950,7 @@ type TL_updateNewChannelMessage struct {
 
 // Constructs Update
 type TL_updateReadChannelInbox struct {
-	FolderID         Option[int32] // (optional)
+	FolderID         *int32 // (optional)
 	ChannelID        int64
 	MaxID            int32
 	StillUnreadCount int32
@@ -4035,8 +4035,8 @@ type TL_updateBotCallbackQuery struct {
 	Peer          TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	MsgID         int32
 	ChatInstance  int64
-	Data          []byte         // (optional)
-	GameShortName Option[string] // (optional)
+	Data          []byte  // (optional)
+	GameShortName *string // (optional)
 }
 
 // Constructs Update
@@ -4052,8 +4052,8 @@ type TL_updateInlineBotCallbackQuery struct {
 	UserID        int64
 	MsgID         TL // InputBotInlineMessageID: TL_inputBotInlineMessageID | TL_inputBotInlineMessageID64
 	ChatInstance  int64
-	Data          []byte         // (optional)
-	GameShortName Option[string] // (optional)
+	Data          []byte  // (optional)
+	GameShortName *string // (optional)
 }
 
 // Constructs Update
@@ -4064,9 +4064,9 @@ type TL_updateReadChannelOutbox struct {
 
 // Constructs Update
 type TL_updateDraftMessage struct {
-	Peer     TL            // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	TopMsgID Option[int32] // (optional)
-	Draft    TL            // DraftMessage: TL_draftMessageEmpty | TL_draftMessage
+	Peer     TL     // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	TopMsgID *int32 // (optional)
+	Draft    TL     // DraftMessage: TL_draftMessageEmpty | TL_draftMessage
 }
 
 // Constructs Update
@@ -4096,14 +4096,14 @@ type TL_updateChannelWebPage struct {
 // Constructs Update
 type TL_updateDialogPinned struct {
 	Pinned   bool
-	FolderID Option[int32] // (optional)
-	Peer     TL            // DialogPeer: TL_dialogPeer | TL_dialogPeerFolder
+	FolderID *int32 // (optional)
+	Peer     TL     // DialogPeer: TL_dialogPeer | TL_dialogPeerFolder
 }
 
 // Constructs Update
 type TL_updatePinnedDialogs struct {
-	FolderID Option[int32] // (optional)
-	Order    []TL          // (optional) DialogPeer: TL_dialogPeer | TL_dialogPeerFolder
+	FolderID *int32 // (optional)
+	Order    []TL   // (optional) DialogPeer: TL_dialogPeer | TL_dialogPeerFolder
 }
 
 // Constructs Update
@@ -4131,8 +4131,8 @@ type TL_updateBotPrecheckoutQuery struct {
 	QueryID          int64
 	UserID           int64
 	Payload          []byte
-	Info             TL             // (optional) PaymentRequestedInfo: TL_paymentRequestedInfo
-	ShippingOptionID Option[string] // (optional)
+	Info             TL      // (optional) PaymentRequestedInfo: TL_paymentRequestedInfo
+	ShippingOptionID *string // (optional)
 	Currency         string
 	TotalAmount      int64
 }
@@ -4159,7 +4159,7 @@ type TL_updateFavedStickers struct {
 // Constructs Update
 type TL_updateChannelReadMessagesContents struct {
 	ChannelID int64
-	TopMsgID  Option[int32] // (optional)
+	TopMsgID  *int32 // (optional)
 	Messages  []int32
 }
 
@@ -4278,8 +4278,8 @@ type TL_updateReadChannelDiscussionInbox struct {
 	ChannelID     int64
 	TopMsgID      int32
 	ReadMaxID     int32
-	BroadcastID   Option[int64] // (optional)
-	BroadcastPost Option[int32] // (optional)
+	BroadcastID   *int64 // (optional)
+	BroadcastPost *int32 // (optional)
 }
 
 // Constructs Update
@@ -4299,9 +4299,9 @@ type TL_updatePeerBlocked struct {
 // Constructs Update
 type TL_updateChannelUserTyping struct {
 	ChannelID int64
-	TopMsgID  Option[int32] // (optional)
-	FromID    TL            // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	Action    TL            // SendMessageAction: TL_sendMessageTypingAction | TL_sendMessageCancelAction | TL_sendMessageRecordVideoAction | TL_sendMessageUploadVideoAction | TL_sendMessageRecordAudioAction | TL_sendMessageUploadAudioAction | TL_sendMessageUploadPhotoAction | TL_sendMessageUploadDocumentAction | TL_sendMessageGeoLocationAction | TL_sendMessageChooseContactAction | TL_sendMessageGamePlayAction | TL_sendMessageRecordRoundAction | TL_sendMessageUploadRoundAction | TL_speakingInGroupCallAction | TL_sendMessageHistoryImportAction | TL_sendMessageChooseStickerAction | TL_sendMessageEmojiInteraction | TL_sendMessageEmojiInteractionSeen
+	TopMsgID  *int32 // (optional)
+	FromID    TL     // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Action    TL     // SendMessageAction: TL_sendMessageTypingAction | TL_sendMessageCancelAction | TL_sendMessageRecordVideoAction | TL_sendMessageUploadVideoAction | TL_sendMessageRecordAudioAction | TL_sendMessageUploadAudioAction | TL_sendMessageUploadPhotoAction | TL_sendMessageUploadDocumentAction | TL_sendMessageGeoLocationAction | TL_sendMessageChooseContactAction | TL_sendMessageGamePlayAction | TL_sendMessageRecordRoundAction | TL_sendMessageUploadRoundAction | TL_speakingInGroupCallAction | TL_sendMessageHistoryImportAction | TL_sendMessageChooseStickerAction | TL_sendMessageEmojiInteraction | TL_sendMessageEmojiInteractionSeen
 }
 
 // Constructs Update
@@ -4342,8 +4342,8 @@ type TL_updateGroupCall struct {
 
 // Constructs Update
 type TL_updatePeerHistoryTTL struct {
-	Peer      TL            // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	TtlPeriod Option[int32] // (optional)
+	Peer      TL     // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	TtlPeriod *int32 // (optional)
 }
 
 // Constructs Update
@@ -4413,8 +4413,8 @@ type TL_updateBotChatInviteRequester struct {
 type TL_updateMessageReactions struct {
 	Peer      TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	MsgID     int32
-	TopMsgID  Option[int32] // (optional)
-	Reactions TL            // MessageReactions: TL_messageReactions
+	TopMsgID  *int32 // (optional)
+	Reactions TL     // MessageReactions: TL_messageReactions
 }
 
 // Constructs Update
@@ -4590,11 +4590,11 @@ type TL_updateShortMessage struct {
 	Pts         int32
 	PtsCount    int32
 	Date        int32
-	FwdFrom     TL            // (optional) MessageFwdHeader: TL_messageFwdHeader
-	ViaBotID    Option[int64] // (optional)
-	ReplyTo     TL            // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
-	Entities    []TL          // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	TtlPeriod   Option[int32] // (optional)
+	FwdFrom     TL     // (optional) MessageFwdHeader: TL_messageFwdHeader
+	ViaBotID    *int64 // (optional)
+	ReplyTo     TL     // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
+	Entities    []TL   // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	TtlPeriod   *int32 // (optional)
 }
 
 // Constructs Updates
@@ -4610,11 +4610,11 @@ type TL_updateShortChatMessage struct {
 	Pts         int32
 	PtsCount    int32
 	Date        int32
-	FwdFrom     TL            // (optional) MessageFwdHeader: TL_messageFwdHeader
-	ViaBotID    Option[int64] // (optional)
-	ReplyTo     TL            // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
-	Entities    []TL          // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	TtlPeriod   Option[int32] // (optional)
+	FwdFrom     TL     // (optional) MessageFwdHeader: TL_messageFwdHeader
+	ViaBotID    *int64 // (optional)
+	ReplyTo     TL     // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
+	Entities    []TL   // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	TtlPeriod   *int32 // (optional)
 }
 
 // Constructs Updates
@@ -4649,9 +4649,9 @@ type TL_updateShortSentMessage struct {
 	Pts       int32
 	PtsCount  int32
 	Date      int32
-	Media     TL            // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
-	Entities  []TL          // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	TtlPeriod Option[int32] // (optional)
+	Media     TL     // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
+	Entities  []TL   // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	TtlPeriod *int32 // (optional)
 }
 
 // Constructs photos.Photos
@@ -4733,25 +4733,25 @@ type TL_config struct {
 	RatingEDecay            int32
 	StickersRecentLimit     int32
 	ChannelsReadMediaPeriod int32
-	TmpSessions             Option[int32] // (optional)
+	TmpSessions             *int32 // (optional)
 	CallReceiveTimeoutMs    int32
 	CallRingTimeoutMs       int32
 	CallConnectTimeoutMs    int32
 	CallPacketTimeoutMs     int32
 	MeUrlPrefix             string
-	AutoupdateUrlPrefix     Option[string] // (optional)
-	GifSearchUsername       Option[string] // (optional)
-	VenueSearchUsername     Option[string] // (optional)
-	ImgSearchUsername       Option[string] // (optional)
-	StaticMapsProvider      Option[string] // (optional)
+	AutoupdateUrlPrefix     *string // (optional)
+	GifSearchUsername       *string // (optional)
+	VenueSearchUsername     *string // (optional)
+	ImgSearchUsername       *string // (optional)
+	StaticMapsProvider      *string // (optional)
 	CaptionLengthMax        int32
 	MessageLengthMax        int32
 	WebfileDcID             int32
-	SuggestedLangCode       Option[string] // (optional)
-	LangPackVersion         Option[int32]  // (optional)
-	BaseLangPackVersion     Option[int32]  // (optional)
-	ReactionsDefault        TL             // (optional) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
-	AutologinToken          Option[string] // (optional)
+	SuggestedLangCode       *string // (optional)
+	LangPackVersion         *int32  // (optional)
+	BaseLangPackVersion     *int32  // (optional)
+	ReactionsDefault        TL      // (optional) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+	AutologinToken          *string // (optional)
 }
 
 // Constructs NearestDc
@@ -4767,10 +4767,10 @@ type TL_help_appUpdate struct {
 	ID         int32
 	Version    string
 	Text       string
-	Entities   []TL           // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	Document   TL             // (optional) Document: TL_documentEmpty | TL_document
-	Url        Option[string] // (optional)
-	Sticker    TL             // (optional) Document: TL_documentEmpty | TL_document
+	Entities   []TL    // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Document   TL      // (optional) Document: TL_documentEmpty | TL_document
+	Url        *string // (optional)
+	Sticker    TL      // (optional) Document: TL_documentEmpty | TL_document
 }
 
 // Constructs help.AppUpdate
@@ -4798,7 +4798,7 @@ type TL_encryptedChatWaiting struct {
 
 // Constructs EncryptedChat
 type TL_encryptedChatRequested struct {
-	FolderID      Option[int32] // (optional)
+	FolderID      *int32 // (optional)
 	ID            int32
 	AccessHash    int64
 	Date          int32
@@ -5256,16 +5256,16 @@ type TL_documentAttributeVideo struct {
 	Duration          float64
 	W                 int32
 	H                 int32
-	PreloadPrefixSize Option[int32] // (optional)
+	PreloadPrefixSize *int32 // (optional)
 }
 
 // Constructs DocumentAttribute
 type TL_documentAttributeAudio struct {
 	Voice     bool
 	Duration  int32
-	Title     Option[string] // (optional)
-	Performer Option[string] // (optional)
-	Waveform  []byte         // (optional)
+	Title     *string // (optional)
+	Performer *string // (optional)
+	Waveform  []byte  // (optional)
 }
 
 // Constructs DocumentAttribute
@@ -5320,13 +5320,13 @@ type TL_messages_affectedMessages struct {
 // Constructs WebPage
 type TL_webPageEmpty struct {
 	ID  int64
-	Url Option[string] // (optional)
+	Url *string // (optional)
 }
 
 // Constructs WebPage
 type TL_webPagePending struct {
 	ID   int64
-	Url  Option[string] // (optional)
+	Url  *string // (optional)
 	Date int32
 }
 
@@ -5337,25 +5337,25 @@ type TL_webPage struct {
 	Url           string
 	DisplayUrl    string
 	Hash          int32
-	Type          Option[string] // (optional)
-	SiteName      Option[string] // (optional)
-	Title         Option[string] // (optional)
-	Description   Option[string] // (optional)
-	Photo         TL             // (optional) Photo: TL_photoEmpty | TL_photo
-	EmbedUrl      Option[string] // (optional)
-	EmbedType     Option[string] // (optional)
-	EmbedWidth    Option[int32]  // (optional)
-	EmbedHeight   Option[int32]  // (optional)
-	Duration      Option[int32]  // (optional)
-	Author        Option[string] // (optional)
-	Document      TL             // (optional) Document: TL_documentEmpty | TL_document
-	CachedPage    TL             // (optional) Page: TL_page
-	Attributes    []TL           // (optional) WebPageAttribute: TL_webPageAttributeTheme | TL_webPageAttributeStory
+	Type          *string // (optional)
+	SiteName      *string // (optional)
+	Title         *string // (optional)
+	Description   *string // (optional)
+	Photo         TL      // (optional) Photo: TL_photoEmpty | TL_photo
+	EmbedUrl      *string // (optional)
+	EmbedType     *string // (optional)
+	EmbedWidth    *int32  // (optional)
+	EmbedHeight   *int32  // (optional)
+	Duration      *int32  // (optional)
+	Author        *string // (optional)
+	Document      TL      // (optional) Document: TL_documentEmpty | TL_document
+	CachedPage    TL      // (optional) Page: TL_page
+	Attributes    []TL    // (optional) WebPageAttribute: TL_webPageAttributeTheme | TL_webPageAttributeStory
 }
 
 // Constructs WebPage
 type TL_webPageNotModified struct {
-	CachedPageViews Option[int32] // (optional)
+	CachedPageViews *int32 // (optional)
 }
 
 // Constructs Authorization
@@ -5391,31 +5391,31 @@ type TL_account_password struct {
 	HasRecovery             bool
 	HasSecureValues         bool
 	HasPassword             bool
-	CurrentAlgo             TL             // (optional) PasswordKdfAlgo: TL_passwordKdfAlgoUnknown | TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
-	SrpB                    []byte         // (optional)
-	SrpID                   Option[int64]  // (optional)
-	Hint                    Option[string] // (optional)
-	EmailUnconfirmedPattern Option[string] // (optional)
-	NewAlgo                 TL             // PasswordKdfAlgo: TL_passwordKdfAlgoUnknown | TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
-	NewSecureAlgo           TL             // SecurePasswordKdfAlgo: TL_securePasswordKdfAlgoUnknown | TL_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000 | TL_securePasswordKdfAlgoSHA512
+	CurrentAlgo             TL      // (optional) PasswordKdfAlgo: TL_passwordKdfAlgoUnknown | TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
+	SrpB                    []byte  // (optional)
+	SrpID                   *int64  // (optional)
+	Hint                    *string // (optional)
+	EmailUnconfirmedPattern *string // (optional)
+	NewAlgo                 TL      // PasswordKdfAlgo: TL_passwordKdfAlgoUnknown | TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
+	NewSecureAlgo           TL      // SecurePasswordKdfAlgo: TL_securePasswordKdfAlgoUnknown | TL_securePasswordKdfAlgoPBKDF2HMACSHA512iter100000 | TL_securePasswordKdfAlgoSHA512
 	SecureRandom            []byte
-	PendingResetDate        Option[int32]  // (optional)
-	LoginEmailPattern       Option[string] // (optional)
+	PendingResetDate        *int32  // (optional)
+	LoginEmailPattern       *string // (optional)
 }
 
 // Constructs account.PasswordSettings
 type TL_account_passwordSettings struct {
-	Email          Option[string] // (optional)
-	SecureSettings TL             // (optional) SecureSecretSettings: TL_secureSecretSettings
+	Email          *string // (optional)
+	SecureSettings TL      // (optional) SecureSecretSettings: TL_secureSecretSettings
 }
 
 // Constructs account.PasswordInputSettings
 type TL_account_passwordInputSettings struct {
-	NewAlgo           TL             // (optional) PasswordKdfAlgo: TL_passwordKdfAlgoUnknown | TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
-	NewPasswordHash   []byte         // (optional)
-	Hint              Option[string] // (optional)
-	Email             Option[string] // (optional)
-	NewSecureSettings TL             // (optional) SecureSecretSettings: TL_secureSecretSettings
+	NewAlgo           TL      // (optional) PasswordKdfAlgo: TL_passwordKdfAlgoUnknown | TL_passwordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
+	NewPasswordHash   []byte  // (optional)
+	Hint              *string // (optional)
+	Email             *string // (optional)
+	NewSecureSettings TL      // (optional) SecureSecretSettings: TL_secureSecretSettings
 }
 
 // Constructs auth.PasswordRecovery
@@ -5437,12 +5437,12 @@ type TL_chatInviteExported struct {
 	Link          string
 	AdminID       int64
 	Date          int32
-	StartDate     Option[int32]  // (optional)
-	ExpireDate    Option[int32]  // (optional)
-	UsageLimit    Option[int32]  // (optional)
-	Usage         Option[int32]  // (optional)
-	Requested     Option[int32]  // (optional)
-	Title         Option[string] // (optional)
+	StartDate     *int32  // (optional)
+	ExpireDate    *int32  // (optional)
+	UsageLimit    *int32  // (optional)
+	Usage         *int32  // (optional)
+	Requested     *int32  // (optional)
+	Title         *string // (optional)
 }
 
 // Constructs ExportedChatInvite
@@ -5465,8 +5465,8 @@ type TL_chatInvite struct {
 	Scam              bool
 	Fake              bool
 	Title             string
-	About             Option[string] // (optional)
-	Photo             TL             // Photo: TL_photoEmpty | TL_photo
+	About             *string // (optional)
+	Photo             TL      // Photo: TL_photoEmpty | TL_photo
 	ParticipantsCount int32
 	Participants      []TL // (optional) User: TL_userEmpty | TL_user
 	Color             int32
@@ -5531,15 +5531,15 @@ type TL_stickerSet struct {
 	Videos          bool
 	Emojis          bool
 	TextColor       bool
-	InstalledDate   Option[int32] // (optional)
+	InstalledDate   *int32 // (optional)
 	ID              int64
 	AccessHash      int64
 	Title           string
 	ShortName       string
-	Thumbs          []TL          // (optional) PhotoSize: TL_photoSizeEmpty | TL_photoSize | TL_photoCachedSize | TL_photoStrippedSize | TL_photoSizeProgressive | TL_photoPathSize
-	ThumbDcID       Option[int32] // (optional)
-	ThumbVersion    Option[int32] // (optional)
-	ThumbDocumentID Option[int64] // (optional)
+	Thumbs          []TL   // (optional) PhotoSize: TL_photoSizeEmpty | TL_photoSize | TL_photoCachedSize | TL_photoStrippedSize | TL_photoSizeProgressive | TL_photoPathSize
+	ThumbDcID       *int32 // (optional)
+	ThumbVersion    *int32 // (optional)
+	ThumbDocumentID *int64 // (optional)
 	Count           int32
 	Hash            int32
 }
@@ -5564,12 +5564,12 @@ type TL_botCommand struct {
 
 // Constructs BotInfo
 type TL_botInfo struct {
-	UserID              Option[int64]  // (optional)
-	Description         Option[string] // (optional)
-	DescriptionPhoto    TL             // (optional) Photo: TL_photoEmpty | TL_photo
-	DescriptionDocument TL             // (optional) Document: TL_documentEmpty | TL_document
-	Commands            []TL           // (optional) BotCommand: TL_botCommand
-	MenuButton          TL             // (optional) BotMenuButton: TL_botMenuButtonDefault | TL_botMenuButtonCommands | TL_botMenuButton
+	UserID              *int64  // (optional)
+	Description         *string // (optional)
+	DescriptionPhoto    TL      // (optional) Photo: TL_photoEmpty | TL_photo
+	DescriptionDocument TL      // (optional) Document: TL_documentEmpty | TL_document
+	Commands            []TL    // (optional) BotCommand: TL_botCommand
+	MenuButton          TL      // (optional) BotMenuButton: TL_botMenuButtonDefault | TL_botMenuButtonCommands | TL_botMenuButton
 }
 
 // Constructs KeyboardButton
@@ -5621,7 +5621,7 @@ type TL_keyboardButtonBuy struct {
 // Constructs KeyboardButton
 type TL_keyboardButtonUrlAuth struct {
 	Text     string
-	FwdText  Option[string] // (optional)
+	FwdText  *string // (optional)
 	Url      string
 	ButtonID int32
 }
@@ -5630,14 +5630,14 @@ type TL_keyboardButtonUrlAuth struct {
 type TL_inputKeyboardButtonUrlAuth struct {
 	RequestWriteAccess bool
 	Text               string
-	FwdText            Option[string] // (optional)
+	FwdText            *string // (optional)
 	Url                string
 	Bot                TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
 // Constructs KeyboardButton
 type TL_keyboardButtonRequestPoll struct {
-	Quiz Option[bool] // (optional)
+	Quiz *bool // (optional)
 	Text string
 }
 
@@ -5686,7 +5686,7 @@ type TL_replyKeyboardHide struct {
 type TL_replyKeyboardForceReply struct {
 	SingleUse   bool
 	Selective   bool
-	Placeholder Option[string] // (optional)
+	Placeholder *string // (optional)
 }
 
 // Constructs ReplyMarkup
@@ -5695,8 +5695,8 @@ type TL_replyKeyboardMarkup struct {
 	SingleUse   bool
 	Selective   bool
 	Persistent  bool
-	Rows        []TL           // KeyboardButtonRow: TL_keyboardButtonRow
-	Placeholder Option[string] // (optional)
+	Rows        []TL    // KeyboardButtonRow: TL_keyboardButtonRow
+	Placeholder *string // (optional)
 }
 
 // Constructs ReplyMarkup
@@ -5869,28 +5869,28 @@ type TL_messageRange struct {
 type TL_updates_channelDifferenceEmpty struct {
 	Final   bool
 	Pts     int32
-	Timeout Option[int32] // (optional)
+	Timeout *int32 // (optional)
 }
 
 // Constructs updates.ChannelDifference
 type TL_updates_channelDifferenceTooLong struct {
 	Final    bool
-	Timeout  Option[int32] // (optional)
-	Dialog   TL            // Dialog: TL_dialog | TL_dialogFolder
-	Messages []TL          // Message: TL_messageEmpty | TL_message | TL_messageService
-	Chats    []TL          // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users    []TL          // User: TL_userEmpty | TL_user
+	Timeout  *int32 // (optional)
+	Dialog   TL     // Dialog: TL_dialog | TL_dialogFolder
+	Messages []TL   // Message: TL_messageEmpty | TL_message | TL_messageService
+	Chats    []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users    []TL   // User: TL_userEmpty | TL_user
 }
 
 // Constructs updates.ChannelDifference
 type TL_updates_channelDifference struct {
 	Final        bool
 	Pts          int32
-	Timeout      Option[int32] // (optional)
-	NewMessages  []TL          // Message: TL_messageEmpty | TL_message | TL_messageService
-	OtherUpdates []TL          // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
-	Chats        []TL          // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users        []TL          // User: TL_userEmpty | TL_user
+	Timeout      *int32 // (optional)
+	NewMessages  []TL   // Message: TL_messageEmpty | TL_message | TL_messageService
+	OtherUpdates []TL   // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDcOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGifs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePtsChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateGroupInvitePrivacyForbidden | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction
+	Chats        []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users        []TL   // User: TL_userEmpty | TL_user
 }
 
 // Constructs ChannelMessagesFilter
@@ -5920,8 +5920,8 @@ type TL_channelParticipantSelf struct {
 // Constructs ChannelParticipant
 type TL_channelParticipantCreator struct {
 	UserID      int64
-	AdminRights TL             // ChatAdminRights: TL_chatAdminRights
-	Rank        Option[string] // (optional)
+	AdminRights TL      // ChatAdminRights: TL_chatAdminRights
+	Rank        *string // (optional)
 }
 
 // Constructs ChannelParticipant
@@ -5929,11 +5929,11 @@ type TL_channelParticipantAdmin struct {
 	CanEdit     bool
 	Self        bool
 	UserID      int64
-	InviterID   Option[int64] // (optional)
+	InviterID   *int64 // (optional)
 	PromotedBy  int64
 	Date        int32
-	AdminRights TL             // ChatAdminRights: TL_chatAdminRights
-	Rank        Option[string] // (optional)
+	AdminRights TL      // ChatAdminRights: TL_chatAdminRights
+	Rank        *string // (optional)
 }
 
 // Constructs ChannelParticipant
@@ -5984,8 +5984,8 @@ type TL_channelParticipantsContacts struct {
 
 // Constructs ChannelParticipantsFilter
 type TL_channelParticipantsMentions struct {
-	Q        Option[string] // (optional)
-	TopMsgID Option[int32]  // (optional)
+	Q        *string // (optional)
+	TopMsgID *int32  // (optional)
 }
 
 // Constructs channels.ChannelParticipants
@@ -6012,8 +6012,8 @@ type TL_help_termsOfService struct {
 	Popup         bool
 	ID            TL // DataJSON: TL_dataJSON
 	Text          string
-	Entities      []TL          // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	MinAgeConfirm Option[int32] // (optional)
+	Entities      []TL   // MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	MinAgeConfirm *int32 // (optional)
 }
 
 // Constructs messages.SavedGifs
@@ -6045,11 +6045,11 @@ type TL_inputBotInlineMessageText struct {
 
 // Constructs InputBotInlineMessage
 type TL_inputBotInlineMessageMediaGeo struct {
-	GeoPoint                    TL            // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
-	Heading                     Option[int32] // (optional)
-	Period                      Option[int32] // (optional)
-	ProximityNotificationRadius Option[int32] // (optional)
-	ReplyMarkup                 TL            // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+	GeoPoint                    TL     // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
+	Heading                     *int32 // (optional)
+	Period                      *int32 // (optional)
+	ProximityNotificationRadius *int32 // (optional)
+	ReplyMarkup                 TL     // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
 // Constructs InputBotInlineMessage
@@ -6105,12 +6105,12 @@ type TL_inputBotInlineMessageMediaWebPage struct {
 type TL_inputBotInlineResult struct {
 	ID          string
 	Type        string
-	Title       Option[string] // (optional)
-	Description Option[string] // (optional)
-	Url         Option[string] // (optional)
-	Thumb       TL             // (optional) InputWebDocument: TL_inputWebDocument
-	Content     TL             // (optional) InputWebDocument: TL_inputWebDocument
-	SendMessage TL             // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
+	Title       *string // (optional)
+	Description *string // (optional)
+	Url         *string // (optional)
+	Thumb       TL      // (optional) InputWebDocument: TL_inputWebDocument
+	Content     TL      // (optional) InputWebDocument: TL_inputWebDocument
+	SendMessage TL      // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
 // Constructs InputBotInlineResult
@@ -6125,10 +6125,10 @@ type TL_inputBotInlineResultPhoto struct {
 type TL_inputBotInlineResultDocument struct {
 	ID          string
 	Type        string
-	Title       Option[string] // (optional)
-	Description Option[string] // (optional)
-	Document    TL             // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	SendMessage TL             // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
+	Title       *string // (optional)
+	Description *string // (optional)
+	Document    TL      // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	SendMessage TL      // InputBotInlineMessage: TL_inputBotInlineMessageMediaAuto | TL_inputBotInlineMessageText | TL_inputBotInlineMessageMediaGeo | TL_inputBotInlineMessageMediaVenue | TL_inputBotInlineMessageMediaContact | TL_inputBotInlineMessageGame | TL_inputBotInlineMessageMediaInvoice | TL_inputBotInlineMessageMediaWebPage
 }
 
 // Constructs InputBotInlineResult
@@ -6157,11 +6157,11 @@ type TL_botInlineMessageText struct {
 
 // Constructs BotInlineMessage
 type TL_botInlineMessageMediaGeo struct {
-	Geo                         TL            // GeoPoint: TL_geoPointEmpty | TL_geoPoint
-	Heading                     Option[int32] // (optional)
-	Period                      Option[int32] // (optional)
-	ProximityNotificationRadius Option[int32] // (optional)
-	ReplyMarkup                 TL            // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+	Geo                         TL     // GeoPoint: TL_geoPointEmpty | TL_geoPoint
+	Heading                     *int32 // (optional)
+	Period                      *int32 // (optional)
+	ProximityNotificationRadius *int32 // (optional)
+	ReplyMarkup                 TL     // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
 }
 
 // Constructs BotInlineMessage
@@ -6213,33 +6213,33 @@ type TL_botInlineMessageMediaWebPage struct {
 type TL_botInlineResult struct {
 	ID          string
 	Type        string
-	Title       Option[string] // (optional)
-	Description Option[string] // (optional)
-	Url         Option[string] // (optional)
-	Thumb       TL             // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
-	Content     TL             // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
-	SendMessage TL             // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice | TL_botInlineMessageMediaWebPage
+	Title       *string // (optional)
+	Description *string // (optional)
+	Url         *string // (optional)
+	Thumb       TL      // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
+	Content     TL      // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
+	SendMessage TL      // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice | TL_botInlineMessageMediaWebPage
 }
 
 // Constructs BotInlineResult
 type TL_botInlineMediaResult struct {
 	ID          string
 	Type        string
-	Photo       TL             // (optional) Photo: TL_photoEmpty | TL_photo
-	Document    TL             // (optional) Document: TL_documentEmpty | TL_document
-	Title       Option[string] // (optional)
-	Description Option[string] // (optional)
-	SendMessage TL             // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice | TL_botInlineMessageMediaWebPage
+	Photo       TL      // (optional) Photo: TL_photoEmpty | TL_photo
+	Document    TL      // (optional) Document: TL_documentEmpty | TL_document
+	Title       *string // (optional)
+	Description *string // (optional)
+	SendMessage TL      // BotInlineMessage: TL_botInlineMessageMediaAuto | TL_botInlineMessageText | TL_botInlineMessageMediaGeo | TL_botInlineMessageMediaVenue | TL_botInlineMessageMediaContact | TL_botInlineMessageMediaInvoice | TL_botInlineMessageMediaWebPage
 }
 
 // Constructs messages.BotResults
 type TL_messages_botResults struct {
 	Gallery       bool
 	QueryID       int64
-	NextOffset    Option[string] // (optional)
-	SwitchPm      TL             // (optional) InlineBotSwitchPM: TL_inlineBotSwitchPM
-	SwitchWebview TL             // (optional) InlineBotWebView: TL_inlineBotWebView
-	Results       []TL           // BotInlineResult: TL_botInlineResult | TL_botInlineMediaResult
+	NextOffset    *string // (optional)
+	SwitchPm      TL      // (optional) InlineBotSwitchPM: TL_inlineBotSwitchPM
+	SwitchWebview TL      // (optional) InlineBotWebView: TL_inlineBotWebView
+	Results       []TL    // BotInlineResult: TL_botInlineResult | TL_botInlineMediaResult
 	CacheTime     int32
 	Users         []TL // User: TL_userEmpty | TL_user
 }
@@ -6253,14 +6253,14 @@ type TL_exportedMessageLink struct {
 // Constructs MessageFwdHeader
 type TL_messageFwdHeader struct {
 	Imported       bool
-	FromID         TL             // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	FromName       Option[string] // (optional)
+	FromID         TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	FromName       *string // (optional)
 	Date           int32
-	ChannelPost    Option[int32]  // (optional)
-	PostAuthor     Option[string] // (optional)
-	SavedFromPeer  TL             // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	SavedFromMsgID Option[int32]  // (optional)
-	PsaType        Option[string] // (optional)
+	ChannelPost    *int32  // (optional)
+	PostAuthor     *string // (optional)
+	SavedFromPeer  TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	SavedFromMsgID *int32  // (optional)
+	PsaType        *string // (optional)
 }
 
 // Constructs auth.CodeType
@@ -6315,8 +6315,8 @@ type TL_auth_sentCodeTypeEmailCode struct {
 	GoogleSigninAllowed  bool
 	EmailPattern         string
 	Length               int32
-	ResetAvailablePeriod Option[int32] // (optional)
-	ResetPendingDate     Option[int32] // (optional)
+	ResetAvailablePeriod *int32 // (optional)
+	ResetPendingDate     *int32 // (optional)
 }
 
 // Constructs auth.SentCodeType
@@ -6333,9 +6333,9 @@ type TL_auth_sentCodeTypeFragmentSms struct {
 
 // Constructs auth.SentCodeType
 type TL_auth_sentCodeTypeFirebaseSms struct {
-	Nonce       []byte         // (optional)
-	Receipt     Option[string] // (optional)
-	PushTimeout Option[int32]  // (optional)
+	Nonce       []byte  // (optional)
+	Receipt     *string // (optional)
+	PushTimeout *int32  // (optional)
 	Length      int32
 }
 
@@ -6344,8 +6344,8 @@ type TL_messages_botCallbackAnswer struct {
 	Alert     bool
 	HasUrl    bool
 	NativeUi  bool
-	Message   Option[string] // (optional)
-	Url       Option[string] // (optional)
+	Message   *string // (optional)
+	Url       *string // (optional)
 	CacheTime int32
 }
 
@@ -6446,7 +6446,7 @@ type TL_contacts_topPeersDisabled struct {
 
 // Constructs DraftMessage
 type TL_draftMessageEmpty struct {
-	Date Option[int32] // (optional)
+	Date *int32 // (optional)
 }
 
 // Constructs DraftMessage
@@ -6741,9 +6741,9 @@ type TL_pageBlockPullquote struct {
 // Constructs PageBlock
 type TL_pageBlockPhoto struct {
 	PhotoID   int64
-	Caption   TL             // PageCaption: TL_pageCaption
-	Url       Option[string] // (optional)
-	WebpageID Option[int64]  // (optional)
+	Caption   TL      // PageCaption: TL_pageCaption
+	Url       *string // (optional)
+	WebpageID *int64  // (optional)
 }
 
 // Constructs PageBlock
@@ -6763,12 +6763,12 @@ type TL_pageBlockCover struct {
 type TL_pageBlockEmbed struct {
 	FullWidth      bool
 	AllowScrolling bool
-	Url            Option[string] // (optional)
-	Html           Option[string] // (optional)
-	PosterPhotoID  Option[int64]  // (optional)
-	W              Option[int32]  // (optional)
-	H              Option[int32]  // (optional)
-	Caption        TL             // PageCaption: TL_pageCaption
+	Url            *string // (optional)
+	Html           *string // (optional)
+	PosterPhotoID  *int64  // (optional)
+	W              *int32  // (optional)
+	H              *int32  // (optional)
+	Caption        TL      // PageCaption: TL_pageCaption
 }
 
 // Constructs PageBlock
@@ -6884,10 +6884,10 @@ type TL_invoice struct {
 	EmailToProvider          bool
 	Recurring                bool
 	Currency                 string
-	Prices                   []TL           // LabeledPrice: TL_labeledPrice
-	MaxTipAmount             Option[int64]  // (optional)
-	SuggestedTipAmounts      []int64        // (optional)
-	TermsUrl                 Option[string] // (optional)
+	Prices                   []TL    // LabeledPrice: TL_labeledPrice
+	MaxTipAmount             *int64  // (optional)
+	SuggestedTipAmounts      []int64 // (optional)
+	TermsUrl                 *string // (optional)
 }
 
 // Constructs PaymentCharge
@@ -6908,10 +6908,10 @@ type TL_postAddress struct {
 
 // Constructs PaymentRequestedInfo
 type TL_paymentRequestedInfo struct {
-	Name            Option[string] // (optional)
-	Phone           Option[string] // (optional)
-	Email           Option[string] // (optional)
-	ShippingAddress TL             // (optional) PostAddress: TL_postAddress
+	Name            *string // (optional)
+	Phone           *string // (optional)
+	Email           *string // (optional)
+	ShippingAddress TL      // (optional) PostAddress: TL_postAddress
 }
 
 // Constructs PaymentSavedCredentials
@@ -6964,9 +6964,9 @@ type TL_inputWebFileGeoPointLocation struct {
 // Constructs InputWebFileLocation
 type TL_inputWebFileAudioAlbumThumbLocation struct {
 	Small     bool
-	Document  TL             // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	Title     Option[string] // (optional)
-	Performer Option[string] // (optional)
+	Document  TL      // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	Title     *string // (optional)
+	Performer *string // (optional)
 }
 
 // Constructs upload.WebFile
@@ -6990,18 +6990,18 @@ type TL_payments_paymentForm struct {
 	Invoice            TL // Invoice: TL_invoice
 	ProviderID         int64
 	Url                string
-	NativeProvider     Option[string] // (optional)
-	NativeParams       TL             // (optional) DataJSON: TL_dataJSON
-	AdditionalMethods  []TL           // (optional) PaymentFormMethod: TL_paymentFormMethod
-	SavedInfo          TL             // (optional) PaymentRequestedInfo: TL_paymentRequestedInfo
-	SavedCredentials   []TL           // (optional) PaymentSavedCredentials: TL_paymentSavedCredentialsCard
-	Users              []TL           // User: TL_userEmpty | TL_user
+	NativeProvider     *string // (optional)
+	NativeParams       TL      // (optional) DataJSON: TL_dataJSON
+	AdditionalMethods  []TL    // (optional) PaymentFormMethod: TL_paymentFormMethod
+	SavedInfo          TL      // (optional) PaymentRequestedInfo: TL_paymentRequestedInfo
+	SavedCredentials   []TL    // (optional) PaymentSavedCredentials: TL_paymentSavedCredentialsCard
+	Users              []TL    // User: TL_userEmpty | TL_user
 }
 
 // Constructs payments.ValidatedRequestedInfo
 type TL_payments_validatedRequestedInfo struct {
-	ID              Option[string] // (optional)
-	ShippingOptions []TL           // (optional) ShippingOption: TL_shippingOption
+	ID              *string // (optional)
+	ShippingOptions []TL    // (optional) ShippingOption: TL_shippingOption
 }
 
 // Constructs payments.PaymentResult
@@ -7021,11 +7021,11 @@ type TL_payments_paymentReceipt struct {
 	ProviderID       int64
 	Title            string
 	Description      string
-	Photo            TL            // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
-	Invoice          TL            // Invoice: TL_invoice
-	Info             TL            // (optional) PaymentRequestedInfo: TL_paymentRequestedInfo
-	Shipping         TL            // (optional) ShippingOption: TL_shippingOption
-	TipAmount        Option[int64] // (optional)
+	Photo            TL     // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
+	Invoice          TL     // Invoice: TL_invoice
+	Info             TL     // (optional) PaymentRequestedInfo: TL_paymentRequestedInfo
+	Shipping         TL     // (optional) ShippingOption: TL_shippingOption
+	TipAmount        *int64 // (optional)
 	Currency         string
 	TotalAmount      int64
 	CredentialsTitle string
@@ -7077,8 +7077,8 @@ type TL_shippingOption struct {
 type TL_inputStickerSetItem struct {
 	Document   TL // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
 	Emoji      string
-	MaskCoords TL             // (optional) MaskCoords: TL_maskCoords
-	Keywords   Option[string] // (optional)
+	MaskCoords TL      // (optional) MaskCoords: TL_maskCoords
+	Keywords   *string // (optional)
 }
 
 // Constructs InputPhoneCall
@@ -7100,8 +7100,8 @@ type TL_phoneCallWaiting struct {
 	Date          int32
 	AdminID       int64
 	ParticipantID int64
-	Protocol      TL            // PhoneCallProtocol: TL_phoneCallProtocol
-	ReceiveDate   Option[int32] // (optional)
+	Protocol      TL     // PhoneCallProtocol: TL_phoneCallProtocol
+	ReceiveDate   *int32 // (optional)
 }
 
 // Constructs PhoneCall
@@ -7150,8 +7150,8 @@ type TL_phoneCallDiscarded struct {
 	NeedDebug  bool
 	Video      bool
 	ID         int64
-	Reason     TL            // (optional) PhoneCallDiscardReason: TL_phoneCallDiscardReasonMissed | TL_phoneCallDiscardReasonDisconnect | TL_phoneCallDiscardReasonHangup | TL_phoneCallDiscardReasonBusy
-	Duration   Option[int32] // (optional)
+	Reason     TL     // (optional) PhoneCallDiscardReason: TL_phoneCallDiscardReasonMissed | TL_phoneCallDiscardReasonDisconnect | TL_phoneCallDiscardReasonHangup | TL_phoneCallDiscardReasonBusy
+	Duration   *int32 // (optional)
 }
 
 // Constructs PhoneConnection
@@ -7221,11 +7221,11 @@ type TL_langPackString struct {
 // Constructs LangPackString
 type TL_langPackStringPluralized struct {
 	Key        string
-	ZeroValue  Option[string] // (optional)
-	OneValue   Option[string] // (optional)
-	TwoValue   Option[string] // (optional)
-	FewValue   Option[string] // (optional)
-	ManyValue  Option[string] // (optional)
+	ZeroValue  *string // (optional)
+	OneValue   *string // (optional)
+	TwoValue   *string // (optional)
+	FewValue   *string // (optional)
+	ManyValue  *string // (optional)
 	OtherValue string
 }
 
@@ -7250,7 +7250,7 @@ type TL_langPackLanguage struct {
 	Name            string
 	NativeName      string
 	LangCode        string
-	BaseLangCode    Option[string] // (optional)
+	BaseLangCode    *string // (optional)
 	PluralCode      string
 	StringsCount    int32
 	TranslatedCount int32
@@ -7896,11 +7896,11 @@ type TL_secureCredentialsEncrypted struct {
 
 // Constructs account.AuthorizationForm
 type TL_account_authorizationForm struct {
-	RequiredTypes    []TL           // SecureRequiredType: TL_secureRequiredType | TL_secureRequiredTypeOneOf
-	Values           []TL           // SecureValue: TL_secureValue
-	Errors           []TL           // SecureValueError: TL_secureValueErrorData | TL_secureValueErrorFrontSide | TL_secureValueErrorReverseSide | TL_secureValueErrorSelfie | TL_secureValueErrorFile | TL_secureValueErrorFiles | TL_secureValueError | TL_secureValueErrorTranslationFile | TL_secureValueErrorTranslationFiles
-	Users            []TL           // User: TL_userEmpty | TL_user
-	PrivacyPolicyUrl Option[string] // (optional)
+	RequiredTypes    []TL    // SecureRequiredType: TL_secureRequiredType | TL_secureRequiredTypeOneOf
+	Values           []TL    // SecureValue: TL_secureValue
+	Errors           []TL    // SecureValueError: TL_secureValueErrorData | TL_secureValueErrorFrontSide | TL_secureValueErrorReverseSide | TL_secureValueErrorSelfie | TL_secureValueErrorFile | TL_secureValueErrorFiles | TL_secureValueError | TL_secureValueErrorTranslationFile | TL_secureValueErrorTranslationFiles
+	Users            []TL    // User: TL_userEmpty | TL_user
+	PrivacyPolicyUrl *string // (optional)
 }
 
 // Constructs account.SentEmailCode
@@ -8050,9 +8050,9 @@ type TL_pageTableCell struct {
 	AlignRight   bool
 	ValignMiddle bool
 	ValignBottom bool
-	Text         TL            // (optional) RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
-	Colspan      Option[int32] // (optional)
-	Rowspan      Option[int32] // (optional)
+	Text         TL     // (optional) RichText: TL_textEmpty | TL_textPlain | TL_textBold | TL_textItalic | TL_textUnderline | TL_textStrike | TL_textFixed | TL_textUrl | TL_textEmail | TL_textConcat | TL_textSubscript | TL_textSuperscript | TL_textMarked | TL_textPhone | TL_textImage | TL_textAnchor
+	Colspan      *int32 // (optional)
+	Rowspan      *int32 // (optional)
 }
 
 // Constructs PageTableRow
@@ -8092,11 +8092,11 @@ type TL_pageListOrderedItemBlocks struct {
 type TL_pageRelatedArticle struct {
 	Url           string
 	WebpageID     int64
-	Title         Option[string] // (optional)
-	Description   Option[string] // (optional)
-	PhotoID       Option[int64]  // (optional)
-	Author        Option[string] // (optional)
-	PublishedDate Option[int32]  // (optional)
+	Title         *string // (optional)
+	Description   *string // (optional)
+	PhotoID       *int64  // (optional)
+	Author        *string // (optional)
+	PublishedDate *int32  // (optional)
 }
 
 // Constructs Page
@@ -8105,10 +8105,10 @@ type TL_page struct {
 	Rtl       bool
 	V2        bool
 	Url       string
-	Blocks    []TL          // PageBlock: TL_pageBlockUnsupported | TL_pageBlockTitle | TL_pageBlockSubtitle | TL_pageBlockAuthorDate | TL_pageBlockHeader | TL_pageBlockSubheader | TL_pageBlockParagraph | TL_pageBlockPreformatted | TL_pageBlockFooter | TL_pageBlockDivider | TL_pageBlockAnchor | TL_pageBlockList | TL_pageBlockBlockquote | TL_pageBlockPullquote | TL_pageBlockPhoto | TL_pageBlockVideo | TL_pageBlockCover | TL_pageBlockEmbed | TL_pageBlockEmbedPost | TL_pageBlockCollage | TL_pageBlockSlideshow | TL_pageBlockChannel | TL_pageBlockAudio | TL_pageBlockKicker | TL_pageBlockTable | TL_pageBlockOrderedList | TL_pageBlockDetails | TL_pageBlockRelatedArticles | TL_pageBlockMap
-	Photos    []TL          // Photo: TL_photoEmpty | TL_photo
-	Documents []TL          // Document: TL_documentEmpty | TL_document
-	Views     Option[int32] // (optional)
+	Blocks    []TL   // PageBlock: TL_pageBlockUnsupported | TL_pageBlockTitle | TL_pageBlockSubtitle | TL_pageBlockAuthorDate | TL_pageBlockHeader | TL_pageBlockSubheader | TL_pageBlockParagraph | TL_pageBlockPreformatted | TL_pageBlockFooter | TL_pageBlockDivider | TL_pageBlockAnchor | TL_pageBlockList | TL_pageBlockBlockquote | TL_pageBlockPullquote | TL_pageBlockPhoto | TL_pageBlockVideo | TL_pageBlockCover | TL_pageBlockEmbed | TL_pageBlockEmbedPost | TL_pageBlockCollage | TL_pageBlockSlideshow | TL_pageBlockChannel | TL_pageBlockAudio | TL_pageBlockKicker | TL_pageBlockTable | TL_pageBlockOrderedList | TL_pageBlockDetails | TL_pageBlockRelatedArticles | TL_pageBlockMap
+	Photos    []TL   // Photo: TL_photoEmpty | TL_photo
+	Documents []TL   // Document: TL_documentEmpty | TL_document
+	Views     *int32 // (optional)
 }
 
 // Constructs help.SupportName
@@ -8142,9 +8142,9 @@ type TL_poll struct {
 	MultipleChoice bool
 	Quiz           bool
 	Question       string
-	Answers        []TL          // PollAnswer: TL_pollAnswer
-	ClosePeriod    Option[int32] // (optional)
-	CloseDate      Option[int32] // (optional)
+	Answers        []TL   // PollAnswer: TL_pollAnswer
+	ClosePeriod    *int32 // (optional)
+	CloseDate      *int32 // (optional)
 }
 
 // Constructs PollAnswerVoters
@@ -8158,11 +8158,11 @@ type TL_pollAnswerVoters struct {
 // Constructs PollResults
 type TL_pollResults struct {
 	Min              bool
-	Results          []TL           // (optional) PollAnswerVoters: TL_pollAnswerVoters
-	TotalVoters      Option[int32]  // (optional)
-	RecentVoters     []TL           // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	Solution         Option[string] // (optional)
-	SolutionEntities []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Results          []TL    // (optional) PollAnswerVoters: TL_pollAnswerVoters
+	TotalVoters      *int32  // (optional)
+	RecentVoters     []TL    // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Solution         *string // (optional)
+	SolutionEntities []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 // Constructs ChatOnlines
@@ -8252,21 +8252,21 @@ type TL_codeSettings struct {
 	AllowAppHash    bool
 	AllowMissedCall bool
 	AllowFirebase   bool
-	LogoutTokens    [][]byte       // (optional)
-	Token           Option[string] // (optional)
-	AppSandbox      Option[bool]   // (optional)
+	LogoutTokens    [][]byte // (optional)
+	Token           *string  // (optional)
+	AppSandbox      *bool    // (optional)
 }
 
 // Constructs WallPaperSettings
 type TL_wallPaperSettings struct {
 	Blur                  bool
 	Motion                bool
-	BackgroundColor       Option[int32] // (optional)
-	SecondBackgroundColor Option[int32] // (optional)
-	ThirdBackgroundColor  Option[int32] // (optional)
-	FourthBackgroundColor Option[int32] // (optional)
-	Intensity             Option[int32] // (optional)
-	Rotation              Option[int32] // (optional)
+	BackgroundColor       *int32 // (optional)
+	SecondBackgroundColor *int32 // (optional)
+	ThirdBackgroundColor  *int32 // (optional)
+	FourthBackgroundColor *int32 // (optional)
+	Intensity             *int32 // (optional)
+	Rotation              *int32 // (optional)
 }
 
 // Constructs AutoDownloadSettings
@@ -8415,10 +8415,10 @@ type TL_theme struct {
 	AccessHash    int64
 	Slug          string
 	Title         string
-	Document      TL             // (optional) Document: TL_documentEmpty | TL_document
-	Settings      []TL           // (optional) ThemeSettings: TL_themeSettings
-	Emoticon      Option[string] // (optional)
-	InstallsCount Option[int32]  // (optional)
+	Document      TL      // (optional) Document: TL_documentEmpty | TL_document
+	Settings      []TL    // (optional) ThemeSettings: TL_themeSettings
+	Emoticon      *string // (optional)
+	InstallsCount *int32  // (optional)
 }
 
 // Constructs account.Themes
@@ -8486,10 +8486,10 @@ type TL_inputThemeSettings struct {
 	MessageColorsAnimated bool
 	BaseTheme             TL // BaseTheme: TL_baseThemeClassic | TL_baseThemeDay | TL_baseThemeNight | TL_baseThemeTinted | TL_baseThemeArctic
 	AccentColor           int32
-	OutboxAccentColor     Option[int32] // (optional)
-	MessageColors         []int32       // (optional)
-	Wallpaper             TL            // (optional) InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
-	WallpaperSettings     TL            // (optional) WallPaperSettings: TL_wallPaperSettings
+	OutboxAccentColor     *int32  // (optional)
+	MessageColors         []int32 // (optional)
+	Wallpaper             TL      // (optional) InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
+	WallpaperSettings     TL      // (optional) WallPaperSettings: TL_wallPaperSettings
 }
 
 // Constructs ThemeSettings
@@ -8497,9 +8497,9 @@ type TL_themeSettings struct {
 	MessageColorsAnimated bool
 	BaseTheme             TL // BaseTheme: TL_baseThemeClassic | TL_baseThemeDay | TL_baseThemeNight | TL_baseThemeTinted | TL_baseThemeArctic
 	AccentColor           int32
-	OutboxAccentColor     Option[int32] // (optional)
-	MessageColors         []int32       // (optional)
-	Wallpaper             TL            // (optional) WallPaper: TL_wallPaper | TL_wallPaperNoFile
+	OutboxAccentColor     *int32  // (optional)
+	MessageColors         []int32 // (optional)
+	Wallpaper             TL      // (optional) WallPaper: TL_wallPaper | TL_wallPaperNoFile
 }
 
 // Constructs WebPageAttribute
@@ -8518,10 +8518,10 @@ type TL_webPageAttributeStory struct {
 // Constructs messages.VotesList
 type TL_messages_votesList struct {
 	Count      int32
-	Votes      []TL           // MessagePeerVote: TL_messagePeerVote | TL_messagePeerVoteInputOption | TL_messagePeerVoteMultiple
-	Chats      []TL           // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users      []TL           // User: TL_userEmpty | TL_user
-	NextOffset Option[string] // (optional)
+	Votes      []TL    // MessagePeerVote: TL_messagePeerVote | TL_messagePeerVoteInputOption | TL_messagePeerVoteMultiple
+	Chats      []TL    // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users      []TL    // User: TL_userEmpty | TL_user
+	NextOffset *string // (optional)
 }
 
 // Constructs BankCardOpenUrl
@@ -8548,10 +8548,10 @@ type TL_dialogFilter struct {
 	ExcludeArchived bool
 	ID              int32
 	Title           string
-	Emoticon        Option[string] // (optional)
-	PinnedPeers     []TL           // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	IncludePeers    []TL           // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	ExcludePeers    []TL           // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Emoticon        *string // (optional)
+	PinnedPeers     []TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	IncludePeers    []TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ExcludePeers    []TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Constructs DialogFilter
@@ -8563,9 +8563,9 @@ type TL_dialogFilterChatlist struct {
 	HasMyInvites bool
 	ID           int32
 	Title        string
-	Emoticon     Option[string] // (optional)
-	PinnedPeers  []TL           // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	IncludePeers []TL           // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Emoticon     *string // (optional)
+	PinnedPeers  []TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	IncludePeers []TL    // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Constructs DialogFilterSuggested
@@ -8604,8 +8604,8 @@ type TL_statsGraphError struct {
 
 // Constructs StatsGraph
 type TL_statsGraph struct {
-	Json      TL             // DataJSON: TL_dataJSON
-	ZoomToken Option[string] // (optional)
+	Json      TL      // DataJSON: TL_dataJSON
+	ZoomToken *string // (optional)
 }
 
 // Constructs MessageInteractionCounters
@@ -8643,11 +8643,11 @@ type TL_help_promoDataEmpty struct {
 type TL_help_promoData struct {
 	Proxy      bool
 	Expires    int32
-	Peer       TL             // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	Chats      []TL           // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users      []TL           // User: TL_userEmpty | TL_user
-	PsaType    Option[string] // (optional)
-	PsaMessage Option[string] // (optional)
+	Peer       TL      // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Chats      []TL    // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users      []TL    // User: TL_userEmpty | TL_user
+	PsaType    *string // (optional)
+	PsaMessage *string // (optional)
 }
 
 // Constructs VideoSize
@@ -8656,7 +8656,7 @@ type TL_videoSize struct {
 	W            int32
 	H            int32
 	Size         int32
-	VideoStartTs Option[float64] // (optional)
+	VideoStartTs *float64 // (optional)
 }
 
 // Constructs VideoSize
@@ -8733,8 +8733,8 @@ type TL_help_country struct {
 	Hidden       bool
 	Iso2         string
 	DefaultName  string
-	Name         Option[string] // (optional)
-	CountryCodes []TL           // help.CountryCode: TL_help_countryCode
+	Name         *string // (optional)
+	CountryCodes []TL    // help.CountryCode: TL_help_countryCode
 }
 
 // Constructs help.CountriesList
@@ -8749,9 +8749,9 @@ type TL_help_countriesList struct {
 
 // Constructs MessageViews
 type TL_messageViews struct {
-	Views    Option[int32] // (optional)
-	Forwards Option[int32] // (optional)
-	Replies  TL            // (optional) MessageReplies: TL_messageReplies
+	Views    *int32 // (optional)
+	Forwards *int32 // (optional)
+	Replies  TL     // (optional) MessageReplies: TL_messageReplies
 }
 
 // Constructs messages.MessageViews
@@ -8763,10 +8763,10 @@ type TL_messages_messageViews struct {
 
 // Constructs messages.DiscussionMessage
 type TL_messages_discussionMessage struct {
-	Messages        []TL          // Message: TL_messageEmpty | TL_message | TL_messageService
-	MaxID           Option[int32] // (optional)
-	ReadInboxMaxID  Option[int32] // (optional)
-	ReadOutboxMaxID Option[int32] // (optional)
+	Messages        []TL   // Message: TL_messageEmpty | TL_message | TL_messageService
+	MaxID           *int32 // (optional)
+	ReadInboxMaxID  *int32 // (optional)
+	ReadOutboxMaxID *int32 // (optional)
 	UnreadCount     int32
 	Chats           []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users           []TL // User: TL_userEmpty | TL_user
@@ -8777,13 +8777,13 @@ type TL_messageReplyHeader struct {
 	ReplyToScheduled bool
 	ForumTopic       bool
 	Quote            bool
-	ReplyToMsgID     Option[int32]  // (optional)
-	ReplyToPeerID    TL             // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	ReplyFrom        TL             // (optional) MessageFwdHeader: TL_messageFwdHeader
-	ReplyMedia       TL             // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
-	ReplyToTopID     Option[int32]  // (optional)
-	QuoteText        Option[string] // (optional)
-	QuoteEntities    []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	ReplyToMsgID     *int32  // (optional)
+	ReplyToPeerID    TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	ReplyFrom        TL      // (optional) MessageFwdHeader: TL_messageFwdHeader
+	ReplyMedia       TL      // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
+	ReplyToTopID     *int32  // (optional)
+	QuoteText        *string // (optional)
+	QuoteEntities    []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 // Constructs MessageReplyHeader
@@ -8797,10 +8797,10 @@ type TL_messageReplies struct {
 	Comments       bool
 	Replies        int32
 	RepliesPts     int32
-	RecentRepliers []TL          // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	ChannelID      Option[int64] // (optional)
-	MaxID          Option[int32] // (optional)
-	ReadMaxID      Option[int32] // (optional)
+	RecentRepliers []TL   // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	ChannelID      *int64 // (optional)
+	MaxID          *int32 // (optional)
+	ReadMaxID      *int32 // (optional)
 }
 
 // Constructs PeerBlocked
@@ -8834,11 +8834,11 @@ type TL_groupCall struct {
 	ID                      int64
 	AccessHash              int64
 	ParticipantsCount       int32
-	Title                   Option[string] // (optional)
-	StreamDcID              Option[int32]  // (optional)
-	RecordStartDate         Option[int32]  // (optional)
-	ScheduleDate            Option[int32]  // (optional)
-	UnmutedVideoCount       Option[int32]  // (optional)
+	Title                   *string // (optional)
+	StreamDcID              *int32  // (optional)
+	RecordStartDate         *int32  // (optional)
+	ScheduleDate            *int32  // (optional)
+	UnmutedVideoCount       *int32  // (optional)
 	UnmutedVideoLimit       int32
 	Version                 int32
 }
@@ -8863,13 +8863,13 @@ type TL_groupCallParticipant struct {
 	VideoJoined     bool
 	Peer            TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Date            int32
-	ActiveDate      Option[int32] // (optional)
+	ActiveDate      *int32 // (optional)
 	Source          int32
-	Volume          Option[int32]  // (optional)
-	About           Option[string] // (optional)
-	RaiseHandRating Option[int64]  // (optional)
-	Video           TL             // (optional) GroupCallParticipantVideo: TL_groupCallParticipantVideo
-	Presentation    TL             // (optional) GroupCallParticipantVideo: TL_groupCallParticipantVideo
+	Volume          *int32  // (optional)
+	About           *string // (optional)
+	RaiseHandRating *int64  // (optional)
+	Video           TL      // (optional) GroupCallParticipantVideo: TL_groupCallParticipantVideo
+	Presentation    TL      // (optional) GroupCallParticipantVideo: TL_groupCallParticipantVideo
 }
 
 // Constructs phone.GroupCall
@@ -8924,7 +8924,7 @@ type TL_messages_historyImport struct {
 type TL_messages_historyImportParsed struct {
 	Pm    bool
 	Group bool
-	Title Option[string] // (optional)
+	Title *string // (optional)
 }
 
 // Constructs messages.AffectedFoundMessages
@@ -8941,8 +8941,8 @@ type TL_chatInviteImporter struct {
 	ViaChatlist bool
 	UserID      int64
 	Date        int32
-	About       Option[string] // (optional)
-	ApprovedBy  Option[int64]  // (optional)
+	About       *string // (optional)
+	ApprovedBy  *int64  // (optional)
 }
 
 // Constructs messages.ExportedChatInvites
@@ -9012,8 +9012,8 @@ type TL_groupCallParticipantVideoSourceGroup struct {
 type TL_groupCallParticipantVideo struct {
 	Paused       bool
 	Endpoint     string
-	SourceGroups []TL          // GroupCallParticipantVideoSourceGroup: TL_groupCallParticipantVideoSourceGroup
-	AudioSource  Option[int32] // (optional)
+	SourceGroups []TL   // GroupCallParticipantVideoSourceGroup: TL_groupCallParticipantVideoSourceGroup
+	AudioSource  *int32 // (optional)
 }
 
 // Constructs stickers.SuggestedShortName
@@ -9072,24 +9072,24 @@ type TL_sponsoredMessage struct {
 	Recommended    bool
 	ShowPeerPhoto  bool
 	RandomID       []byte
-	FromID         TL             // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	ChatInvite     TL             // (optional) ChatInvite: TL_chatInviteAlready | TL_chatInvite | TL_chatInvitePeek
-	ChatInviteHash Option[string] // (optional)
-	ChannelPost    Option[int32]  // (optional)
-	StartParam     Option[string] // (optional)
-	Webpage        TL             // (optional) SponsoredWebPage: TL_sponsoredWebPage
+	FromID         TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	ChatInvite     TL      // (optional) ChatInvite: TL_chatInviteAlready | TL_chatInvite | TL_chatInvitePeek
+	ChatInviteHash *string // (optional)
+	ChannelPost    *int32  // (optional)
+	StartParam     *string // (optional)
+	Webpage        TL      // (optional) SponsoredWebPage: TL_sponsoredWebPage
 	Message        string
-	Entities       []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	SponsorInfo    Option[string] // (optional)
-	AdditionalInfo Option[string] // (optional)
+	Entities       []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	SponsorInfo    *string // (optional)
+	AdditionalInfo *string // (optional)
 }
 
 // Constructs messages.SponsoredMessages
 type TL_messages_sponsoredMessages struct {
-	PostsBetween Option[int32] // (optional)
-	Messages     []TL          // SponsoredMessage: TL_sponsoredMessage
-	Chats        []TL          // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users        []TL          // User: TL_userEmpty | TL_user
+	PostsBetween *int32 // (optional)
+	Messages     []TL   // SponsoredMessage: TL_sponsoredMessage
+	Chats        []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users        []TL   // User: TL_userEmpty | TL_user
 }
 
 // Constructs messages.SponsoredMessages
@@ -9110,11 +9110,11 @@ type TL_messages_searchResultsCalendar struct {
 	Count          int32
 	MinDate        int32
 	MinMsgID       int32
-	OffsetIdOffset Option[int32] // (optional)
-	Periods        []TL          // SearchResultsCalendarPeriod: TL_searchResultsCalendarPeriod
-	Messages       []TL          // Message: TL_messageEmpty | TL_message | TL_messageService
-	Chats          []TL          // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users          []TL          // User: TL_userEmpty | TL_user
+	OffsetIdOffset *int32 // (optional)
+	Periods        []TL   // SearchResultsCalendarPeriod: TL_searchResultsCalendarPeriod
+	Messages       []TL   // Message: TL_messageEmpty | TL_message | TL_messageService
+	Chats          []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users          []TL   // User: TL_userEmpty | TL_user
 }
 
 // Constructs SearchResultsPosition
@@ -9158,8 +9158,8 @@ type TL_auth_loggedOut struct {
 
 // Constructs ReactionCount
 type TL_reactionCount struct {
-	ChosenOrder Option[int32] // (optional)
-	Reaction    TL            // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+	ChosenOrder *int32 // (optional)
+	Reaction    TL     // Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 	Count       int32
 }
 
@@ -9174,10 +9174,10 @@ type TL_messageReactions struct {
 // Constructs messages.MessageReactionsList
 type TL_messages_messageReactionsList struct {
 	Count      int32
-	Reactions  []TL           // MessagePeerReaction: TL_messagePeerReaction
-	Chats      []TL           // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users      []TL           // User: TL_userEmpty | TL_user
-	NextOffset Option[string] // (optional)
+	Reactions  []TL    // MessagePeerReaction: TL_messagePeerReaction
+	Chats      []TL    // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users      []TL    // User: TL_userEmpty | TL_user
+	NextOffset *string // (optional)
 }
 
 // Constructs AvailableReaction
@@ -9443,7 +9443,7 @@ type TL_premiumGiftOption struct {
 	Currency     string
 	Amount       int64
 	BotUrl       string
-	StoreProduct Option[string] // (optional)
+	StoreProduct *string // (optional)
 }
 
 // Constructs PaymentFormMethod
@@ -9559,12 +9559,12 @@ type TL_account_emailVerifiedLogin struct {
 type TL_premiumSubscriptionOption struct {
 	Current            bool
 	CanPurchaseUpgrade bool
-	Transaction        Option[string] // (optional)
+	Transaction        *string // (optional)
 	Months             int32
 	Currency           string
 	Amount             int64
 	BotUrl             string
-	StoreProduct       Option[string] // (optional)
+	StoreProduct       *string // (optional)
 }
 
 // Constructs SendAsPeer
@@ -9575,10 +9575,10 @@ type TL_sendAsPeer struct {
 
 // Constructs MessageExtendedMedia
 type TL_messageExtendedMediaPreview struct {
-	W             Option[int32] // (optional)
-	H             Option[int32] // (optional)
-	Thumb         TL            // (optional) PhotoSize: TL_photoSizeEmpty | TL_photoSize | TL_photoCachedSize | TL_photoStrippedSize | TL_photoSizeProgressive | TL_photoPathSize
-	VideoDuration Option[int32] // (optional)
+	W             *int32 // (optional)
+	H             *int32 // (optional)
+	Thumb         TL     // (optional) PhotoSize: TL_photoSizeEmpty | TL_photoSize | TL_photoCachedSize | TL_photoStrippedSize | TL_photoSizeProgressive | TL_photoPathSize
+	VideoDuration *int32 // (optional)
 }
 
 // Constructs MessageExtendedMedia
@@ -9615,7 +9615,7 @@ type TL_forumTopic struct {
 	Date                 int32
 	Title                string
 	IconColor            int32
-	IconEmojiID          Option[int64] // (optional)
+	IconEmojiID          *int64 // (optional)
 	TopMessage           int32
 	ReadInboxMaxID       int32
 	ReadOutboxMaxID      int32
@@ -9651,26 +9651,26 @@ type TL_exportedContactToken struct {
 
 // Constructs RequestPeerType
 type TL_requestPeerTypeUser struct {
-	Bot     Option[bool] // (optional)
-	Premium Option[bool] // (optional)
+	Bot     *bool // (optional)
+	Premium *bool // (optional)
 }
 
 // Constructs RequestPeerType
 type TL_requestPeerTypeChat struct {
 	Creator         bool
 	BotParticipant  bool
-	HasUsername     Option[bool] // (optional)
-	Forum           Option[bool] // (optional)
-	UserAdminRights TL           // (optional) ChatAdminRights: TL_chatAdminRights
-	BotAdminRights  TL           // (optional) ChatAdminRights: TL_chatAdminRights
+	HasUsername     *bool // (optional)
+	Forum           *bool // (optional)
+	UserAdminRights TL    // (optional) ChatAdminRights: TL_chatAdminRights
+	BotAdminRights  TL    // (optional) ChatAdminRights: TL_chatAdminRights
 }
 
 // Constructs RequestPeerType
 type TL_requestPeerTypeBroadcast struct {
 	Creator         bool
-	HasUsername     Option[bool] // (optional)
-	UserAdminRights TL           // (optional) ChatAdminRights: TL_chatAdminRights
-	BotAdminRights  TL           // (optional) ChatAdminRights: TL_chatAdminRights
+	HasUsername     *bool // (optional)
+	UserAdminRights TL    // (optional) ChatAdminRights: TL_chatAdminRights
+	BotAdminRights  TL    // (optional) ChatAdminRights: TL_chatAdminRights
 }
 
 // Constructs EmojiList
@@ -9715,7 +9715,7 @@ type TL_messages_translateResult struct {
 type TL_autoSaveSettings struct {
 	Photos       bool
 	Videos       bool
-	VideoMaxSize Option[int64] // (optional)
+	VideoMaxSize *int64 // (optional)
 }
 
 // Constructs AutoSaveException
@@ -9834,10 +9834,10 @@ type TL_chatlists_chatlistInviteAlready struct {
 // Constructs chatlists.ChatlistInvite
 type TL_chatlists_chatlistInvite struct {
 	Title    string
-	Emoticon Option[string] // (optional)
-	Peers    []TL           // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	Chats    []TL           // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users    []TL           // User: TL_userEmpty | TL_user
+	Emoticon *string // (optional)
+	Peers    []TL    // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Chats    []TL    // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users    []TL    // User: TL_userEmpty | TL_user
 }
 
 // Constructs chatlists.ChatlistUpdates
@@ -9885,10 +9885,10 @@ type TL_sponsoredWebPage struct {
 type TL_storyViews struct {
 	HasViewers     bool
 	ViewsCount     int32
-	ForwardsCount  Option[int32] // (optional)
-	Reactions      []TL          // (optional) ReactionCount: TL_reactionCount
-	ReactionsCount Option[int32] // (optional)
-	RecentViewers  []int64       // (optional)
+	ForwardsCount  *int32  // (optional)
+	Reactions      []TL    // (optional) ReactionCount: TL_reactionCount
+	ReactionsCount *int32  // (optional)
+	RecentViewers  []int64 // (optional)
 }
 
 // Constructs StoryItem
@@ -9918,13 +9918,13 @@ type TL_storyItem struct {
 	ID               int32
 	Date             int32
 	ExpireDate       int32
-	Caption          Option[string] // (optional)
-	Entities         []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	Media            TL             // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
-	MediaAreas       []TL           // (optional) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
-	Privacy          []TL           // (optional) PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants | TL_privacyValueAllowCloseFriends
-	Views            TL             // (optional) StoryViews: TL_storyViews
-	SentReaction     TL             // (optional) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+	Caption          *string // (optional)
+	Entities         []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Media            TL      // MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
+	MediaAreas       []TL    // (optional) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
+	Privacy          []TL    // (optional) PrivacyRule: TL_privacyValueAllowContacts | TL_privacyValueAllowAll | TL_privacyValueAllowUsers | TL_privacyValueDisallowContacts | TL_privacyValueDisallowAll | TL_privacyValueDisallowUsers | TL_privacyValueAllowChatParticipants | TL_privacyValueDisallowChatParticipants | TL_privacyValueAllowCloseFriends
+	Views            TL      // (optional) StoryViews: TL_storyViews
+	SentReaction     TL      // (optional) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
 }
 
 // Constructs stories.AllStories
@@ -9965,9 +9965,9 @@ type TL_storyView struct {
 type TL_stories_storyViewsList struct {
 	Count          int32
 	ReactionsCount int32
-	Views          []TL           // StoryView: TL_storyView
-	Users          []TL           // User: TL_userEmpty | TL_user
-	NextOffset     Option[string] // (optional)
+	Views          []TL    // StoryView: TL_storyView
+	Users          []TL    // User: TL_userEmpty | TL_user
+	NextOffset     *string // (optional)
 }
 
 // Constructs stories.StoryViews
@@ -9979,10 +9979,10 @@ type TL_stories_storyViews struct {
 // Constructs InputReplyTo
 type TL_inputReplyToMessage struct {
 	ReplyToMsgID  int32
-	TopMsgID      Option[int32]  // (optional)
-	ReplyToPeerID TL             // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	QuoteText     Option[string] // (optional)
-	QuoteEntities []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	TopMsgID      *int32  // (optional)
+	ReplyToPeerID TL      // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	QuoteText     *string // (optional)
+	QuoteEntities []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 // Constructs InputReplyTo
@@ -9998,8 +9998,8 @@ type TL_exportedStoryLink struct {
 
 // Constructs StoriesStealthMode
 type TL_storiesStealthMode struct {
-	ActiveUntilDate   Option[int32] // (optional)
-	CooldownUntilDate Option[int32] // (optional)
+	ActiveUntilDate   *int32 // (optional)
+	CooldownUntilDate *int32 // (optional)
 }
 
 // Constructs MediaAreaCoordinates
@@ -10045,9 +10045,9 @@ type TL_mediaAreaSuggestedReaction struct {
 
 // Constructs PeerStories
 type TL_peerStories struct {
-	Peer      TL            // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	MaxReadID Option[int32] // (optional)
-	Stories   []TL          // StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
+	Peer      TL     // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	MaxReadID *int32 // (optional)
+	Stories   []TL   // StoryItem: TL_storyItemDeleted | TL_storyItemSkipped | TL_storyItem
 }
 
 // Constructs stories.PeerStories
@@ -10068,8 +10068,8 @@ type TL_messages_webPage struct {
 type TL_premiumGiftCodeOption struct {
 	Users         int32
 	Months        int32
-	StoreProduct  Option[string] // (optional)
-	StoreQuantity Option[int32]  // (optional)
+	StoreProduct  *string // (optional)
+	StoreQuantity *int32  // (optional)
 	Currency      string
 	Amount        int64
 }
@@ -10077,14 +10077,14 @@ type TL_premiumGiftCodeOption struct {
 // Constructs payments.CheckedGiftCode
 type TL_payments_checkedGiftCode struct {
 	ViaGiveaway   bool
-	FromID        TL            // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	GiveawayMsgID Option[int32] // (optional)
-	ToID          Option[int64] // (optional)
+	FromID        TL     // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	GiveawayMsgID *int32 // (optional)
+	ToID          *int64 // (optional)
 	Date          int32
 	Months        int32
-	UsedDate      Option[int32] // (optional)
-	Chats         []TL          // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
-	Users         []TL          // User: TL_userEmpty | TL_user
+	UsedDate      *int32 // (optional)
+	Chats         []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
+	Users         []TL   // User: TL_userEmpty | TL_user
 }
 
 // Constructs payments.GiveawayInfo
@@ -10092,9 +10092,9 @@ type TL_payments_giveawayInfo struct {
 	Participating         bool
 	PreparingResults      bool
 	StartDate             int32
-	JoinedTooEarlyDate    Option[int32]  // (optional)
-	AdminDisallowedChatID Option[int64]  // (optional)
-	DisallowedCountry     Option[string] // (optional)
+	JoinedTooEarlyDate    *int32  // (optional)
+	AdminDisallowedChatID *int64  // (optional)
+	DisallowedCountry     *string // (optional)
 }
 
 // Constructs payments.GiveawayInfo
@@ -10102,7 +10102,7 @@ type TL_payments_giveawayInfoResults struct {
 	Winner         bool
 	Refunded       bool
 	StartDate      int32
-	GiftCodeSlug   Option[string] // (optional)
+	GiftCodeSlug   *string // (optional)
 	FinishDate     int32
 	WinnersCount   int32
 	ActivatedCount int32
@@ -10122,20 +10122,20 @@ type TL_boost struct {
 	Giveaway      bool
 	Unclaimed     bool
 	ID            string
-	UserID        Option[int64] // (optional)
-	GiveawayMsgID Option[int32] // (optional)
+	UserID        *int64 // (optional)
+	GiveawayMsgID *int32 // (optional)
 	Date          int32
 	Expires       int32
-	UsedGiftSlug  Option[string] // (optional)
-	Multiplier    Option[int32]  // (optional)
+	UsedGiftSlug  *string // (optional)
+	Multiplier    *int32  // (optional)
 }
 
 // Constructs premium.BoostsList
 type TL_premium_boostsList struct {
 	Count      int32
-	Boosts     []TL           // Boost: TL_boost
-	NextOffset Option[string] // (optional)
-	Users      []TL           // User: TL_userEmpty | TL_user
+	Boosts     []TL    // Boost: TL_boost
+	NextOffset *string // (optional)
+	Users      []TL    // User: TL_userEmpty | TL_user
 }
 
 // Constructs MyBoost
@@ -10144,7 +10144,7 @@ type TL_myBoost struct {
 	Peer              TL // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Date              int32
 	Expires           int32
-	CooldownUntilDate Option[int32] // (optional)
+	CooldownUntilDate *int32 // (optional)
 }
 
 // Constructs premium.MyBoosts
@@ -10160,9 +10160,9 @@ type TL_premium_boostsStatus struct {
 	Level              int32
 	CurrentLevelBoosts int32
 	Boosts             int32
-	GiftBoosts         Option[int32] // (optional)
-	NextLevelBoosts    Option[int32] // (optional)
-	PremiumAudience    TL            // (optional) StatsPercentValue: TL_statsPercentValue
+	GiftBoosts         *int32 // (optional)
+	NextLevelBoosts    *int32 // (optional)
+	PremiumAudience    TL     // (optional) StatsPercentValue: TL_statsPercentValue
 	BoostUrl           string
 	PrepaidGiveaways   []TL    // (optional) PrepaidGiveaway: TL_prepaidGiveaway
 	MyBoostSlots       []int32 // (optional)
@@ -10237,8 +10237,8 @@ type TL_auth_signUp struct {
 type TL_auth_signIn struct {
 	PhoneNumber       string
 	PhoneCodeHash     string
-	PhoneCode         Option[string] // (optional)
-	EmailVerification TL             // (optional) EmailVerification: TL_emailVerificationCode | TL_emailVerificationGoogle | TL_emailVerificationApple
+	PhoneCode         *string // (optional)
+	EmailVerification TL      // (optional) EmailVerification: TL_emailVerificationCode | TL_emailVerificationGoogle | TL_emailVerificationApple
 }
 
 // Returns auth.LoggedOut: TL_auth_loggedOut
@@ -10341,8 +10341,8 @@ type TL_auth_importWebTokenAuthorization struct {
 type TL_auth_requestFirebaseSms struct {
 	PhoneNumber    string
 	PhoneCodeHash  string
-	SafetyNetToken Option[string] // (optional)
-	IosPushSecret  Option[string] // (optional)
+	SafetyNetToken *string // (optional)
+	IosPushSecret  *string // (optional)
 }
 
 // Returns auth.SentCode: TL_auth_sentCode | TL_auth_sentCodeSuccess
@@ -10385,9 +10385,9 @@ type TL_account_resetNotifySettings struct {
 
 // Returns User: TL_userEmpty | TL_user
 type TL_account_updateProfile struct {
-	FirstName Option[string] // (optional)
-	LastName  Option[string] // (optional)
-	About     Option[string] // (optional)
+	FirstName *string // (optional)
+	LastName  *string // (optional)
+	About     *string // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -10585,7 +10585,7 @@ type TL_account_initTakeoutSession struct {
 	MessageMegagroups bool
 	MessageChannels   bool
 	Files             bool
-	FileMaxSize       Option[int64] // (optional)
+	FileMaxSize       *int64 // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -10682,11 +10682,11 @@ type TL_account_createTheme struct {
 // Returns Theme: TL_theme
 type TL_account_updateTheme struct {
 	Format   string
-	Theme    TL             // InputTheme: TL_inputTheme | TL_inputThemeSlug
-	Slug     Option[string] // (optional)
-	Title    Option[string] // (optional)
-	Document TL             // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	Settings []TL           // (optional) InputThemeSettings: TL_inputThemeSettings
+	Theme    TL      // InputTheme: TL_inputTheme | TL_inputThemeSlug
+	Slug     *string // (optional)
+	Title    *string // (optional)
+	Document TL      // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	Settings []TL    // (optional) InputThemeSettings: TL_inputThemeSettings
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -10698,9 +10698,9 @@ type TL_account_saveTheme struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_installTheme struct {
 	Dark      bool
-	Theme     TL             // (optional) InputTheme: TL_inputTheme | TL_inputThemeSlug
-	Format    Option[string] // (optional)
-	BaseTheme TL             // (optional) BaseTheme: TL_baseThemeClassic | TL_baseThemeDay | TL_baseThemeNight | TL_baseThemeTinted | TL_baseThemeArctic
+	Theme     TL      // (optional) InputTheme: TL_inputTheme | TL_inputThemeSlug
+	Format    *string // (optional)
+	BaseTheme TL      // (optional) BaseTheme: TL_baseThemeClassic | TL_baseThemeDay | TL_baseThemeNight | TL_baseThemeTinted | TL_baseThemeArctic
 }
 
 // Returns Theme: TL_theme
@@ -10768,8 +10768,8 @@ type TL_account_setAuthorizationTTL struct {
 type TL_account_changeAuthorizationSettings struct {
 	Confirmed                 bool
 	Hash                      int64
-	EncryptedRequestsDisabled Option[bool] // (optional)
-	CallRequestsDisabled      Option[bool] // (optional)
+	EncryptedRequestsDisabled *bool // (optional)
+	CallRequestsDisabled      *bool // (optional)
 }
 
 // Returns account.SavedRingtones: TL_account_savedRingtonesNotModified | TL_account_savedRingtones
@@ -10855,7 +10855,7 @@ type TL_account_invalidateSignInCodes struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_account_updateColor struct {
 	Color             int32
-	BackgroundEmojiID Option[int64] // (optional)
+	BackgroundEmojiID *int64 // (optional)
 }
 
 // Returns EmojiList: TL_emojiListNotModified | TL_emojiList
@@ -10989,8 +10989,8 @@ type TL_contacts_acceptContact struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_contacts_getLocated struct {
 	Background  bool
-	GeoPoint    TL            // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
-	SelfExpires Option[int32] // (optional)
+	GeoPoint    TL     // InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
+	SelfExpires *int32 // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -11035,7 +11035,7 @@ type TL_messages_getMessages struct {
 // Returns messages.Dialogs: TL_messages_dialogs | TL_messages_dialogsSlice | TL_messages_dialogsNotModified
 type TL_messages_getDialogs struct {
 	ExcludePinned bool
-	FolderID      Option[int32] // (optional)
+	FolderID      *int32 // (optional)
 	OffsetDate    int32
 	OffsetID      int32
 	OffsetPeer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -11059,9 +11059,9 @@ type TL_messages_getHistory struct {
 type TL_messages_search struct {
 	Peer      TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Q         string
-	FromID    TL            // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID  Option[int32] // (optional)
-	Filter    TL            // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
+	FromID    TL     // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID  *int32 // (optional)
+	Filter    TL     // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
 	MinDate   int32
 	MaxDate   int32
 	OffsetID  int32
@@ -11084,8 +11084,8 @@ type TL_messages_deleteHistory struct {
 	Revoke    bool
 	Peer      TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MaxID     int32
-	MinDate   Option[int32] // (optional)
-	MaxDate   Option[int32] // (optional)
+	MinDate   *int32 // (optional)
+	MaxDate   *int32 // (optional)
 }
 
 // Returns messages.AffectedMessages: TL_messages_affectedMessages
@@ -11101,9 +11101,9 @@ type TL_messages_receivedMessages struct {
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setTyping struct {
-	Peer     TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID Option[int32] // (optional)
-	Action   TL            // SendMessageAction: TL_sendMessageTypingAction | TL_sendMessageCancelAction | TL_sendMessageRecordVideoAction | TL_sendMessageUploadVideoAction | TL_sendMessageRecordAudioAction | TL_sendMessageUploadAudioAction | TL_sendMessageUploadPhotoAction | TL_sendMessageUploadDocumentAction | TL_sendMessageGeoLocationAction | TL_sendMessageChooseContactAction | TL_sendMessageGamePlayAction | TL_sendMessageRecordRoundAction | TL_sendMessageUploadRoundAction | TL_speakingInGroupCallAction | TL_sendMessageHistoryImportAction | TL_sendMessageChooseStickerAction | TL_sendMessageEmojiInteraction | TL_sendMessageEmojiInteractionSeen
+	Peer     TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID *int32 // (optional)
+	Action   TL     // SendMessageAction: TL_sendMessageTypingAction | TL_sendMessageCancelAction | TL_sendMessageRecordVideoAction | TL_sendMessageUploadVideoAction | TL_sendMessageRecordAudioAction | TL_sendMessageUploadAudioAction | TL_sendMessageUploadPhotoAction | TL_sendMessageUploadDocumentAction | TL_sendMessageGeoLocationAction | TL_sendMessageChooseContactAction | TL_sendMessageGamePlayAction | TL_sendMessageRecordRoundAction | TL_sendMessageUploadRoundAction | TL_speakingInGroupCallAction | TL_sendMessageHistoryImportAction | TL_sendMessageChooseStickerAction | TL_sendMessageEmojiInteraction | TL_sendMessageEmojiInteractionSeen
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -11119,10 +11119,10 @@ type TL_messages_sendMessage struct {
 	ReplyTo                TL // (optional) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	Message                string
 	RandomID               int64
-	ReplyMarkup            TL            // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities               []TL          // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	ScheduleDate           Option[int32] // (optional)
-	SendAs                 TL            // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ReplyMarkup            TL     // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+	Entities               []TL   // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	ScheduleDate           *int32 // (optional)
+	SendAs                 TL     // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -11138,10 +11138,10 @@ type TL_messages_sendMedia struct {
 	Media                  TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
 	Message                string
 	RandomID               int64
-	ReplyMarkup            TL            // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities               []TL          // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	ScheduleDate           Option[int32] // (optional)
-	SendAs                 TL            // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ReplyMarkup            TL     // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+	Entities               []TL   // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	ScheduleDate           *int32 // (optional)
+	SendAs                 TL     // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -11155,10 +11155,10 @@ type TL_messages_forwardMessages struct {
 	FromPeer          TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID                []int32
 	RandomID          []int64
-	ToPeer            TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID          Option[int32] // (optional)
-	ScheduleDate      Option[int32] // (optional)
-	SendAs            TL            // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ToPeer            TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID          *int32 // (optional)
+	ScheduleDate      *int32 // (optional)
+	SendAs            TL     // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -11219,7 +11219,7 @@ type TL_messages_deleteChatUser struct {
 type TL_messages_createChat struct {
 	Users     []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Title     string
-	TtlPeriod Option[int32] // (optional)
+	TtlPeriod *int32 // (optional)
 }
 
 // Returns messages.DhConfig: TL_messages_dhConfigNotModified | TL_messages_dhConfig
@@ -11320,10 +11320,10 @@ type TL_messages_getWebPagePreview struct {
 type TL_messages_exportChatInvite struct {
 	LegacyRevokePermanent bool
 	RequestNeeded         bool
-	Peer                  TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	ExpireDate            Option[int32]  // (optional)
-	UsageLimit            Option[int32]  // (optional)
-	Title                 Option[string] // (optional)
+	Peer                  TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ExpireDate            *int32  // (optional)
+	UsageLimit            *int32  // (optional)
+	Title                 *string // (optional)
 }
 
 // Returns ChatInvite: TL_chatInviteAlready | TL_chatInvite | TL_chatInvitePeek
@@ -11382,7 +11382,7 @@ type TL_messages_migrateChat struct {
 
 // Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_searchGlobal struct {
-	FolderID   Option[int32] // (optional)
+	FolderID   *int32 // (optional)
 	Q          string
 	Filter     TL // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
 	MinDate    int32
@@ -11434,9 +11434,9 @@ type TL_messages_setInlineBotResults struct {
 	QueryID       int64
 	Results       []TL // InputBotInlineResult: TL_inputBotInlineResult | TL_inputBotInlineResultPhoto | TL_inputBotInlineResultDocument | TL_inputBotInlineResultGame
 	CacheTime     int32
-	NextOffset    Option[string] // (optional)
-	SwitchPm      TL             // (optional) InlineBotSwitchPM: TL_inlineBotSwitchPM
-	SwitchWebview TL             // (optional) InlineBotWebView: TL_inlineBotWebView
+	NextOffset    *string // (optional)
+	SwitchPm      TL      // (optional) InlineBotSwitchPM: TL_inlineBotSwitchPM
+	SwitchWebview TL      // (optional) InlineBotWebView: TL_inlineBotWebView
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -11450,8 +11450,8 @@ type TL_messages_sendInlineBotResult struct {
 	RandomID     int64
 	QueryID      int64
 	ID           string
-	ScheduleDate Option[int32] // (optional)
-	SendAs       TL            // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ScheduleDate *int32 // (optional)
+	SendAs       TL     // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Returns messages.MessageEditData: TL_messages_messageEditData
@@ -11466,22 +11466,22 @@ type TL_messages_editMessage struct {
 	InvertMedia  bool
 	Peer         TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID           int32
-	Message      Option[string] // (optional)
-	Media        TL             // (optional) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
-	ReplyMarkup  TL             // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities     []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	ScheduleDate Option[int32]  // (optional)
+	Message      *string // (optional)
+	Media        TL      // (optional) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
+	ReplyMarkup  TL      // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+	Entities     []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	ScheduleDate *int32  // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_editInlineBotMessage struct {
 	NoWebpage   bool
 	InvertMedia bool
-	ID          TL             // InputBotInlineMessageID: TL_inputBotInlineMessageID | TL_inputBotInlineMessageID64
-	Message     Option[string] // (optional)
-	Media       TL             // (optional) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
-	ReplyMarkup TL             // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities    []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	ID          TL      // InputBotInlineMessageID: TL_inputBotInlineMessageID | TL_inputBotInlineMessageID64
+	Message     *string // (optional)
+	Media       TL      // (optional) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
+	ReplyMarkup TL      // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+	Entities    []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
 }
 
 // Returns messages.BotCallbackAnswer: TL_messages_botCallbackAnswer
@@ -11497,8 +11497,8 @@ type TL_messages_getBotCallbackAnswer struct {
 type TL_messages_setBotCallbackAnswer struct {
 	Alert     bool
 	QueryID   int64
-	Message   Option[string] // (optional)
-	Url       Option[string] // (optional)
+	Message   *string // (optional)
+	Url       *string // (optional)
 	CacheTime int32
 }
 
@@ -11634,15 +11634,15 @@ type TL_messages_getPinnedDialogs struct {
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setBotShippingResults struct {
 	QueryID         int64
-	Error           Option[string] // (optional)
-	ShippingOptions []TL           // (optional) ShippingOption: TL_shippingOption
+	Error           *string // (optional)
+	ShippingOptions []TL    // (optional) ShippingOption: TL_shippingOption
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_messages_setBotPrecheckoutResults struct {
 	Success bool
 	QueryID int64
-	Error   Option[string] // (optional)
+	Error   *string // (optional)
 }
 
 // Returns MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway
@@ -11671,8 +11671,8 @@ type TL_messages_faveSticker struct {
 
 // Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getUnreadMentions struct {
-	Peer      TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID  Option[int32] // (optional)
+	Peer      TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID  *int32 // (optional)
 	OffsetID  int32
 	AddOffset int32
 	Limit     int32
@@ -11682,8 +11682,8 @@ type TL_messages_getUnreadMentions struct {
 
 // Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_messages_readMentions struct {
-	Peer     TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID Option[int32] // (optional)
+	Peer     TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID *int32 // (optional)
 }
 
 // Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
@@ -11701,11 +11701,11 @@ type TL_messages_sendMultiMedia struct {
 	Noforwards             bool
 	UpdateStickersetsOrder bool
 	InvertMedia            bool
-	Peer                   TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	ReplyTo                TL            // (optional) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
-	MultiMedia             []TL          // InputSingleMedia: TL_inputSingleMedia
-	ScheduleDate           Option[int32] // (optional)
-	SendAs                 TL            // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Peer                   TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	ReplyTo                TL     // (optional) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
+	MultiMedia             []TL   // InputSingleMedia: TL_inputSingleMedia
+	ScheduleDate           *int32 // (optional)
+	SendAs                 TL     // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Returns EncryptedFile: TL_encryptedFileEmpty | TL_encryptedFile
@@ -11801,26 +11801,26 @@ type TL_messages_getEmojiURL struct {
 
 // Returns Vector<messages.SearchCounter>: TL_messages_searchCounter
 type TL_messages_getSearchCounters struct {
-	Peer     TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID Option[int32] // (optional)
-	Filters  []TL          // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
+	Peer     TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID *int32 // (optional)
+	Filters  []TL   // MessagesFilter: TL_inputMessagesFilterEmpty | TL_inputMessagesFilterPhotos | TL_inputMessagesFilterVideo | TL_inputMessagesFilterPhotoVideo | TL_inputMessagesFilterDocument | TL_inputMessagesFilterUrl | TL_inputMessagesFilterGif | TL_inputMessagesFilterVoice | TL_inputMessagesFilterMusic | TL_inputMessagesFilterChatPhotos | TL_inputMessagesFilterPhoneCalls | TL_inputMessagesFilterRoundVoice | TL_inputMessagesFilterRoundVideo | TL_inputMessagesFilterMyMentions | TL_inputMessagesFilterGeo | TL_inputMessagesFilterContacts | TL_inputMessagesFilterPinned
 }
 
 // Returns UrlAuthResult: TL_urlAuthResultRequest | TL_urlAuthResultAccepted | TL_urlAuthResultDefault
 type TL_messages_requestUrlAuth struct {
-	Peer     TL             // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	MsgID    Option[int32]  // (optional)
-	ButtonID Option[int32]  // (optional)
-	Url      Option[string] // (optional)
+	Peer     TL      // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	MsgID    *int32  // (optional)
+	ButtonID *int32  // (optional)
+	Url      *string // (optional)
 }
 
 // Returns UrlAuthResult: TL_urlAuthResultRequest | TL_urlAuthResultAccepted | TL_urlAuthResultDefault
 type TL_messages_acceptUrlAuth struct {
 	WriteAllowed bool
-	Peer         TL             // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	MsgID        Option[int32]  // (optional)
-	ButtonID     Option[int32]  // (optional)
-	Url          Option[string] // (optional)
+	Peer         TL      // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	MsgID        *int32  // (optional)
+	ButtonID     *int32  // (optional)
+	Url          *string // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -11856,8 +11856,8 @@ type TL_messages_deleteScheduledMessages struct {
 type TL_messages_getPollVotes struct {
 	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID     int32
-	Option []byte         // (optional)
-	Offset Option[string] // (optional)
+	Option []byte  // (optional)
+	Offset *string // (optional)
 	Limit  int32
 }
 
@@ -11923,8 +11923,8 @@ type TL_messages_readDiscussion struct {
 
 // Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_messages_unpinAllMessages struct {
-	Peer     TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID Option[int32] // (optional)
+	Peer     TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID *int32 // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -11966,10 +11966,10 @@ type TL_messages_startHistoryImport struct {
 // Returns messages.ExportedChatInvites: TL_messages_exportedChatInvites
 type TL_messages_getExportedChatInvites struct {
 	Revoked    bool
-	Peer       TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	AdminID    TL             // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	OffsetDate Option[int32]  // (optional)
-	OffsetLink Option[string] // (optional)
+	Peer       TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	AdminID    TL      // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	OffsetDate *int32  // (optional)
+	OffsetLink *string // (optional)
 	Limit      int32
 }
 
@@ -11984,10 +11984,10 @@ type TL_messages_editExportedChatInvite struct {
 	Revoked       bool
 	Peer          TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Link          string
-	ExpireDate    Option[int32]  // (optional)
-	UsageLimit    Option[int32]  // (optional)
-	RequestNeeded Option[bool]   // (optional)
-	Title         Option[string] // (optional)
+	ExpireDate    *int32  // (optional)
+	UsageLimit    *int32  // (optional)
+	RequestNeeded *bool   // (optional)
+	Title         *string // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -12010,9 +12010,9 @@ type TL_messages_getAdminsWithInvites struct {
 // Returns messages.ChatInviteImporters: TL_messages_chatInviteImporters
 type TL_messages_getChatInviteImporters struct {
 	Requested  bool
-	Peer       TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Link       Option[string] // (optional)
-	Q          Option[string] // (optional)
+	Peer       TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Link       *string // (optional)
+	Q          *string // (optional)
 	OffsetDate int32
 	OffsetUser TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Limit      int32
@@ -12067,8 +12067,8 @@ type TL_messages_hideChatJoinRequest struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_hideAllChatJoinRequests struct {
 	Approved bool
-	Peer     TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Link     Option[string] // (optional)
+	Peer     TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Link     *string // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -12102,8 +12102,8 @@ type TL_messages_getMessagesReactions struct {
 type TL_messages_getMessageReactionsList struct {
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID       int32
-	Reaction TL             // (optional) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
-	Offset   Option[string] // (optional)
+	Reaction TL      // (optional) Reaction: TL_reactionEmpty | TL_reactionEmoji | TL_reactionCustomEmoji
+	Offset   *string // (optional)
 	Limit    int32
 }
 
@@ -12133,8 +12133,8 @@ type TL_messages_translateText struct {
 
 // Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
 type TL_messages_getUnreadReactions struct {
-	Peer      TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID  Option[int32] // (optional)
+	Peer      TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID  *int32 // (optional)
 	OffsetID  int32
 	AddOffset int32
 	Limit     int32
@@ -12144,8 +12144,8 @@ type TL_messages_getUnreadReactions struct {
 
 // Returns messages.AffectedHistory: TL_messages_affectedHistory
 type TL_messages_readReactions struct {
-	Peer     TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	TopMsgID Option[int32] // (optional)
+	Peer     TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	TopMsgID *int32 // (optional)
 }
 
 // Returns messages.Messages: TL_messages_messages | TL_messages_messagesSlice | TL_messages_channelMessages | TL_messages_messagesNotModified
@@ -12176,11 +12176,11 @@ type TL_messages_toggleBotInAttachMenu struct {
 type TL_messages_requestWebView struct {
 	FromBotMenu bool
 	Silent      bool
-	Peer        TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Bot         TL             // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	Url         Option[string] // (optional)
-	StartParam  Option[string] // (optional)
-	ThemeParams TL             // (optional) DataJSON: TL_dataJSON
+	Peer        TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Bot         TL      // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	Url         *string // (optional)
+	StartParam  *string // (optional)
+	ThemeParams TL      // (optional) DataJSON: TL_dataJSON
 	Platform    string
 	ReplyTo     TL // (optional) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	SendAs      TL // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -12200,10 +12200,10 @@ type TL_messages_prolongWebView struct {
 type TL_messages_requestSimpleWebView struct {
 	FromSwitchWebview bool
 	FromSideMenu      bool
-	Bot               TL             // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	Url               Option[string] // (optional)
-	StartParam        Option[string] // (optional)
-	ThemeParams       TL             // (optional) DataJSON: TL_dataJSON
+	Bot               TL      // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	Url               *string // (optional)
+	StartParam        *string // (optional)
+	ThemeParams       TL      // (optional) DataJSON: TL_dataJSON
 	Platform          string
 }
 
@@ -12332,19 +12332,19 @@ type TL_messages_getBotApp struct {
 // Returns AppWebViewResult: TL_appWebViewResultUrl
 type TL_messages_requestAppWebView struct {
 	WriteAllowed bool
-	Peer         TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	App          TL             // InputBotApp: TL_inputBotAppID | TL_inputBotAppShortName
-	StartParam   Option[string] // (optional)
-	ThemeParams  TL             // (optional) DataJSON: TL_dataJSON
+	Peer         TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	App          TL      // InputBotApp: TL_inputBotAppID | TL_inputBotAppShortName
+	StartParam   *string // (optional)
+	ThemeParams  TL      // (optional) DataJSON: TL_dataJSON
 	Platform     string
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_setChatWallPaper struct {
-	Peer      TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Wallpaper TL            // (optional) InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
-	Settings  TL            // (optional) WallPaperSettings: TL_wallPaperSettings
-	ID        Option[int32] // (optional)
+	Peer      TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Wallpaper TL     // (optional) InputWallPaper: TL_inputWallPaper | TL_inputWallPaperSlug | TL_inputWallPaperNoFile
+	Settings  TL     // (optional) WallPaperSettings: TL_wallPaperSettings
+	ID        *int32 // (optional)
 }
 
 // Returns updates.State: TL_updates_state
@@ -12354,11 +12354,11 @@ type TL_updates_getState struct {
 // Returns updates.Difference: TL_updates_differenceEmpty | TL_updates_difference | TL_updates_differenceSlice | TL_updates_differenceTooLong
 type TL_updates_getDifference struct {
 	Pts           int32
-	PtsLimit      Option[int32] // (optional)
-	PtsTotalLimit Option[int32] // (optional)
+	PtsLimit      *int32 // (optional)
+	PtsTotalLimit *int32 // (optional)
 	Date          int32
 	Qts           int32
-	QtsLimit      Option[int32] // (optional)
+	QtsLimit      *int32 // (optional)
 }
 
 // Returns updates.ChannelDifference: TL_updates_channelDifferenceEmpty | TL_updates_channelDifferenceTooLong | TL_updates_channelDifference
@@ -12380,11 +12380,11 @@ type TL_photos_updateProfilePhoto struct {
 // Returns photos.Photo: TL_photos_photo
 type TL_photos_uploadProfilePhoto struct {
 	Fallback         bool
-	Bot              TL              // (optional) InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	File             TL              // (optional) InputFile: TL_inputFile | TL_inputFileBig
-	Video            TL              // (optional) InputFile: TL_inputFile | TL_inputFileBig
-	VideoStartTs     Option[float64] // (optional)
-	VideoEmojiMarkup TL              // (optional) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
+	Bot              TL       // (optional) InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	File             TL       // (optional) InputFile: TL_inputFile | TL_inputFileBig
+	Video            TL       // (optional) InputFile: TL_inputFile | TL_inputFileBig
+	VideoStartTs     *float64 // (optional)
+	VideoEmojiMarkup TL       // (optional) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
 }
 
 // Returns Vector<long>:
@@ -12404,11 +12404,11 @@ type TL_photos_getUserPhotos struct {
 type TL_photos_uploadContactProfilePhoto struct {
 	Suggest          bool
 	Save             bool
-	UserID           TL              // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
-	File             TL              // (optional) InputFile: TL_inputFile | TL_inputFileBig
-	Video            TL              // (optional) InputFile: TL_inputFile | TL_inputFileBig
-	VideoStartTs     Option[float64] // (optional)
-	VideoEmojiMarkup TL              // (optional) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
+	UserID           TL       // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	File             TL       // (optional) InputFile: TL_inputFile | TL_inputFileBig
+	Video            TL       // (optional) InputFile: TL_inputFile | TL_inputFileBig
+	VideoStartTs     *float64 // (optional)
+	VideoEmojiMarkup TL       // (optional) VideoSize: TL_videoSize | TL_videoSizeEmojiMarkup | TL_videoSizeStickerMarkup
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -12636,9 +12636,9 @@ type TL_channels_createChannel struct {
 	Forum     bool
 	Title     string
 	About     string
-	GeoPoint  TL             // (optional) InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
-	Address   Option[string] // (optional)
-	TtlPeriod Option[int32]  // (optional)
+	GeoPoint  TL      // (optional) InputGeoPoint: TL_inputGeoPointEmpty | TL_inputGeoPoint
+	Address   *string // (optional)
+	TtlPeriod *int32  // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -12863,16 +12863,16 @@ type TL_channels_toggleForum struct {
 type TL_channels_createForumTopic struct {
 	Channel     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Title       string
-	IconColor   Option[int32] // (optional)
-	IconEmojiID Option[int64] // (optional)
+	IconColor   *int32 // (optional)
+	IconEmojiID *int64 // (optional)
 	RandomID    int64
 	SendAs      TL // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Returns messages.ForumTopics: TL_messages_forumTopics
 type TL_channels_getForumTopics struct {
-	Channel     TL             // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Q           Option[string] // (optional)
+	Channel     TL      // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
+	Q           *string // (optional)
 	OffsetDate  int32
 	OffsetID    int32
 	OffsetTopic int32
@@ -12889,10 +12889,10 @@ type TL_channels_getForumTopicsByID struct {
 type TL_channels_editForumTopic struct {
 	Channel     TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	TopicID     int32
-	Title       Option[string] // (optional)
-	IconEmojiID Option[int64]  // (optional)
-	Closed      Option[bool]   // (optional)
-	Hidden      Option[bool]   // (optional)
+	Title       *string // (optional)
+	IconEmojiID *int64  // (optional)
+	Closed      *bool   // (optional)
+	Hidden      *bool   // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -12943,7 +12943,7 @@ type TL_channels_clickSponsoredMessage struct {
 type TL_channels_updateColor struct {
 	Channel           TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Color             int32
-	BackgroundEmojiID Option[int64] // (optional)
+	BackgroundEmojiID *int64 // (optional)
 }
 
 // Returns DataJSON: TL_dataJSON
@@ -13002,9 +13002,9 @@ type TL_bots_setBotGroupDefaultAdminRights struct {
 type TL_bots_setBotInfo struct {
 	Bot         TL // (optional) InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	LangCode    string
-	Name        Option[string] // (optional)
-	About       Option[string] // (optional)
-	Description Option[string] // (optional)
+	Name        *string // (optional)
+	About       *string // (optional)
+	Description *string // (optional)
 }
 
 // Returns bots.BotInfo: TL_bots_botInfo
@@ -13065,11 +13065,11 @@ type TL_payments_validateRequestedInfo struct {
 // Returns payments.PaymentResult: TL_payments_paymentResult | TL_payments_paymentVerificationNeeded
 type TL_payments_sendPaymentForm struct {
 	FormID           int64
-	Invoice          TL             // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode
-	RequestedInfoID  Option[string] // (optional)
-	ShippingOptionID Option[string] // (optional)
-	Credentials      TL             // InputPaymentCredentials: TL_inputPaymentCredentialsSaved | TL_inputPaymentCredentials | TL_inputPaymentCredentialsApplePay | TL_inputPaymentCredentialsGooglePay
-	TipAmount        Option[int64]  // (optional)
+	Invoice          TL      // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode
+	RequestedInfoID  *string // (optional)
+	ShippingOptionID *string // (optional)
+	Credentials      TL      // InputPaymentCredentials: TL_inputPaymentCredentialsSaved | TL_inputPaymentCredentials | TL_inputPaymentCredentialsApplePay | TL_inputPaymentCredentialsGooglePay
+	TipAmount        *int64  // (optional)
 }
 
 // Returns payments.SavedInfo: TL_payments_savedInfo
@@ -13147,9 +13147,9 @@ type TL_stickers_createStickerSet struct {
 	UserID    TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 	Title     string
 	ShortName string
-	Thumb     TL             // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	Stickers  []TL           // InputStickerSetItem: TL_inputStickerSetItem
-	Software  Option[string] // (optional)
+	Thumb     TL      // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	Stickers  []TL    // InputStickerSetItem: TL_inputStickerSetItem
+	Software  *string // (optional)
 }
 
 // Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
@@ -13171,9 +13171,9 @@ type TL_stickers_addStickerToSet struct {
 
 // Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_setStickerSetThumb struct {
-	Stickerset      TL            // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
-	Thumb           TL            // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	ThumbDocumentID Option[int64] // (optional)
+	Stickerset      TL     // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons
+	Thumb           TL     // (optional) InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	ThumbDocumentID *int64 // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -13188,10 +13188,10 @@ type TL_stickers_suggestShortName struct {
 
 // Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
 type TL_stickers_changeSticker struct {
-	Sticker    TL             // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
-	Emoji      Option[string] // (optional)
-	MaskCoords TL             // (optional) MaskCoords: TL_maskCoords
-	Keywords   Option[string] // (optional)
+	Sticker    TL      // InputDocument: TL_inputDocumentEmpty | TL_inputDocument
+	Emoji      *string // (optional)
+	MaskCoords TL      // (optional) MaskCoords: TL_maskCoords
+	Keywords   *string // (optional)
 }
 
 // Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
@@ -13272,18 +13272,18 @@ type TL_phone_createGroupCall struct {
 	RtmpStream   bool
 	Peer         TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	RandomID     int32
-	Title        Option[string] // (optional)
-	ScheduleDate Option[int32]  // (optional)
+	Title        *string // (optional)
+	ScheduleDate *int32  // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_joinGroupCall struct {
 	Muted        bool
 	VideoStopped bool
-	Call         TL             // InputGroupCall: TL_inputGroupCall
-	JoinAs       TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	InviteHash   Option[string] // (optional)
-	Params       TL             // DataJSON: TL_dataJSON
+	Call         TL      // InputGroupCall: TL_inputGroupCall
+	JoinAs       TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	InviteHash   *string // (optional)
+	Params       TL      // DataJSON: TL_dataJSON
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -13306,8 +13306,8 @@ type TL_phone_discardGroupCall struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_toggleGroupCallSettings struct {
 	ResetInviteHash bool
-	Call            TL           // InputGroupCall: TL_inputGroupCall
-	JoinMuted       Option[bool] // (optional)
+	Call            TL    // InputGroupCall: TL_inputGroupCall
+	JoinMuted       *bool // (optional)
 }
 
 // Returns phone.GroupCall: TL_phone_groupCall
@@ -13335,21 +13335,21 @@ type TL_phone_checkGroupCall struct {
 type TL_phone_toggleGroupCallRecord struct {
 	Start         bool
 	Video         bool
-	Call          TL             // InputGroupCall: TL_inputGroupCall
-	Title         Option[string] // (optional)
-	VideoPortrait Option[bool]   // (optional)
+	Call          TL      // InputGroupCall: TL_inputGroupCall
+	Title         *string // (optional)
+	VideoPortrait *bool   // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_phone_editGroupCallParticipant struct {
-	Call               TL            // InputGroupCall: TL_inputGroupCall
-	Participant        TL            // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Muted              Option[bool]  // (optional)
-	Volume             Option[int32] // (optional)
-	RaiseHand          Option[bool]  // (optional)
-	VideoStopped       Option[bool]  // (optional)
-	VideoPaused        Option[bool]  // (optional)
-	PresentationPaused Option[bool]  // (optional)
+	Call               TL     // InputGroupCall: TL_inputGroupCall
+	Participant        TL     // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Muted              *bool  // (optional)
+	Volume             *int32 // (optional)
+	RaiseHand          *bool  // (optional)
+	VideoStopped       *bool  // (optional)
+	VideoPaused        *bool  // (optional)
+	PresentationPaused *bool  // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -13459,7 +13459,7 @@ type TL_stats_getBroadcastStats struct {
 // Returns StatsGraph: TL_statsGraphAsync | TL_statsGraphError | TL_statsGraph
 type TL_stats_loadAsyncGraph struct {
 	Token string
-	X     Option[int64] // (optional)
+	X     *int64 // (optional)
 }
 
 // Returns stats.MegagroupStats: TL_stats_megagroupStats
@@ -13502,8 +13502,8 @@ type TL_chatlists_deleteExportedInvite struct {
 type TL_chatlists_editExportedInvite struct {
 	Chatlist TL // InputChatlist: TL_inputChatlistDialogFilter
 	Slug     string
-	Title    Option[string] // (optional)
-	Peers    []TL           // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Title    *string // (optional)
+	Peers    []TL    // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Returns chatlists.ExportedInvites: TL_chatlists_exportedInvites
@@ -13558,25 +13558,25 @@ type TL_stories_canSendStory struct {
 type TL_stories_sendStory struct {
 	Pinned       bool
 	Noforwards   bool
-	Peer         TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Media        TL             // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
-	MediaAreas   []TL           // (optional) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
-	Caption      Option[string] // (optional)
-	Entities     []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	PrivacyRules []TL           // InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
+	Peer         TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Media        TL      // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
+	MediaAreas   []TL    // (optional) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
+	Caption      *string // (optional)
+	Entities     []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	PrivacyRules []TL    // InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
 	RandomID     int64
-	Period       Option[int32] // (optional)
+	Period       *int32 // (optional)
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_stories_editStory struct {
 	Peer         TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID           int32
-	Media        TL             // (optional) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
-	MediaAreas   []TL           // (optional) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
-	Caption      Option[string] // (optional)
-	Entities     []TL           // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	PrivacyRules []TL           // (optional) InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
+	Media        TL      // (optional) InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage
+	MediaAreas   []TL    // (optional) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction
+	Caption      *string // (optional)
+	Entities     []TL    // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityUrl | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextUrl | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	PrivacyRules []TL    // (optional) InputPrivacyRule: TL_inputPrivacyValueAllowContacts | TL_inputPrivacyValueAllowAll | TL_inputPrivacyValueAllowUsers | TL_inputPrivacyValueDisallowContacts | TL_inputPrivacyValueDisallowAll | TL_inputPrivacyValueDisallowUsers | TL_inputPrivacyValueAllowChatParticipants | TL_inputPrivacyValueDisallowChatParticipants | TL_inputPrivacyValueAllowCloseFriends
 }
 
 // Returns Vector<int>:
@@ -13596,7 +13596,7 @@ type TL_stories_togglePinned struct {
 type TL_stories_getAllStories struct {
 	Next   bool
 	Hidden bool
-	State  Option[string] // (optional)
+	State  *string // (optional)
 }
 
 // Returns stories.Stories: TL_stories_stories
@@ -13640,8 +13640,8 @@ type TL_stories_incrementStoryViews struct {
 type TL_stories_getStoryViewsList struct {
 	JustContacts   bool
 	ReactionsFirst bool
-	Peer           TL             // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
-	Q              Option[string] // (optional)
+	Peer           TL      // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Q              *string // (optional)
 	ID             int32
 	Offset         string
 	Limit          int32
@@ -14378,7 +14378,7 @@ func (e TL_inputMediaUploadedPhoto) encode() []byte {
 	if e.Stickers != nil {
 		flags |= (1 << 0)
 	}
-	if e.TtlSeconds.IsSet {
+	if e.TtlSeconds != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -14388,8 +14388,8 @@ func (e TL_inputMediaUploadedPhoto) encode() []byte {
 	if e.Stickers != nil {
 		x.Vector(e.Stickers)
 	}
-	if e.TtlSeconds.IsSet {
-		x.Int(e.TtlSeconds.Value)
+	if e.TtlSeconds != nil {
+		x.Int(*e.TtlSeconds)
 	}
 	return x.buf
 }
@@ -14399,15 +14399,15 @@ func (e TL_inputMediaPhoto) encode() []byte {
 	if e.Spoiler {
 		flags |= (1 << 1)
 	}
-	if e.TtlSeconds.IsSet {
+	if e.TtlSeconds != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaPhoto)
 	x.Int(flags)
 	x.Object(e.ID)
-	if e.TtlSeconds.IsSet {
-		x.Int(e.TtlSeconds.Value)
+	if e.TtlSeconds != nil {
+		x.Int(*e.TtlSeconds)
 	}
 	return x.buf
 }
@@ -14446,7 +14446,7 @@ func (e TL_inputMediaUploadedDocument) encode() []byte {
 	if e.Stickers != nil {
 		flags |= (1 << 0)
 	}
-	if e.TtlSeconds.IsSet {
+	if e.TtlSeconds != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -14461,8 +14461,8 @@ func (e TL_inputMediaUploadedDocument) encode() []byte {
 	if e.Stickers != nil {
 		x.Vector(e.Stickers)
 	}
-	if e.TtlSeconds.IsSet {
-		x.Int(e.TtlSeconds.Value)
+	if e.TtlSeconds != nil {
+		x.Int(*e.TtlSeconds)
 	}
 	return x.buf
 }
@@ -14472,21 +14472,21 @@ func (e TL_inputMediaDocument) encode() []byte {
 	if e.Spoiler {
 		flags |= (1 << 2)
 	}
-	if e.TtlSeconds.IsSet {
+	if e.TtlSeconds != nil {
 		flags |= (1 << 0)
 	}
-	if e.Query.IsSet {
+	if e.Query != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaDocument)
 	x.Int(flags)
 	x.Object(e.ID)
-	if e.TtlSeconds.IsSet {
-		x.Int(e.TtlSeconds.Value)
+	if e.TtlSeconds != nil {
+		x.Int(*e.TtlSeconds)
 	}
-	if e.Query.IsSet {
-		x.String(e.Query.Value)
+	if e.Query != nil {
+		x.String(*e.Query)
 	}
 	return x.buf
 }
@@ -14508,15 +14508,15 @@ func (e TL_inputMediaPhotoExternal) encode() []byte {
 	if e.Spoiler {
 		flags |= (1 << 1)
 	}
-	if e.TtlSeconds.IsSet {
+	if e.TtlSeconds != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaPhotoExternal)
 	x.Int(flags)
 	x.String(e.Url)
-	if e.TtlSeconds.IsSet {
-		x.Int(e.TtlSeconds.Value)
+	if e.TtlSeconds != nil {
+		x.Int(*e.TtlSeconds)
 	}
 	return x.buf
 }
@@ -14526,15 +14526,15 @@ func (e TL_inputMediaDocumentExternal) encode() []byte {
 	if e.Spoiler {
 		flags |= (1 << 1)
 	}
-	if e.TtlSeconds.IsSet {
+	if e.TtlSeconds != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaDocumentExternal)
 	x.Int(flags)
 	x.String(e.Url)
-	if e.TtlSeconds.IsSet {
-		x.Int(e.TtlSeconds.Value)
+	if e.TtlSeconds != nil {
+		x.Int(*e.TtlSeconds)
 	}
 	return x.buf
 }
@@ -14551,7 +14551,7 @@ func (e TL_inputMediaInvoice) encode() []byte {
 	if e.Photo != nil {
 		flags |= (1 << 0)
 	}
-	if e.StartParam.IsSet {
+	if e.StartParam != nil {
 		flags |= (1 << 1)
 	}
 	if e.ExtendedMedia != nil {
@@ -14569,8 +14569,8 @@ func (e TL_inputMediaInvoice) encode() []byte {
 	x.StringBytes(e.Payload)
 	x.String(e.Provider)
 	x.Object(e.ProviderData)
-	if e.StartParam.IsSet {
-		x.String(e.StartParam.Value)
+	if e.StartParam != nil {
+		x.String(*e.StartParam)
 	}
 	if e.ExtendedMedia != nil {
 		x.Object(e.ExtendedMedia)
@@ -14583,27 +14583,27 @@ func (e TL_inputMediaGeoLive) encode() []byte {
 	if e.Stopped {
 		flags |= (1 << 0)
 	}
-	if e.Heading.IsSet {
+	if e.Heading != nil {
 		flags |= (1 << 2)
 	}
-	if e.Period.IsSet {
+	if e.Period != nil {
 		flags |= (1 << 1)
 	}
-	if e.ProximityNotificationRadius.IsSet {
+	if e.ProximityNotificationRadius != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaGeoLive)
 	x.Int(flags)
 	x.Object(e.GeoPoint)
-	if e.Heading.IsSet {
-		x.Int(e.Heading.Value)
+	if e.Heading != nil {
+		x.Int(*e.Heading)
 	}
-	if e.Period.IsSet {
-		x.Int(e.Period.Value)
+	if e.Period != nil {
+		x.Int(*e.Period)
 	}
-	if e.ProximityNotificationRadius.IsSet {
-		x.Int(e.ProximityNotificationRadius.Value)
+	if e.ProximityNotificationRadius != nil {
+		x.Int(*e.ProximityNotificationRadius)
 	}
 	return x.buf
 }
@@ -14613,7 +14613,7 @@ func (e TL_inputMediaPoll) encode() []byte {
 	if e.CorrectAnswers != nil {
 		flags |= (1 << 0)
 	}
-	if e.Solution.IsSet {
+	if e.Solution != nil {
 		flags |= (1 << 1)
 	}
 	if e.SolutionEntities != nil {
@@ -14626,8 +14626,8 @@ func (e TL_inputMediaPoll) encode() []byte {
 	if e.CorrectAnswers != nil {
 		x.VectorBytes(e.CorrectAnswers)
 	}
-	if e.Solution.IsSet {
-		x.String(e.Solution.Value)
+	if e.Solution != nil {
+		x.String(*e.Solution)
 	}
 	if e.SolutionEntities != nil {
 		x.Vector(e.SolutionEntities)
@@ -14682,7 +14682,7 @@ func (e TL_inputChatUploadedPhoto) encode() []byte {
 	if e.Video != nil {
 		flags |= (1 << 1)
 	}
-	if e.VideoStartTs.IsSet {
+	if e.VideoStartTs != nil {
 		flags |= (1 << 2)
 	}
 	if e.VideoEmojiMarkup != nil {
@@ -14697,8 +14697,8 @@ func (e TL_inputChatUploadedPhoto) encode() []byte {
 	if e.Video != nil {
 		x.Object(e.Video)
 	}
-	if e.VideoStartTs.IsSet {
-		x.Double(e.VideoStartTs.Value)
+	if e.VideoStartTs != nil {
+		x.Double(*e.VideoStartTs)
 	}
 	if e.VideoEmojiMarkup != nil {
 		x.Object(e.VideoEmojiMarkup)
@@ -14721,7 +14721,7 @@ func (e TL_inputGeoPointEmpty) encode() []byte {
 
 func (e TL_inputGeoPoint) encode() []byte {
 	var flags int32
-	if e.AccuracyRadius.IsSet {
+	if e.AccuracyRadius != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -14729,8 +14729,8 @@ func (e TL_inputGeoPoint) encode() []byte {
 	x.Int(flags)
 	x.Double(e.Lat)
 	x.Double(e.Long)
-	if e.AccuracyRadius.IsSet {
-		x.Int(e.AccuracyRadius.Value)
+	if e.AccuracyRadius != nil {
+		x.Int(*e.AccuracyRadius)
 	}
 	return x.buf
 }
@@ -14837,10 +14837,10 @@ func (e TL_inputStickerSetThumb) encode() []byte {
 
 func (e TL_inputGroupCallStream) encode() []byte {
 	var flags int32
-	if e.VideoChannel.IsSet {
+	if e.VideoChannel != nil {
 		flags |= (1 << 0)
 	}
-	if e.VideoQuality.IsSet {
+	if e.VideoQuality != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -14849,11 +14849,11 @@ func (e TL_inputGroupCallStream) encode() []byte {
 	x.Object(e.Call)
 	x.Long(e.TimeMs)
 	x.Int(e.Scale)
-	if e.VideoChannel.IsSet {
-		x.Int(e.VideoChannel.Value)
+	if e.VideoChannel != nil {
+		x.Int(*e.VideoChannel)
 	}
-	if e.VideoQuality.IsSet {
-		x.Int(e.VideoQuality.Value)
+	if e.VideoQuality != nil {
+		x.Int(*e.VideoQuality)
 	}
 	return x.buf
 }
@@ -15014,19 +15014,19 @@ func (e TL_user) encode() []byte {
 	if e.StoriesUnavailable {
 		flags2 |= (1 << 4)
 	}
-	if e.AccessHash.IsSet {
+	if e.AccessHash != nil {
 		flags |= (1 << 0)
 	}
-	if e.FirstName.IsSet {
+	if e.FirstName != nil {
 		flags |= (1 << 1)
 	}
-	if e.LastName.IsSet {
+	if e.LastName != nil {
 		flags |= (1 << 2)
 	}
-	if e.Username.IsSet {
+	if e.Username != nil {
 		flags |= (1 << 3)
 	}
-	if e.Phone.IsSet {
+	if e.Phone != nil {
 		flags |= (1 << 4)
 	}
 	if e.Photo != nil {
@@ -15035,16 +15035,16 @@ func (e TL_user) encode() []byte {
 	if e.Status != nil {
 		flags |= (1 << 6)
 	}
-	if e.BotInfoVersion.IsSet {
+	if e.BotInfoVersion != nil {
 		flags |= (1 << 14)
 	}
 	if e.RestrictionReason != nil {
 		flags |= (1 << 18)
 	}
-	if e.BotInlinePlaceholder.IsSet {
+	if e.BotInlinePlaceholder != nil {
 		flags |= (1 << 19)
 	}
-	if e.LangCode.IsSet {
+	if e.LangCode != nil {
 		flags |= (1 << 22)
 	}
 	if e.EmojiStatus != nil {
@@ -15053,13 +15053,13 @@ func (e TL_user) encode() []byte {
 	if e.Usernames != nil {
 		flags2 |= (1 << 0)
 	}
-	if e.StoriesMaxID.IsSet {
+	if e.StoriesMaxID != nil {
 		flags2 |= (1 << 5)
 	}
-	if e.Color.IsSet {
+	if e.Color != nil {
 		flags2 |= (1 << 7)
 	}
-	if e.BackgroundEmojiID.IsSet {
+	if e.BackgroundEmojiID != nil {
 		flags2 |= (1 << 6)
 	}
 	x := NewEncodeBuf(512)
@@ -15067,20 +15067,20 @@ func (e TL_user) encode() []byte {
 	x.Int(flags)
 	x.Int(flags2)
 	x.Long(e.ID)
-	if e.AccessHash.IsSet {
-		x.Long(e.AccessHash.Value)
+	if e.AccessHash != nil {
+		x.Long(*e.AccessHash)
 	}
-	if e.FirstName.IsSet {
-		x.String(e.FirstName.Value)
+	if e.FirstName != nil {
+		x.String(*e.FirstName)
 	}
-	if e.LastName.IsSet {
-		x.String(e.LastName.Value)
+	if e.LastName != nil {
+		x.String(*e.LastName)
 	}
-	if e.Username.IsSet {
-		x.String(e.Username.Value)
+	if e.Username != nil {
+		x.String(*e.Username)
 	}
-	if e.Phone.IsSet {
-		x.String(e.Phone.Value)
+	if e.Phone != nil {
+		x.String(*e.Phone)
 	}
 	if e.Photo != nil {
 		x.Object(e.Photo)
@@ -15088,17 +15088,17 @@ func (e TL_user) encode() []byte {
 	if e.Status != nil {
 		x.Object(e.Status)
 	}
-	if e.BotInfoVersion.IsSet {
-		x.Int(e.BotInfoVersion.Value)
+	if e.BotInfoVersion != nil {
+		x.Int(*e.BotInfoVersion)
 	}
 	if e.RestrictionReason != nil {
 		x.Vector(e.RestrictionReason)
 	}
-	if e.BotInlinePlaceholder.IsSet {
-		x.String(e.BotInlinePlaceholder.Value)
+	if e.BotInlinePlaceholder != nil {
+		x.String(*e.BotInlinePlaceholder)
 	}
-	if e.LangCode.IsSet {
-		x.String(e.LangCode.Value)
+	if e.LangCode != nil {
+		x.String(*e.LangCode)
 	}
 	if e.EmojiStatus != nil {
 		x.Object(e.EmojiStatus)
@@ -15106,14 +15106,14 @@ func (e TL_user) encode() []byte {
 	if e.Usernames != nil {
 		x.Vector(e.Usernames)
 	}
-	if e.StoriesMaxID.IsSet {
-		x.Int(e.StoriesMaxID.Value)
+	if e.StoriesMaxID != nil {
+		x.Int(*e.StoriesMaxID)
 	}
-	if e.Color.IsSet {
-		x.Int(e.Color.Value)
+	if e.Color != nil {
+		x.Int(*e.Color)
 	}
-	if e.BackgroundEmojiID.IsSet {
-		x.Long(e.BackgroundEmojiID.Value)
+	if e.BackgroundEmojiID != nil {
+		x.Long(*e.BackgroundEmojiID)
 	}
 	return x.buf
 }
@@ -15320,10 +15320,10 @@ func (e TL_channel) encode() []byte {
 	if e.StoriesUnavailable {
 		flags2 |= (1 << 3)
 	}
-	if e.AccessHash.IsSet {
+	if e.AccessHash != nil {
 		flags |= (1 << 13)
 	}
-	if e.Username.IsSet {
+	if e.Username != nil {
 		flags |= (1 << 6)
 	}
 	if e.RestrictionReason != nil {
@@ -15338,19 +15338,19 @@ func (e TL_channel) encode() []byte {
 	if e.DefaultBannedRights != nil {
 		flags |= (1 << 18)
 	}
-	if e.ParticipantsCount.IsSet {
+	if e.ParticipantsCount != nil {
 		flags |= (1 << 17)
 	}
 	if e.Usernames != nil {
 		flags2 |= (1 << 0)
 	}
-	if e.StoriesMaxID.IsSet {
+	if e.StoriesMaxID != nil {
 		flags2 |= (1 << 4)
 	}
-	if e.Color.IsSet {
+	if e.Color != nil {
 		flags2 |= (1 << 6)
 	}
-	if e.BackgroundEmojiID.IsSet {
+	if e.BackgroundEmojiID != nil {
 		flags2 |= (1 << 5)
 	}
 	x := NewEncodeBuf(512)
@@ -15358,12 +15358,12 @@ func (e TL_channel) encode() []byte {
 	x.Int(flags)
 	x.Int(flags2)
 	x.Long(e.ID)
-	if e.AccessHash.IsSet {
-		x.Long(e.AccessHash.Value)
+	if e.AccessHash != nil {
+		x.Long(*e.AccessHash)
 	}
 	x.String(e.Title)
-	if e.Username.IsSet {
-		x.String(e.Username.Value)
+	if e.Username != nil {
+		x.String(*e.Username)
 	}
 	x.Object(e.Photo)
 	x.Int(e.Date)
@@ -15379,20 +15379,20 @@ func (e TL_channel) encode() []byte {
 	if e.DefaultBannedRights != nil {
 		x.Object(e.DefaultBannedRights)
 	}
-	if e.ParticipantsCount.IsSet {
-		x.Int(e.ParticipantsCount.Value)
+	if e.ParticipantsCount != nil {
+		x.Int(*e.ParticipantsCount)
 	}
 	if e.Usernames != nil {
 		x.Vector(e.Usernames)
 	}
-	if e.StoriesMaxID.IsSet {
-		x.Int(e.StoriesMaxID.Value)
+	if e.StoriesMaxID != nil {
+		x.Int(*e.StoriesMaxID)
 	}
-	if e.Color.IsSet {
-		x.Int(e.Color.Value)
+	if e.Color != nil {
+		x.Int(*e.Color)
 	}
-	if e.BackgroundEmojiID.IsSet {
-		x.Long(e.BackgroundEmojiID.Value)
+	if e.BackgroundEmojiID != nil {
+		x.Long(*e.BackgroundEmojiID)
 	}
 	return x.buf
 }
@@ -15405,7 +15405,7 @@ func (e TL_channelForbidden) encode() []byte {
 	if e.Megagroup {
 		flags |= (1 << 8)
 	}
-	if e.UntilDate.IsSet {
+	if e.UntilDate != nil {
 		flags |= (1 << 16)
 	}
 	x := NewEncodeBuf(512)
@@ -15414,8 +15414,8 @@ func (e TL_channelForbidden) encode() []byte {
 	x.Long(e.ID)
 	x.Long(e.AccessHash)
 	x.String(e.Title)
-	if e.UntilDate.IsSet {
-		x.Int(e.UntilDate.Value)
+	if e.UntilDate != nil {
+		x.Int(*e.UntilDate)
 	}
 	return x.buf
 }
@@ -15440,25 +15440,25 @@ func (e TL_chatFull) encode() []byte {
 	if e.BotInfo != nil {
 		flags |= (1 << 3)
 	}
-	if e.PinnedMsgID.IsSet {
+	if e.PinnedMsgID != nil {
 		flags |= (1 << 6)
 	}
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 11)
 	}
 	if e.Call != nil {
 		flags |= (1 << 12)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 14)
 	}
 	if e.GroupcallDefaultJoinAs != nil {
 		flags |= (1 << 15)
 	}
-	if e.ThemeEmoticon.IsSet {
+	if e.ThemeEmoticon != nil {
 		flags |= (1 << 16)
 	}
-	if e.RequestsPending.IsSet {
+	if e.RequestsPending != nil {
 		flags |= (1 << 17)
 	}
 	if e.RecentRequesters != nil {
@@ -15483,26 +15483,26 @@ func (e TL_chatFull) encode() []byte {
 	if e.BotInfo != nil {
 		x.Vector(e.BotInfo)
 	}
-	if e.PinnedMsgID.IsSet {
-		x.Int(e.PinnedMsgID.Value)
+	if e.PinnedMsgID != nil {
+		x.Int(*e.PinnedMsgID)
 	}
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
 	if e.Call != nil {
 		x.Object(e.Call)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	if e.GroupcallDefaultJoinAs != nil {
 		x.Object(e.GroupcallDefaultJoinAs)
 	}
-	if e.ThemeEmoticon.IsSet {
-		x.String(e.ThemeEmoticon.Value)
+	if e.ThemeEmoticon != nil {
+		x.String(*e.ThemeEmoticon)
 	}
-	if e.RequestsPending.IsSet {
-		x.Int(e.RequestsPending.Value)
+	if e.RequestsPending != nil {
+		x.Int(*e.RequestsPending)
 	}
 	if e.RecentRequesters != nil {
 		x.VectorLong(e.RecentRequesters)
@@ -15554,61 +15554,61 @@ func (e TL_channelFull) encode() []byte {
 	if e.StoriesPinnedAvailable {
 		flags2 |= (1 << 5)
 	}
-	if e.ParticipantsCount.IsSet {
+	if e.ParticipantsCount != nil {
 		flags |= (1 << 0)
 	}
-	if e.AdminsCount.IsSet {
+	if e.AdminsCount != nil {
 		flags |= (1 << 1)
 	}
-	if e.KickedCount.IsSet {
+	if e.KickedCount != nil {
 		flags |= (1 << 2)
 	}
-	if e.BannedCount.IsSet {
+	if e.BannedCount != nil {
 		flags |= (1 << 2)
 	}
-	if e.OnlineCount.IsSet {
+	if e.OnlineCount != nil {
 		flags |= (1 << 13)
 	}
 	if e.ExportedInvite != nil {
 		flags |= (1 << 23)
 	}
-	if e.MigratedFromChatID.IsSet {
+	if e.MigratedFromChatID != nil {
 		flags |= (1 << 4)
 	}
-	if e.MigratedFromMaxID.IsSet {
+	if e.MigratedFromMaxID != nil {
 		flags |= (1 << 4)
 	}
-	if e.PinnedMsgID.IsSet {
+	if e.PinnedMsgID != nil {
 		flags |= (1 << 5)
 	}
 	if e.Stickerset != nil {
 		flags |= (1 << 8)
 	}
-	if e.AvailableMinID.IsSet {
+	if e.AvailableMinID != nil {
 		flags |= (1 << 9)
 	}
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 11)
 	}
-	if e.LinkedChatID.IsSet {
+	if e.LinkedChatID != nil {
 		flags |= (1 << 14)
 	}
 	if e.Location != nil {
 		flags |= (1 << 15)
 	}
-	if e.SlowmodeSeconds.IsSet {
+	if e.SlowmodeSeconds != nil {
 		flags |= (1 << 17)
 	}
-	if e.SlowmodeNextSendDate.IsSet {
+	if e.SlowmodeNextSendDate != nil {
 		flags |= (1 << 18)
 	}
-	if e.StatsDc.IsSet {
+	if e.StatsDc != nil {
 		flags |= (1 << 12)
 	}
 	if e.Call != nil {
 		flags |= (1 << 21)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 24)
 	}
 	if e.PendingSuggestions != nil {
@@ -15617,10 +15617,10 @@ func (e TL_channelFull) encode() []byte {
 	if e.GroupcallDefaultJoinAs != nil {
 		flags |= (1 << 26)
 	}
-	if e.ThemeEmoticon.IsSet {
+	if e.ThemeEmoticon != nil {
 		flags |= (1 << 27)
 	}
-	if e.RequestsPending.IsSet {
+	if e.RequestsPending != nil {
 		flags |= (1 << 28)
 	}
 	if e.RecentRequesters != nil {
@@ -15641,20 +15641,20 @@ func (e TL_channelFull) encode() []byte {
 	x.Int(flags2)
 	x.Long(e.ID)
 	x.String(e.About)
-	if e.ParticipantsCount.IsSet {
-		x.Int(e.ParticipantsCount.Value)
+	if e.ParticipantsCount != nil {
+		x.Int(*e.ParticipantsCount)
 	}
-	if e.AdminsCount.IsSet {
-		x.Int(e.AdminsCount.Value)
+	if e.AdminsCount != nil {
+		x.Int(*e.AdminsCount)
 	}
-	if e.KickedCount.IsSet {
-		x.Int(e.KickedCount.Value)
+	if e.KickedCount != nil {
+		x.Int(*e.KickedCount)
 	}
-	if e.BannedCount.IsSet {
-		x.Int(e.BannedCount.Value)
+	if e.BannedCount != nil {
+		x.Int(*e.BannedCount)
 	}
-	if e.OnlineCount.IsSet {
-		x.Int(e.OnlineCount.Value)
+	if e.OnlineCount != nil {
+		x.Int(*e.OnlineCount)
 	}
 	x.Int(e.ReadInboxMaxID)
 	x.Int(e.ReadOutboxMaxID)
@@ -15665,45 +15665,45 @@ func (e TL_channelFull) encode() []byte {
 		x.Object(e.ExportedInvite)
 	}
 	x.Vector(e.BotInfo)
-	if e.MigratedFromChatID.IsSet {
-		x.Long(e.MigratedFromChatID.Value)
+	if e.MigratedFromChatID != nil {
+		x.Long(*e.MigratedFromChatID)
 	}
-	if e.MigratedFromMaxID.IsSet {
-		x.Int(e.MigratedFromMaxID.Value)
+	if e.MigratedFromMaxID != nil {
+		x.Int(*e.MigratedFromMaxID)
 	}
-	if e.PinnedMsgID.IsSet {
-		x.Int(e.PinnedMsgID.Value)
+	if e.PinnedMsgID != nil {
+		x.Int(*e.PinnedMsgID)
 	}
 	if e.Stickerset != nil {
 		x.Object(e.Stickerset)
 	}
-	if e.AvailableMinID.IsSet {
-		x.Int(e.AvailableMinID.Value)
+	if e.AvailableMinID != nil {
+		x.Int(*e.AvailableMinID)
 	}
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
-	if e.LinkedChatID.IsSet {
-		x.Long(e.LinkedChatID.Value)
+	if e.LinkedChatID != nil {
+		x.Long(*e.LinkedChatID)
 	}
 	if e.Location != nil {
 		x.Object(e.Location)
 	}
-	if e.SlowmodeSeconds.IsSet {
-		x.Int(e.SlowmodeSeconds.Value)
+	if e.SlowmodeSeconds != nil {
+		x.Int(*e.SlowmodeSeconds)
 	}
-	if e.SlowmodeNextSendDate.IsSet {
-		x.Int(e.SlowmodeNextSendDate.Value)
+	if e.SlowmodeNextSendDate != nil {
+		x.Int(*e.SlowmodeNextSendDate)
 	}
-	if e.StatsDc.IsSet {
-		x.Int(e.StatsDc.Value)
+	if e.StatsDc != nil {
+		x.Int(*e.StatsDc)
 	}
 	x.Int(e.Pts)
 	if e.Call != nil {
 		x.Object(e.Call)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	if e.PendingSuggestions != nil {
 		x.VectorString(e.PendingSuggestions)
@@ -15711,11 +15711,11 @@ func (e TL_channelFull) encode() []byte {
 	if e.GroupcallDefaultJoinAs != nil {
 		x.Object(e.GroupcallDefaultJoinAs)
 	}
-	if e.ThemeEmoticon.IsSet {
-		x.String(e.ThemeEmoticon.Value)
+	if e.ThemeEmoticon != nil {
+		x.String(*e.ThemeEmoticon)
 	}
-	if e.RequestsPending.IsSet {
-		x.Int(e.RequestsPending.Value)
+	if e.RequestsPending != nil {
+		x.Int(*e.RequestsPending)
 	}
 	if e.RecentRequesters != nil {
 		x.VectorLong(e.RecentRequesters)
@@ -15862,7 +15862,7 @@ func (e TL_message) encode() []byte {
 	if e.FwdFrom != nil {
 		flags |= (1 << 2)
 	}
-	if e.ViaBotID.IsSet {
+	if e.ViaBotID != nil {
 		flags |= (1 << 11)
 	}
 	if e.ReplyTo != nil {
@@ -15877,22 +15877,22 @@ func (e TL_message) encode() []byte {
 	if e.Entities != nil {
 		flags |= (1 << 7)
 	}
-	if e.Views.IsSet {
+	if e.Views != nil {
 		flags |= (1 << 10)
 	}
-	if e.Forwards.IsSet {
+	if e.Forwards != nil {
 		flags |= (1 << 10)
 	}
 	if e.Replies != nil {
 		flags |= (1 << 23)
 	}
-	if e.EditDate.IsSet {
+	if e.EditDate != nil {
 		flags |= (1 << 15)
 	}
-	if e.PostAuthor.IsSet {
+	if e.PostAuthor != nil {
 		flags |= (1 << 16)
 	}
-	if e.GroupedID.IsSet {
+	if e.GroupedID != nil {
 		flags |= (1 << 17)
 	}
 	if e.Reactions != nil {
@@ -15901,7 +15901,7 @@ func (e TL_message) encode() []byte {
 	if e.RestrictionReason != nil {
 		flags |= (1 << 22)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 25)
 	}
 	x := NewEncodeBuf(512)
@@ -15915,8 +15915,8 @@ func (e TL_message) encode() []byte {
 	if e.FwdFrom != nil {
 		x.Object(e.FwdFrom)
 	}
-	if e.ViaBotID.IsSet {
-		x.Long(e.ViaBotID.Value)
+	if e.ViaBotID != nil {
+		x.Long(*e.ViaBotID)
 	}
 	if e.ReplyTo != nil {
 		x.Object(e.ReplyTo)
@@ -15932,23 +15932,23 @@ func (e TL_message) encode() []byte {
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
-	if e.Views.IsSet {
-		x.Int(e.Views.Value)
+	if e.Views != nil {
+		x.Int(*e.Views)
 	}
-	if e.Forwards.IsSet {
-		x.Int(e.Forwards.Value)
+	if e.Forwards != nil {
+		x.Int(*e.Forwards)
 	}
 	if e.Replies != nil {
 		x.Object(e.Replies)
 	}
-	if e.EditDate.IsSet {
-		x.Int(e.EditDate.Value)
+	if e.EditDate != nil {
+		x.Int(*e.EditDate)
 	}
-	if e.PostAuthor.IsSet {
-		x.String(e.PostAuthor.Value)
+	if e.PostAuthor != nil {
+		x.String(*e.PostAuthor)
 	}
-	if e.GroupedID.IsSet {
-		x.Long(e.GroupedID.Value)
+	if e.GroupedID != nil {
+		x.Long(*e.GroupedID)
 	}
 	if e.Reactions != nil {
 		x.Object(e.Reactions)
@@ -15956,8 +15956,8 @@ func (e TL_message) encode() []byte {
 	if e.RestrictionReason != nil {
 		x.Vector(e.RestrictionReason)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -15988,7 +15988,7 @@ func (e TL_messageService) encode() []byte {
 	if e.ReplyTo != nil {
 		flags |= (1 << 3)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 25)
 	}
 	x := NewEncodeBuf(512)
@@ -16004,8 +16004,8 @@ func (e TL_messageService) encode() []byte {
 	}
 	x.Int(e.Date)
 	x.Object(e.Action)
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -16024,7 +16024,7 @@ func (e TL_messageMediaPhoto) encode() []byte {
 	if e.Photo != nil {
 		flags |= (1 << 0)
 	}
-	if e.TtlSeconds.IsSet {
+	if e.TtlSeconds != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -16033,8 +16033,8 @@ func (e TL_messageMediaPhoto) encode() []byte {
 	if e.Photo != nil {
 		x.Object(e.Photo)
 	}
-	if e.TtlSeconds.IsSet {
-		x.Int(e.TtlSeconds.Value)
+	if e.TtlSeconds != nil {
+		x.Int(*e.TtlSeconds)
 	}
 	return x.buf
 }
@@ -16077,7 +16077,7 @@ func (e TL_messageMediaDocument) encode() []byte {
 	if e.AltDocument != nil {
 		flags |= (1 << 5)
 	}
-	if e.TtlSeconds.IsSet {
+	if e.TtlSeconds != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -16089,8 +16089,8 @@ func (e TL_messageMediaDocument) encode() []byte {
 	if e.AltDocument != nil {
 		x.Object(e.AltDocument)
 	}
-	if e.TtlSeconds.IsSet {
-		x.Int(e.TtlSeconds.Value)
+	if e.TtlSeconds != nil {
+		x.Int(*e.TtlSeconds)
 	}
 	return x.buf
 }
@@ -16146,7 +16146,7 @@ func (e TL_messageMediaInvoice) encode() []byte {
 	if e.Photo != nil {
 		flags |= (1 << 0)
 	}
-	if e.ReceiptMsgID.IsSet {
+	if e.ReceiptMsgID != nil {
 		flags |= (1 << 2)
 	}
 	if e.ExtendedMedia != nil {
@@ -16160,8 +16160,8 @@ func (e TL_messageMediaInvoice) encode() []byte {
 	if e.Photo != nil {
 		x.Object(e.Photo)
 	}
-	if e.ReceiptMsgID.IsSet {
-		x.Int(e.ReceiptMsgID.Value)
+	if e.ReceiptMsgID != nil {
+		x.Int(*e.ReceiptMsgID)
 	}
 	x.String(e.Currency)
 	x.Long(e.TotalAmount)
@@ -16174,22 +16174,22 @@ func (e TL_messageMediaInvoice) encode() []byte {
 
 func (e TL_messageMediaGeoLive) encode() []byte {
 	var flags int32
-	if e.Heading.IsSet {
+	if e.Heading != nil {
 		flags |= (1 << 0)
 	}
-	if e.ProximityNotificationRadius.IsSet {
+	if e.ProximityNotificationRadius != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageMediaGeoLive)
 	x.Int(flags)
 	x.Object(e.Geo)
-	if e.Heading.IsSet {
-		x.Int(e.Heading.Value)
+	if e.Heading != nil {
+		x.Int(*e.Heading)
 	}
 	x.Int(e.Period)
-	if e.ProximityNotificationRadius.IsSet {
-		x.Int(e.ProximityNotificationRadius.Value)
+	if e.ProximityNotificationRadius != nil {
+		x.Int(*e.ProximityNotificationRadius)
 	}
 	return x.buf
 }
@@ -16358,7 +16358,7 @@ func (e TL_messageActionPaymentSentMe) encode() []byte {
 	if e.Info != nil {
 		flags |= (1 << 0)
 	}
-	if e.ShippingOptionID.IsSet {
+	if e.ShippingOptionID != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -16370,8 +16370,8 @@ func (e TL_messageActionPaymentSentMe) encode() []byte {
 	if e.Info != nil {
 		x.Object(e.Info)
 	}
-	if e.ShippingOptionID.IsSet {
-		x.String(e.ShippingOptionID.Value)
+	if e.ShippingOptionID != nil {
+		x.String(*e.ShippingOptionID)
 	}
 	x.Object(e.Charge)
 	return x.buf
@@ -16385,7 +16385,7 @@ func (e TL_messageActionPaymentSent) encode() []byte {
 	if e.RecurringUsed {
 		flags |= (1 << 3)
 	}
-	if e.InvoiceSlug.IsSet {
+	if e.InvoiceSlug != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -16393,8 +16393,8 @@ func (e TL_messageActionPaymentSent) encode() []byte {
 	x.Int(flags)
 	x.String(e.Currency)
 	x.Long(e.TotalAmount)
-	if e.InvoiceSlug.IsSet {
-		x.String(e.InvoiceSlug.Value)
+	if e.InvoiceSlug != nil {
+		x.String(*e.InvoiceSlug)
 	}
 	return x.buf
 }
@@ -16407,7 +16407,7 @@ func (e TL_messageActionPhoneCall) encode() []byte {
 	if e.Reason != nil {
 		flags |= (1 << 0)
 	}
-	if e.Duration.IsSet {
+	if e.Duration != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -16417,8 +16417,8 @@ func (e TL_messageActionPhoneCall) encode() []byte {
 	if e.Reason != nil {
 		x.Object(e.Reason)
 	}
-	if e.Duration.IsSet {
-		x.Int(e.Duration.Value)
+	if e.Duration != nil {
+		x.Int(*e.Duration)
 	}
 	return x.buf
 }
@@ -16444,7 +16444,7 @@ func (e TL_messageActionBotAllowed) encode() []byte {
 	if e.FromRequest {
 		flags |= (1 << 3)
 	}
-	if e.Domain.IsSet {
+	if e.Domain != nil {
 		flags |= (1 << 0)
 	}
 	if e.App != nil {
@@ -16453,8 +16453,8 @@ func (e TL_messageActionBotAllowed) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionBotAllowed)
 	x.Int(flags)
-	if e.Domain.IsSet {
-		x.String(e.Domain.Value)
+	if e.Domain != nil {
+		x.String(*e.Domain)
 	}
 	if e.App != nil {
 		x.Object(e.App)
@@ -16494,15 +16494,15 @@ func (e TL_messageActionGeoProximityReached) encode() []byte {
 
 func (e TL_messageActionGroupCall) encode() []byte {
 	var flags int32
-	if e.Duration.IsSet {
+	if e.Duration != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionGroupCall)
 	x.Int(flags)
 	x.Object(e.Call)
-	if e.Duration.IsSet {
-		x.Int(e.Duration.Value)
+	if e.Duration != nil {
+		x.Int(*e.Duration)
 	}
 	return x.buf
 }
@@ -16517,15 +16517,15 @@ func (e TL_messageActionInviteToGroupCall) encode() []byte {
 
 func (e TL_messageActionSetMessagesTTL) encode() []byte {
 	var flags int32
-	if e.AutoSettingFrom.IsSet {
+	if e.AutoSettingFrom != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionSetMessagesTTL)
 	x.Int(flags)
 	x.Int(e.Period)
-	if e.AutoSettingFrom.IsSet {
-		x.Long(e.AutoSettingFrom.Value)
+	if e.AutoSettingFrom != nil {
+		x.Long(*e.AutoSettingFrom)
 	}
 	return x.buf
 }
@@ -16568,10 +16568,10 @@ func (e TL_messageActionWebViewDataSent) encode() []byte {
 
 func (e TL_messageActionGiftPremium) encode() []byte {
 	var flags int32
-	if e.CryptoCurrency.IsSet {
+	if e.CryptoCurrency != nil {
 		flags |= (1 << 0)
 	}
-	if e.CryptoAmount.IsSet {
+	if e.CryptoAmount != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -16580,18 +16580,18 @@ func (e TL_messageActionGiftPremium) encode() []byte {
 	x.String(e.Currency)
 	x.Long(e.Amount)
 	x.Int(e.Months)
-	if e.CryptoCurrency.IsSet {
-		x.String(e.CryptoCurrency.Value)
+	if e.CryptoCurrency != nil {
+		x.String(*e.CryptoCurrency)
 	}
-	if e.CryptoAmount.IsSet {
-		x.Long(e.CryptoAmount.Value)
+	if e.CryptoAmount != nil {
+		x.Long(*e.CryptoAmount)
 	}
 	return x.buf
 }
 
 func (e TL_messageActionTopicCreate) encode() []byte {
 	var flags int32
-	if e.IconEmojiID.IsSet {
+	if e.IconEmojiID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -16599,40 +16599,40 @@ func (e TL_messageActionTopicCreate) encode() []byte {
 	x.Int(flags)
 	x.String(e.Title)
 	x.Int(e.IconColor)
-	if e.IconEmojiID.IsSet {
-		x.Long(e.IconEmojiID.Value)
+	if e.IconEmojiID != nil {
+		x.Long(*e.IconEmojiID)
 	}
 	return x.buf
 }
 
 func (e TL_messageActionTopicEdit) encode() []byte {
 	var flags int32
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 0)
 	}
-	if e.IconEmojiID.IsSet {
+	if e.IconEmojiID != nil {
 		flags |= (1 << 1)
 	}
-	if e.Closed.IsSet {
+	if e.Closed != nil {
 		flags |= (1 << 2)
 	}
-	if e.Hidden.IsSet {
+	if e.Hidden != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionTopicEdit)
 	x.Int(flags)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.IconEmojiID.IsSet {
-		x.Long(e.IconEmojiID.Value)
+	if e.IconEmojiID != nil {
+		x.Long(*e.IconEmojiID)
 	}
-	if e.Closed.IsSet {
-		x.Bool(e.Closed.Value)
+	if e.Closed != nil {
+		x.Bool(*e.Closed)
 	}
-	if e.Hidden.IsSet {
-		x.Bool(e.Hidden.Value)
+	if e.Hidden != nil {
+		x.Bool(*e.Hidden)
 	}
 	return x.buf
 }
@@ -16702,16 +16702,16 @@ func (e TL_dialog) encode() []byte {
 	if e.UnreadMark {
 		flags |= (1 << 3)
 	}
-	if e.Pts.IsSet {
+	if e.Pts != nil {
 		flags |= (1 << 0)
 	}
 	if e.Draft != nil {
 		flags |= (1 << 1)
 	}
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 4)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 5)
 	}
 	x := NewEncodeBuf(512)
@@ -16725,17 +16725,17 @@ func (e TL_dialog) encode() []byte {
 	x.Int(e.UnreadMentionsCount)
 	x.Int(e.UnreadReactionsCount)
 	x.Object(e.NotifySettings)
-	if e.Pts.IsSet {
-		x.Int(e.Pts.Value)
+	if e.Pts != nil {
+		x.Int(*e.Pts)
 	}
 	if e.Draft != nil {
 		x.Object(e.Draft)
 	}
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -16849,7 +16849,7 @@ func (e TL_geoPointEmpty) encode() []byte {
 
 func (e TL_geoPoint) encode() []byte {
 	var flags int32
-	if e.AccuracyRadius.IsSet {
+	if e.AccuracyRadius != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -16858,8 +16858,8 @@ func (e TL_geoPoint) encode() []byte {
 	x.Double(e.Long)
 	x.Double(e.Lat)
 	x.Long(e.AccessHash)
-	if e.AccuracyRadius.IsSet {
-		x.Int(e.AccuracyRadius.Value)
+	if e.AccuracyRadius != nil {
+		x.Int(*e.AccuracyRadius)
 	}
 	return x.buf
 }
@@ -16869,7 +16869,7 @@ func (e TL_auth_sentCode) encode() []byte {
 	if e.NextType != nil {
 		flags |= (1 << 1)
 	}
-	if e.Timeout.IsSet {
+	if e.Timeout != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -16880,8 +16880,8 @@ func (e TL_auth_sentCode) encode() []byte {
 	if e.NextType != nil {
 		x.Object(e.NextType)
 	}
-	if e.Timeout.IsSet {
-		x.Int(e.Timeout.Value)
+	if e.Timeout != nil {
+		x.Int(*e.Timeout)
 	}
 	return x.buf
 }
@@ -16898,10 +16898,10 @@ func (e TL_auth_authorization) encode() []byte {
 	if e.SetupPasswordRequired {
 		flags |= (1 << 1)
 	}
-	if e.OtherwiseReloginDays.IsSet {
+	if e.OtherwiseReloginDays != nil {
 		flags |= (1 << 1)
 	}
-	if e.TmpSessions.IsSet {
+	if e.TmpSessions != nil {
 		flags |= (1 << 0)
 	}
 	if e.FutureAuthToken != nil {
@@ -16910,11 +16910,11 @@ func (e TL_auth_authorization) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_auth_authorization)
 	x.Int(flags)
-	if e.OtherwiseReloginDays.IsSet {
-		x.Int(e.OtherwiseReloginDays.Value)
+	if e.OtherwiseReloginDays != nil {
+		x.Int(*e.OtherwiseReloginDays)
 	}
-	if e.TmpSessions.IsSet {
-		x.Int(e.TmpSessions.Value)
+	if e.TmpSessions != nil {
+		x.Int(*e.TmpSessions)
 	}
 	if e.FutureAuthToken != nil {
 		x.StringBytes(e.FutureAuthToken)
@@ -16980,22 +16980,22 @@ func (e TL_inputNotifyForumTopic) encode() []byte {
 
 func (e TL_inputPeerNotifySettings) encode() []byte {
 	var flags int32
-	if e.ShowPreviews.IsSet {
+	if e.ShowPreviews != nil {
 		flags |= (1 << 0)
 	}
-	if e.Silent.IsSet {
+	if e.Silent != nil {
 		flags |= (1 << 1)
 	}
-	if e.MuteUntil.IsSet {
+	if e.MuteUntil != nil {
 		flags |= (1 << 2)
 	}
 	if e.Sound != nil {
 		flags |= (1 << 3)
 	}
-	if e.StoriesMuted.IsSet {
+	if e.StoriesMuted != nil {
 		flags |= (1 << 6)
 	}
-	if e.StoriesHideSender.IsSet {
+	if e.StoriesHideSender != nil {
 		flags |= (1 << 7)
 	}
 	if e.StoriesSound != nil {
@@ -17004,23 +17004,23 @@ func (e TL_inputPeerNotifySettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputPeerNotifySettings)
 	x.Int(flags)
-	if e.ShowPreviews.IsSet {
-		x.Bool(e.ShowPreviews.Value)
+	if e.ShowPreviews != nil {
+		x.Bool(*e.ShowPreviews)
 	}
-	if e.Silent.IsSet {
-		x.Bool(e.Silent.Value)
+	if e.Silent != nil {
+		x.Bool(*e.Silent)
 	}
-	if e.MuteUntil.IsSet {
-		x.Int(e.MuteUntil.Value)
+	if e.MuteUntil != nil {
+		x.Int(*e.MuteUntil)
 	}
 	if e.Sound != nil {
 		x.Object(e.Sound)
 	}
-	if e.StoriesMuted.IsSet {
-		x.Bool(e.StoriesMuted.Value)
+	if e.StoriesMuted != nil {
+		x.Bool(*e.StoriesMuted)
 	}
-	if e.StoriesHideSender.IsSet {
-		x.Bool(e.StoriesHideSender.Value)
+	if e.StoriesHideSender != nil {
+		x.Bool(*e.StoriesHideSender)
 	}
 	if e.StoriesSound != nil {
 		x.Object(e.StoriesSound)
@@ -17030,13 +17030,13 @@ func (e TL_inputPeerNotifySettings) encode() []byte {
 
 func (e TL_peerNotifySettings) encode() []byte {
 	var flags int32
-	if e.ShowPreviews.IsSet {
+	if e.ShowPreviews != nil {
 		flags |= (1 << 0)
 	}
-	if e.Silent.IsSet {
+	if e.Silent != nil {
 		flags |= (1 << 1)
 	}
-	if e.MuteUntil.IsSet {
+	if e.MuteUntil != nil {
 		flags |= (1 << 2)
 	}
 	if e.IosSound != nil {
@@ -17048,10 +17048,10 @@ func (e TL_peerNotifySettings) encode() []byte {
 	if e.OtherSound != nil {
 		flags |= (1 << 5)
 	}
-	if e.StoriesMuted.IsSet {
+	if e.StoriesMuted != nil {
 		flags |= (1 << 6)
 	}
-	if e.StoriesHideSender.IsSet {
+	if e.StoriesHideSender != nil {
 		flags |= (1 << 7)
 	}
 	if e.StoriesIosSound != nil {
@@ -17066,14 +17066,14 @@ func (e TL_peerNotifySettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_peerNotifySettings)
 	x.Int(flags)
-	if e.ShowPreviews.IsSet {
-		x.Bool(e.ShowPreviews.Value)
+	if e.ShowPreviews != nil {
+		x.Bool(*e.ShowPreviews)
 	}
-	if e.Silent.IsSet {
-		x.Bool(e.Silent.Value)
+	if e.Silent != nil {
+		x.Bool(*e.Silent)
 	}
-	if e.MuteUntil.IsSet {
-		x.Int(e.MuteUntil.Value)
+	if e.MuteUntil != nil {
+		x.Int(*e.MuteUntil)
 	}
 	if e.IosSound != nil {
 		x.Object(e.IosSound)
@@ -17084,11 +17084,11 @@ func (e TL_peerNotifySettings) encode() []byte {
 	if e.OtherSound != nil {
 		x.Object(e.OtherSound)
 	}
-	if e.StoriesMuted.IsSet {
-		x.Bool(e.StoriesMuted.Value)
+	if e.StoriesMuted != nil {
+		x.Bool(*e.StoriesMuted)
 	}
-	if e.StoriesHideSender.IsSet {
-		x.Bool(e.StoriesHideSender.Value)
+	if e.StoriesHideSender != nil {
+		x.Bool(*e.StoriesHideSender)
 	}
 	if e.StoriesIosSound != nil {
 		x.Object(e.StoriesIosSound)
@@ -17131,26 +17131,26 @@ func (e TL_peerSettings) encode() []byte {
 	if e.RequestChatBroadcast {
 		flags |= (1 << 10)
 	}
-	if e.GeoDistance.IsSet {
+	if e.GeoDistance != nil {
 		flags |= (1 << 6)
 	}
-	if e.RequestChatTitle.IsSet {
+	if e.RequestChatTitle != nil {
 		flags |= (1 << 9)
 	}
-	if e.RequestChatDate.IsSet {
+	if e.RequestChatDate != nil {
 		flags |= (1 << 9)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_peerSettings)
 	x.Int(flags)
-	if e.GeoDistance.IsSet {
-		x.Int(e.GeoDistance.Value)
+	if e.GeoDistance != nil {
+		x.Int(*e.GeoDistance)
 	}
-	if e.RequestChatTitle.IsSet {
-		x.String(e.RequestChatTitle.Value)
+	if e.RequestChatTitle != nil {
+		x.String(*e.RequestChatTitle)
 	}
-	if e.RequestChatDate.IsSet {
-		x.Int(e.RequestChatDate.Value)
+	if e.RequestChatDate != nil {
+		x.Int(*e.RequestChatDate)
 	}
 	return x.buf
 }
@@ -17298,7 +17298,7 @@ func (e TL_userFull) encode() []byte {
 	if e.BlockedMyStoriesFrom {
 		flags |= (1 << 27)
 	}
-	if e.About.IsSet {
+	if e.About != nil {
 		flags |= (1 << 1)
 	}
 	if e.PersonalPhoto != nil {
@@ -17313,19 +17313,19 @@ func (e TL_userFull) encode() []byte {
 	if e.BotInfo != nil {
 		flags |= (1 << 3)
 	}
-	if e.PinnedMsgID.IsSet {
+	if e.PinnedMsgID != nil {
 		flags |= (1 << 6)
 	}
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 11)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 14)
 	}
-	if e.ThemeEmoticon.IsSet {
+	if e.ThemeEmoticon != nil {
 		flags |= (1 << 15)
 	}
-	if e.PrivateForwardName.IsSet {
+	if e.PrivateForwardName != nil {
 		flags |= (1 << 16)
 	}
 	if e.BotGroupAdminRights != nil {
@@ -17347,8 +17347,8 @@ func (e TL_userFull) encode() []byte {
 	x.UInt(CRC_userFull)
 	x.Int(flags)
 	x.Long(e.ID)
-	if e.About.IsSet {
-		x.String(e.About.Value)
+	if e.About != nil {
+		x.String(*e.About)
 	}
 	x.Object(e.Settings)
 	if e.PersonalPhoto != nil {
@@ -17364,21 +17364,21 @@ func (e TL_userFull) encode() []byte {
 	if e.BotInfo != nil {
 		x.Object(e.BotInfo)
 	}
-	if e.PinnedMsgID.IsSet {
-		x.Int(e.PinnedMsgID.Value)
+	if e.PinnedMsgID != nil {
+		x.Int(*e.PinnedMsgID)
 	}
 	x.Int(e.CommonChatsCount)
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
-	if e.ThemeEmoticon.IsSet {
-		x.String(e.ThemeEmoticon.Value)
+	if e.ThemeEmoticon != nil {
+		x.String(*e.ThemeEmoticon)
 	}
-	if e.PrivateForwardName.IsSet {
-		x.String(e.PrivateForwardName.Value)
+	if e.PrivateForwardName != nil {
+		x.String(*e.PrivateForwardName)
 	}
 	if e.BotGroupAdminRights != nil {
 		x.Object(e.BotGroupAdminRights)
@@ -17508,21 +17508,21 @@ func (e TL_messages_messagesSlice) encode() []byte {
 	if e.Inexact {
 		flags |= (1 << 1)
 	}
-	if e.NextRate.IsSet {
+	if e.NextRate != nil {
 		flags |= (1 << 0)
 	}
-	if e.OffsetIdOffset.IsSet {
+	if e.OffsetIdOffset != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_messagesSlice)
 	x.Int(flags)
 	x.Int(e.Count)
-	if e.NextRate.IsSet {
-		x.Int(e.NextRate.Value)
+	if e.NextRate != nil {
+		x.Int(*e.NextRate)
 	}
-	if e.OffsetIdOffset.IsSet {
-		x.Int(e.OffsetIdOffset.Value)
+	if e.OffsetIdOffset != nil {
+		x.Int(*e.OffsetIdOffset)
 	}
 	x.Vector(e.Messages)
 	x.Vector(e.Chats)
@@ -17535,7 +17535,7 @@ func (e TL_messages_channelMessages) encode() []byte {
 	if e.Inexact {
 		flags |= (1 << 1)
 	}
-	if e.OffsetIdOffset.IsSet {
+	if e.OffsetIdOffset != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -17543,8 +17543,8 @@ func (e TL_messages_channelMessages) encode() []byte {
 	x.Int(flags)
 	x.Int(e.Pts)
 	x.Int(e.Count)
-	if e.OffsetIdOffset.IsSet {
-		x.Int(e.OffsetIdOffset.Value)
+	if e.OffsetIdOffset != nil {
+		x.Int(*e.OffsetIdOffset)
 	}
 	x.Vector(e.Messages)
 	x.Vector(e.Topics)
@@ -17773,27 +17773,27 @@ func (e TL_updateNewAuthorization) encode() []byte {
 	if e.Unconfirmed {
 		flags |= (1 << 0)
 	}
-	if e.Date.IsSet {
+	if e.Date != nil {
 		flags |= (1 << 0)
 	}
-	if e.Device.IsSet {
+	if e.Device != nil {
 		flags |= (1 << 0)
 	}
-	if e.Location.IsSet {
+	if e.Location != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateNewAuthorization)
 	x.Int(flags)
 	x.Long(e.Hash)
-	if e.Date.IsSet {
-		x.Int(e.Date.Value)
+	if e.Date != nil {
+		x.Int(*e.Date)
 	}
-	if e.Device.IsSet {
-		x.String(e.Device.Value)
+	if e.Device != nil {
+		x.String(*e.Device)
 	}
-	if e.Location.IsSet {
-		x.String(e.Location.Value)
+	if e.Location != nil {
+		x.String(*e.Location)
 	}
 	return x.buf
 }
@@ -17873,14 +17873,14 @@ func (e TL_updateServiceNotification) encode() []byte {
 	if e.InvertMedia {
 		flags |= (1 << 2)
 	}
-	if e.InboxDate.IsSet {
+	if e.InboxDate != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateServiceNotification)
 	x.Int(flags)
-	if e.InboxDate.IsSet {
-		x.Int(e.InboxDate.Value)
+	if e.InboxDate != nil {
+		x.Int(*e.InboxDate)
 	}
 	x.String(e.Type)
 	x.String(e.Message)
@@ -17907,14 +17907,14 @@ func (e TL_updateUserPhone) encode() []byte {
 
 func (e TL_updateReadHistoryInbox) encode() []byte {
 	var flags int32
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateReadHistoryInbox)
 	x.Int(flags)
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
 	x.Object(e.Peer)
 	x.Int(e.MaxID)
@@ -17945,7 +17945,7 @@ func (e TL_updateWebPage) encode() []byte {
 
 func (e TL_updateReadMessagesContents) encode() []byte {
 	var flags int32
-	if e.Date.IsSet {
+	if e.Date != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -17954,23 +17954,23 @@ func (e TL_updateReadMessagesContents) encode() []byte {
 	x.VectorInt(e.Messages)
 	x.Int(e.Pts)
 	x.Int(e.PtsCount)
-	if e.Date.IsSet {
-		x.Int(e.Date.Value)
+	if e.Date != nil {
+		x.Int(*e.Date)
 	}
 	return x.buf
 }
 
 func (e TL_updateChannelTooLong) encode() []byte {
 	var flags int32
-	if e.Pts.IsSet {
+	if e.Pts != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateChannelTooLong)
 	x.Int(flags)
 	x.Long(e.ChannelID)
-	if e.Pts.IsSet {
-		x.Int(e.Pts.Value)
+	if e.Pts != nil {
+		x.Int(*e.Pts)
 	}
 	return x.buf
 }
@@ -17993,14 +17993,14 @@ func (e TL_updateNewChannelMessage) encode() []byte {
 
 func (e TL_updateReadChannelInbox) encode() []byte {
 	var flags int32
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateReadChannelInbox)
 	x.Int(flags)
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
 	x.Long(e.ChannelID)
 	x.Int(e.MaxID)
@@ -18141,7 +18141,7 @@ func (e TL_updateBotCallbackQuery) encode() []byte {
 	if e.Data != nil {
 		flags |= (1 << 0)
 	}
-	if e.GameShortName.IsSet {
+	if e.GameShortName != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -18155,8 +18155,8 @@ func (e TL_updateBotCallbackQuery) encode() []byte {
 	if e.Data != nil {
 		x.StringBytes(e.Data)
 	}
-	if e.GameShortName.IsSet {
-		x.String(e.GameShortName.Value)
+	if e.GameShortName != nil {
+		x.String(*e.GameShortName)
 	}
 	return x.buf
 }
@@ -18175,7 +18175,7 @@ func (e TL_updateInlineBotCallbackQuery) encode() []byte {
 	if e.Data != nil {
 		flags |= (1 << 0)
 	}
-	if e.GameShortName.IsSet {
+	if e.GameShortName != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -18188,8 +18188,8 @@ func (e TL_updateInlineBotCallbackQuery) encode() []byte {
 	if e.Data != nil {
 		x.StringBytes(e.Data)
 	}
-	if e.GameShortName.IsSet {
-		x.String(e.GameShortName.Value)
+	if e.GameShortName != nil {
+		x.String(*e.GameShortName)
 	}
 	return x.buf
 }
@@ -18204,15 +18204,15 @@ func (e TL_updateReadChannelOutbox) encode() []byte {
 
 func (e TL_updateDraftMessage) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateDraftMessage)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.Object(e.Draft)
 	return x.buf
@@ -18257,14 +18257,14 @@ func (e TL_updateDialogPinned) encode() []byte {
 	if e.Pinned {
 		flags |= (1 << 0)
 	}
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateDialogPinned)
 	x.Int(flags)
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
 	x.Object(e.Peer)
 	return x.buf
@@ -18272,7 +18272,7 @@ func (e TL_updateDialogPinned) encode() []byte {
 
 func (e TL_updatePinnedDialogs) encode() []byte {
 	var flags int32
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 1)
 	}
 	if e.Order != nil {
@@ -18281,8 +18281,8 @@ func (e TL_updatePinnedDialogs) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updatePinnedDialogs)
 	x.Int(flags)
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
 	if e.Order != nil {
 		x.Vector(e.Order)
@@ -18321,7 +18321,7 @@ func (e TL_updateBotPrecheckoutQuery) encode() []byte {
 	if e.Info != nil {
 		flags |= (1 << 0)
 	}
-	if e.ShippingOptionID.IsSet {
+	if e.ShippingOptionID != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -18333,8 +18333,8 @@ func (e TL_updateBotPrecheckoutQuery) encode() []byte {
 	if e.Info != nil {
 		x.Object(e.Info)
 	}
-	if e.ShippingOptionID.IsSet {
-		x.String(e.ShippingOptionID.Value)
+	if e.ShippingOptionID != nil {
+		x.String(*e.ShippingOptionID)
 	}
 	x.String(e.Currency)
 	x.Long(e.TotalAmount)
@@ -18370,15 +18370,15 @@ func (e TL_updateFavedStickers) encode() []byte {
 
 func (e TL_updateChannelReadMessagesContents) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateChannelReadMessagesContents)
 	x.Int(flags)
 	x.Long(e.ChannelID)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.VectorInt(e.Messages)
 	return x.buf
@@ -18552,10 +18552,10 @@ func (e TL_updateChannelMessageForwards) encode() []byte {
 
 func (e TL_updateReadChannelDiscussionInbox) encode() []byte {
 	var flags int32
-	if e.BroadcastID.IsSet {
+	if e.BroadcastID != nil {
 		flags |= (1 << 0)
 	}
-	if e.BroadcastPost.IsSet {
+	if e.BroadcastPost != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -18564,11 +18564,11 @@ func (e TL_updateReadChannelDiscussionInbox) encode() []byte {
 	x.Long(e.ChannelID)
 	x.Int(e.TopMsgID)
 	x.Int(e.ReadMaxID)
-	if e.BroadcastID.IsSet {
-		x.Long(e.BroadcastID.Value)
+	if e.BroadcastID != nil {
+		x.Long(*e.BroadcastID)
 	}
-	if e.BroadcastPost.IsSet {
-		x.Int(e.BroadcastPost.Value)
+	if e.BroadcastPost != nil {
+		x.Int(*e.BroadcastPost)
 	}
 	return x.buf
 }
@@ -18599,15 +18599,15 @@ func (e TL_updatePeerBlocked) encode() []byte {
 
 func (e TL_updateChannelUserTyping) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateChannelUserTyping)
 	x.Int(flags)
 	x.Long(e.ChannelID)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.Object(e.FromID)
 	x.Object(e.Action)
@@ -18670,15 +18670,15 @@ func (e TL_updateGroupCall) encode() []byte {
 
 func (e TL_updatePeerHistoryTTL) encode() []byte {
 	var flags int32
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updatePeerHistoryTTL)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -18802,7 +18802,7 @@ func (e TL_updateBotChatInviteRequester) encode() []byte {
 
 func (e TL_updateMessageReactions) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -18810,8 +18810,8 @@ func (e TL_updateMessageReactions) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.Int(e.MsgID)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.Object(e.Reactions)
 	return x.buf
@@ -19070,7 +19070,7 @@ func (e TL_updateShortMessage) encode() []byte {
 	if e.FwdFrom != nil {
 		flags |= (1 << 2)
 	}
-	if e.ViaBotID.IsSet {
+	if e.ViaBotID != nil {
 		flags |= (1 << 11)
 	}
 	if e.ReplyTo != nil {
@@ -19079,7 +19079,7 @@ func (e TL_updateShortMessage) encode() []byte {
 	if e.Entities != nil {
 		flags |= (1 << 7)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 25)
 	}
 	x := NewEncodeBuf(512)
@@ -19094,8 +19094,8 @@ func (e TL_updateShortMessage) encode() []byte {
 	if e.FwdFrom != nil {
 		x.Object(e.FwdFrom)
 	}
-	if e.ViaBotID.IsSet {
-		x.Long(e.ViaBotID.Value)
+	if e.ViaBotID != nil {
+		x.Long(*e.ViaBotID)
 	}
 	if e.ReplyTo != nil {
 		x.Object(e.ReplyTo)
@@ -19103,8 +19103,8 @@ func (e TL_updateShortMessage) encode() []byte {
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -19126,7 +19126,7 @@ func (e TL_updateShortChatMessage) encode() []byte {
 	if e.FwdFrom != nil {
 		flags |= (1 << 2)
 	}
-	if e.ViaBotID.IsSet {
+	if e.ViaBotID != nil {
 		flags |= (1 << 11)
 	}
 	if e.ReplyTo != nil {
@@ -19135,7 +19135,7 @@ func (e TL_updateShortChatMessage) encode() []byte {
 	if e.Entities != nil {
 		flags |= (1 << 7)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 25)
 	}
 	x := NewEncodeBuf(512)
@@ -19151,8 +19151,8 @@ func (e TL_updateShortChatMessage) encode() []byte {
 	if e.FwdFrom != nil {
 		x.Object(e.FwdFrom)
 	}
-	if e.ViaBotID.IsSet {
-		x.Long(e.ViaBotID.Value)
+	if e.ViaBotID != nil {
+		x.Long(*e.ViaBotID)
 	}
 	if e.ReplyTo != nil {
 		x.Object(e.ReplyTo)
@@ -19160,8 +19160,8 @@ func (e TL_updateShortChatMessage) encode() []byte {
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -19208,7 +19208,7 @@ func (e TL_updateShortSentMessage) encode() []byte {
 	if e.Entities != nil {
 		flags |= (1 << 7)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 25)
 	}
 	x := NewEncodeBuf(512)
@@ -19224,8 +19224,8 @@ func (e TL_updateShortSentMessage) encode() []byte {
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -19327,37 +19327,37 @@ func (e TL_config) encode() []byte {
 	if e.ForceTryIpv6 {
 		flags |= (1 << 14)
 	}
-	if e.TmpSessions.IsSet {
+	if e.TmpSessions != nil {
 		flags |= (1 << 0)
 	}
-	if e.AutoupdateUrlPrefix.IsSet {
+	if e.AutoupdateUrlPrefix != nil {
 		flags |= (1 << 7)
 	}
-	if e.GifSearchUsername.IsSet {
+	if e.GifSearchUsername != nil {
 		flags |= (1 << 9)
 	}
-	if e.VenueSearchUsername.IsSet {
+	if e.VenueSearchUsername != nil {
 		flags |= (1 << 10)
 	}
-	if e.ImgSearchUsername.IsSet {
+	if e.ImgSearchUsername != nil {
 		flags |= (1 << 11)
 	}
-	if e.StaticMapsProvider.IsSet {
+	if e.StaticMapsProvider != nil {
 		flags |= (1 << 12)
 	}
-	if e.SuggestedLangCode.IsSet {
+	if e.SuggestedLangCode != nil {
 		flags |= (1 << 2)
 	}
-	if e.LangPackVersion.IsSet {
+	if e.LangPackVersion != nil {
 		flags |= (1 << 2)
 	}
-	if e.BaseLangPackVersion.IsSet {
+	if e.BaseLangPackVersion != nil {
 		flags |= (1 << 2)
 	}
 	if e.ReactionsDefault != nil {
 		flags |= (1 << 15)
 	}
-	if e.AutologinToken.IsSet {
+	if e.AutologinToken != nil {
 		flags |= (1 << 16)
 	}
 	x := NewEncodeBuf(512)
@@ -19386,46 +19386,46 @@ func (e TL_config) encode() []byte {
 	x.Int(e.RatingEDecay)
 	x.Int(e.StickersRecentLimit)
 	x.Int(e.ChannelsReadMediaPeriod)
-	if e.TmpSessions.IsSet {
-		x.Int(e.TmpSessions.Value)
+	if e.TmpSessions != nil {
+		x.Int(*e.TmpSessions)
 	}
 	x.Int(e.CallReceiveTimeoutMs)
 	x.Int(e.CallRingTimeoutMs)
 	x.Int(e.CallConnectTimeoutMs)
 	x.Int(e.CallPacketTimeoutMs)
 	x.String(e.MeUrlPrefix)
-	if e.AutoupdateUrlPrefix.IsSet {
-		x.String(e.AutoupdateUrlPrefix.Value)
+	if e.AutoupdateUrlPrefix != nil {
+		x.String(*e.AutoupdateUrlPrefix)
 	}
-	if e.GifSearchUsername.IsSet {
-		x.String(e.GifSearchUsername.Value)
+	if e.GifSearchUsername != nil {
+		x.String(*e.GifSearchUsername)
 	}
-	if e.VenueSearchUsername.IsSet {
-		x.String(e.VenueSearchUsername.Value)
+	if e.VenueSearchUsername != nil {
+		x.String(*e.VenueSearchUsername)
 	}
-	if e.ImgSearchUsername.IsSet {
-		x.String(e.ImgSearchUsername.Value)
+	if e.ImgSearchUsername != nil {
+		x.String(*e.ImgSearchUsername)
 	}
-	if e.StaticMapsProvider.IsSet {
-		x.String(e.StaticMapsProvider.Value)
+	if e.StaticMapsProvider != nil {
+		x.String(*e.StaticMapsProvider)
 	}
 	x.Int(e.CaptionLengthMax)
 	x.Int(e.MessageLengthMax)
 	x.Int(e.WebfileDcID)
-	if e.SuggestedLangCode.IsSet {
-		x.String(e.SuggestedLangCode.Value)
+	if e.SuggestedLangCode != nil {
+		x.String(*e.SuggestedLangCode)
 	}
-	if e.LangPackVersion.IsSet {
-		x.Int(e.LangPackVersion.Value)
+	if e.LangPackVersion != nil {
+		x.Int(*e.LangPackVersion)
 	}
-	if e.BaseLangPackVersion.IsSet {
-		x.Int(e.BaseLangPackVersion.Value)
+	if e.BaseLangPackVersion != nil {
+		x.Int(*e.BaseLangPackVersion)
 	}
 	if e.ReactionsDefault != nil {
 		x.Object(e.ReactionsDefault)
 	}
-	if e.AutologinToken.IsSet {
-		x.String(e.AutologinToken.Value)
+	if e.AutologinToken != nil {
+		x.String(*e.AutologinToken)
 	}
 	return x.buf
 }
@@ -19447,7 +19447,7 @@ func (e TL_help_appUpdate) encode() []byte {
 	if e.Document != nil {
 		flags |= (1 << 1)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 2)
 	}
 	if e.Sticker != nil {
@@ -19463,8 +19463,8 @@ func (e TL_help_appUpdate) encode() []byte {
 	if e.Document != nil {
 		x.Object(e.Document)
 	}
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	if e.Sticker != nil {
 		x.Object(e.Sticker)
@@ -19505,14 +19505,14 @@ func (e TL_encryptedChatWaiting) encode() []byte {
 
 func (e TL_encryptedChatRequested) encode() []byte {
 	var flags int32
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_encryptedChatRequested)
 	x.Int(flags)
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
 	x.Int(e.ID)
 	x.Long(e.AccessHash)
@@ -20174,7 +20174,7 @@ func (e TL_documentAttributeVideo) encode() []byte {
 	if e.Nosound {
 		flags |= (1 << 3)
 	}
-	if e.PreloadPrefixSize.IsSet {
+	if e.PreloadPrefixSize != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -20183,8 +20183,8 @@ func (e TL_documentAttributeVideo) encode() []byte {
 	x.Double(e.Duration)
 	x.Int(e.W)
 	x.Int(e.H)
-	if e.PreloadPrefixSize.IsSet {
-		x.Int(e.PreloadPrefixSize.Value)
+	if e.PreloadPrefixSize != nil {
+		x.Int(*e.PreloadPrefixSize)
 	}
 	return x.buf
 }
@@ -20194,10 +20194,10 @@ func (e TL_documentAttributeAudio) encode() []byte {
 	if e.Voice {
 		flags |= (1 << 10)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 0)
 	}
-	if e.Performer.IsSet {
+	if e.Performer != nil {
 		flags |= (1 << 1)
 	}
 	if e.Waveform != nil {
@@ -20207,11 +20207,11 @@ func (e TL_documentAttributeAudio) encode() []byte {
 	x.UInt(CRC_documentAttributeAudio)
 	x.Int(flags)
 	x.Int(e.Duration)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.Performer.IsSet {
-		x.String(e.Performer.Value)
+	if e.Performer != nil {
+		x.String(*e.Performer)
 	}
 	if e.Waveform != nil {
 		x.StringBytes(e.Waveform)
@@ -20294,30 +20294,30 @@ func (e TL_messages_affectedMessages) encode() []byte {
 
 func (e TL_webPageEmpty) encode() []byte {
 	var flags int32
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_webPageEmpty)
 	x.Int(flags)
 	x.Long(e.ID)
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	return x.buf
 }
 
 func (e TL_webPagePending) encode() []byte {
 	var flags int32
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_webPagePending)
 	x.Int(flags)
 	x.Long(e.ID)
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	x.Int(e.Date)
 	return x.buf
@@ -20328,37 +20328,37 @@ func (e TL_webPage) encode() []byte {
 	if e.HasLargeMedia {
 		flags |= (1 << 13)
 	}
-	if e.Type.IsSet {
+	if e.Type != nil {
 		flags |= (1 << 0)
 	}
-	if e.SiteName.IsSet {
+	if e.SiteName != nil {
 		flags |= (1 << 1)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 2)
 	}
-	if e.Description.IsSet {
+	if e.Description != nil {
 		flags |= (1 << 3)
 	}
 	if e.Photo != nil {
 		flags |= (1 << 4)
 	}
-	if e.EmbedUrl.IsSet {
+	if e.EmbedUrl != nil {
 		flags |= (1 << 5)
 	}
-	if e.EmbedType.IsSet {
+	if e.EmbedType != nil {
 		flags |= (1 << 5)
 	}
-	if e.EmbedWidth.IsSet {
+	if e.EmbedWidth != nil {
 		flags |= (1 << 6)
 	}
-	if e.EmbedHeight.IsSet {
+	if e.EmbedHeight != nil {
 		flags |= (1 << 6)
 	}
-	if e.Duration.IsSet {
+	if e.Duration != nil {
 		flags |= (1 << 7)
 	}
-	if e.Author.IsSet {
+	if e.Author != nil {
 		flags |= (1 << 8)
 	}
 	if e.Document != nil {
@@ -20377,38 +20377,38 @@ func (e TL_webPage) encode() []byte {
 	x.String(e.Url)
 	x.String(e.DisplayUrl)
 	x.Int(e.Hash)
-	if e.Type.IsSet {
-		x.String(e.Type.Value)
+	if e.Type != nil {
+		x.String(*e.Type)
 	}
-	if e.SiteName.IsSet {
-		x.String(e.SiteName.Value)
+	if e.SiteName != nil {
+		x.String(*e.SiteName)
 	}
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.Description.IsSet {
-		x.String(e.Description.Value)
+	if e.Description != nil {
+		x.String(*e.Description)
 	}
 	if e.Photo != nil {
 		x.Object(e.Photo)
 	}
-	if e.EmbedUrl.IsSet {
-		x.String(e.EmbedUrl.Value)
+	if e.EmbedUrl != nil {
+		x.String(*e.EmbedUrl)
 	}
-	if e.EmbedType.IsSet {
-		x.String(e.EmbedType.Value)
+	if e.EmbedType != nil {
+		x.String(*e.EmbedType)
 	}
-	if e.EmbedWidth.IsSet {
-		x.Int(e.EmbedWidth.Value)
+	if e.EmbedWidth != nil {
+		x.Int(*e.EmbedWidth)
 	}
-	if e.EmbedHeight.IsSet {
-		x.Int(e.EmbedHeight.Value)
+	if e.EmbedHeight != nil {
+		x.Int(*e.EmbedHeight)
 	}
-	if e.Duration.IsSet {
-		x.Int(e.Duration.Value)
+	if e.Duration != nil {
+		x.Int(*e.Duration)
 	}
-	if e.Author.IsSet {
-		x.String(e.Author.Value)
+	if e.Author != nil {
+		x.String(*e.Author)
 	}
 	if e.Document != nil {
 		x.Object(e.Document)
@@ -20424,14 +20424,14 @@ func (e TL_webPage) encode() []byte {
 
 func (e TL_webPageNotModified) encode() []byte {
 	var flags int32
-	if e.CachedPageViews.IsSet {
+	if e.CachedPageViews != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_webPageNotModified)
 	x.Int(flags)
-	if e.CachedPageViews.IsSet {
-		x.Int(e.CachedPageViews.Value)
+	if e.CachedPageViews != nil {
+		x.Int(*e.CachedPageViews)
 	}
 	return x.buf
 }
@@ -20499,19 +20499,19 @@ func (e TL_account_password) encode() []byte {
 	if e.SrpB != nil {
 		flags |= (1 << 2)
 	}
-	if e.SrpID.IsSet {
+	if e.SrpID != nil {
 		flags |= (1 << 2)
 	}
-	if e.Hint.IsSet {
+	if e.Hint != nil {
 		flags |= (1 << 3)
 	}
-	if e.EmailUnconfirmedPattern.IsSet {
+	if e.EmailUnconfirmedPattern != nil {
 		flags |= (1 << 4)
 	}
-	if e.PendingResetDate.IsSet {
+	if e.PendingResetDate != nil {
 		flags |= (1 << 5)
 	}
-	if e.LoginEmailPattern.IsSet {
+	if e.LoginEmailPattern != nil {
 		flags |= (1 << 6)
 	}
 	x := NewEncodeBuf(512)
@@ -20523,30 +20523,30 @@ func (e TL_account_password) encode() []byte {
 	if e.SrpB != nil {
 		x.StringBytes(e.SrpB)
 	}
-	if e.SrpID.IsSet {
-		x.Long(e.SrpID.Value)
+	if e.SrpID != nil {
+		x.Long(*e.SrpID)
 	}
-	if e.Hint.IsSet {
-		x.String(e.Hint.Value)
+	if e.Hint != nil {
+		x.String(*e.Hint)
 	}
-	if e.EmailUnconfirmedPattern.IsSet {
-		x.String(e.EmailUnconfirmedPattern.Value)
+	if e.EmailUnconfirmedPattern != nil {
+		x.String(*e.EmailUnconfirmedPattern)
 	}
 	x.Object(e.NewAlgo)
 	x.Object(e.NewSecureAlgo)
 	x.StringBytes(e.SecureRandom)
-	if e.PendingResetDate.IsSet {
-		x.Int(e.PendingResetDate.Value)
+	if e.PendingResetDate != nil {
+		x.Int(*e.PendingResetDate)
 	}
-	if e.LoginEmailPattern.IsSet {
-		x.String(e.LoginEmailPattern.Value)
+	if e.LoginEmailPattern != nil {
+		x.String(*e.LoginEmailPattern)
 	}
 	return x.buf
 }
 
 func (e TL_account_passwordSettings) encode() []byte {
 	var flags int32
-	if e.Email.IsSet {
+	if e.Email != nil {
 		flags |= (1 << 0)
 	}
 	if e.SecureSettings != nil {
@@ -20555,8 +20555,8 @@ func (e TL_account_passwordSettings) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_passwordSettings)
 	x.Int(flags)
-	if e.Email.IsSet {
-		x.String(e.Email.Value)
+	if e.Email != nil {
+		x.String(*e.Email)
 	}
 	if e.SecureSettings != nil {
 		x.Object(e.SecureSettings)
@@ -20572,10 +20572,10 @@ func (e TL_account_passwordInputSettings) encode() []byte {
 	if e.NewPasswordHash != nil {
 		flags |= (1 << 0)
 	}
-	if e.Hint.IsSet {
+	if e.Hint != nil {
 		flags |= (1 << 0)
 	}
-	if e.Email.IsSet {
+	if e.Email != nil {
 		flags |= (1 << 1)
 	}
 	if e.NewSecureSettings != nil {
@@ -20590,11 +20590,11 @@ func (e TL_account_passwordInputSettings) encode() []byte {
 	if e.NewPasswordHash != nil {
 		x.StringBytes(e.NewPasswordHash)
 	}
-	if e.Hint.IsSet {
-		x.String(e.Hint.Value)
+	if e.Hint != nil {
+		x.String(*e.Hint)
 	}
-	if e.Email.IsSet {
-		x.String(e.Email.Value)
+	if e.Email != nil {
+		x.String(*e.Email)
 	}
 	if e.NewSecureSettings != nil {
 		x.Object(e.NewSecureSettings)
@@ -20628,22 +20628,22 @@ func (e TL_chatInviteExported) encode() []byte {
 	if e.RequestNeeded {
 		flags |= (1 << 6)
 	}
-	if e.StartDate.IsSet {
+	if e.StartDate != nil {
 		flags |= (1 << 4)
 	}
-	if e.ExpireDate.IsSet {
+	if e.ExpireDate != nil {
 		flags |= (1 << 1)
 	}
-	if e.UsageLimit.IsSet {
+	if e.UsageLimit != nil {
 		flags |= (1 << 2)
 	}
-	if e.Usage.IsSet {
+	if e.Usage != nil {
 		flags |= (1 << 3)
 	}
-	if e.Requested.IsSet {
+	if e.Requested != nil {
 		flags |= (1 << 7)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 8)
 	}
 	x := NewEncodeBuf(512)
@@ -20652,23 +20652,23 @@ func (e TL_chatInviteExported) encode() []byte {
 	x.String(e.Link)
 	x.Long(e.AdminID)
 	x.Int(e.Date)
-	if e.StartDate.IsSet {
-		x.Int(e.StartDate.Value)
+	if e.StartDate != nil {
+		x.Int(*e.StartDate)
 	}
-	if e.ExpireDate.IsSet {
-		x.Int(e.ExpireDate.Value)
+	if e.ExpireDate != nil {
+		x.Int(*e.ExpireDate)
 	}
-	if e.UsageLimit.IsSet {
-		x.Int(e.UsageLimit.Value)
+	if e.UsageLimit != nil {
+		x.Int(*e.UsageLimit)
 	}
-	if e.Usage.IsSet {
-		x.Int(e.Usage.Value)
+	if e.Usage != nil {
+		x.Int(*e.Usage)
 	}
-	if e.Requested.IsSet {
-		x.Int(e.Requested.Value)
+	if e.Requested != nil {
+		x.Int(*e.Requested)
 	}
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
 	return x.buf
 }
@@ -20712,7 +20712,7 @@ func (e TL_chatInvite) encode() []byte {
 	if e.Fake {
 		flags |= (1 << 9)
 	}
-	if e.About.IsSet {
+	if e.About != nil {
 		flags |= (1 << 5)
 	}
 	if e.Participants != nil {
@@ -20722,8 +20722,8 @@ func (e TL_chatInvite) encode() []byte {
 	x.UInt(CRC_chatInvite)
 	x.Int(flags)
 	x.String(e.Title)
-	if e.About.IsSet {
-		x.String(e.About.Value)
+	if e.About != nil {
+		x.String(*e.About)
 	}
 	x.Object(e.Photo)
 	x.Int(e.ParticipantsCount)
@@ -20829,26 +20829,26 @@ func (e TL_stickerSet) encode() []byte {
 	if e.TextColor {
 		flags |= (1 << 9)
 	}
-	if e.InstalledDate.IsSet {
+	if e.InstalledDate != nil {
 		flags |= (1 << 0)
 	}
 	if e.Thumbs != nil {
 		flags |= (1 << 4)
 	}
-	if e.ThumbDcID.IsSet {
+	if e.ThumbDcID != nil {
 		flags |= (1 << 4)
 	}
-	if e.ThumbVersion.IsSet {
+	if e.ThumbVersion != nil {
 		flags |= (1 << 4)
 	}
-	if e.ThumbDocumentID.IsSet {
+	if e.ThumbDocumentID != nil {
 		flags |= (1 << 8)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stickerSet)
 	x.Int(flags)
-	if e.InstalledDate.IsSet {
-		x.Int(e.InstalledDate.Value)
+	if e.InstalledDate != nil {
+		x.Int(*e.InstalledDate)
 	}
 	x.Long(e.ID)
 	x.Long(e.AccessHash)
@@ -20857,14 +20857,14 @@ func (e TL_stickerSet) encode() []byte {
 	if e.Thumbs != nil {
 		x.Vector(e.Thumbs)
 	}
-	if e.ThumbDcID.IsSet {
-		x.Int(e.ThumbDcID.Value)
+	if e.ThumbDcID != nil {
+		x.Int(*e.ThumbDcID)
 	}
-	if e.ThumbVersion.IsSet {
-		x.Int(e.ThumbVersion.Value)
+	if e.ThumbVersion != nil {
+		x.Int(*e.ThumbVersion)
 	}
-	if e.ThumbDocumentID.IsSet {
-		x.Long(e.ThumbDocumentID.Value)
+	if e.ThumbDocumentID != nil {
+		x.Long(*e.ThumbDocumentID)
 	}
 	x.Int(e.Count)
 	x.Int(e.Hash)
@@ -20897,10 +20897,10 @@ func (e TL_botCommand) encode() []byte {
 
 func (e TL_botInfo) encode() []byte {
 	var flags int32
-	if e.UserID.IsSet {
+	if e.UserID != nil {
 		flags |= (1 << 0)
 	}
-	if e.Description.IsSet {
+	if e.Description != nil {
 		flags |= (1 << 1)
 	}
 	if e.DescriptionPhoto != nil {
@@ -20918,11 +20918,11 @@ func (e TL_botInfo) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_botInfo)
 	x.Int(flags)
-	if e.UserID.IsSet {
-		x.Long(e.UserID.Value)
+	if e.UserID != nil {
+		x.Long(*e.UserID)
 	}
-	if e.Description.IsSet {
-		x.String(e.Description.Value)
+	if e.Description != nil {
+		x.String(*e.Description)
 	}
 	if e.DescriptionPhoto != nil {
 		x.Object(e.DescriptionPhoto)
@@ -21016,15 +21016,15 @@ func (e TL_keyboardButtonBuy) encode() []byte {
 
 func (e TL_keyboardButtonUrlAuth) encode() []byte {
 	var flags int32
-	if e.FwdText.IsSet {
+	if e.FwdText != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_keyboardButtonUrlAuth)
 	x.Int(flags)
 	x.String(e.Text)
-	if e.FwdText.IsSet {
-		x.String(e.FwdText.Value)
+	if e.FwdText != nil {
+		x.String(*e.FwdText)
 	}
 	x.String(e.Url)
 	x.Int(e.ButtonID)
@@ -21036,15 +21036,15 @@ func (e TL_inputKeyboardButtonUrlAuth) encode() []byte {
 	if e.RequestWriteAccess {
 		flags |= (1 << 0)
 	}
-	if e.FwdText.IsSet {
+	if e.FwdText != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputKeyboardButtonUrlAuth)
 	x.Int(flags)
 	x.String(e.Text)
-	if e.FwdText.IsSet {
-		x.String(e.FwdText.Value)
+	if e.FwdText != nil {
+		x.String(*e.FwdText)
 	}
 	x.String(e.Url)
 	x.Object(e.Bot)
@@ -21053,14 +21053,14 @@ func (e TL_inputKeyboardButtonUrlAuth) encode() []byte {
 
 func (e TL_keyboardButtonRequestPoll) encode() []byte {
 	var flags int32
-	if e.Quiz.IsSet {
+	if e.Quiz != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_keyboardButtonRequestPoll)
 	x.Int(flags)
-	if e.Quiz.IsSet {
-		x.Bool(e.Quiz.Value)
+	if e.Quiz != nil {
+		x.Bool(*e.Quiz)
 	}
 	x.String(e.Text)
 	return x.buf
@@ -21133,14 +21133,14 @@ func (e TL_replyKeyboardForceReply) encode() []byte {
 	if e.Selective {
 		flags |= (1 << 2)
 	}
-	if e.Placeholder.IsSet {
+	if e.Placeholder != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_replyKeyboardForceReply)
 	x.Int(flags)
-	if e.Placeholder.IsSet {
-		x.String(e.Placeholder.Value)
+	if e.Placeholder != nil {
+		x.String(*e.Placeholder)
 	}
 	return x.buf
 }
@@ -21159,15 +21159,15 @@ func (e TL_replyKeyboardMarkup) encode() []byte {
 	if e.Persistent {
 		flags |= (1 << 4)
 	}
-	if e.Placeholder.IsSet {
+	if e.Placeholder != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_replyKeyboardMarkup)
 	x.Int(flags)
 	x.Vector(e.Rows)
-	if e.Placeholder.IsSet {
-		x.String(e.Placeholder.Value)
+	if e.Placeholder != nil {
+		x.String(*e.Placeholder)
 	}
 	return x.buf
 }
@@ -21397,15 +21397,15 @@ func (e TL_updates_channelDifferenceEmpty) encode() []byte {
 	if e.Final {
 		flags |= (1 << 0)
 	}
-	if e.Timeout.IsSet {
+	if e.Timeout != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updates_channelDifferenceEmpty)
 	x.Int(flags)
 	x.Int(e.Pts)
-	if e.Timeout.IsSet {
-		x.Int(e.Timeout.Value)
+	if e.Timeout != nil {
+		x.Int(*e.Timeout)
 	}
 	return x.buf
 }
@@ -21415,14 +21415,14 @@ func (e TL_updates_channelDifferenceTooLong) encode() []byte {
 	if e.Final {
 		flags |= (1 << 0)
 	}
-	if e.Timeout.IsSet {
+	if e.Timeout != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updates_channelDifferenceTooLong)
 	x.Int(flags)
-	if e.Timeout.IsSet {
-		x.Int(e.Timeout.Value)
+	if e.Timeout != nil {
+		x.Int(*e.Timeout)
 	}
 	x.Object(e.Dialog)
 	x.Vector(e.Messages)
@@ -21436,15 +21436,15 @@ func (e TL_updates_channelDifference) encode() []byte {
 	if e.Final {
 		flags |= (1 << 0)
 	}
-	if e.Timeout.IsSet {
+	if e.Timeout != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updates_channelDifference)
 	x.Int(flags)
 	x.Int(e.Pts)
-	if e.Timeout.IsSet {
-		x.Int(e.Timeout.Value)
+	if e.Timeout != nil {
+		x.Int(*e.Timeout)
 	}
 	x.Vector(e.NewMessages)
 	x.Vector(e.OtherUpdates)
@@ -21495,7 +21495,7 @@ func (e TL_channelParticipantSelf) encode() []byte {
 
 func (e TL_channelParticipantCreator) encode() []byte {
 	var flags int32
-	if e.Rank.IsSet {
+	if e.Rank != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -21503,8 +21503,8 @@ func (e TL_channelParticipantCreator) encode() []byte {
 	x.Int(flags)
 	x.Long(e.UserID)
 	x.Object(e.AdminRights)
-	if e.Rank.IsSet {
-		x.String(e.Rank.Value)
+	if e.Rank != nil {
+		x.String(*e.Rank)
 	}
 	return x.buf
 }
@@ -21517,24 +21517,24 @@ func (e TL_channelParticipantAdmin) encode() []byte {
 	if e.Self {
 		flags |= (1 << 1)
 	}
-	if e.InviterID.IsSet {
+	if e.InviterID != nil {
 		flags |= (1 << 1)
 	}
-	if e.Rank.IsSet {
+	if e.Rank != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelParticipantAdmin)
 	x.Int(flags)
 	x.Long(e.UserID)
-	if e.InviterID.IsSet {
-		x.Long(e.InviterID.Value)
+	if e.InviterID != nil {
+		x.Long(*e.InviterID)
 	}
 	x.Long(e.PromotedBy)
 	x.Int(e.Date)
 	x.Object(e.AdminRights)
-	if e.Rank.IsSet {
-		x.String(e.Rank.Value)
+	if e.Rank != nil {
+		x.String(*e.Rank)
 	}
 	return x.buf
 }
@@ -21609,20 +21609,20 @@ func (e TL_channelParticipantsContacts) encode() []byte {
 
 func (e TL_channelParticipantsMentions) encode() []byte {
 	var flags int32
-	if e.Q.IsSet {
+	if e.Q != nil {
 		flags |= (1 << 0)
 	}
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelParticipantsMentions)
 	x.Int(flags)
-	if e.Q.IsSet {
-		x.String(e.Q.Value)
+	if e.Q != nil {
+		x.String(*e.Q)
 	}
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	return x.buf
 }
@@ -21657,7 +21657,7 @@ func (e TL_help_termsOfService) encode() []byte {
 	if e.Popup {
 		flags |= (1 << 0)
 	}
-	if e.MinAgeConfirm.IsSet {
+	if e.MinAgeConfirm != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -21666,8 +21666,8 @@ func (e TL_help_termsOfService) encode() []byte {
 	x.Object(e.ID)
 	x.String(e.Text)
 	x.Vector(e.Entities)
-	if e.MinAgeConfirm.IsSet {
-		x.Int(e.MinAgeConfirm.Value)
+	if e.MinAgeConfirm != nil {
+		x.Int(*e.MinAgeConfirm)
 	}
 	return x.buf
 }
@@ -21739,13 +21739,13 @@ func (e TL_inputBotInlineMessageText) encode() []byte {
 
 func (e TL_inputBotInlineMessageMediaGeo) encode() []byte {
 	var flags int32
-	if e.Heading.IsSet {
+	if e.Heading != nil {
 		flags |= (1 << 0)
 	}
-	if e.Period.IsSet {
+	if e.Period != nil {
 		flags |= (1 << 1)
 	}
-	if e.ProximityNotificationRadius.IsSet {
+	if e.ProximityNotificationRadius != nil {
 		flags |= (1 << 3)
 	}
 	if e.ReplyMarkup != nil {
@@ -21755,14 +21755,14 @@ func (e TL_inputBotInlineMessageMediaGeo) encode() []byte {
 	x.UInt(CRC_inputBotInlineMessageMediaGeo)
 	x.Int(flags)
 	x.Object(e.GeoPoint)
-	if e.Heading.IsSet {
-		x.Int(e.Heading.Value)
+	if e.Heading != nil {
+		x.Int(*e.Heading)
 	}
-	if e.Period.IsSet {
-		x.Int(e.Period.Value)
+	if e.Period != nil {
+		x.Int(*e.Period)
 	}
-	if e.ProximityNotificationRadius.IsSet {
-		x.Int(e.ProximityNotificationRadius.Value)
+	if e.ProximityNotificationRadius != nil {
+		x.Int(*e.ProximityNotificationRadius)
 	}
 	if e.ReplyMarkup != nil {
 		x.Object(e.ReplyMarkup)
@@ -21884,13 +21884,13 @@ func (e TL_inputBotInlineMessageMediaWebPage) encode() []byte {
 
 func (e TL_inputBotInlineResult) encode() []byte {
 	var flags int32
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 1)
 	}
-	if e.Description.IsSet {
+	if e.Description != nil {
 		flags |= (1 << 2)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 3)
 	}
 	if e.Thumb != nil {
@@ -21904,14 +21904,14 @@ func (e TL_inputBotInlineResult) encode() []byte {
 	x.Int(flags)
 	x.String(e.ID)
 	x.String(e.Type)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.Description.IsSet {
-		x.String(e.Description.Value)
+	if e.Description != nil {
+		x.String(*e.Description)
 	}
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	if e.Thumb != nil {
 		x.Object(e.Thumb)
@@ -21935,10 +21935,10 @@ func (e TL_inputBotInlineResultPhoto) encode() []byte {
 
 func (e TL_inputBotInlineResultDocument) encode() []byte {
 	var flags int32
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 1)
 	}
-	if e.Description.IsSet {
+	if e.Description != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -21946,11 +21946,11 @@ func (e TL_inputBotInlineResultDocument) encode() []byte {
 	x.Int(flags)
 	x.String(e.ID)
 	x.String(e.Type)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.Description.IsSet {
-		x.String(e.Description.Value)
+	if e.Description != nil {
+		x.String(*e.Description)
 	}
 	x.Object(e.Document)
 	x.Object(e.SendMessage)
@@ -22019,13 +22019,13 @@ func (e TL_botInlineMessageText) encode() []byte {
 
 func (e TL_botInlineMessageMediaGeo) encode() []byte {
 	var flags int32
-	if e.Heading.IsSet {
+	if e.Heading != nil {
 		flags |= (1 << 0)
 	}
-	if e.Period.IsSet {
+	if e.Period != nil {
 		flags |= (1 << 1)
 	}
-	if e.ProximityNotificationRadius.IsSet {
+	if e.ProximityNotificationRadius != nil {
 		flags |= (1 << 3)
 	}
 	if e.ReplyMarkup != nil {
@@ -22035,14 +22035,14 @@ func (e TL_botInlineMessageMediaGeo) encode() []byte {
 	x.UInt(CRC_botInlineMessageMediaGeo)
 	x.Int(flags)
 	x.Object(e.Geo)
-	if e.Heading.IsSet {
-		x.Int(e.Heading.Value)
+	if e.Heading != nil {
+		x.Int(*e.Heading)
 	}
-	if e.Period.IsSet {
-		x.Int(e.Period.Value)
+	if e.Period != nil {
+		x.Int(*e.Period)
 	}
-	if e.ProximityNotificationRadius.IsSet {
-		x.Int(e.ProximityNotificationRadius.Value)
+	if e.ProximityNotificationRadius != nil {
+		x.Int(*e.ProximityNotificationRadius)
 	}
 	if e.ReplyMarkup != nil {
 		x.Object(e.ReplyMarkup)
@@ -22157,13 +22157,13 @@ func (e TL_botInlineMessageMediaWebPage) encode() []byte {
 
 func (e TL_botInlineResult) encode() []byte {
 	var flags int32
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 1)
 	}
-	if e.Description.IsSet {
+	if e.Description != nil {
 		flags |= (1 << 2)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 3)
 	}
 	if e.Thumb != nil {
@@ -22177,14 +22177,14 @@ func (e TL_botInlineResult) encode() []byte {
 	x.Int(flags)
 	x.String(e.ID)
 	x.String(e.Type)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.Description.IsSet {
-		x.String(e.Description.Value)
+	if e.Description != nil {
+		x.String(*e.Description)
 	}
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	if e.Thumb != nil {
 		x.Object(e.Thumb)
@@ -22204,10 +22204,10 @@ func (e TL_botInlineMediaResult) encode() []byte {
 	if e.Document != nil {
 		flags |= (1 << 1)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 2)
 	}
-	if e.Description.IsSet {
+	if e.Description != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -22221,11 +22221,11 @@ func (e TL_botInlineMediaResult) encode() []byte {
 	if e.Document != nil {
 		x.Object(e.Document)
 	}
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.Description.IsSet {
-		x.String(e.Description.Value)
+	if e.Description != nil {
+		x.String(*e.Description)
 	}
 	x.Object(e.SendMessage)
 	return x.buf
@@ -22236,7 +22236,7 @@ func (e TL_messages_botResults) encode() []byte {
 	if e.Gallery {
 		flags |= (1 << 0)
 	}
-	if e.NextOffset.IsSet {
+	if e.NextOffset != nil {
 		flags |= (1 << 1)
 	}
 	if e.SwitchPm != nil {
@@ -22249,8 +22249,8 @@ func (e TL_messages_botResults) encode() []byte {
 	x.UInt(CRC_messages_botResults)
 	x.Int(flags)
 	x.Long(e.QueryID)
-	if e.NextOffset.IsSet {
-		x.String(e.NextOffset.Value)
+	if e.NextOffset != nil {
+		x.String(*e.NextOffset)
 	}
 	if e.SwitchPm != nil {
 		x.Object(e.SwitchPm)
@@ -22280,22 +22280,22 @@ func (e TL_messageFwdHeader) encode() []byte {
 	if e.FromID != nil {
 		flags |= (1 << 0)
 	}
-	if e.FromName.IsSet {
+	if e.FromName != nil {
 		flags |= (1 << 5)
 	}
-	if e.ChannelPost.IsSet {
+	if e.ChannelPost != nil {
 		flags |= (1 << 2)
 	}
-	if e.PostAuthor.IsSet {
+	if e.PostAuthor != nil {
 		flags |= (1 << 3)
 	}
 	if e.SavedFromPeer != nil {
 		flags |= (1 << 4)
 	}
-	if e.SavedFromMsgID.IsSet {
+	if e.SavedFromMsgID != nil {
 		flags |= (1 << 4)
 	}
-	if e.PsaType.IsSet {
+	if e.PsaType != nil {
 		flags |= (1 << 6)
 	}
 	x := NewEncodeBuf(512)
@@ -22304,24 +22304,24 @@ func (e TL_messageFwdHeader) encode() []byte {
 	if e.FromID != nil {
 		x.Object(e.FromID)
 	}
-	if e.FromName.IsSet {
-		x.String(e.FromName.Value)
+	if e.FromName != nil {
+		x.String(*e.FromName)
 	}
 	x.Int(e.Date)
-	if e.ChannelPost.IsSet {
-		x.Int(e.ChannelPost.Value)
+	if e.ChannelPost != nil {
+		x.Int(*e.ChannelPost)
 	}
-	if e.PostAuthor.IsSet {
-		x.String(e.PostAuthor.Value)
+	if e.PostAuthor != nil {
+		x.String(*e.PostAuthor)
 	}
 	if e.SavedFromPeer != nil {
 		x.Object(e.SavedFromPeer)
 	}
-	if e.SavedFromMsgID.IsSet {
-		x.Int(e.SavedFromMsgID.Value)
+	if e.SavedFromMsgID != nil {
+		x.Int(*e.SavedFromMsgID)
 	}
-	if e.PsaType.IsSet {
-		x.String(e.PsaType.Value)
+	if e.PsaType != nil {
+		x.String(*e.PsaType)
 	}
 	return x.buf
 }
@@ -22400,10 +22400,10 @@ func (e TL_auth_sentCodeTypeEmailCode) encode() []byte {
 	if e.GoogleSigninAllowed {
 		flags |= (1 << 1)
 	}
-	if e.ResetAvailablePeriod.IsSet {
+	if e.ResetAvailablePeriod != nil {
 		flags |= (1 << 3)
 	}
-	if e.ResetPendingDate.IsSet {
+	if e.ResetPendingDate != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
@@ -22411,11 +22411,11 @@ func (e TL_auth_sentCodeTypeEmailCode) encode() []byte {
 	x.Int(flags)
 	x.String(e.EmailPattern)
 	x.Int(e.Length)
-	if e.ResetAvailablePeriod.IsSet {
-		x.Int(e.ResetAvailablePeriod.Value)
+	if e.ResetAvailablePeriod != nil {
+		x.Int(*e.ResetAvailablePeriod)
 	}
-	if e.ResetPendingDate.IsSet {
-		x.Int(e.ResetPendingDate.Value)
+	if e.ResetPendingDate != nil {
+		x.Int(*e.ResetPendingDate)
 	}
 	return x.buf
 }
@@ -22447,10 +22447,10 @@ func (e TL_auth_sentCodeTypeFirebaseSms) encode() []byte {
 	if e.Nonce != nil {
 		flags |= (1 << 0)
 	}
-	if e.Receipt.IsSet {
+	if e.Receipt != nil {
 		flags |= (1 << 1)
 	}
-	if e.PushTimeout.IsSet {
+	if e.PushTimeout != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -22459,11 +22459,11 @@ func (e TL_auth_sentCodeTypeFirebaseSms) encode() []byte {
 	if e.Nonce != nil {
 		x.StringBytes(e.Nonce)
 	}
-	if e.Receipt.IsSet {
-		x.String(e.Receipt.Value)
+	if e.Receipt != nil {
+		x.String(*e.Receipt)
 	}
-	if e.PushTimeout.IsSet {
-		x.Int(e.PushTimeout.Value)
+	if e.PushTimeout != nil {
+		x.Int(*e.PushTimeout)
 	}
 	x.Int(e.Length)
 	return x.buf
@@ -22480,20 +22480,20 @@ func (e TL_messages_botCallbackAnswer) encode() []byte {
 	if e.NativeUi {
 		flags |= (1 << 4)
 	}
-	if e.Message.IsSet {
+	if e.Message != nil {
 		flags |= (1 << 0)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_botCallbackAnswer)
 	x.Int(flags)
-	if e.Message.IsSet {
-		x.String(e.Message.Value)
+	if e.Message != nil {
+		x.String(*e.Message)
 	}
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	x.Int(e.CacheTime)
 	return x.buf
@@ -22636,14 +22636,14 @@ func (e TL_contacts_topPeersDisabled) encode() []byte {
 
 func (e TL_draftMessageEmpty) encode() []byte {
 	var flags int32
-	if e.Date.IsSet {
+	if e.Date != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_draftMessageEmpty)
 	x.Int(flags)
-	if e.Date.IsSet {
-		x.Int(e.Date.Value)
+	if e.Date != nil {
+		x.Int(*e.Date)
 	}
 	return x.buf
 }
@@ -23071,10 +23071,10 @@ func (e TL_pageBlockPullquote) encode() []byte {
 
 func (e TL_pageBlockPhoto) encode() []byte {
 	var flags int32
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 0)
 	}
-	if e.WebpageID.IsSet {
+	if e.WebpageID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -23082,11 +23082,11 @@ func (e TL_pageBlockPhoto) encode() []byte {
 	x.Int(flags)
 	x.Long(e.PhotoID)
 	x.Object(e.Caption)
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
-	if e.WebpageID.IsSet {
-		x.Long(e.WebpageID.Value)
+	if e.WebpageID != nil {
+		x.Long(*e.WebpageID)
 	}
 	return x.buf
 }
@@ -23122,38 +23122,38 @@ func (e TL_pageBlockEmbed) encode() []byte {
 	if e.AllowScrolling {
 		flags |= (1 << 3)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 1)
 	}
-	if e.Html.IsSet {
+	if e.Html != nil {
 		flags |= (1 << 2)
 	}
-	if e.PosterPhotoID.IsSet {
+	if e.PosterPhotoID != nil {
 		flags |= (1 << 4)
 	}
-	if e.W.IsSet {
+	if e.W != nil {
 		flags |= (1 << 5)
 	}
-	if e.H.IsSet {
+	if e.H != nil {
 		flags |= (1 << 5)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_pageBlockEmbed)
 	x.Int(flags)
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
-	if e.Html.IsSet {
-		x.String(e.Html.Value)
+	if e.Html != nil {
+		x.String(*e.Html)
 	}
-	if e.PosterPhotoID.IsSet {
-		x.Long(e.PosterPhotoID.Value)
+	if e.PosterPhotoID != nil {
+		x.Long(*e.PosterPhotoID)
 	}
-	if e.W.IsSet {
-		x.Int(e.W.Value)
+	if e.W != nil {
+		x.Int(*e.W)
 	}
-	if e.H.IsSet {
-		x.Int(e.H.Value)
+	if e.H != nil {
+		x.Int(*e.H)
 	}
 	x.Object(e.Caption)
 	return x.buf
@@ -23333,13 +23333,13 @@ func (e TL_invoice) encode() []byte {
 	if e.Recurring {
 		flags |= (1 << 9)
 	}
-	if e.MaxTipAmount.IsSet {
+	if e.MaxTipAmount != nil {
 		flags |= (1 << 8)
 	}
 	if e.SuggestedTipAmounts != nil {
 		flags |= (1 << 8)
 	}
-	if e.TermsUrl.IsSet {
+	if e.TermsUrl != nil {
 		flags |= (1 << 10)
 	}
 	x := NewEncodeBuf(512)
@@ -23347,14 +23347,14 @@ func (e TL_invoice) encode() []byte {
 	x.Int(flags)
 	x.String(e.Currency)
 	x.Vector(e.Prices)
-	if e.MaxTipAmount.IsSet {
-		x.Long(e.MaxTipAmount.Value)
+	if e.MaxTipAmount != nil {
+		x.Long(*e.MaxTipAmount)
 	}
 	if e.SuggestedTipAmounts != nil {
 		x.VectorLong(e.SuggestedTipAmounts)
 	}
-	if e.TermsUrl.IsSet {
-		x.String(e.TermsUrl.Value)
+	if e.TermsUrl != nil {
+		x.String(*e.TermsUrl)
 	}
 	return x.buf
 }
@@ -23381,13 +23381,13 @@ func (e TL_postAddress) encode() []byte {
 
 func (e TL_paymentRequestedInfo) encode() []byte {
 	var flags int32
-	if e.Name.IsSet {
+	if e.Name != nil {
 		flags |= (1 << 0)
 	}
-	if e.Phone.IsSet {
+	if e.Phone != nil {
 		flags |= (1 << 1)
 	}
-	if e.Email.IsSet {
+	if e.Email != nil {
 		flags |= (1 << 2)
 	}
 	if e.ShippingAddress != nil {
@@ -23396,14 +23396,14 @@ func (e TL_paymentRequestedInfo) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_paymentRequestedInfo)
 	x.Int(flags)
-	if e.Name.IsSet {
-		x.String(e.Name.Value)
+	if e.Name != nil {
+		x.String(*e.Name)
 	}
-	if e.Phone.IsSet {
-		x.String(e.Phone.Value)
+	if e.Phone != nil {
+		x.String(*e.Phone)
 	}
-	if e.Email.IsSet {
-		x.String(e.Email.Value)
+	if e.Email != nil {
+		x.String(*e.Email)
 	}
 	if e.ShippingAddress != nil {
 		x.Object(e.ShippingAddress)
@@ -23478,10 +23478,10 @@ func (e TL_inputWebFileAudioAlbumThumbLocation) encode() []byte {
 	if e.Document != nil {
 		flags |= (1 << 0)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 1)
 	}
-	if e.Performer.IsSet {
+	if e.Performer != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -23490,11 +23490,11 @@ func (e TL_inputWebFileAudioAlbumThumbLocation) encode() []byte {
 	if e.Document != nil {
 		x.Object(e.Document)
 	}
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.Performer.IsSet {
-		x.String(e.Performer.Value)
+	if e.Performer != nil {
+		x.String(*e.Performer)
 	}
 	return x.buf
 }
@@ -23521,7 +23521,7 @@ func (e TL_payments_paymentForm) encode() []byte {
 	if e.Photo != nil {
 		flags |= (1 << 5)
 	}
-	if e.NativeProvider.IsSet {
+	if e.NativeProvider != nil {
 		flags |= (1 << 4)
 	}
 	if e.NativeParams != nil {
@@ -23549,8 +23549,8 @@ func (e TL_payments_paymentForm) encode() []byte {
 	x.Object(e.Invoice)
 	x.Long(e.ProviderID)
 	x.String(e.Url)
-	if e.NativeProvider.IsSet {
-		x.String(e.NativeProvider.Value)
+	if e.NativeProvider != nil {
+		x.String(*e.NativeProvider)
 	}
 	if e.NativeParams != nil {
 		x.Object(e.NativeParams)
@@ -23570,7 +23570,7 @@ func (e TL_payments_paymentForm) encode() []byte {
 
 func (e TL_payments_validatedRequestedInfo) encode() []byte {
 	var flags int32
-	if e.ID.IsSet {
+	if e.ID != nil {
 		flags |= (1 << 0)
 	}
 	if e.ShippingOptions != nil {
@@ -23579,8 +23579,8 @@ func (e TL_payments_validatedRequestedInfo) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_validatedRequestedInfo)
 	x.Int(flags)
-	if e.ID.IsSet {
-		x.String(e.ID.Value)
+	if e.ID != nil {
+		x.String(*e.ID)
 	}
 	if e.ShippingOptions != nil {
 		x.Vector(e.ShippingOptions)
@@ -23613,7 +23613,7 @@ func (e TL_payments_paymentReceipt) encode() []byte {
 	if e.Shipping != nil {
 		flags |= (1 << 1)
 	}
-	if e.TipAmount.IsSet {
+	if e.TipAmount != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -23634,8 +23634,8 @@ func (e TL_payments_paymentReceipt) encode() []byte {
 	if e.Shipping != nil {
 		x.Object(e.Shipping)
 	}
-	if e.TipAmount.IsSet {
-		x.Long(e.TipAmount.Value)
+	if e.TipAmount != nil {
+		x.Long(*e.TipAmount)
 	}
 	x.String(e.Currency)
 	x.Long(e.TotalAmount)
@@ -23717,7 +23717,7 @@ func (e TL_inputStickerSetItem) encode() []byte {
 	if e.MaskCoords != nil {
 		flags |= (1 << 0)
 	}
-	if e.Keywords.IsSet {
+	if e.Keywords != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -23728,8 +23728,8 @@ func (e TL_inputStickerSetItem) encode() []byte {
 	if e.MaskCoords != nil {
 		x.Object(e.MaskCoords)
 	}
-	if e.Keywords.IsSet {
-		x.String(e.Keywords.Value)
+	if e.Keywords != nil {
+		x.String(*e.Keywords)
 	}
 	return x.buf
 }
@@ -23754,7 +23754,7 @@ func (e TL_phoneCallWaiting) encode() []byte {
 	if e.Video {
 		flags |= (1 << 6)
 	}
-	if e.ReceiveDate.IsSet {
+	if e.ReceiveDate != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -23766,8 +23766,8 @@ func (e TL_phoneCallWaiting) encode() []byte {
 	x.Long(e.AdminID)
 	x.Long(e.ParticipantID)
 	x.Object(e.Protocol)
-	if e.ReceiveDate.IsSet {
-		x.Int(e.ReceiveDate.Value)
+	if e.ReceiveDate != nil {
+		x.Int(*e.ReceiveDate)
 	}
 	return x.buf
 }
@@ -23846,7 +23846,7 @@ func (e TL_phoneCallDiscarded) encode() []byte {
 	if e.Reason != nil {
 		flags |= (1 << 0)
 	}
-	if e.Duration.IsSet {
+	if e.Duration != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -23856,8 +23856,8 @@ func (e TL_phoneCallDiscarded) encode() []byte {
 	if e.Reason != nil {
 		x.Object(e.Reason)
 	}
-	if e.Duration.IsSet {
-		x.Int(e.Duration.Value)
+	if e.Duration != nil {
+		x.Int(*e.Duration)
 	}
 	return x.buf
 }
@@ -23962,39 +23962,39 @@ func (e TL_langPackString) encode() []byte {
 
 func (e TL_langPackStringPluralized) encode() []byte {
 	var flags int32
-	if e.ZeroValue.IsSet {
+	if e.ZeroValue != nil {
 		flags |= (1 << 0)
 	}
-	if e.OneValue.IsSet {
+	if e.OneValue != nil {
 		flags |= (1 << 1)
 	}
-	if e.TwoValue.IsSet {
+	if e.TwoValue != nil {
 		flags |= (1 << 2)
 	}
-	if e.FewValue.IsSet {
+	if e.FewValue != nil {
 		flags |= (1 << 3)
 	}
-	if e.ManyValue.IsSet {
+	if e.ManyValue != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_langPackStringPluralized)
 	x.Int(flags)
 	x.String(e.Key)
-	if e.ZeroValue.IsSet {
-		x.String(e.ZeroValue.Value)
+	if e.ZeroValue != nil {
+		x.String(*e.ZeroValue)
 	}
-	if e.OneValue.IsSet {
-		x.String(e.OneValue.Value)
+	if e.OneValue != nil {
+		x.String(*e.OneValue)
 	}
-	if e.TwoValue.IsSet {
-		x.String(e.TwoValue.Value)
+	if e.TwoValue != nil {
+		x.String(*e.TwoValue)
 	}
-	if e.FewValue.IsSet {
-		x.String(e.FewValue.Value)
+	if e.FewValue != nil {
+		x.String(*e.FewValue)
 	}
-	if e.ManyValue.IsSet {
-		x.String(e.ManyValue.Value)
+	if e.ManyValue != nil {
+		x.String(*e.ManyValue)
 	}
 	x.String(e.OtherValue)
 	return x.buf
@@ -24028,7 +24028,7 @@ func (e TL_langPackLanguage) encode() []byte {
 	if e.Beta {
 		flags |= (1 << 3)
 	}
-	if e.BaseLangCode.IsSet {
+	if e.BaseLangCode != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -24037,8 +24037,8 @@ func (e TL_langPackLanguage) encode() []byte {
 	x.String(e.Name)
 	x.String(e.NativeName)
 	x.String(e.LangCode)
-	if e.BaseLangCode.IsSet {
-		x.String(e.BaseLangCode.Value)
+	if e.BaseLangCode != nil {
+		x.String(*e.BaseLangCode)
 	}
 	x.String(e.PluralCode)
 	x.Int(e.StringsCount)
@@ -25035,7 +25035,7 @@ func (e TL_secureCredentialsEncrypted) encode() []byte {
 
 func (e TL_account_authorizationForm) encode() []byte {
 	var flags int32
-	if e.PrivacyPolicyUrl.IsSet {
+	if e.PrivacyPolicyUrl != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -25045,8 +25045,8 @@ func (e TL_account_authorizationForm) encode() []byte {
 	x.Vector(e.Values)
 	x.Vector(e.Errors)
 	x.Vector(e.Users)
-	if e.PrivacyPolicyUrl.IsSet {
-		x.String(e.PrivacyPolicyUrl.Value)
+	if e.PrivacyPolicyUrl != nil {
+		x.String(*e.PrivacyPolicyUrl)
 	}
 	return x.buf
 }
@@ -25278,10 +25278,10 @@ func (e TL_pageTableCell) encode() []byte {
 	if e.Text != nil {
 		flags |= (1 << 7)
 	}
-	if e.Colspan.IsSet {
+	if e.Colspan != nil {
 		flags |= (1 << 1)
 	}
-	if e.Rowspan.IsSet {
+	if e.Rowspan != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -25290,11 +25290,11 @@ func (e TL_pageTableCell) encode() []byte {
 	if e.Text != nil {
 		x.Object(e.Text)
 	}
-	if e.Colspan.IsSet {
-		x.Int(e.Colspan.Value)
+	if e.Colspan != nil {
+		x.Int(*e.Colspan)
 	}
-	if e.Rowspan.IsSet {
-		x.Int(e.Rowspan.Value)
+	if e.Rowspan != nil {
+		x.Int(*e.Rowspan)
 	}
 	return x.buf
 }
@@ -25346,19 +25346,19 @@ func (e TL_pageListOrderedItemBlocks) encode() []byte {
 
 func (e TL_pageRelatedArticle) encode() []byte {
 	var flags int32
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 0)
 	}
-	if e.Description.IsSet {
+	if e.Description != nil {
 		flags |= (1 << 1)
 	}
-	if e.PhotoID.IsSet {
+	if e.PhotoID != nil {
 		flags |= (1 << 2)
 	}
-	if e.Author.IsSet {
+	if e.Author != nil {
 		flags |= (1 << 3)
 	}
-	if e.PublishedDate.IsSet {
+	if e.PublishedDate != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
@@ -25366,20 +25366,20 @@ func (e TL_pageRelatedArticle) encode() []byte {
 	x.Int(flags)
 	x.String(e.Url)
 	x.Long(e.WebpageID)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.Description.IsSet {
-		x.String(e.Description.Value)
+	if e.Description != nil {
+		x.String(*e.Description)
 	}
-	if e.PhotoID.IsSet {
-		x.Long(e.PhotoID.Value)
+	if e.PhotoID != nil {
+		x.Long(*e.PhotoID)
 	}
-	if e.Author.IsSet {
-		x.String(e.Author.Value)
+	if e.Author != nil {
+		x.String(*e.Author)
 	}
-	if e.PublishedDate.IsSet {
-		x.Int(e.PublishedDate.Value)
+	if e.PublishedDate != nil {
+		x.Int(*e.PublishedDate)
 	}
 	return x.buf
 }
@@ -25395,7 +25395,7 @@ func (e TL_page) encode() []byte {
 	if e.V2 {
 		flags |= (1 << 2)
 	}
-	if e.Views.IsSet {
+	if e.Views != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -25405,8 +25405,8 @@ func (e TL_page) encode() []byte {
 	x.Vector(e.Blocks)
 	x.Vector(e.Photos)
 	x.Vector(e.Documents)
-	if e.Views.IsSet {
-		x.Int(e.Views.Value)
+	if e.Views != nil {
+		x.Int(*e.Views)
 	}
 	return x.buf
 }
@@ -25456,10 +25456,10 @@ func (e TL_poll) encode() []byte {
 	if e.Quiz {
 		flags |= (1 << 3)
 	}
-	if e.ClosePeriod.IsSet {
+	if e.ClosePeriod != nil {
 		flags |= (1 << 4)
 	}
-	if e.CloseDate.IsSet {
+	if e.CloseDate != nil {
 		flags |= (1 << 5)
 	}
 	x := NewEncodeBuf(512)
@@ -25468,11 +25468,11 @@ func (e TL_poll) encode() []byte {
 	x.Int(flags)
 	x.String(e.Question)
 	x.Vector(e.Answers)
-	if e.ClosePeriod.IsSet {
-		x.Int(e.ClosePeriod.Value)
+	if e.ClosePeriod != nil {
+		x.Int(*e.ClosePeriod)
 	}
-	if e.CloseDate.IsSet {
-		x.Int(e.CloseDate.Value)
+	if e.CloseDate != nil {
+		x.Int(*e.CloseDate)
 	}
 	return x.buf
 }
@@ -25501,13 +25501,13 @@ func (e TL_pollResults) encode() []byte {
 	if e.Results != nil {
 		flags |= (1 << 1)
 	}
-	if e.TotalVoters.IsSet {
+	if e.TotalVoters != nil {
 		flags |= (1 << 2)
 	}
 	if e.RecentVoters != nil {
 		flags |= (1 << 3)
 	}
-	if e.Solution.IsSet {
+	if e.Solution != nil {
 		flags |= (1 << 4)
 	}
 	if e.SolutionEntities != nil {
@@ -25519,14 +25519,14 @@ func (e TL_pollResults) encode() []byte {
 	if e.Results != nil {
 		x.Vector(e.Results)
 	}
-	if e.TotalVoters.IsSet {
-		x.Int(e.TotalVoters.Value)
+	if e.TotalVoters != nil {
+		x.Int(*e.TotalVoters)
 	}
 	if e.RecentVoters != nil {
 		x.Vector(e.RecentVoters)
 	}
-	if e.Solution.IsSet {
-		x.String(e.Solution.Value)
+	if e.Solution != nil {
+		x.String(*e.Solution)
 	}
 	if e.SolutionEntities != nil {
 		x.Vector(e.SolutionEntities)
@@ -25726,10 +25726,10 @@ func (e TL_codeSettings) encode() []byte {
 	if e.LogoutTokens != nil {
 		flags |= (1 << 6)
 	}
-	if e.Token.IsSet {
+	if e.Token != nil {
 		flags |= (1 << 8)
 	}
-	if e.AppSandbox.IsSet {
+	if e.AppSandbox != nil {
 		flags |= (1 << 8)
 	}
 	x := NewEncodeBuf(512)
@@ -25738,11 +25738,11 @@ func (e TL_codeSettings) encode() []byte {
 	if e.LogoutTokens != nil {
 		x.VectorBytes(e.LogoutTokens)
 	}
-	if e.Token.IsSet {
-		x.String(e.Token.Value)
+	if e.Token != nil {
+		x.String(*e.Token)
 	}
-	if e.AppSandbox.IsSet {
-		x.Bool(e.AppSandbox.Value)
+	if e.AppSandbox != nil {
+		x.Bool(*e.AppSandbox)
 	}
 	return x.buf
 }
@@ -25755,44 +25755,44 @@ func (e TL_wallPaperSettings) encode() []byte {
 	if e.Motion {
 		flags |= (1 << 2)
 	}
-	if e.BackgroundColor.IsSet {
+	if e.BackgroundColor != nil {
 		flags |= (1 << 0)
 	}
-	if e.SecondBackgroundColor.IsSet {
+	if e.SecondBackgroundColor != nil {
 		flags |= (1 << 4)
 	}
-	if e.ThirdBackgroundColor.IsSet {
+	if e.ThirdBackgroundColor != nil {
 		flags |= (1 << 5)
 	}
-	if e.FourthBackgroundColor.IsSet {
+	if e.FourthBackgroundColor != nil {
 		flags |= (1 << 6)
 	}
-	if e.Intensity.IsSet {
+	if e.Intensity != nil {
 		flags |= (1 << 3)
 	}
-	if e.Rotation.IsSet {
+	if e.Rotation != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_wallPaperSettings)
 	x.Int(flags)
-	if e.BackgroundColor.IsSet {
-		x.Int(e.BackgroundColor.Value)
+	if e.BackgroundColor != nil {
+		x.Int(*e.BackgroundColor)
 	}
-	if e.SecondBackgroundColor.IsSet {
-		x.Int(e.SecondBackgroundColor.Value)
+	if e.SecondBackgroundColor != nil {
+		x.Int(*e.SecondBackgroundColor)
 	}
-	if e.ThirdBackgroundColor.IsSet {
-		x.Int(e.ThirdBackgroundColor.Value)
+	if e.ThirdBackgroundColor != nil {
+		x.Int(*e.ThirdBackgroundColor)
 	}
-	if e.FourthBackgroundColor.IsSet {
-		x.Int(e.FourthBackgroundColor.Value)
+	if e.FourthBackgroundColor != nil {
+		x.Int(*e.FourthBackgroundColor)
 	}
-	if e.Intensity.IsSet {
-		x.Int(e.Intensity.Value)
+	if e.Intensity != nil {
+		x.Int(*e.Intensity)
 	}
-	if e.Rotation.IsSet {
-		x.Int(e.Rotation.Value)
+	if e.Rotation != nil {
+		x.Int(*e.Rotation)
 	}
 	return x.buf
 }
@@ -26026,10 +26026,10 @@ func (e TL_theme) encode() []byte {
 	if e.Settings != nil {
 		flags |= (1 << 3)
 	}
-	if e.Emoticon.IsSet {
+	if e.Emoticon != nil {
 		flags |= (1 << 6)
 	}
-	if e.InstallsCount.IsSet {
+	if e.InstallsCount != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
@@ -26045,11 +26045,11 @@ func (e TL_theme) encode() []byte {
 	if e.Settings != nil {
 		x.Vector(e.Settings)
 	}
-	if e.Emoticon.IsSet {
-		x.String(e.Emoticon.Value)
+	if e.Emoticon != nil {
+		x.String(*e.Emoticon)
 	}
-	if e.InstallsCount.IsSet {
-		x.Int(e.InstallsCount.Value)
+	if e.InstallsCount != nil {
+		x.Int(*e.InstallsCount)
 	}
 	return x.buf
 }
@@ -26149,7 +26149,7 @@ func (e TL_inputThemeSettings) encode() []byte {
 	if e.MessageColorsAnimated {
 		flags |= (1 << 2)
 	}
-	if e.OutboxAccentColor.IsSet {
+	if e.OutboxAccentColor != nil {
 		flags |= (1 << 3)
 	}
 	if e.MessageColors != nil {
@@ -26166,8 +26166,8 @@ func (e TL_inputThemeSettings) encode() []byte {
 	x.Int(flags)
 	x.Object(e.BaseTheme)
 	x.Int(e.AccentColor)
-	if e.OutboxAccentColor.IsSet {
-		x.Int(e.OutboxAccentColor.Value)
+	if e.OutboxAccentColor != nil {
+		x.Int(*e.OutboxAccentColor)
 	}
 	if e.MessageColors != nil {
 		x.VectorInt(e.MessageColors)
@@ -26186,7 +26186,7 @@ func (e TL_themeSettings) encode() []byte {
 	if e.MessageColorsAnimated {
 		flags |= (1 << 2)
 	}
-	if e.OutboxAccentColor.IsSet {
+	if e.OutboxAccentColor != nil {
 		flags |= (1 << 3)
 	}
 	if e.MessageColors != nil {
@@ -26200,8 +26200,8 @@ func (e TL_themeSettings) encode() []byte {
 	x.Int(flags)
 	x.Object(e.BaseTheme)
 	x.Int(e.AccentColor)
-	if e.OutboxAccentColor.IsSet {
-		x.Int(e.OutboxAccentColor.Value)
+	if e.OutboxAccentColor != nil {
+		x.Int(*e.OutboxAccentColor)
 	}
 	if e.MessageColors != nil {
 		x.VectorInt(e.MessageColors)
@@ -26250,7 +26250,7 @@ func (e TL_webPageAttributeStory) encode() []byte {
 
 func (e TL_messages_votesList) encode() []byte {
 	var flags int32
-	if e.NextOffset.IsSet {
+	if e.NextOffset != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -26260,8 +26260,8 @@ func (e TL_messages_votesList) encode() []byte {
 	x.Vector(e.Votes)
 	x.Vector(e.Chats)
 	x.Vector(e.Users)
-	if e.NextOffset.IsSet {
-		x.String(e.NextOffset.Value)
+	if e.NextOffset != nil {
+		x.String(*e.NextOffset)
 	}
 	return x.buf
 }
@@ -26308,7 +26308,7 @@ func (e TL_dialogFilter) encode() []byte {
 	if e.ExcludeArchived {
 		flags |= (1 << 13)
 	}
-	if e.Emoticon.IsSet {
+	if e.Emoticon != nil {
 		flags |= (1 << 25)
 	}
 	x := NewEncodeBuf(512)
@@ -26316,8 +26316,8 @@ func (e TL_dialogFilter) encode() []byte {
 	x.Int(flags)
 	x.Int(e.ID)
 	x.String(e.Title)
-	if e.Emoticon.IsSet {
-		x.String(e.Emoticon.Value)
+	if e.Emoticon != nil {
+		x.String(*e.Emoticon)
 	}
 	x.Vector(e.PinnedPeers)
 	x.Vector(e.IncludePeers)
@@ -26336,7 +26336,7 @@ func (e TL_dialogFilterChatlist) encode() []byte {
 	if e.HasMyInvites {
 		flags |= (1 << 26)
 	}
-	if e.Emoticon.IsSet {
+	if e.Emoticon != nil {
 		flags |= (1 << 25)
 	}
 	x := NewEncodeBuf(512)
@@ -26344,8 +26344,8 @@ func (e TL_dialogFilterChatlist) encode() []byte {
 	x.Int(flags)
 	x.Int(e.ID)
 	x.String(e.Title)
-	if e.Emoticon.IsSet {
-		x.String(e.Emoticon.Value)
+	if e.Emoticon != nil {
+		x.String(*e.Emoticon)
 	}
 	x.Vector(e.PinnedPeers)
 	x.Vector(e.IncludePeers)
@@ -26400,15 +26400,15 @@ func (e TL_statsGraphError) encode() []byte {
 
 func (e TL_statsGraph) encode() []byte {
 	var flags int32
-	if e.ZoomToken.IsSet {
+	if e.ZoomToken != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_statsGraph)
 	x.Int(flags)
 	x.Object(e.Json)
-	if e.ZoomToken.IsSet {
-		x.String(e.ZoomToken.Value)
+	if e.ZoomToken != nil {
+		x.String(*e.ZoomToken)
 	}
 	return x.buf
 }
@@ -26455,10 +26455,10 @@ func (e TL_help_promoData) encode() []byte {
 	if e.Proxy {
 		flags |= (1 << 0)
 	}
-	if e.PsaType.IsSet {
+	if e.PsaType != nil {
 		flags |= (1 << 1)
 	}
-	if e.PsaMessage.IsSet {
+	if e.PsaMessage != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -26468,18 +26468,18 @@ func (e TL_help_promoData) encode() []byte {
 	x.Object(e.Peer)
 	x.Vector(e.Chats)
 	x.Vector(e.Users)
-	if e.PsaType.IsSet {
-		x.String(e.PsaType.Value)
+	if e.PsaType != nil {
+		x.String(*e.PsaType)
 	}
-	if e.PsaMessage.IsSet {
-		x.String(e.PsaMessage.Value)
+	if e.PsaMessage != nil {
+		x.String(*e.PsaMessage)
 	}
 	return x.buf
 }
 
 func (e TL_videoSize) encode() []byte {
 	var flags int32
-	if e.VideoStartTs.IsSet {
+	if e.VideoStartTs != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -26489,8 +26489,8 @@ func (e TL_videoSize) encode() []byte {
 	x.Int(e.W)
 	x.Int(e.H)
 	x.Int(e.Size)
-	if e.VideoStartTs.IsSet {
-		x.Double(e.VideoStartTs.Value)
+	if e.VideoStartTs != nil {
+		x.Double(*e.VideoStartTs)
 	}
 	return x.buf
 }
@@ -26605,7 +26605,7 @@ func (e TL_help_country) encode() []byte {
 	if e.Hidden {
 		flags |= (1 << 0)
 	}
-	if e.Name.IsSet {
+	if e.Name != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -26613,8 +26613,8 @@ func (e TL_help_country) encode() []byte {
 	x.Int(flags)
 	x.String(e.Iso2)
 	x.String(e.DefaultName)
-	if e.Name.IsSet {
-		x.String(e.Name.Value)
+	if e.Name != nil {
+		x.String(*e.Name)
 	}
 	x.Vector(e.CountryCodes)
 	return x.buf
@@ -26636,10 +26636,10 @@ func (e TL_help_countriesList) encode() []byte {
 
 func (e TL_messageViews) encode() []byte {
 	var flags int32
-	if e.Views.IsSet {
+	if e.Views != nil {
 		flags |= (1 << 0)
 	}
-	if e.Forwards.IsSet {
+	if e.Forwards != nil {
 		flags |= (1 << 1)
 	}
 	if e.Replies != nil {
@@ -26648,11 +26648,11 @@ func (e TL_messageViews) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageViews)
 	x.Int(flags)
-	if e.Views.IsSet {
-		x.Int(e.Views.Value)
+	if e.Views != nil {
+		x.Int(*e.Views)
 	}
-	if e.Forwards.IsSet {
-		x.Int(e.Forwards.Value)
+	if e.Forwards != nil {
+		x.Int(*e.Forwards)
 	}
 	if e.Replies != nil {
 		x.Object(e.Replies)
@@ -26671,27 +26671,27 @@ func (e TL_messages_messageViews) encode() []byte {
 
 func (e TL_messages_discussionMessage) encode() []byte {
 	var flags int32
-	if e.MaxID.IsSet {
+	if e.MaxID != nil {
 		flags |= (1 << 0)
 	}
-	if e.ReadInboxMaxID.IsSet {
+	if e.ReadInboxMaxID != nil {
 		flags |= (1 << 1)
 	}
-	if e.ReadOutboxMaxID.IsSet {
+	if e.ReadOutboxMaxID != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_discussionMessage)
 	x.Int(flags)
 	x.Vector(e.Messages)
-	if e.MaxID.IsSet {
-		x.Int(e.MaxID.Value)
+	if e.MaxID != nil {
+		x.Int(*e.MaxID)
 	}
-	if e.ReadInboxMaxID.IsSet {
-		x.Int(e.ReadInboxMaxID.Value)
+	if e.ReadInboxMaxID != nil {
+		x.Int(*e.ReadInboxMaxID)
 	}
-	if e.ReadOutboxMaxID.IsSet {
-		x.Int(e.ReadOutboxMaxID.Value)
+	if e.ReadOutboxMaxID != nil {
+		x.Int(*e.ReadOutboxMaxID)
 	}
 	x.Int(e.UnreadCount)
 	x.Vector(e.Chats)
@@ -26710,7 +26710,7 @@ func (e TL_messageReplyHeader) encode() []byte {
 	if e.Quote {
 		flags |= (1 << 9)
 	}
-	if e.ReplyToMsgID.IsSet {
+	if e.ReplyToMsgID != nil {
 		flags |= (1 << 4)
 	}
 	if e.ReplyToPeerID != nil {
@@ -26722,10 +26722,10 @@ func (e TL_messageReplyHeader) encode() []byte {
 	if e.ReplyMedia != nil {
 		flags |= (1 << 8)
 	}
-	if e.ReplyToTopID.IsSet {
+	if e.ReplyToTopID != nil {
 		flags |= (1 << 1)
 	}
-	if e.QuoteText.IsSet {
+	if e.QuoteText != nil {
 		flags |= (1 << 6)
 	}
 	if e.QuoteEntities != nil {
@@ -26734,8 +26734,8 @@ func (e TL_messageReplyHeader) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageReplyHeader)
 	x.Int(flags)
-	if e.ReplyToMsgID.IsSet {
-		x.Int(e.ReplyToMsgID.Value)
+	if e.ReplyToMsgID != nil {
+		x.Int(*e.ReplyToMsgID)
 	}
 	if e.ReplyToPeerID != nil {
 		x.Object(e.ReplyToPeerID)
@@ -26746,11 +26746,11 @@ func (e TL_messageReplyHeader) encode() []byte {
 	if e.ReplyMedia != nil {
 		x.Object(e.ReplyMedia)
 	}
-	if e.ReplyToTopID.IsSet {
-		x.Int(e.ReplyToTopID.Value)
+	if e.ReplyToTopID != nil {
+		x.Int(*e.ReplyToTopID)
 	}
-	if e.QuoteText.IsSet {
-		x.String(e.QuoteText.Value)
+	if e.QuoteText != nil {
+		x.String(*e.QuoteText)
 	}
 	if e.QuoteEntities != nil {
 		x.Vector(e.QuoteEntities)
@@ -26774,13 +26774,13 @@ func (e TL_messageReplies) encode() []byte {
 	if e.RecentRepliers != nil {
 		flags |= (1 << 1)
 	}
-	if e.ChannelID.IsSet {
+	if e.ChannelID != nil {
 		flags |= (1 << 0)
 	}
-	if e.MaxID.IsSet {
+	if e.MaxID != nil {
 		flags |= (1 << 2)
 	}
-	if e.ReadMaxID.IsSet {
+	if e.ReadMaxID != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -26791,14 +26791,14 @@ func (e TL_messageReplies) encode() []byte {
 	if e.RecentRepliers != nil {
 		x.Vector(e.RecentRepliers)
 	}
-	if e.ChannelID.IsSet {
-		x.Long(e.ChannelID.Value)
+	if e.ChannelID != nil {
+		x.Long(*e.ChannelID)
 	}
-	if e.MaxID.IsSet {
-		x.Int(e.MaxID.Value)
+	if e.MaxID != nil {
+		x.Int(*e.MaxID)
 	}
-	if e.ReadMaxID.IsSet {
-		x.Int(e.ReadMaxID.Value)
+	if e.ReadMaxID != nil {
+		x.Int(*e.ReadMaxID)
 	}
 	return x.buf
 }
@@ -26853,19 +26853,19 @@ func (e TL_groupCall) encode() []byte {
 	if e.ListenersHidden {
 		flags |= (1 << 13)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 3)
 	}
-	if e.StreamDcID.IsSet {
+	if e.StreamDcID != nil {
 		flags |= (1 << 4)
 	}
-	if e.RecordStartDate.IsSet {
+	if e.RecordStartDate != nil {
 		flags |= (1 << 5)
 	}
-	if e.ScheduleDate.IsSet {
+	if e.ScheduleDate != nil {
 		flags |= (1 << 7)
 	}
-	if e.UnmutedVideoCount.IsSet {
+	if e.UnmutedVideoCount != nil {
 		flags |= (1 << 10)
 	}
 	x := NewEncodeBuf(512)
@@ -26874,20 +26874,20 @@ func (e TL_groupCall) encode() []byte {
 	x.Long(e.ID)
 	x.Long(e.AccessHash)
 	x.Int(e.ParticipantsCount)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.StreamDcID.IsSet {
-		x.Int(e.StreamDcID.Value)
+	if e.StreamDcID != nil {
+		x.Int(*e.StreamDcID)
 	}
-	if e.RecordStartDate.IsSet {
-		x.Int(e.RecordStartDate.Value)
+	if e.RecordStartDate != nil {
+		x.Int(*e.RecordStartDate)
 	}
-	if e.ScheduleDate.IsSet {
-		x.Int(e.ScheduleDate.Value)
+	if e.ScheduleDate != nil {
+		x.Int(*e.ScheduleDate)
 	}
-	if e.UnmutedVideoCount.IsSet {
-		x.Int(e.UnmutedVideoCount.Value)
+	if e.UnmutedVideoCount != nil {
+		x.Int(*e.UnmutedVideoCount)
 	}
 	x.Int(e.UnmutedVideoLimit)
 	x.Int(e.Version)
@@ -26934,16 +26934,16 @@ func (e TL_groupCallParticipant) encode() []byte {
 	if e.VideoJoined {
 		flags |= (1 << 15)
 	}
-	if e.ActiveDate.IsSet {
+	if e.ActiveDate != nil {
 		flags |= (1 << 3)
 	}
-	if e.Volume.IsSet {
+	if e.Volume != nil {
 		flags |= (1 << 7)
 	}
-	if e.About.IsSet {
+	if e.About != nil {
 		flags |= (1 << 11)
 	}
-	if e.RaiseHandRating.IsSet {
+	if e.RaiseHandRating != nil {
 		flags |= (1 << 13)
 	}
 	if e.Video != nil {
@@ -26957,18 +26957,18 @@ func (e TL_groupCallParticipant) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.Int(e.Date)
-	if e.ActiveDate.IsSet {
-		x.Int(e.ActiveDate.Value)
+	if e.ActiveDate != nil {
+		x.Int(*e.ActiveDate)
 	}
 	x.Int(e.Source)
-	if e.Volume.IsSet {
-		x.Int(e.Volume.Value)
+	if e.Volume != nil {
+		x.Int(*e.Volume)
 	}
-	if e.About.IsSet {
-		x.String(e.About.Value)
+	if e.About != nil {
+		x.String(*e.About)
 	}
-	if e.RaiseHandRating.IsSet {
-		x.Long(e.RaiseHandRating.Value)
+	if e.RaiseHandRating != nil {
+		x.Long(*e.RaiseHandRating)
 	}
 	if e.Video != nil {
 		x.Object(e.Video)
@@ -27053,14 +27053,14 @@ func (e TL_messages_historyImportParsed) encode() []byte {
 	if e.Group {
 		flags |= (1 << 1)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_historyImportParsed)
 	x.Int(flags)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
 	return x.buf
 }
@@ -27083,10 +27083,10 @@ func (e TL_chatInviteImporter) encode() []byte {
 	if e.ViaChatlist {
 		flags |= (1 << 3)
 	}
-	if e.About.IsSet {
+	if e.About != nil {
 		flags |= (1 << 2)
 	}
-	if e.ApprovedBy.IsSet {
+	if e.ApprovedBy != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -27094,11 +27094,11 @@ func (e TL_chatInviteImporter) encode() []byte {
 	x.Int(flags)
 	x.Long(e.UserID)
 	x.Int(e.Date)
-	if e.About.IsSet {
-		x.String(e.About.Value)
+	if e.About != nil {
+		x.String(*e.About)
 	}
-	if e.ApprovedBy.IsSet {
-		x.Long(e.ApprovedBy.Value)
+	if e.ApprovedBy != nil {
+		x.Long(*e.ApprovedBy)
 	}
 	return x.buf
 }
@@ -27191,7 +27191,7 @@ func (e TL_groupCallParticipantVideo) encode() []byte {
 	if e.Paused {
 		flags |= (1 << 0)
 	}
-	if e.AudioSource.IsSet {
+	if e.AudioSource != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -27199,8 +27199,8 @@ func (e TL_groupCallParticipantVideo) encode() []byte {
 	x.Int(flags)
 	x.String(e.Endpoint)
 	x.Vector(e.SourceGroups)
-	if e.AudioSource.IsSet {
-		x.Int(e.AudioSource.Value)
+	if e.AudioSource != nil {
+		x.Int(*e.AudioSource)
 	}
 	return x.buf
 }
@@ -27292,13 +27292,13 @@ func (e TL_sponsoredMessage) encode() []byte {
 	if e.ChatInvite != nil {
 		flags |= (1 << 4)
 	}
-	if e.ChatInviteHash.IsSet {
+	if e.ChatInviteHash != nil {
 		flags |= (1 << 4)
 	}
-	if e.ChannelPost.IsSet {
+	if e.ChannelPost != nil {
 		flags |= (1 << 2)
 	}
-	if e.StartParam.IsSet {
+	if e.StartParam != nil {
 		flags |= (1 << 0)
 	}
 	if e.Webpage != nil {
@@ -27307,10 +27307,10 @@ func (e TL_sponsoredMessage) encode() []byte {
 	if e.Entities != nil {
 		flags |= (1 << 1)
 	}
-	if e.SponsorInfo.IsSet {
+	if e.SponsorInfo != nil {
 		flags |= (1 << 7)
 	}
-	if e.AdditionalInfo.IsSet {
+	if e.AdditionalInfo != nil {
 		flags |= (1 << 8)
 	}
 	x := NewEncodeBuf(512)
@@ -27323,14 +27323,14 @@ func (e TL_sponsoredMessage) encode() []byte {
 	if e.ChatInvite != nil {
 		x.Object(e.ChatInvite)
 	}
-	if e.ChatInviteHash.IsSet {
-		x.String(e.ChatInviteHash.Value)
+	if e.ChatInviteHash != nil {
+		x.String(*e.ChatInviteHash)
 	}
-	if e.ChannelPost.IsSet {
-		x.Int(e.ChannelPost.Value)
+	if e.ChannelPost != nil {
+		x.Int(*e.ChannelPost)
 	}
-	if e.StartParam.IsSet {
-		x.String(e.StartParam.Value)
+	if e.StartParam != nil {
+		x.String(*e.StartParam)
 	}
 	if e.Webpage != nil {
 		x.Object(e.Webpage)
@@ -27339,25 +27339,25 @@ func (e TL_sponsoredMessage) encode() []byte {
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
-	if e.SponsorInfo.IsSet {
-		x.String(e.SponsorInfo.Value)
+	if e.SponsorInfo != nil {
+		x.String(*e.SponsorInfo)
 	}
-	if e.AdditionalInfo.IsSet {
-		x.String(e.AdditionalInfo.Value)
+	if e.AdditionalInfo != nil {
+		x.String(*e.AdditionalInfo)
 	}
 	return x.buf
 }
 
 func (e TL_messages_sponsoredMessages) encode() []byte {
 	var flags int32
-	if e.PostsBetween.IsSet {
+	if e.PostsBetween != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_sponsoredMessages)
 	x.Int(flags)
-	if e.PostsBetween.IsSet {
-		x.Int(e.PostsBetween.Value)
+	if e.PostsBetween != nil {
+		x.Int(*e.PostsBetween)
 	}
 	x.Vector(e.Messages)
 	x.Vector(e.Chats)
@@ -27386,7 +27386,7 @@ func (e TL_messages_searchResultsCalendar) encode() []byte {
 	if e.Inexact {
 		flags |= (1 << 0)
 	}
-	if e.OffsetIdOffset.IsSet {
+	if e.OffsetIdOffset != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -27395,8 +27395,8 @@ func (e TL_messages_searchResultsCalendar) encode() []byte {
 	x.Int(e.Count)
 	x.Int(e.MinDate)
 	x.Int(e.MinMsgID)
-	if e.OffsetIdOffset.IsSet {
-		x.Int(e.OffsetIdOffset.Value)
+	if e.OffsetIdOffset != nil {
+		x.Int(*e.OffsetIdOffset)
 	}
 	x.Vector(e.Periods)
 	x.Vector(e.Messages)
@@ -27465,14 +27465,14 @@ func (e TL_auth_loggedOut) encode() []byte {
 
 func (e TL_reactionCount) encode() []byte {
 	var flags int32
-	if e.ChosenOrder.IsSet {
+	if e.ChosenOrder != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_reactionCount)
 	x.Int(flags)
-	if e.ChosenOrder.IsSet {
-		x.Int(e.ChosenOrder.Value)
+	if e.ChosenOrder != nil {
+		x.Int(*e.ChosenOrder)
 	}
 	x.Object(e.Reaction)
 	x.Int(e.Count)
@@ -27502,7 +27502,7 @@ func (e TL_messageReactions) encode() []byte {
 
 func (e TL_messages_messageReactionsList) encode() []byte {
 	var flags int32
-	if e.NextOffset.IsSet {
+	if e.NextOffset != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -27512,8 +27512,8 @@ func (e TL_messages_messageReactionsList) encode() []byte {
 	x.Vector(e.Reactions)
 	x.Vector(e.Chats)
 	x.Vector(e.Users)
-	if e.NextOffset.IsSet {
-		x.String(e.NextOffset.Value)
+	if e.NextOffset != nil {
+		x.String(*e.NextOffset)
 	}
 	return x.buf
 }
@@ -27949,7 +27949,7 @@ func (e TL_inputStorePaymentPremiumGiveaway) encode() []byte {
 
 func (e TL_premiumGiftOption) encode() []byte {
 	var flags int32
-	if e.StoreProduct.IsSet {
+	if e.StoreProduct != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -27959,8 +27959,8 @@ func (e TL_premiumGiftOption) encode() []byte {
 	x.String(e.Currency)
 	x.Long(e.Amount)
 	x.String(e.BotUrl)
-	if e.StoreProduct.IsSet {
-		x.String(e.StoreProduct.Value)
+	if e.StoreProduct != nil {
+		x.String(*e.StoreProduct)
 	}
 	return x.buf
 }
@@ -28130,24 +28130,24 @@ func (e TL_premiumSubscriptionOption) encode() []byte {
 	if e.CanPurchaseUpgrade {
 		flags |= (1 << 2)
 	}
-	if e.Transaction.IsSet {
+	if e.Transaction != nil {
 		flags |= (1 << 3)
 	}
-	if e.StoreProduct.IsSet {
+	if e.StoreProduct != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_premiumSubscriptionOption)
 	x.Int(flags)
-	if e.Transaction.IsSet {
-		x.String(e.Transaction.Value)
+	if e.Transaction != nil {
+		x.String(*e.Transaction)
 	}
 	x.Int(e.Months)
 	x.String(e.Currency)
 	x.Long(e.Amount)
 	x.String(e.BotUrl)
-	if e.StoreProduct.IsSet {
-		x.String(e.StoreProduct.Value)
+	if e.StoreProduct != nil {
+		x.String(*e.StoreProduct)
 	}
 	return x.buf
 }
@@ -28166,32 +28166,32 @@ func (e TL_sendAsPeer) encode() []byte {
 
 func (e TL_messageExtendedMediaPreview) encode() []byte {
 	var flags int32
-	if e.W.IsSet {
+	if e.W != nil {
 		flags |= (1 << 0)
 	}
-	if e.H.IsSet {
+	if e.H != nil {
 		flags |= (1 << 0)
 	}
 	if e.Thumb != nil {
 		flags |= (1 << 1)
 	}
-	if e.VideoDuration.IsSet {
+	if e.VideoDuration != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageExtendedMediaPreview)
 	x.Int(flags)
-	if e.W.IsSet {
-		x.Int(e.W.Value)
+	if e.W != nil {
+		x.Int(*e.W)
 	}
-	if e.H.IsSet {
-		x.Int(e.H.Value)
+	if e.H != nil {
+		x.Int(*e.H)
 	}
 	if e.Thumb != nil {
 		x.Object(e.Thumb)
 	}
-	if e.VideoDuration.IsSet {
-		x.Int(e.VideoDuration.Value)
+	if e.VideoDuration != nil {
+		x.Int(*e.VideoDuration)
 	}
 	return x.buf
 }
@@ -28250,7 +28250,7 @@ func (e TL_forumTopic) encode() []byte {
 	if e.Hidden {
 		flags |= (1 << 6)
 	}
-	if e.IconEmojiID.IsSet {
+	if e.IconEmojiID != nil {
 		flags |= (1 << 0)
 	}
 	if e.Draft != nil {
@@ -28263,8 +28263,8 @@ func (e TL_forumTopic) encode() []byte {
 	x.Int(e.Date)
 	x.String(e.Title)
 	x.Int(e.IconColor)
-	if e.IconEmojiID.IsSet {
-		x.Long(e.IconEmojiID.Value)
+	if e.IconEmojiID != nil {
+		x.Long(*e.IconEmojiID)
 	}
 	x.Int(e.TopMessage)
 	x.Int(e.ReadInboxMaxID)
@@ -28314,20 +28314,20 @@ func (e TL_exportedContactToken) encode() []byte {
 
 func (e TL_requestPeerTypeUser) encode() []byte {
 	var flags int32
-	if e.Bot.IsSet {
+	if e.Bot != nil {
 		flags |= (1 << 0)
 	}
-	if e.Premium.IsSet {
+	if e.Premium != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_requestPeerTypeUser)
 	x.Int(flags)
-	if e.Bot.IsSet {
-		x.Bool(e.Bot.Value)
+	if e.Bot != nil {
+		x.Bool(*e.Bot)
 	}
-	if e.Premium.IsSet {
-		x.Bool(e.Premium.Value)
+	if e.Premium != nil {
+		x.Bool(*e.Premium)
 	}
 	return x.buf
 }
@@ -28340,10 +28340,10 @@ func (e TL_requestPeerTypeChat) encode() []byte {
 	if e.BotParticipant {
 		flags |= (1 << 5)
 	}
-	if e.HasUsername.IsSet {
+	if e.HasUsername != nil {
 		flags |= (1 << 3)
 	}
-	if e.Forum.IsSet {
+	if e.Forum != nil {
 		flags |= (1 << 4)
 	}
 	if e.UserAdminRights != nil {
@@ -28355,11 +28355,11 @@ func (e TL_requestPeerTypeChat) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_requestPeerTypeChat)
 	x.Int(flags)
-	if e.HasUsername.IsSet {
-		x.Bool(e.HasUsername.Value)
+	if e.HasUsername != nil {
+		x.Bool(*e.HasUsername)
 	}
-	if e.Forum.IsSet {
-		x.Bool(e.Forum.Value)
+	if e.Forum != nil {
+		x.Bool(*e.Forum)
 	}
 	if e.UserAdminRights != nil {
 		x.Object(e.UserAdminRights)
@@ -28375,7 +28375,7 @@ func (e TL_requestPeerTypeBroadcast) encode() []byte {
 	if e.Creator {
 		flags |= (1 << 0)
 	}
-	if e.HasUsername.IsSet {
+	if e.HasUsername != nil {
 		flags |= (1 << 3)
 	}
 	if e.UserAdminRights != nil {
@@ -28387,8 +28387,8 @@ func (e TL_requestPeerTypeBroadcast) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_requestPeerTypeBroadcast)
 	x.Int(flags)
-	if e.HasUsername.IsSet {
-		x.Bool(e.HasUsername.Value)
+	if e.HasUsername != nil {
+		x.Bool(*e.HasUsername)
 	}
 	if e.UserAdminRights != nil {
 		x.Object(e.UserAdminRights)
@@ -28459,14 +28459,14 @@ func (e TL_autoSaveSettings) encode() []byte {
 	if e.Videos {
 		flags |= (1 << 1)
 	}
-	if e.VideoMaxSize.IsSet {
+	if e.VideoMaxSize != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_autoSaveSettings)
 	x.Int(flags)
-	if e.VideoMaxSize.IsSet {
-		x.Long(e.VideoMaxSize.Value)
+	if e.VideoMaxSize != nil {
+		x.Long(*e.VideoMaxSize)
 	}
 	return x.buf
 }
@@ -28637,15 +28637,15 @@ func (e TL_chatlists_chatlistInviteAlready) encode() []byte {
 
 func (e TL_chatlists_chatlistInvite) encode() []byte {
 	var flags int32
-	if e.Emoticon.IsSet {
+	if e.Emoticon != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_chatlists_chatlistInvite)
 	x.Int(flags)
 	x.String(e.Title)
-	if e.Emoticon.IsSet {
-		x.String(e.Emoticon.Value)
+	if e.Emoticon != nil {
+		x.String(*e.Emoticon)
 	}
 	x.Vector(e.Peers)
 	x.Vector(e.Chats)
@@ -28718,13 +28718,13 @@ func (e TL_storyViews) encode() []byte {
 	if e.HasViewers {
 		flags |= (1 << 1)
 	}
-	if e.ForwardsCount.IsSet {
+	if e.ForwardsCount != nil {
 		flags |= (1 << 2)
 	}
 	if e.Reactions != nil {
 		flags |= (1 << 3)
 	}
-	if e.ReactionsCount.IsSet {
+	if e.ReactionsCount != nil {
 		flags |= (1 << 4)
 	}
 	if e.RecentViewers != nil {
@@ -28734,14 +28734,14 @@ func (e TL_storyViews) encode() []byte {
 	x.UInt(CRC_storyViews)
 	x.Int(flags)
 	x.Int(e.ViewsCount)
-	if e.ForwardsCount.IsSet {
-		x.Int(e.ForwardsCount.Value)
+	if e.ForwardsCount != nil {
+		x.Int(*e.ForwardsCount)
 	}
 	if e.Reactions != nil {
 		x.Vector(e.Reactions)
 	}
-	if e.ReactionsCount.IsSet {
-		x.Int(e.ReactionsCount.Value)
+	if e.ReactionsCount != nil {
+		x.Int(*e.ReactionsCount)
 	}
 	if e.RecentViewers != nil {
 		x.VectorLong(e.RecentViewers)
@@ -28799,7 +28799,7 @@ func (e TL_storyItem) encode() []byte {
 	if e.Out {
 		flags |= (1 << 16)
 	}
-	if e.Caption.IsSet {
+	if e.Caption != nil {
 		flags |= (1 << 0)
 	}
 	if e.Entities != nil {
@@ -28823,8 +28823,8 @@ func (e TL_storyItem) encode() []byte {
 	x.Int(e.ID)
 	x.Int(e.Date)
 	x.Int(e.ExpireDate)
-	if e.Caption.IsSet {
-		x.String(e.Caption.Value)
+	if e.Caption != nil {
+		x.String(*e.Caption)
 	}
 	if e.Entities != nil {
 		x.Vector(e.Entities)
@@ -28906,7 +28906,7 @@ func (e TL_storyView) encode() []byte {
 
 func (e TL_stories_storyViewsList) encode() []byte {
 	var flags int32
-	if e.NextOffset.IsSet {
+	if e.NextOffset != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -28916,8 +28916,8 @@ func (e TL_stories_storyViewsList) encode() []byte {
 	x.Int(e.ReactionsCount)
 	x.Vector(e.Views)
 	x.Vector(e.Users)
-	if e.NextOffset.IsSet {
-		x.String(e.NextOffset.Value)
+	if e.NextOffset != nil {
+		x.String(*e.NextOffset)
 	}
 	return x.buf
 }
@@ -28932,13 +28932,13 @@ func (e TL_stories_storyViews) encode() []byte {
 
 func (e TL_inputReplyToMessage) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	if e.ReplyToPeerID != nil {
 		flags |= (1 << 1)
 	}
-	if e.QuoteText.IsSet {
+	if e.QuoteText != nil {
 		flags |= (1 << 2)
 	}
 	if e.QuoteEntities != nil {
@@ -28948,14 +28948,14 @@ func (e TL_inputReplyToMessage) encode() []byte {
 	x.UInt(CRC_inputReplyToMessage)
 	x.Int(flags)
 	x.Int(e.ReplyToMsgID)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	if e.ReplyToPeerID != nil {
 		x.Object(e.ReplyToPeerID)
 	}
-	if e.QuoteText.IsSet {
-		x.String(e.QuoteText.Value)
+	if e.QuoteText != nil {
+		x.String(*e.QuoteText)
 	}
 	if e.QuoteEntities != nil {
 		x.Vector(e.QuoteEntities)
@@ -28980,20 +28980,20 @@ func (e TL_exportedStoryLink) encode() []byte {
 
 func (e TL_storiesStealthMode) encode() []byte {
 	var flags int32
-	if e.ActiveUntilDate.IsSet {
+	if e.ActiveUntilDate != nil {
 		flags |= (1 << 0)
 	}
-	if e.CooldownUntilDate.IsSet {
+	if e.CooldownUntilDate != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_storiesStealthMode)
 	x.Int(flags)
-	if e.ActiveUntilDate.IsSet {
-		x.Int(e.ActiveUntilDate.Value)
+	if e.ActiveUntilDate != nil {
+		x.Int(*e.ActiveUntilDate)
 	}
-	if e.CooldownUntilDate.IsSet {
-		x.Int(e.CooldownUntilDate.Value)
+	if e.CooldownUntilDate != nil {
+		x.Int(*e.CooldownUntilDate)
 	}
 	return x.buf
 }
@@ -29057,15 +29057,15 @@ func (e TL_mediaAreaSuggestedReaction) encode() []byte {
 
 func (e TL_peerStories) encode() []byte {
 	var flags int32
-	if e.MaxReadID.IsSet {
+	if e.MaxReadID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_peerStories)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.MaxReadID.IsSet {
-		x.Int(e.MaxReadID.Value)
+	if e.MaxReadID != nil {
+		x.Int(*e.MaxReadID)
 	}
 	x.Vector(e.Stories)
 	return x.buf
@@ -29091,10 +29091,10 @@ func (e TL_messages_webPage) encode() []byte {
 
 func (e TL_premiumGiftCodeOption) encode() []byte {
 	var flags int32
-	if e.StoreProduct.IsSet {
+	if e.StoreProduct != nil {
 		flags |= (1 << 0)
 	}
-	if e.StoreQuantity.IsSet {
+	if e.StoreQuantity != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -29102,11 +29102,11 @@ func (e TL_premiumGiftCodeOption) encode() []byte {
 	x.Int(flags)
 	x.Int(e.Users)
 	x.Int(e.Months)
-	if e.StoreProduct.IsSet {
-		x.String(e.StoreProduct.Value)
+	if e.StoreProduct != nil {
+		x.String(*e.StoreProduct)
 	}
-	if e.StoreQuantity.IsSet {
-		x.Int(e.StoreQuantity.Value)
+	if e.StoreQuantity != nil {
+		x.Int(*e.StoreQuantity)
 	}
 	x.String(e.Currency)
 	x.Long(e.Amount)
@@ -29118,29 +29118,29 @@ func (e TL_payments_checkedGiftCode) encode() []byte {
 	if e.ViaGiveaway {
 		flags |= (1 << 2)
 	}
-	if e.GiveawayMsgID.IsSet {
+	if e.GiveawayMsgID != nil {
 		flags |= (1 << 3)
 	}
-	if e.ToID.IsSet {
+	if e.ToID != nil {
 		flags |= (1 << 0)
 	}
-	if e.UsedDate.IsSet {
+	if e.UsedDate != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_checkedGiftCode)
 	x.Int(flags)
 	x.Object(e.FromID)
-	if e.GiveawayMsgID.IsSet {
-		x.Int(e.GiveawayMsgID.Value)
+	if e.GiveawayMsgID != nil {
+		x.Int(*e.GiveawayMsgID)
 	}
-	if e.ToID.IsSet {
-		x.Long(e.ToID.Value)
+	if e.ToID != nil {
+		x.Long(*e.ToID)
 	}
 	x.Int(e.Date)
 	x.Int(e.Months)
-	if e.UsedDate.IsSet {
-		x.Int(e.UsedDate.Value)
+	if e.UsedDate != nil {
+		x.Int(*e.UsedDate)
 	}
 	x.Vector(e.Chats)
 	x.Vector(e.Users)
@@ -29155,27 +29155,27 @@ func (e TL_payments_giveawayInfo) encode() []byte {
 	if e.PreparingResults {
 		flags |= (1 << 3)
 	}
-	if e.JoinedTooEarlyDate.IsSet {
+	if e.JoinedTooEarlyDate != nil {
 		flags |= (1 << 1)
 	}
-	if e.AdminDisallowedChatID.IsSet {
+	if e.AdminDisallowedChatID != nil {
 		flags |= (1 << 2)
 	}
-	if e.DisallowedCountry.IsSet {
+	if e.DisallowedCountry != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_giveawayInfo)
 	x.Int(flags)
 	x.Int(e.StartDate)
-	if e.JoinedTooEarlyDate.IsSet {
-		x.Int(e.JoinedTooEarlyDate.Value)
+	if e.JoinedTooEarlyDate != nil {
+		x.Int(*e.JoinedTooEarlyDate)
 	}
-	if e.AdminDisallowedChatID.IsSet {
-		x.Long(e.AdminDisallowedChatID.Value)
+	if e.AdminDisallowedChatID != nil {
+		x.Long(*e.AdminDisallowedChatID)
 	}
-	if e.DisallowedCountry.IsSet {
-		x.String(e.DisallowedCountry.Value)
+	if e.DisallowedCountry != nil {
+		x.String(*e.DisallowedCountry)
 	}
 	return x.buf
 }
@@ -29188,15 +29188,15 @@ func (e TL_payments_giveawayInfoResults) encode() []byte {
 	if e.Refunded {
 		flags |= (1 << 1)
 	}
-	if e.GiftCodeSlug.IsSet {
+	if e.GiftCodeSlug != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_giveawayInfoResults)
 	x.Int(flags)
 	x.Int(e.StartDate)
-	if e.GiftCodeSlug.IsSet {
-		x.String(e.GiftCodeSlug.Value)
+	if e.GiftCodeSlug != nil {
+		x.String(*e.GiftCodeSlug)
 	}
 	x.Int(e.FinishDate)
 	x.Int(e.WinnersCount)
@@ -29225,42 +29225,42 @@ func (e TL_boost) encode() []byte {
 	if e.Unclaimed {
 		flags |= (1 << 3)
 	}
-	if e.UserID.IsSet {
+	if e.UserID != nil {
 		flags |= (1 << 0)
 	}
-	if e.GiveawayMsgID.IsSet {
+	if e.GiveawayMsgID != nil {
 		flags |= (1 << 2)
 	}
-	if e.UsedGiftSlug.IsSet {
+	if e.UsedGiftSlug != nil {
 		flags |= (1 << 4)
 	}
-	if e.Multiplier.IsSet {
+	if e.Multiplier != nil {
 		flags |= (1 << 5)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_boost)
 	x.Int(flags)
 	x.String(e.ID)
-	if e.UserID.IsSet {
-		x.Long(e.UserID.Value)
+	if e.UserID != nil {
+		x.Long(*e.UserID)
 	}
-	if e.GiveawayMsgID.IsSet {
-		x.Int(e.GiveawayMsgID.Value)
+	if e.GiveawayMsgID != nil {
+		x.Int(*e.GiveawayMsgID)
 	}
 	x.Int(e.Date)
 	x.Int(e.Expires)
-	if e.UsedGiftSlug.IsSet {
-		x.String(e.UsedGiftSlug.Value)
+	if e.UsedGiftSlug != nil {
+		x.String(*e.UsedGiftSlug)
 	}
-	if e.Multiplier.IsSet {
-		x.Int(e.Multiplier.Value)
+	if e.Multiplier != nil {
+		x.Int(*e.Multiplier)
 	}
 	return x.buf
 }
 
 func (e TL_premium_boostsList) encode() []byte {
 	var flags int32
-	if e.NextOffset.IsSet {
+	if e.NextOffset != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -29268,8 +29268,8 @@ func (e TL_premium_boostsList) encode() []byte {
 	x.Int(flags)
 	x.Int(e.Count)
 	x.Vector(e.Boosts)
-	if e.NextOffset.IsSet {
-		x.String(e.NextOffset.Value)
+	if e.NextOffset != nil {
+		x.String(*e.NextOffset)
 	}
 	x.Vector(e.Users)
 	return x.buf
@@ -29280,7 +29280,7 @@ func (e TL_myBoost) encode() []byte {
 	if e.Peer != nil {
 		flags |= (1 << 0)
 	}
-	if e.CooldownUntilDate.IsSet {
+	if e.CooldownUntilDate != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -29292,8 +29292,8 @@ func (e TL_myBoost) encode() []byte {
 	}
 	x.Int(e.Date)
 	x.Int(e.Expires)
-	if e.CooldownUntilDate.IsSet {
-		x.Int(e.CooldownUntilDate.Value)
+	if e.CooldownUntilDate != nil {
+		x.Int(*e.CooldownUntilDate)
 	}
 	return x.buf
 }
@@ -29312,10 +29312,10 @@ func (e TL_premium_boostsStatus) encode() []byte {
 	if e.MyBoost {
 		flags |= (1 << 2)
 	}
-	if e.GiftBoosts.IsSet {
+	if e.GiftBoosts != nil {
 		flags |= (1 << 4)
 	}
-	if e.NextLevelBoosts.IsSet {
+	if e.NextLevelBoosts != nil {
 		flags |= (1 << 0)
 	}
 	if e.PremiumAudience != nil {
@@ -29333,11 +29333,11 @@ func (e TL_premium_boostsStatus) encode() []byte {
 	x.Int(e.Level)
 	x.Int(e.CurrentLevelBoosts)
 	x.Int(e.Boosts)
-	if e.GiftBoosts.IsSet {
-		x.Int(e.GiftBoosts.Value)
+	if e.GiftBoosts != nil {
+		x.Int(*e.GiftBoosts)
 	}
-	if e.NextLevelBoosts.IsSet {
-		x.Int(e.NextLevelBoosts.Value)
+	if e.NextLevelBoosts != nil {
+		x.Int(*e.NextLevelBoosts)
 	}
 	if e.PremiumAudience != nil {
 		x.Object(e.PremiumAudience)
@@ -29449,7 +29449,7 @@ func (e TL_auth_signUp) encode() []byte {
 
 func (e TL_auth_signIn) encode() []byte {
 	var flags int32
-	if e.PhoneCode.IsSet {
+	if e.PhoneCode != nil {
 		flags |= (1 << 0)
 	}
 	if e.EmailVerification != nil {
@@ -29460,8 +29460,8 @@ func (e TL_auth_signIn) encode() []byte {
 	x.Int(flags)
 	x.String(e.PhoneNumber)
 	x.String(e.PhoneCodeHash)
-	if e.PhoneCode.IsSet {
-		x.String(e.PhoneCode.Value)
+	if e.PhoneCode != nil {
+		x.String(*e.PhoneCode)
 	}
 	if e.EmailVerification != nil {
 		x.Object(e.EmailVerification)
@@ -29608,10 +29608,10 @@ func (e TL_auth_importWebTokenAuthorization) encode() []byte {
 
 func (e TL_auth_requestFirebaseSms) encode() []byte {
 	var flags int32
-	if e.SafetyNetToken.IsSet {
+	if e.SafetyNetToken != nil {
 		flags |= (1 << 0)
 	}
-	if e.IosPushSecret.IsSet {
+	if e.IosPushSecret != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -29619,11 +29619,11 @@ func (e TL_auth_requestFirebaseSms) encode() []byte {
 	x.Int(flags)
 	x.String(e.PhoneNumber)
 	x.String(e.PhoneCodeHash)
-	if e.SafetyNetToken.IsSet {
-		x.String(e.SafetyNetToken.Value)
+	if e.SafetyNetToken != nil {
+		x.String(*e.SafetyNetToken)
 	}
-	if e.IosPushSecret.IsSet {
-		x.String(e.IosPushSecret.Value)
+	if e.IosPushSecret != nil {
+		x.String(*e.IosPushSecret)
 	}
 	return x.buf
 }
@@ -29684,26 +29684,26 @@ func (e TL_account_resetNotifySettings) encode() []byte {
 
 func (e TL_account_updateProfile) encode() []byte {
 	var flags int32
-	if e.FirstName.IsSet {
+	if e.FirstName != nil {
 		flags |= (1 << 0)
 	}
-	if e.LastName.IsSet {
+	if e.LastName != nil {
 		flags |= (1 << 1)
 	}
-	if e.About.IsSet {
+	if e.About != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_updateProfile)
 	x.Int(flags)
-	if e.FirstName.IsSet {
-		x.String(e.FirstName.Value)
+	if e.FirstName != nil {
+		x.String(*e.FirstName)
 	}
-	if e.LastName.IsSet {
-		x.String(e.LastName.Value)
+	if e.LastName != nil {
+		x.String(*e.LastName)
 	}
-	if e.About.IsSet {
-		x.String(e.About.Value)
+	if e.About != nil {
+		x.String(*e.About)
 	}
 	return x.buf
 }
@@ -29990,14 +29990,14 @@ func (e TL_account_initTakeoutSession) encode() []byte {
 	if e.Files {
 		flags |= (1 << 5)
 	}
-	if e.FileMaxSize.IsSet {
+	if e.FileMaxSize != nil {
 		flags |= (1 << 5)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_initTakeoutSession)
 	x.Int(flags)
-	if e.FileMaxSize.IsSet {
-		x.Long(e.FileMaxSize.Value)
+	if e.FileMaxSize != nil {
+		x.Long(*e.FileMaxSize)
 	}
 	return x.buf
 }
@@ -30171,10 +30171,10 @@ func (e TL_account_createTheme) encode() []byte {
 
 func (e TL_account_updateTheme) encode() []byte {
 	var flags int32
-	if e.Slug.IsSet {
+	if e.Slug != nil {
 		flags |= (1 << 0)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 1)
 	}
 	if e.Document != nil {
@@ -30188,11 +30188,11 @@ func (e TL_account_updateTheme) encode() []byte {
 	x.Int(flags)
 	x.String(e.Format)
 	x.Object(e.Theme)
-	if e.Slug.IsSet {
-		x.String(e.Slug.Value)
+	if e.Slug != nil {
+		x.String(*e.Slug)
 	}
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
 	if e.Document != nil {
 		x.Object(e.Document)
@@ -30219,7 +30219,7 @@ func (e TL_account_installTheme) encode() []byte {
 	if e.Theme != nil {
 		flags |= (1 << 1)
 	}
-	if e.Format.IsSet {
+	if e.Format != nil {
 		flags |= (1 << 2)
 	}
 	if e.BaseTheme != nil {
@@ -30231,8 +30231,8 @@ func (e TL_account_installTheme) encode() []byte {
 	if e.Theme != nil {
 		x.Object(e.Theme)
 	}
-	if e.Format.IsSet {
-		x.String(e.Format.Value)
+	if e.Format != nil {
+		x.String(*e.Format)
 	}
 	if e.BaseTheme != nil {
 		x.Object(e.BaseTheme)
@@ -30334,21 +30334,21 @@ func (e TL_account_changeAuthorizationSettings) encode() []byte {
 	if e.Confirmed {
 		flags |= (1 << 3)
 	}
-	if e.EncryptedRequestsDisabled.IsSet {
+	if e.EncryptedRequestsDisabled != nil {
 		flags |= (1 << 0)
 	}
-	if e.CallRequestsDisabled.IsSet {
+	if e.CallRequestsDisabled != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_changeAuthorizationSettings)
 	x.Int(flags)
 	x.Long(e.Hash)
-	if e.EncryptedRequestsDisabled.IsSet {
-		x.Bool(e.EncryptedRequestsDisabled.Value)
+	if e.EncryptedRequestsDisabled != nil {
+		x.Bool(*e.EncryptedRequestsDisabled)
 	}
-	if e.CallRequestsDisabled.IsSet {
-		x.Bool(e.CallRequestsDisabled.Value)
+	if e.CallRequestsDisabled != nil {
+		x.Bool(*e.CallRequestsDisabled)
 	}
 	return x.buf
 }
@@ -30478,15 +30478,15 @@ func (e TL_account_invalidateSignInCodes) encode() []byte {
 
 func (e TL_account_updateColor) encode() []byte {
 	var flags int32
-	if e.BackgroundEmojiID.IsSet {
+	if e.BackgroundEmojiID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_account_updateColor)
 	x.Int(flags)
 	x.Int(e.Color)
-	if e.BackgroundEmojiID.IsSet {
-		x.Long(e.BackgroundEmojiID.Value)
+	if e.BackgroundEmojiID != nil {
+		x.Long(*e.BackgroundEmojiID)
 	}
 	return x.buf
 }
@@ -30702,15 +30702,15 @@ func (e TL_contacts_getLocated) encode() []byte {
 	if e.Background {
 		flags |= (1 << 1)
 	}
-	if e.SelfExpires.IsSet {
+	if e.SelfExpires != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_contacts_getLocated)
 	x.Int(flags)
 	x.Object(e.GeoPoint)
-	if e.SelfExpires.IsSet {
-		x.Int(e.SelfExpires.Value)
+	if e.SelfExpires != nil {
+		x.Int(*e.SelfExpires)
 	}
 	return x.buf
 }
@@ -30785,14 +30785,14 @@ func (e TL_messages_getDialogs) encode() []byte {
 	if e.ExcludePinned {
 		flags |= (1 << 0)
 	}
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getDialogs)
 	x.Int(flags)
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
 	x.Int(e.OffsetDate)
 	x.Int(e.OffsetID)
@@ -30821,7 +30821,7 @@ func (e TL_messages_search) encode() []byte {
 	if e.FromID != nil {
 		flags |= (1 << 0)
 	}
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -30832,8 +30832,8 @@ func (e TL_messages_search) encode() []byte {
 	if e.FromID != nil {
 		x.Object(e.FromID)
 	}
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.Object(e.Filter)
 	x.Int(e.MinDate)
@@ -30863,10 +30863,10 @@ func (e TL_messages_deleteHistory) encode() []byte {
 	if e.Revoke {
 		flags |= (1 << 1)
 	}
-	if e.MinDate.IsSet {
+	if e.MinDate != nil {
 		flags |= (1 << 2)
 	}
-	if e.MaxDate.IsSet {
+	if e.MaxDate != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -30874,11 +30874,11 @@ func (e TL_messages_deleteHistory) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.Int(e.MaxID)
-	if e.MinDate.IsSet {
-		x.Int(e.MinDate.Value)
+	if e.MinDate != nil {
+		x.Int(*e.MinDate)
 	}
-	if e.MaxDate.IsSet {
-		x.Int(e.MaxDate.Value)
+	if e.MaxDate != nil {
+		x.Int(*e.MaxDate)
 	}
 	return x.buf
 }
@@ -30904,15 +30904,15 @@ func (e TL_messages_receivedMessages) encode() []byte {
 
 func (e TL_messages_setTyping) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_setTyping)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.Object(e.Action)
 	return x.buf
@@ -30950,7 +30950,7 @@ func (e TL_messages_sendMessage) encode() []byte {
 	if e.Entities != nil {
 		flags |= (1 << 3)
 	}
-	if e.ScheduleDate.IsSet {
+	if e.ScheduleDate != nil {
 		flags |= (1 << 10)
 	}
 	if e.SendAs != nil {
@@ -30971,8 +30971,8 @@ func (e TL_messages_sendMessage) encode() []byte {
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
-	if e.ScheduleDate.IsSet {
-		x.Int(e.ScheduleDate.Value)
+	if e.ScheduleDate != nil {
+		x.Int(*e.ScheduleDate)
 	}
 	if e.SendAs != nil {
 		x.Object(e.SendAs)
@@ -31009,7 +31009,7 @@ func (e TL_messages_sendMedia) encode() []byte {
 	if e.Entities != nil {
 		flags |= (1 << 3)
 	}
-	if e.ScheduleDate.IsSet {
+	if e.ScheduleDate != nil {
 		flags |= (1 << 10)
 	}
 	if e.SendAs != nil {
@@ -31031,8 +31031,8 @@ func (e TL_messages_sendMedia) encode() []byte {
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
-	if e.ScheduleDate.IsSet {
-		x.Int(e.ScheduleDate.Value)
+	if e.ScheduleDate != nil {
+		x.Int(*e.ScheduleDate)
 	}
 	if e.SendAs != nil {
 		x.Object(e.SendAs)
@@ -31060,10 +31060,10 @@ func (e TL_messages_forwardMessages) encode() []byte {
 	if e.Noforwards {
 		flags |= (1 << 14)
 	}
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 9)
 	}
-	if e.ScheduleDate.IsSet {
+	if e.ScheduleDate != nil {
 		flags |= (1 << 10)
 	}
 	if e.SendAs != nil {
@@ -31076,11 +31076,11 @@ func (e TL_messages_forwardMessages) encode() []byte {
 	x.VectorInt(e.ID)
 	x.VectorLong(e.RandomID)
 	x.Object(e.ToPeer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
-	if e.ScheduleDate.IsSet {
-		x.Int(e.ScheduleDate.Value)
+	if e.ScheduleDate != nil {
+		x.Int(*e.ScheduleDate)
 	}
 	if e.SendAs != nil {
 		x.Object(e.SendAs)
@@ -31166,7 +31166,7 @@ func (e TL_messages_deleteChatUser) encode() []byte {
 
 func (e TL_messages_createChat) encode() []byte {
 	var flags int32
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -31174,8 +31174,8 @@ func (e TL_messages_createChat) encode() []byte {
 	x.Int(flags)
 	x.Vector(e.Users)
 	x.String(e.Title)
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -31331,27 +31331,27 @@ func (e TL_messages_exportChatInvite) encode() []byte {
 	if e.RequestNeeded {
 		flags |= (1 << 3)
 	}
-	if e.ExpireDate.IsSet {
+	if e.ExpireDate != nil {
 		flags |= (1 << 0)
 	}
-	if e.UsageLimit.IsSet {
+	if e.UsageLimit != nil {
 		flags |= (1 << 1)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_exportChatInvite)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.ExpireDate.IsSet {
-		x.Int(e.ExpireDate.Value)
+	if e.ExpireDate != nil {
+		x.Int(*e.ExpireDate)
 	}
-	if e.UsageLimit.IsSet {
-		x.Int(e.UsageLimit.Value)
+	if e.UsageLimit != nil {
+		x.Int(*e.UsageLimit)
 	}
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
 	return x.buf
 }
@@ -31430,14 +31430,14 @@ func (e TL_messages_migrateChat) encode() []byte {
 
 func (e TL_messages_searchGlobal) encode() []byte {
 	var flags int32
-	if e.FolderID.IsSet {
+	if e.FolderID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_searchGlobal)
 	x.Int(flags)
-	if e.FolderID.IsSet {
-		x.Int(e.FolderID.Value)
+	if e.FolderID != nil {
+		x.Int(*e.FolderID)
 	}
 	x.String(e.Q)
 	x.Object(e.Filter)
@@ -31515,7 +31515,7 @@ func (e TL_messages_setInlineBotResults) encode() []byte {
 	if e.Private {
 		flags |= (1 << 1)
 	}
-	if e.NextOffset.IsSet {
+	if e.NextOffset != nil {
 		flags |= (1 << 2)
 	}
 	if e.SwitchPm != nil {
@@ -31530,8 +31530,8 @@ func (e TL_messages_setInlineBotResults) encode() []byte {
 	x.Long(e.QueryID)
 	x.Vector(e.Results)
 	x.Int(e.CacheTime)
-	if e.NextOffset.IsSet {
-		x.String(e.NextOffset.Value)
+	if e.NextOffset != nil {
+		x.String(*e.NextOffset)
 	}
 	if e.SwitchPm != nil {
 		x.Object(e.SwitchPm)
@@ -31559,7 +31559,7 @@ func (e TL_messages_sendInlineBotResult) encode() []byte {
 	if e.ReplyTo != nil {
 		flags |= (1 << 0)
 	}
-	if e.ScheduleDate.IsSet {
+	if e.ScheduleDate != nil {
 		flags |= (1 << 10)
 	}
 	if e.SendAs != nil {
@@ -31575,8 +31575,8 @@ func (e TL_messages_sendInlineBotResult) encode() []byte {
 	x.Long(e.RandomID)
 	x.Long(e.QueryID)
 	x.String(e.ID)
-	if e.ScheduleDate.IsSet {
-		x.Int(e.ScheduleDate.Value)
+	if e.ScheduleDate != nil {
+		x.Int(*e.ScheduleDate)
 	}
 	if e.SendAs != nil {
 		x.Object(e.SendAs)
@@ -31600,7 +31600,7 @@ func (e TL_messages_editMessage) encode() []byte {
 	if e.InvertMedia {
 		flags |= (1 << 16)
 	}
-	if e.Message.IsSet {
+	if e.Message != nil {
 		flags |= (1 << 11)
 	}
 	if e.Media != nil {
@@ -31612,7 +31612,7 @@ func (e TL_messages_editMessage) encode() []byte {
 	if e.Entities != nil {
 		flags |= (1 << 3)
 	}
-	if e.ScheduleDate.IsSet {
+	if e.ScheduleDate != nil {
 		flags |= (1 << 15)
 	}
 	x := NewEncodeBuf(512)
@@ -31620,8 +31620,8 @@ func (e TL_messages_editMessage) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.Int(e.ID)
-	if e.Message.IsSet {
-		x.String(e.Message.Value)
+	if e.Message != nil {
+		x.String(*e.Message)
 	}
 	if e.Media != nil {
 		x.Object(e.Media)
@@ -31632,8 +31632,8 @@ func (e TL_messages_editMessage) encode() []byte {
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
-	if e.ScheduleDate.IsSet {
-		x.Int(e.ScheduleDate.Value)
+	if e.ScheduleDate != nil {
+		x.Int(*e.ScheduleDate)
 	}
 	return x.buf
 }
@@ -31646,7 +31646,7 @@ func (e TL_messages_editInlineBotMessage) encode() []byte {
 	if e.InvertMedia {
 		flags |= (1 << 16)
 	}
-	if e.Message.IsSet {
+	if e.Message != nil {
 		flags |= (1 << 11)
 	}
 	if e.Media != nil {
@@ -31662,8 +31662,8 @@ func (e TL_messages_editInlineBotMessage) encode() []byte {
 	x.UInt(CRC_messages_editInlineBotMessage)
 	x.Int(flags)
 	x.Object(e.ID)
-	if e.Message.IsSet {
-		x.String(e.Message.Value)
+	if e.Message != nil {
+		x.String(*e.Message)
 	}
 	if e.Media != nil {
 		x.Object(e.Media)
@@ -31707,21 +31707,21 @@ func (e TL_messages_setBotCallbackAnswer) encode() []byte {
 	if e.Alert {
 		flags |= (1 << 1)
 	}
-	if e.Message.IsSet {
+	if e.Message != nil {
 		flags |= (1 << 0)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_setBotCallbackAnswer)
 	x.Int(flags)
 	x.Long(e.QueryID)
-	if e.Message.IsSet {
-		x.String(e.Message.Value)
+	if e.Message != nil {
+		x.String(*e.Message)
 	}
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	x.Int(e.CacheTime)
 	return x.buf
@@ -31957,7 +31957,7 @@ func (e TL_messages_getPinnedDialogs) encode() []byte {
 
 func (e TL_messages_setBotShippingResults) encode() []byte {
 	var flags int32
-	if e.Error.IsSet {
+	if e.Error != nil {
 		flags |= (1 << 0)
 	}
 	if e.ShippingOptions != nil {
@@ -31967,8 +31967,8 @@ func (e TL_messages_setBotShippingResults) encode() []byte {
 	x.UInt(CRC_messages_setBotShippingResults)
 	x.Int(flags)
 	x.Long(e.QueryID)
-	if e.Error.IsSet {
-		x.String(e.Error.Value)
+	if e.Error != nil {
+		x.String(*e.Error)
 	}
 	if e.ShippingOptions != nil {
 		x.Vector(e.ShippingOptions)
@@ -31981,15 +31981,15 @@ func (e TL_messages_setBotPrecheckoutResults) encode() []byte {
 	if e.Success {
 		flags |= (1 << 1)
 	}
-	if e.Error.IsSet {
+	if e.Error != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_setBotPrecheckoutResults)
 	x.Int(flags)
 	x.Long(e.QueryID)
-	if e.Error.IsSet {
-		x.String(e.Error.Value)
+	if e.Error != nil {
+		x.String(*e.Error)
 	}
 	return x.buf
 }
@@ -32028,15 +32028,15 @@ func (e TL_messages_faveSticker) encode() []byte {
 
 func (e TL_messages_getUnreadMentions) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getUnreadMentions)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.Int(e.OffsetID)
 	x.Int(e.AddOffset)
@@ -32048,15 +32048,15 @@ func (e TL_messages_getUnreadMentions) encode() []byte {
 
 func (e TL_messages_readMentions) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_readMentions)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	return x.buf
 }
@@ -32093,7 +32093,7 @@ func (e TL_messages_sendMultiMedia) encode() []byte {
 	if e.ReplyTo != nil {
 		flags |= (1 << 0)
 	}
-	if e.ScheduleDate.IsSet {
+	if e.ScheduleDate != nil {
 		flags |= (1 << 10)
 	}
 	if e.SendAs != nil {
@@ -32107,8 +32107,8 @@ func (e TL_messages_sendMultiMedia) encode() []byte {
 		x.Object(e.ReplyTo)
 	}
 	x.Vector(e.MultiMedia)
-	if e.ScheduleDate.IsSet {
-		x.Int(e.ScheduleDate.Value)
+	if e.ScheduleDate != nil {
+		x.Int(*e.ScheduleDate)
 	}
 	if e.SendAs != nil {
 		x.Object(e.SendAs)
@@ -32257,15 +32257,15 @@ func (e TL_messages_getEmojiURL) encode() []byte {
 
 func (e TL_messages_getSearchCounters) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getSearchCounters)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.Vector(e.Filters)
 	return x.buf
@@ -32276,13 +32276,13 @@ func (e TL_messages_requestUrlAuth) encode() []byte {
 	if e.Peer != nil {
 		flags |= (1 << 1)
 	}
-	if e.MsgID.IsSet {
+	if e.MsgID != nil {
 		flags |= (1 << 1)
 	}
-	if e.ButtonID.IsSet {
+	if e.ButtonID != nil {
 		flags |= (1 << 1)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -32291,14 +32291,14 @@ func (e TL_messages_requestUrlAuth) encode() []byte {
 	if e.Peer != nil {
 		x.Object(e.Peer)
 	}
-	if e.MsgID.IsSet {
-		x.Int(e.MsgID.Value)
+	if e.MsgID != nil {
+		x.Int(*e.MsgID)
 	}
-	if e.ButtonID.IsSet {
-		x.Int(e.ButtonID.Value)
+	if e.ButtonID != nil {
+		x.Int(*e.ButtonID)
 	}
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	return x.buf
 }
@@ -32311,13 +32311,13 @@ func (e TL_messages_acceptUrlAuth) encode() []byte {
 	if e.Peer != nil {
 		flags |= (1 << 1)
 	}
-	if e.MsgID.IsSet {
+	if e.MsgID != nil {
 		flags |= (1 << 1)
 	}
-	if e.ButtonID.IsSet {
+	if e.ButtonID != nil {
 		flags |= (1 << 1)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -32326,14 +32326,14 @@ func (e TL_messages_acceptUrlAuth) encode() []byte {
 	if e.Peer != nil {
 		x.Object(e.Peer)
 	}
-	if e.MsgID.IsSet {
-		x.Int(e.MsgID.Value)
+	if e.MsgID != nil {
+		x.Int(*e.MsgID)
 	}
-	if e.ButtonID.IsSet {
-		x.Int(e.ButtonID.Value)
+	if e.ButtonID != nil {
+		x.Int(*e.ButtonID)
 	}
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
 	return x.buf
 }
@@ -32382,7 +32382,7 @@ func (e TL_messages_getPollVotes) encode() []byte {
 	if e.Option != nil {
 		flags |= (1 << 0)
 	}
-	if e.Offset.IsSet {
+	if e.Offset != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -32393,8 +32393,8 @@ func (e TL_messages_getPollVotes) encode() []byte {
 	if e.Option != nil {
 		x.StringBytes(e.Option)
 	}
-	if e.Offset.IsSet {
-		x.String(e.Offset.Value)
+	if e.Offset != nil {
+		x.String(*e.Offset)
 	}
 	x.Int(e.Limit)
 	return x.buf
@@ -32495,15 +32495,15 @@ func (e TL_messages_readDiscussion) encode() []byte {
 
 func (e TL_messages_unpinAllMessages) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_unpinAllMessages)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	return x.buf
 }
@@ -32565,10 +32565,10 @@ func (e TL_messages_getExportedChatInvites) encode() []byte {
 	if e.Revoked {
 		flags |= (1 << 3)
 	}
-	if e.OffsetDate.IsSet {
+	if e.OffsetDate != nil {
 		flags |= (1 << 2)
 	}
-	if e.OffsetLink.IsSet {
+	if e.OffsetLink != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -32576,11 +32576,11 @@ func (e TL_messages_getExportedChatInvites) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.Object(e.AdminID)
-	if e.OffsetDate.IsSet {
-		x.Int(e.OffsetDate.Value)
+	if e.OffsetDate != nil {
+		x.Int(*e.OffsetDate)
 	}
-	if e.OffsetLink.IsSet {
-		x.String(e.OffsetLink.Value)
+	if e.OffsetLink != nil {
+		x.String(*e.OffsetLink)
 	}
 	x.Int(e.Limit)
 	return x.buf
@@ -32599,16 +32599,16 @@ func (e TL_messages_editExportedChatInvite) encode() []byte {
 	if e.Revoked {
 		flags |= (1 << 2)
 	}
-	if e.ExpireDate.IsSet {
+	if e.ExpireDate != nil {
 		flags |= (1 << 0)
 	}
-	if e.UsageLimit.IsSet {
+	if e.UsageLimit != nil {
 		flags |= (1 << 1)
 	}
-	if e.RequestNeeded.IsSet {
+	if e.RequestNeeded != nil {
 		flags |= (1 << 3)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
@@ -32616,17 +32616,17 @@ func (e TL_messages_editExportedChatInvite) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.String(e.Link)
-	if e.ExpireDate.IsSet {
-		x.Int(e.ExpireDate.Value)
+	if e.ExpireDate != nil {
+		x.Int(*e.ExpireDate)
 	}
-	if e.UsageLimit.IsSet {
-		x.Int(e.UsageLimit.Value)
+	if e.UsageLimit != nil {
+		x.Int(*e.UsageLimit)
 	}
-	if e.RequestNeeded.IsSet {
-		x.Bool(e.RequestNeeded.Value)
+	if e.RequestNeeded != nil {
+		x.Bool(*e.RequestNeeded)
 	}
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
 	return x.buf
 }
@@ -32659,21 +32659,21 @@ func (e TL_messages_getChatInviteImporters) encode() []byte {
 	if e.Requested {
 		flags |= (1 << 0)
 	}
-	if e.Link.IsSet {
+	if e.Link != nil {
 		flags |= (1 << 1)
 	}
-	if e.Q.IsSet {
+	if e.Q != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getChatInviteImporters)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.Link.IsSet {
-		x.String(e.Link.Value)
+	if e.Link != nil {
+		x.String(*e.Link)
 	}
-	if e.Q.IsSet {
-		x.String(e.Q.Value)
+	if e.Q != nil {
+		x.String(*e.Q)
 	}
 	x.Int(e.OffsetDate)
 	x.Object(e.OffsetUser)
@@ -32750,15 +32750,15 @@ func (e TL_messages_hideAllChatJoinRequests) encode() []byte {
 	if e.Approved {
 		flags |= (1 << 0)
 	}
-	if e.Link.IsSet {
+	if e.Link != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_hideAllChatJoinRequests)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.Link.IsSet {
-		x.String(e.Link.Value)
+	if e.Link != nil {
+		x.String(*e.Link)
 	}
 	return x.buf
 }
@@ -32814,7 +32814,7 @@ func (e TL_messages_getMessageReactionsList) encode() []byte {
 	if e.Reaction != nil {
 		flags |= (1 << 0)
 	}
-	if e.Offset.IsSet {
+	if e.Offset != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -32825,8 +32825,8 @@ func (e TL_messages_getMessageReactionsList) encode() []byte {
 	if e.Reaction != nil {
 		x.Object(e.Reaction)
 	}
-	if e.Offset.IsSet {
-		x.String(e.Offset.Value)
+	if e.Offset != nil {
+		x.String(*e.Offset)
 	}
 	x.Int(e.Limit)
 	return x.buf
@@ -32883,15 +32883,15 @@ func (e TL_messages_translateText) encode() []byte {
 
 func (e TL_messages_getUnreadReactions) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_getUnreadReactions)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	x.Int(e.OffsetID)
 	x.Int(e.AddOffset)
@@ -32903,15 +32903,15 @@ func (e TL_messages_getUnreadReactions) encode() []byte {
 
 func (e TL_messages_readReactions) encode() []byte {
 	var flags int32
-	if e.TopMsgID.IsSet {
+	if e.TopMsgID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messages_readReactions)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.TopMsgID.IsSet {
-		x.Int(e.TopMsgID.Value)
+	if e.TopMsgID != nil {
+		x.Int(*e.TopMsgID)
 	}
 	return x.buf
 }
@@ -32960,10 +32960,10 @@ func (e TL_messages_requestWebView) encode() []byte {
 	if e.Silent {
 		flags |= (1 << 5)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 1)
 	}
-	if e.StartParam.IsSet {
+	if e.StartParam != nil {
 		flags |= (1 << 3)
 	}
 	if e.ThemeParams != nil {
@@ -32980,11 +32980,11 @@ func (e TL_messages_requestWebView) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.Object(e.Bot)
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
-	if e.StartParam.IsSet {
-		x.String(e.StartParam.Value)
+	if e.StartParam != nil {
+		x.String(*e.StartParam)
 	}
 	if e.ThemeParams != nil {
 		x.Object(e.ThemeParams)
@@ -33033,10 +33033,10 @@ func (e TL_messages_requestSimpleWebView) encode() []byte {
 	if e.FromSideMenu {
 		flags |= (1 << 2)
 	}
-	if e.Url.IsSet {
+	if e.Url != nil {
 		flags |= (1 << 3)
 	}
-	if e.StartParam.IsSet {
+	if e.StartParam != nil {
 		flags |= (1 << 4)
 	}
 	if e.ThemeParams != nil {
@@ -33046,11 +33046,11 @@ func (e TL_messages_requestSimpleWebView) encode() []byte {
 	x.UInt(CRC_messages_requestSimpleWebView)
 	x.Int(flags)
 	x.Object(e.Bot)
-	if e.Url.IsSet {
-		x.String(e.Url.Value)
+	if e.Url != nil {
+		x.String(*e.Url)
 	}
-	if e.StartParam.IsSet {
-		x.String(e.StartParam.Value)
+	if e.StartParam != nil {
+		x.String(*e.StartParam)
 	}
 	if e.ThemeParams != nil {
 		x.Object(e.ThemeParams)
@@ -33232,7 +33232,7 @@ func (e TL_messages_requestAppWebView) encode() []byte {
 	if e.WriteAllowed {
 		flags |= (1 << 0)
 	}
-	if e.StartParam.IsSet {
+	if e.StartParam != nil {
 		flags |= (1 << 1)
 	}
 	if e.ThemeParams != nil {
@@ -33243,8 +33243,8 @@ func (e TL_messages_requestAppWebView) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.Object(e.App)
-	if e.StartParam.IsSet {
-		x.String(e.StartParam.Value)
+	if e.StartParam != nil {
+		x.String(*e.StartParam)
 	}
 	if e.ThemeParams != nil {
 		x.Object(e.ThemeParams)
@@ -33261,7 +33261,7 @@ func (e TL_messages_setChatWallPaper) encode() []byte {
 	if e.Settings != nil {
 		flags |= (1 << 2)
 	}
-	if e.ID.IsSet {
+	if e.ID != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -33274,8 +33274,8 @@ func (e TL_messages_setChatWallPaper) encode() []byte {
 	if e.Settings != nil {
 		x.Object(e.Settings)
 	}
-	if e.ID.IsSet {
-		x.Int(e.ID.Value)
+	if e.ID != nil {
+		x.Int(*e.ID)
 	}
 	return x.buf
 }
@@ -33288,29 +33288,29 @@ func (e TL_updates_getState) encode() []byte {
 
 func (e TL_updates_getDifference) encode() []byte {
 	var flags int32
-	if e.PtsLimit.IsSet {
+	if e.PtsLimit != nil {
 		flags |= (1 << 1)
 	}
-	if e.PtsTotalLimit.IsSet {
+	if e.PtsTotalLimit != nil {
 		flags |= (1 << 0)
 	}
-	if e.QtsLimit.IsSet {
+	if e.QtsLimit != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updates_getDifference)
 	x.Int(flags)
 	x.Int(e.Pts)
-	if e.PtsLimit.IsSet {
-		x.Int(e.PtsLimit.Value)
+	if e.PtsLimit != nil {
+		x.Int(*e.PtsLimit)
 	}
-	if e.PtsTotalLimit.IsSet {
-		x.Int(e.PtsTotalLimit.Value)
+	if e.PtsTotalLimit != nil {
+		x.Int(*e.PtsTotalLimit)
 	}
 	x.Int(e.Date)
 	x.Int(e.Qts)
-	if e.QtsLimit.IsSet {
-		x.Int(e.QtsLimit.Value)
+	if e.QtsLimit != nil {
+		x.Int(*e.QtsLimit)
 	}
 	return x.buf
 }
@@ -33362,7 +33362,7 @@ func (e TL_photos_uploadProfilePhoto) encode() []byte {
 	if e.Video != nil {
 		flags |= (1 << 1)
 	}
-	if e.VideoStartTs.IsSet {
+	if e.VideoStartTs != nil {
 		flags |= (1 << 2)
 	}
 	if e.VideoEmojiMarkup != nil {
@@ -33380,8 +33380,8 @@ func (e TL_photos_uploadProfilePhoto) encode() []byte {
 	if e.Video != nil {
 		x.Object(e.Video)
 	}
-	if e.VideoStartTs.IsSet {
-		x.Double(e.VideoStartTs.Value)
+	if e.VideoStartTs != nil {
+		x.Double(*e.VideoStartTs)
 	}
 	if e.VideoEmojiMarkup != nil {
 		x.Object(e.VideoEmojiMarkup)
@@ -33420,7 +33420,7 @@ func (e TL_photos_uploadContactProfilePhoto) encode() []byte {
 	if e.Video != nil {
 		flags |= (1 << 1)
 	}
-	if e.VideoStartTs.IsSet {
+	if e.VideoStartTs != nil {
 		flags |= (1 << 2)
 	}
 	if e.VideoEmojiMarkup != nil {
@@ -33436,8 +33436,8 @@ func (e TL_photos_uploadContactProfilePhoto) encode() []byte {
 	if e.Video != nil {
 		x.Object(e.Video)
 	}
-	if e.VideoStartTs.IsSet {
-		x.Double(e.VideoStartTs.Value)
+	if e.VideoStartTs != nil {
+		x.Double(*e.VideoStartTs)
 	}
 	if e.VideoEmojiMarkup != nil {
 		x.Object(e.VideoEmojiMarkup)
@@ -33763,10 +33763,10 @@ func (e TL_channels_createChannel) encode() []byte {
 	if e.GeoPoint != nil {
 		flags |= (1 << 2)
 	}
-	if e.Address.IsSet {
+	if e.Address != nil {
 		flags |= (1 << 2)
 	}
-	if e.TtlPeriod.IsSet {
+	if e.TtlPeriod != nil {
 		flags |= (1 << 4)
 	}
 	x := NewEncodeBuf(512)
@@ -33777,11 +33777,11 @@ func (e TL_channels_createChannel) encode() []byte {
 	if e.GeoPoint != nil {
 		x.Object(e.GeoPoint)
 	}
-	if e.Address.IsSet {
-		x.String(e.Address.Value)
+	if e.Address != nil {
+		x.String(*e.Address)
 	}
-	if e.TtlPeriod.IsSet {
-		x.Int(e.TtlPeriod.Value)
+	if e.TtlPeriod != nil {
+		x.Int(*e.TtlPeriod)
 	}
 	return x.buf
 }
@@ -34106,10 +34106,10 @@ func (e TL_channels_toggleForum) encode() []byte {
 
 func (e TL_channels_createForumTopic) encode() []byte {
 	var flags int32
-	if e.IconColor.IsSet {
+	if e.IconColor != nil {
 		flags |= (1 << 0)
 	}
-	if e.IconEmojiID.IsSet {
+	if e.IconEmojiID != nil {
 		flags |= (1 << 3)
 	}
 	if e.SendAs != nil {
@@ -34120,11 +34120,11 @@ func (e TL_channels_createForumTopic) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Channel)
 	x.String(e.Title)
-	if e.IconColor.IsSet {
-		x.Int(e.IconColor.Value)
+	if e.IconColor != nil {
+		x.Int(*e.IconColor)
 	}
-	if e.IconEmojiID.IsSet {
-		x.Long(e.IconEmojiID.Value)
+	if e.IconEmojiID != nil {
+		x.Long(*e.IconEmojiID)
 	}
 	x.Long(e.RandomID)
 	if e.SendAs != nil {
@@ -34135,15 +34135,15 @@ func (e TL_channels_createForumTopic) encode() []byte {
 
 func (e TL_channels_getForumTopics) encode() []byte {
 	var flags int32
-	if e.Q.IsSet {
+	if e.Q != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_getForumTopics)
 	x.Int(flags)
 	x.Object(e.Channel)
-	if e.Q.IsSet {
-		x.String(e.Q.Value)
+	if e.Q != nil {
+		x.String(*e.Q)
 	}
 	x.Int(e.OffsetDate)
 	x.Int(e.OffsetID)
@@ -34162,16 +34162,16 @@ func (e TL_channels_getForumTopicsByID) encode() []byte {
 
 func (e TL_channels_editForumTopic) encode() []byte {
 	var flags int32
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 0)
 	}
-	if e.IconEmojiID.IsSet {
+	if e.IconEmojiID != nil {
 		flags |= (1 << 1)
 	}
-	if e.Closed.IsSet {
+	if e.Closed != nil {
 		flags |= (1 << 2)
 	}
-	if e.Hidden.IsSet {
+	if e.Hidden != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -34179,17 +34179,17 @@ func (e TL_channels_editForumTopic) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Channel)
 	x.Int(e.TopicID)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.IconEmojiID.IsSet {
-		x.Long(e.IconEmojiID.Value)
+	if e.IconEmojiID != nil {
+		x.Long(*e.IconEmojiID)
 	}
-	if e.Closed.IsSet {
-		x.Bool(e.Closed.Value)
+	if e.Closed != nil {
+		x.Bool(*e.Closed)
 	}
-	if e.Hidden.IsSet {
-		x.Bool(e.Hidden.Value)
+	if e.Hidden != nil {
+		x.Bool(*e.Hidden)
 	}
 	return x.buf
 }
@@ -34258,7 +34258,7 @@ func (e TL_channels_clickSponsoredMessage) encode() []byte {
 
 func (e TL_channels_updateColor) encode() []byte {
 	var flags int32
-	if e.BackgroundEmojiID.IsSet {
+	if e.BackgroundEmojiID != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -34266,8 +34266,8 @@ func (e TL_channels_updateColor) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Channel)
 	x.Int(e.Color)
-	if e.BackgroundEmojiID.IsSet {
-		x.Long(e.BackgroundEmojiID.Value)
+	if e.BackgroundEmojiID != nil {
+		x.Long(*e.BackgroundEmojiID)
 	}
 	return x.buf
 }
@@ -34347,13 +34347,13 @@ func (e TL_bots_setBotInfo) encode() []byte {
 	if e.Bot != nil {
 		flags |= (1 << 2)
 	}
-	if e.Name.IsSet {
+	if e.Name != nil {
 		flags |= (1 << 3)
 	}
-	if e.About.IsSet {
+	if e.About != nil {
 		flags |= (1 << 0)
 	}
-	if e.Description.IsSet {
+	if e.Description != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -34363,14 +34363,14 @@ func (e TL_bots_setBotInfo) encode() []byte {
 		x.Object(e.Bot)
 	}
 	x.String(e.LangCode)
-	if e.Name.IsSet {
-		x.String(e.Name.Value)
+	if e.Name != nil {
+		x.String(*e.Name)
 	}
-	if e.About.IsSet {
-		x.String(e.About.Value)
+	if e.About != nil {
+		x.String(*e.About)
 	}
-	if e.Description.IsSet {
-		x.String(e.Description.Value)
+	if e.Description != nil {
+		x.String(*e.Description)
 	}
 	return x.buf
 }
@@ -34468,13 +34468,13 @@ func (e TL_payments_validateRequestedInfo) encode() []byte {
 
 func (e TL_payments_sendPaymentForm) encode() []byte {
 	var flags int32
-	if e.RequestedInfoID.IsSet {
+	if e.RequestedInfoID != nil {
 		flags |= (1 << 0)
 	}
-	if e.ShippingOptionID.IsSet {
+	if e.ShippingOptionID != nil {
 		flags |= (1 << 1)
 	}
-	if e.TipAmount.IsSet {
+	if e.TipAmount != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
@@ -34482,15 +34482,15 @@ func (e TL_payments_sendPaymentForm) encode() []byte {
 	x.Int(flags)
 	x.Long(e.FormID)
 	x.Object(e.Invoice)
-	if e.RequestedInfoID.IsSet {
-		x.String(e.RequestedInfoID.Value)
+	if e.RequestedInfoID != nil {
+		x.String(*e.RequestedInfoID)
 	}
-	if e.ShippingOptionID.IsSet {
-		x.String(e.ShippingOptionID.Value)
+	if e.ShippingOptionID != nil {
+		x.String(*e.ShippingOptionID)
 	}
 	x.Object(e.Credentials)
-	if e.TipAmount.IsSet {
-		x.Long(e.TipAmount.Value)
+	if e.TipAmount != nil {
+		x.Long(*e.TipAmount)
 	}
 	return x.buf
 }
@@ -34617,7 +34617,7 @@ func (e TL_stickers_createStickerSet) encode() []byte {
 	if e.Thumb != nil {
 		flags |= (1 << 2)
 	}
-	if e.Software.IsSet {
+	if e.Software != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -34630,8 +34630,8 @@ func (e TL_stickers_createStickerSet) encode() []byte {
 		x.Object(e.Thumb)
 	}
 	x.Vector(e.Stickers)
-	if e.Software.IsSet {
-		x.String(e.Software.Value)
+	if e.Software != nil {
+		x.String(*e.Software)
 	}
 	return x.buf
 }
@@ -34664,7 +34664,7 @@ func (e TL_stickers_setStickerSetThumb) encode() []byte {
 	if e.Thumb != nil {
 		flags |= (1 << 0)
 	}
-	if e.ThumbDocumentID.IsSet {
+	if e.ThumbDocumentID != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -34674,8 +34674,8 @@ func (e TL_stickers_setStickerSetThumb) encode() []byte {
 	if e.Thumb != nil {
 		x.Object(e.Thumb)
 	}
-	if e.ThumbDocumentID.IsSet {
-		x.Long(e.ThumbDocumentID.Value)
+	if e.ThumbDocumentID != nil {
+		x.Long(*e.ThumbDocumentID)
 	}
 	return x.buf
 }
@@ -34696,27 +34696,27 @@ func (e TL_stickers_suggestShortName) encode() []byte {
 
 func (e TL_stickers_changeSticker) encode() []byte {
 	var flags int32
-	if e.Emoji.IsSet {
+	if e.Emoji != nil {
 		flags |= (1 << 0)
 	}
 	if e.MaskCoords != nil {
 		flags |= (1 << 1)
 	}
-	if e.Keywords.IsSet {
+	if e.Keywords != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stickers_changeSticker)
 	x.Int(flags)
 	x.Object(e.Sticker)
-	if e.Emoji.IsSet {
-		x.String(e.Emoji.Value)
+	if e.Emoji != nil {
+		x.String(*e.Emoji)
 	}
 	if e.MaskCoords != nil {
 		x.Object(e.MaskCoords)
 	}
-	if e.Keywords.IsSet {
-		x.String(e.Keywords.Value)
+	if e.Keywords != nil {
+		x.String(*e.Keywords)
 	}
 	return x.buf
 }
@@ -34833,10 +34833,10 @@ func (e TL_phone_createGroupCall) encode() []byte {
 	if e.RtmpStream {
 		flags |= (1 << 2)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 0)
 	}
-	if e.ScheduleDate.IsSet {
+	if e.ScheduleDate != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -34844,11 +34844,11 @@ func (e TL_phone_createGroupCall) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Peer)
 	x.Int(e.RandomID)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.ScheduleDate.IsSet {
-		x.Int(e.ScheduleDate.Value)
+	if e.ScheduleDate != nil {
+		x.Int(*e.ScheduleDate)
 	}
 	return x.buf
 }
@@ -34861,7 +34861,7 @@ func (e TL_phone_joinGroupCall) encode() []byte {
 	if e.VideoStopped {
 		flags |= (1 << 2)
 	}
-	if e.InviteHash.IsSet {
+	if e.InviteHash != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
@@ -34869,8 +34869,8 @@ func (e TL_phone_joinGroupCall) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Call)
 	x.Object(e.JoinAs)
-	if e.InviteHash.IsSet {
-		x.String(e.InviteHash.Value)
+	if e.InviteHash != nil {
+		x.String(*e.InviteHash)
 	}
 	x.Object(e.Params)
 	return x.buf
@@ -34904,15 +34904,15 @@ func (e TL_phone_toggleGroupCallSettings) encode() []byte {
 	if e.ResetInviteHash {
 		flags |= (1 << 1)
 	}
-	if e.JoinMuted.IsSet {
+	if e.JoinMuted != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_phone_toggleGroupCallSettings)
 	x.Int(flags)
 	x.Object(e.Call)
-	if e.JoinMuted.IsSet {
-		x.Bool(e.JoinMuted.Value)
+	if e.JoinMuted != nil {
+		x.Bool(*e.JoinMuted)
 	}
 	return x.buf
 }
@@ -34952,43 +34952,43 @@ func (e TL_phone_toggleGroupCallRecord) encode() []byte {
 	if e.Video {
 		flags |= (1 << 2)
 	}
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 1)
 	}
-	if e.VideoPortrait.IsSet {
+	if e.VideoPortrait != nil {
 		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_phone_toggleGroupCallRecord)
 	x.Int(flags)
 	x.Object(e.Call)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
-	if e.VideoPortrait.IsSet {
-		x.Bool(e.VideoPortrait.Value)
+	if e.VideoPortrait != nil {
+		x.Bool(*e.VideoPortrait)
 	}
 	return x.buf
 }
 
 func (e TL_phone_editGroupCallParticipant) encode() []byte {
 	var flags int32
-	if e.Muted.IsSet {
+	if e.Muted != nil {
 		flags |= (1 << 0)
 	}
-	if e.Volume.IsSet {
+	if e.Volume != nil {
 		flags |= (1 << 1)
 	}
-	if e.RaiseHand.IsSet {
+	if e.RaiseHand != nil {
 		flags |= (1 << 2)
 	}
-	if e.VideoStopped.IsSet {
+	if e.VideoStopped != nil {
 		flags |= (1 << 3)
 	}
-	if e.VideoPaused.IsSet {
+	if e.VideoPaused != nil {
 		flags |= (1 << 4)
 	}
-	if e.PresentationPaused.IsSet {
+	if e.PresentationPaused != nil {
 		flags |= (1 << 5)
 	}
 	x := NewEncodeBuf(512)
@@ -34996,23 +34996,23 @@ func (e TL_phone_editGroupCallParticipant) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Call)
 	x.Object(e.Participant)
-	if e.Muted.IsSet {
-		x.Bool(e.Muted.Value)
+	if e.Muted != nil {
+		x.Bool(*e.Muted)
 	}
-	if e.Volume.IsSet {
-		x.Int(e.Volume.Value)
+	if e.Volume != nil {
+		x.Int(*e.Volume)
 	}
-	if e.RaiseHand.IsSet {
-		x.Bool(e.RaiseHand.Value)
+	if e.RaiseHand != nil {
+		x.Bool(*e.RaiseHand)
 	}
-	if e.VideoStopped.IsSet {
-		x.Bool(e.VideoStopped.Value)
+	if e.VideoStopped != nil {
+		x.Bool(*e.VideoStopped)
 	}
-	if e.VideoPaused.IsSet {
-		x.Bool(e.VideoPaused.Value)
+	if e.VideoPaused != nil {
+		x.Bool(*e.VideoPaused)
 	}
-	if e.PresentationPaused.IsSet {
-		x.Bool(e.PresentationPaused.Value)
+	if e.PresentationPaused != nil {
+		x.Bool(*e.PresentationPaused)
 	}
 	return x.buf
 }
@@ -35167,15 +35167,15 @@ func (e TL_stats_getBroadcastStats) encode() []byte {
 
 func (e TL_stats_loadAsyncGraph) encode() []byte {
 	var flags int32
-	if e.X.IsSet {
+	if e.X != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stats_loadAsyncGraph)
 	x.Int(flags)
 	x.String(e.Token)
-	if e.X.IsSet {
-		x.Long(e.X.Value)
+	if e.X != nil {
+		x.Long(*e.X)
 	}
 	return x.buf
 }
@@ -35236,7 +35236,7 @@ func (e TL_chatlists_deleteExportedInvite) encode() []byte {
 
 func (e TL_chatlists_editExportedInvite) encode() []byte {
 	var flags int32
-	if e.Title.IsSet {
+	if e.Title != nil {
 		flags |= (1 << 1)
 	}
 	if e.Peers != nil {
@@ -35247,8 +35247,8 @@ func (e TL_chatlists_editExportedInvite) encode() []byte {
 	x.Int(flags)
 	x.Object(e.Chatlist)
 	x.String(e.Slug)
-	if e.Title.IsSet {
-		x.String(e.Title.Value)
+	if e.Title != nil {
+		x.String(*e.Title)
 	}
 	if e.Peers != nil {
 		x.Vector(e.Peers)
@@ -35333,13 +35333,13 @@ func (e TL_stories_sendStory) encode() []byte {
 	if e.MediaAreas != nil {
 		flags |= (1 << 5)
 	}
-	if e.Caption.IsSet {
+	if e.Caption != nil {
 		flags |= (1 << 0)
 	}
 	if e.Entities != nil {
 		flags |= (1 << 1)
 	}
-	if e.Period.IsSet {
+	if e.Period != nil {
 		flags |= (1 << 3)
 	}
 	x := NewEncodeBuf(512)
@@ -35350,16 +35350,16 @@ func (e TL_stories_sendStory) encode() []byte {
 	if e.MediaAreas != nil {
 		x.Vector(e.MediaAreas)
 	}
-	if e.Caption.IsSet {
-		x.String(e.Caption.Value)
+	if e.Caption != nil {
+		x.String(*e.Caption)
 	}
 	if e.Entities != nil {
 		x.Vector(e.Entities)
 	}
 	x.Vector(e.PrivacyRules)
 	x.Long(e.RandomID)
-	if e.Period.IsSet {
-		x.Int(e.Period.Value)
+	if e.Period != nil {
+		x.Int(*e.Period)
 	}
 	return x.buf
 }
@@ -35372,7 +35372,7 @@ func (e TL_stories_editStory) encode() []byte {
 	if e.MediaAreas != nil {
 		flags |= (1 << 3)
 	}
-	if e.Caption.IsSet {
+	if e.Caption != nil {
 		flags |= (1 << 1)
 	}
 	if e.Entities != nil {
@@ -35392,8 +35392,8 @@ func (e TL_stories_editStory) encode() []byte {
 	if e.MediaAreas != nil {
 		x.Vector(e.MediaAreas)
 	}
-	if e.Caption.IsSet {
-		x.String(e.Caption.Value)
+	if e.Caption != nil {
+		x.String(*e.Caption)
 	}
 	if e.Entities != nil {
 		x.Vector(e.Entities)
@@ -35429,14 +35429,14 @@ func (e TL_stories_getAllStories) encode() []byte {
 	if e.Hidden {
 		flags |= (1 << 2)
 	}
-	if e.State.IsSet {
+	if e.State != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stories_getAllStories)
 	x.Int(flags)
-	if e.State.IsSet {
-		x.String(e.State.Value)
+	if e.State != nil {
+		x.String(*e.State)
 	}
 	return x.buf
 }
@@ -35498,15 +35498,15 @@ func (e TL_stories_getStoryViewsList) encode() []byte {
 	if e.ReactionsFirst {
 		flags |= (1 << 2)
 	}
-	if e.Q.IsSet {
+	if e.Q != nil {
 		flags |= (1 << 1)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stories_getStoryViewsList)
 	x.Int(flags)
 	x.Object(e.Peer)
-	if e.Q.IsSet {
-		x.String(e.Q.Value)
+	if e.Q != nil {
+		x.String(*e.Q)
 	}
 	x.Int(e.ID)
 	x.String(e.Offset)
@@ -38309,7 +38309,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Stickers = m.Vector()
 		}
 		if flags&(1<<1) != 0 {
-			tl.TtlSeconds = Some(m.Int())
+			tl.TtlSeconds = Ref(m.Int())
 		}
 		r = tl
 	case CRC_inputMediaPhoto:
@@ -38318,7 +38318,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Spoiler = flags&(1<<1) != 0
 		tl.ID = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TtlSeconds = Some(m.Int())
+			tl.TtlSeconds = Ref(m.Int())
 		}
 		r = tl
 	case CRC_inputMediaGeoPoint:
@@ -38348,7 +38348,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Stickers = m.Vector()
 		}
 		if flags&(1<<1) != 0 {
-			tl.TtlSeconds = Some(m.Int())
+			tl.TtlSeconds = Ref(m.Int())
 		}
 		r = tl
 	case CRC_inputMediaDocument:
@@ -38357,10 +38357,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Spoiler = flags&(1<<2) != 0
 		tl.ID = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TtlSeconds = Some(m.Int())
+			tl.TtlSeconds = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Query = Some(m.String())
+			tl.Query = Ref(m.String())
 		}
 		r = tl
 	case CRC_inputMediaVenue:
@@ -38378,7 +38378,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Spoiler = flags&(1<<1) != 0
 		tl.Url = m.String()
 		if flags&(1<<0) != 0 {
-			tl.TtlSeconds = Some(m.Int())
+			tl.TtlSeconds = Ref(m.Int())
 		}
 		r = tl
 	case CRC_inputMediaDocumentExternal:
@@ -38387,7 +38387,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Spoiler = flags&(1<<1) != 0
 		tl.Url = m.String()
 		if flags&(1<<0) != 0 {
-			tl.TtlSeconds = Some(m.Int())
+			tl.TtlSeconds = Ref(m.Int())
 		}
 		r = tl
 	case CRC_inputMediaGame:
@@ -38407,7 +38407,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Provider = m.String()
 		tl.ProviderData = m.Object()
 		if flags&(1<<1) != 0 {
-			tl.StartParam = Some(m.String())
+			tl.StartParam = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.ExtendedMedia = m.Object()
@@ -38419,13 +38419,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Stopped = flags&(1<<0) != 0
 		tl.GeoPoint = m.Object()
 		if flags&(1<<2) != 0 {
-			tl.Heading = Some(m.Int())
+			tl.Heading = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Period = Some(m.Int())
+			tl.Period = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.ProximityNotificationRadius = Some(m.Int())
+			tl.ProximityNotificationRadius = Ref(m.Int())
 		}
 		r = tl
 	case CRC_inputMediaPoll:
@@ -38436,7 +38436,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.CorrectAnswers = m.VectorBytes()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Solution = Some(m.String())
+			tl.Solution = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.SolutionEntities = m.Vector()
@@ -38472,7 +38472,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Video = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.VideoStartTs = Some(m.Double())
+			tl.VideoStartTs = Ref(m.Double())
 		}
 		if flags&(1<<3) != 0 {
 			tl.VideoEmojiMarkup = m.Object()
@@ -38491,7 +38491,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Lat = m.Double()
 		tl.Long = m.Double()
 		if flags&(1<<0) != 0 {
-			tl.AccuracyRadius = Some(m.Int())
+			tl.AccuracyRadius = Ref(m.Int())
 		}
 		r = tl
 	case CRC_inputPhotoEmpty:
@@ -38565,10 +38565,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.TimeMs = m.Long()
 		tl.Scale = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.VideoChannel = Some(m.Int())
+			tl.VideoChannel = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
-			tl.VideoQuality = Some(m.Int())
+			tl.VideoQuality = Ref(m.Int())
 		}
 		r = tl
 	case CRC_peerUser:
@@ -38645,19 +38645,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.StoriesUnavailable = flags2&(1<<4) != 0
 		tl.ID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.AccessHash = Some(m.Long())
+			tl.AccessHash = Ref(m.Long())
 		}
 		if flags&(1<<1) != 0 {
-			tl.FirstName = Some(m.String())
+			tl.FirstName = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.LastName = Some(m.String())
+			tl.LastName = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Username = Some(m.String())
+			tl.Username = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.Phone = Some(m.String())
+			tl.Phone = Ref(m.String())
 		}
 		if flags&(1<<5) != 0 {
 			tl.Photo = m.Object()
@@ -38666,16 +38666,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Status = m.Object()
 		}
 		if flags&(1<<14) != 0 {
-			tl.BotInfoVersion = Some(m.Int())
+			tl.BotInfoVersion = Ref(m.Int())
 		}
 		if flags&(1<<18) != 0 {
 			tl.RestrictionReason = m.Vector()
 		}
 		if flags&(1<<19) != 0 {
-			tl.BotInlinePlaceholder = Some(m.String())
+			tl.BotInlinePlaceholder = Ref(m.String())
 		}
 		if flags&(1<<22) != 0 {
-			tl.LangCode = Some(m.String())
+			tl.LangCode = Ref(m.String())
 		}
 		if flags&(1<<30) != 0 {
 			tl.EmojiStatus = m.Object()
@@ -38684,13 +38684,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Usernames = m.Vector()
 		}
 		if flags2&(1<<5) != 0 {
-			tl.StoriesMaxID = Some(m.Int())
+			tl.StoriesMaxID = Ref(m.Int())
 		}
 		if flags2&(1<<7) != 0 {
-			tl.Color = Some(m.Int())
+			tl.Color = Ref(m.Int())
 		}
 		if flags2&(1<<6) != 0 {
-			tl.BackgroundEmojiID = Some(m.Long())
+			tl.BackgroundEmojiID = Ref(m.Long())
 		}
 		r = tl
 	case CRC_userProfilePhotoEmpty:
@@ -38790,11 +38790,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.StoriesUnavailable = flags2&(1<<3) != 0
 		tl.ID = m.Long()
 		if flags&(1<<13) != 0 {
-			tl.AccessHash = Some(m.Long())
+			tl.AccessHash = Ref(m.Long())
 		}
 		tl.Title = m.String()
 		if flags&(1<<6) != 0 {
-			tl.Username = Some(m.String())
+			tl.Username = Ref(m.String())
 		}
 		tl.Photo = m.Object()
 		tl.Date = m.Int()
@@ -38811,19 +38811,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.DefaultBannedRights = m.Object()
 		}
 		if flags&(1<<17) != 0 {
-			tl.ParticipantsCount = Some(m.Int())
+			tl.ParticipantsCount = Ref(m.Int())
 		}
 		if flags2&(1<<0) != 0 {
 			tl.Usernames = m.Vector()
 		}
 		if flags2&(1<<4) != 0 {
-			tl.StoriesMaxID = Some(m.Int())
+			tl.StoriesMaxID = Ref(m.Int())
 		}
 		if flags2&(1<<6) != 0 {
-			tl.Color = Some(m.Int())
+			tl.Color = Ref(m.Int())
 		}
 		if flags2&(1<<5) != 0 {
-			tl.BackgroundEmojiID = Some(m.Long())
+			tl.BackgroundEmojiID = Ref(m.Long())
 		}
 		r = tl
 	case CRC_channelForbidden:
@@ -38835,7 +38835,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.AccessHash = m.Long()
 		tl.Title = m.String()
 		if flags&(1<<16) != 0 {
-			tl.UntilDate = Some(m.Int())
+			tl.UntilDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_chatFull:
@@ -38858,25 +38858,25 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.BotInfo = m.Vector()
 		}
 		if flags&(1<<6) != 0 {
-			tl.PinnedMsgID = Some(m.Int())
+			tl.PinnedMsgID = Ref(m.Int())
 		}
 		if flags&(1<<11) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		if flags&(1<<12) != 0 {
 			tl.Call = m.Object()
 		}
 		if flags&(1<<14) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		if flags&(1<<15) != 0 {
 			tl.GroupcallDefaultJoinAs = m.Object()
 		}
 		if flags&(1<<16) != 0 {
-			tl.ThemeEmoticon = Some(m.String())
+			tl.ThemeEmoticon = Ref(m.String())
 		}
 		if flags&(1<<17) != 0 {
-			tl.RequestsPending = Some(m.Int())
+			tl.RequestsPending = Ref(m.Int())
 		}
 		if flags&(1<<17) != 0 {
 			tl.RecentRequesters = m.VectorLong()
@@ -38905,19 +38905,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ID = m.Long()
 		tl.About = m.String()
 		if flags&(1<<0) != 0 {
-			tl.ParticipantsCount = Some(m.Int())
+			tl.ParticipantsCount = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.AdminsCount = Some(m.Int())
+			tl.AdminsCount = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.KickedCount = Some(m.Int())
+			tl.KickedCount = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.BannedCount = Some(m.Int())
+			tl.BannedCount = Ref(m.Int())
 		}
 		if flags&(1<<13) != 0 {
-			tl.OnlineCount = Some(m.Int())
+			tl.OnlineCount = Ref(m.Int())
 		}
 		tl.ReadInboxMaxID = m.Int()
 		tl.ReadOutboxMaxID = m.Int()
@@ -38929,44 +38929,44 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 		tl.BotInfo = m.Vector()
 		if flags&(1<<4) != 0 {
-			tl.MigratedFromChatID = Some(m.Long())
+			tl.MigratedFromChatID = Ref(m.Long())
 		}
 		if flags&(1<<4) != 0 {
-			tl.MigratedFromMaxID = Some(m.Int())
+			tl.MigratedFromMaxID = Ref(m.Int())
 		}
 		if flags&(1<<5) != 0 {
-			tl.PinnedMsgID = Some(m.Int())
+			tl.PinnedMsgID = Ref(m.Int())
 		}
 		if flags&(1<<8) != 0 {
 			tl.Stickerset = m.Object()
 		}
 		if flags&(1<<9) != 0 {
-			tl.AvailableMinID = Some(m.Int())
+			tl.AvailableMinID = Ref(m.Int())
 		}
 		if flags&(1<<11) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		if flags&(1<<14) != 0 {
-			tl.LinkedChatID = Some(m.Long())
+			tl.LinkedChatID = Ref(m.Long())
 		}
 		if flags&(1<<15) != 0 {
 			tl.Location = m.Object()
 		}
 		if flags&(1<<17) != 0 {
-			tl.SlowmodeSeconds = Some(m.Int())
+			tl.SlowmodeSeconds = Ref(m.Int())
 		}
 		if flags&(1<<18) != 0 {
-			tl.SlowmodeNextSendDate = Some(m.Int())
+			tl.SlowmodeNextSendDate = Ref(m.Int())
 		}
 		if flags&(1<<12) != 0 {
-			tl.StatsDc = Some(m.Int())
+			tl.StatsDc = Ref(m.Int())
 		}
 		tl.Pts = m.Int()
 		if flags&(1<<21) != 0 {
 			tl.Call = m.Object()
 		}
 		if flags&(1<<24) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		if flags&(1<<25) != 0 {
 			tl.PendingSuggestions = m.VectorString()
@@ -38975,10 +38975,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.GroupcallDefaultJoinAs = m.Object()
 		}
 		if flags&(1<<27) != 0 {
-			tl.ThemeEmoticon = Some(m.String())
+			tl.ThemeEmoticon = Ref(m.String())
 		}
 		if flags&(1<<28) != 0 {
-			tl.RequestsPending = Some(m.Int())
+			tl.RequestsPending = Ref(m.Int())
 		}
 		if flags&(1<<28) != 0 {
 			tl.RecentRequesters = m.VectorLong()
@@ -39067,7 +39067,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.FwdFrom = m.Object()
 		}
 		if flags&(1<<11) != 0 {
-			tl.ViaBotID = Some(m.Long())
+			tl.ViaBotID = Ref(m.Long())
 		}
 		if flags&(1<<3) != 0 {
 			tl.ReplyTo = m.Object()
@@ -39084,22 +39084,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Entities = m.Vector()
 		}
 		if flags&(1<<10) != 0 {
-			tl.Views = Some(m.Int())
+			tl.Views = Ref(m.Int())
 		}
 		if flags&(1<<10) != 0 {
-			tl.Forwards = Some(m.Int())
+			tl.Forwards = Ref(m.Int())
 		}
 		if flags&(1<<23) != 0 {
 			tl.Replies = m.Object()
 		}
 		if flags&(1<<15) != 0 {
-			tl.EditDate = Some(m.Int())
+			tl.EditDate = Ref(m.Int())
 		}
 		if flags&(1<<16) != 0 {
-			tl.PostAuthor = Some(m.String())
+			tl.PostAuthor = Ref(m.String())
 		}
 		if flags&(1<<17) != 0 {
-			tl.GroupedID = Some(m.Long())
+			tl.GroupedID = Ref(m.Long())
 		}
 		if flags&(1<<20) != 0 {
 			tl.Reactions = m.Object()
@@ -39108,7 +39108,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.RestrictionReason = m.Vector()
 		}
 		if flags&(1<<25) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messageService:
@@ -39131,7 +39131,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Date = m.Int()
 		tl.Action = m.Object()
 		if flags&(1<<25) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messageMediaEmpty:
@@ -39145,7 +39145,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Photo = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.TtlSeconds = Some(m.Int())
+			tl.TtlSeconds = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messageMediaGeo:
@@ -39175,7 +39175,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.AltDocument = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.TtlSeconds = Some(m.Int())
+			tl.TtlSeconds = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messageMediaWebPage:
@@ -39211,7 +39211,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Photo = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.ReceiptMsgID = Some(m.Int())
+			tl.ReceiptMsgID = Ref(m.Int())
 		}
 		tl.Currency = m.String()
 		tl.TotalAmount = m.Long()
@@ -39225,11 +39225,11 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Geo = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Heading = Some(m.Int())
+			tl.Heading = Ref(m.Int())
 		}
 		tl.Period = m.Int()
 		if flags&(1<<1) != 0 {
-			tl.ProximityNotificationRadius = Some(m.Int())
+			tl.ProximityNotificationRadius = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messageMediaPoll:
@@ -39331,7 +39331,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Info = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.ShippingOptionID = Some(m.String())
+			tl.ShippingOptionID = Ref(m.String())
 		}
 		tl.Charge = m.Object()
 		r = tl
@@ -39343,7 +39343,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Currency = m.String()
 		tl.TotalAmount = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.InvoiceSlug = Some(m.String())
+			tl.InvoiceSlug = Ref(m.String())
 		}
 		r = tl
 	case CRC_messageActionPhoneCall:
@@ -39355,7 +39355,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Reason = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Duration = Some(m.Int())
+			tl.Duration = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messageActionScreenshotTaken:
@@ -39371,7 +39371,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.AttachMenu = flags&(1<<1) != 0
 		tl.FromRequest = flags&(1<<3) != 0
 		if flags&(1<<0) != 0 {
-			tl.Domain = Some(m.String())
+			tl.Domain = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.App = m.Object()
@@ -39400,7 +39400,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Call = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Duration = Some(m.Int())
+			tl.Duration = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messageActionInviteToGroupCall:
@@ -39413,7 +39413,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Period = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.AutoSettingFrom = Some(m.Long())
+			tl.AutoSettingFrom = Ref(m.Long())
 		}
 		r = tl
 	case CRC_messageActionGroupCallScheduled:
@@ -39444,10 +39444,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Amount = m.Long()
 		tl.Months = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.CryptoCurrency = Some(m.String())
+			tl.CryptoCurrency = Ref(m.String())
 		}
 		if flags&(1<<0) != 0 {
-			tl.CryptoAmount = Some(m.Long())
+			tl.CryptoAmount = Ref(m.Long())
 		}
 		r = tl
 	case CRC_messageActionTopicCreate:
@@ -39456,23 +39456,23 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Title = m.String()
 		tl.IconColor = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.IconEmojiID = Some(m.Long())
+			tl.IconEmojiID = Ref(m.Long())
 		}
 		r = tl
 	case CRC_messageActionTopicEdit:
 		tl := TL_messageActionTopicEdit{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.IconEmojiID = Some(m.Long())
+			tl.IconEmojiID = Ref(m.Long())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Closed = Some(m.Bool())
+			tl.Closed = Ref(m.Bool())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Hidden = Some(m.Bool())
+			tl.Hidden = Ref(m.Bool())
 		}
 		r = tl
 	case CRC_messageActionSuggestProfilePhoto:
@@ -39520,16 +39520,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.UnreadReactionsCount = m.Int()
 		tl.NotifySettings = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Pts = Some(m.Int())
+			tl.Pts = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
 			tl.Draft = m.Object()
 		}
 		if flags&(1<<4) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		if flags&(1<<5) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_dialogFolder:
@@ -39607,7 +39607,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Lat = m.Double()
 		tl.AccessHash = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.AccuracyRadius = Some(m.Int())
+			tl.AccuracyRadius = Ref(m.Int())
 		}
 		r = tl
 	case CRC_auth_sentCode:
@@ -39619,7 +39619,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.NextType = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.Timeout = Some(m.Int())
+			tl.Timeout = Ref(m.Int())
 		}
 		r = tl
 	case CRC_auth_sentCodeSuccess:
@@ -39631,10 +39631,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.SetupPasswordRequired = flags&(1<<1) != 0
 		if flags&(1<<1) != 0 {
-			tl.OtherwiseReloginDays = Some(m.Int())
+			tl.OtherwiseReloginDays = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
-			tl.TmpSessions = Some(m.Int())
+			tl.TmpSessions = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
 			tl.FutureAuthToken = m.StringBytes()
@@ -39675,22 +39675,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_inputPeerNotifySettings{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.ShowPreviews = Some(m.Bool())
+			tl.ShowPreviews = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Silent = Some(m.Bool())
+			tl.Silent = Ref(m.Bool())
 		}
 		if flags&(1<<2) != 0 {
-			tl.MuteUntil = Some(m.Int())
+			tl.MuteUntil = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
 			tl.Sound = m.Object()
 		}
 		if flags&(1<<6) != 0 {
-			tl.StoriesMuted = Some(m.Bool())
+			tl.StoriesMuted = Ref(m.Bool())
 		}
 		if flags&(1<<7) != 0 {
-			tl.StoriesHideSender = Some(m.Bool())
+			tl.StoriesHideSender = Ref(m.Bool())
 		}
 		if flags&(1<<8) != 0 {
 			tl.StoriesSound = m.Object()
@@ -39700,13 +39700,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_peerNotifySettings{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.ShowPreviews = Some(m.Bool())
+			tl.ShowPreviews = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Silent = Some(m.Bool())
+			tl.Silent = Ref(m.Bool())
 		}
 		if flags&(1<<2) != 0 {
-			tl.MuteUntil = Some(m.Int())
+			tl.MuteUntil = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
 			tl.IosSound = m.Object()
@@ -39718,10 +39718,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.OtherSound = m.Object()
 		}
 		if flags&(1<<6) != 0 {
-			tl.StoriesMuted = Some(m.Bool())
+			tl.StoriesMuted = Ref(m.Bool())
 		}
 		if flags&(1<<7) != 0 {
-			tl.StoriesHideSender = Some(m.Bool())
+			tl.StoriesHideSender = Ref(m.Bool())
 		}
 		if flags&(1<<8) != 0 {
 			tl.StoriesIosSound = m.Object()
@@ -39746,13 +39746,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.InviteMembers = flags&(1<<8) != 0
 		tl.RequestChatBroadcast = flags&(1<<10) != 0
 		if flags&(1<<6) != 0 {
-			tl.GeoDistance = Some(m.Int())
+			tl.GeoDistance = Ref(m.Int())
 		}
 		if flags&(1<<9) != 0 {
-			tl.RequestChatTitle = Some(m.String())
+			tl.RequestChatTitle = Ref(m.String())
 		}
 		if flags&(1<<9) != 0 {
-			tl.RequestChatDate = Some(m.Int())
+			tl.RequestChatDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_wallPaper:
@@ -39825,7 +39825,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.BlockedMyStoriesFrom = flags&(1<<27) != 0
 		tl.ID = m.Long()
 		if flags&(1<<1) != 0 {
-			tl.About = Some(m.String())
+			tl.About = Ref(m.String())
 		}
 		tl.Settings = m.Object()
 		if flags&(1<<21) != 0 {
@@ -39842,20 +39842,20 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.BotInfo = m.Object()
 		}
 		if flags&(1<<6) != 0 {
-			tl.PinnedMsgID = Some(m.Int())
+			tl.PinnedMsgID = Ref(m.Int())
 		}
 		tl.CommonChatsCount = m.Int()
 		if flags&(1<<11) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		if flags&(1<<14) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		if flags&(1<<15) != 0 {
-			tl.ThemeEmoticon = Some(m.String())
+			tl.ThemeEmoticon = Ref(m.String())
 		}
 		if flags&(1<<16) != 0 {
-			tl.PrivateForwardName = Some(m.String())
+			tl.PrivateForwardName = Ref(m.String())
 		}
 		if flags&(1<<17) != 0 {
 			tl.BotGroupAdminRights = m.Object()
@@ -39948,10 +39948,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Inexact = flags&(1<<1) != 0
 		tl.Count = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.NextRate = Some(m.Int())
+			tl.NextRate = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.OffsetIdOffset = Some(m.Int())
+			tl.OffsetIdOffset = Ref(m.Int())
 		}
 		tl.Messages = m.Vector()
 		tl.Chats = m.Vector()
@@ -39964,7 +39964,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Pts = m.Int()
 		tl.Count = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.OffsetIdOffset = Some(m.Int())
+			tl.OffsetIdOffset = Ref(m.Int())
 		}
 		tl.Messages = m.Vector()
 		tl.Topics = m.Vector()
@@ -40099,13 +40099,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Unconfirmed = flags&(1<<0) != 0
 		tl.Hash = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Date = Some(m.Int())
+			tl.Date = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
-			tl.Device = Some(m.String())
+			tl.Device = Ref(m.String())
 		}
 		if flags&(1<<0) != 0 {
-			tl.Location = Some(m.String())
+			tl.Location = Ref(m.String())
 		}
 		r = tl
 	case CRC_updateNewEncryptedMessage:
@@ -40157,7 +40157,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Popup = flags&(1<<0) != 0
 		tl.InvertMedia = flags&(1<<2) != 0
 		if flags&(1<<1) != 0 {
-			tl.InboxDate = Some(m.Int())
+			tl.InboxDate = Ref(m.Int())
 		}
 		tl.Type = m.String()
 		tl.Message = m.String()
@@ -40178,7 +40178,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_updateReadHistoryInbox{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		tl.Peer = m.Object()
 		tl.MaxID = m.Int()
@@ -40206,7 +40206,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Pts = m.Int()
 		tl.PtsCount = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Date = Some(m.Int())
+			tl.Date = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updateChannelTooLong:
@@ -40214,7 +40214,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.ChannelID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Pts = Some(m.Int())
+			tl.Pts = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updateChannel:
@@ -40231,7 +40231,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_updateReadChannelInbox{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		tl.ChannelID = m.Long()
 		tl.MaxID = m.Int()
@@ -40323,7 +40323,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Data = m.StringBytes()
 		}
 		if flags&(1<<1) != 0 {
-			tl.GameShortName = Some(m.String())
+			tl.GameShortName = Ref(m.String())
 		}
 		r = tl
 	case CRC_updateEditMessage:
@@ -40343,7 +40343,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Data = m.StringBytes()
 		}
 		if flags&(1<<1) != 0 {
-			tl.GameShortName = Some(m.String())
+			tl.GameShortName = Ref(m.String())
 		}
 		r = tl
 	case CRC_updateReadChannelOutbox:
@@ -40356,7 +40356,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.Draft = m.Object()
 		r = tl
@@ -40384,7 +40384,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Pinned = flags&(1<<0) != 0
 		if flags&(1<<1) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		tl.Peer = m.Object()
 		r = tl
@@ -40392,7 +40392,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_updatePinnedDialogs{}
 		flags := m.Int()
 		if flags&(1<<1) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
 			tl.Order = m.Vector()
@@ -40425,7 +40425,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Info = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.ShippingOptionID = Some(m.String())
+			tl.ShippingOptionID = Ref(m.String())
 		}
 		tl.Currency = m.String()
 		tl.TotalAmount = m.Long()
@@ -40450,7 +40450,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.ChannelID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.Messages = m.VectorInt()
 		r = tl
@@ -40559,10 +40559,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.TopMsgID = m.Int()
 		tl.ReadMaxID = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.BroadcastID = Some(m.Long())
+			tl.BroadcastID = Ref(m.Long())
 		}
 		if flags&(1<<0) != 0 {
-			tl.BroadcastPost = Some(m.Int())
+			tl.BroadcastPost = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updateReadChannelDiscussionOutbox:
@@ -40583,7 +40583,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.ChannelID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.FromID = m.Object()
 		tl.Action = m.Object()
@@ -40626,7 +40626,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updateChatParticipant:
@@ -40706,7 +40706,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.MsgID = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.Reactions = m.Object()
 		r = tl
@@ -40867,7 +40867,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.FwdFrom = m.Object()
 		}
 		if flags&(1<<11) != 0 {
-			tl.ViaBotID = Some(m.Long())
+			tl.ViaBotID = Ref(m.Long())
 		}
 		if flags&(1<<3) != 0 {
 			tl.ReplyTo = m.Object()
@@ -40876,7 +40876,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Entities = m.Vector()
 		}
 		if flags&(1<<25) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updateShortChatMessage:
@@ -40897,7 +40897,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.FwdFrom = m.Object()
 		}
 		if flags&(1<<11) != 0 {
-			tl.ViaBotID = Some(m.Long())
+			tl.ViaBotID = Ref(m.Long())
 		}
 		if flags&(1<<3) != 0 {
 			tl.ReplyTo = m.Object()
@@ -40906,7 +40906,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Entities = m.Vector()
 		}
 		if flags&(1<<25) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updateShort:
@@ -40946,7 +40946,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Entities = m.Vector()
 		}
 		if flags&(1<<25) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_photos_photos:
@@ -41027,7 +41027,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.StickersRecentLimit = m.Int()
 		tl.ChannelsReadMediaPeriod = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.TmpSessions = Some(m.Int())
+			tl.TmpSessions = Ref(m.Int())
 		}
 		tl.CallReceiveTimeoutMs = m.Int()
 		tl.CallRingTimeoutMs = m.Int()
@@ -41035,37 +41035,37 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.CallPacketTimeoutMs = m.Int()
 		tl.MeUrlPrefix = m.String()
 		if flags&(1<<7) != 0 {
-			tl.AutoupdateUrlPrefix = Some(m.String())
+			tl.AutoupdateUrlPrefix = Ref(m.String())
 		}
 		if flags&(1<<9) != 0 {
-			tl.GifSearchUsername = Some(m.String())
+			tl.GifSearchUsername = Ref(m.String())
 		}
 		if flags&(1<<10) != 0 {
-			tl.VenueSearchUsername = Some(m.String())
+			tl.VenueSearchUsername = Ref(m.String())
 		}
 		if flags&(1<<11) != 0 {
-			tl.ImgSearchUsername = Some(m.String())
+			tl.ImgSearchUsername = Ref(m.String())
 		}
 		if flags&(1<<12) != 0 {
-			tl.StaticMapsProvider = Some(m.String())
+			tl.StaticMapsProvider = Ref(m.String())
 		}
 		tl.CaptionLengthMax = m.Int()
 		tl.MessageLengthMax = m.Int()
 		tl.WebfileDcID = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.SuggestedLangCode = Some(m.String())
+			tl.SuggestedLangCode = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.LangPackVersion = Some(m.Int())
+			tl.LangPackVersion = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.BaseLangPackVersion = Some(m.Int())
+			tl.BaseLangPackVersion = Ref(m.Int())
 		}
 		if flags&(1<<15) != 0 {
 			tl.ReactionsDefault = m.Object()
 		}
 		if flags&(1<<16) != 0 {
-			tl.AutologinToken = Some(m.String())
+			tl.AutologinToken = Ref(m.String())
 		}
 		r = tl
 	case CRC_nearestDc:
@@ -41086,7 +41086,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Document = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
 			tl.Sticker = m.Object()
@@ -41115,7 +41115,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_encryptedChatRequested{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		tl.ID = m.Int()
 		tl.AccessHash = m.Long()
@@ -41497,7 +41497,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.W = m.Int()
 		tl.H = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.PreloadPrefixSize = Some(m.Int())
+			tl.PreloadPrefixSize = Ref(m.Int())
 		}
 		r = tl
 	case CRC_documentAttributeAudio:
@@ -41506,10 +41506,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Voice = flags&(1<<10) != 0
 		tl.Duration = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Performer = Some(m.String())
+			tl.Performer = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.Waveform = m.StringBytes()
@@ -41561,7 +41561,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.ID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		r = tl
 	case CRC_webPagePending:
@@ -41569,7 +41569,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.ID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		tl.Date = m.Int()
 		r = tl
@@ -41582,37 +41582,37 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.DisplayUrl = m.String()
 		tl.Hash = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Type = Some(m.String())
+			tl.Type = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.SiteName = Some(m.String())
+			tl.SiteName = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Description = Some(m.String())
+			tl.Description = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
 			tl.Photo = m.Object()
 		}
 		if flags&(1<<5) != 0 {
-			tl.EmbedUrl = Some(m.String())
+			tl.EmbedUrl = Ref(m.String())
 		}
 		if flags&(1<<5) != 0 {
-			tl.EmbedType = Some(m.String())
+			tl.EmbedType = Ref(m.String())
 		}
 		if flags&(1<<6) != 0 {
-			tl.EmbedWidth = Some(m.Int())
+			tl.EmbedWidth = Ref(m.Int())
 		}
 		if flags&(1<<6) != 0 {
-			tl.EmbedHeight = Some(m.Int())
+			tl.EmbedHeight = Ref(m.Int())
 		}
 		if flags&(1<<7) != 0 {
-			tl.Duration = Some(m.Int())
+			tl.Duration = Ref(m.Int())
 		}
 		if flags&(1<<8) != 0 {
-			tl.Author = Some(m.String())
+			tl.Author = Ref(m.String())
 		}
 		if flags&(1<<9) != 0 {
 			tl.Document = m.Object()
@@ -41628,7 +41628,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_webPageNotModified{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.CachedPageViews = Some(m.Int())
+			tl.CachedPageViews = Ref(m.Int())
 		}
 		r = tl
 	case CRC_authorization:
@@ -41671,29 +41671,29 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.SrpB = m.StringBytes()
 		}
 		if flags&(1<<2) != 0 {
-			tl.SrpID = Some(m.Long())
+			tl.SrpID = Ref(m.Long())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Hint = Some(m.String())
+			tl.Hint = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.EmailUnconfirmedPattern = Some(m.String())
+			tl.EmailUnconfirmedPattern = Ref(m.String())
 		}
 		tl.NewAlgo = m.Object()
 		tl.NewSecureAlgo = m.Object()
 		tl.SecureRandom = m.StringBytes()
 		if flags&(1<<5) != 0 {
-			tl.PendingResetDate = Some(m.Int())
+			tl.PendingResetDate = Ref(m.Int())
 		}
 		if flags&(1<<6) != 0 {
-			tl.LoginEmailPattern = Some(m.String())
+			tl.LoginEmailPattern = Ref(m.String())
 		}
 		r = tl
 	case CRC_account_passwordSettings:
 		tl := TL_account_passwordSettings{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Email = Some(m.String())
+			tl.Email = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.SecureSettings = m.Object()
@@ -41709,10 +41709,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.NewPasswordHash = m.StringBytes()
 		}
 		if flags&(1<<0) != 0 {
-			tl.Hint = Some(m.String())
+			tl.Hint = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Email = Some(m.String())
+			tl.Email = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.NewSecureSettings = m.Object()
@@ -41737,22 +41737,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.AdminID = m.Long()
 		tl.Date = m.Int()
 		if flags&(1<<4) != 0 {
-			tl.StartDate = Some(m.Int())
+			tl.StartDate = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.ExpireDate = Some(m.Int())
+			tl.ExpireDate = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.UsageLimit = Some(m.Int())
+			tl.UsageLimit = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Usage = Some(m.Int())
+			tl.Usage = Ref(m.Int())
 		}
 		if flags&(1<<7) != 0 {
-			tl.Requested = Some(m.Int())
+			tl.Requested = Ref(m.Int())
 		}
 		if flags&(1<<8) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		r = tl
 	case CRC_chatInvitePublicJoinRequests:
@@ -41775,7 +41775,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Fake = flags&(1<<9) != 0
 		tl.Title = m.String()
 		if flags&(1<<5) != 0 {
-			tl.About = Some(m.String())
+			tl.About = Ref(m.String())
 		}
 		tl.Photo = m.Object()
 		tl.ParticipantsCount = m.Int()
@@ -41834,7 +41834,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Emojis = flags&(1<<7) != 0
 		tl.TextColor = flags&(1<<9) != 0
 		if flags&(1<<0) != 0 {
-			tl.InstalledDate = Some(m.Int())
+			tl.InstalledDate = Ref(m.Int())
 		}
 		tl.ID = m.Long()
 		tl.AccessHash = m.Long()
@@ -41844,13 +41844,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Thumbs = m.Vector()
 		}
 		if flags&(1<<4) != 0 {
-			tl.ThumbDcID = Some(m.Int())
+			tl.ThumbDcID = Ref(m.Int())
 		}
 		if flags&(1<<4) != 0 {
-			tl.ThumbVersion = Some(m.Int())
+			tl.ThumbVersion = Ref(m.Int())
 		}
 		if flags&(1<<8) != 0 {
-			tl.ThumbDocumentID = Some(m.Long())
+			tl.ThumbDocumentID = Ref(m.Long())
 		}
 		tl.Count = m.Int()
 		tl.Hash = m.Int()
@@ -41874,10 +41874,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_botInfo{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.UserID = Some(m.Long())
+			tl.UserID = Ref(m.Long())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Description = Some(m.String())
+			tl.Description = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
 			tl.DescriptionPhoto = m.Object()
@@ -41939,7 +41939,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Text = m.String()
 		if flags&(1<<0) != 0 {
-			tl.FwdText = Some(m.String())
+			tl.FwdText = Ref(m.String())
 		}
 		tl.Url = m.String()
 		tl.ButtonID = m.Int()
@@ -41950,7 +41950,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.RequestWriteAccess = flags&(1<<0) != 0
 		tl.Text = m.String()
 		if flags&(1<<1) != 0 {
-			tl.FwdText = Some(m.String())
+			tl.FwdText = Ref(m.String())
 		}
 		tl.Url = m.String()
 		tl.Bot = m.Object()
@@ -41959,7 +41959,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_keyboardButtonRequestPoll{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Quiz = Some(m.Bool())
+			tl.Quiz = Ref(m.Bool())
 		}
 		tl.Text = m.String()
 		r = tl
@@ -42004,7 +42004,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.SingleUse = flags&(1<<1) != 0
 		tl.Selective = flags&(1<<2) != 0
 		if flags&(1<<3) != 0 {
-			tl.Placeholder = Some(m.String())
+			tl.Placeholder = Ref(m.String())
 		}
 		r = tl
 	case CRC_replyKeyboardMarkup:
@@ -42016,7 +42016,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Persistent = flags&(1<<4) != 0
 		tl.Rows = m.Vector()
 		if flags&(1<<3) != 0 {
-			tl.Placeholder = Some(m.String())
+			tl.Placeholder = Ref(m.String())
 		}
 		r = tl
 	case CRC_replyInlineMarkup:
@@ -42164,7 +42164,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Final = flags&(1<<0) != 0
 		tl.Pts = m.Int()
 		if flags&(1<<1) != 0 {
-			tl.Timeout = Some(m.Int())
+			tl.Timeout = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updates_channelDifferenceTooLong:
@@ -42172,7 +42172,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Final = flags&(1<<0) != 0
 		if flags&(1<<1) != 0 {
-			tl.Timeout = Some(m.Int())
+			tl.Timeout = Ref(m.Int())
 		}
 		tl.Dialog = m.Object()
 		tl.Messages = m.Vector()
@@ -42185,7 +42185,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Final = flags&(1<<0) != 0
 		tl.Pts = m.Int()
 		if flags&(1<<1) != 0 {
-			tl.Timeout = Some(m.Int())
+			tl.Timeout = Ref(m.Int())
 		}
 		tl.NewMessages = m.Vector()
 		tl.OtherUpdates = m.Vector()
@@ -42220,7 +42220,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.UserID = m.Long()
 		tl.AdminRights = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Rank = Some(m.String())
+			tl.Rank = Ref(m.String())
 		}
 		r = tl
 	case CRC_channelParticipantAdmin:
@@ -42230,13 +42230,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Self = flags&(1<<1) != 0
 		tl.UserID = m.Long()
 		if flags&(1<<1) != 0 {
-			tl.InviterID = Some(m.Long())
+			tl.InviterID = Ref(m.Long())
 		}
 		tl.PromotedBy = m.Long()
 		tl.Date = m.Int()
 		tl.AdminRights = m.Object()
 		if flags&(1<<2) != 0 {
-			tl.Rank = Some(m.String())
+			tl.Rank = Ref(m.String())
 		}
 		r = tl
 	case CRC_channelParticipantBanned:
@@ -42281,10 +42281,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_channelParticipantsMentions{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Q = Some(m.String())
+			tl.Q = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		r = tl
 	case CRC_channels_channelParticipants:
@@ -42311,7 +42311,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Text = m.String()
 		tl.Entities = m.Vector()
 		if flags&(1<<1) != 0 {
-			tl.MinAgeConfirm = Some(m.Int())
+			tl.MinAgeConfirm = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messages_savedGifsNotModified:
@@ -42352,13 +42352,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.GeoPoint = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Heading = Some(m.Int())
+			tl.Heading = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Period = Some(m.Int())
+			tl.Period = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.ProximityNotificationRadius = Some(m.Int())
+			tl.ProximityNotificationRadius = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
 			tl.ReplyMarkup = m.Object()
@@ -42433,13 +42433,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ID = m.String()
 		tl.Type = m.String()
 		if flags&(1<<1) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Description = Some(m.String())
+			tl.Description = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
 			tl.Thumb = m.Object()
@@ -42462,10 +42462,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ID = m.String()
 		tl.Type = m.String()
 		if flags&(1<<1) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Description = Some(m.String())
+			tl.Description = Ref(m.String())
 		}
 		tl.Document = m.Object()
 		tl.SendMessage = m.Object()
@@ -42506,13 +42506,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Geo = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Heading = Some(m.Int())
+			tl.Heading = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Period = Some(m.Int())
+			tl.Period = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.ProximityNotificationRadius = Some(m.Int())
+			tl.ProximityNotificationRadius = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
 			tl.ReplyMarkup = m.Object()
@@ -42581,13 +42581,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ID = m.String()
 		tl.Type = m.String()
 		if flags&(1<<1) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Description = Some(m.String())
+			tl.Description = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
 			tl.Thumb = m.Object()
@@ -42609,10 +42609,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Document = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Description = Some(m.String())
+			tl.Description = Ref(m.String())
 		}
 		tl.SendMessage = m.Object()
 		r = tl
@@ -42622,7 +42622,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Gallery = flags&(1<<0) != 0
 		tl.QueryID = m.Long()
 		if flags&(1<<1) != 0 {
-			tl.NextOffset = Some(m.String())
+			tl.NextOffset = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.SwitchPm = m.Object()
@@ -42647,23 +42647,23 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.FromID = m.Object()
 		}
 		if flags&(1<<5) != 0 {
-			tl.FromName = Some(m.String())
+			tl.FromName = Ref(m.String())
 		}
 		tl.Date = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.ChannelPost = Some(m.Int())
+			tl.ChannelPost = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.PostAuthor = Some(m.String())
+			tl.PostAuthor = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
 			tl.SavedFromPeer = m.Object()
 		}
 		if flags&(1<<4) != 0 {
-			tl.SavedFromMsgID = Some(m.Int())
+			tl.SavedFromMsgID = Ref(m.Int())
 		}
 		if flags&(1<<6) != 0 {
-			tl.PsaType = Some(m.String())
+			tl.PsaType = Ref(m.String())
 		}
 		r = tl
 	case CRC_auth_codeTypeSms:
@@ -42710,10 +42710,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.EmailPattern = m.String()
 		tl.Length = m.Int()
 		if flags&(1<<3) != 0 {
-			tl.ResetAvailablePeriod = Some(m.Int())
+			tl.ResetAvailablePeriod = Ref(m.Int())
 		}
 		if flags&(1<<4) != 0 {
-			tl.ResetPendingDate = Some(m.Int())
+			tl.ResetPendingDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_auth_sentCodeTypeSetUpEmailRequired:
@@ -42734,10 +42734,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Nonce = m.StringBytes()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Receipt = Some(m.String())
+			tl.Receipt = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.PushTimeout = Some(m.Int())
+			tl.PushTimeout = Ref(m.Int())
 		}
 		tl.Length = m.Int()
 		r = tl
@@ -42748,10 +42748,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.HasUrl = flags&(1<<3) != 0
 		tl.NativeUi = flags&(1<<4) != 0
 		if flags&(1<<0) != 0 {
-			tl.Message = Some(m.String())
+			tl.Message = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		tl.CacheTime = m.Int()
 		r = tl
@@ -42837,7 +42837,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_draftMessageEmpty{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Date = Some(m.Int())
+			tl.Date = Ref(m.Int())
 		}
 		r = tl
 	case CRC_draftMessage:
@@ -43096,10 +43096,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.PhotoID = m.Long()
 		tl.Caption = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		if flags&(1<<0) != 0 {
-			tl.WebpageID = Some(m.Long())
+			tl.WebpageID = Ref(m.Long())
 		}
 		r = tl
 	case CRC_pageBlockVideo:
@@ -43120,19 +43120,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.FullWidth = flags&(1<<0) != 0
 		tl.AllowScrolling = flags&(1<<3) != 0
 		if flags&(1<<1) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Html = Some(m.String())
+			tl.Html = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.PosterPhotoID = Some(m.Long())
+			tl.PosterPhotoID = Ref(m.Long())
 		}
 		if flags&(1<<5) != 0 {
-			tl.W = Some(m.Int())
+			tl.W = Ref(m.Int())
 		}
 		if flags&(1<<5) != 0 {
-			tl.H = Some(m.Int())
+			tl.H = Ref(m.Int())
 		}
 		tl.Caption = m.Object()
 		r = tl
@@ -43237,13 +43237,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Currency = m.String()
 		tl.Prices = m.Vector()
 		if flags&(1<<8) != 0 {
-			tl.MaxTipAmount = Some(m.Long())
+			tl.MaxTipAmount = Ref(m.Long())
 		}
 		if flags&(1<<8) != 0 {
 			tl.SuggestedTipAmounts = m.VectorLong()
 		}
 		if flags&(1<<10) != 0 {
-			tl.TermsUrl = Some(m.String())
+			tl.TermsUrl = Ref(m.String())
 		}
 		r = tl
 	case CRC_paymentCharge:
@@ -43264,13 +43264,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_paymentRequestedInfo{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Name = Some(m.String())
+			tl.Name = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Phone = Some(m.String())
+			tl.Phone = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Email = Some(m.String())
+			tl.Email = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
 			tl.ShippingAddress = m.Object()
@@ -43325,10 +43325,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Document = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Performer = Some(m.String())
+			tl.Performer = Ref(m.String())
 		}
 		r = tl
 	case CRC_upload_webFile:
@@ -43355,7 +43355,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ProviderID = m.Long()
 		tl.Url = m.String()
 		if flags&(1<<4) != 0 {
-			tl.NativeProvider = Some(m.String())
+			tl.NativeProvider = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
 			tl.NativeParams = m.Object()
@@ -43375,7 +43375,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_payments_validatedRequestedInfo{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.ID = Some(m.String())
+			tl.ID = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.ShippingOptions = m.Vector()
@@ -43408,7 +43408,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Shipping = m.Object()
 		}
 		if flags&(1<<3) != 0 {
-			tl.TipAmount = Some(m.Long())
+			tl.TipAmount = Ref(m.Long())
 		}
 		tl.Currency = m.String()
 		tl.TotalAmount = m.Long()
@@ -43462,7 +43462,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.MaskCoords = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Keywords = Some(m.String())
+			tl.Keywords = Ref(m.String())
 		}
 		r = tl
 	case CRC_inputPhoneCall:
@@ -43485,7 +43485,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ParticipantID = m.Long()
 		tl.Protocol = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.ReceiveDate = Some(m.Int())
+			tl.ReceiveDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_phoneCallRequested:
@@ -43539,7 +43539,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Reason = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Duration = Some(m.Int())
+			tl.Duration = Ref(m.Int())
 		}
 		r = tl
 	case CRC_phoneConnection:
@@ -43605,19 +43605,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Key = m.String()
 		if flags&(1<<0) != 0 {
-			tl.ZeroValue = Some(m.String())
+			tl.ZeroValue = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.OneValue = Some(m.String())
+			tl.OneValue = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.TwoValue = Some(m.String())
+			tl.TwoValue = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
-			tl.FewValue = Some(m.String())
+			tl.FewValue = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.ManyValue = Some(m.String())
+			tl.ManyValue = Ref(m.String())
 		}
 		tl.OtherValue = m.String()
 		r = tl
@@ -43642,7 +43642,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.NativeName = m.String()
 		tl.LangCode = m.String()
 		if flags&(1<<1) != 0 {
-			tl.BaseLangCode = Some(m.String())
+			tl.BaseLangCode = Ref(m.String())
 		}
 		tl.PluralCode = m.String()
 		tl.StringsCount = m.Int()
@@ -44227,7 +44227,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Errors = m.Vector()
 		tl.Users = m.Vector()
 		if flags&(1<<0) != 0 {
-			tl.PrivacyPolicyUrl = Some(m.String())
+			tl.PrivacyPolicyUrl = Ref(m.String())
 		}
 		r = tl
 	case CRC_account_sentEmailCode:
@@ -44361,10 +44361,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Text = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Colspan = Some(m.Int())
+			tl.Colspan = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Rowspan = Some(m.Int())
+			tl.Rowspan = Ref(m.Int())
 		}
 		r = tl
 	case CRC_pageTableRow:
@@ -44400,19 +44400,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Url = m.String()
 		tl.WebpageID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Description = Some(m.String())
+			tl.Description = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.PhotoID = Some(m.Long())
+			tl.PhotoID = Ref(m.Long())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Author = Some(m.String())
+			tl.Author = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.PublishedDate = Some(m.Int())
+			tl.PublishedDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_page:
@@ -44426,7 +44426,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Photos = m.Vector()
 		tl.Documents = m.Vector()
 		if flags&(1<<3) != 0 {
-			tl.Views = Some(m.Int())
+			tl.Views = Ref(m.Int())
 		}
 		r = tl
 	case CRC_help_supportName:
@@ -44459,10 +44459,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Question = m.String()
 		tl.Answers = m.Vector()
 		if flags&(1<<4) != 0 {
-			tl.ClosePeriod = Some(m.Int())
+			tl.ClosePeriod = Ref(m.Int())
 		}
 		if flags&(1<<5) != 0 {
-			tl.CloseDate = Some(m.Int())
+			tl.CloseDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_pollAnswerVoters:
@@ -44481,13 +44481,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Results = m.Vector()
 		}
 		if flags&(1<<2) != 0 {
-			tl.TotalVoters = Some(m.Int())
+			tl.TotalVoters = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
 			tl.RecentVoters = m.Vector()
 		}
 		if flags&(1<<4) != 0 {
-			tl.Solution = Some(m.String())
+			tl.Solution = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
 			tl.SolutionEntities = m.Vector()
@@ -44578,10 +44578,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.LogoutTokens = m.VectorBytes()
 		}
 		if flags&(1<<8) != 0 {
-			tl.Token = Some(m.String())
+			tl.Token = Ref(m.String())
 		}
 		if flags&(1<<8) != 0 {
-			tl.AppSandbox = Some(m.Bool())
+			tl.AppSandbox = Ref(m.Bool())
 		}
 		r = tl
 	case CRC_wallPaperSettings:
@@ -44590,22 +44590,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Blur = flags&(1<<1) != 0
 		tl.Motion = flags&(1<<2) != 0
 		if flags&(1<<0) != 0 {
-			tl.BackgroundColor = Some(m.Int())
+			tl.BackgroundColor = Ref(m.Int())
 		}
 		if flags&(1<<4) != 0 {
-			tl.SecondBackgroundColor = Some(m.Int())
+			tl.SecondBackgroundColor = Ref(m.Int())
 		}
 		if flags&(1<<5) != 0 {
-			tl.ThirdBackgroundColor = Some(m.Int())
+			tl.ThirdBackgroundColor = Ref(m.Int())
 		}
 		if flags&(1<<6) != 0 {
-			tl.FourthBackgroundColor = Some(m.Int())
+			tl.FourthBackgroundColor = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Intensity = Some(m.Int())
+			tl.Intensity = Ref(m.Int())
 		}
 		if flags&(1<<4) != 0 {
-			tl.Rotation = Some(m.Int())
+			tl.Rotation = Ref(m.Int())
 		}
 		r = tl
 	case CRC_autoDownloadSettings:
@@ -44747,10 +44747,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Settings = m.Vector()
 		}
 		if flags&(1<<6) != 0 {
-			tl.Emoticon = Some(m.String())
+			tl.Emoticon = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.InstallsCount = Some(m.Int())
+			tl.InstallsCount = Ref(m.Int())
 		}
 		r = tl
 	case CRC_account_themesNotModified:
@@ -44809,7 +44809,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.BaseTheme = m.Object()
 		tl.AccentColor = m.Int()
 		if flags&(1<<3) != 0 {
-			tl.OutboxAccentColor = Some(m.Int())
+			tl.OutboxAccentColor = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
 			tl.MessageColors = m.VectorInt()
@@ -44828,7 +44828,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.BaseTheme = m.Object()
 		tl.AccentColor = m.Int()
 		if flags&(1<<3) != 0 {
-			tl.OutboxAccentColor = Some(m.Int())
+			tl.OutboxAccentColor = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
 			tl.MessageColors = m.VectorInt()
@@ -44864,7 +44864,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Chats = m.Vector()
 		tl.Users = m.Vector()
 		if flags&(1<<0) != 0 {
-			tl.NextOffset = Some(m.String())
+			tl.NextOffset = Ref(m.String())
 		}
 		r = tl
 	case CRC_bankCardOpenUrl:
@@ -44891,7 +44891,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ID = m.Int()
 		tl.Title = m.String()
 		if flags&(1<<25) != 0 {
-			tl.Emoticon = Some(m.String())
+			tl.Emoticon = Ref(m.String())
 		}
 		tl.PinnedPeers = m.Vector()
 		tl.IncludePeers = m.Vector()
@@ -44907,7 +44907,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ID = m.Int()
 		tl.Title = m.String()
 		if flags&(1<<25) != 0 {
-			tl.Emoticon = Some(m.String())
+			tl.Emoticon = Ref(m.String())
 		}
 		tl.PinnedPeers = m.Vector()
 		tl.IncludePeers = m.Vector()
@@ -44945,7 +44945,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Json = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.ZoomToken = Some(m.String())
+			tl.ZoomToken = Ref(m.String())
 		}
 		r = tl
 	case CRC_messageInteractionCounters:
@@ -44985,10 +44985,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Chats = m.Vector()
 		tl.Users = m.Vector()
 		if flags&(1<<1) != 0 {
-			tl.PsaType = Some(m.String())
+			tl.PsaType = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.PsaMessage = Some(m.String())
+			tl.PsaMessage = Ref(m.String())
 		}
 		r = tl
 	case CRC_videoSize:
@@ -44999,7 +44999,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.H = m.Int()
 		tl.Size = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.VideoStartTs = Some(m.Double())
+			tl.VideoStartTs = Ref(m.Double())
 		}
 		r = tl
 	case CRC_videoSizeEmojiMarkup:
@@ -45076,7 +45076,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Iso2 = m.String()
 		tl.DefaultName = m.String()
 		if flags&(1<<1) != 0 {
-			tl.Name = Some(m.String())
+			tl.Name = Ref(m.String())
 		}
 		tl.CountryCodes = m.Vector()
 		r = tl
@@ -45092,10 +45092,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_messageViews{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Views = Some(m.Int())
+			tl.Views = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Forwards = Some(m.Int())
+			tl.Forwards = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
 			tl.Replies = m.Object()
@@ -45112,13 +45112,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Messages = m.Vector()
 		if flags&(1<<0) != 0 {
-			tl.MaxID = Some(m.Int())
+			tl.MaxID = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.ReadInboxMaxID = Some(m.Int())
+			tl.ReadInboxMaxID = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.ReadOutboxMaxID = Some(m.Int())
+			tl.ReadOutboxMaxID = Ref(m.Int())
 		}
 		tl.UnreadCount = m.Int()
 		tl.Chats = m.Vector()
@@ -45131,7 +45131,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ForumTopic = flags&(1<<3) != 0
 		tl.Quote = flags&(1<<9) != 0
 		if flags&(1<<4) != 0 {
-			tl.ReplyToMsgID = Some(m.Int())
+			tl.ReplyToMsgID = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
 			tl.ReplyToPeerID = m.Object()
@@ -45143,10 +45143,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.ReplyMedia = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.ReplyToTopID = Some(m.Int())
+			tl.ReplyToTopID = Ref(m.Int())
 		}
 		if flags&(1<<6) != 0 {
-			tl.QuoteText = Some(m.String())
+			tl.QuoteText = Ref(m.String())
 		}
 		if flags&(1<<7) != 0 {
 			tl.QuoteEntities = m.Vector()
@@ -45167,13 +45167,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.RecentRepliers = m.Vector()
 		}
 		if flags&(1<<0) != 0 {
-			tl.ChannelID = Some(m.Long())
+			tl.ChannelID = Ref(m.Long())
 		}
 		if flags&(1<<2) != 0 {
-			tl.MaxID = Some(m.Int())
+			tl.MaxID = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.ReadMaxID = Some(m.Int())
+			tl.ReadMaxID = Ref(m.Int())
 		}
 		r = tl
 	case CRC_peerBlocked:
@@ -45206,19 +45206,19 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.AccessHash = m.Long()
 		tl.ParticipantsCount = m.Int()
 		if flags&(1<<3) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.StreamDcID = Some(m.Int())
+			tl.StreamDcID = Ref(m.Int())
 		}
 		if flags&(1<<5) != 0 {
-			tl.RecordStartDate = Some(m.Int())
+			tl.RecordStartDate = Ref(m.Int())
 		}
 		if flags&(1<<7) != 0 {
-			tl.ScheduleDate = Some(m.Int())
+			tl.ScheduleDate = Ref(m.Int())
 		}
 		if flags&(1<<10) != 0 {
-			tl.UnmutedVideoCount = Some(m.Int())
+			tl.UnmutedVideoCount = Ref(m.Int())
 		}
 		tl.UnmutedVideoLimit = m.Int()
 		tl.Version = m.Int()
@@ -45244,17 +45244,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.Date = m.Int()
 		if flags&(1<<3) != 0 {
-			tl.ActiveDate = Some(m.Int())
+			tl.ActiveDate = Ref(m.Int())
 		}
 		tl.Source = m.Int()
 		if flags&(1<<7) != 0 {
-			tl.Volume = Some(m.Int())
+			tl.Volume = Ref(m.Int())
 		}
 		if flags&(1<<11) != 0 {
-			tl.About = Some(m.String())
+			tl.About = Ref(m.String())
 		}
 		if flags&(1<<13) != 0 {
-			tl.RaiseHandRating = Some(m.Long())
+			tl.RaiseHandRating = Ref(m.Long())
 		}
 		if flags&(1<<6) != 0 {
 			tl.Video = m.Object()
@@ -45308,7 +45308,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Pm = flags&(1<<0) != 0
 		tl.Group = flags&(1<<1) != 0
 		if flags&(1<<2) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		r = tl
 	case CRC_messages_affectedFoundMessages:
@@ -45326,10 +45326,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.UserID = m.Long()
 		tl.Date = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.About = Some(m.String())
+			tl.About = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.ApprovedBy = Some(m.Long())
+			tl.ApprovedBy = Ref(m.Long())
 		}
 		r = tl
 	case CRC_messages_exportedChatInvites:
@@ -45392,7 +45392,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Endpoint = m.String()
 		tl.SourceGroups = m.Vector()
 		if flags&(1<<1) != 0 {
-			tl.AudioSource = Some(m.Int())
+			tl.AudioSource = Ref(m.Int())
 		}
 		r = tl
 	case CRC_stickers_suggestedShortName:
@@ -45448,13 +45448,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.ChatInvite = m.Object()
 		}
 		if flags&(1<<4) != 0 {
-			tl.ChatInviteHash = Some(m.String())
+			tl.ChatInviteHash = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.ChannelPost = Some(m.Int())
+			tl.ChannelPost = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
-			tl.StartParam = Some(m.String())
+			tl.StartParam = Ref(m.String())
 		}
 		if flags&(1<<9) != 0 {
 			tl.Webpage = m.Object()
@@ -45464,17 +45464,17 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Entities = m.Vector()
 		}
 		if flags&(1<<7) != 0 {
-			tl.SponsorInfo = Some(m.String())
+			tl.SponsorInfo = Ref(m.String())
 		}
 		if flags&(1<<8) != 0 {
-			tl.AdditionalInfo = Some(m.String())
+			tl.AdditionalInfo = Ref(m.String())
 		}
 		r = tl
 	case CRC_messages_sponsoredMessages:
 		tl := TL_messages_sponsoredMessages{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.PostsBetween = Some(m.Int())
+			tl.PostsBetween = Ref(m.Int())
 		}
 		tl.Messages = m.Vector()
 		tl.Chats = m.Vector()
@@ -45498,7 +45498,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.MinDate = m.Int()
 		tl.MinMsgID = m.Int()
 		if flags&(1<<1) != 0 {
-			tl.OffsetIdOffset = Some(m.Int())
+			tl.OffsetIdOffset = Ref(m.Int())
 		}
 		tl.Periods = m.Vector()
 		tl.Messages = m.Vector()
@@ -45545,7 +45545,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_reactionCount{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.ChosenOrder = Some(m.Int())
+			tl.ChosenOrder = Ref(m.Int())
 		}
 		tl.Reaction = m.Object()
 		tl.Count = m.Int()
@@ -45568,7 +45568,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Chats = m.Vector()
 		tl.Users = m.Vector()
 		if flags&(1<<0) != 0 {
-			tl.NextOffset = Some(m.String())
+			tl.NextOffset = Ref(m.String())
 		}
 		r = tl
 	case CRC_availableReaction:
@@ -45819,7 +45819,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Amount = m.Long()
 		tl.BotUrl = m.String()
 		if flags&(1<<0) != 0 {
-			tl.StoreProduct = Some(m.String())
+			tl.StoreProduct = Ref(m.String())
 		}
 		r = tl
 	case CRC_paymentFormMethod:
@@ -45916,14 +45916,14 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Current = flags&(1<<1) != 0
 		tl.CanPurchaseUpgrade = flags&(1<<2) != 0
 		if flags&(1<<3) != 0 {
-			tl.Transaction = Some(m.String())
+			tl.Transaction = Ref(m.String())
 		}
 		tl.Months = m.Int()
 		tl.Currency = m.String()
 		tl.Amount = m.Long()
 		tl.BotUrl = m.String()
 		if flags&(1<<0) != 0 {
-			tl.StoreProduct = Some(m.String())
+			tl.StoreProduct = Ref(m.String())
 		}
 		r = tl
 	case CRC_sendAsPeer:
@@ -45936,16 +45936,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_messageExtendedMediaPreview{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.W = Some(m.Int())
+			tl.W = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
-			tl.H = Some(m.Int())
+			tl.H = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
 			tl.Thumb = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.VideoDuration = Some(m.Int())
+			tl.VideoDuration = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messageExtendedMedia:
@@ -45981,7 +45981,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Title = m.String()
 		tl.IconColor = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.IconEmojiID = Some(m.Long())
+			tl.IconEmojiID = Ref(m.Long())
 		}
 		tl.TopMessage = m.Int()
 		tl.ReadInboxMaxID = m.Int()
@@ -46019,10 +46019,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_requestPeerTypeUser{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Bot = Some(m.Bool())
+			tl.Bot = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Premium = Some(m.Bool())
+			tl.Premium = Ref(m.Bool())
 		}
 		r = tl
 	case CRC_requestPeerTypeChat:
@@ -46031,10 +46031,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Creator = flags&(1<<0) != 0
 		tl.BotParticipant = flags&(1<<5) != 0
 		if flags&(1<<3) != 0 {
-			tl.HasUsername = Some(m.Bool())
+			tl.HasUsername = Ref(m.Bool())
 		}
 		if flags&(1<<4) != 0 {
-			tl.Forum = Some(m.Bool())
+			tl.Forum = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
 			tl.UserAdminRights = m.Object()
@@ -46048,7 +46048,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Creator = flags&(1<<0) != 0
 		if flags&(1<<3) != 0 {
-			tl.HasUsername = Some(m.Bool())
+			tl.HasUsername = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
 			tl.UserAdminRights = m.Object()
@@ -46094,7 +46094,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Photos = flags&(1<<0) != 0
 		tl.Videos = flags&(1<<1) != 0
 		if flags&(1<<2) != 0 {
-			tl.VideoMaxSize = Some(m.Long())
+			tl.VideoMaxSize = Ref(m.Long())
 		}
 		r = tl
 	case CRC_autoSaveException:
@@ -46203,7 +46203,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Title = m.String()
 		if flags&(1<<0) != 0 {
-			tl.Emoticon = Some(m.String())
+			tl.Emoticon = Ref(m.String())
 		}
 		tl.Peers = m.Vector()
 		tl.Chats = m.Vector()
@@ -46253,13 +46253,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.HasViewers = flags&(1<<1) != 0
 		tl.ViewsCount = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.ForwardsCount = Some(m.Int())
+			tl.ForwardsCount = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
 			tl.Reactions = m.Vector()
 		}
 		if flags&(1<<4) != 0 {
-			tl.ReactionsCount = Some(m.Int())
+			tl.ReactionsCount = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
 			tl.RecentViewers = m.VectorLong()
@@ -46293,7 +46293,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Date = m.Int()
 		tl.ExpireDate = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Caption = Some(m.String())
+			tl.Caption = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.Entities = m.Vector()
@@ -46355,7 +46355,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Views = m.Vector()
 		tl.Users = m.Vector()
 		if flags&(1<<0) != 0 {
-			tl.NextOffset = Some(m.String())
+			tl.NextOffset = Ref(m.String())
 		}
 		r = tl
 	case CRC_stories_storyViews:
@@ -46368,13 +46368,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.ReplyToMsgID = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
 			tl.ReplyToPeerID = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.QuoteText = Some(m.String())
+			tl.QuoteText = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
 			tl.QuoteEntities = m.Vector()
@@ -46393,10 +46393,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_storiesStealthMode{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.ActiveUntilDate = Some(m.Int())
+			tl.ActiveUntilDate = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.CooldownUntilDate = Some(m.Int())
+			tl.CooldownUntilDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_mediaAreaCoordinates:
@@ -46441,7 +46441,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.MaxReadID = Some(m.Int())
+			tl.MaxReadID = Ref(m.Int())
 		}
 		tl.Stories = m.Vector()
 		r = tl
@@ -46463,10 +46463,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Users = m.Int()
 		tl.Months = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.StoreProduct = Some(m.String())
+			tl.StoreProduct = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.StoreQuantity = Some(m.Int())
+			tl.StoreQuantity = Ref(m.Int())
 		}
 		tl.Currency = m.String()
 		tl.Amount = m.Long()
@@ -46477,15 +46477,15 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ViaGiveaway = flags&(1<<2) != 0
 		tl.FromID = m.Object()
 		if flags&(1<<3) != 0 {
-			tl.GiveawayMsgID = Some(m.Int())
+			tl.GiveawayMsgID = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
-			tl.ToID = Some(m.Long())
+			tl.ToID = Ref(m.Long())
 		}
 		tl.Date = m.Int()
 		tl.Months = m.Int()
 		if flags&(1<<1) != 0 {
-			tl.UsedDate = Some(m.Int())
+			tl.UsedDate = Ref(m.Int())
 		}
 		tl.Chats = m.Vector()
 		tl.Users = m.Vector()
@@ -46497,13 +46497,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.PreparingResults = flags&(1<<3) != 0
 		tl.StartDate = m.Int()
 		if flags&(1<<1) != 0 {
-			tl.JoinedTooEarlyDate = Some(m.Int())
+			tl.JoinedTooEarlyDate = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.AdminDisallowedChatID = Some(m.Long())
+			tl.AdminDisallowedChatID = Ref(m.Long())
 		}
 		if flags&(1<<4) != 0 {
-			tl.DisallowedCountry = Some(m.String())
+			tl.DisallowedCountry = Ref(m.String())
 		}
 		r = tl
 	case CRC_payments_giveawayInfoResults:
@@ -46513,7 +46513,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Refunded = flags&(1<<1) != 0
 		tl.StartDate = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.GiftCodeSlug = Some(m.String())
+			tl.GiftCodeSlug = Ref(m.String())
 		}
 		tl.FinishDate = m.Int()
 		tl.WinnersCount = m.Int()
@@ -46534,18 +46534,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Unclaimed = flags&(1<<3) != 0
 		tl.ID = m.String()
 		if flags&(1<<0) != 0 {
-			tl.UserID = Some(m.Long())
+			tl.UserID = Ref(m.Long())
 		}
 		if flags&(1<<2) != 0 {
-			tl.GiveawayMsgID = Some(m.Int())
+			tl.GiveawayMsgID = Ref(m.Int())
 		}
 		tl.Date = m.Int()
 		tl.Expires = m.Int()
 		if flags&(1<<4) != 0 {
-			tl.UsedGiftSlug = Some(m.String())
+			tl.UsedGiftSlug = Ref(m.String())
 		}
 		if flags&(1<<5) != 0 {
-			tl.Multiplier = Some(m.Int())
+			tl.Multiplier = Ref(m.Int())
 		}
 		r = tl
 	case CRC_premium_boostsList:
@@ -46554,7 +46554,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Count = m.Int()
 		tl.Boosts = m.Vector()
 		if flags&(1<<0) != 0 {
-			tl.NextOffset = Some(m.String())
+			tl.NextOffset = Ref(m.String())
 		}
 		tl.Users = m.Vector()
 		r = tl
@@ -46568,7 +46568,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Date = m.Int()
 		tl.Expires = m.Int()
 		if flags&(1<<1) != 0 {
-			tl.CooldownUntilDate = Some(m.Int())
+			tl.CooldownUntilDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_premium_myBoosts:
@@ -46585,10 +46585,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.CurrentLevelBoosts = m.Int()
 		tl.Boosts = m.Int()
 		if flags&(1<<4) != 0 {
-			tl.GiftBoosts = Some(m.Int())
+			tl.GiftBoosts = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
-			tl.NextLevelBoosts = Some(m.Int())
+			tl.NextLevelBoosts = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
 			tl.PremiumAudience = m.Object()
@@ -46668,7 +46668,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.PhoneNumber = m.String()
 		tl.PhoneCodeHash = m.String()
 		if flags&(1<<0) != 0 {
-			tl.PhoneCode = Some(m.String())
+			tl.PhoneCode = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.EmailVerification = m.Object()
@@ -46762,10 +46762,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.PhoneNumber = m.String()
 		tl.PhoneCodeHash = m.String()
 		if flags&(1<<0) != 0 {
-			tl.SafetyNetToken = Some(m.String())
+			tl.SafetyNetToken = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.IosPushSecret = Some(m.String())
+			tl.IosPushSecret = Ref(m.String())
 		}
 		r = tl
 	case CRC_auth_resetLoginEmail:
@@ -46805,13 +46805,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_account_updateProfile{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.FirstName = Some(m.String())
+			tl.FirstName = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.LastName = Some(m.String())
+			tl.LastName = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.About = Some(m.String())
+			tl.About = Ref(m.String())
 		}
 		r = tl
 	case CRC_account_updateStatus:
@@ -46980,7 +46980,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.MessageChannels = flags&(1<<4) != 0
 		tl.Files = flags&(1<<5) != 0
 		if flags&(1<<5) != 0 {
-			tl.FileMaxSize = Some(m.Long())
+			tl.FileMaxSize = Ref(m.Long())
 		}
 		r = tl
 	case CRC_account_finishTakeoutSession:
@@ -47078,10 +47078,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Format = m.String()
 		tl.Theme = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Slug = Some(m.String())
+			tl.Slug = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.Document = m.Object()
@@ -47103,7 +47103,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Theme = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.Format = Some(m.String())
+			tl.Format = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
 			tl.BaseTheme = m.Object()
@@ -47165,10 +47165,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Confirmed = flags&(1<<3) != 0
 		tl.Hash = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.EncryptedRequestsDisabled = Some(m.Bool())
+			tl.EncryptedRequestsDisabled = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.CallRequestsDisabled = Some(m.Bool())
+			tl.CallRequestsDisabled = Ref(m.Bool())
 		}
 		r = tl
 	case CRC_account_getSavedRingtones:
@@ -47244,7 +47244,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Color = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.BackgroundEmojiID = Some(m.Long())
+			tl.BackgroundEmojiID = Ref(m.Long())
 		}
 		r = tl
 	case CRC_account_getDefaultBackgroundEmojis:
@@ -47364,7 +47364,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Background = flags&(1<<1) != 0
 		tl.GeoPoint = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.SelfExpires = Some(m.Int())
+			tl.SelfExpires = Ref(m.Int())
 		}
 		r = tl
 	case CRC_contacts_blockFromReplies:
@@ -47406,7 +47406,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.ExcludePinned = flags&(1<<0) != 0
 		if flags&(1<<1) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		tl.OffsetDate = m.Int()
 		tl.OffsetID = m.Int()
@@ -47434,7 +47434,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.FromID = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.Filter = m.Object()
 		tl.MinDate = m.Int()
@@ -47459,10 +47459,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.MaxID = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.MinDate = Some(m.Int())
+			tl.MinDate = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.MaxDate = Some(m.Int())
+			tl.MaxDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messages_deleteMessages:
@@ -47480,7 +47480,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.Action = m.Object()
 		r = tl
@@ -47507,7 +47507,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Entities = m.Vector()
 		}
 		if flags&(1<<10) != 0 {
-			tl.ScheduleDate = Some(m.Int())
+			tl.ScheduleDate = Ref(m.Int())
 		}
 		if flags&(1<<13) != 0 {
 			tl.SendAs = m.Object()
@@ -47536,7 +47536,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Entities = m.Vector()
 		}
 		if flags&(1<<10) != 0 {
-			tl.ScheduleDate = Some(m.Int())
+			tl.ScheduleDate = Ref(m.Int())
 		}
 		if flags&(1<<13) != 0 {
 			tl.SendAs = m.Object()
@@ -47556,10 +47556,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.RandomID = m.VectorLong()
 		tl.ToPeer = m.Object()
 		if flags&(1<<9) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		if flags&(1<<10) != 0 {
-			tl.ScheduleDate = Some(m.Int())
+			tl.ScheduleDate = Ref(m.Int())
 		}
 		if flags&(1<<13) != 0 {
 			tl.SendAs = m.Object()
@@ -47617,7 +47617,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Users = m.Vector()
 		tl.Title = m.String()
 		if flags&(1<<0) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messages_getDhConfig:
@@ -47712,13 +47712,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.RequestNeeded = flags&(1<<3) != 0
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.ExpireDate = Some(m.Int())
+			tl.ExpireDate = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.UsageLimit = Some(m.Int())
+			tl.UsageLimit = Ref(m.Int())
 		}
 		if flags&(1<<4) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		r = tl
 	case CRC_messages_checkChatInvite:
@@ -47770,7 +47770,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl := TL_messages_searchGlobal{}
 		flags := m.Int()
 		if flags&(1<<0) != 0 {
-			tl.FolderID = Some(m.Int())
+			tl.FolderID = Ref(m.Int())
 		}
 		tl.Q = m.String()
 		tl.Filter = m.Object()
@@ -47823,7 +47823,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Results = m.Vector()
 		tl.CacheTime = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.NextOffset = Some(m.String())
+			tl.NextOffset = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
 			tl.SwitchPm = m.Object()
@@ -47847,7 +47847,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.QueryID = m.Long()
 		tl.ID = m.String()
 		if flags&(1<<10) != 0 {
-			tl.ScheduleDate = Some(m.Int())
+			tl.ScheduleDate = Ref(m.Int())
 		}
 		if flags&(1<<13) != 0 {
 			tl.SendAs = m.Object()
@@ -47866,7 +47866,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.ID = m.Int()
 		if flags&(1<<11) != 0 {
-			tl.Message = Some(m.String())
+			tl.Message = Ref(m.String())
 		}
 		if flags&(1<<14) != 0 {
 			tl.Media = m.Object()
@@ -47878,7 +47878,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Entities = m.Vector()
 		}
 		if flags&(1<<15) != 0 {
-			tl.ScheduleDate = Some(m.Int())
+			tl.ScheduleDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messages_editInlineBotMessage:
@@ -47888,7 +47888,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.InvertMedia = flags&(1<<16) != 0
 		tl.ID = m.Object()
 		if flags&(1<<11) != 0 {
-			tl.Message = Some(m.String())
+			tl.Message = Ref(m.String())
 		}
 		if flags&(1<<14) != 0 {
 			tl.Media = m.Object()
@@ -47919,10 +47919,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Alert = flags&(1<<1) != 0
 		tl.QueryID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Message = Some(m.String())
+			tl.Message = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		tl.CacheTime = m.Int()
 		r = tl
@@ -48055,7 +48055,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.QueryID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Error = Some(m.String())
+			tl.Error = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.ShippingOptions = m.Vector()
@@ -48067,7 +48067,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Success = flags&(1<<1) != 0
 		tl.QueryID = m.Long()
 		if flags&(1<<0) != 0 {
-			tl.Error = Some(m.String())
+			tl.Error = Ref(m.String())
 		}
 		r = tl
 	case CRC_messages_uploadMedia:
@@ -48095,7 +48095,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.OffsetID = m.Int()
 		tl.AddOffset = m.Int()
@@ -48108,7 +48108,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messages_getRecentLocations:
@@ -48132,7 +48132,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 		tl.MultiMedia = m.Vector()
 		if flags&(1<<10) != 0 {
-			tl.ScheduleDate = Some(m.Int())
+			tl.ScheduleDate = Ref(m.Int())
 		}
 		if flags&(1<<13) != 0 {
 			tl.SendAs = m.Object()
@@ -48221,7 +48221,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.Filters = m.Vector()
 		r = tl
@@ -48232,13 +48232,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Peer = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.MsgID = Some(m.Int())
+			tl.MsgID = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.ButtonID = Some(m.Int())
+			tl.ButtonID = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		r = tl
 	case CRC_messages_acceptUrlAuth:
@@ -48249,13 +48249,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Peer = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.MsgID = Some(m.Int())
+			tl.MsgID = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.ButtonID = Some(m.Int())
+			tl.ButtonID = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		r = tl
 	case CRC_messages_hidePeerSettingsBar:
@@ -48291,7 +48291,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Option = m.StringBytes()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Offset = Some(m.String())
+			tl.Offset = Ref(m.String())
 		}
 		tl.Limit = m.Int()
 		r = tl
@@ -48355,7 +48355,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messages_deleteChat:
@@ -48396,10 +48396,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.AdminID = m.Object()
 		if flags&(1<<2) != 0 {
-			tl.OffsetDate = Some(m.Int())
+			tl.OffsetDate = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.OffsetLink = Some(m.String())
+			tl.OffsetLink = Ref(m.String())
 		}
 		tl.Limit = m.Int()
 		r = tl
@@ -48415,16 +48415,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.Link = m.String()
 		if flags&(1<<0) != 0 {
-			tl.ExpireDate = Some(m.Int())
+			tl.ExpireDate = Ref(m.Int())
 		}
 		if flags&(1<<1) != 0 {
-			tl.UsageLimit = Some(m.Int())
+			tl.UsageLimit = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.RequestNeeded = Some(m.Bool())
+			tl.RequestNeeded = Ref(m.Bool())
 		}
 		if flags&(1<<4) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		r = tl
 	case CRC_messages_deleteRevokedExportedChatInvites:
@@ -48447,10 +48447,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Requested = flags&(1<<0) != 0
 		tl.Peer = m.Object()
 		if flags&(1<<1) != 0 {
-			tl.Link = Some(m.String())
+			tl.Link = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Q = Some(m.String())
+			tl.Q = Ref(m.String())
 		}
 		tl.OffsetDate = m.Int()
 		tl.OffsetUser = m.Object()
@@ -48502,7 +48502,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Approved = flags&(1<<0) != 0
 		tl.Peer = m.Object()
 		if flags&(1<<1) != 0 {
-			tl.Link = Some(m.String())
+			tl.Link = Ref(m.String())
 		}
 		r = tl
 	case CRC_messages_toggleNoForwards:
@@ -48540,7 +48540,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Reaction = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Offset = Some(m.String())
+			tl.Offset = Ref(m.String())
 		}
 		tl.Limit = m.Int()
 		r = tl
@@ -48576,7 +48576,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		tl.OffsetID = m.Int()
 		tl.AddOffset = m.Int()
@@ -48589,7 +48589,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Peer = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Some(m.Int())
+			tl.TopMsgID = Ref(m.Int())
 		}
 		r = tl
 	case CRC_messages_searchSentMedia:
@@ -48621,10 +48621,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.Bot = m.Object()
 		if flags&(1<<1) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		if flags&(1<<3) != 0 {
-			tl.StartParam = Some(m.String())
+			tl.StartParam = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.ThemeParams = m.Object()
@@ -48658,10 +48658,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.FromSideMenu = flags&(1<<2) != 0
 		tl.Bot = m.Object()
 		if flags&(1<<3) != 0 {
-			tl.Url = Some(m.String())
+			tl.Url = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.StartParam = Some(m.String())
+			tl.StartParam = Ref(m.String())
 		}
 		if flags&(1<<0) != 0 {
 			tl.ThemeParams = m.Object()
@@ -48777,7 +48777,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.App = m.Object()
 		if flags&(1<<1) != 0 {
-			tl.StartParam = Some(m.String())
+			tl.StartParam = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.ThemeParams = m.Object()
@@ -48795,7 +48795,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Settings = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.ID = Some(m.Int())
+			tl.ID = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updates_getState:
@@ -48806,15 +48806,15 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Pts = m.Int()
 		if flags&(1<<1) != 0 {
-			tl.PtsLimit = Some(m.Int())
+			tl.PtsLimit = Ref(m.Int())
 		}
 		if flags&(1<<0) != 0 {
-			tl.PtsTotalLimit = Some(m.Int())
+			tl.PtsTotalLimit = Ref(m.Int())
 		}
 		tl.Date = m.Int()
 		tl.Qts = m.Int()
 		if flags&(1<<2) != 0 {
-			tl.QtsLimit = Some(m.Int())
+			tl.QtsLimit = Ref(m.Int())
 		}
 		r = tl
 	case CRC_updates_getChannelDifference:
@@ -48849,7 +48849,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Video = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.VideoStartTs = Some(m.Double())
+			tl.VideoStartTs = Ref(m.Double())
 		}
 		if flags&(1<<4) != 0 {
 			tl.VideoEmojiMarkup = m.Object()
@@ -48879,7 +48879,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Video = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.VideoStartTs = Some(m.Double())
+			tl.VideoStartTs = Ref(m.Double())
 		}
 		if flags&(1<<5) != 0 {
 			tl.VideoEmojiMarkup = m.Object()
@@ -49077,10 +49077,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.GeoPoint = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.Address = Some(m.String())
+			tl.Address = Ref(m.String())
 		}
 		if flags&(1<<4) != 0 {
-			tl.TtlPeriod = Some(m.Int())
+			tl.TtlPeriod = Ref(m.Int())
 		}
 		r = tl
 	case CRC_channels_editAdmin:
@@ -49279,10 +49279,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Channel = m.Object()
 		tl.Title = m.String()
 		if flags&(1<<0) != 0 {
-			tl.IconColor = Some(m.Int())
+			tl.IconColor = Ref(m.Int())
 		}
 		if flags&(1<<3) != 0 {
-			tl.IconEmojiID = Some(m.Long())
+			tl.IconEmojiID = Ref(m.Long())
 		}
 		tl.RandomID = m.Long()
 		if flags&(1<<2) != 0 {
@@ -49294,7 +49294,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Channel = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Q = Some(m.String())
+			tl.Q = Ref(m.String())
 		}
 		tl.OffsetDate = m.Int()
 		tl.OffsetID = m.Int()
@@ -49312,16 +49312,16 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Channel = m.Object()
 		tl.TopicID = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.IconEmojiID = Some(m.Long())
+			tl.IconEmojiID = Ref(m.Long())
 		}
 		if flags&(1<<2) != 0 {
-			tl.Closed = Some(m.Bool())
+			tl.Closed = Ref(m.Bool())
 		}
 		if flags&(1<<3) != 0 {
-			tl.Hidden = Some(m.Bool())
+			tl.Hidden = Ref(m.Bool())
 		}
 		r = tl
 	case CRC_channels_updatePinnedForumTopic:
@@ -49368,7 +49368,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Channel = m.Object()
 		tl.Color = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.BackgroundEmojiID = Some(m.Long())
+			tl.BackgroundEmojiID = Ref(m.Long())
 		}
 		r = tl
 	case CRC_bots_sendCustomRequest:
@@ -49422,13 +49422,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 		tl.LangCode = m.String()
 		if flags&(1<<3) != 0 {
-			tl.Name = Some(m.String())
+			tl.Name = Ref(m.String())
 		}
 		if flags&(1<<0) != 0 {
-			tl.About = Some(m.String())
+			tl.About = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Description = Some(m.String())
+			tl.Description = Ref(m.String())
 		}
 		r = tl
 	case CRC_bots_getBotInfo:
@@ -49490,14 +49490,14 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.FormID = m.Long()
 		tl.Invoice = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.RequestedInfoID = Some(m.String())
+			tl.RequestedInfoID = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.ShippingOptionID = Some(m.String())
+			tl.ShippingOptionID = Ref(m.String())
 		}
 		tl.Credentials = m.Object()
 		if flags&(1<<2) != 0 {
-			tl.TipAmount = Some(m.Long())
+			tl.TipAmount = Ref(m.Long())
 		}
 		r = tl
 	case CRC_payments_getSavedInfo:
@@ -49573,7 +49573,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		}
 		tl.Stickers = m.Vector()
 		if flags&(1<<3) != 0 {
-			tl.Software = Some(m.String())
+			tl.Software = Ref(m.String())
 		}
 		r = tl
 	case CRC_stickers_removeStickerFromSet:
@@ -49598,7 +49598,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.Thumb = m.Object()
 		}
 		if flags&(1<<1) != 0 {
-			tl.ThumbDocumentID = Some(m.Long())
+			tl.ThumbDocumentID = Ref(m.Long())
 		}
 		r = tl
 	case CRC_stickers_checkShortName:
@@ -49614,13 +49614,13 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Sticker = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Emoji = Some(m.String())
+			tl.Emoji = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.MaskCoords = m.Object()
 		}
 		if flags&(1<<2) != 0 {
-			tl.Keywords = Some(m.String())
+			tl.Keywords = Ref(m.String())
 		}
 		r = tl
 	case CRC_stickers_renameStickerSet:
@@ -49695,10 +49695,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Peer = m.Object()
 		tl.RandomID = m.Int()
 		if flags&(1<<0) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
-			tl.ScheduleDate = Some(m.Int())
+			tl.ScheduleDate = Ref(m.Int())
 		}
 		r = tl
 	case CRC_phone_joinGroupCall:
@@ -49709,7 +49709,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Call = m.Object()
 		tl.JoinAs = m.Object()
 		if flags&(1<<1) != 0 {
-			tl.InviteHash = Some(m.String())
+			tl.InviteHash = Ref(m.String())
 		}
 		tl.Params = m.Object()
 		r = tl
@@ -49733,7 +49733,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ResetInviteHash = flags&(1<<1) != 0
 		tl.Call = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.JoinMuted = Some(m.Bool())
+			tl.JoinMuted = Ref(m.Bool())
 		}
 		r = tl
 	case CRC_phone_getGroupCall:
@@ -49761,10 +49761,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Video = flags&(1<<2) != 0
 		tl.Call = m.Object()
 		if flags&(1<<1) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
-			tl.VideoPortrait = Some(m.Bool())
+			tl.VideoPortrait = Ref(m.Bool())
 		}
 		r = tl
 	case CRC_phone_editGroupCallParticipant:
@@ -49773,22 +49773,22 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Call = m.Object()
 		tl.Participant = m.Object()
 		if flags&(1<<0) != 0 {
-			tl.Muted = Some(m.Bool())
+			tl.Muted = Ref(m.Bool())
 		}
 		if flags&(1<<1) != 0 {
-			tl.Volume = Some(m.Int())
+			tl.Volume = Ref(m.Int())
 		}
 		if flags&(1<<2) != 0 {
-			tl.RaiseHand = Some(m.Bool())
+			tl.RaiseHand = Ref(m.Bool())
 		}
 		if flags&(1<<3) != 0 {
-			tl.VideoStopped = Some(m.Bool())
+			tl.VideoStopped = Ref(m.Bool())
 		}
 		if flags&(1<<4) != 0 {
-			tl.VideoPaused = Some(m.Bool())
+			tl.VideoPaused = Ref(m.Bool())
 		}
 		if flags&(1<<5) != 0 {
-			tl.PresentationPaused = Some(m.Bool())
+			tl.PresentationPaused = Ref(m.Bool())
 		}
 		r = tl
 	case CRC_phone_editGroupCallTitle:
@@ -49884,7 +49884,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		flags := m.Int()
 		tl.Token = m.String()
 		if flags&(1<<0) != 0 {
-			tl.X = Some(m.Long())
+			tl.X = Ref(m.Long())
 		}
 		r = tl
 	case CRC_stats_getMegagroupStats:
@@ -49926,7 +49926,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Chatlist = m.Object()
 		tl.Slug = m.String()
 		if flags&(1<<1) != 0 {
-			tl.Title = Some(m.String())
+			tl.Title = Ref(m.String())
 		}
 		if flags&(1<<2) != 0 {
 			tl.Peers = m.Vector()
@@ -49982,7 +49982,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.MediaAreas = m.Vector()
 		}
 		if flags&(1<<0) != 0 {
-			tl.Caption = Some(m.String())
+			tl.Caption = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.Entities = m.Vector()
@@ -49990,7 +49990,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.PrivacyRules = m.Vector()
 		tl.RandomID = m.Long()
 		if flags&(1<<3) != 0 {
-			tl.Period = Some(m.Int())
+			tl.Period = Ref(m.Int())
 		}
 		r = tl
 	case CRC_stories_editStory:
@@ -50005,7 +50005,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 			tl.MediaAreas = m.Vector()
 		}
 		if flags&(1<<1) != 0 {
-			tl.Caption = Some(m.String())
+			tl.Caption = Ref(m.String())
 		}
 		if flags&(1<<1) != 0 {
 			tl.Entities = m.Vector()
@@ -50031,7 +50031,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.Next = flags&(1<<1) != 0
 		tl.Hidden = flags&(1<<2) != 0
 		if flags&(1<<0) != 0 {
-			tl.State = Some(m.String())
+			tl.State = Ref(m.String())
 		}
 		r = tl
 	case CRC_stories_getPinnedStories:
@@ -50072,7 +50072,7 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		tl.ReactionsFirst = flags&(1<<2) != 0
 		tl.Peer = m.Object()
 		if flags&(1<<1) != 0 {
-			tl.Q = Some(m.String())
+			tl.Q = Ref(m.String())
 		}
 		tl.ID = m.Int()
 		tl.Offset = m.String()
