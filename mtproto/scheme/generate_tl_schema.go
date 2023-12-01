@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"hash/crc32"
-	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
@@ -247,7 +246,7 @@ func makeCombinatorDescription(id, fieldsStr, typeName string) string {
 
 func parseTLSchema(fpath string) []*Combinator {
 	// reading tl file
-	data, err := ioutil.ReadFile(fpath)
+	data, err := os.ReadFile(fpath)
 	if err != nil {
 		log.Fatal(err)
 	}
