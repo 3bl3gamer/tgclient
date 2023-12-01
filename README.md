@@ -6,7 +6,7 @@ It is a pure-Golang MTProto client for Telegram API.
 
 Initially based on https://github.com/sdidyk/mtproto and https://github.com/ronaksoft/mtproto.
 
-TL layer: 166
+TL layer: 167
 
 Consists of two parts:
   * mtproto — core part for API interaction;
@@ -124,7 +124,7 @@ tg.SetUpdateHandler(func(updateTL mtproto.TL) {
 
 ## Updating API schema version (aka layer)
 
-Get new schema from https://core.telegram.org/schema (remove definitions for `boolFalse`, `boolTrue`, `true`, `vector`, `error` and `null`: they are hard-coded and must not be generated). If it is ~~still~~ outdated check other repos (like official ones), some useful links are at the top of [generate_tl_schema.go](https://github.com/3bl3gamer/tgclient/blob/master/mtproto/scheme/generate_tl_schema.go).
+Get new schema from https://core.telegram.org/schema (remove definitions for `int`, `long`, `double`, `string`, `vector`, `int128` and `int256`: they are hard-coded and must not be generated). If it is ~~still~~ outdated check other repos (like official ones), some useful links are at the top of [generate_tl_schema.go](https://github.com/3bl3gamer/tgclient/blob/master/mtproto/scheme/generate_tl_schema.go).
 
 Place new `.tl` file to `mtproto/scheme` folder.
 
