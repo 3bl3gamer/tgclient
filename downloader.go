@@ -187,7 +187,11 @@ func (d *Downloader) DownloadFileParts(
 
 func (d *Downloader) ReqestFilePart(dcID int32, fileLocation mtproto.TL, totalSize, offset, limit int64) chan *FileResponse {
 	if totalSize-offset < limit {
+		d.log.Warn("ReqestFilePart: totalSize: %d, offset: %d, limit: %d; adjusting limit to %d", totalSize, offset, limit, totalSize-offset)
 		limit = totalSize - offset
+		if limit < 0 {
+			limit = 0
+		}
 	}
 	part := &filePart{
 		dcID:     dcID,
