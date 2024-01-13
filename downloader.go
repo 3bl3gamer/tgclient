@@ -118,7 +118,6 @@ func (d *Downloader) DownloadFileToPath(
 		}
 	}
 
-	d.log.Warn("calling DownloadFileParts: fpath: %s size: %d, partSize: %d, offset: %d", fpath, size, partSize, offset)
 	partsRes, err := d.DownloadFileParts(fd, fileLocation, dcID, size, partSize, offset, progressHnd)
 	if err != nil {
 		return nil, merry.Wrap(err)
@@ -141,12 +140,10 @@ func (d *Downloader) DownloadFileParts(
 	partsRes := &FilePartsResult{ActualDcID: dcID}
 
 	partsCount := int((size - offset + partSize - 1) / partSize)
-	d.log.Warn("DownloadFileParts: partsCount: %d", partsCount)
 	resChans := make([]chan *FileResponse, clampI(1, partsCount, 4))
-	d.log.Warn("DownloadFileParts: len(resChans): %d", len(resChans))
 
 	for i := 0; i < len(resChans); i++ {
-		resChans[i] = d.ReqestFilePart(dcID, fileLocation, size,
+		resChans[i] = d.ReqestFilePart(dcID, fileLocation,
 			offset+partSize*int64(i), partSize)
 	}
 
@@ -166,7 +163,7 @@ func (d *Downloader) DownloadFileParts(
 		}
 		newPartOffset := offset + partSize*int64(len(resChans)-1)
 		if newPartOffset < size {
-			resChans[len(resChans)-1] = d.ReqestFilePart(dcID, fileLocation, size, newPartOffset, partSize)
+			resChans[len(resChans)-1] = d.ReqestFilePart(dcID, fileLocation, newPartOffset, partSize)
 		} else {
 			resChans = resChans[:len(resChans)-1]
 		}
@@ -188,8 +185,7 @@ func (d *Downloader) DownloadFileParts(
 	return partsRes, nil
 }
 
-func (d *Downloader) ReqestFilePart(dcID int32, fileLocation mtproto.TL, totalSize, offset, limit int64) chan *FileResponse {
-	d.log.Warn("ReqestFilePart: totalSize: %d, offset: %d, limit: %d", totalSize, offset, limit)
+func (d *Downloader) ReqestFilePart(dcID int32, fileLocation mtproto.TL, offset, limit int64) chan *FileResponse {
 	part := &filePart{
 		dcID:     dcID,
 		location: fileLocation,
