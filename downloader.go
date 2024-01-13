@@ -165,7 +165,7 @@ func (d *Downloader) DownloadFileParts(
 			resChans[i-1] = resChans[i]
 		}
 		newPartOffset := offset + partSize*int64(len(resChans)-1)
-		if newPartOffset < size || len(resChans) == 1 {
+		if newPartOffset < size {
 			resChans[len(resChans)-1] = d.ReqestFilePart(dcID, fileLocation, size, newPartOffset, partSize)
 		} else {
 			resChans = resChans[:len(resChans)-1]
@@ -180,7 +180,7 @@ func (d *Downloader) DownloadFileParts(
 		}
 		partsRes.BytesWritten += n
 
-		if len(res.Data) < int(partSize) {
+		if newPartOffset >= size {
 			partsRes.Finished = true
 			break
 		}
