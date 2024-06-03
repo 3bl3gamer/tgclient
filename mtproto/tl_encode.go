@@ -14,6 +14,10 @@ func NewEncodeBuf(cap int) *EncodeBuf {
 	return &EncodeBuf{make([]byte, 0, cap)}
 }
 
+func (e *EncodeBuf) Buf() []byte {
+	return e.buf
+}
+
 func (e *EncodeBuf) Bool(s bool) {
 	var crc uint32 = CRC_boolFalse
 	if s {

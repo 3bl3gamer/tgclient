@@ -41,6 +41,14 @@ func NewDecodeBuf(b []byte) *DecodeBuf {
 	return &DecodeBuf{b, 0, len(b), nil}
 }
 
+func (m *DecodeBuf) Err() error {
+	return m.err
+}
+
+func (m *DecodeBuf) RemainingLen() int {
+	return m.size - m.off
+}
+
 func (m *DecodeBuf) SeekBack(n int) {
 	if m.off >= n {
 		m.off -= n
