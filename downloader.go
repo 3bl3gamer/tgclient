@@ -107,7 +107,7 @@ func (d *Downloader) DownloadFileToPath(
 		return nil, merry.Wrap(err)
 	}
 	if offset%int64(partSize) != 0 {
-		d.log.Warn("file '%s' exists but size is not multiple of block size (%d % %d != 0), moving to start",
+		d.log.Warn("file '%s' exists but size is not multiple of block size (%d %% %d != 0), moving to start",
 			tempFpath, offset, partSize)
 		offset, err = fd.Seek(0, io.SeekStart)
 		if err != nil {
@@ -177,7 +177,7 @@ func (d *Downloader) DownloadFileParts(
 		}
 		partsRes.BytesWritten += n
 
-		if newPartOffset >= size {
+		if len(resChans) == 0 {
 			partsRes.Finished = true
 			break
 		}
