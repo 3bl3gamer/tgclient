@@ -369,10 +369,6 @@ func (m *DecodeBuf) vectorHeader(errLabel string) int32 {
 	return size
 }
 
-func (d *DecodeBuf) dump() {
-	fmt.Println(hex.Dump(d.buf[d.off:d.size]))
-}
-
 func (d *DecodeBuf) pushToErrBufStack(objStartOffset int, constructor uint32) {
 	if d.err == nil {
 		return
@@ -480,7 +476,7 @@ func (m *MTProto) decodeMessage(dbuf *DecodeBuf, reqMsg TLReq) (r TL) {
 		gz, _ := gzip.NewReader(&buf)
 
 		b := make([]byte, 4096)
-		for true {
+		for {
 			n, _ := gz.Read(b)
 			obj = append(obj, b[0:n]...)
 			if n <= 0 {

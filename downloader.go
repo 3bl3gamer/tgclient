@@ -248,13 +248,11 @@ func (d *Downloader) getFileMT(dcID int32) (*mtproto.MTProto, error) {
 	d.fileMTsMutex.Lock()
 	defer d.fileMTsMutex.Unlock()
 
-	mt, _ := d.fileMTs[dcID]
-	if mt != nil {
+	if mt := d.fileMTs[dcID]; mt != nil {
 		return mt, nil
 	}
 
-	var err error
-	mt, err = d.tg.mt.NewConnection(dcID)
+	mt, err := d.tg.mt.NewConnection(dcID)
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}

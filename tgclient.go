@@ -76,9 +76,12 @@ func (c *TGClient) InitAndConnect() error {
 }
 
 func (c *TGClient) Disconnect() error {
-	err := c.Downloader.Stop()
-	err = c.mt.Disconnect()
-	return merry.Wrap(err)
+	stopErr := c.Downloader.Stop()
+	discErr := c.mt.Disconnect()
+	if stopErr != nil {
+		merry.Wrap(stopErr)
+	}
+	return merry.Wrap(discErr)
 }
 
 func (c *TGClient) handleEvent(eventObj mtproto.TL) {

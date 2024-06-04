@@ -100,7 +100,7 @@ func (m *MTProto) read() (*packetReceived, error) {
 		return nil, merry.Wrap(err)
 	}
 	b := make([]byte, 1)
-	n, err = m.conn.Read(b)
+	_, err = m.conn.Read(b)
 	if err != nil {
 		return nil, merry.Wrap(err)
 	}
@@ -109,7 +109,7 @@ func (m *MTProto) read() (*packetReceived, error) {
 		size = int(b[0]) << 2
 	} else {
 		b := make([]byte, 3)
-		n, err = m.conn.Read(b)
+		_, err = m.conn.Read(b)
 		if err != nil {
 			return nil, merry.Wrap(err)
 		}
@@ -339,6 +339,9 @@ func (m *MTProto) makeAuthKey() error {
 	copy(x[0:], sha1(innerData2))
 	copy(x[20:], innerData2)
 	encryptedData2, err := doAES256IGEencrypt(x, tmpAESKey, tmpAESIV)
+	if err != nil {
+		return merry.Wrap(err)
+	}
 
 	// (send) set_client_DH_params
 	err = m.justSend(TL_setClientDHParams{nonceFirst, nonceServer, string(encryptedData2)})

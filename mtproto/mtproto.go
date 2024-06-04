@@ -197,7 +197,6 @@ func (m *MTProto) InitSession(sessEncrIsReady bool) error {
 		m.encryptionReady = sessEncrIsReady
 	}
 
-	rand.Seed(time.Now().UnixNano())
 	m.session.sessionId = rand.Int63()
 	return nil
 }
@@ -294,7 +293,7 @@ func (m *MTProto) Connect() error {
 		}
 		m.log.Error(err, "failed to connect")
 		m.log.Info("trying to connect one more time (%d)", i)
-		time.Sleep(1)
+		time.Sleep(time.Second)
 	}
 	if err != nil {
 		return merry.Wrap(err)
@@ -482,7 +481,7 @@ func (m *MTProto) NewConnection(dcID int32) (*MTProto, error) {
 		if !ok {
 			return nil, merry.New(UnexpectedTL("auth export", res))
 		}
-		res = newMT.SendSync(TL_auth_importAuthorization{ID: exported.ID, Bytes: exported.Bytes})
+		res = newMT.SendSync(TL_auth_importAuthorization(exported))
 		if _, ok := res.(TL_auth_authorization); !ok {
 			return nil, merry.New(UnexpectedTL("auth import", res))
 		}
@@ -720,6 +719,17 @@ func (m *MTProto) Auth(authData AuthDataProvider) error {
 	return nil
 }
 
+//	func (m *MTProto) popPendingPackets() []*packetToSend {
+//		m.mutex.Lock()
+//		defer m.mutex.Unlock()
+//		return m.popPendingPacketsUnlocked()
+//	}
+//	func (m *MTProto) pushPendingPackets(packets []*packetToSend) {
+//		m.mutex.Lock()
+//		defer m.mutex.Unlock()
+//		m.pushPendingPacketsUnlocked(packets)
+//	}
+
 func (m *MTProto) popPendingPacketsUnlocked() []*packetToSend {
 	packets := make([]*packetToSend, 0, len(m.msgsByID))
 	msgs := make([]TL, 0)
@@ -731,21 +741,11 @@ func (m *MTProto) popPendingPacketsUnlocked() []*packetToSend {
 	m.log.Debug("popped %d pending packet(s): %#v", len(packets), msgs)
 	return packets
 }
-func (m *MTProto) popPendingPackets() []*packetToSend {
-	m.mutex.Lock()
-	defer m.mutex.Unlock()
-	return m.popPendingPacketsUnlocked()
-}
 func (m *MTProto) pushPendingPacketsUnlocked(packets []*packetToSend) {
 	for _, packet := range packets {
 		m.sendQueue <- packet
 	}
 	m.log.Debug("pushed %d pending packet(s)", len(packets))
-}
-func (m *MTProto) pushPendingPackets(packets []*packetToSend) {
-	m.mutex.Lock()
-	defer m.mutex.Unlock()
-	m.pushPendingPacketsUnlocked(packets)
 }
 func (m *MTProto) resendPendingPackets() {
 	m.mutex.Lock()
@@ -789,25 +789,6 @@ func (m *MTProto) GetContacts() error {
 
 	return nil
 }
-
-/*func (m *MTProto) SendMessage(user_id int32, msg string) error {
-	resp := make(chan TL, 1)
-	m.sendQueue <- packetToSend{
-		TL_messages_sendMessage{
-			TL_inputPeerContact{user_id},
-			msg,
-			rand.Int63(),
-		},
-		resp,
-	}
-	x := <-resp
-	_, ok := x.(TL_messages_sentMessage)
-	if !ok {
-		return merry.Errorf("RPC: %#v", x)
-	}
-
-	return nil
-}*/
 
 func (m *MTProto) pingRoutine() {
 	defer func() {
