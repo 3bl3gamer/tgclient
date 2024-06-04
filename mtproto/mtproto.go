@@ -18,7 +18,7 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-//go:generate go run scheme/generate_tl_schema.go 167 scheme/tl-schema-167.tl tl_schema.go
+//go:generate go run scheme/generate_tl_schema.go 181 scheme/tl-schema-181.tl tl_schema.go
 //go:generate gofmt -w tl_schema.go
 
 const ROUTINES_COUNT = 5
