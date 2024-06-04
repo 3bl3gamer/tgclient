@@ -518,7 +518,8 @@ func (m *MTProto) SendSyncRetry(
 		}
 
 		// TL_rpc_error{ErrorCode:-503, ErrorMessage:"Timeout"}
-		if IsError(res, "Timeout") {
+		// UPD: seems the message was checnged to "Timedout". Not sure is old one is absolete or not. Checking both just in case.
+		if IsError(res, "Timeout") || IsError(res, "Timedout") {
 			m.log.Warn("got RPC timeout, retrying in %s", failRetryInterval)
 			time.Sleep(failRetryInterval)
 			continue
