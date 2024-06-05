@@ -45,7 +45,6 @@ func IsWrongClientTimeError(tlOrErr any) bool {
 	}
 
 	if msg, ok := tlOrErr.(TL_badMsgNotification); ok {
-		fmt.Printf("%#v\n", msg)
 		return msg.ErrorCode == 16 || msg.ErrorCode == 17
 	}
 	return false
