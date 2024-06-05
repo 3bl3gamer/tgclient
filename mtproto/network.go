@@ -86,6 +86,8 @@ func (m *MTProto) send(packet *packetToSend) error {
 	if _, err := m.conn.Write(x.buf); err != nil {
 		return merry.Wrap(err)
 	}
+
+	packet.sentAt = time.Now()
 	return nil
 }
 

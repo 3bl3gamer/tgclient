@@ -93,6 +93,7 @@ type packetToSend struct {
 	msg     TL
 	resp    chan TL
 	needAck bool
+	sentAt  time.Time
 }
 
 func newPacket(msg TL, resp chan TL) *packetToSend {
@@ -909,10 +910,10 @@ func (m *MTProto) debugRoutine() {
 
 		m.mutex.Lock()
 		count := 0
-		for id := range m.msgsByID {
-			delta := time.Now().Unix() - (id >> 32)
-			if delta > 5 {
-				m.log.Warn("msgsByID: #%d: is here for %ds", id, delta)
+		for id, packet := range m.msgsByID {
+			delta := time.Since(packet.sentAt)
+			if delta > 5*time.Second {
+				m.log.Warn("msgsByID: #%d: is here for %ds", id, int64(delta/time.Second))
 			}
 			count++
 		}
