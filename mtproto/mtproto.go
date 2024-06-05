@@ -75,6 +75,9 @@ type MTProto struct {
 	handleEvent        func(TL)
 	handleReconnection func() error
 
+	lastInMsgTimeOffsetSec int64
+	outMsgIDTimeOffsetSec  int64
+
 	dcOptions []TL_dcOption
 }
 
@@ -104,6 +107,7 @@ type MTParams struct {
 	ConnDialer proxy.Dialer
 	SessStore  SessionStore
 	Session    *SessionInfo
+	TimeOffset time.Duration
 }
 
 func NewMTProto(appID int32, appHash string) *MTProto {
@@ -167,6 +171,8 @@ func NewMTProtoExt(params MTParams) *MTProto {
 
 		connectSemaphore: semaphore.NewWeighted(1),
 		reconnSemaphore:  semaphore.NewWeighted(1),
+
+		outMsgIDTimeOffsetSec: int64(params.TimeOffset / time.Second),
 	}
 	return m
 }
@@ -230,6 +236,10 @@ func (m *MTProto) SetReconnectionHandler(handler func() error) {
 }
 
 func (m *MTProto) initConection() error {
+	m.lastOutMsgID = 0
+	m.lastOutSeqNo = 0
+	m.lastInMsgTimeOffsetSec = 0
+
 	m.log.Info("connecting to DC %d (%s)...", m.session.DCID, m.session.Addr)
 	var err error
 	m.conn, err = m.connDialer.Dial("tcp", m.session.Addr)
@@ -291,7 +301,13 @@ func (m *MTProto) Connect() error {
 		if err == nil {
 			break
 		}
-		m.log.Error(err, "failed to connect")
+
+		if IsWrongClientTimeError(err) {
+			m.log.Info("client time seems inaccurate, applying correction")
+			m.outMsgIDTimeOffsetSec = m.lastInMsgTimeOffsetSec
+		} else {
+			m.log.Error(err, "failed to connect")
+		}
 		m.log.Info("trying to connect one more time (%d)", i)
 		time.Sleep(time.Second)
 	}
@@ -467,6 +483,7 @@ func (m *MTProto) NewConnection(dcID int32) (*MTProto, error) {
 		Session:    session,
 		LogHandler: m.log.Hnd,
 		ConnDialer: m.connDialer,
+		TimeOffset: time.Duration(m.outMsgIDTimeOffsetSec) * time.Second,
 	})
 	if err := newMT.InitSession(encrIsReady); err != nil {
 		return nil, merry.Wrap(err)

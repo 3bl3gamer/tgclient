@@ -81,6 +81,21 @@ func start(appID int32, appHash string) error {
 		log.Printf("done: #%d %s", self.ID, mtproto.DerefOr(self.FirstName, ""))
 	}
 
+	{
+		curDC := m.CopySession().DCID
+		newDC := int32(2)
+		if curDC == newDC {
+			newDC = 1
+		}
+		log.Printf("Connecting to another DC (%d -> %d)", curDC, newDC)
+		m1, err := m.NewConnection(newDC)
+		if err != nil {
+			return merry.Wrap(err)
+		}
+		res := m1.SendSync(mtproto.TL_help_getConfig{})
+		log.Printf("done, date from TL_config: %d", res.(mtproto.TL_config).Date)
+	}
+
 	<-chan bool(nil) //pausing forever
 	return nil
 }

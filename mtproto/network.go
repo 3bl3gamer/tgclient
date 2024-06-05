@@ -194,6 +194,9 @@ func (m *MTProto) read() (*packetReceived, error) {
 		return nil, merry.Errorf("handshake: wrong bits of message_id: %d", mod)
 	}
 
+	msgStamp := packet.msgID >> 32
+	m.lastInMsgTimeOffsetSec = msgStamp - time.Now().Unix()
+
 	m.log.Message(true, packet.msg, packet.msgID)
 	return &packet, nil
 }
@@ -377,7 +380,7 @@ func (m *MTProto) generateMessageId() int64 {
 	// "must approximately equal unixtime*2^32"
 	// "the lower 32 bits ... must present a fractional part of the time point when the message was created"
 	// "Client message identifiers are divisible by 4"
-	id := ((unixnano / nano) << 32) | ((unixnano % nano) & -4)
+	id := ((unixnano/nano + m.outMsgIDTimeOffsetSec) << 32) | ((unixnano % nano) & -4)
 
 	// "must increase monotonically"
 	// (Windows has a low time resolution, multiple UnixNano() may produce same result)
