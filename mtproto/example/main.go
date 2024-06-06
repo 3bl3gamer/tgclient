@@ -82,6 +82,14 @@ func start(appID int32, appHash string) error {
 	}
 
 	{
+		log.Println("Reconnecting")
+		if err := m.Reconnect(); err != nil {
+			return merry.Wrap(err)
+		}
+		log.Println("done")
+	}
+
+	{
 		curDC := m.CopySession().DCID
 		newDC := int32(2)
 		if curDC == newDC {

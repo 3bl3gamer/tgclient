@@ -238,8 +238,8 @@ func (m *MTProto) SetReconnectionHandler(handler func() error) {
 
 func (m *MTProto) initConection() error {
 	m.lastOutMsgID = 0
-	m.lastOutSeqNo = 0
 	m.lastInMsgTimeOffsetSec = 0
+	// no need to reset m.lastOutSeqNo otherwise after reconnection TG will respond with TL_badMsgNotification{ErrorCode:32} (msg_seqno too low)
 
 	m.log.Info("connecting to DC %d (%s)...", m.session.DCID, m.session.Addr)
 	var err error
@@ -535,7 +535,7 @@ func (m *MTProto) SendSyncRetry(
 		}
 
 		// TL_rpc_error{ErrorCode:-503, ErrorMessage:"Timeout"}
-		// UPD: seems the message was checnged to "Timedout". Not sure is old one is absolete or not. Checking both just in case.
+		// UPD: seems the message was checnged to "Timedout". Not sure if old one is absolete or not. Checking both just in case.
 		if IsError(res, "Timeout") || IsError(res, "Timedout") {
 			m.log.Warn("got RPC timeout, retrying in %s", failRetryInterval)
 			time.Sleep(failRetryInterval)
