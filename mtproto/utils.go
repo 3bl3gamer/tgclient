@@ -22,20 +22,33 @@ func IsErrorType(obj TL, code int32) bool {
 }
 
 const FloodWaitErrPerfix = "FLOOD_WAIT_"
+const FloodPremiumWaitErrPerfix = "FLOOD_PREMIUM_WAIT_"
 
 func IsFloodError(tlOrErr any) (time.Duration, bool) {
+	var secs int64
+
 	if val, ok := unwrapUnexpectedTypeErrValue(tlOrErr); ok {
 		tlOrErr = val
 	}
 
-	if err, ok := tlOrErr.(TL_rpcError); ok && strings.HasPrefix(err.ErrorMessage, FloodWaitErrPerfix) {
-		secs, _ := strconv.ParseInt(err.ErrorMessage[len(FloodWaitErrPerfix):], 10, 64)
-		if secs <= 0 {
-			secs = 1
-		}
-		return time.Duration(secs) * time.Second, true
+	err, ok := tlOrErr.(TL_rpcError)
+	if !ok {
+		return 0, false
 	}
-	return 0, false
+
+	if strings.HasPrefix(err.ErrorMessage, FloodWaitErrPerfix) {
+		secs, _ = strconv.ParseInt(err.ErrorMessage[len(FloodWaitErrPerfix):], 10, 64)
+	} else if strings.HasPrefix(err.ErrorMessage, FloodPremiumWaitErrPerfix) {
+		secs, _ = strconv.ParseInt(err.ErrorMessage[len(FloodPremiumWaitErrPerfix):], 10, 64)
+	} else {
+		return 0, false
+	}
+
+	if secs <= 0 {
+		secs = 1
+	}
+
+	return time.Duration(secs) * time.Second, true
 }
 
 // https://core.telegram.org/mtproto/service_messages_about_messages#notice-of-ignored-error-message
