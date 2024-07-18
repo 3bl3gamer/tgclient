@@ -21,6 +21,14 @@ func IsErrorType(obj TL, code int32) bool {
 	return ok && err.ErrorCode == code
 }
 
+func IsErrorMessage(obj any, message string) bool {
+	if val, ok := unwrapUnexpectedTypeErrValue(obj); ok {
+		obj = val
+	}
+	err, ok := obj.(TL_rpcError)
+	return ok && err.ErrorMessage == message
+}
+
 const FloodWaitErrPerfix = "FLOOD_WAIT_"
 const FloodPremiumWaitErrPerfix = "FLOOD_PREMIUM_WAIT_"
 
@@ -59,6 +67,28 @@ func IsWrongClientTimeError(tlOrErr any) bool {
 
 	if msg, ok := tlOrErr.(TL_badMsgNotification); ok {
 		return msg.ErrorCode == 16 || msg.ErrorCode == 17
+	}
+	return false
+}
+
+func IsMsgSeqnoTooLowError(tlOrErr any) bool {
+	if val, ok := unwrapUnexpectedTypeErrValue(tlOrErr); ok {
+		tlOrErr = val
+	}
+
+	if msg, ok := tlOrErr.(TL_badMsgNotification); ok {
+		return msg.ErrorCode == 32
+	}
+	return false
+}
+
+func IsMsgSeqnoTooHighError(tlOrErr any) bool {
+	if val, ok := unwrapUnexpectedTypeErrValue(tlOrErr); ok {
+		tlOrErr = val
+	}
+
+	if msg, ok := tlOrErr.(TL_badMsgNotification); ok {
+		return msg.ErrorCode == 33
 	}
 	return false
 }
