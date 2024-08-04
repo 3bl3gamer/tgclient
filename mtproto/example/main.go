@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"log"
+	"math/rand"
 	"os"
 
 	"github.com/3bl3gamer/tgclient/mtproto"
@@ -82,6 +83,35 @@ func start(appID int32, appHash string) error {
 	}
 
 	{
+		log.Println("Sending self message")
+		randomID := rand.Int63()
+		res := m.SendSync(mtproto.TL_messages_sendMessage{
+			Peer:     mtproto.TL_inputPeerSelf{},
+			Message:  "tgclient test message",
+			RandomID: randomID,
+		})
+		updates := res.(mtproto.TL_updates)
+		var msgID int32 = 0
+		for _, updTL := range updates.Updates {
+			if upd, ok := updTL.(mtproto.TL_updateMessageID); ok {
+				if upd.RandomID == randomID {
+					msgID = upd.ID
+					break
+				}
+			}
+		}
+		if msgID == 0 {
+			return merry.Errorf("new message ID not found in: %#v", updates.Updates)
+		}
+		log.Printf("done: msg ID = %d, removing now", msgID)
+		res = m.SendSync(mtproto.TL_messages_deleteMessages{
+			ID: []int32{msgID},
+		})
+		_ = res.(mtproto.TL_messages_affectedMessages)
+		log.Printf("done: message #%d removed", msgID)
+	}
+
+	{
 		log.Println("Reconnecting")
 		if err := m.Reconnect(); err != nil {
 			return merry.Wrap(err)
@@ -104,6 +134,7 @@ func start(appID int32, appHash string) error {
 		log.Printf("done, date from TL_config: %d", res.(mtproto.TL_config).Date)
 	}
 
-	<-chan bool(nil) //pausing forever
+	log.Print("example finished, pausing forever")
+	<-chan bool(nil)
 	return nil
 }
