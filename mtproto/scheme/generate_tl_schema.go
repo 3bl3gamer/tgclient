@@ -583,17 +583,21 @@ import (
 	}
 
 	// decode funcs
-	write(`
-func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
-	objStartOffset := m.off - 4 //4 bytes of constructor name have been already read
-	switch constructor {`)
-
 	for _, c := range combinators {
 		if c.isFunction {
-			continue //no need to generate RPC responses encoding
+			continue //no need to generate RPC requests decoders
 		}
 
-		write("case %s:\n", c.crcName())
+		write("func decode_%s(m *DecodeBuf) TL {\n", c.structName())
+		write("  m.constructorAssert(%s)\n", c.crcName())
+		write("  return decode_body_%s(m)\n", c.structName())
+		write("}\n")
+
+		dbufArgName := "m"
+		if len(c.fields) == 0 {
+			dbufArgName = "_"
+		}
+		write("func decode_body_%s(%s *DecodeBuf) TL {\n", c.structName(), dbufArgName) //TL as return type is intended, see ObjectGenerated comment below
 		write("tl := %s{}\n", c.structName())
 		for _, t := range c.fields {
 			fieldName := normalizeFieldName(t.name)
@@ -625,11 +629,18 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 				}
 
 				if vecNesting == 1 {
-					write("tl.%s = DecodeBuf_GenericVector[%s](m)\n", fieldName, typ)
+					read := "m.Vector()"
+					if typ != "TL" {
+						read = fmt.Sprintf("DecodeBuf_GenericVector[%s](m)", typ)
+					}
+					write("tl.%s = %s\n", fieldName, read)
 				} else if vecNesting == 2 {
 					write("tl.%s = m.Vector2d()\n", fieldName)
 				} else {
-					read := fmt.Sprintf("DecodeBuf_GenericObject[%s](m)", typ)
+					read := "m.Object()"
+					if typ != "TL" {
+						read = fmt.Sprintf("decode_%s(m).(%s)", typ, typ)
+					}
 					if len(constructorIDs) == 1 && vecNesting == 0 && t.flag != nil {
 						read = "Ref(" + read + ")"
 					}
@@ -641,14 +652,53 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 				write("}\n")
 			}
 		}
-		write("r = tl\n")
+		write("return tl\n")
+		write("}\n\n")
+	}
+
+	// In Go 1.23 (at least) decoding works faster when the constructor's decoder
+	// is chosen by a large switch and when each case is a simple fucntion call which returns TL.
+	//
+	// It works slower if each decode_* function return exact type (i.e. decode_body_TL_poll()TL_poll{...}).
+	// It works slower when switch is replaced by map[uint32]func(*DecodeBuf)TL.
+	//
+	// Benchmarked via calling DecodeBuf().Object() with three input buffers:
+	//  1) large - 100 KB TL_messages_channelMessages{} response with single message with Instant View
+	//  2) regualr - 400 bytes TL_messages_channelMessages{} response with single simple short text message
+	//  3) tiny - 4 bytes with TL_starsTransactionPeerAds{} (is has no fields)
+	//
+	// switch, decode_* funcs return TL
+	//   Large      884349 ns/op      465960 B/op       12844 allocs/op
+	//   Regular      1876 ns/op        1392 B/op          28 allocs/op
+	//   Tiny            8.231 ns/op       0 B/op           0 allocs/op
+	//
+	// switch, decode_* funcs return exact types
+	//   Large      915388 ns/op      465824 B/op       12842 allocs/op
+	//   Regular      2036 ns/op        1368 B/op          27 allocs/op
+	//   Tiny            8.343 ns/op       0 B/op           0 allocs/op
+	//
+	// map, decode_* funcs return TL
+	//   Large      936009 ns/op      466024 B/op       12845 allocs/op
+	//   Regular      1961 ns/op        1456 B/op          29 allocs/op
+	//   Tiny           57.84 ns/op       64 B/op           1 allocs/op
+	write(`
+func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
+	objStartOffset := m.off - 4 //4 bytes of constructor name have been already read
+	switch constructor {`)
+
+	for _, c := range combinators {
+		if c.isFunction {
+			continue //no need to generate RPC requests decoders
+		}
+
+		write("case %s:\n", c.crcName())
+		write("r = decode_body_%s(m)\n", c.structName())
 	}
 
 	write(`
 	default:
 		m.err = merry.Errorf("Unknown constructor: %%08x", constructor)
 		return nil
-
 	}
 
 	if m.err != nil {

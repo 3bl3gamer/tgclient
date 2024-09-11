@@ -44465,10139 +44465,21258 @@ func (e TL_fragment_getCollectibleInfo) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func decode_TL_resPQ(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_resPQ)
+	return decode_body_TL_resPQ(m)
+}
+func decode_body_TL_resPQ(m *DecodeBuf) TL {
+	tl := TL_resPQ{}
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.PQ = m.String()
+	tl.ServerPublicKeyFingerprints = m.VectorLong()
+	return tl
+}
+
+func decode_TL_pqInnerData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pqInnerData)
+	return decode_body_TL_pqInnerData(m)
+}
+func decode_body_TL_pqInnerData(m *DecodeBuf) TL {
+	tl := TL_pqInnerData{}
+	tl.PQ = m.String()
+	tl.P = m.String()
+	tl.Q = m.String()
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.NewNonce = m.Bytes32()
+	return tl
+}
+
+func decode_TL_pqInnerDataDC(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pqInnerDataDC)
+	return decode_body_TL_pqInnerDataDC(m)
+}
+func decode_body_TL_pqInnerDataDC(m *DecodeBuf) TL {
+	tl := TL_pqInnerDataDC{}
+	tl.PQ = m.String()
+	tl.P = m.String()
+	tl.Q = m.String()
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.NewNonce = m.Bytes32()
+	tl.DC = m.Int()
+	return tl
+}
+
+func decode_TL_pqInnerDataTemp(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pqInnerDataTemp)
+	return decode_body_TL_pqInnerDataTemp(m)
+}
+func decode_body_TL_pqInnerDataTemp(m *DecodeBuf) TL {
+	tl := TL_pqInnerDataTemp{}
+	tl.PQ = m.String()
+	tl.P = m.String()
+	tl.Q = m.String()
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.NewNonce = m.Bytes32()
+	tl.ExpiresIn = m.Int()
+	return tl
+}
+
+func decode_TL_pqInnerDataTempDC(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pqInnerDataTempDC)
+	return decode_body_TL_pqInnerDataTempDC(m)
+}
+func decode_body_TL_pqInnerDataTempDC(m *DecodeBuf) TL {
+	tl := TL_pqInnerDataTempDC{}
+	tl.PQ = m.String()
+	tl.P = m.String()
+	tl.Q = m.String()
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.NewNonce = m.Bytes32()
+	tl.DC = m.Int()
+	tl.ExpiresIn = m.Int()
+	return tl
+}
+
+func decode_TL_bindAuthKeyInner(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_bindAuthKeyInner)
+	return decode_body_TL_bindAuthKeyInner(m)
+}
+func decode_body_TL_bindAuthKeyInner(m *DecodeBuf) TL {
+	tl := TL_bindAuthKeyInner{}
+	tl.Nonce = m.Long()
+	tl.TempAuthKeyID = m.Long()
+	tl.PermAuthKeyID = m.Long()
+	tl.TempSessionID = m.Long()
+	tl.ExpiresAt = m.Int()
+	return tl
+}
+
+func decode_TL_serverDHParamsFail(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_serverDHParamsFail)
+	return decode_body_TL_serverDHParamsFail(m)
+}
+func decode_body_TL_serverDHParamsFail(m *DecodeBuf) TL {
+	tl := TL_serverDHParamsFail{}
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.NewNonceHash = m.Bytes16()
+	return tl
+}
+
+func decode_TL_serverDHParamsOK(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_serverDHParamsOK)
+	return decode_body_TL_serverDHParamsOK(m)
+}
+func decode_body_TL_serverDHParamsOK(m *DecodeBuf) TL {
+	tl := TL_serverDHParamsOK{}
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.EncryptedAnswer = m.String()
+	return tl
+}
+
+func decode_TL_serverDHInnerData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_serverDHInnerData)
+	return decode_body_TL_serverDHInnerData(m)
+}
+func decode_body_TL_serverDHInnerData(m *DecodeBuf) TL {
+	tl := TL_serverDHInnerData{}
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.G = m.Int()
+	tl.DHPrime = m.String()
+	tl.GA = m.String()
+	tl.ServerTime = m.Int()
+	return tl
+}
+
+func decode_TL_clientDHInnerData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_clientDHInnerData)
+	return decode_body_TL_clientDHInnerData(m)
+}
+func decode_body_TL_clientDHInnerData(m *DecodeBuf) TL {
+	tl := TL_clientDHInnerData{}
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.RetryID = m.Long()
+	tl.GB = m.String()
+	return tl
+}
+
+func decode_TL_dhGenOK(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dhGenOK)
+	return decode_body_TL_dhGenOK(m)
+}
+func decode_body_TL_dhGenOK(m *DecodeBuf) TL {
+	tl := TL_dhGenOK{}
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.NewNonceHash1 = m.Bytes16()
+	return tl
+}
+
+func decode_TL_dhGenRetry(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dhGenRetry)
+	return decode_body_TL_dhGenRetry(m)
+}
+func decode_body_TL_dhGenRetry(m *DecodeBuf) TL {
+	tl := TL_dhGenRetry{}
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.NewNonceHash2 = m.Bytes16()
+	return tl
+}
+
+func decode_TL_dhGenFail(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dhGenFail)
+	return decode_body_TL_dhGenFail(m)
+}
+func decode_body_TL_dhGenFail(m *DecodeBuf) TL {
+	tl := TL_dhGenFail{}
+	tl.Nonce = m.Bytes16()
+	tl.ServerNonce = m.Bytes16()
+	tl.NewNonceHash3 = m.Bytes16()
+	return tl
+}
+
+func decode_TL_destroyAuthKeyOK(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_destroyAuthKeyOK)
+	return decode_body_TL_destroyAuthKeyOK(m)
+}
+func decode_body_TL_destroyAuthKeyOK(_ *DecodeBuf) TL {
+	tl := TL_destroyAuthKeyOK{}
+	return tl
+}
+
+func decode_TL_destroyAuthKeyNone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_destroyAuthKeyNone)
+	return decode_body_TL_destroyAuthKeyNone(m)
+}
+func decode_body_TL_destroyAuthKeyNone(_ *DecodeBuf) TL {
+	tl := TL_destroyAuthKeyNone{}
+	return tl
+}
+
+func decode_TL_destroyAuthKeyFail(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_destroyAuthKeyFail)
+	return decode_body_TL_destroyAuthKeyFail(m)
+}
+func decode_body_TL_destroyAuthKeyFail(_ *DecodeBuf) TL {
+	tl := TL_destroyAuthKeyFail{}
+	return tl
+}
+
+func decode_TL_msgsACK(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_msgsACK)
+	return decode_body_TL_msgsACK(m)
+}
+func decode_body_TL_msgsACK(m *DecodeBuf) TL {
+	tl := TL_msgsACK{}
+	tl.MsgIDs = m.VectorLong()
+	return tl
+}
+
+func decode_TL_badMsgNotification(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_badMsgNotification)
+	return decode_body_TL_badMsgNotification(m)
+}
+func decode_body_TL_badMsgNotification(m *DecodeBuf) TL {
+	tl := TL_badMsgNotification{}
+	tl.BadMsgID = m.Long()
+	tl.BadMsgSeqno = m.Int()
+	tl.ErrorCode = m.Int()
+	return tl
+}
+
+func decode_TL_badServerSalt(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_badServerSalt)
+	return decode_body_TL_badServerSalt(m)
+}
+func decode_body_TL_badServerSalt(m *DecodeBuf) TL {
+	tl := TL_badServerSalt{}
+	tl.BadMsgID = m.Long()
+	tl.BadMsgSeqno = m.Int()
+	tl.ErrorCode = m.Int()
+	tl.NewServerSalt = m.Long()
+	return tl
+}
+
+func decode_TL_msgsStateReq(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_msgsStateReq)
+	return decode_body_TL_msgsStateReq(m)
+}
+func decode_body_TL_msgsStateReq(m *DecodeBuf) TL {
+	tl := TL_msgsStateReq{}
+	tl.MsgIDs = m.VectorLong()
+	return tl
+}
+
+func decode_TL_msgsStateInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_msgsStateInfo)
+	return decode_body_TL_msgsStateInfo(m)
+}
+func decode_body_TL_msgsStateInfo(m *DecodeBuf) TL {
+	tl := TL_msgsStateInfo{}
+	tl.ReqMsgID = m.Long()
+	tl.Info = m.String()
+	return tl
+}
+
+func decode_TL_msgsAllInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_msgsAllInfo)
+	return decode_body_TL_msgsAllInfo(m)
+}
+func decode_body_TL_msgsAllInfo(m *DecodeBuf) TL {
+	tl := TL_msgsAllInfo{}
+	tl.MsgIDs = m.VectorLong()
+	tl.Info = m.String()
+	return tl
+}
+
+func decode_TL_msgDetailedInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_msgDetailedInfo)
+	return decode_body_TL_msgDetailedInfo(m)
+}
+func decode_body_TL_msgDetailedInfo(m *DecodeBuf) TL {
+	tl := TL_msgDetailedInfo{}
+	tl.MsgID = m.Long()
+	tl.AnswerMsgID = m.Long()
+	tl.Bytes = m.Int()
+	tl.Status = m.Int()
+	return tl
+}
+
+func decode_TL_msgNewDetailedInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_msgNewDetailedInfo)
+	return decode_body_TL_msgNewDetailedInfo(m)
+}
+func decode_body_TL_msgNewDetailedInfo(m *DecodeBuf) TL {
+	tl := TL_msgNewDetailedInfo{}
+	tl.AnswerMsgID = m.Long()
+	tl.Bytes = m.Int()
+	tl.Status = m.Int()
+	return tl
+}
+
+func decode_TL_msgResendReq(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_msgResendReq)
+	return decode_body_TL_msgResendReq(m)
+}
+func decode_body_TL_msgResendReq(m *DecodeBuf) TL {
+	tl := TL_msgResendReq{}
+	tl.MsgIDs = m.VectorLong()
+	return tl
+}
+
+func decode_TL_rpcError(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_rpcError)
+	return decode_body_TL_rpcError(m)
+}
+func decode_body_TL_rpcError(m *DecodeBuf) TL {
+	tl := TL_rpcError{}
+	tl.ErrorCode = m.Int()
+	tl.ErrorMessage = m.String()
+	return tl
+}
+
+func decode_TL_rpcAnswerUnknown(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_rpcAnswerUnknown)
+	return decode_body_TL_rpcAnswerUnknown(m)
+}
+func decode_body_TL_rpcAnswerUnknown(_ *DecodeBuf) TL {
+	tl := TL_rpcAnswerUnknown{}
+	return tl
+}
+
+func decode_TL_rpcAnswerDroppedRunning(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_rpcAnswerDroppedRunning)
+	return decode_body_TL_rpcAnswerDroppedRunning(m)
+}
+func decode_body_TL_rpcAnswerDroppedRunning(_ *DecodeBuf) TL {
+	tl := TL_rpcAnswerDroppedRunning{}
+	return tl
+}
+
+func decode_TL_rpcAnswerDropped(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_rpcAnswerDropped)
+	return decode_body_TL_rpcAnswerDropped(m)
+}
+func decode_body_TL_rpcAnswerDropped(m *DecodeBuf) TL {
+	tl := TL_rpcAnswerDropped{}
+	tl.MsgID = m.Long()
+	tl.SeqNo = m.Int()
+	tl.Bytes = m.Int()
+	return tl
+}
+
+func decode_TL_futureSalt(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_futureSalt)
+	return decode_body_TL_futureSalt(m)
+}
+func decode_body_TL_futureSalt(m *DecodeBuf) TL {
+	tl := TL_futureSalt{}
+	tl.ValidSince = m.Int()
+	tl.ValidUntil = m.Int()
+	tl.Salt = m.Long()
+	return tl
+}
+
+func decode_TL_futureSalts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_futureSalts)
+	return decode_body_TL_futureSalts(m)
+}
+func decode_body_TL_futureSalts(m *DecodeBuf) TL {
+	tl := TL_futureSalts{}
+	tl.ReqMsgID = m.Long()
+	tl.Now = m.Int()
+	tl.Salts = m.Vector()
+	return tl
+}
+
+func decode_TL_pong(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pong)
+	return decode_body_TL_pong(m)
+}
+func decode_body_TL_pong(m *DecodeBuf) TL {
+	tl := TL_pong{}
+	tl.MsgID = m.Long()
+	tl.PingID = m.Long()
+	return tl
+}
+
+func decode_TL_destroySessionOK(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_destroySessionOK)
+	return decode_body_TL_destroySessionOK(m)
+}
+func decode_body_TL_destroySessionOK(m *DecodeBuf) TL {
+	tl := TL_destroySessionOK{}
+	tl.SessionID = m.Long()
+	return tl
+}
+
+func decode_TL_destroySessionNone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_destroySessionNone)
+	return decode_body_TL_destroySessionNone(m)
+}
+func decode_body_TL_destroySessionNone(m *DecodeBuf) TL {
+	tl := TL_destroySessionNone{}
+	tl.SessionID = m.Long()
+	return tl
+}
+
+func decode_TL_newSessionCreated(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_newSessionCreated)
+	return decode_body_TL_newSessionCreated(m)
+}
+func decode_body_TL_newSessionCreated(m *DecodeBuf) TL {
+	tl := TL_newSessionCreated{}
+	tl.FirstMsgID = m.Long()
+	tl.UniqueID = m.Long()
+	tl.ServerSalt = m.Long()
+	return tl
+}
+
+func decode_TL_httpWait(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_httpWait)
+	return decode_body_TL_httpWait(m)
+}
+func decode_body_TL_httpWait(m *DecodeBuf) TL {
+	tl := TL_httpWait{}
+	tl.MaxDelay = m.Int()
+	tl.WaitAfter = m.Int()
+	tl.MaxWait = m.Int()
+	return tl
+}
+
+func decode_TL_ipPort(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_ipPort)
+	return decode_body_TL_ipPort(m)
+}
+func decode_body_TL_ipPort(m *DecodeBuf) TL {
+	tl := TL_ipPort{}
+	tl.IPv4 = m.Int()
+	tl.Port = m.Int()
+	return tl
+}
+
+func decode_TL_ipPortSecret(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_ipPortSecret)
+	return decode_body_TL_ipPortSecret(m)
+}
+func decode_body_TL_ipPortSecret(m *DecodeBuf) TL {
+	tl := TL_ipPortSecret{}
+	tl.IPv4 = m.Int()
+	tl.Port = m.Int()
+	tl.Secret = m.StringBytes()
+	return tl
+}
+
+func decode_TL_accessPointRule(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_accessPointRule)
+	return decode_body_TL_accessPointRule(m)
+}
+func decode_body_TL_accessPointRule(m *DecodeBuf) TL {
+	tl := TL_accessPointRule{}
+	tl.PhonePrefixRules = m.String()
+	tl.DCID = m.Int()
+	tl.IPs = m.Vector()
+	return tl
+}
+
+func decode_TL_help_configSimple(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_configSimple)
+	return decode_body_TL_help_configSimple(m)
+}
+func decode_body_TL_help_configSimple(m *DecodeBuf) TL {
+	tl := TL_help_configSimple{}
+	tl.Date = m.Int()
+	tl.Expires = m.Int()
+	tl.Rules = DecodeBuf_GenericVector[TL_accessPointRule](m)
+	return tl
+}
+
+func decode_TL_tlsClientHello(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsClientHello)
+	return decode_body_TL_tlsClientHello(m)
+}
+func decode_body_TL_tlsClientHello(m *DecodeBuf) TL {
+	tl := TL_tlsClientHello{}
+	tl.Blocks = m.Vector()
+	return tl
+}
+
+func decode_TL_tlsBlockString(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsBlockString)
+	return decode_body_TL_tlsBlockString(m)
+}
+func decode_body_TL_tlsBlockString(m *DecodeBuf) TL {
+	tl := TL_tlsBlockString{}
+	tl.Data = m.String()
+	return tl
+}
+
+func decode_TL_tlsBlockRandom(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsBlockRandom)
+	return decode_body_TL_tlsBlockRandom(m)
+}
+func decode_body_TL_tlsBlockRandom(m *DecodeBuf) TL {
+	tl := TL_tlsBlockRandom{}
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_tlsBlockZero(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsBlockZero)
+	return decode_body_TL_tlsBlockZero(m)
+}
+func decode_body_TL_tlsBlockZero(m *DecodeBuf) TL {
+	tl := TL_tlsBlockZero{}
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_tlsBlockDomain(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsBlockDomain)
+	return decode_body_TL_tlsBlockDomain(m)
+}
+func decode_body_TL_tlsBlockDomain(_ *DecodeBuf) TL {
+	tl := TL_tlsBlockDomain{}
+	return tl
+}
+
+func decode_TL_tlsBlockGrease(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsBlockGrease)
+	return decode_body_TL_tlsBlockGrease(m)
+}
+func decode_body_TL_tlsBlockGrease(m *DecodeBuf) TL {
+	tl := TL_tlsBlockGrease{}
+	tl.Seed = m.Int()
+	return tl
+}
+
+func decode_TL_tlsBlockPublicKey(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsBlockPublicKey)
+	return decode_body_TL_tlsBlockPublicKey(m)
+}
+func decode_body_TL_tlsBlockPublicKey(_ *DecodeBuf) TL {
+	tl := TL_tlsBlockPublicKey{}
+	return tl
+}
+
+func decode_TL_tlsBlockScope(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsBlockScope)
+	return decode_body_TL_tlsBlockScope(m)
+}
+func decode_body_TL_tlsBlockScope(m *DecodeBuf) TL {
+	tl := TL_tlsBlockScope{}
+	tl.Entries = m.Vector()
+	return tl
+}
+
+func decode_TL_tlsBlockPermutation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_tlsBlockPermutation)
+	return decode_body_TL_tlsBlockPermutation(m)
+}
+func decode_body_TL_tlsBlockPermutation(m *DecodeBuf) TL {
+	tl := TL_tlsBlockPermutation{}
+	tl.Entries = m.Vector2d()
+	return tl
+}
+
+func decode_TL_boolFalse(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_boolFalse)
+	return decode_body_TL_boolFalse(m)
+}
+func decode_body_TL_boolFalse(_ *DecodeBuf) TL {
+	tl := TL_boolFalse{}
+	return tl
+}
+
+func decode_TL_boolTrue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_boolTrue)
+	return decode_body_TL_boolTrue(m)
+}
+func decode_body_TL_boolTrue(_ *DecodeBuf) TL {
+	tl := TL_boolTrue{}
+	return tl
+}
+
+func decode_TL_true(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_true)
+	return decode_body_TL_true(m)
+}
+func decode_body_TL_true(_ *DecodeBuf) TL {
+	tl := TL_true{}
+	return tl
+}
+
+func decode_TL_error(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_error)
+	return decode_body_TL_error(m)
+}
+func decode_body_TL_error(m *DecodeBuf) TL {
+	tl := TL_error{}
+	tl.Code = m.Int()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_null(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_null)
+	return decode_body_TL_null(m)
+}
+func decode_body_TL_null(_ *DecodeBuf) TL {
+	tl := TL_null{}
+	return tl
+}
+
+func decode_TL_inputPeerEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerEmpty)
+	return decode_body_TL_inputPeerEmpty(m)
+}
+func decode_body_TL_inputPeerEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputPeerEmpty{}
+	return tl
+}
+
+func decode_TL_inputPeerSelf(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerSelf)
+	return decode_body_TL_inputPeerSelf(m)
+}
+func decode_body_TL_inputPeerSelf(_ *DecodeBuf) TL {
+	tl := TL_inputPeerSelf{}
+	return tl
+}
+
+func decode_TL_inputPeerChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerChat)
+	return decode_body_TL_inputPeerChat(m)
+}
+func decode_body_TL_inputPeerChat(m *DecodeBuf) TL {
+	tl := TL_inputPeerChat{}
+	tl.ChatID = m.Long()
+	return tl
+}
+
+func decode_TL_inputPeerUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerUser)
+	return decode_body_TL_inputPeerUser(m)
+}
+func decode_body_TL_inputPeerUser(m *DecodeBuf) TL {
+	tl := TL_inputPeerUser{}
+	tl.UserID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputPeerChannel(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerChannel)
+	return decode_body_TL_inputPeerChannel(m)
+}
+func decode_body_TL_inputPeerChannel(m *DecodeBuf) TL {
+	tl := TL_inputPeerChannel{}
+	tl.ChannelID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputPeerUserFromMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerUserFromMessage)
+	return decode_body_TL_inputPeerUserFromMessage(m)
+}
+func decode_body_TL_inputPeerUserFromMessage(m *DecodeBuf) TL {
+	tl := TL_inputPeerUserFromMessage{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_inputPeerChannelFromMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerChannelFromMessage)
+	return decode_body_TL_inputPeerChannelFromMessage(m)
+}
+func decode_body_TL_inputPeerChannelFromMessage(m *DecodeBuf) TL {
+	tl := TL_inputPeerChannelFromMessage{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.ChannelID = m.Long()
+	return tl
+}
+
+func decode_TL_inputUserEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputUserEmpty)
+	return decode_body_TL_inputUserEmpty(m)
+}
+func decode_body_TL_inputUserEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputUserEmpty{}
+	return tl
+}
+
+func decode_TL_inputUserSelf(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputUserSelf)
+	return decode_body_TL_inputUserSelf(m)
+}
+func decode_body_TL_inputUserSelf(_ *DecodeBuf) TL {
+	tl := TL_inputUserSelf{}
+	return tl
+}
+
+func decode_TL_inputUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputUser)
+	return decode_body_TL_inputUser(m)
+}
+func decode_body_TL_inputUser(m *DecodeBuf) TL {
+	tl := TL_inputUser{}
+	tl.UserID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputUserFromMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputUserFromMessage)
+	return decode_body_TL_inputUserFromMessage(m)
+}
+func decode_body_TL_inputUserFromMessage(m *DecodeBuf) TL {
+	tl := TL_inputUserFromMessage{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_inputPhoneContact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPhoneContact)
+	return decode_body_TL_inputPhoneContact(m)
+}
+func decode_body_TL_inputPhoneContact(m *DecodeBuf) TL {
+	tl := TL_inputPhoneContact{}
+	tl.ClientID = m.Long()
+	tl.Phone = m.String()
+	tl.FirstName = m.String()
+	tl.LastName = m.String()
+	return tl
+}
+
+func decode_TL_inputFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputFile)
+	return decode_body_TL_inputFile(m)
+}
+func decode_body_TL_inputFile(m *DecodeBuf) TL {
+	tl := TL_inputFile{}
+	tl.ID = m.Long()
+	tl.Parts = m.Int()
+	tl.Name = m.String()
+	tl.MD5Checksum = m.String()
+	return tl
+}
+
+func decode_TL_inputFileBig(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputFileBig)
+	return decode_body_TL_inputFileBig(m)
+}
+func decode_body_TL_inputFileBig(m *DecodeBuf) TL {
+	tl := TL_inputFileBig{}
+	tl.ID = m.Long()
+	tl.Parts = m.Int()
+	tl.Name = m.String()
+	return tl
+}
+
+func decode_TL_inputFileStoryDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputFileStoryDocument)
+	return decode_body_TL_inputFileStoryDocument(m)
+}
+func decode_body_TL_inputFileStoryDocument(m *DecodeBuf) TL {
+	tl := TL_inputFileStoryDocument{}
+	tl.ID = m.Object()
+	return tl
+}
+
+func decode_TL_inputMediaEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaEmpty)
+	return decode_body_TL_inputMediaEmpty(m)
+}
+func decode_body_TL_inputMediaEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputMediaEmpty{}
+	return tl
+}
+
+func decode_TL_inputMediaUploadedPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaUploadedPhoto)
+	return decode_body_TL_inputMediaUploadedPhoto(m)
+}
+func decode_body_TL_inputMediaUploadedPhoto(m *DecodeBuf) TL {
+	tl := TL_inputMediaUploadedPhoto{}
+	flags := m.Int()
+	tl.Spoiler = flags&(1<<2) != 0
+	tl.File = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Stickers = m.Vector()
+	}
+	if flags&(1<<1) != 0 {
+		tl.TTLSeconds = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_inputMediaPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaPhoto)
+	return decode_body_TL_inputMediaPhoto(m)
+}
+func decode_body_TL_inputMediaPhoto(m *DecodeBuf) TL {
+	tl := TL_inputMediaPhoto{}
+	flags := m.Int()
+	tl.Spoiler = flags&(1<<1) != 0
+	tl.ID = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.TTLSeconds = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_inputMediaGeoPoint(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaGeoPoint)
+	return decode_body_TL_inputMediaGeoPoint(m)
+}
+func decode_body_TL_inputMediaGeoPoint(m *DecodeBuf) TL {
+	tl := TL_inputMediaGeoPoint{}
+	tl.GeoPoint = m.Object()
+	return tl
+}
+
+func decode_TL_inputMediaContact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaContact)
+	return decode_body_TL_inputMediaContact(m)
+}
+func decode_body_TL_inputMediaContact(m *DecodeBuf) TL {
+	tl := TL_inputMediaContact{}
+	tl.PhoneNumber = m.String()
+	tl.FirstName = m.String()
+	tl.LastName = m.String()
+	tl.Vcard = m.String()
+	return tl
+}
+
+func decode_TL_inputMediaUploadedDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaUploadedDocument)
+	return decode_body_TL_inputMediaUploadedDocument(m)
+}
+func decode_body_TL_inputMediaUploadedDocument(m *DecodeBuf) TL {
+	tl := TL_inputMediaUploadedDocument{}
+	flags := m.Int()
+	tl.NosoundVideo = flags&(1<<3) != 0
+	tl.ForceFile = flags&(1<<4) != 0
+	tl.Spoiler = flags&(1<<5) != 0
+	tl.File = m.Object()
+	if flags&(1<<2) != 0 {
+		tl.Thumb = m.Object()
+	}
+	tl.MIMEType = m.String()
+	tl.Attributes = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.Stickers = m.Vector()
+	}
+	if flags&(1<<1) != 0 {
+		tl.TTLSeconds = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_inputMediaDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaDocument)
+	return decode_body_TL_inputMediaDocument(m)
+}
+func decode_body_TL_inputMediaDocument(m *DecodeBuf) TL {
+	tl := TL_inputMediaDocument{}
+	flags := m.Int()
+	tl.Spoiler = flags&(1<<2) != 0
+	tl.ID = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.TTLSeconds = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Query = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_inputMediaVenue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaVenue)
+	return decode_body_TL_inputMediaVenue(m)
+}
+func decode_body_TL_inputMediaVenue(m *DecodeBuf) TL {
+	tl := TL_inputMediaVenue{}
+	tl.GeoPoint = m.Object()
+	tl.Title = m.String()
+	tl.Address = m.String()
+	tl.Provider = m.String()
+	tl.VenueID = m.String()
+	tl.VenueType = m.String()
+	return tl
+}
+
+func decode_TL_inputMediaPhotoExternal(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaPhotoExternal)
+	return decode_body_TL_inputMediaPhotoExternal(m)
+}
+func decode_body_TL_inputMediaPhotoExternal(m *DecodeBuf) TL {
+	tl := TL_inputMediaPhotoExternal{}
+	flags := m.Int()
+	tl.Spoiler = flags&(1<<1) != 0
+	tl.URL = m.String()
+	if flags&(1<<0) != 0 {
+		tl.TTLSeconds = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_inputMediaDocumentExternal(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaDocumentExternal)
+	return decode_body_TL_inputMediaDocumentExternal(m)
+}
+func decode_body_TL_inputMediaDocumentExternal(m *DecodeBuf) TL {
+	tl := TL_inputMediaDocumentExternal{}
+	flags := m.Int()
+	tl.Spoiler = flags&(1<<1) != 0
+	tl.URL = m.String()
+	if flags&(1<<0) != 0 {
+		tl.TTLSeconds = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_inputMediaGame(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaGame)
+	return decode_body_TL_inputMediaGame(m)
+}
+func decode_body_TL_inputMediaGame(m *DecodeBuf) TL {
+	tl := TL_inputMediaGame{}
+	tl.ID = m.Object()
+	return tl
+}
+
+func decode_TL_inputMediaInvoice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaInvoice)
+	return decode_body_TL_inputMediaInvoice(m)
+}
+func decode_body_TL_inputMediaInvoice(m *DecodeBuf) TL {
+	tl := TL_inputMediaInvoice{}
+	flags := m.Int()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Photo = Ref(decode_TL_inputWebDocument(m).(TL_inputWebDocument))
+	}
+	tl.Invoice = decode_TL_invoice(m).(TL_invoice)
+	tl.Payload = m.StringBytes()
+	if flags&(1<<3) != 0 {
+		tl.Provider = Ref(m.String())
+	}
+	tl.ProviderData = decode_TL_dataJSON(m).(TL_dataJSON)
+	if flags&(1<<1) != 0 {
+		tl.StartParam = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.ExtendedMedia = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputMediaGeoLive(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaGeoLive)
+	return decode_body_TL_inputMediaGeoLive(m)
+}
+func decode_body_TL_inputMediaGeoLive(m *DecodeBuf) TL {
+	tl := TL_inputMediaGeoLive{}
+	flags := m.Int()
+	tl.Stopped = flags&(1<<0) != 0
+	tl.GeoPoint = m.Object()
+	if flags&(1<<2) != 0 {
+		tl.Heading = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Period = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.ProximityNotificationRadius = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_inputMediaPoll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaPoll)
+	return decode_body_TL_inputMediaPoll(m)
+}
+func decode_body_TL_inputMediaPoll(m *DecodeBuf) TL {
+	tl := TL_inputMediaPoll{}
+	flags := m.Int()
+	tl.Poll = decode_TL_poll(m).(TL_poll)
+	if flags&(1<<0) != 0 {
+		tl.CorrectAnswers = m.VectorBytes()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Solution = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.SolutionEntities = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_inputMediaDice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaDice)
+	return decode_body_TL_inputMediaDice(m)
+}
+func decode_body_TL_inputMediaDice(m *DecodeBuf) TL {
+	tl := TL_inputMediaDice{}
+	tl.Emoticon = m.String()
+	return tl
+}
+
+func decode_TL_inputMediaStory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaStory)
+	return decode_body_TL_inputMediaStory(m)
+}
+func decode_body_TL_inputMediaStory(m *DecodeBuf) TL {
+	tl := TL_inputMediaStory{}
+	tl.Peer = m.Object()
+	tl.ID = m.Int()
+	return tl
+}
+
+func decode_TL_inputMediaWebPage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaWebPage)
+	return decode_body_TL_inputMediaWebPage(m)
+}
+func decode_body_TL_inputMediaWebPage(m *DecodeBuf) TL {
+	tl := TL_inputMediaWebPage{}
+	flags := m.Int()
+	tl.ForceLargeMedia = flags&(1<<0) != 0
+	tl.ForceSmallMedia = flags&(1<<1) != 0
+	tl.Optional = flags&(1<<2) != 0
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_inputMediaPaidMedia(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaPaidMedia)
+	return decode_body_TL_inputMediaPaidMedia(m)
+}
+func decode_body_TL_inputMediaPaidMedia(m *DecodeBuf) TL {
+	tl := TL_inputMediaPaidMedia{}
+	tl.StarsAmount = m.Long()
+	tl.ExtendedMedia = m.Vector()
+	return tl
+}
+
+func decode_TL_inputChatPhotoEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputChatPhotoEmpty)
+	return decode_body_TL_inputChatPhotoEmpty(m)
+}
+func decode_body_TL_inputChatPhotoEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputChatPhotoEmpty{}
+	return tl
+}
+
+func decode_TL_inputChatUploadedPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputChatUploadedPhoto)
+	return decode_body_TL_inputChatUploadedPhoto(m)
+}
+func decode_body_TL_inputChatUploadedPhoto(m *DecodeBuf) TL {
+	tl := TL_inputChatUploadedPhoto{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.File = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Video = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.VideoStartTS = Ref(m.Double())
+	}
+	if flags&(1<<3) != 0 {
+		tl.VideoEmojiMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputChatPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputChatPhoto)
+	return decode_body_TL_inputChatPhoto(m)
+}
+func decode_body_TL_inputChatPhoto(m *DecodeBuf) TL {
+	tl := TL_inputChatPhoto{}
+	tl.ID = m.Object()
+	return tl
+}
+
+func decode_TL_inputGeoPointEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputGeoPointEmpty)
+	return decode_body_TL_inputGeoPointEmpty(m)
+}
+func decode_body_TL_inputGeoPointEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputGeoPointEmpty{}
+	return tl
+}
+
+func decode_TL_inputGeoPoint(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputGeoPoint)
+	return decode_body_TL_inputGeoPoint(m)
+}
+func decode_body_TL_inputGeoPoint(m *DecodeBuf) TL {
+	tl := TL_inputGeoPoint{}
+	flags := m.Int()
+	tl.Lat = m.Double()
+	tl.Long = m.Double()
+	if flags&(1<<0) != 0 {
+		tl.AccuracyRadius = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_inputPhotoEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPhotoEmpty)
+	return decode_body_TL_inputPhotoEmpty(m)
+}
+func decode_body_TL_inputPhotoEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputPhotoEmpty{}
+	return tl
+}
+
+func decode_TL_inputPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPhoto)
+	return decode_body_TL_inputPhoto(m)
+}
+func decode_body_TL_inputPhoto(m *DecodeBuf) TL {
+	tl := TL_inputPhoto{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.FileReference = m.StringBytes()
+	return tl
+}
+
+func decode_TL_inputFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputFileLocation)
+	return decode_body_TL_inputFileLocation(m)
+}
+func decode_body_TL_inputFileLocation(m *DecodeBuf) TL {
+	tl := TL_inputFileLocation{}
+	tl.VolumeID = m.Long()
+	tl.LocalID = m.Int()
+	tl.Secret = m.Long()
+	tl.FileReference = m.StringBytes()
+	return tl
+}
+
+func decode_TL_inputEncryptedFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputEncryptedFileLocation)
+	return decode_body_TL_inputEncryptedFileLocation(m)
+}
+func decode_body_TL_inputEncryptedFileLocation(m *DecodeBuf) TL {
+	tl := TL_inputEncryptedFileLocation{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputDocumentFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputDocumentFileLocation)
+	return decode_body_TL_inputDocumentFileLocation(m)
+}
+func decode_body_TL_inputDocumentFileLocation(m *DecodeBuf) TL {
+	tl := TL_inputDocumentFileLocation{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.FileReference = m.StringBytes()
+	tl.ThumbSize = m.String()
+	return tl
+}
+
+func decode_TL_inputSecureFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputSecureFileLocation)
+	return decode_body_TL_inputSecureFileLocation(m)
+}
+func decode_body_TL_inputSecureFileLocation(m *DecodeBuf) TL {
+	tl := TL_inputSecureFileLocation{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputTakeoutFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputTakeoutFileLocation)
+	return decode_body_TL_inputTakeoutFileLocation(m)
+}
+func decode_body_TL_inputTakeoutFileLocation(_ *DecodeBuf) TL {
+	tl := TL_inputTakeoutFileLocation{}
+	return tl
+}
+
+func decode_TL_inputPhotoFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPhotoFileLocation)
+	return decode_body_TL_inputPhotoFileLocation(m)
+}
+func decode_body_TL_inputPhotoFileLocation(m *DecodeBuf) TL {
+	tl := TL_inputPhotoFileLocation{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.FileReference = m.StringBytes()
+	tl.ThumbSize = m.String()
+	return tl
+}
+
+func decode_TL_inputPhotoLegacyFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPhotoLegacyFileLocation)
+	return decode_body_TL_inputPhotoLegacyFileLocation(m)
+}
+func decode_body_TL_inputPhotoLegacyFileLocation(m *DecodeBuf) TL {
+	tl := TL_inputPhotoLegacyFileLocation{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.FileReference = m.StringBytes()
+	tl.VolumeID = m.Long()
+	tl.LocalID = m.Int()
+	tl.Secret = m.Long()
+	return tl
+}
+
+func decode_TL_inputPeerPhotoFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerPhotoFileLocation)
+	return decode_body_TL_inputPeerPhotoFileLocation(m)
+}
+func decode_body_TL_inputPeerPhotoFileLocation(m *DecodeBuf) TL {
+	tl := TL_inputPeerPhotoFileLocation{}
+	flags := m.Int()
+	tl.Big = flags&(1<<0) != 0
+	tl.Peer = m.Object()
+	tl.PhotoID = m.Long()
+	return tl
+}
+
+func decode_TL_inputStickerSetThumb(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetThumb)
+	return decode_body_TL_inputStickerSetThumb(m)
+}
+func decode_body_TL_inputStickerSetThumb(m *DecodeBuf) TL {
+	tl := TL_inputStickerSetThumb{}
+	tl.Stickerset = m.Object()
+	tl.ThumbVersion = m.Int()
+	return tl
+}
+
+func decode_TL_inputGroupCallStream(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputGroupCallStream)
+	return decode_body_TL_inputGroupCallStream(m)
+}
+func decode_body_TL_inputGroupCallStream(m *DecodeBuf) TL {
+	tl := TL_inputGroupCallStream{}
+	flags := m.Int()
+	tl.Call = decode_TL_inputGroupCall(m).(TL_inputGroupCall)
+	tl.TimeMS = m.Long()
+	tl.Scale = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.VideoChannel = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.VideoQuality = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_peerUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerUser)
+	return decode_body_TL_peerUser(m)
+}
+func decode_body_TL_peerUser(m *DecodeBuf) TL {
+	tl := TL_peerUser{}
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_peerChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerChat)
+	return decode_body_TL_peerChat(m)
+}
+func decode_body_TL_peerChat(m *DecodeBuf) TL {
+	tl := TL_peerChat{}
+	tl.ChatID = m.Long()
+	return tl
+}
+
+func decode_TL_peerChannel(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerChannel)
+	return decode_body_TL_peerChannel(m)
+}
+func decode_body_TL_peerChannel(m *DecodeBuf) TL {
+	tl := TL_peerChannel{}
+	tl.ChannelID = m.Long()
+	return tl
+}
+
+func decode_TL_storage_fileUnknown(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_fileUnknown)
+	return decode_body_TL_storage_fileUnknown(m)
+}
+func decode_body_TL_storage_fileUnknown(_ *DecodeBuf) TL {
+	tl := TL_storage_fileUnknown{}
+	return tl
+}
+
+func decode_TL_storage_filePartial(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_filePartial)
+	return decode_body_TL_storage_filePartial(m)
+}
+func decode_body_TL_storage_filePartial(_ *DecodeBuf) TL {
+	tl := TL_storage_filePartial{}
+	return tl
+}
+
+func decode_TL_storage_fileJPEG(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_fileJPEG)
+	return decode_body_TL_storage_fileJPEG(m)
+}
+func decode_body_TL_storage_fileJPEG(_ *DecodeBuf) TL {
+	tl := TL_storage_fileJPEG{}
+	return tl
+}
+
+func decode_TL_storage_fileGIF(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_fileGIF)
+	return decode_body_TL_storage_fileGIF(m)
+}
+func decode_body_TL_storage_fileGIF(_ *DecodeBuf) TL {
+	tl := TL_storage_fileGIF{}
+	return tl
+}
+
+func decode_TL_storage_filePNG(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_filePNG)
+	return decode_body_TL_storage_filePNG(m)
+}
+func decode_body_TL_storage_filePNG(_ *DecodeBuf) TL {
+	tl := TL_storage_filePNG{}
+	return tl
+}
+
+func decode_TL_storage_filePDF(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_filePDF)
+	return decode_body_TL_storage_filePDF(m)
+}
+func decode_body_TL_storage_filePDF(_ *DecodeBuf) TL {
+	tl := TL_storage_filePDF{}
+	return tl
+}
+
+func decode_TL_storage_fileMP3(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_fileMP3)
+	return decode_body_TL_storage_fileMP3(m)
+}
+func decode_body_TL_storage_fileMP3(_ *DecodeBuf) TL {
+	tl := TL_storage_fileMP3{}
+	return tl
+}
+
+func decode_TL_storage_fileMOV(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_fileMOV)
+	return decode_body_TL_storage_fileMOV(m)
+}
+func decode_body_TL_storage_fileMOV(_ *DecodeBuf) TL {
+	tl := TL_storage_fileMOV{}
+	return tl
+}
+
+func decode_TL_storage_fileMP4(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_fileMP4)
+	return decode_body_TL_storage_fileMP4(m)
+}
+func decode_body_TL_storage_fileMP4(_ *DecodeBuf) TL {
+	tl := TL_storage_fileMP4{}
+	return tl
+}
+
+func decode_TL_storage_fileWEBP(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storage_fileWEBP)
+	return decode_body_TL_storage_fileWEBP(m)
+}
+func decode_body_TL_storage_fileWEBP(_ *DecodeBuf) TL {
+	tl := TL_storage_fileWEBP{}
+	return tl
+}
+
+func decode_TL_userEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userEmpty)
+	return decode_body_TL_userEmpty(m)
+}
+func decode_body_TL_userEmpty(m *DecodeBuf) TL {
+	tl := TL_userEmpty{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_user(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_user)
+	return decode_body_TL_user(m)
+}
+func decode_body_TL_user(m *DecodeBuf) TL {
+	tl := TL_user{}
+	flags := m.Int()
+	tl.Self = flags&(1<<10) != 0
+	tl.Contact = flags&(1<<11) != 0
+	tl.MutualContact = flags&(1<<12) != 0
+	tl.Deleted = flags&(1<<13) != 0
+	tl.Bot = flags&(1<<14) != 0
+	tl.BotChatHistory = flags&(1<<15) != 0
+	tl.BotNochats = flags&(1<<16) != 0
+	tl.Verified = flags&(1<<17) != 0
+	tl.Restricted = flags&(1<<18) != 0
+	tl.Min = flags&(1<<20) != 0
+	tl.BotInlineGeo = flags&(1<<21) != 0
+	tl.Support = flags&(1<<23) != 0
+	tl.Scam = flags&(1<<24) != 0
+	tl.ApplyMinPhoto = flags&(1<<25) != 0
+	tl.Fake = flags&(1<<26) != 0
+	tl.BotAttachMenu = flags&(1<<27) != 0
+	tl.Premium = flags&(1<<28) != 0
+	tl.AttachMenuEnabled = flags&(1<<29) != 0
+	flags2 := m.Int()
+	tl.BotCanEdit = flags2&(1<<1) != 0
+	tl.CloseFriend = flags2&(1<<2) != 0
+	tl.StoriesHidden = flags2&(1<<3) != 0
+	tl.StoriesUnavailable = flags2&(1<<4) != 0
+	tl.ContactRequirePremium = flags2&(1<<10) != 0
+	tl.BotBusiness = flags2&(1<<11) != 0
+	tl.BotHasMainApp = flags2&(1<<13) != 0
+	tl.ID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.AccessHash = Ref(m.Long())
+	}
+	if flags&(1<<1) != 0 {
+		tl.FirstName = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.LastName = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Username = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.Phone = Ref(m.String())
+	}
+	if flags&(1<<5) != 0 {
+		tl.Photo = m.Object()
+	}
+	if flags&(1<<6) != 0 {
+		tl.Status = m.Object()
+	}
+	if flags&(1<<14) != 0 {
+		tl.BotInfoVersion = Ref(m.Int())
+	}
+	if flags&(1<<18) != 0 {
+		tl.RestrictionReason = DecodeBuf_GenericVector[TL_restrictionReason](m)
+	}
+	if flags&(1<<19) != 0 {
+		tl.BotInlinePlaceholder = Ref(m.String())
+	}
+	if flags&(1<<22) != 0 {
+		tl.LangCode = Ref(m.String())
+	}
+	if flags&(1<<30) != 0 {
+		tl.EmojiStatus = m.Object()
+	}
+	if flags2&(1<<0) != 0 {
+		tl.Usernames = DecodeBuf_GenericVector[TL_username](m)
+	}
+	if flags2&(1<<5) != 0 {
+		tl.StoriesMaxID = Ref(m.Int())
+	}
+	if flags2&(1<<8) != 0 {
+		tl.Color = Ref(decode_TL_peerColor(m).(TL_peerColor))
+	}
+	if flags2&(1<<9) != 0 {
+		tl.ProfileColor = Ref(decode_TL_peerColor(m).(TL_peerColor))
+	}
+	if flags2&(1<<12) != 0 {
+		tl.BotActiveUsers = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_userProfilePhotoEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userProfilePhotoEmpty)
+	return decode_body_TL_userProfilePhotoEmpty(m)
+}
+func decode_body_TL_userProfilePhotoEmpty(_ *DecodeBuf) TL {
+	tl := TL_userProfilePhotoEmpty{}
+	return tl
+}
+
+func decode_TL_userProfilePhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userProfilePhoto)
+	return decode_body_TL_userProfilePhoto(m)
+}
+func decode_body_TL_userProfilePhoto(m *DecodeBuf) TL {
+	tl := TL_userProfilePhoto{}
+	flags := m.Int()
+	tl.HasVideo = flags&(1<<0) != 0
+	tl.Personal = flags&(1<<2) != 0
+	tl.PhotoID = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.StrippedThumb = m.StringBytes()
+	}
+	tl.DCID = m.Int()
+	return tl
+}
+
+func decode_TL_userStatusEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userStatusEmpty)
+	return decode_body_TL_userStatusEmpty(m)
+}
+func decode_body_TL_userStatusEmpty(_ *DecodeBuf) TL {
+	tl := TL_userStatusEmpty{}
+	return tl
+}
+
+func decode_TL_userStatusOnline(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userStatusOnline)
+	return decode_body_TL_userStatusOnline(m)
+}
+func decode_body_TL_userStatusOnline(m *DecodeBuf) TL {
+	tl := TL_userStatusOnline{}
+	tl.Expires = m.Int()
+	return tl
+}
+
+func decode_TL_userStatusOffline(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userStatusOffline)
+	return decode_body_TL_userStatusOffline(m)
+}
+func decode_body_TL_userStatusOffline(m *DecodeBuf) TL {
+	tl := TL_userStatusOffline{}
+	tl.WasOnline = m.Int()
+	return tl
+}
+
+func decode_TL_userStatusRecently(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userStatusRecently)
+	return decode_body_TL_userStatusRecently(m)
+}
+func decode_body_TL_userStatusRecently(m *DecodeBuf) TL {
+	tl := TL_userStatusRecently{}
+	flags := m.Int()
+	tl.ByMe = flags&(1<<0) != 0
+	return tl
+}
+
+func decode_TL_userStatusLastWeek(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userStatusLastWeek)
+	return decode_body_TL_userStatusLastWeek(m)
+}
+func decode_body_TL_userStatusLastWeek(m *DecodeBuf) TL {
+	tl := TL_userStatusLastWeek{}
+	flags := m.Int()
+	tl.ByMe = flags&(1<<0) != 0
+	return tl
+}
+
+func decode_TL_userStatusLastMonth(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userStatusLastMonth)
+	return decode_body_TL_userStatusLastMonth(m)
+}
+func decode_body_TL_userStatusLastMonth(m *DecodeBuf) TL {
+	tl := TL_userStatusLastMonth{}
+	flags := m.Int()
+	tl.ByMe = flags&(1<<0) != 0
+	return tl
+}
+
+func decode_TL_chatEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatEmpty)
+	return decode_body_TL_chatEmpty(m)
+}
+func decode_body_TL_chatEmpty(m *DecodeBuf) TL {
+	tl := TL_chatEmpty{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_chat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chat)
+	return decode_body_TL_chat(m)
+}
+func decode_body_TL_chat(m *DecodeBuf) TL {
+	tl := TL_chat{}
+	flags := m.Int()
+	tl.Creator = flags&(1<<0) != 0
+	tl.Left = flags&(1<<2) != 0
+	tl.Deactivated = flags&(1<<5) != 0
+	tl.CallActive = flags&(1<<23) != 0
+	tl.CallNotEmpty = flags&(1<<24) != 0
+	tl.Noforwards = flags&(1<<25) != 0
+	tl.ID = m.Long()
+	tl.Title = m.String()
+	tl.Photo = m.Object()
+	tl.ParticipantsCount = m.Int()
+	tl.Date = m.Int()
+	tl.Version = m.Int()
+	if flags&(1<<6) != 0 {
+		tl.MigratedTo = m.Object()
+	}
+	if flags&(1<<14) != 0 {
+		tl.AdminRights = Ref(decode_TL_chatAdminRights(m).(TL_chatAdminRights))
+	}
+	if flags&(1<<18) != 0 {
+		tl.DefaultBannedRights = Ref(decode_TL_chatBannedRights(m).(TL_chatBannedRights))
+	}
+	return tl
+}
+
+func decode_TL_chatForbidden(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatForbidden)
+	return decode_body_TL_chatForbidden(m)
+}
+func decode_body_TL_chatForbidden(m *DecodeBuf) TL {
+	tl := TL_chatForbidden{}
+	tl.ID = m.Long()
+	tl.Title = m.String()
+	return tl
+}
+
+func decode_TL_channel(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channel)
+	return decode_body_TL_channel(m)
+}
+func decode_body_TL_channel(m *DecodeBuf) TL {
+	tl := TL_channel{}
+	flags := m.Int()
+	tl.Creator = flags&(1<<0) != 0
+	tl.Left = flags&(1<<2) != 0
+	tl.Broadcast = flags&(1<<5) != 0
+	tl.Verified = flags&(1<<7) != 0
+	tl.Megagroup = flags&(1<<8) != 0
+	tl.Restricted = flags&(1<<9) != 0
+	tl.Signatures = flags&(1<<11) != 0
+	tl.Min = flags&(1<<12) != 0
+	tl.Scam = flags&(1<<19) != 0
+	tl.HasLink = flags&(1<<20) != 0
+	tl.HasGeo = flags&(1<<21) != 0
+	tl.SlowmodeEnabled = flags&(1<<22) != 0
+	tl.CallActive = flags&(1<<23) != 0
+	tl.CallNotEmpty = flags&(1<<24) != 0
+	tl.Fake = flags&(1<<25) != 0
+	tl.Gigagroup = flags&(1<<26) != 0
+	tl.Noforwards = flags&(1<<27) != 0
+	tl.JoinToSend = flags&(1<<28) != 0
+	tl.JoinRequest = flags&(1<<29) != 0
+	tl.Forum = flags&(1<<30) != 0
+	flags2 := m.Int()
+	tl.StoriesHidden = flags2&(1<<1) != 0
+	tl.StoriesHiddenMin = flags2&(1<<2) != 0
+	tl.StoriesUnavailable = flags2&(1<<3) != 0
+	tl.SignatureProfiles = flags2&(1<<12) != 0
+	tl.ID = m.Long()
+	if flags&(1<<13) != 0 {
+		tl.AccessHash = Ref(m.Long())
+	}
+	tl.Title = m.String()
+	if flags&(1<<6) != 0 {
+		tl.Username = Ref(m.String())
+	}
+	tl.Photo = m.Object()
+	tl.Date = m.Int()
+	if flags&(1<<9) != 0 {
+		tl.RestrictionReason = DecodeBuf_GenericVector[TL_restrictionReason](m)
+	}
+	if flags&(1<<14) != 0 {
+		tl.AdminRights = Ref(decode_TL_chatAdminRights(m).(TL_chatAdminRights))
+	}
+	if flags&(1<<15) != 0 {
+		tl.BannedRights = Ref(decode_TL_chatBannedRights(m).(TL_chatBannedRights))
+	}
+	if flags&(1<<18) != 0 {
+		tl.DefaultBannedRights = Ref(decode_TL_chatBannedRights(m).(TL_chatBannedRights))
+	}
+	if flags&(1<<17) != 0 {
+		tl.ParticipantsCount = Ref(m.Int())
+	}
+	if flags2&(1<<0) != 0 {
+		tl.Usernames = DecodeBuf_GenericVector[TL_username](m)
+	}
+	if flags2&(1<<4) != 0 {
+		tl.StoriesMaxID = Ref(m.Int())
+	}
+	if flags2&(1<<7) != 0 {
+		tl.Color = Ref(decode_TL_peerColor(m).(TL_peerColor))
+	}
+	if flags2&(1<<8) != 0 {
+		tl.ProfileColor = Ref(decode_TL_peerColor(m).(TL_peerColor))
+	}
+	if flags2&(1<<9) != 0 {
+		tl.EmojiStatus = m.Object()
+	}
+	if flags2&(1<<10) != 0 {
+		tl.Level = Ref(m.Int())
+	}
+	if flags2&(1<<11) != 0 {
+		tl.SubscriptionUntilDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_channelForbidden(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelForbidden)
+	return decode_body_TL_channelForbidden(m)
+}
+func decode_body_TL_channelForbidden(m *DecodeBuf) TL {
+	tl := TL_channelForbidden{}
+	flags := m.Int()
+	tl.Broadcast = flags&(1<<5) != 0
+	tl.Megagroup = flags&(1<<8) != 0
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Title = m.String()
+	if flags&(1<<16) != 0 {
+		tl.UntilDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_chatFull(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatFull)
+	return decode_body_TL_chatFull(m)
+}
+func decode_body_TL_chatFull(m *DecodeBuf) TL {
+	tl := TL_chatFull{}
+	flags := m.Int()
+	tl.CanSetUsername = flags&(1<<7) != 0
+	tl.HasScheduled = flags&(1<<8) != 0
+	tl.TranslationsDisabled = flags&(1<<19) != 0
+	tl.ID = m.Long()
+	tl.About = m.String()
+	tl.Participants = m.Object()
+	if flags&(1<<2) != 0 {
+		tl.ChatPhoto = m.Object()
+	}
+	tl.NotifySettings = decode_TL_peerNotifySettings(m).(TL_peerNotifySettings)
+	if flags&(1<<13) != 0 {
+		tl.ExportedInvite = m.Object()
+	}
+	if flags&(1<<3) != 0 {
+		tl.BotInfo = DecodeBuf_GenericVector[TL_botInfo](m)
+	}
+	if flags&(1<<6) != 0 {
+		tl.PinnedMsgID = Ref(m.Int())
+	}
+	if flags&(1<<11) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	if flags&(1<<12) != 0 {
+		tl.Call = Ref(decode_TL_inputGroupCall(m).(TL_inputGroupCall))
+	}
+	if flags&(1<<14) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	if flags&(1<<15) != 0 {
+		tl.GroupcallDefaultJoinAs = m.Object()
+	}
+	if flags&(1<<16) != 0 {
+		tl.ThemeEmoticon = Ref(m.String())
+	}
+	if flags&(1<<17) != 0 {
+		tl.RequestsPending = Ref(m.Int())
+	}
+	if flags&(1<<17) != 0 {
+		tl.RecentRequesters = m.VectorLong()
+	}
+	if flags&(1<<18) != 0 {
+		tl.AvailableReactions = m.Object()
+	}
+	if flags&(1<<20) != 0 {
+		tl.ReactionsLimit = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_channelFull(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelFull)
+	return decode_body_TL_channelFull(m)
+}
+func decode_body_TL_channelFull(m *DecodeBuf) TL {
+	tl := TL_channelFull{}
+	flags := m.Int()
+	tl.CanViewParticipants = flags&(1<<3) != 0
+	tl.CanSetUsername = flags&(1<<6) != 0
+	tl.CanSetStickers = flags&(1<<7) != 0
+	tl.HiddenPrehistory = flags&(1<<10) != 0
+	tl.CanSetLocation = flags&(1<<16) != 0
+	tl.HasScheduled = flags&(1<<19) != 0
+	tl.CanViewStats = flags&(1<<20) != 0
+	tl.Blocked = flags&(1<<22) != 0
+	flags2 := m.Int()
+	tl.CanDeleteChannel = flags2&(1<<0) != 0
+	tl.Antispam = flags2&(1<<1) != 0
+	tl.ParticipantsHidden = flags2&(1<<2) != 0
+	tl.TranslationsDisabled = flags2&(1<<3) != 0
+	tl.StoriesPinnedAvailable = flags2&(1<<5) != 0
+	tl.ViewForumAsMessages = flags2&(1<<6) != 0
+	tl.RestrictedSponsored = flags2&(1<<11) != 0
+	tl.CanViewRevenue = flags2&(1<<12) != 0
+	tl.PaidMediaAllowed = flags2&(1<<14) != 0
+	tl.CanViewStarsRevenue = flags2&(1<<15) != 0
+	tl.PaidReactionsAvailable = flags2&(1<<16) != 0
+	tl.ID = m.Long()
+	tl.About = m.String()
+	if flags&(1<<0) != 0 {
+		tl.ParticipantsCount = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.AdminsCount = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.KickedCount = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.BannedCount = Ref(m.Int())
+	}
+	if flags&(1<<13) != 0 {
+		tl.OnlineCount = Ref(m.Int())
+	}
+	tl.ReadInboxMaxID = m.Int()
+	tl.ReadOutboxMaxID = m.Int()
+	tl.UnreadCount = m.Int()
+	tl.ChatPhoto = m.Object()
+	tl.NotifySettings = decode_TL_peerNotifySettings(m).(TL_peerNotifySettings)
+	if flags&(1<<23) != 0 {
+		tl.ExportedInvite = m.Object()
+	}
+	tl.BotInfo = DecodeBuf_GenericVector[TL_botInfo](m)
+	if flags&(1<<4) != 0 {
+		tl.MigratedFromChatID = Ref(m.Long())
+	}
+	if flags&(1<<4) != 0 {
+		tl.MigratedFromMaxID = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.PinnedMsgID = Ref(m.Int())
+	}
+	if flags&(1<<8) != 0 {
+		tl.Stickerset = Ref(decode_TL_stickerSet(m).(TL_stickerSet))
+	}
+	if flags&(1<<9) != 0 {
+		tl.AvailableMinID = Ref(m.Int())
+	}
+	if flags&(1<<11) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	if flags&(1<<14) != 0 {
+		tl.LinkedChatID = Ref(m.Long())
+	}
+	if flags&(1<<15) != 0 {
+		tl.Location = m.Object()
+	}
+	if flags&(1<<17) != 0 {
+		tl.SlowmodeSeconds = Ref(m.Int())
+	}
+	if flags&(1<<18) != 0 {
+		tl.SlowmodeNextSendDate = Ref(m.Int())
+	}
+	if flags&(1<<12) != 0 {
+		tl.StatsDC = Ref(m.Int())
+	}
+	tl.PTS = m.Int()
+	if flags&(1<<21) != 0 {
+		tl.Call = Ref(decode_TL_inputGroupCall(m).(TL_inputGroupCall))
+	}
+	if flags&(1<<24) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	if flags&(1<<25) != 0 {
+		tl.PendingSuggestions = m.VectorString()
+	}
+	if flags&(1<<26) != 0 {
+		tl.GroupcallDefaultJoinAs = m.Object()
+	}
+	if flags&(1<<27) != 0 {
+		tl.ThemeEmoticon = Ref(m.String())
+	}
+	if flags&(1<<28) != 0 {
+		tl.RequestsPending = Ref(m.Int())
+	}
+	if flags&(1<<28) != 0 {
+		tl.RecentRequesters = m.VectorLong()
+	}
+	if flags&(1<<29) != 0 {
+		tl.DefaultSendAs = m.Object()
+	}
+	if flags&(1<<30) != 0 {
+		tl.AvailableReactions = m.Object()
+	}
+	if flags2&(1<<13) != 0 {
+		tl.ReactionsLimit = Ref(m.Int())
+	}
+	if flags2&(1<<4) != 0 {
+		tl.Stories = Ref(decode_TL_peerStories(m).(TL_peerStories))
+	}
+	if flags2&(1<<7) != 0 {
+		tl.Wallpaper = m.Object()
+	}
+	if flags2&(1<<8) != 0 {
+		tl.BoostsApplied = Ref(m.Int())
+	}
+	if flags2&(1<<9) != 0 {
+		tl.BoostsUnrestrict = Ref(m.Int())
+	}
+	if flags2&(1<<10) != 0 {
+		tl.Emojiset = Ref(decode_TL_stickerSet(m).(TL_stickerSet))
+	}
+	return tl
+}
+
+func decode_TL_chatParticipant(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatParticipant)
+	return decode_body_TL_chatParticipant(m)
+}
+func decode_body_TL_chatParticipant(m *DecodeBuf) TL {
+	tl := TL_chatParticipant{}
+	tl.UserID = m.Long()
+	tl.InviterID = m.Long()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_chatParticipantCreator(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatParticipantCreator)
+	return decode_body_TL_chatParticipantCreator(m)
+}
+func decode_body_TL_chatParticipantCreator(m *DecodeBuf) TL {
+	tl := TL_chatParticipantCreator{}
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_chatParticipantAdmin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatParticipantAdmin)
+	return decode_body_TL_chatParticipantAdmin(m)
+}
+func decode_body_TL_chatParticipantAdmin(m *DecodeBuf) TL {
+	tl := TL_chatParticipantAdmin{}
+	tl.UserID = m.Long()
+	tl.InviterID = m.Long()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_chatParticipantsForbidden(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatParticipantsForbidden)
+	return decode_body_TL_chatParticipantsForbidden(m)
+}
+func decode_body_TL_chatParticipantsForbidden(m *DecodeBuf) TL {
+	tl := TL_chatParticipantsForbidden{}
+	flags := m.Int()
+	tl.ChatID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.SelfParticipant = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_chatParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatParticipants)
+	return decode_body_TL_chatParticipants(m)
+}
+func decode_body_TL_chatParticipants(m *DecodeBuf) TL {
+	tl := TL_chatParticipants{}
+	tl.ChatID = m.Long()
+	tl.Participants = m.Vector()
+	tl.Version = m.Int()
+	return tl
+}
+
+func decode_TL_chatPhotoEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatPhotoEmpty)
+	return decode_body_TL_chatPhotoEmpty(m)
+}
+func decode_body_TL_chatPhotoEmpty(_ *DecodeBuf) TL {
+	tl := TL_chatPhotoEmpty{}
+	return tl
+}
+
+func decode_TL_chatPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatPhoto)
+	return decode_body_TL_chatPhoto(m)
+}
+func decode_body_TL_chatPhoto(m *DecodeBuf) TL {
+	tl := TL_chatPhoto{}
+	flags := m.Int()
+	tl.HasVideo = flags&(1<<0) != 0
+	tl.PhotoID = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.StrippedThumb = m.StringBytes()
+	}
+	tl.DCID = m.Int()
+	return tl
+}
+
+func decode_TL_messageEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEmpty)
+	return decode_body_TL_messageEmpty(m)
+}
+func decode_body_TL_messageEmpty(m *DecodeBuf) TL {
+	tl := TL_messageEmpty{}
+	flags := m.Int()
+	tl.ID = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.PeerID = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_message(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_message)
+	return decode_body_TL_message(m)
+}
+func decode_body_TL_message(m *DecodeBuf) TL {
+	tl := TL_message{}
+	flags := m.Int()
+	tl.Out = flags&(1<<1) != 0
+	tl.Mentioned = flags&(1<<4) != 0
+	tl.MediaUnread = flags&(1<<5) != 0
+	tl.Silent = flags&(1<<13) != 0
+	tl.Post = flags&(1<<14) != 0
+	tl.FromScheduled = flags&(1<<18) != 0
+	tl.Legacy = flags&(1<<19) != 0
+	tl.EditHide = flags&(1<<21) != 0
+	tl.Pinned = flags&(1<<24) != 0
+	tl.Noforwards = flags&(1<<26) != 0
+	tl.InvertMedia = flags&(1<<27) != 0
+	flags2 := m.Int()
+	tl.Offline = flags2&(1<<1) != 0
+	tl.ID = m.Int()
+	if flags&(1<<8) != 0 {
+		tl.FromID = m.Object()
+	}
+	if flags&(1<<29) != 0 {
+		tl.FromBoostsApplied = Ref(m.Int())
+	}
+	tl.PeerID = m.Object()
+	if flags&(1<<28) != 0 {
+		tl.SavedPeerID = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.FwdFrom = Ref(decode_TL_messageFwdHeader(m).(TL_messageFwdHeader))
+	}
+	if flags&(1<<11) != 0 {
+		tl.ViaBotID = Ref(m.Long())
+	}
+	if flags2&(1<<0) != 0 {
+		tl.ViaBusinessBotID = Ref(m.Long())
+	}
+	if flags&(1<<3) != 0 {
+		tl.ReplyTo = m.Object()
+	}
+	tl.Date = m.Int()
+	tl.Message = m.String()
+	if flags&(1<<9) != 0 {
+		tl.Media = m.Object()
+	}
+	if flags&(1<<6) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	if flags&(1<<7) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<10) != 0 {
+		tl.Views = Ref(m.Int())
+	}
+	if flags&(1<<10) != 0 {
+		tl.Forwards = Ref(m.Int())
+	}
+	if flags&(1<<23) != 0 {
+		tl.Replies = Ref(decode_TL_messageReplies(m).(TL_messageReplies))
+	}
+	if flags&(1<<15) != 0 {
+		tl.EditDate = Ref(m.Int())
+	}
+	if flags&(1<<16) != 0 {
+		tl.PostAuthor = Ref(m.String())
+	}
+	if flags&(1<<17) != 0 {
+		tl.GroupedID = Ref(m.Long())
+	}
+	if flags&(1<<20) != 0 {
+		tl.Reactions = Ref(decode_TL_messageReactions(m).(TL_messageReactions))
+	}
+	if flags&(1<<22) != 0 {
+		tl.RestrictionReason = DecodeBuf_GenericVector[TL_restrictionReason](m)
+	}
+	if flags&(1<<25) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	if flags&(1<<30) != 0 {
+		tl.QuickReplyShortcutID = Ref(m.Int())
+	}
+	if flags2&(1<<2) != 0 {
+		tl.Effect = Ref(m.Long())
+	}
+	if flags2&(1<<3) != 0 {
+		tl.Factcheck = Ref(decode_TL_factCheck(m).(TL_factCheck))
+	}
+	return tl
+}
+
+func decode_TL_messageService(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageService)
+	return decode_body_TL_messageService(m)
+}
+func decode_body_TL_messageService(m *DecodeBuf) TL {
+	tl := TL_messageService{}
+	flags := m.Int()
+	tl.Out = flags&(1<<1) != 0
+	tl.Mentioned = flags&(1<<4) != 0
+	tl.MediaUnread = flags&(1<<5) != 0
+	tl.Silent = flags&(1<<13) != 0
+	tl.Post = flags&(1<<14) != 0
+	tl.Legacy = flags&(1<<19) != 0
+	tl.ID = m.Int()
+	if flags&(1<<8) != 0 {
+		tl.FromID = m.Object()
+	}
+	tl.PeerID = m.Object()
+	if flags&(1<<3) != 0 {
+		tl.ReplyTo = m.Object()
+	}
+	tl.Date = m.Int()
+	tl.Action = m.Object()
+	if flags&(1<<25) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messageMediaEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaEmpty)
+	return decode_body_TL_messageMediaEmpty(m)
+}
+func decode_body_TL_messageMediaEmpty(_ *DecodeBuf) TL {
+	tl := TL_messageMediaEmpty{}
+	return tl
+}
+
+func decode_TL_messageMediaPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaPhoto)
+	return decode_body_TL_messageMediaPhoto(m)
+}
+func decode_body_TL_messageMediaPhoto(m *DecodeBuf) TL {
+	tl := TL_messageMediaPhoto{}
+	flags := m.Int()
+	tl.Spoiler = flags&(1<<3) != 0
+	if flags&(1<<0) != 0 {
+		tl.Photo = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.TTLSeconds = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messageMediaGeo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaGeo)
+	return decode_body_TL_messageMediaGeo(m)
+}
+func decode_body_TL_messageMediaGeo(m *DecodeBuf) TL {
+	tl := TL_messageMediaGeo{}
+	tl.Geo = m.Object()
+	return tl
+}
+
+func decode_TL_messageMediaContact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaContact)
+	return decode_body_TL_messageMediaContact(m)
+}
+func decode_body_TL_messageMediaContact(m *DecodeBuf) TL {
+	tl := TL_messageMediaContact{}
+	tl.PhoneNumber = m.String()
+	tl.FirstName = m.String()
+	tl.LastName = m.String()
+	tl.Vcard = m.String()
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_messageMediaUnsupported(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaUnsupported)
+	return decode_body_TL_messageMediaUnsupported(m)
+}
+func decode_body_TL_messageMediaUnsupported(_ *DecodeBuf) TL {
+	tl := TL_messageMediaUnsupported{}
+	return tl
+}
+
+func decode_TL_messageMediaDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaDocument)
+	return decode_body_TL_messageMediaDocument(m)
+}
+func decode_body_TL_messageMediaDocument(m *DecodeBuf) TL {
+	tl := TL_messageMediaDocument{}
+	flags := m.Int()
+	tl.Nopremium = flags&(1<<3) != 0
+	tl.Spoiler = flags&(1<<4) != 0
+	tl.Video = flags&(1<<6) != 0
+	tl.Round = flags&(1<<7) != 0
+	tl.Voice = flags&(1<<8) != 0
+	if flags&(1<<0) != 0 {
+		tl.Document = m.Object()
+	}
+	if flags&(1<<5) != 0 {
+		tl.AltDocument = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.TTLSeconds = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messageMediaWebPage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaWebPage)
+	return decode_body_TL_messageMediaWebPage(m)
+}
+func decode_body_TL_messageMediaWebPage(m *DecodeBuf) TL {
+	tl := TL_messageMediaWebPage{}
+	flags := m.Int()
+	tl.ForceLargeMedia = flags&(1<<0) != 0
+	tl.ForceSmallMedia = flags&(1<<1) != 0
+	tl.Manual = flags&(1<<3) != 0
+	tl.Safe = flags&(1<<4) != 0
+	tl.Webpage = m.Object()
+	return tl
+}
+
+func decode_TL_messageMediaVenue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaVenue)
+	return decode_body_TL_messageMediaVenue(m)
+}
+func decode_body_TL_messageMediaVenue(m *DecodeBuf) TL {
+	tl := TL_messageMediaVenue{}
+	tl.Geo = m.Object()
+	tl.Title = m.String()
+	tl.Address = m.String()
+	tl.Provider = m.String()
+	tl.VenueID = m.String()
+	tl.VenueType = m.String()
+	return tl
+}
+
+func decode_TL_messageMediaGame(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaGame)
+	return decode_body_TL_messageMediaGame(m)
+}
+func decode_body_TL_messageMediaGame(m *DecodeBuf) TL {
+	tl := TL_messageMediaGame{}
+	tl.Game = decode_TL_game(m).(TL_game)
+	return tl
+}
+
+func decode_TL_messageMediaInvoice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaInvoice)
+	return decode_body_TL_messageMediaInvoice(m)
+}
+func decode_body_TL_messageMediaInvoice(m *DecodeBuf) TL {
+	tl := TL_messageMediaInvoice{}
+	flags := m.Int()
+	tl.ShippingAddressRequested = flags&(1<<1) != 0
+	tl.Test = flags&(1<<3) != 0
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Photo = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReceiptMsgID = Ref(m.Int())
+	}
+	tl.Currency = m.String()
+	tl.TotalAmount = m.Long()
+	tl.StartParam = m.String()
+	if flags&(1<<4) != 0 {
+		tl.ExtendedMedia = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_messageMediaGeoLive(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaGeoLive)
+	return decode_body_TL_messageMediaGeoLive(m)
+}
+func decode_body_TL_messageMediaGeoLive(m *DecodeBuf) TL {
+	tl := TL_messageMediaGeoLive{}
+	flags := m.Int()
+	tl.Geo = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Heading = Ref(m.Int())
+	}
+	tl.Period = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.ProximityNotificationRadius = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messageMediaPoll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaPoll)
+	return decode_body_TL_messageMediaPoll(m)
+}
+func decode_body_TL_messageMediaPoll(m *DecodeBuf) TL {
+	tl := TL_messageMediaPoll{}
+	tl.Poll = decode_TL_poll(m).(TL_poll)
+	tl.Results = decode_TL_pollResults(m).(TL_pollResults)
+	return tl
+}
+
+func decode_TL_messageMediaDice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaDice)
+	return decode_body_TL_messageMediaDice(m)
+}
+func decode_body_TL_messageMediaDice(m *DecodeBuf) TL {
+	tl := TL_messageMediaDice{}
+	tl.Value = m.Int()
+	tl.Emoticon = m.String()
+	return tl
+}
+
+func decode_TL_messageMediaStory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaStory)
+	return decode_body_TL_messageMediaStory(m)
+}
+func decode_body_TL_messageMediaStory(m *DecodeBuf) TL {
+	tl := TL_messageMediaStory{}
+	flags := m.Int()
+	tl.ViaMention = flags&(1<<1) != 0
+	tl.Peer = m.Object()
+	tl.ID = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Story = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_messageMediaGiveaway(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaGiveaway)
+	return decode_body_TL_messageMediaGiveaway(m)
+}
+func decode_body_TL_messageMediaGiveaway(m *DecodeBuf) TL {
+	tl := TL_messageMediaGiveaway{}
+	flags := m.Int()
+	tl.OnlyNewSubscribers = flags&(1<<0) != 0
+	tl.WinnersAreVisible = flags&(1<<2) != 0
+	tl.Channels = m.VectorLong()
+	if flags&(1<<1) != 0 {
+		tl.CountriesISO2 = m.VectorString()
+	}
+	if flags&(1<<3) != 0 {
+		tl.PrizeDescription = Ref(m.String())
+	}
+	tl.Quantity = m.Int()
+	tl.Months = m.Int()
+	tl.UntilDate = m.Int()
+	return tl
+}
+
+func decode_TL_messageMediaGiveawayResults(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaGiveawayResults)
+	return decode_body_TL_messageMediaGiveawayResults(m)
+}
+func decode_body_TL_messageMediaGiveawayResults(m *DecodeBuf) TL {
+	tl := TL_messageMediaGiveawayResults{}
+	flags := m.Int()
+	tl.OnlyNewSubscribers = flags&(1<<0) != 0
+	tl.Refunded = flags&(1<<2) != 0
+	tl.ChannelID = m.Long()
+	if flags&(1<<3) != 0 {
+		tl.AdditionalPeersCount = Ref(m.Int())
+	}
+	tl.LaunchMsgID = m.Int()
+	tl.WinnersCount = m.Int()
+	tl.UnclaimedCount = m.Int()
+	tl.Winners = m.VectorLong()
+	tl.Months = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.PrizeDescription = Ref(m.String())
+	}
+	tl.UntilDate = m.Int()
+	return tl
+}
+
+func decode_TL_messageMediaPaidMedia(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageMediaPaidMedia)
+	return decode_body_TL_messageMediaPaidMedia(m)
+}
+func decode_body_TL_messageMediaPaidMedia(m *DecodeBuf) TL {
+	tl := TL_messageMediaPaidMedia{}
+	tl.StarsAmount = m.Long()
+	tl.ExtendedMedia = m.Vector()
+	return tl
+}
+
+func decode_TL_messageActionEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionEmpty)
+	return decode_body_TL_messageActionEmpty(m)
+}
+func decode_body_TL_messageActionEmpty(_ *DecodeBuf) TL {
+	tl := TL_messageActionEmpty{}
+	return tl
+}
+
+func decode_TL_messageActionChatCreate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatCreate)
+	return decode_body_TL_messageActionChatCreate(m)
+}
+func decode_body_TL_messageActionChatCreate(m *DecodeBuf) TL {
+	tl := TL_messageActionChatCreate{}
+	tl.Title = m.String()
+	tl.Users = m.VectorLong()
+	return tl
+}
+
+func decode_TL_messageActionChatEditTitle(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatEditTitle)
+	return decode_body_TL_messageActionChatEditTitle(m)
+}
+func decode_body_TL_messageActionChatEditTitle(m *DecodeBuf) TL {
+	tl := TL_messageActionChatEditTitle{}
+	tl.Title = m.String()
+	return tl
+}
+
+func decode_TL_messageActionChatEditPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatEditPhoto)
+	return decode_body_TL_messageActionChatEditPhoto(m)
+}
+func decode_body_TL_messageActionChatEditPhoto(m *DecodeBuf) TL {
+	tl := TL_messageActionChatEditPhoto{}
+	tl.Photo = m.Object()
+	return tl
+}
+
+func decode_TL_messageActionChatDeletePhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatDeletePhoto)
+	return decode_body_TL_messageActionChatDeletePhoto(m)
+}
+func decode_body_TL_messageActionChatDeletePhoto(_ *DecodeBuf) TL {
+	tl := TL_messageActionChatDeletePhoto{}
+	return tl
+}
+
+func decode_TL_messageActionChatAddUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatAddUser)
+	return decode_body_TL_messageActionChatAddUser(m)
+}
+func decode_body_TL_messageActionChatAddUser(m *DecodeBuf) TL {
+	tl := TL_messageActionChatAddUser{}
+	tl.Users = m.VectorLong()
+	return tl
+}
+
+func decode_TL_messageActionChatDeleteUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatDeleteUser)
+	return decode_body_TL_messageActionChatDeleteUser(m)
+}
+func decode_body_TL_messageActionChatDeleteUser(m *DecodeBuf) TL {
+	tl := TL_messageActionChatDeleteUser{}
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_messageActionChatJoinedByLink(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatJoinedByLink)
+	return decode_body_TL_messageActionChatJoinedByLink(m)
+}
+func decode_body_TL_messageActionChatJoinedByLink(m *DecodeBuf) TL {
+	tl := TL_messageActionChatJoinedByLink{}
+	tl.InviterID = m.Long()
+	return tl
+}
+
+func decode_TL_messageActionChannelCreate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChannelCreate)
+	return decode_body_TL_messageActionChannelCreate(m)
+}
+func decode_body_TL_messageActionChannelCreate(m *DecodeBuf) TL {
+	tl := TL_messageActionChannelCreate{}
+	tl.Title = m.String()
+	return tl
+}
+
+func decode_TL_messageActionChatMigrateTo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatMigrateTo)
+	return decode_body_TL_messageActionChatMigrateTo(m)
+}
+func decode_body_TL_messageActionChatMigrateTo(m *DecodeBuf) TL {
+	tl := TL_messageActionChatMigrateTo{}
+	tl.ChannelID = m.Long()
+	return tl
+}
+
+func decode_TL_messageActionChannelMigrateFrom(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChannelMigrateFrom)
+	return decode_body_TL_messageActionChannelMigrateFrom(m)
+}
+func decode_body_TL_messageActionChannelMigrateFrom(m *DecodeBuf) TL {
+	tl := TL_messageActionChannelMigrateFrom{}
+	tl.Title = m.String()
+	tl.ChatID = m.Long()
+	return tl
+}
+
+func decode_TL_messageActionPINMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionPINMessage)
+	return decode_body_TL_messageActionPINMessage(m)
+}
+func decode_body_TL_messageActionPINMessage(_ *DecodeBuf) TL {
+	tl := TL_messageActionPINMessage{}
+	return tl
+}
+
+func decode_TL_messageActionHistoryClear(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionHistoryClear)
+	return decode_body_TL_messageActionHistoryClear(m)
+}
+func decode_body_TL_messageActionHistoryClear(_ *DecodeBuf) TL {
+	tl := TL_messageActionHistoryClear{}
+	return tl
+}
+
+func decode_TL_messageActionGameScore(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGameScore)
+	return decode_body_TL_messageActionGameScore(m)
+}
+func decode_body_TL_messageActionGameScore(m *DecodeBuf) TL {
+	tl := TL_messageActionGameScore{}
+	tl.GameID = m.Long()
+	tl.Score = m.Int()
+	return tl
+}
+
+func decode_TL_messageActionPaymentSentMe(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionPaymentSentMe)
+	return decode_body_TL_messageActionPaymentSentMe(m)
+}
+func decode_body_TL_messageActionPaymentSentMe(m *DecodeBuf) TL {
+	tl := TL_messageActionPaymentSentMe{}
+	flags := m.Int()
+	tl.RecurringInit = flags&(1<<2) != 0
+	tl.RecurringUsed = flags&(1<<3) != 0
+	tl.Currency = m.String()
+	tl.TotalAmount = m.Long()
+	tl.Payload = m.StringBytes()
+	if flags&(1<<0) != 0 {
+		tl.Info = Ref(decode_TL_paymentRequestedInfo(m).(TL_paymentRequestedInfo))
+	}
+	if flags&(1<<1) != 0 {
+		tl.ShippingOptionID = Ref(m.String())
+	}
+	tl.Charge = decode_TL_paymentCharge(m).(TL_paymentCharge)
+	return tl
+}
+
+func decode_TL_messageActionPaymentSent(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionPaymentSent)
+	return decode_body_TL_messageActionPaymentSent(m)
+}
+func decode_body_TL_messageActionPaymentSent(m *DecodeBuf) TL {
+	tl := TL_messageActionPaymentSent{}
+	flags := m.Int()
+	tl.RecurringInit = flags&(1<<2) != 0
+	tl.RecurringUsed = flags&(1<<3) != 0
+	tl.Currency = m.String()
+	tl.TotalAmount = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.InvoiceSlug = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_messageActionPhoneCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionPhoneCall)
+	return decode_body_TL_messageActionPhoneCall(m)
+}
+func decode_body_TL_messageActionPhoneCall(m *DecodeBuf) TL {
+	tl := TL_messageActionPhoneCall{}
+	flags := m.Int()
+	tl.Video = flags&(1<<2) != 0
+	tl.CallID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Reason = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Duration = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messageActionScreenshotTaken(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionScreenshotTaken)
+	return decode_body_TL_messageActionScreenshotTaken(m)
+}
+func decode_body_TL_messageActionScreenshotTaken(_ *DecodeBuf) TL {
+	tl := TL_messageActionScreenshotTaken{}
+	return tl
+}
+
+func decode_TL_messageActionCustomAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionCustomAction)
+	return decode_body_TL_messageActionCustomAction(m)
+}
+func decode_body_TL_messageActionCustomAction(m *DecodeBuf) TL {
+	tl := TL_messageActionCustomAction{}
+	tl.Message = m.String()
+	return tl
+}
+
+func decode_TL_messageActionBotAllowed(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionBotAllowed)
+	return decode_body_TL_messageActionBotAllowed(m)
+}
+func decode_body_TL_messageActionBotAllowed(m *DecodeBuf) TL {
+	tl := TL_messageActionBotAllowed{}
+	flags := m.Int()
+	tl.AttachMenu = flags&(1<<1) != 0
+	tl.FromRequest = flags&(1<<3) != 0
+	if flags&(1<<0) != 0 {
+		tl.Domain = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.App = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_messageActionSecureValuesSentMe(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionSecureValuesSentMe)
+	return decode_body_TL_messageActionSecureValuesSentMe(m)
+}
+func decode_body_TL_messageActionSecureValuesSentMe(m *DecodeBuf) TL {
+	tl := TL_messageActionSecureValuesSentMe{}
+	tl.Values = DecodeBuf_GenericVector[TL_secureValue](m)
+	tl.Credentials = decode_TL_secureCredentialsEncrypted(m).(TL_secureCredentialsEncrypted)
+	return tl
+}
+
+func decode_TL_messageActionSecureValuesSent(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionSecureValuesSent)
+	return decode_body_TL_messageActionSecureValuesSent(m)
+}
+func decode_body_TL_messageActionSecureValuesSent(m *DecodeBuf) TL {
+	tl := TL_messageActionSecureValuesSent{}
+	tl.Types = m.Vector()
+	return tl
+}
+
+func decode_TL_messageActionContactSignUp(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionContactSignUp)
+	return decode_body_TL_messageActionContactSignUp(m)
+}
+func decode_body_TL_messageActionContactSignUp(_ *DecodeBuf) TL {
+	tl := TL_messageActionContactSignUp{}
+	return tl
+}
+
+func decode_TL_messageActionGeoProximityReached(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGeoProximityReached)
+	return decode_body_TL_messageActionGeoProximityReached(m)
+}
+func decode_body_TL_messageActionGeoProximityReached(m *DecodeBuf) TL {
+	tl := TL_messageActionGeoProximityReached{}
+	tl.FromID = m.Object()
+	tl.ToID = m.Object()
+	tl.Distance = m.Int()
+	return tl
+}
+
+func decode_TL_messageActionGroupCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGroupCall)
+	return decode_body_TL_messageActionGroupCall(m)
+}
+func decode_body_TL_messageActionGroupCall(m *DecodeBuf) TL {
+	tl := TL_messageActionGroupCall{}
+	flags := m.Int()
+	tl.Call = decode_TL_inputGroupCall(m).(TL_inputGroupCall)
+	if flags&(1<<0) != 0 {
+		tl.Duration = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messageActionInviteToGroupCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionInviteToGroupCall)
+	return decode_body_TL_messageActionInviteToGroupCall(m)
+}
+func decode_body_TL_messageActionInviteToGroupCall(m *DecodeBuf) TL {
+	tl := TL_messageActionInviteToGroupCall{}
+	tl.Call = decode_TL_inputGroupCall(m).(TL_inputGroupCall)
+	tl.Users = m.VectorLong()
+	return tl
+}
+
+func decode_TL_messageActionSetMessagesTTL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionSetMessagesTTL)
+	return decode_body_TL_messageActionSetMessagesTTL(m)
+}
+func decode_body_TL_messageActionSetMessagesTTL(m *DecodeBuf) TL {
+	tl := TL_messageActionSetMessagesTTL{}
+	flags := m.Int()
+	tl.Period = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.AutoSettingFrom = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_messageActionGroupCallScheduled(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGroupCallScheduled)
+	return decode_body_TL_messageActionGroupCallScheduled(m)
+}
+func decode_body_TL_messageActionGroupCallScheduled(m *DecodeBuf) TL {
+	tl := TL_messageActionGroupCallScheduled{}
+	tl.Call = decode_TL_inputGroupCall(m).(TL_inputGroupCall)
+	tl.ScheduleDate = m.Int()
+	return tl
+}
+
+func decode_TL_messageActionSetChatTheme(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionSetChatTheme)
+	return decode_body_TL_messageActionSetChatTheme(m)
+}
+func decode_body_TL_messageActionSetChatTheme(m *DecodeBuf) TL {
+	tl := TL_messageActionSetChatTheme{}
+	tl.Emoticon = m.String()
+	return tl
+}
+
+func decode_TL_messageActionChatJoinedByRequest(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionChatJoinedByRequest)
+	return decode_body_TL_messageActionChatJoinedByRequest(m)
+}
+func decode_body_TL_messageActionChatJoinedByRequest(_ *DecodeBuf) TL {
+	tl := TL_messageActionChatJoinedByRequest{}
+	return tl
+}
+
+func decode_TL_messageActionWebViewDataSentMe(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionWebViewDataSentMe)
+	return decode_body_TL_messageActionWebViewDataSentMe(m)
+}
+func decode_body_TL_messageActionWebViewDataSentMe(m *DecodeBuf) TL {
+	tl := TL_messageActionWebViewDataSentMe{}
+	tl.Text = m.String()
+	tl.Data = m.String()
+	return tl
+}
+
+func decode_TL_messageActionWebViewDataSent(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionWebViewDataSent)
+	return decode_body_TL_messageActionWebViewDataSent(m)
+}
+func decode_body_TL_messageActionWebViewDataSent(m *DecodeBuf) TL {
+	tl := TL_messageActionWebViewDataSent{}
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_messageActionGiftPremium(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGiftPremium)
+	return decode_body_TL_messageActionGiftPremium(m)
+}
+func decode_body_TL_messageActionGiftPremium(m *DecodeBuf) TL {
+	tl := TL_messageActionGiftPremium{}
+	flags := m.Int()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	tl.Months = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.CryptoCurrency = Ref(m.String())
+	}
+	if flags&(1<<0) != 0 {
+		tl.CryptoAmount = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_messageActionTopicCreate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionTopicCreate)
+	return decode_body_TL_messageActionTopicCreate(m)
+}
+func decode_body_TL_messageActionTopicCreate(m *DecodeBuf) TL {
+	tl := TL_messageActionTopicCreate{}
+	flags := m.Int()
+	tl.Title = m.String()
+	tl.IconColor = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.IconEmojiID = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_messageActionTopicEdit(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionTopicEdit)
+	return decode_body_TL_messageActionTopicEdit(m)
+}
+func decode_body_TL_messageActionTopicEdit(m *DecodeBuf) TL {
+	tl := TL_messageActionTopicEdit{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.IconEmojiID = Ref(m.Long())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Closed = Ref(m.Bool())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Hidden = Ref(m.Bool())
+	}
+	return tl
+}
+
+func decode_TL_messageActionSuggestProfilePhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionSuggestProfilePhoto)
+	return decode_body_TL_messageActionSuggestProfilePhoto(m)
+}
+func decode_body_TL_messageActionSuggestProfilePhoto(m *DecodeBuf) TL {
+	tl := TL_messageActionSuggestProfilePhoto{}
+	tl.Photo = m.Object()
+	return tl
+}
+
+func decode_TL_messageActionRequestedPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionRequestedPeer)
+	return decode_body_TL_messageActionRequestedPeer(m)
+}
+func decode_body_TL_messageActionRequestedPeer(m *DecodeBuf) TL {
+	tl := TL_messageActionRequestedPeer{}
+	tl.ButtonID = m.Int()
+	tl.Peers = m.Vector()
+	return tl
+}
+
+func decode_TL_messageActionSetChatWallPaper(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionSetChatWallPaper)
+	return decode_body_TL_messageActionSetChatWallPaper(m)
+}
+func decode_body_TL_messageActionSetChatWallPaper(m *DecodeBuf) TL {
+	tl := TL_messageActionSetChatWallPaper{}
+	flags := m.Int()
+	tl.Same = flags&(1<<0) != 0
+	tl.ForBoth = flags&(1<<1) != 0
+	tl.Wallpaper = m.Object()
+	return tl
+}
+
+func decode_TL_messageActionGiftCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGiftCode)
+	return decode_body_TL_messageActionGiftCode(m)
+}
+func decode_body_TL_messageActionGiftCode(m *DecodeBuf) TL {
+	tl := TL_messageActionGiftCode{}
+	flags := m.Int()
+	tl.ViaGiveaway = flags&(1<<0) != 0
+	tl.Unclaimed = flags&(1<<2) != 0
+	if flags&(1<<1) != 0 {
+		tl.BoostPeer = m.Object()
+	}
+	tl.Months = m.Int()
+	tl.Slug = m.String()
+	if flags&(1<<2) != 0 {
+		tl.Currency = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Amount = Ref(m.Long())
+	}
+	if flags&(1<<3) != 0 {
+		tl.CryptoCurrency = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.CryptoAmount = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_messageActionGiveawayLaunch(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGiveawayLaunch)
+	return decode_body_TL_messageActionGiveawayLaunch(m)
+}
+func decode_body_TL_messageActionGiveawayLaunch(_ *DecodeBuf) TL {
+	tl := TL_messageActionGiveawayLaunch{}
+	return tl
+}
+
+func decode_TL_messageActionGiveawayResults(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGiveawayResults)
+	return decode_body_TL_messageActionGiveawayResults(m)
+}
+func decode_body_TL_messageActionGiveawayResults(m *DecodeBuf) TL {
+	tl := TL_messageActionGiveawayResults{}
+	tl.WinnersCount = m.Int()
+	tl.UnclaimedCount = m.Int()
+	return tl
+}
+
+func decode_TL_messageActionBoostApply(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionBoostApply)
+	return decode_body_TL_messageActionBoostApply(m)
+}
+func decode_body_TL_messageActionBoostApply(m *DecodeBuf) TL {
+	tl := TL_messageActionBoostApply{}
+	tl.Boosts = m.Int()
+	return tl
+}
+
+func decode_TL_messageActionRequestedPeerSentMe(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionRequestedPeerSentMe)
+	return decode_body_TL_messageActionRequestedPeerSentMe(m)
+}
+func decode_body_TL_messageActionRequestedPeerSentMe(m *DecodeBuf) TL {
+	tl := TL_messageActionRequestedPeerSentMe{}
+	tl.ButtonID = m.Int()
+	tl.Peers = m.Vector()
+	return tl
+}
+
+func decode_TL_messageActionPaymentRefunded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionPaymentRefunded)
+	return decode_body_TL_messageActionPaymentRefunded(m)
+}
+func decode_body_TL_messageActionPaymentRefunded(m *DecodeBuf) TL {
+	tl := TL_messageActionPaymentRefunded{}
+	flags := m.Int()
+	tl.Peer = m.Object()
+	tl.Currency = m.String()
+	tl.TotalAmount = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Payload = m.StringBytes()
+	}
+	tl.Charge = decode_TL_paymentCharge(m).(TL_paymentCharge)
+	return tl
+}
+
+func decode_TL_messageActionGiftStars(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionGiftStars)
+	return decode_body_TL_messageActionGiftStars(m)
+}
+func decode_body_TL_messageActionGiftStars(m *DecodeBuf) TL {
+	tl := TL_messageActionGiftStars{}
+	flags := m.Int()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	tl.Stars = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.CryptoCurrency = Ref(m.String())
+	}
+	if flags&(1<<0) != 0 {
+		tl.CryptoAmount = Ref(m.Long())
+	}
+	if flags&(1<<1) != 0 {
+		tl.TransactionID = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_dialog(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dialog)
+	return decode_body_TL_dialog(m)
+}
+func decode_body_TL_dialog(m *DecodeBuf) TL {
+	tl := TL_dialog{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<2) != 0
+	tl.UnreadMark = flags&(1<<3) != 0
+	tl.ViewForumAsMessages = flags&(1<<6) != 0
+	tl.Peer = m.Object()
+	tl.TopMessage = m.Int()
+	tl.ReadInboxMaxID = m.Int()
+	tl.ReadOutboxMaxID = m.Int()
+	tl.UnreadCount = m.Int()
+	tl.UnreadMentionsCount = m.Int()
+	tl.UnreadReactionsCount = m.Int()
+	tl.NotifySettings = decode_TL_peerNotifySettings(m).(TL_peerNotifySettings)
+	if flags&(1<<0) != 0 {
+		tl.PTS = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Draft = m.Object()
+	}
+	if flags&(1<<4) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_dialogFolder(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dialogFolder)
+	return decode_body_TL_dialogFolder(m)
+}
+func decode_body_TL_dialogFolder(m *DecodeBuf) TL {
+	tl := TL_dialogFolder{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<2) != 0
+	tl.Folder = decode_TL_folder(m).(TL_folder)
+	tl.Peer = m.Object()
+	tl.TopMessage = m.Int()
+	tl.UnreadMutedPeersCount = m.Int()
+	tl.UnreadUnmutedPeersCount = m.Int()
+	tl.UnreadMutedMessagesCount = m.Int()
+	tl.UnreadUnmutedMessagesCount = m.Int()
+	return tl
+}
+
+func decode_TL_photoEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photoEmpty)
+	return decode_body_TL_photoEmpty(m)
+}
+func decode_body_TL_photoEmpty(m *DecodeBuf) TL {
+	tl := TL_photoEmpty{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_photo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photo)
+	return decode_body_TL_photo(m)
+}
+func decode_body_TL_photo(m *DecodeBuf) TL {
+	tl := TL_photo{}
+	flags := m.Int()
+	tl.HasStickers = flags&(1<<0) != 0
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.FileReference = m.StringBytes()
+	tl.Date = m.Int()
+	tl.Sizes = m.Vector()
+	if flags&(1<<1) != 0 {
+		tl.VideoSizes = m.Vector()
+	}
+	tl.DCID = m.Int()
+	return tl
+}
+
+func decode_TL_photoSizeEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photoSizeEmpty)
+	return decode_body_TL_photoSizeEmpty(m)
+}
+func decode_body_TL_photoSizeEmpty(m *DecodeBuf) TL {
+	tl := TL_photoSizeEmpty{}
+	tl.Type = m.String()
+	return tl
+}
+
+func decode_TL_photoSize(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photoSize)
+	return decode_body_TL_photoSize(m)
+}
+func decode_body_TL_photoSize(m *DecodeBuf) TL {
+	tl := TL_photoSize{}
+	tl.Type = m.String()
+	tl.W = m.Int()
+	tl.H = m.Int()
+	tl.Size = m.Int()
+	return tl
+}
+
+func decode_TL_photoCachedSize(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photoCachedSize)
+	return decode_body_TL_photoCachedSize(m)
+}
+func decode_body_TL_photoCachedSize(m *DecodeBuf) TL {
+	tl := TL_photoCachedSize{}
+	tl.Type = m.String()
+	tl.W = m.Int()
+	tl.H = m.Int()
+	tl.Bytes = m.StringBytes()
+	return tl
+}
+
+func decode_TL_photoStrippedSize(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photoStrippedSize)
+	return decode_body_TL_photoStrippedSize(m)
+}
+func decode_body_TL_photoStrippedSize(m *DecodeBuf) TL {
+	tl := TL_photoStrippedSize{}
+	tl.Type = m.String()
+	tl.Bytes = m.StringBytes()
+	return tl
+}
+
+func decode_TL_photoSizeProgressive(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photoSizeProgressive)
+	return decode_body_TL_photoSizeProgressive(m)
+}
+func decode_body_TL_photoSizeProgressive(m *DecodeBuf) TL {
+	tl := TL_photoSizeProgressive{}
+	tl.Type = m.String()
+	tl.W = m.Int()
+	tl.H = m.Int()
+	tl.Sizes = m.VectorInt()
+	return tl
+}
+
+func decode_TL_photoPathSize(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photoPathSize)
+	return decode_body_TL_photoPathSize(m)
+}
+func decode_body_TL_photoPathSize(m *DecodeBuf) TL {
+	tl := TL_photoPathSize{}
+	tl.Type = m.String()
+	tl.Bytes = m.StringBytes()
+	return tl
+}
+
+func decode_TL_geoPointEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_geoPointEmpty)
+	return decode_body_TL_geoPointEmpty(m)
+}
+func decode_body_TL_geoPointEmpty(_ *DecodeBuf) TL {
+	tl := TL_geoPointEmpty{}
+	return tl
+}
+
+func decode_TL_geoPoint(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_geoPoint)
+	return decode_body_TL_geoPoint(m)
+}
+func decode_body_TL_geoPoint(m *DecodeBuf) TL {
+	tl := TL_geoPoint{}
+	flags := m.Int()
+	tl.Long = m.Double()
+	tl.Lat = m.Double()
+	tl.AccessHash = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.AccuracyRadius = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_auth_sentCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCode)
+	return decode_body_TL_auth_sentCode(m)
+}
+func decode_body_TL_auth_sentCode(m *DecodeBuf) TL {
+	tl := TL_auth_sentCode{}
+	flags := m.Int()
+	tl.Type = m.Object()
+	tl.PhoneCodeHash = m.String()
+	if flags&(1<<1) != 0 {
+		tl.NextType = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.Timeout = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_auth_sentCodeSuccess(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeSuccess)
+	return decode_body_TL_auth_sentCodeSuccess(m)
+}
+func decode_body_TL_auth_sentCodeSuccess(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeSuccess{}
+	tl.Authorization = m.Object()
+	return tl
+}
+
+func decode_TL_auth_authorization(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_authorization)
+	return decode_body_TL_auth_authorization(m)
+}
+func decode_body_TL_auth_authorization(m *DecodeBuf) TL {
+	tl := TL_auth_authorization{}
+	flags := m.Int()
+	tl.SetupPasswordRequired = flags&(1<<1) != 0
+	if flags&(1<<1) != 0 {
+		tl.OtherwiseReloginDays = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.TmpSessions = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.FutureAuthToken = m.StringBytes()
+	}
+	tl.User = m.Object()
+	return tl
+}
+
+func decode_TL_auth_authorizationSignUpRequired(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_authorizationSignUpRequired)
+	return decode_body_TL_auth_authorizationSignUpRequired(m)
+}
+func decode_body_TL_auth_authorizationSignUpRequired(m *DecodeBuf) TL {
+	tl := TL_auth_authorizationSignUpRequired{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.TermsOfService = Ref(decode_TL_help_termsOfService(m).(TL_help_termsOfService))
+	}
+	return tl
+}
+
+func decode_TL_auth_exportedAuthorization(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_exportedAuthorization)
+	return decode_body_TL_auth_exportedAuthorization(m)
+}
+func decode_body_TL_auth_exportedAuthorization(m *DecodeBuf) TL {
+	tl := TL_auth_exportedAuthorization{}
+	tl.ID = m.Long()
+	tl.Bytes = m.StringBytes()
+	return tl
+}
+
+func decode_TL_inputNotifyPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputNotifyPeer)
+	return decode_body_TL_inputNotifyPeer(m)
+}
+func decode_body_TL_inputNotifyPeer(m *DecodeBuf) TL {
+	tl := TL_inputNotifyPeer{}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_inputNotifyUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputNotifyUsers)
+	return decode_body_TL_inputNotifyUsers(m)
+}
+func decode_body_TL_inputNotifyUsers(_ *DecodeBuf) TL {
+	tl := TL_inputNotifyUsers{}
+	return tl
+}
+
+func decode_TL_inputNotifyChats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputNotifyChats)
+	return decode_body_TL_inputNotifyChats(m)
+}
+func decode_body_TL_inputNotifyChats(_ *DecodeBuf) TL {
+	tl := TL_inputNotifyChats{}
+	return tl
+}
+
+func decode_TL_inputNotifyBroadcasts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputNotifyBroadcasts)
+	return decode_body_TL_inputNotifyBroadcasts(m)
+}
+func decode_body_TL_inputNotifyBroadcasts(_ *DecodeBuf) TL {
+	tl := TL_inputNotifyBroadcasts{}
+	return tl
+}
+
+func decode_TL_inputNotifyForumTopic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputNotifyForumTopic)
+	return decode_body_TL_inputNotifyForumTopic(m)
+}
+func decode_body_TL_inputNotifyForumTopic(m *DecodeBuf) TL {
+	tl := TL_inputNotifyForumTopic{}
+	tl.Peer = m.Object()
+	tl.TopMsgID = m.Int()
+	return tl
+}
+
+func decode_TL_inputPeerNotifySettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPeerNotifySettings)
+	return decode_body_TL_inputPeerNotifySettings(m)
+}
+func decode_body_TL_inputPeerNotifySettings(m *DecodeBuf) TL {
+	tl := TL_inputPeerNotifySettings{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.ShowPreviews = Ref(m.Bool())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Silent = Ref(m.Bool())
+	}
+	if flags&(1<<2) != 0 {
+		tl.MuteUntil = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Sound = m.Object()
+	}
+	if flags&(1<<6) != 0 {
+		tl.StoriesMuted = Ref(m.Bool())
+	}
+	if flags&(1<<7) != 0 {
+		tl.StoriesHideSender = Ref(m.Bool())
+	}
+	if flags&(1<<8) != 0 {
+		tl.StoriesSound = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_peerNotifySettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerNotifySettings)
+	return decode_body_TL_peerNotifySettings(m)
+}
+func decode_body_TL_peerNotifySettings(m *DecodeBuf) TL {
+	tl := TL_peerNotifySettings{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.ShowPreviews = Ref(m.Bool())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Silent = Ref(m.Bool())
+	}
+	if flags&(1<<2) != 0 {
+		tl.MuteUntil = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.IOSSound = m.Object()
+	}
+	if flags&(1<<4) != 0 {
+		tl.AndroidSound = m.Object()
+	}
+	if flags&(1<<5) != 0 {
+		tl.OtherSound = m.Object()
+	}
+	if flags&(1<<6) != 0 {
+		tl.StoriesMuted = Ref(m.Bool())
+	}
+	if flags&(1<<7) != 0 {
+		tl.StoriesHideSender = Ref(m.Bool())
+	}
+	if flags&(1<<8) != 0 {
+		tl.StoriesIOSSound = m.Object()
+	}
+	if flags&(1<<9) != 0 {
+		tl.StoriesAndroidSound = m.Object()
+	}
+	if flags&(1<<10) != 0 {
+		tl.StoriesOtherSound = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_peerSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerSettings)
+	return decode_body_TL_peerSettings(m)
+}
+func decode_body_TL_peerSettings(m *DecodeBuf) TL {
+	tl := TL_peerSettings{}
+	flags := m.Int()
+	tl.ReportSpam = flags&(1<<0) != 0
+	tl.AddContact = flags&(1<<1) != 0
+	tl.BlockContact = flags&(1<<2) != 0
+	tl.ShareContact = flags&(1<<3) != 0
+	tl.NeedContactsException = flags&(1<<4) != 0
+	tl.ReportGeo = flags&(1<<5) != 0
+	tl.Autoarchived = flags&(1<<7) != 0
+	tl.InviteMembers = flags&(1<<8) != 0
+	tl.RequestChatBroadcast = flags&(1<<10) != 0
+	tl.BusinessBotPaused = flags&(1<<11) != 0
+	tl.BusinessBotCanReply = flags&(1<<12) != 0
+	if flags&(1<<6) != 0 {
+		tl.GeoDistance = Ref(m.Int())
+	}
+	if flags&(1<<9) != 0 {
+		tl.RequestChatTitle = Ref(m.String())
+	}
+	if flags&(1<<9) != 0 {
+		tl.RequestChatDate = Ref(m.Int())
+	}
+	if flags&(1<<13) != 0 {
+		tl.BusinessBotID = Ref(m.Long())
+	}
+	if flags&(1<<13) != 0 {
+		tl.BusinessBotManageURL = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_wallPaper(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_wallPaper)
+	return decode_body_TL_wallPaper(m)
+}
+func decode_body_TL_wallPaper(m *DecodeBuf) TL {
+	tl := TL_wallPaper{}
+	tl.ID = m.Long()
+	flags := m.Int()
+	tl.Creator = flags&(1<<0) != 0
+	tl.Default = flags&(1<<1) != 0
+	tl.Pattern = flags&(1<<3) != 0
+	tl.Dark = flags&(1<<4) != 0
+	tl.AccessHash = m.Long()
+	tl.Slug = m.String()
+	tl.Document = m.Object()
+	if flags&(1<<2) != 0 {
+		tl.Settings = Ref(decode_TL_wallPaperSettings(m).(TL_wallPaperSettings))
+	}
+	return tl
+}
+
+func decode_TL_wallPaperNoFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_wallPaperNoFile)
+	return decode_body_TL_wallPaperNoFile(m)
+}
+func decode_body_TL_wallPaperNoFile(m *DecodeBuf) TL {
+	tl := TL_wallPaperNoFile{}
+	tl.ID = m.Long()
+	flags := m.Int()
+	tl.Default = flags&(1<<1) != 0
+	tl.Dark = flags&(1<<4) != 0
+	if flags&(1<<2) != 0 {
+		tl.Settings = Ref(decode_TL_wallPaperSettings(m).(TL_wallPaperSettings))
+	}
+	return tl
+}
+
+func decode_TL_inputReportReasonSpam(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonSpam)
+	return decode_body_TL_inputReportReasonSpam(m)
+}
+func decode_body_TL_inputReportReasonSpam(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonSpam{}
+	return tl
+}
+
+func decode_TL_inputReportReasonViolence(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonViolence)
+	return decode_body_TL_inputReportReasonViolence(m)
+}
+func decode_body_TL_inputReportReasonViolence(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonViolence{}
+	return tl
+}
+
+func decode_TL_inputReportReasonPornography(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonPornography)
+	return decode_body_TL_inputReportReasonPornography(m)
+}
+func decode_body_TL_inputReportReasonPornography(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonPornography{}
+	return tl
+}
+
+func decode_TL_inputReportReasonChildAbuse(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonChildAbuse)
+	return decode_body_TL_inputReportReasonChildAbuse(m)
+}
+func decode_body_TL_inputReportReasonChildAbuse(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonChildAbuse{}
+	return tl
+}
+
+func decode_TL_inputReportReasonOther(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonOther)
+	return decode_body_TL_inputReportReasonOther(m)
+}
+func decode_body_TL_inputReportReasonOther(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonOther{}
+	return tl
+}
+
+func decode_TL_inputReportReasonCopyright(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonCopyright)
+	return decode_body_TL_inputReportReasonCopyright(m)
+}
+func decode_body_TL_inputReportReasonCopyright(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonCopyright{}
+	return tl
+}
+
+func decode_TL_inputReportReasonGeoIrrelevant(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonGeoIrrelevant)
+	return decode_body_TL_inputReportReasonGeoIrrelevant(m)
+}
+func decode_body_TL_inputReportReasonGeoIrrelevant(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonGeoIrrelevant{}
+	return tl
+}
+
+func decode_TL_inputReportReasonFake(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonFake)
+	return decode_body_TL_inputReportReasonFake(m)
+}
+func decode_body_TL_inputReportReasonFake(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonFake{}
+	return tl
+}
+
+func decode_TL_inputReportReasonIllegalDrugs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonIllegalDrugs)
+	return decode_body_TL_inputReportReasonIllegalDrugs(m)
+}
+func decode_body_TL_inputReportReasonIllegalDrugs(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonIllegalDrugs{}
+	return tl
+}
+
+func decode_TL_inputReportReasonPersonalDetails(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReportReasonPersonalDetails)
+	return decode_body_TL_inputReportReasonPersonalDetails(m)
+}
+func decode_body_TL_inputReportReasonPersonalDetails(_ *DecodeBuf) TL {
+	tl := TL_inputReportReasonPersonalDetails{}
+	return tl
+}
+
+func decode_TL_userFull(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userFull)
+	return decode_body_TL_userFull(m)
+}
+func decode_body_TL_userFull(m *DecodeBuf) TL {
+	tl := TL_userFull{}
+	flags := m.Int()
+	tl.Blocked = flags&(1<<0) != 0
+	tl.PhoneCallsAvailable = flags&(1<<4) != 0
+	tl.PhoneCallsPrivate = flags&(1<<5) != 0
+	tl.CanPINMessage = flags&(1<<7) != 0
+	tl.HasScheduled = flags&(1<<12) != 0
+	tl.VideoCallsAvailable = flags&(1<<13) != 0
+	tl.VoiceMessagesForbidden = flags&(1<<20) != 0
+	tl.TranslationsDisabled = flags&(1<<23) != 0
+	tl.StoriesPinnedAvailable = flags&(1<<26) != 0
+	tl.BlockedMyStoriesFrom = flags&(1<<27) != 0
+	tl.WallpaperOverridden = flags&(1<<28) != 0
+	tl.ContactRequirePremium = flags&(1<<29) != 0
+	tl.ReadDatesPrivate = flags&(1<<30) != 0
+	flags2 := m.Int()
+	tl.SponsoredEnabled = flags2&(1<<7) != 0
+	tl.ID = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.About = Ref(m.String())
+	}
+	tl.Settings = decode_TL_peerSettings(m).(TL_peerSettings)
+	if flags&(1<<21) != 0 {
+		tl.PersonalPhoto = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.ProfilePhoto = m.Object()
+	}
+	if flags&(1<<22) != 0 {
+		tl.FallbackPhoto = m.Object()
+	}
+	tl.NotifySettings = decode_TL_peerNotifySettings(m).(TL_peerNotifySettings)
+	if flags&(1<<3) != 0 {
+		tl.BotInfo = Ref(decode_TL_botInfo(m).(TL_botInfo))
+	}
+	if flags&(1<<6) != 0 {
+		tl.PinnedMsgID = Ref(m.Int())
+	}
+	tl.CommonChatsCount = m.Int()
+	if flags&(1<<11) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	if flags&(1<<14) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	if flags&(1<<15) != 0 {
+		tl.ThemeEmoticon = Ref(m.String())
+	}
+	if flags&(1<<16) != 0 {
+		tl.PrivateForwardName = Ref(m.String())
+	}
+	if flags&(1<<17) != 0 {
+		tl.BotGroupAdminRights = Ref(decode_TL_chatAdminRights(m).(TL_chatAdminRights))
+	}
+	if flags&(1<<18) != 0 {
+		tl.BotBroadcastAdminRights = Ref(decode_TL_chatAdminRights(m).(TL_chatAdminRights))
+	}
+	if flags&(1<<19) != 0 {
+		tl.PremiumGifts = DecodeBuf_GenericVector[TL_premiumGiftOption](m)
+	}
+	if flags&(1<<24) != 0 {
+		tl.Wallpaper = m.Object()
+	}
+	if flags&(1<<25) != 0 {
+		tl.Stories = Ref(decode_TL_peerStories(m).(TL_peerStories))
+	}
+	if flags2&(1<<0) != 0 {
+		tl.BusinessWorkHours = Ref(decode_TL_businessWorkHours(m).(TL_businessWorkHours))
+	}
+	if flags2&(1<<1) != 0 {
+		tl.BusinessLocation = Ref(decode_TL_businessLocation(m).(TL_businessLocation))
+	}
+	if flags2&(1<<2) != 0 {
+		tl.BusinessGreetingMessage = Ref(decode_TL_businessGreetingMessage(m).(TL_businessGreetingMessage))
+	}
+	if flags2&(1<<3) != 0 {
+		tl.BusinessAwayMessage = Ref(decode_TL_businessAwayMessage(m).(TL_businessAwayMessage))
+	}
+	if flags2&(1<<4) != 0 {
+		tl.BusinessIntro = Ref(decode_TL_businessIntro(m).(TL_businessIntro))
+	}
+	if flags2&(1<<5) != 0 {
+		tl.Birthday = Ref(decode_TL_birthday(m).(TL_birthday))
+	}
+	if flags2&(1<<6) != 0 {
+		tl.PersonalChannelID = Ref(m.Long())
+	}
+	if flags2&(1<<6) != 0 {
+		tl.PersonalChannelMessage = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_contact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contact)
+	return decode_body_TL_contact(m)
+}
+func decode_body_TL_contact(m *DecodeBuf) TL {
+	tl := TL_contact{}
+	tl.UserID = m.Long()
+	tl.Mutual = m.Bool()
+	return tl
+}
+
+func decode_TL_importedContact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_importedContact)
+	return decode_body_TL_importedContact(m)
+}
+func decode_body_TL_importedContact(m *DecodeBuf) TL {
+	tl := TL_importedContact{}
+	tl.UserID = m.Long()
+	tl.ClientID = m.Long()
+	return tl
+}
+
+func decode_TL_contactStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contactStatus)
+	return decode_body_TL_contactStatus(m)
+}
+func decode_body_TL_contactStatus(m *DecodeBuf) TL {
+	tl := TL_contactStatus{}
+	tl.UserID = m.Long()
+	tl.Status = m.Object()
+	return tl
+}
+
+func decode_TL_contacts_contactsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_contactsNotModified)
+	return decode_body_TL_contacts_contactsNotModified(m)
+}
+func decode_body_TL_contacts_contactsNotModified(_ *DecodeBuf) TL {
+	tl := TL_contacts_contactsNotModified{}
+	return tl
+}
+
+func decode_TL_contacts_contacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_contacts)
+	return decode_body_TL_contacts_contacts(m)
+}
+func decode_body_TL_contacts_contacts(m *DecodeBuf) TL {
+	tl := TL_contacts_contacts{}
+	tl.Contacts = DecodeBuf_GenericVector[TL_contact](m)
+	tl.SavedCount = m.Int()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_contacts_importedContacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_importedContacts)
+	return decode_body_TL_contacts_importedContacts(m)
+}
+func decode_body_TL_contacts_importedContacts(m *DecodeBuf) TL {
+	tl := TL_contacts_importedContacts{}
+	tl.Imported = DecodeBuf_GenericVector[TL_importedContact](m)
+	tl.PopularInvites = DecodeBuf_GenericVector[TL_popularContact](m)
+	tl.RetryContacts = m.VectorLong()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_contacts_blocked(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_blocked)
+	return decode_body_TL_contacts_blocked(m)
+}
+func decode_body_TL_contacts_blocked(m *DecodeBuf) TL {
+	tl := TL_contacts_blocked{}
+	tl.Blocked = DecodeBuf_GenericVector[TL_peerBlocked](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_contacts_blockedSlice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_blockedSlice)
+	return decode_body_TL_contacts_blockedSlice(m)
+}
+func decode_body_TL_contacts_blockedSlice(m *DecodeBuf) TL {
+	tl := TL_contacts_blockedSlice{}
+	tl.Count = m.Int()
+	tl.Blocked = DecodeBuf_GenericVector[TL_peerBlocked](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_dialogs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_dialogs)
+	return decode_body_TL_messages_dialogs(m)
+}
+func decode_body_TL_messages_dialogs(m *DecodeBuf) TL {
+	tl := TL_messages_dialogs{}
+	tl.Dialogs = m.Vector()
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_dialogsSlice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_dialogsSlice)
+	return decode_body_TL_messages_dialogsSlice(m)
+}
+func decode_body_TL_messages_dialogsSlice(m *DecodeBuf) TL {
+	tl := TL_messages_dialogsSlice{}
+	tl.Count = m.Int()
+	tl.Dialogs = m.Vector()
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_dialogsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_dialogsNotModified)
+	return decode_body_TL_messages_dialogsNotModified(m)
+}
+func decode_body_TL_messages_dialogsNotModified(m *DecodeBuf) TL {
+	tl := TL_messages_dialogsNotModified{}
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_messages_messages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_messages)
+	return decode_body_TL_messages_messages(m)
+}
+func decode_body_TL_messages_messages(m *DecodeBuf) TL {
+	tl := TL_messages_messages{}
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_messagesSlice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_messagesSlice)
+	return decode_body_TL_messages_messagesSlice(m)
+}
+func decode_body_TL_messages_messagesSlice(m *DecodeBuf) TL {
+	tl := TL_messages_messagesSlice{}
+	flags := m.Int()
+	tl.Inexact = flags&(1<<1) != 0
+	tl.Count = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.NextRate = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.OffsetIDOffset = Ref(m.Int())
+	}
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_channelMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_channelMessages)
+	return decode_body_TL_messages_channelMessages(m)
+}
+func decode_body_TL_messages_channelMessages(m *DecodeBuf) TL {
+	tl := TL_messages_channelMessages{}
+	flags := m.Int()
+	tl.Inexact = flags&(1<<1) != 0
+	tl.PTS = m.Int()
+	tl.Count = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.OffsetIDOffset = Ref(m.Int())
+	}
+	tl.Messages = m.Vector()
+	tl.Topics = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_messagesNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_messagesNotModified)
+	return decode_body_TL_messages_messagesNotModified(m)
+}
+func decode_body_TL_messages_messagesNotModified(m *DecodeBuf) TL {
+	tl := TL_messages_messagesNotModified{}
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_messages_chats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_chats)
+	return decode_body_TL_messages_chats(m)
+}
+func decode_body_TL_messages_chats(m *DecodeBuf) TL {
+	tl := TL_messages_chats{}
+	tl.Chats = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_chatsSlice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_chatsSlice)
+	return decode_body_TL_messages_chatsSlice(m)
+}
+func decode_body_TL_messages_chatsSlice(m *DecodeBuf) TL {
+	tl := TL_messages_chatsSlice{}
+	tl.Count = m.Int()
+	tl.Chats = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_chatFull(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_chatFull)
+	return decode_body_TL_messages_chatFull(m)
+}
+func decode_body_TL_messages_chatFull(m *DecodeBuf) TL {
+	tl := TL_messages_chatFull{}
+	tl.FullChat = m.Object()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_affectedHistory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_affectedHistory)
+	return decode_body_TL_messages_affectedHistory(m)
+}
+func decode_body_TL_messages_affectedHistory(m *DecodeBuf) TL {
+	tl := TL_messages_affectedHistory{}
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	tl.Offset = m.Int()
+	return tl
+}
+
+func decode_TL_inputMessagesFilterEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterEmpty)
+	return decode_body_TL_inputMessagesFilterEmpty(m)
+}
+func decode_body_TL_inputMessagesFilterEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterEmpty{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterPhotos(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterPhotos)
+	return decode_body_TL_inputMessagesFilterPhotos(m)
+}
+func decode_body_TL_inputMessagesFilterPhotos(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterPhotos{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterVideo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterVideo)
+	return decode_body_TL_inputMessagesFilterVideo(m)
+}
+func decode_body_TL_inputMessagesFilterVideo(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterVideo{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterPhotoVideo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterPhotoVideo)
+	return decode_body_TL_inputMessagesFilterPhotoVideo(m)
+}
+func decode_body_TL_inputMessagesFilterPhotoVideo(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterPhotoVideo{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterDocument)
+	return decode_body_TL_inputMessagesFilterDocument(m)
+}
+func decode_body_TL_inputMessagesFilterDocument(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterDocument{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterURL)
+	return decode_body_TL_inputMessagesFilterURL(m)
+}
+func decode_body_TL_inputMessagesFilterURL(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterURL{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterGIF(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterGIF)
+	return decode_body_TL_inputMessagesFilterGIF(m)
+}
+func decode_body_TL_inputMessagesFilterGIF(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterGIF{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterVoice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterVoice)
+	return decode_body_TL_inputMessagesFilterVoice(m)
+}
+func decode_body_TL_inputMessagesFilterVoice(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterVoice{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterMusic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterMusic)
+	return decode_body_TL_inputMessagesFilterMusic(m)
+}
+func decode_body_TL_inputMessagesFilterMusic(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterMusic{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterChatPhotos(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterChatPhotos)
+	return decode_body_TL_inputMessagesFilterChatPhotos(m)
+}
+func decode_body_TL_inputMessagesFilterChatPhotos(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterChatPhotos{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterPhoneCalls(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterPhoneCalls)
+	return decode_body_TL_inputMessagesFilterPhoneCalls(m)
+}
+func decode_body_TL_inputMessagesFilterPhoneCalls(m *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterPhoneCalls{}
+	flags := m.Int()
+	tl.Missed = flags&(1<<0) != 0
+	return tl
+}
+
+func decode_TL_inputMessagesFilterRoundVoice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterRoundVoice)
+	return decode_body_TL_inputMessagesFilterRoundVoice(m)
+}
+func decode_body_TL_inputMessagesFilterRoundVoice(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterRoundVoice{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterRoundVideo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterRoundVideo)
+	return decode_body_TL_inputMessagesFilterRoundVideo(m)
+}
+func decode_body_TL_inputMessagesFilterRoundVideo(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterRoundVideo{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterMyMentions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterMyMentions)
+	return decode_body_TL_inputMessagesFilterMyMentions(m)
+}
+func decode_body_TL_inputMessagesFilterMyMentions(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterMyMentions{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterGeo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterGeo)
+	return decode_body_TL_inputMessagesFilterGeo(m)
+}
+func decode_body_TL_inputMessagesFilterGeo(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterGeo{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterContacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterContacts)
+	return decode_body_TL_inputMessagesFilterContacts(m)
+}
+func decode_body_TL_inputMessagesFilterContacts(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterContacts{}
+	return tl
+}
+
+func decode_TL_inputMessagesFilterPinned(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagesFilterPinned)
+	return decode_body_TL_inputMessagesFilterPinned(m)
+}
+func decode_body_TL_inputMessagesFilterPinned(_ *DecodeBuf) TL {
+	tl := TL_inputMessagesFilterPinned{}
+	return tl
+}
+
+func decode_TL_updateNewMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNewMessage)
+	return decode_body_TL_updateNewMessage(m)
+}
+func decode_body_TL_updateNewMessage(m *DecodeBuf) TL {
+	tl := TL_updateNewMessage{}
+	tl.Message = m.Object()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateMessageID(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateMessageID)
+	return decode_body_TL_updateMessageID(m)
+}
+func decode_body_TL_updateMessageID(m *DecodeBuf) TL {
+	tl := TL_updateMessageID{}
+	tl.ID = m.Int()
+	tl.RandomID = m.Long()
+	return tl
+}
+
+func decode_TL_updateDeleteMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDeleteMessages)
+	return decode_body_TL_updateDeleteMessages(m)
+}
+func decode_body_TL_updateDeleteMessages(m *DecodeBuf) TL {
+	tl := TL_updateDeleteMessages{}
+	tl.Messages = m.VectorInt()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateUserTyping(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateUserTyping)
+	return decode_body_TL_updateUserTyping(m)
+}
+func decode_body_TL_updateUserTyping(m *DecodeBuf) TL {
+	tl := TL_updateUserTyping{}
+	tl.UserID = m.Long()
+	tl.Action = m.Object()
+	return tl
+}
+
+func decode_TL_updateChatUserTyping(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChatUserTyping)
+	return decode_body_TL_updateChatUserTyping(m)
+}
+func decode_body_TL_updateChatUserTyping(m *DecodeBuf) TL {
+	tl := TL_updateChatUserTyping{}
+	tl.ChatID = m.Long()
+	tl.FromID = m.Object()
+	tl.Action = m.Object()
+	return tl
+}
+
+func decode_TL_updateChatParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChatParticipants)
+	return decode_body_TL_updateChatParticipants(m)
+}
+func decode_body_TL_updateChatParticipants(m *DecodeBuf) TL {
+	tl := TL_updateChatParticipants{}
+	tl.Participants = m.Object()
+	return tl
+}
+
+func decode_TL_updateUserStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateUserStatus)
+	return decode_body_TL_updateUserStatus(m)
+}
+func decode_body_TL_updateUserStatus(m *DecodeBuf) TL {
+	tl := TL_updateUserStatus{}
+	tl.UserID = m.Long()
+	tl.Status = m.Object()
+	return tl
+}
+
+func decode_TL_updateUserName(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateUserName)
+	return decode_body_TL_updateUserName(m)
+}
+func decode_body_TL_updateUserName(m *DecodeBuf) TL {
+	tl := TL_updateUserName{}
+	tl.UserID = m.Long()
+	tl.FirstName = m.String()
+	tl.LastName = m.String()
+	tl.Usernames = DecodeBuf_GenericVector[TL_username](m)
+	return tl
+}
+
+func decode_TL_updateNewAuthorization(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNewAuthorization)
+	return decode_body_TL_updateNewAuthorization(m)
+}
+func decode_body_TL_updateNewAuthorization(m *DecodeBuf) TL {
+	tl := TL_updateNewAuthorization{}
+	flags := m.Int()
+	tl.Unconfirmed = flags&(1<<0) != 0
+	tl.Hash = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Date = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.Device = Ref(m.String())
+	}
+	if flags&(1<<0) != 0 {
+		tl.Location = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_updateNewEncryptedMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNewEncryptedMessage)
+	return decode_body_TL_updateNewEncryptedMessage(m)
+}
+func decode_body_TL_updateNewEncryptedMessage(m *DecodeBuf) TL {
+	tl := TL_updateNewEncryptedMessage{}
+	tl.Message = m.Object()
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateEncryptedChatTyping(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateEncryptedChatTyping)
+	return decode_body_TL_updateEncryptedChatTyping(m)
+}
+func decode_body_TL_updateEncryptedChatTyping(m *DecodeBuf) TL {
+	tl := TL_updateEncryptedChatTyping{}
+	tl.ChatID = m.Int()
+	return tl
+}
+
+func decode_TL_updateEncryption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateEncryption)
+	return decode_body_TL_updateEncryption(m)
+}
+func decode_body_TL_updateEncryption(m *DecodeBuf) TL {
+	tl := TL_updateEncryption{}
+	tl.Chat = m.Object()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_updateEncryptedMessagesRead(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateEncryptedMessagesRead)
+	return decode_body_TL_updateEncryptedMessagesRead(m)
+}
+func decode_body_TL_updateEncryptedMessagesRead(m *DecodeBuf) TL {
+	tl := TL_updateEncryptedMessagesRead{}
+	tl.ChatID = m.Int()
+	tl.MaxDate = m.Int()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_updateChatParticipantAdd(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChatParticipantAdd)
+	return decode_body_TL_updateChatParticipantAdd(m)
+}
+func decode_body_TL_updateChatParticipantAdd(m *DecodeBuf) TL {
+	tl := TL_updateChatParticipantAdd{}
+	tl.ChatID = m.Long()
+	tl.UserID = m.Long()
+	tl.InviterID = m.Long()
+	tl.Date = m.Int()
+	tl.Version = m.Int()
+	return tl
+}
+
+func decode_TL_updateChatParticipantDelete(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChatParticipantDelete)
+	return decode_body_TL_updateChatParticipantDelete(m)
+}
+func decode_body_TL_updateChatParticipantDelete(m *DecodeBuf) TL {
+	tl := TL_updateChatParticipantDelete{}
+	tl.ChatID = m.Long()
+	tl.UserID = m.Long()
+	tl.Version = m.Int()
+	return tl
+}
+
+func decode_TL_updateDCOptions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDCOptions)
+	return decode_body_TL_updateDCOptions(m)
+}
+func decode_body_TL_updateDCOptions(m *DecodeBuf) TL {
+	tl := TL_updateDCOptions{}
+	tl.DCOptions = DecodeBuf_GenericVector[TL_dcOption](m)
+	return tl
+}
+
+func decode_TL_updateNotifySettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNotifySettings)
+	return decode_body_TL_updateNotifySettings(m)
+}
+func decode_body_TL_updateNotifySettings(m *DecodeBuf) TL {
+	tl := TL_updateNotifySettings{}
+	tl.Peer = m.Object()
+	tl.NotifySettings = decode_TL_peerNotifySettings(m).(TL_peerNotifySettings)
+	return tl
+}
+
+func decode_TL_updateServiceNotification(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateServiceNotification)
+	return decode_body_TL_updateServiceNotification(m)
+}
+func decode_body_TL_updateServiceNotification(m *DecodeBuf) TL {
+	tl := TL_updateServiceNotification{}
+	flags := m.Int()
+	tl.Popup = flags&(1<<0) != 0
+	tl.InvertMedia = flags&(1<<2) != 0
+	if flags&(1<<1) != 0 {
+		tl.InboxDate = Ref(m.Int())
+	}
+	tl.Type = m.String()
+	tl.Message = m.String()
+	tl.Media = m.Object()
+	tl.Entities = m.Vector()
+	return tl
+}
+
+func decode_TL_updatePrivacy(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePrivacy)
+	return decode_body_TL_updatePrivacy(m)
+}
+func decode_body_TL_updatePrivacy(m *DecodeBuf) TL {
+	tl := TL_updatePrivacy{}
+	tl.Key = m.Object()
+	tl.Rules = m.Vector()
+	return tl
+}
+
+func decode_TL_updateUserPhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateUserPhone)
+	return decode_body_TL_updateUserPhone(m)
+}
+func decode_body_TL_updateUserPhone(m *DecodeBuf) TL {
+	tl := TL_updateUserPhone{}
+	tl.UserID = m.Long()
+	tl.Phone = m.String()
+	return tl
+}
+
+func decode_TL_updateReadHistoryInbox(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadHistoryInbox)
+	return decode_body_TL_updateReadHistoryInbox(m)
+}
+func decode_body_TL_updateReadHistoryInbox(m *DecodeBuf) TL {
+	tl := TL_updateReadHistoryInbox{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	tl.Peer = m.Object()
+	tl.MaxID = m.Int()
+	tl.StillUnreadCount = m.Int()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateReadHistoryOutbox(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadHistoryOutbox)
+	return decode_body_TL_updateReadHistoryOutbox(m)
+}
+func decode_body_TL_updateReadHistoryOutbox(m *DecodeBuf) TL {
+	tl := TL_updateReadHistoryOutbox{}
+	tl.Peer = m.Object()
+	tl.MaxID = m.Int()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateWebPage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateWebPage)
+	return decode_body_TL_updateWebPage(m)
+}
+func decode_body_TL_updateWebPage(m *DecodeBuf) TL {
+	tl := TL_updateWebPage{}
+	tl.Webpage = m.Object()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateReadMessagesContents(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadMessagesContents)
+	return decode_body_TL_updateReadMessagesContents(m)
+}
+func decode_body_TL_updateReadMessagesContents(m *DecodeBuf) TL {
+	tl := TL_updateReadMessagesContents{}
+	flags := m.Int()
+	tl.Messages = m.VectorInt()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Date = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_updateChannelTooLong(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelTooLong)
+	return decode_body_TL_updateChannelTooLong(m)
+}
+func decode_body_TL_updateChannelTooLong(m *DecodeBuf) TL {
+	tl := TL_updateChannelTooLong{}
+	flags := m.Int()
+	tl.ChannelID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.PTS = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_updateChannel(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannel)
+	return decode_body_TL_updateChannel(m)
+}
+func decode_body_TL_updateChannel(m *DecodeBuf) TL {
+	tl := TL_updateChannel{}
+	tl.ChannelID = m.Long()
+	return tl
+}
+
+func decode_TL_updateNewChannelMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNewChannelMessage)
+	return decode_body_TL_updateNewChannelMessage(m)
+}
+func decode_body_TL_updateNewChannelMessage(m *DecodeBuf) TL {
+	tl := TL_updateNewChannelMessage{}
+	tl.Message = m.Object()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateReadChannelInbox(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadChannelInbox)
+	return decode_body_TL_updateReadChannelInbox(m)
+}
+func decode_body_TL_updateReadChannelInbox(m *DecodeBuf) TL {
+	tl := TL_updateReadChannelInbox{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	tl.ChannelID = m.Long()
+	tl.MaxID = m.Int()
+	tl.StillUnreadCount = m.Int()
+	tl.PTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateDeleteChannelMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDeleteChannelMessages)
+	return decode_body_TL_updateDeleteChannelMessages(m)
+}
+func decode_body_TL_updateDeleteChannelMessages(m *DecodeBuf) TL {
+	tl := TL_updateDeleteChannelMessages{}
+	tl.ChannelID = m.Long()
+	tl.Messages = m.VectorInt()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateChannelMessageViews(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelMessageViews)
+	return decode_body_TL_updateChannelMessageViews(m)
+}
+func decode_body_TL_updateChannelMessageViews(m *DecodeBuf) TL {
+	tl := TL_updateChannelMessageViews{}
+	tl.ChannelID = m.Long()
+	tl.ID = m.Int()
+	tl.Views = m.Int()
+	return tl
+}
+
+func decode_TL_updateChatParticipantAdmin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChatParticipantAdmin)
+	return decode_body_TL_updateChatParticipantAdmin(m)
+}
+func decode_body_TL_updateChatParticipantAdmin(m *DecodeBuf) TL {
+	tl := TL_updateChatParticipantAdmin{}
+	tl.ChatID = m.Long()
+	tl.UserID = m.Long()
+	tl.IsAdmin = m.Bool()
+	tl.Version = m.Int()
+	return tl
+}
+
+func decode_TL_updateNewStickerSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNewStickerSet)
+	return decode_body_TL_updateNewStickerSet(m)
+}
+func decode_body_TL_updateNewStickerSet(m *DecodeBuf) TL {
+	tl := TL_updateNewStickerSet{}
+	tl.Stickerset = m.Object()
+	return tl
+}
+
+func decode_TL_updateStickerSetsOrder(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateStickerSetsOrder)
+	return decode_body_TL_updateStickerSetsOrder(m)
+}
+func decode_body_TL_updateStickerSetsOrder(m *DecodeBuf) TL {
+	tl := TL_updateStickerSetsOrder{}
+	flags := m.Int()
+	tl.Masks = flags&(1<<0) != 0
+	tl.Emojis = flags&(1<<1) != 0
+	tl.Order = m.VectorLong()
+	return tl
+}
+
+func decode_TL_updateStickerSets(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateStickerSets)
+	return decode_body_TL_updateStickerSets(m)
+}
+func decode_body_TL_updateStickerSets(m *DecodeBuf) TL {
+	tl := TL_updateStickerSets{}
+	flags := m.Int()
+	tl.Masks = flags&(1<<0) != 0
+	tl.Emojis = flags&(1<<1) != 0
+	return tl
+}
+
+func decode_TL_updateSavedGIFs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateSavedGIFs)
+	return decode_body_TL_updateSavedGIFs(m)
+}
+func decode_body_TL_updateSavedGIFs(_ *DecodeBuf) TL {
+	tl := TL_updateSavedGIFs{}
+	return tl
+}
+
+func decode_TL_updateBotInlineQuery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotInlineQuery)
+	return decode_body_TL_updateBotInlineQuery(m)
+}
+func decode_body_TL_updateBotInlineQuery(m *DecodeBuf) TL {
+	tl := TL_updateBotInlineQuery{}
+	flags := m.Int()
+	tl.QueryID = m.Long()
+	tl.UserID = m.Long()
+	tl.Query = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Geo = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.PeerType = m.Object()
+	}
+	tl.Offset = m.String()
+	return tl
+}
+
+func decode_TL_updateBotInlineSend(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotInlineSend)
+	return decode_body_TL_updateBotInlineSend(m)
+}
+func decode_body_TL_updateBotInlineSend(m *DecodeBuf) TL {
+	tl := TL_updateBotInlineSend{}
+	flags := m.Int()
+	tl.UserID = m.Long()
+	tl.Query = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Geo = m.Object()
+	}
+	tl.ID = m.String()
+	if flags&(1<<1) != 0 {
+		tl.MsgID = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_updateEditChannelMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateEditChannelMessage)
+	return decode_body_TL_updateEditChannelMessage(m)
+}
+func decode_body_TL_updateEditChannelMessage(m *DecodeBuf) TL {
+	tl := TL_updateEditChannelMessage{}
+	tl.Message = m.Object()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateBotCallbackQuery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotCallbackQuery)
+	return decode_body_TL_updateBotCallbackQuery(m)
+}
+func decode_body_TL_updateBotCallbackQuery(m *DecodeBuf) TL {
+	tl := TL_updateBotCallbackQuery{}
+	flags := m.Int()
+	tl.QueryID = m.Long()
+	tl.UserID = m.Long()
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.ChatInstance = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Data = m.StringBytes()
+	}
+	if flags&(1<<1) != 0 {
+		tl.GameShortName = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_updateEditMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateEditMessage)
+	return decode_body_TL_updateEditMessage(m)
+}
+func decode_body_TL_updateEditMessage(m *DecodeBuf) TL {
+	tl := TL_updateEditMessage{}
+	tl.Message = m.Object()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateInlineBotCallbackQuery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateInlineBotCallbackQuery)
+	return decode_body_TL_updateInlineBotCallbackQuery(m)
+}
+func decode_body_TL_updateInlineBotCallbackQuery(m *DecodeBuf) TL {
+	tl := TL_updateInlineBotCallbackQuery{}
+	flags := m.Int()
+	tl.QueryID = m.Long()
+	tl.UserID = m.Long()
+	tl.MsgID = m.Object()
+	tl.ChatInstance = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Data = m.StringBytes()
+	}
+	if flags&(1<<1) != 0 {
+		tl.GameShortName = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_updateReadChannelOutbox(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadChannelOutbox)
+	return decode_body_TL_updateReadChannelOutbox(m)
+}
+func decode_body_TL_updateReadChannelOutbox(m *DecodeBuf) TL {
+	tl := TL_updateReadChannelOutbox{}
+	tl.ChannelID = m.Long()
+	tl.MaxID = m.Int()
+	return tl
+}
+
+func decode_TL_updateDraftMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDraftMessage)
+	return decode_body_TL_updateDraftMessage(m)
+}
+func decode_body_TL_updateDraftMessage(m *DecodeBuf) TL {
+	tl := TL_updateDraftMessage{}
+	flags := m.Int()
+	tl.Peer = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.TopMsgID = Ref(m.Int())
+	}
+	tl.Draft = m.Object()
+	return tl
+}
+
+func decode_TL_updateReadFeaturedStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadFeaturedStickers)
+	return decode_body_TL_updateReadFeaturedStickers(m)
+}
+func decode_body_TL_updateReadFeaturedStickers(_ *DecodeBuf) TL {
+	tl := TL_updateReadFeaturedStickers{}
+	return tl
+}
+
+func decode_TL_updateRecentStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateRecentStickers)
+	return decode_body_TL_updateRecentStickers(m)
+}
+func decode_body_TL_updateRecentStickers(_ *DecodeBuf) TL {
+	tl := TL_updateRecentStickers{}
+	return tl
+}
+
+func decode_TL_updateConfig(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateConfig)
+	return decode_body_TL_updateConfig(m)
+}
+func decode_body_TL_updateConfig(_ *DecodeBuf) TL {
+	tl := TL_updateConfig{}
+	return tl
+}
+
+func decode_TL_updatePTSChanged(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePTSChanged)
+	return decode_body_TL_updatePTSChanged(m)
+}
+func decode_body_TL_updatePTSChanged(_ *DecodeBuf) TL {
+	tl := TL_updatePTSChanged{}
+	return tl
+}
+
+func decode_TL_updateChannelWebPage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelWebPage)
+	return decode_body_TL_updateChannelWebPage(m)
+}
+func decode_body_TL_updateChannelWebPage(m *DecodeBuf) TL {
+	tl := TL_updateChannelWebPage{}
+	tl.ChannelID = m.Long()
+	tl.Webpage = m.Object()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateDialogPinned(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDialogPinned)
+	return decode_body_TL_updateDialogPinned(m)
+}
+func decode_body_TL_updateDialogPinned(m *DecodeBuf) TL {
+	tl := TL_updateDialogPinned{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<0) != 0
+	if flags&(1<<1) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_updatePinnedDialogs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePinnedDialogs)
+	return decode_body_TL_updatePinnedDialogs(m)
+}
+func decode_body_TL_updatePinnedDialogs(m *DecodeBuf) TL {
+	tl := TL_updatePinnedDialogs{}
+	flags := m.Int()
+	if flags&(1<<1) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.Order = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_updateBotWebhookJSON(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotWebhookJSON)
+	return decode_body_TL_updateBotWebhookJSON(m)
+}
+func decode_body_TL_updateBotWebhookJSON(m *DecodeBuf) TL {
+	tl := TL_updateBotWebhookJSON{}
+	tl.Data = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_updateBotWebhookJSONQuery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotWebhookJSONQuery)
+	return decode_body_TL_updateBotWebhookJSONQuery(m)
+}
+func decode_body_TL_updateBotWebhookJSONQuery(m *DecodeBuf) TL {
+	tl := TL_updateBotWebhookJSONQuery{}
+	tl.QueryID = m.Long()
+	tl.Data = decode_TL_dataJSON(m).(TL_dataJSON)
+	tl.Timeout = m.Int()
+	return tl
+}
+
+func decode_TL_updateBotShippingQuery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotShippingQuery)
+	return decode_body_TL_updateBotShippingQuery(m)
+}
+func decode_body_TL_updateBotShippingQuery(m *DecodeBuf) TL {
+	tl := TL_updateBotShippingQuery{}
+	tl.QueryID = m.Long()
+	tl.UserID = m.Long()
+	tl.Payload = m.StringBytes()
+	tl.ShippingAddress = decode_TL_postAddress(m).(TL_postAddress)
+	return tl
+}
+
+func decode_TL_updateBotPrecheckoutQuery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotPrecheckoutQuery)
+	return decode_body_TL_updateBotPrecheckoutQuery(m)
+}
+func decode_body_TL_updateBotPrecheckoutQuery(m *DecodeBuf) TL {
+	tl := TL_updateBotPrecheckoutQuery{}
+	flags := m.Int()
+	tl.QueryID = m.Long()
+	tl.UserID = m.Long()
+	tl.Payload = m.StringBytes()
+	if flags&(1<<0) != 0 {
+		tl.Info = Ref(decode_TL_paymentRequestedInfo(m).(TL_paymentRequestedInfo))
+	}
+	if flags&(1<<1) != 0 {
+		tl.ShippingOptionID = Ref(m.String())
+	}
+	tl.Currency = m.String()
+	tl.TotalAmount = m.Long()
+	return tl
+}
+
+func decode_TL_updatePhoneCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePhoneCall)
+	return decode_body_TL_updatePhoneCall(m)
+}
+func decode_body_TL_updatePhoneCall(m *DecodeBuf) TL {
+	tl := TL_updatePhoneCall{}
+	tl.PhoneCall = m.Object()
+	return tl
+}
+
+func decode_TL_updateLangPackTooLong(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateLangPackTooLong)
+	return decode_body_TL_updateLangPackTooLong(m)
+}
+func decode_body_TL_updateLangPackTooLong(m *DecodeBuf) TL {
+	tl := TL_updateLangPackTooLong{}
+	tl.LangCode = m.String()
+	return tl
+}
+
+func decode_TL_updateLangPack(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateLangPack)
+	return decode_body_TL_updateLangPack(m)
+}
+func decode_body_TL_updateLangPack(m *DecodeBuf) TL {
+	tl := TL_updateLangPack{}
+	tl.Difference = decode_TL_langPackDifference(m).(TL_langPackDifference)
+	return tl
+}
+
+func decode_TL_updateFavedStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateFavedStickers)
+	return decode_body_TL_updateFavedStickers(m)
+}
+func decode_body_TL_updateFavedStickers(_ *DecodeBuf) TL {
+	tl := TL_updateFavedStickers{}
+	return tl
+}
+
+func decode_TL_updateChannelReadMessagesContents(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelReadMessagesContents)
+	return decode_body_TL_updateChannelReadMessagesContents(m)
+}
+func decode_body_TL_updateChannelReadMessagesContents(m *DecodeBuf) TL {
+	tl := TL_updateChannelReadMessagesContents{}
+	flags := m.Int()
+	tl.ChannelID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.TopMsgID = Ref(m.Int())
+	}
+	tl.Messages = m.VectorInt()
+	return tl
+}
+
+func decode_TL_updateContactsReset(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateContactsReset)
+	return decode_body_TL_updateContactsReset(m)
+}
+func decode_body_TL_updateContactsReset(_ *DecodeBuf) TL {
+	tl := TL_updateContactsReset{}
+	return tl
+}
+
+func decode_TL_updateChannelAvailableMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelAvailableMessages)
+	return decode_body_TL_updateChannelAvailableMessages(m)
+}
+func decode_body_TL_updateChannelAvailableMessages(m *DecodeBuf) TL {
+	tl := TL_updateChannelAvailableMessages{}
+	tl.ChannelID = m.Long()
+	tl.AvailableMinID = m.Int()
+	return tl
+}
+
+func decode_TL_updateDialogUnreadMark(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDialogUnreadMark)
+	return decode_body_TL_updateDialogUnreadMark(m)
+}
+func decode_body_TL_updateDialogUnreadMark(m *DecodeBuf) TL {
+	tl := TL_updateDialogUnreadMark{}
+	flags := m.Int()
+	tl.Unread = flags&(1<<0) != 0
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_updateMessagePoll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateMessagePoll)
+	return decode_body_TL_updateMessagePoll(m)
+}
+func decode_body_TL_updateMessagePoll(m *DecodeBuf) TL {
+	tl := TL_updateMessagePoll{}
+	flags := m.Int()
+	tl.PollID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Poll = Ref(decode_TL_poll(m).(TL_poll))
+	}
+	tl.Results = decode_TL_pollResults(m).(TL_pollResults)
+	return tl
+}
+
+func decode_TL_updateChatDefaultBannedRights(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChatDefaultBannedRights)
+	return decode_body_TL_updateChatDefaultBannedRights(m)
+}
+func decode_body_TL_updateChatDefaultBannedRights(m *DecodeBuf) TL {
+	tl := TL_updateChatDefaultBannedRights{}
+	tl.Peer = m.Object()
+	tl.DefaultBannedRights = decode_TL_chatBannedRights(m).(TL_chatBannedRights)
+	tl.Version = m.Int()
+	return tl
+}
+
+func decode_TL_updateFolderPeers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateFolderPeers)
+	return decode_body_TL_updateFolderPeers(m)
+}
+func decode_body_TL_updateFolderPeers(m *DecodeBuf) TL {
+	tl := TL_updateFolderPeers{}
+	tl.FolderPeers = DecodeBuf_GenericVector[TL_folderPeer](m)
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updatePeerSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePeerSettings)
+	return decode_body_TL_updatePeerSettings(m)
+}
+func decode_body_TL_updatePeerSettings(m *DecodeBuf) TL {
+	tl := TL_updatePeerSettings{}
+	tl.Peer = m.Object()
+	tl.Settings = decode_TL_peerSettings(m).(TL_peerSettings)
+	return tl
+}
+
+func decode_TL_updatePeerLocated(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePeerLocated)
+	return decode_body_TL_updatePeerLocated(m)
+}
+func decode_body_TL_updatePeerLocated(m *DecodeBuf) TL {
+	tl := TL_updatePeerLocated{}
+	tl.Peers = m.Vector()
+	return tl
+}
+
+func decode_TL_updateNewScheduledMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNewScheduledMessage)
+	return decode_body_TL_updateNewScheduledMessage(m)
+}
+func decode_body_TL_updateNewScheduledMessage(m *DecodeBuf) TL {
+	tl := TL_updateNewScheduledMessage{}
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_updateDeleteScheduledMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDeleteScheduledMessages)
+	return decode_body_TL_updateDeleteScheduledMessages(m)
+}
+func decode_body_TL_updateDeleteScheduledMessages(m *DecodeBuf) TL {
+	tl := TL_updateDeleteScheduledMessages{}
+	tl.Peer = m.Object()
+	tl.Messages = m.VectorInt()
+	return tl
+}
+
+func decode_TL_updateTheme(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateTheme)
+	return decode_body_TL_updateTheme(m)
+}
+func decode_body_TL_updateTheme(m *DecodeBuf) TL {
+	tl := TL_updateTheme{}
+	tl.Theme = decode_TL_theme(m).(TL_theme)
+	return tl
+}
+
+func decode_TL_updateGeoLiveViewed(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateGeoLiveViewed)
+	return decode_body_TL_updateGeoLiveViewed(m)
+}
+func decode_body_TL_updateGeoLiveViewed(m *DecodeBuf) TL {
+	tl := TL_updateGeoLiveViewed{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	return tl
+}
+
+func decode_TL_updateLoginToken(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateLoginToken)
+	return decode_body_TL_updateLoginToken(m)
+}
+func decode_body_TL_updateLoginToken(_ *DecodeBuf) TL {
+	tl := TL_updateLoginToken{}
+	return tl
+}
+
+func decode_TL_updateMessagePollVote(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateMessagePollVote)
+	return decode_body_TL_updateMessagePollVote(m)
+}
+func decode_body_TL_updateMessagePollVote(m *DecodeBuf) TL {
+	tl := TL_updateMessagePollVote{}
+	tl.PollID = m.Long()
+	tl.Peer = m.Object()
+	tl.Options = m.VectorBytes()
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateDialogFilter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDialogFilter)
+	return decode_body_TL_updateDialogFilter(m)
+}
+func decode_body_TL_updateDialogFilter(m *DecodeBuf) TL {
+	tl := TL_updateDialogFilter{}
+	flags := m.Int()
+	tl.ID = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Filter = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_updateDialogFilterOrder(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDialogFilterOrder)
+	return decode_body_TL_updateDialogFilterOrder(m)
+}
+func decode_body_TL_updateDialogFilterOrder(m *DecodeBuf) TL {
+	tl := TL_updateDialogFilterOrder{}
+	tl.Order = m.VectorInt()
+	return tl
+}
+
+func decode_TL_updateDialogFilters(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDialogFilters)
+	return decode_body_TL_updateDialogFilters(m)
+}
+func decode_body_TL_updateDialogFilters(_ *DecodeBuf) TL {
+	tl := TL_updateDialogFilters{}
+	return tl
+}
+
+func decode_TL_updatePhoneCallSignalingData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePhoneCallSignalingData)
+	return decode_body_TL_updatePhoneCallSignalingData(m)
+}
+func decode_body_TL_updatePhoneCallSignalingData(m *DecodeBuf) TL {
+	tl := TL_updatePhoneCallSignalingData{}
+	tl.PhoneCallID = m.Long()
+	tl.Data = m.StringBytes()
+	return tl
+}
+
+func decode_TL_updateChannelMessageForwards(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelMessageForwards)
+	return decode_body_TL_updateChannelMessageForwards(m)
+}
+func decode_body_TL_updateChannelMessageForwards(m *DecodeBuf) TL {
+	tl := TL_updateChannelMessageForwards{}
+	tl.ChannelID = m.Long()
+	tl.ID = m.Int()
+	tl.Forwards = m.Int()
+	return tl
+}
+
+func decode_TL_updateReadChannelDiscussionInbox(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadChannelDiscussionInbox)
+	return decode_body_TL_updateReadChannelDiscussionInbox(m)
+}
+func decode_body_TL_updateReadChannelDiscussionInbox(m *DecodeBuf) TL {
+	tl := TL_updateReadChannelDiscussionInbox{}
+	flags := m.Int()
+	tl.ChannelID = m.Long()
+	tl.TopMsgID = m.Int()
+	tl.ReadMaxID = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.BroadcastID = Ref(m.Long())
+	}
+	if flags&(1<<0) != 0 {
+		tl.BroadcastPost = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_updateReadChannelDiscussionOutbox(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadChannelDiscussionOutbox)
+	return decode_body_TL_updateReadChannelDiscussionOutbox(m)
+}
+func decode_body_TL_updateReadChannelDiscussionOutbox(m *DecodeBuf) TL {
+	tl := TL_updateReadChannelDiscussionOutbox{}
+	tl.ChannelID = m.Long()
+	tl.TopMsgID = m.Int()
+	tl.ReadMaxID = m.Int()
+	return tl
+}
+
+func decode_TL_updatePeerBlocked(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePeerBlocked)
+	return decode_body_TL_updatePeerBlocked(m)
+}
+func decode_body_TL_updatePeerBlocked(m *DecodeBuf) TL {
+	tl := TL_updatePeerBlocked{}
+	flags := m.Int()
+	tl.Blocked = flags&(1<<0) != 0
+	tl.BlockedMyStoriesFrom = flags&(1<<1) != 0
+	tl.PeerID = m.Object()
+	return tl
+}
+
+func decode_TL_updateChannelUserTyping(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelUserTyping)
+	return decode_body_TL_updateChannelUserTyping(m)
+}
+func decode_body_TL_updateChannelUserTyping(m *DecodeBuf) TL {
+	tl := TL_updateChannelUserTyping{}
+	flags := m.Int()
+	tl.ChannelID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.TopMsgID = Ref(m.Int())
+	}
+	tl.FromID = m.Object()
+	tl.Action = m.Object()
+	return tl
+}
+
+func decode_TL_updatePinnedMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePinnedMessages)
+	return decode_body_TL_updatePinnedMessages(m)
+}
+func decode_body_TL_updatePinnedMessages(m *DecodeBuf) TL {
+	tl := TL_updatePinnedMessages{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<0) != 0
+	tl.Peer = m.Object()
+	tl.Messages = m.VectorInt()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updatePinnedChannelMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePinnedChannelMessages)
+	return decode_body_TL_updatePinnedChannelMessages(m)
+}
+func decode_body_TL_updatePinnedChannelMessages(m *DecodeBuf) TL {
+	tl := TL_updatePinnedChannelMessages{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<0) != 0
+	tl.ChannelID = m.Long()
+	tl.Messages = m.VectorInt()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_updateChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChat)
+	return decode_body_TL_updateChat(m)
+}
+func decode_body_TL_updateChat(m *DecodeBuf) TL {
+	tl := TL_updateChat{}
+	tl.ChatID = m.Long()
+	return tl
+}
+
+func decode_TL_updateGroupCallParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateGroupCallParticipants)
+	return decode_body_TL_updateGroupCallParticipants(m)
+}
+func decode_body_TL_updateGroupCallParticipants(m *DecodeBuf) TL {
+	tl := TL_updateGroupCallParticipants{}
+	tl.Call = decode_TL_inputGroupCall(m).(TL_inputGroupCall)
+	tl.Participants = DecodeBuf_GenericVector[TL_groupCallParticipant](m)
+	tl.Version = m.Int()
+	return tl
+}
+
+func decode_TL_updateGroupCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateGroupCall)
+	return decode_body_TL_updateGroupCall(m)
+}
+func decode_body_TL_updateGroupCall(m *DecodeBuf) TL {
+	tl := TL_updateGroupCall{}
+	tl.ChatID = m.Long()
+	tl.Call = m.Object()
+	return tl
+}
+
+func decode_TL_updatePeerHistoryTTL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePeerHistoryTTL)
+	return decode_body_TL_updatePeerHistoryTTL(m)
+}
+func decode_body_TL_updatePeerHistoryTTL(m *DecodeBuf) TL {
+	tl := TL_updatePeerHistoryTTL{}
+	flags := m.Int()
+	tl.Peer = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_updateChatParticipant(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChatParticipant)
+	return decode_body_TL_updateChatParticipant(m)
+}
+func decode_body_TL_updateChatParticipant(m *DecodeBuf) TL {
+	tl := TL_updateChatParticipant{}
+	flags := m.Int()
+	tl.ChatID = m.Long()
+	tl.Date = m.Int()
+	tl.ActorID = m.Long()
+	tl.UserID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.PrevParticipant = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.NewParticipant = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.Invite = m.Object()
+	}
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateChannelParticipant(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelParticipant)
+	return decode_body_TL_updateChannelParticipant(m)
+}
+func decode_body_TL_updateChannelParticipant(m *DecodeBuf) TL {
+	tl := TL_updateChannelParticipant{}
+	flags := m.Int()
+	tl.ViaChatlist = flags&(1<<3) != 0
+	tl.ChannelID = m.Long()
+	tl.Date = m.Int()
+	tl.ActorID = m.Long()
+	tl.UserID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.PrevParticipant = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.NewParticipant = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.Invite = m.Object()
+	}
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateBotStopped(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotStopped)
+	return decode_body_TL_updateBotStopped(m)
+}
+func decode_body_TL_updateBotStopped(m *DecodeBuf) TL {
+	tl := TL_updateBotStopped{}
+	tl.UserID = m.Long()
+	tl.Date = m.Int()
+	tl.Stopped = m.Bool()
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateGroupCallConnection(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateGroupCallConnection)
+	return decode_body_TL_updateGroupCallConnection(m)
+}
+func decode_body_TL_updateGroupCallConnection(m *DecodeBuf) TL {
+	tl := TL_updateGroupCallConnection{}
+	flags := m.Int()
+	tl.Presentation = flags&(1<<0) != 0
+	tl.Params = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_updateBotCommands(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotCommands)
+	return decode_body_TL_updateBotCommands(m)
+}
+func decode_body_TL_updateBotCommands(m *DecodeBuf) TL {
+	tl := TL_updateBotCommands{}
+	tl.Peer = m.Object()
+	tl.BotID = m.Long()
+	tl.Commands = DecodeBuf_GenericVector[TL_botCommand](m)
+	return tl
+}
+
+func decode_TL_updatePendingJoinRequests(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePendingJoinRequests)
+	return decode_body_TL_updatePendingJoinRequests(m)
+}
+func decode_body_TL_updatePendingJoinRequests(m *DecodeBuf) TL {
+	tl := TL_updatePendingJoinRequests{}
+	tl.Peer = m.Object()
+	tl.RequestsPending = m.Int()
+	tl.RecentRequesters = m.VectorLong()
+	return tl
+}
+
+func decode_TL_updateBotChatInviteRequester(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotChatInviteRequester)
+	return decode_body_TL_updateBotChatInviteRequester(m)
+}
+func decode_body_TL_updateBotChatInviteRequester(m *DecodeBuf) TL {
+	tl := TL_updateBotChatInviteRequester{}
+	tl.Peer = m.Object()
+	tl.Date = m.Int()
+	tl.UserID = m.Long()
+	tl.About = m.String()
+	tl.Invite = m.Object()
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateMessageReactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateMessageReactions)
+	return decode_body_TL_updateMessageReactions(m)
+}
+func decode_body_TL_updateMessageReactions(m *DecodeBuf) TL {
+	tl := TL_updateMessageReactions{}
+	flags := m.Int()
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.TopMsgID = Ref(m.Int())
+	}
+	tl.Reactions = decode_TL_messageReactions(m).(TL_messageReactions)
+	return tl
+}
+
+func decode_TL_updateAttachMenuBots(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateAttachMenuBots)
+	return decode_body_TL_updateAttachMenuBots(m)
+}
+func decode_body_TL_updateAttachMenuBots(_ *DecodeBuf) TL {
+	tl := TL_updateAttachMenuBots{}
+	return tl
+}
+
+func decode_TL_updateWebViewResultSent(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateWebViewResultSent)
+	return decode_body_TL_updateWebViewResultSent(m)
+}
+func decode_body_TL_updateWebViewResultSent(m *DecodeBuf) TL {
+	tl := TL_updateWebViewResultSent{}
+	tl.QueryID = m.Long()
+	return tl
+}
+
+func decode_TL_updateBotMenuButton(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotMenuButton)
+	return decode_body_TL_updateBotMenuButton(m)
+}
+func decode_body_TL_updateBotMenuButton(m *DecodeBuf) TL {
+	tl := TL_updateBotMenuButton{}
+	tl.BotID = m.Long()
+	tl.Button = m.Object()
+	return tl
+}
+
+func decode_TL_updateSavedRingtones(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateSavedRingtones)
+	return decode_body_TL_updateSavedRingtones(m)
+}
+func decode_body_TL_updateSavedRingtones(_ *DecodeBuf) TL {
+	tl := TL_updateSavedRingtones{}
+	return tl
+}
+
+func decode_TL_updateTranscribedAudio(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateTranscribedAudio)
+	return decode_body_TL_updateTranscribedAudio(m)
+}
+func decode_body_TL_updateTranscribedAudio(m *DecodeBuf) TL {
+	tl := TL_updateTranscribedAudio{}
+	flags := m.Int()
+	tl.Pending = flags&(1<<0) != 0
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.TranscriptionID = m.Long()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_updateReadFeaturedEmojiStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadFeaturedEmojiStickers)
+	return decode_body_TL_updateReadFeaturedEmojiStickers(m)
+}
+func decode_body_TL_updateReadFeaturedEmojiStickers(_ *DecodeBuf) TL {
+	tl := TL_updateReadFeaturedEmojiStickers{}
+	return tl
+}
+
+func decode_TL_updateUserEmojiStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateUserEmojiStatus)
+	return decode_body_TL_updateUserEmojiStatus(m)
+}
+func decode_body_TL_updateUserEmojiStatus(m *DecodeBuf) TL {
+	tl := TL_updateUserEmojiStatus{}
+	tl.UserID = m.Long()
+	tl.EmojiStatus = m.Object()
+	return tl
+}
+
+func decode_TL_updateRecentEmojiStatuses(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateRecentEmojiStatuses)
+	return decode_body_TL_updateRecentEmojiStatuses(m)
+}
+func decode_body_TL_updateRecentEmojiStatuses(_ *DecodeBuf) TL {
+	tl := TL_updateRecentEmojiStatuses{}
+	return tl
+}
+
+func decode_TL_updateRecentReactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateRecentReactions)
+	return decode_body_TL_updateRecentReactions(m)
+}
+func decode_body_TL_updateRecentReactions(_ *DecodeBuf) TL {
+	tl := TL_updateRecentReactions{}
+	return tl
+}
+
+func decode_TL_updateMoveStickerSetToTop(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateMoveStickerSetToTop)
+	return decode_body_TL_updateMoveStickerSetToTop(m)
+}
+func decode_body_TL_updateMoveStickerSetToTop(m *DecodeBuf) TL {
+	tl := TL_updateMoveStickerSetToTop{}
+	flags := m.Int()
+	tl.Masks = flags&(1<<0) != 0
+	tl.Emojis = flags&(1<<1) != 0
+	tl.Stickerset = m.Long()
+	return tl
+}
+
+func decode_TL_updateMessageExtendedMedia(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateMessageExtendedMedia)
+	return decode_body_TL_updateMessageExtendedMedia(m)
+}
+func decode_body_TL_updateMessageExtendedMedia(m *DecodeBuf) TL {
+	tl := TL_updateMessageExtendedMedia{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.ExtendedMedia = m.Vector()
+	return tl
+}
+
+func decode_TL_updateChannelPinnedTopic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelPinnedTopic)
+	return decode_body_TL_updateChannelPinnedTopic(m)
+}
+func decode_body_TL_updateChannelPinnedTopic(m *DecodeBuf) TL {
+	tl := TL_updateChannelPinnedTopic{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<0) != 0
+	tl.ChannelID = m.Long()
+	tl.TopicID = m.Int()
+	return tl
+}
+
+func decode_TL_updateChannelPinnedTopics(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelPinnedTopics)
+	return decode_body_TL_updateChannelPinnedTopics(m)
+}
+func decode_body_TL_updateChannelPinnedTopics(m *DecodeBuf) TL {
+	tl := TL_updateChannelPinnedTopics{}
+	flags := m.Int()
+	tl.ChannelID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Order = m.VectorInt()
+	}
+	return tl
+}
+
+func decode_TL_updateUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateUser)
+	return decode_body_TL_updateUser(m)
+}
+func decode_body_TL_updateUser(m *DecodeBuf) TL {
+	tl := TL_updateUser{}
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_updateAutoSaveSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateAutoSaveSettings)
+	return decode_body_TL_updateAutoSaveSettings(m)
+}
+func decode_body_TL_updateAutoSaveSettings(_ *DecodeBuf) TL {
+	tl := TL_updateAutoSaveSettings{}
+	return tl
+}
+
+func decode_TL_updateStory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateStory)
+	return decode_body_TL_updateStory(m)
+}
+func decode_body_TL_updateStory(m *DecodeBuf) TL {
+	tl := TL_updateStory{}
+	tl.Peer = m.Object()
+	tl.Story = m.Object()
+	return tl
+}
+
+func decode_TL_updateReadStories(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateReadStories)
+	return decode_body_TL_updateReadStories(m)
+}
+func decode_body_TL_updateReadStories(m *DecodeBuf) TL {
+	tl := TL_updateReadStories{}
+	tl.Peer = m.Object()
+	tl.MaxID = m.Int()
+	return tl
+}
+
+func decode_TL_updateStoryID(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateStoryID)
+	return decode_body_TL_updateStoryID(m)
+}
+func decode_body_TL_updateStoryID(m *DecodeBuf) TL {
+	tl := TL_updateStoryID{}
+	tl.ID = m.Int()
+	tl.RandomID = m.Long()
+	return tl
+}
+
+func decode_TL_updateStoriesStealthMode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateStoriesStealthMode)
+	return decode_body_TL_updateStoriesStealthMode(m)
+}
+func decode_body_TL_updateStoriesStealthMode(m *DecodeBuf) TL {
+	tl := TL_updateStoriesStealthMode{}
+	tl.StealthMode = decode_TL_storiesStealthMode(m).(TL_storiesStealthMode)
+	return tl
+}
+
+func decode_TL_updateSentStoryReaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateSentStoryReaction)
+	return decode_body_TL_updateSentStoryReaction(m)
+}
+func decode_body_TL_updateSentStoryReaction(m *DecodeBuf) TL {
+	tl := TL_updateSentStoryReaction{}
+	tl.Peer = m.Object()
+	tl.StoryID = m.Int()
+	tl.Reaction = m.Object()
+	return tl
+}
+
+func decode_TL_updateBotChatBoost(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotChatBoost)
+	return decode_body_TL_updateBotChatBoost(m)
+}
+func decode_body_TL_updateBotChatBoost(m *DecodeBuf) TL {
+	tl := TL_updateBotChatBoost{}
+	tl.Peer = m.Object()
+	tl.Boost = decode_TL_boost(m).(TL_boost)
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateChannelViewForumAsMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateChannelViewForumAsMessages)
+	return decode_body_TL_updateChannelViewForumAsMessages(m)
+}
+func decode_body_TL_updateChannelViewForumAsMessages(m *DecodeBuf) TL {
+	tl := TL_updateChannelViewForumAsMessages{}
+	tl.ChannelID = m.Long()
+	tl.Enabled = m.Bool()
+	return tl
+}
+
+func decode_TL_updatePeerWallpaper(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePeerWallpaper)
+	return decode_body_TL_updatePeerWallpaper(m)
+}
+func decode_body_TL_updatePeerWallpaper(m *DecodeBuf) TL {
+	tl := TL_updatePeerWallpaper{}
+	flags := m.Int()
+	tl.WallpaperOverridden = flags&(1<<1) != 0
+	tl.Peer = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Wallpaper = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_updateBotMessageReaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotMessageReaction)
+	return decode_body_TL_updateBotMessageReaction(m)
+}
+func decode_body_TL_updateBotMessageReaction(m *DecodeBuf) TL {
+	tl := TL_updateBotMessageReaction{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.Date = m.Int()
+	tl.Actor = m.Object()
+	tl.OldReactions = m.Vector()
+	tl.NewReactions = m.Vector()
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateBotMessageReactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotMessageReactions)
+	return decode_body_TL_updateBotMessageReactions(m)
+}
+func decode_body_TL_updateBotMessageReactions(m *DecodeBuf) TL {
+	tl := TL_updateBotMessageReactions{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.Date = m.Int()
+	tl.Reactions = DecodeBuf_GenericVector[TL_reactionCount](m)
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateSavedDialogPinned(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateSavedDialogPinned)
+	return decode_body_TL_updateSavedDialogPinned(m)
+}
+func decode_body_TL_updateSavedDialogPinned(m *DecodeBuf) TL {
+	tl := TL_updateSavedDialogPinned{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<0) != 0
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_updatePinnedSavedDialogs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePinnedSavedDialogs)
+	return decode_body_TL_updatePinnedSavedDialogs(m)
+}
+func decode_body_TL_updatePinnedSavedDialogs(m *DecodeBuf) TL {
+	tl := TL_updatePinnedSavedDialogs{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Order = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_updateSavedReactionTags(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateSavedReactionTags)
+	return decode_body_TL_updateSavedReactionTags(m)
+}
+func decode_body_TL_updateSavedReactionTags(_ *DecodeBuf) TL {
+	tl := TL_updateSavedReactionTags{}
+	return tl
+}
+
+func decode_TL_updateSMSJob(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateSMSJob)
+	return decode_body_TL_updateSMSJob(m)
+}
+func decode_body_TL_updateSMSJob(m *DecodeBuf) TL {
+	tl := TL_updateSMSJob{}
+	tl.JobID = m.String()
+	return tl
+}
+
+func decode_TL_updateQuickReplies(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateQuickReplies)
+	return decode_body_TL_updateQuickReplies(m)
+}
+func decode_body_TL_updateQuickReplies(m *DecodeBuf) TL {
+	tl := TL_updateQuickReplies{}
+	tl.QuickReplies = DecodeBuf_GenericVector[TL_quickReply](m)
+	return tl
+}
+
+func decode_TL_updateNewQuickReply(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNewQuickReply)
+	return decode_body_TL_updateNewQuickReply(m)
+}
+func decode_body_TL_updateNewQuickReply(m *DecodeBuf) TL {
+	tl := TL_updateNewQuickReply{}
+	tl.QuickReply = decode_TL_quickReply(m).(TL_quickReply)
+	return tl
+}
+
+func decode_TL_updateDeleteQuickReply(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDeleteQuickReply)
+	return decode_body_TL_updateDeleteQuickReply(m)
+}
+func decode_body_TL_updateDeleteQuickReply(m *DecodeBuf) TL {
+	tl := TL_updateDeleteQuickReply{}
+	tl.ShortcutID = m.Int()
+	return tl
+}
+
+func decode_TL_updateQuickReplyMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateQuickReplyMessage)
+	return decode_body_TL_updateQuickReplyMessage(m)
+}
+func decode_body_TL_updateQuickReplyMessage(m *DecodeBuf) TL {
+	tl := TL_updateQuickReplyMessage{}
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_updateDeleteQuickReplyMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateDeleteQuickReplyMessages)
+	return decode_body_TL_updateDeleteQuickReplyMessages(m)
+}
+func decode_body_TL_updateDeleteQuickReplyMessages(m *DecodeBuf) TL {
+	tl := TL_updateDeleteQuickReplyMessages{}
+	tl.ShortcutID = m.Int()
+	tl.Messages = m.VectorInt()
+	return tl
+}
+
+func decode_TL_updateBotBusinessConnect(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotBusinessConnect)
+	return decode_body_TL_updateBotBusinessConnect(m)
+}
+func decode_body_TL_updateBotBusinessConnect(m *DecodeBuf) TL {
+	tl := TL_updateBotBusinessConnect{}
+	tl.Connection = decode_TL_botBusinessConnection(m).(TL_botBusinessConnection)
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateBotNewBusinessMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotNewBusinessMessage)
+	return decode_body_TL_updateBotNewBusinessMessage(m)
+}
+func decode_body_TL_updateBotNewBusinessMessage(m *DecodeBuf) TL {
+	tl := TL_updateBotNewBusinessMessage{}
+	flags := m.Int()
+	tl.ConnectionID = m.String()
+	tl.Message = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.ReplyToMessage = m.Object()
+	}
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateBotEditBusinessMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotEditBusinessMessage)
+	return decode_body_TL_updateBotEditBusinessMessage(m)
+}
+func decode_body_TL_updateBotEditBusinessMessage(m *DecodeBuf) TL {
+	tl := TL_updateBotEditBusinessMessage{}
+	flags := m.Int()
+	tl.ConnectionID = m.String()
+	tl.Message = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.ReplyToMessage = m.Object()
+	}
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateBotDeleteBusinessMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotDeleteBusinessMessage)
+	return decode_body_TL_updateBotDeleteBusinessMessage(m)
+}
+func decode_body_TL_updateBotDeleteBusinessMessage(m *DecodeBuf) TL {
+	tl := TL_updateBotDeleteBusinessMessage{}
+	tl.ConnectionID = m.String()
+	tl.Peer = m.Object()
+	tl.Messages = m.VectorInt()
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updateNewStoryReaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateNewStoryReaction)
+	return decode_body_TL_updateNewStoryReaction(m)
+}
+func decode_body_TL_updateNewStoryReaction(m *DecodeBuf) TL {
+	tl := TL_updateNewStoryReaction{}
+	tl.StoryID = m.Int()
+	tl.Peer = m.Object()
+	tl.Reaction = m.Object()
+	return tl
+}
+
+func decode_TL_updateBroadcastRevenueTransactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBroadcastRevenueTransactions)
+	return decode_body_TL_updateBroadcastRevenueTransactions(m)
+}
+func decode_body_TL_updateBroadcastRevenueTransactions(m *DecodeBuf) TL {
+	tl := TL_updateBroadcastRevenueTransactions{}
+	tl.Peer = m.Object()
+	tl.Balances = decode_TL_broadcastRevenueBalances(m).(TL_broadcastRevenueBalances)
+	return tl
+}
+
+func decode_TL_updateStarsBalance(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateStarsBalance)
+	return decode_body_TL_updateStarsBalance(m)
+}
+func decode_body_TL_updateStarsBalance(m *DecodeBuf) TL {
+	tl := TL_updateStarsBalance{}
+	tl.Balance = m.Long()
+	return tl
+}
+
+func decode_TL_updateBusinessBotCallbackQuery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBusinessBotCallbackQuery)
+	return decode_body_TL_updateBusinessBotCallbackQuery(m)
+}
+func decode_body_TL_updateBusinessBotCallbackQuery(m *DecodeBuf) TL {
+	tl := TL_updateBusinessBotCallbackQuery{}
+	flags := m.Int()
+	tl.QueryID = m.Long()
+	tl.UserID = m.Long()
+	tl.ConnectionID = m.String()
+	tl.Message = m.Object()
+	if flags&(1<<2) != 0 {
+		tl.ReplyToMessage = m.Object()
+	}
+	tl.ChatInstance = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Data = m.StringBytes()
+	}
+	return tl
+}
+
+func decode_TL_updateStarsRevenueStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateStarsRevenueStatus)
+	return decode_body_TL_updateStarsRevenueStatus(m)
+}
+func decode_body_TL_updateStarsRevenueStatus(m *DecodeBuf) TL {
+	tl := TL_updateStarsRevenueStatus{}
+	tl.Peer = m.Object()
+	tl.Status = decode_TL_starsRevenueStatus(m).(TL_starsRevenueStatus)
+	return tl
+}
+
+func decode_TL_updates_state(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates_state)
+	return decode_body_TL_updates_state(m)
+}
+func decode_body_TL_updates_state(m *DecodeBuf) TL {
+	tl := TL_updates_state{}
+	tl.PTS = m.Int()
+	tl.QTS = m.Int()
+	tl.Date = m.Int()
+	tl.Seq = m.Int()
+	tl.UnreadCount = m.Int()
+	return tl
+}
+
+func decode_TL_updates_differenceEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates_differenceEmpty)
+	return decode_body_TL_updates_differenceEmpty(m)
+}
+func decode_body_TL_updates_differenceEmpty(m *DecodeBuf) TL {
+	tl := TL_updates_differenceEmpty{}
+	tl.Date = m.Int()
+	tl.Seq = m.Int()
+	return tl
+}
+
+func decode_TL_updates_difference(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates_difference)
+	return decode_body_TL_updates_difference(m)
+}
+func decode_body_TL_updates_difference(m *DecodeBuf) TL {
+	tl := TL_updates_difference{}
+	tl.NewMessages = m.Vector()
+	tl.NewEncryptedMessages = m.Vector()
+	tl.OtherUpdates = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	tl.State = decode_TL_updates_state(m).(TL_updates_state)
+	return tl
+}
+
+func decode_TL_updates_differenceSlice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates_differenceSlice)
+	return decode_body_TL_updates_differenceSlice(m)
+}
+func decode_body_TL_updates_differenceSlice(m *DecodeBuf) TL {
+	tl := TL_updates_differenceSlice{}
+	tl.NewMessages = m.Vector()
+	tl.NewEncryptedMessages = m.Vector()
+	tl.OtherUpdates = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	tl.IntermediateState = decode_TL_updates_state(m).(TL_updates_state)
+	return tl
+}
+
+func decode_TL_updates_differenceTooLong(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates_differenceTooLong)
+	return decode_body_TL_updates_differenceTooLong(m)
+}
+func decode_body_TL_updates_differenceTooLong(m *DecodeBuf) TL {
+	tl := TL_updates_differenceTooLong{}
+	tl.PTS = m.Int()
+	return tl
+}
+
+func decode_TL_updatesTooLong(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatesTooLong)
+	return decode_body_TL_updatesTooLong(m)
+}
+func decode_body_TL_updatesTooLong(_ *DecodeBuf) TL {
+	tl := TL_updatesTooLong{}
+	return tl
+}
+
+func decode_TL_updateShortMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateShortMessage)
+	return decode_body_TL_updateShortMessage(m)
+}
+func decode_body_TL_updateShortMessage(m *DecodeBuf) TL {
+	tl := TL_updateShortMessage{}
+	flags := m.Int()
+	tl.Out = flags&(1<<1) != 0
+	tl.Mentioned = flags&(1<<4) != 0
+	tl.MediaUnread = flags&(1<<5) != 0
+	tl.Silent = flags&(1<<13) != 0
+	tl.ID = m.Int()
+	tl.UserID = m.Long()
+	tl.Message = m.String()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	tl.Date = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.FwdFrom = Ref(decode_TL_messageFwdHeader(m).(TL_messageFwdHeader))
+	}
+	if flags&(1<<11) != 0 {
+		tl.ViaBotID = Ref(m.Long())
+	}
+	if flags&(1<<3) != 0 {
+		tl.ReplyTo = m.Object()
+	}
+	if flags&(1<<7) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<25) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_updateShortChatMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateShortChatMessage)
+	return decode_body_TL_updateShortChatMessage(m)
+}
+func decode_body_TL_updateShortChatMessage(m *DecodeBuf) TL {
+	tl := TL_updateShortChatMessage{}
+	flags := m.Int()
+	tl.Out = flags&(1<<1) != 0
+	tl.Mentioned = flags&(1<<4) != 0
+	tl.MediaUnread = flags&(1<<5) != 0
+	tl.Silent = flags&(1<<13) != 0
+	tl.ID = m.Int()
+	tl.FromID = m.Long()
+	tl.ChatID = m.Long()
+	tl.Message = m.String()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	tl.Date = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.FwdFrom = Ref(decode_TL_messageFwdHeader(m).(TL_messageFwdHeader))
+	}
+	if flags&(1<<11) != 0 {
+		tl.ViaBotID = Ref(m.Long())
+	}
+	if flags&(1<<3) != 0 {
+		tl.ReplyTo = m.Object()
+	}
+	if flags&(1<<7) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<25) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_updateShort(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateShort)
+	return decode_body_TL_updateShort(m)
+}
+func decode_body_TL_updateShort(m *DecodeBuf) TL {
+	tl := TL_updateShort{}
+	tl.Update = m.Object()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_updatesCombined(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatesCombined)
+	return decode_body_TL_updatesCombined(m)
+}
+func decode_body_TL_updatesCombined(m *DecodeBuf) TL {
+	tl := TL_updatesCombined{}
+	tl.Updates = m.Vector()
+	tl.Users = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Date = m.Int()
+	tl.SeqStart = m.Int()
+	tl.Seq = m.Int()
+	return tl
+}
+
+func decode_TL_updates(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates)
+	return decode_body_TL_updates(m)
+}
+func decode_body_TL_updates(m *DecodeBuf) TL {
+	tl := TL_updates{}
+	tl.Updates = m.Vector()
+	tl.Users = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Date = m.Int()
+	tl.Seq = m.Int()
+	return tl
+}
+
+func decode_TL_updateShortSentMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateShortSentMessage)
+	return decode_body_TL_updateShortSentMessage(m)
+}
+func decode_body_TL_updateShortSentMessage(m *DecodeBuf) TL {
+	tl := TL_updateShortSentMessage{}
+	flags := m.Int()
+	tl.Out = flags&(1<<1) != 0
+	tl.ID = m.Int()
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	tl.Date = m.Int()
+	if flags&(1<<9) != 0 {
+		tl.Media = m.Object()
+	}
+	if flags&(1<<7) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<25) != 0 {
+		tl.TTLPeriod = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_photos_photos(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photos_photos)
+	return decode_body_TL_photos_photos(m)
+}
+func decode_body_TL_photos_photos(m *DecodeBuf) TL {
+	tl := TL_photos_photos{}
+	tl.Photos = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_photos_photosSlice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photos_photosSlice)
+	return decode_body_TL_photos_photosSlice(m)
+}
+func decode_body_TL_photos_photosSlice(m *DecodeBuf) TL {
+	tl := TL_photos_photosSlice{}
+	tl.Count = m.Int()
+	tl.Photos = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_photos_photo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_photos_photo)
+	return decode_body_TL_photos_photo(m)
+}
+func decode_body_TL_photos_photo(m *DecodeBuf) TL {
+	tl := TL_photos_photo{}
+	tl.Photo = m.Object()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_upload_file(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_upload_file)
+	return decode_body_TL_upload_file(m)
+}
+func decode_body_TL_upload_file(m *DecodeBuf) TL {
+	tl := TL_upload_file{}
+	tl.Type = m.Object()
+	tl.Mtime = m.Int()
+	tl.Bytes = m.StringBytes()
+	return tl
+}
+
+func decode_TL_upload_fileCDNRedirect(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_upload_fileCDNRedirect)
+	return decode_body_TL_upload_fileCDNRedirect(m)
+}
+func decode_body_TL_upload_fileCDNRedirect(m *DecodeBuf) TL {
+	tl := TL_upload_fileCDNRedirect{}
+	tl.DCID = m.Int()
+	tl.FileToken = m.StringBytes()
+	tl.EncryptionKey = m.StringBytes()
+	tl.EncryptionIV = m.StringBytes()
+	tl.FileHashes = DecodeBuf_GenericVector[TL_fileHash](m)
+	return tl
+}
+
+func decode_TL_dcOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dcOption)
+	return decode_body_TL_dcOption(m)
+}
+func decode_body_TL_dcOption(m *DecodeBuf) TL {
+	tl := TL_dcOption{}
+	flags := m.Int()
+	tl.IPv6 = flags&(1<<0) != 0
+	tl.MediaOnly = flags&(1<<1) != 0
+	tl.TCPOOnly = flags&(1<<2) != 0
+	tl.CDN = flags&(1<<3) != 0
+	tl.Static = flags&(1<<4) != 0
+	tl.ThisPortOnly = flags&(1<<5) != 0
+	tl.ID = m.Int()
+	tl.IPAddress = m.String()
+	tl.Port = m.Int()
+	if flags&(1<<10) != 0 {
+		tl.Secret = m.StringBytes()
+	}
+	return tl
+}
+
+func decode_TL_config(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_config)
+	return decode_body_TL_config(m)
+}
+func decode_body_TL_config(m *DecodeBuf) TL {
+	tl := TL_config{}
+	flags := m.Int()
+	tl.DefaultP2PContacts = flags&(1<<3) != 0
+	tl.PreloadFeaturedStickers = flags&(1<<4) != 0
+	tl.RevokePMInbox = flags&(1<<6) != 0
+	tl.BlockedMode = flags&(1<<8) != 0
+	tl.ForceTryIPv6 = flags&(1<<14) != 0
+	tl.Date = m.Int()
+	tl.Expires = m.Int()
+	tl.TestMode = m.Bool()
+	tl.ThisDC = m.Int()
+	tl.DCOptions = DecodeBuf_GenericVector[TL_dcOption](m)
+	tl.DCTXTDomainName = m.String()
+	tl.ChatSizeMax = m.Int()
+	tl.MegagroupSizeMax = m.Int()
+	tl.ForwardedCountMax = m.Int()
+	tl.OnlineUpdatePeriodMS = m.Int()
+	tl.OfflineBlurTimeoutMS = m.Int()
+	tl.OfflineIdleTimeoutMS = m.Int()
+	tl.OnlineCloudTimeoutMS = m.Int()
+	tl.NotifyCloudDelayMS = m.Int()
+	tl.NotifyDefaultDelayMS = m.Int()
+	tl.PushChatPeriodMS = m.Int()
+	tl.PushChatLimit = m.Int()
+	tl.EditTimeLimit = m.Int()
+	tl.RevokeTimeLimit = m.Int()
+	tl.RevokePMTimeLimit = m.Int()
+	tl.RatingEDecay = m.Int()
+	tl.StickersRecentLimit = m.Int()
+	tl.ChannelsReadMediaPeriod = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.TmpSessions = Ref(m.Int())
+	}
+	tl.CallReceiveTimeoutMS = m.Int()
+	tl.CallRingTimeoutMS = m.Int()
+	tl.CallConnectTimeoutMS = m.Int()
+	tl.CallPacketTimeoutMS = m.Int()
+	tl.MeURLPrefix = m.String()
+	if flags&(1<<7) != 0 {
+		tl.AutoupdateURLPrefix = Ref(m.String())
+	}
+	if flags&(1<<9) != 0 {
+		tl.GIFSearchUsername = Ref(m.String())
+	}
+	if flags&(1<<10) != 0 {
+		tl.VenueSearchUsername = Ref(m.String())
+	}
+	if flags&(1<<11) != 0 {
+		tl.ImgSearchUsername = Ref(m.String())
+	}
+	if flags&(1<<12) != 0 {
+		tl.StaticMapsProvider = Ref(m.String())
+	}
+	tl.CaptionLengthMax = m.Int()
+	tl.MessageLengthMax = m.Int()
+	tl.WebfileDCID = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.SuggestedLangCode = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.LangPackVersion = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.BaseLangPackVersion = Ref(m.Int())
+	}
+	if flags&(1<<15) != 0 {
+		tl.ReactionsDefault = m.Object()
+	}
+	if flags&(1<<16) != 0 {
+		tl.AutologinToken = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_nearestDC(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_nearestDC)
+	return decode_body_TL_nearestDC(m)
+}
+func decode_body_TL_nearestDC(m *DecodeBuf) TL {
+	tl := TL_nearestDC{}
+	tl.Country = m.String()
+	tl.ThisDC = m.Int()
+	tl.NearestDC = m.Int()
+	return tl
+}
+
+func decode_TL_help_appUpdate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_appUpdate)
+	return decode_body_TL_help_appUpdate(m)
+}
+func decode_body_TL_help_appUpdate(m *DecodeBuf) TL {
+	tl := TL_help_appUpdate{}
+	flags := m.Int()
+	tl.CanNotSkip = flags&(1<<0) != 0
+	tl.ID = m.Int()
+	tl.Version = m.String()
+	tl.Text = m.String()
+	tl.Entities = m.Vector()
+	if flags&(1<<1) != 0 {
+		tl.Document = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.URL = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Sticker = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_help_noAppUpdate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_noAppUpdate)
+	return decode_body_TL_help_noAppUpdate(m)
+}
+func decode_body_TL_help_noAppUpdate(_ *DecodeBuf) TL {
+	tl := TL_help_noAppUpdate{}
+	return tl
+}
+
+func decode_TL_help_inviteText(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_inviteText)
+	return decode_body_TL_help_inviteText(m)
+}
+func decode_body_TL_help_inviteText(m *DecodeBuf) TL {
+	tl := TL_help_inviteText{}
+	tl.Message = m.String()
+	return tl
+}
+
+func decode_TL_encryptedChatEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedChatEmpty)
+	return decode_body_TL_encryptedChatEmpty(m)
+}
+func decode_body_TL_encryptedChatEmpty(m *DecodeBuf) TL {
+	tl := TL_encryptedChatEmpty{}
+	tl.ID = m.Int()
+	return tl
+}
+
+func decode_TL_encryptedChatWaiting(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedChatWaiting)
+	return decode_body_TL_encryptedChatWaiting(m)
+}
+func decode_body_TL_encryptedChatWaiting(m *DecodeBuf) TL {
+	tl := TL_encryptedChatWaiting{}
+	tl.ID = m.Int()
+	tl.AccessHash = m.Long()
+	tl.Date = m.Int()
+	tl.AdminID = m.Long()
+	tl.ParticipantID = m.Long()
+	return tl
+}
+
+func decode_TL_encryptedChatRequested(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedChatRequested)
+	return decode_body_TL_encryptedChatRequested(m)
+}
+func decode_body_TL_encryptedChatRequested(m *DecodeBuf) TL {
+	tl := TL_encryptedChatRequested{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.FolderID = Ref(m.Int())
+	}
+	tl.ID = m.Int()
+	tl.AccessHash = m.Long()
+	tl.Date = m.Int()
+	tl.AdminID = m.Long()
+	tl.ParticipantID = m.Long()
+	tl.GA = m.StringBytes()
+	return tl
+}
+
+func decode_TL_encryptedChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedChat)
+	return decode_body_TL_encryptedChat(m)
+}
+func decode_body_TL_encryptedChat(m *DecodeBuf) TL {
+	tl := TL_encryptedChat{}
+	tl.ID = m.Int()
+	tl.AccessHash = m.Long()
+	tl.Date = m.Int()
+	tl.AdminID = m.Long()
+	tl.ParticipantID = m.Long()
+	tl.GAOrB = m.StringBytes()
+	tl.KeyFingerprint = m.Long()
+	return tl
+}
+
+func decode_TL_encryptedChatDiscarded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedChatDiscarded)
+	return decode_body_TL_encryptedChatDiscarded(m)
+}
+func decode_body_TL_encryptedChatDiscarded(m *DecodeBuf) TL {
+	tl := TL_encryptedChatDiscarded{}
+	flags := m.Int()
+	tl.HistoryDeleted = flags&(1<<0) != 0
+	tl.ID = m.Int()
+	return tl
+}
+
+func decode_TL_inputEncryptedChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputEncryptedChat)
+	return decode_body_TL_inputEncryptedChat(m)
+}
+func decode_body_TL_inputEncryptedChat(m *DecodeBuf) TL {
+	tl := TL_inputEncryptedChat{}
+	tl.ChatID = m.Int()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_encryptedFileEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedFileEmpty)
+	return decode_body_TL_encryptedFileEmpty(m)
+}
+func decode_body_TL_encryptedFileEmpty(_ *DecodeBuf) TL {
+	tl := TL_encryptedFileEmpty{}
+	return tl
+}
+
+func decode_TL_encryptedFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedFile)
+	return decode_body_TL_encryptedFile(m)
+}
+func decode_body_TL_encryptedFile(m *DecodeBuf) TL {
+	tl := TL_encryptedFile{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Size = m.Long()
+	tl.DCID = m.Int()
+	tl.KeyFingerprint = m.Int()
+	return tl
+}
+
+func decode_TL_inputEncryptedFileEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputEncryptedFileEmpty)
+	return decode_body_TL_inputEncryptedFileEmpty(m)
+}
+func decode_body_TL_inputEncryptedFileEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputEncryptedFileEmpty{}
+	return tl
+}
+
+func decode_TL_inputEncryptedFileUploaded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputEncryptedFileUploaded)
+	return decode_body_TL_inputEncryptedFileUploaded(m)
+}
+func decode_body_TL_inputEncryptedFileUploaded(m *DecodeBuf) TL {
+	tl := TL_inputEncryptedFileUploaded{}
+	tl.ID = m.Long()
+	tl.Parts = m.Int()
+	tl.MD5Checksum = m.String()
+	tl.KeyFingerprint = m.Int()
+	return tl
+}
+
+func decode_TL_inputEncryptedFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputEncryptedFile)
+	return decode_body_TL_inputEncryptedFile(m)
+}
+func decode_body_TL_inputEncryptedFile(m *DecodeBuf) TL {
+	tl := TL_inputEncryptedFile{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputEncryptedFileBigUploaded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputEncryptedFileBigUploaded)
+	return decode_body_TL_inputEncryptedFileBigUploaded(m)
+}
+func decode_body_TL_inputEncryptedFileBigUploaded(m *DecodeBuf) TL {
+	tl := TL_inputEncryptedFileBigUploaded{}
+	tl.ID = m.Long()
+	tl.Parts = m.Int()
+	tl.KeyFingerprint = m.Int()
+	return tl
+}
+
+func decode_TL_encryptedMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedMessage)
+	return decode_body_TL_encryptedMessage(m)
+}
+func decode_body_TL_encryptedMessage(m *DecodeBuf) TL {
+	tl := TL_encryptedMessage{}
+	tl.RandomID = m.Long()
+	tl.ChatID = m.Int()
+	tl.Date = m.Int()
+	tl.Bytes = m.StringBytes()
+	tl.File = m.Object()
+	return tl
+}
+
+func decode_TL_encryptedMessageService(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_encryptedMessageService)
+	return decode_body_TL_encryptedMessageService(m)
+}
+func decode_body_TL_encryptedMessageService(m *DecodeBuf) TL {
+	tl := TL_encryptedMessageService{}
+	tl.RandomID = m.Long()
+	tl.ChatID = m.Int()
+	tl.Date = m.Int()
+	tl.Bytes = m.StringBytes()
+	return tl
+}
+
+func decode_TL_messages_dhConfigNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_dhConfigNotModified)
+	return decode_body_TL_messages_dhConfigNotModified(m)
+}
+func decode_body_TL_messages_dhConfigNotModified(m *DecodeBuf) TL {
+	tl := TL_messages_dhConfigNotModified{}
+	tl.Random = m.StringBytes()
+	return tl
+}
+
+func decode_TL_messages_dhConfig(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_dhConfig)
+	return decode_body_TL_messages_dhConfig(m)
+}
+func decode_body_TL_messages_dhConfig(m *DecodeBuf) TL {
+	tl := TL_messages_dhConfig{}
+	tl.G = m.Int()
+	tl.P = m.StringBytes()
+	tl.Version = m.Int()
+	tl.Random = m.StringBytes()
+	return tl
+}
+
+func decode_TL_messages_sentEncryptedMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_sentEncryptedMessage)
+	return decode_body_TL_messages_sentEncryptedMessage(m)
+}
+func decode_body_TL_messages_sentEncryptedMessage(m *DecodeBuf) TL {
+	tl := TL_messages_sentEncryptedMessage{}
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_messages_sentEncryptedFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_sentEncryptedFile)
+	return decode_body_TL_messages_sentEncryptedFile(m)
+}
+func decode_body_TL_messages_sentEncryptedFile(m *DecodeBuf) TL {
+	tl := TL_messages_sentEncryptedFile{}
+	tl.Date = m.Int()
+	tl.File = m.Object()
+	return tl
+}
+
+func decode_TL_inputDocumentEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputDocumentEmpty)
+	return decode_body_TL_inputDocumentEmpty(m)
+}
+func decode_body_TL_inputDocumentEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputDocumentEmpty{}
+	return tl
+}
+
+func decode_TL_inputDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputDocument)
+	return decode_body_TL_inputDocument(m)
+}
+func decode_body_TL_inputDocument(m *DecodeBuf) TL {
+	tl := TL_inputDocument{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.FileReference = m.StringBytes()
+	return tl
+}
+
+func decode_TL_documentEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentEmpty)
+	return decode_body_TL_documentEmpty(m)
+}
+func decode_body_TL_documentEmpty(m *DecodeBuf) TL {
+	tl := TL_documentEmpty{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_document(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_document)
+	return decode_body_TL_document(m)
+}
+func decode_body_TL_document(m *DecodeBuf) TL {
+	tl := TL_document{}
+	flags := m.Int()
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.FileReference = m.StringBytes()
+	tl.Date = m.Int()
+	tl.MIMEType = m.String()
+	tl.Size = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Thumbs = m.Vector()
+	}
+	if flags&(1<<1) != 0 {
+		tl.VideoThumbs = m.Vector()
+	}
+	tl.DCID = m.Int()
+	tl.Attributes = m.Vector()
+	return tl
+}
+
+func decode_TL_help_support(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_support)
+	return decode_body_TL_help_support(m)
+}
+func decode_body_TL_help_support(m *DecodeBuf) TL {
+	tl := TL_help_support{}
+	tl.PhoneNumber = m.String()
+	tl.User = m.Object()
+	return tl
+}
+
+func decode_TL_notifyPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notifyPeer)
+	return decode_body_TL_notifyPeer(m)
+}
+func decode_body_TL_notifyPeer(m *DecodeBuf) TL {
+	tl := TL_notifyPeer{}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_notifyUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notifyUsers)
+	return decode_body_TL_notifyUsers(m)
+}
+func decode_body_TL_notifyUsers(_ *DecodeBuf) TL {
+	tl := TL_notifyUsers{}
+	return tl
+}
+
+func decode_TL_notifyChats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notifyChats)
+	return decode_body_TL_notifyChats(m)
+}
+func decode_body_TL_notifyChats(_ *DecodeBuf) TL {
+	tl := TL_notifyChats{}
+	return tl
+}
+
+func decode_TL_notifyBroadcasts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notifyBroadcasts)
+	return decode_body_TL_notifyBroadcasts(m)
+}
+func decode_body_TL_notifyBroadcasts(_ *DecodeBuf) TL {
+	tl := TL_notifyBroadcasts{}
+	return tl
+}
+
+func decode_TL_notifyForumTopic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notifyForumTopic)
+	return decode_body_TL_notifyForumTopic(m)
+}
+func decode_body_TL_notifyForumTopic(m *DecodeBuf) TL {
+	tl := TL_notifyForumTopic{}
+	tl.Peer = m.Object()
+	tl.TopMsgID = m.Int()
+	return tl
+}
+
+func decode_TL_sendMessageTypingAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageTypingAction)
+	return decode_body_TL_sendMessageTypingAction(m)
+}
+func decode_body_TL_sendMessageTypingAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageTypingAction{}
+	return tl
+}
+
+func decode_TL_sendMessageCancelAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageCancelAction)
+	return decode_body_TL_sendMessageCancelAction(m)
+}
+func decode_body_TL_sendMessageCancelAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageCancelAction{}
+	return tl
+}
+
+func decode_TL_sendMessageRecordVideoAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageRecordVideoAction)
+	return decode_body_TL_sendMessageRecordVideoAction(m)
+}
+func decode_body_TL_sendMessageRecordVideoAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageRecordVideoAction{}
+	return tl
+}
+
+func decode_TL_sendMessageUploadVideoAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageUploadVideoAction)
+	return decode_body_TL_sendMessageUploadVideoAction(m)
+}
+func decode_body_TL_sendMessageUploadVideoAction(m *DecodeBuf) TL {
+	tl := TL_sendMessageUploadVideoAction{}
+	tl.Progress = m.Int()
+	return tl
+}
+
+func decode_TL_sendMessageRecordAudioAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageRecordAudioAction)
+	return decode_body_TL_sendMessageRecordAudioAction(m)
+}
+func decode_body_TL_sendMessageRecordAudioAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageRecordAudioAction{}
+	return tl
+}
+
+func decode_TL_sendMessageUploadAudioAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageUploadAudioAction)
+	return decode_body_TL_sendMessageUploadAudioAction(m)
+}
+func decode_body_TL_sendMessageUploadAudioAction(m *DecodeBuf) TL {
+	tl := TL_sendMessageUploadAudioAction{}
+	tl.Progress = m.Int()
+	return tl
+}
+
+func decode_TL_sendMessageUploadPhotoAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageUploadPhotoAction)
+	return decode_body_TL_sendMessageUploadPhotoAction(m)
+}
+func decode_body_TL_sendMessageUploadPhotoAction(m *DecodeBuf) TL {
+	tl := TL_sendMessageUploadPhotoAction{}
+	tl.Progress = m.Int()
+	return tl
+}
+
+func decode_TL_sendMessageUploadDocumentAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageUploadDocumentAction)
+	return decode_body_TL_sendMessageUploadDocumentAction(m)
+}
+func decode_body_TL_sendMessageUploadDocumentAction(m *DecodeBuf) TL {
+	tl := TL_sendMessageUploadDocumentAction{}
+	tl.Progress = m.Int()
+	return tl
+}
+
+func decode_TL_sendMessageGeoLocationAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageGeoLocationAction)
+	return decode_body_TL_sendMessageGeoLocationAction(m)
+}
+func decode_body_TL_sendMessageGeoLocationAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageGeoLocationAction{}
+	return tl
+}
+
+func decode_TL_sendMessageChooseContactAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageChooseContactAction)
+	return decode_body_TL_sendMessageChooseContactAction(m)
+}
+func decode_body_TL_sendMessageChooseContactAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageChooseContactAction{}
+	return tl
+}
+
+func decode_TL_sendMessageGamePlayAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageGamePlayAction)
+	return decode_body_TL_sendMessageGamePlayAction(m)
+}
+func decode_body_TL_sendMessageGamePlayAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageGamePlayAction{}
+	return tl
+}
+
+func decode_TL_sendMessageRecordRoundAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageRecordRoundAction)
+	return decode_body_TL_sendMessageRecordRoundAction(m)
+}
+func decode_body_TL_sendMessageRecordRoundAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageRecordRoundAction{}
+	return tl
+}
+
+func decode_TL_sendMessageUploadRoundAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageUploadRoundAction)
+	return decode_body_TL_sendMessageUploadRoundAction(m)
+}
+func decode_body_TL_sendMessageUploadRoundAction(m *DecodeBuf) TL {
+	tl := TL_sendMessageUploadRoundAction{}
+	tl.Progress = m.Int()
+	return tl
+}
+
+func decode_TL_speakingInGroupCallAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_speakingInGroupCallAction)
+	return decode_body_TL_speakingInGroupCallAction(m)
+}
+func decode_body_TL_speakingInGroupCallAction(_ *DecodeBuf) TL {
+	tl := TL_speakingInGroupCallAction{}
+	return tl
+}
+
+func decode_TL_sendMessageHistoryImportAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageHistoryImportAction)
+	return decode_body_TL_sendMessageHistoryImportAction(m)
+}
+func decode_body_TL_sendMessageHistoryImportAction(m *DecodeBuf) TL {
+	tl := TL_sendMessageHistoryImportAction{}
+	tl.Progress = m.Int()
+	return tl
+}
+
+func decode_TL_sendMessageChooseStickerAction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageChooseStickerAction)
+	return decode_body_TL_sendMessageChooseStickerAction(m)
+}
+func decode_body_TL_sendMessageChooseStickerAction(_ *DecodeBuf) TL {
+	tl := TL_sendMessageChooseStickerAction{}
+	return tl
+}
+
+func decode_TL_sendMessageEmojiInteraction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageEmojiInteraction)
+	return decode_body_TL_sendMessageEmojiInteraction(m)
+}
+func decode_body_TL_sendMessageEmojiInteraction(m *DecodeBuf) TL {
+	tl := TL_sendMessageEmojiInteraction{}
+	tl.Emoticon = m.String()
+	tl.MsgID = m.Int()
+	tl.Interaction = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_sendMessageEmojiInteractionSeen(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendMessageEmojiInteractionSeen)
+	return decode_body_TL_sendMessageEmojiInteractionSeen(m)
+}
+func decode_body_TL_sendMessageEmojiInteractionSeen(m *DecodeBuf) TL {
+	tl := TL_sendMessageEmojiInteractionSeen{}
+	tl.Emoticon = m.String()
+	return tl
+}
+
+func decode_TL_contacts_found(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_found)
+	return decode_body_TL_contacts_found(m)
+}
+func decode_body_TL_contacts_found(m *DecodeBuf) TL {
+	tl := TL_contacts_found{}
+	tl.MyResults = m.Vector()
+	tl.Results = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyStatusTimestamp(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyStatusTimestamp)
+	return decode_body_TL_inputPrivacyKeyStatusTimestamp(m)
+}
+func decode_body_TL_inputPrivacyKeyStatusTimestamp(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyStatusTimestamp{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyChatInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyChatInvite)
+	return decode_body_TL_inputPrivacyKeyChatInvite(m)
+}
+func decode_body_TL_inputPrivacyKeyChatInvite(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyChatInvite{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyPhoneCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyPhoneCall)
+	return decode_body_TL_inputPrivacyKeyPhoneCall(m)
+}
+func decode_body_TL_inputPrivacyKeyPhoneCall(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyPhoneCall{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyPhoneP2P(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyPhoneP2P)
+	return decode_body_TL_inputPrivacyKeyPhoneP2P(m)
+}
+func decode_body_TL_inputPrivacyKeyPhoneP2P(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyPhoneP2P{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyForwards(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyForwards)
+	return decode_body_TL_inputPrivacyKeyForwards(m)
+}
+func decode_body_TL_inputPrivacyKeyForwards(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyForwards{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyProfilePhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyProfilePhoto)
+	return decode_body_TL_inputPrivacyKeyProfilePhoto(m)
+}
+func decode_body_TL_inputPrivacyKeyProfilePhoto(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyProfilePhoto{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyPhoneNumber(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyPhoneNumber)
+	return decode_body_TL_inputPrivacyKeyPhoneNumber(m)
+}
+func decode_body_TL_inputPrivacyKeyPhoneNumber(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyPhoneNumber{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyAddedByPhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyAddedByPhone)
+	return decode_body_TL_inputPrivacyKeyAddedByPhone(m)
+}
+func decode_body_TL_inputPrivacyKeyAddedByPhone(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyAddedByPhone{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyVoiceMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyVoiceMessages)
+	return decode_body_TL_inputPrivacyKeyVoiceMessages(m)
+}
+func decode_body_TL_inputPrivacyKeyVoiceMessages(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyVoiceMessages{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyAbout(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyAbout)
+	return decode_body_TL_inputPrivacyKeyAbout(m)
+}
+func decode_body_TL_inputPrivacyKeyAbout(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyAbout{}
+	return tl
+}
+
+func decode_TL_inputPrivacyKeyBirthday(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyKeyBirthday)
+	return decode_body_TL_inputPrivacyKeyBirthday(m)
+}
+func decode_body_TL_inputPrivacyKeyBirthday(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyKeyBirthday{}
+	return tl
+}
+
+func decode_TL_privacyKeyStatusTimestamp(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyStatusTimestamp)
+	return decode_body_TL_privacyKeyStatusTimestamp(m)
+}
+func decode_body_TL_privacyKeyStatusTimestamp(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyStatusTimestamp{}
+	return tl
+}
+
+func decode_TL_privacyKeyChatInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyChatInvite)
+	return decode_body_TL_privacyKeyChatInvite(m)
+}
+func decode_body_TL_privacyKeyChatInvite(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyChatInvite{}
+	return tl
+}
+
+func decode_TL_privacyKeyPhoneCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyPhoneCall)
+	return decode_body_TL_privacyKeyPhoneCall(m)
+}
+func decode_body_TL_privacyKeyPhoneCall(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyPhoneCall{}
+	return tl
+}
+
+func decode_TL_privacyKeyPhoneP2P(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyPhoneP2P)
+	return decode_body_TL_privacyKeyPhoneP2P(m)
+}
+func decode_body_TL_privacyKeyPhoneP2P(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyPhoneP2P{}
+	return tl
+}
+
+func decode_TL_privacyKeyForwards(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyForwards)
+	return decode_body_TL_privacyKeyForwards(m)
+}
+func decode_body_TL_privacyKeyForwards(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyForwards{}
+	return tl
+}
+
+func decode_TL_privacyKeyProfilePhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyProfilePhoto)
+	return decode_body_TL_privacyKeyProfilePhoto(m)
+}
+func decode_body_TL_privacyKeyProfilePhoto(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyProfilePhoto{}
+	return tl
+}
+
+func decode_TL_privacyKeyPhoneNumber(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyPhoneNumber)
+	return decode_body_TL_privacyKeyPhoneNumber(m)
+}
+func decode_body_TL_privacyKeyPhoneNumber(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyPhoneNumber{}
+	return tl
+}
+
+func decode_TL_privacyKeyAddedByPhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyAddedByPhone)
+	return decode_body_TL_privacyKeyAddedByPhone(m)
+}
+func decode_body_TL_privacyKeyAddedByPhone(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyAddedByPhone{}
+	return tl
+}
+
+func decode_TL_privacyKeyVoiceMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyVoiceMessages)
+	return decode_body_TL_privacyKeyVoiceMessages(m)
+}
+func decode_body_TL_privacyKeyVoiceMessages(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyVoiceMessages{}
+	return tl
+}
+
+func decode_TL_privacyKeyAbout(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyAbout)
+	return decode_body_TL_privacyKeyAbout(m)
+}
+func decode_body_TL_privacyKeyAbout(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyAbout{}
+	return tl
+}
+
+func decode_TL_privacyKeyBirthday(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyKeyBirthday)
+	return decode_body_TL_privacyKeyBirthday(m)
+}
+func decode_body_TL_privacyKeyBirthday(_ *DecodeBuf) TL {
+	tl := TL_privacyKeyBirthday{}
+	return tl
+}
+
+func decode_TL_inputPrivacyValueAllowContacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueAllowContacts)
+	return decode_body_TL_inputPrivacyValueAllowContacts(m)
+}
+func decode_body_TL_inputPrivacyValueAllowContacts(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueAllowContacts{}
+	return tl
+}
+
+func decode_TL_inputPrivacyValueAllowAll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueAllowAll)
+	return decode_body_TL_inputPrivacyValueAllowAll(m)
+}
+func decode_body_TL_inputPrivacyValueAllowAll(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueAllowAll{}
+	return tl
+}
+
+func decode_TL_inputPrivacyValueAllowUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueAllowUsers)
+	return decode_body_TL_inputPrivacyValueAllowUsers(m)
+}
+func decode_body_TL_inputPrivacyValueAllowUsers(m *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueAllowUsers{}
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_inputPrivacyValueDisallowContacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueDisallowContacts)
+	return decode_body_TL_inputPrivacyValueDisallowContacts(m)
+}
+func decode_body_TL_inputPrivacyValueDisallowContacts(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueDisallowContacts{}
+	return tl
+}
+
+func decode_TL_inputPrivacyValueDisallowAll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueDisallowAll)
+	return decode_body_TL_inputPrivacyValueDisallowAll(m)
+}
+func decode_body_TL_inputPrivacyValueDisallowAll(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueDisallowAll{}
+	return tl
+}
+
+func decode_TL_inputPrivacyValueDisallowUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueDisallowUsers)
+	return decode_body_TL_inputPrivacyValueDisallowUsers(m)
+}
+func decode_body_TL_inputPrivacyValueDisallowUsers(m *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueDisallowUsers{}
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_inputPrivacyValueAllowChatParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueAllowChatParticipants)
+	return decode_body_TL_inputPrivacyValueAllowChatParticipants(m)
+}
+func decode_body_TL_inputPrivacyValueAllowChatParticipants(m *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueAllowChatParticipants{}
+	tl.Chats = m.VectorLong()
+	return tl
+}
+
+func decode_TL_inputPrivacyValueDisallowChatParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueDisallowChatParticipants)
+	return decode_body_TL_inputPrivacyValueDisallowChatParticipants(m)
+}
+func decode_body_TL_inputPrivacyValueDisallowChatParticipants(m *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueDisallowChatParticipants{}
+	tl.Chats = m.VectorLong()
+	return tl
+}
+
+func decode_TL_inputPrivacyValueAllowCloseFriends(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueAllowCloseFriends)
+	return decode_body_TL_inputPrivacyValueAllowCloseFriends(m)
+}
+func decode_body_TL_inputPrivacyValueAllowCloseFriends(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueAllowCloseFriends{}
+	return tl
+}
+
+func decode_TL_inputPrivacyValueAllowPremium(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPrivacyValueAllowPremium)
+	return decode_body_TL_inputPrivacyValueAllowPremium(m)
+}
+func decode_body_TL_inputPrivacyValueAllowPremium(_ *DecodeBuf) TL {
+	tl := TL_inputPrivacyValueAllowPremium{}
+	return tl
+}
+
+func decode_TL_privacyValueAllowContacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueAllowContacts)
+	return decode_body_TL_privacyValueAllowContacts(m)
+}
+func decode_body_TL_privacyValueAllowContacts(_ *DecodeBuf) TL {
+	tl := TL_privacyValueAllowContacts{}
+	return tl
+}
+
+func decode_TL_privacyValueAllowAll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueAllowAll)
+	return decode_body_TL_privacyValueAllowAll(m)
+}
+func decode_body_TL_privacyValueAllowAll(_ *DecodeBuf) TL {
+	tl := TL_privacyValueAllowAll{}
+	return tl
+}
+
+func decode_TL_privacyValueAllowUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueAllowUsers)
+	return decode_body_TL_privacyValueAllowUsers(m)
+}
+func decode_body_TL_privacyValueAllowUsers(m *DecodeBuf) TL {
+	tl := TL_privacyValueAllowUsers{}
+	tl.Users = m.VectorLong()
+	return tl
+}
+
+func decode_TL_privacyValueDisallowContacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueDisallowContacts)
+	return decode_body_TL_privacyValueDisallowContacts(m)
+}
+func decode_body_TL_privacyValueDisallowContacts(_ *DecodeBuf) TL {
+	tl := TL_privacyValueDisallowContacts{}
+	return tl
+}
+
+func decode_TL_privacyValueDisallowAll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueDisallowAll)
+	return decode_body_TL_privacyValueDisallowAll(m)
+}
+func decode_body_TL_privacyValueDisallowAll(_ *DecodeBuf) TL {
+	tl := TL_privacyValueDisallowAll{}
+	return tl
+}
+
+func decode_TL_privacyValueDisallowUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueDisallowUsers)
+	return decode_body_TL_privacyValueDisallowUsers(m)
+}
+func decode_body_TL_privacyValueDisallowUsers(m *DecodeBuf) TL {
+	tl := TL_privacyValueDisallowUsers{}
+	tl.Users = m.VectorLong()
+	return tl
+}
+
+func decode_TL_privacyValueAllowChatParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueAllowChatParticipants)
+	return decode_body_TL_privacyValueAllowChatParticipants(m)
+}
+func decode_body_TL_privacyValueAllowChatParticipants(m *DecodeBuf) TL {
+	tl := TL_privacyValueAllowChatParticipants{}
+	tl.Chats = m.VectorLong()
+	return tl
+}
+
+func decode_TL_privacyValueDisallowChatParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueDisallowChatParticipants)
+	return decode_body_TL_privacyValueDisallowChatParticipants(m)
+}
+func decode_body_TL_privacyValueDisallowChatParticipants(m *DecodeBuf) TL {
+	tl := TL_privacyValueDisallowChatParticipants{}
+	tl.Chats = m.VectorLong()
+	return tl
+}
+
+func decode_TL_privacyValueAllowCloseFriends(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueAllowCloseFriends)
+	return decode_body_TL_privacyValueAllowCloseFriends(m)
+}
+func decode_body_TL_privacyValueAllowCloseFriends(_ *DecodeBuf) TL {
+	tl := TL_privacyValueAllowCloseFriends{}
+	return tl
+}
+
+func decode_TL_privacyValueAllowPremium(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_privacyValueAllowPremium)
+	return decode_body_TL_privacyValueAllowPremium(m)
+}
+func decode_body_TL_privacyValueAllowPremium(_ *DecodeBuf) TL {
+	tl := TL_privacyValueAllowPremium{}
+	return tl
+}
+
+func decode_TL_account_privacyRules(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_privacyRules)
+	return decode_body_TL_account_privacyRules(m)
+}
+func decode_body_TL_account_privacyRules(m *DecodeBuf) TL {
+	tl := TL_account_privacyRules{}
+	tl.Rules = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_accountDaysTTL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_accountDaysTTL)
+	return decode_body_TL_accountDaysTTL(m)
+}
+func decode_body_TL_accountDaysTTL(m *DecodeBuf) TL {
+	tl := TL_accountDaysTTL{}
+	tl.Days = m.Int()
+	return tl
+}
+
+func decode_TL_documentAttributeImageSize(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentAttributeImageSize)
+	return decode_body_TL_documentAttributeImageSize(m)
+}
+func decode_body_TL_documentAttributeImageSize(m *DecodeBuf) TL {
+	tl := TL_documentAttributeImageSize{}
+	tl.W = m.Int()
+	tl.H = m.Int()
+	return tl
+}
+
+func decode_TL_documentAttributeAnimated(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentAttributeAnimated)
+	return decode_body_TL_documentAttributeAnimated(m)
+}
+func decode_body_TL_documentAttributeAnimated(_ *DecodeBuf) TL {
+	tl := TL_documentAttributeAnimated{}
+	return tl
+}
+
+func decode_TL_documentAttributeSticker(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentAttributeSticker)
+	return decode_body_TL_documentAttributeSticker(m)
+}
+func decode_body_TL_documentAttributeSticker(m *DecodeBuf) TL {
+	tl := TL_documentAttributeSticker{}
+	flags := m.Int()
+	tl.Mask = flags&(1<<1) != 0
+	tl.Alt = m.String()
+	tl.Stickerset = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.MaskCoords = Ref(decode_TL_maskCoords(m).(TL_maskCoords))
+	}
+	return tl
+}
+
+func decode_TL_documentAttributeVideo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentAttributeVideo)
+	return decode_body_TL_documentAttributeVideo(m)
+}
+func decode_body_TL_documentAttributeVideo(m *DecodeBuf) TL {
+	tl := TL_documentAttributeVideo{}
+	flags := m.Int()
+	tl.RoundMessage = flags&(1<<0) != 0
+	tl.SupportsStreaming = flags&(1<<1) != 0
+	tl.Nosound = flags&(1<<3) != 0
+	tl.Duration = m.Double()
+	tl.W = m.Int()
+	tl.H = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.PreloadPrefixSize = Ref(m.Int())
+	}
+	if flags&(1<<4) != 0 {
+		tl.VideoStartTS = Ref(m.Double())
+	}
+	return tl
+}
+
+func decode_TL_documentAttributeAudio(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentAttributeAudio)
+	return decode_body_TL_documentAttributeAudio(m)
+}
+func decode_body_TL_documentAttributeAudio(m *DecodeBuf) TL {
+	tl := TL_documentAttributeAudio{}
+	flags := m.Int()
+	tl.Voice = flags&(1<<10) != 0
+	tl.Duration = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Performer = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Waveform = m.StringBytes()
+	}
+	return tl
+}
+
+func decode_TL_documentAttributeFilename(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentAttributeFilename)
+	return decode_body_TL_documentAttributeFilename(m)
+}
+func decode_body_TL_documentAttributeFilename(m *DecodeBuf) TL {
+	tl := TL_documentAttributeFilename{}
+	tl.FileName = m.String()
+	return tl
+}
+
+func decode_TL_documentAttributeHasStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentAttributeHasStickers)
+	return decode_body_TL_documentAttributeHasStickers(m)
+}
+func decode_body_TL_documentAttributeHasStickers(_ *DecodeBuf) TL {
+	tl := TL_documentAttributeHasStickers{}
+	return tl
+}
+
+func decode_TL_documentAttributeCustomEmoji(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_documentAttributeCustomEmoji)
+	return decode_body_TL_documentAttributeCustomEmoji(m)
+}
+func decode_body_TL_documentAttributeCustomEmoji(m *DecodeBuf) TL {
+	tl := TL_documentAttributeCustomEmoji{}
+	flags := m.Int()
+	tl.Free = flags&(1<<0) != 0
+	tl.TextColor = flags&(1<<1) != 0
+	tl.Alt = m.String()
+	tl.Stickerset = m.Object()
+	return tl
+}
+
+func decode_TL_messages_stickersNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_stickersNotModified)
+	return decode_body_TL_messages_stickersNotModified(m)
+}
+func decode_body_TL_messages_stickersNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_stickersNotModified{}
+	return tl
+}
+
+func decode_TL_messages_stickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_stickers)
+	return decode_body_TL_messages_stickers(m)
+}
+func decode_body_TL_messages_stickers(m *DecodeBuf) TL {
+	tl := TL_messages_stickers{}
+	tl.Hash = m.Long()
+	tl.Stickers = m.Vector()
+	return tl
+}
+
+func decode_TL_stickerPack(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stickerPack)
+	return decode_body_TL_stickerPack(m)
+}
+func decode_body_TL_stickerPack(m *DecodeBuf) TL {
+	tl := TL_stickerPack{}
+	tl.Emoticon = m.String()
+	tl.Documents = m.VectorLong()
+	return tl
+}
+
+func decode_TL_messages_allStickersNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_allStickersNotModified)
+	return decode_body_TL_messages_allStickersNotModified(m)
+}
+func decode_body_TL_messages_allStickersNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_allStickersNotModified{}
+	return tl
+}
+
+func decode_TL_messages_allStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_allStickers)
+	return decode_body_TL_messages_allStickers(m)
+}
+func decode_body_TL_messages_allStickers(m *DecodeBuf) TL {
+	tl := TL_messages_allStickers{}
+	tl.Hash = m.Long()
+	tl.Sets = DecodeBuf_GenericVector[TL_stickerSet](m)
+	return tl
+}
+
+func decode_TL_messages_affectedMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_affectedMessages)
+	return decode_body_TL_messages_affectedMessages(m)
+}
+func decode_body_TL_messages_affectedMessages(m *DecodeBuf) TL {
+	tl := TL_messages_affectedMessages{}
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	return tl
+}
+
+func decode_TL_webPageEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webPageEmpty)
+	return decode_body_TL_webPageEmpty(m)
+}
+func decode_body_TL_webPageEmpty(m *DecodeBuf) TL {
+	tl := TL_webPageEmpty{}
+	flags := m.Int()
+	tl.ID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.URL = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_webPagePending(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webPagePending)
+	return decode_body_TL_webPagePending(m)
+}
+func decode_body_TL_webPagePending(m *DecodeBuf) TL {
+	tl := TL_webPagePending{}
+	flags := m.Int()
+	tl.ID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.URL = Ref(m.String())
+	}
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_webPage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webPage)
+	return decode_body_TL_webPage(m)
+}
+func decode_body_TL_webPage(m *DecodeBuf) TL {
+	tl := TL_webPage{}
+	flags := m.Int()
+	tl.HasLargeMedia = flags&(1<<13) != 0
+	tl.ID = m.Long()
+	tl.URL = m.String()
+	tl.DisplayURL = m.String()
+	tl.Hash = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Type = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.SiteName = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Description = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.Photo = m.Object()
+	}
+	if flags&(1<<5) != 0 {
+		tl.EmbedURL = Ref(m.String())
+	}
+	if flags&(1<<5) != 0 {
+		tl.EmbedType = Ref(m.String())
+	}
+	if flags&(1<<6) != 0 {
+		tl.EmbedWidth = Ref(m.Int())
+	}
+	if flags&(1<<6) != 0 {
+		tl.EmbedHeight = Ref(m.Int())
+	}
+	if flags&(1<<7) != 0 {
+		tl.Duration = Ref(m.Int())
+	}
+	if flags&(1<<8) != 0 {
+		tl.Author = Ref(m.String())
+	}
+	if flags&(1<<9) != 0 {
+		tl.Document = m.Object()
+	}
+	if flags&(1<<10) != 0 {
+		tl.CachedPage = Ref(decode_TL_page(m).(TL_page))
+	}
+	if flags&(1<<12) != 0 {
+		tl.Attributes = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_webPageNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webPageNotModified)
+	return decode_body_TL_webPageNotModified(m)
+}
+func decode_body_TL_webPageNotModified(m *DecodeBuf) TL {
+	tl := TL_webPageNotModified{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.CachedPageViews = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_authorization(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_authorization)
+	return decode_body_TL_authorization(m)
+}
+func decode_body_TL_authorization(m *DecodeBuf) TL {
+	tl := TL_authorization{}
+	flags := m.Int()
+	tl.Current = flags&(1<<0) != 0
+	tl.OfficialApp = flags&(1<<1) != 0
+	tl.PasswordPending = flags&(1<<2) != 0
+	tl.EncryptedRequestsDisabled = flags&(1<<3) != 0
+	tl.CallRequestsDisabled = flags&(1<<4) != 0
+	tl.Unconfirmed = flags&(1<<5) != 0
+	tl.Hash = m.Long()
+	tl.DeviceModel = m.String()
+	tl.Platform = m.String()
+	tl.SystemVersion = m.String()
+	tl.APIID = m.Int()
+	tl.AppName = m.String()
+	tl.AppVersion = m.String()
+	tl.DateCreated = m.Int()
+	tl.DateActive = m.Int()
+	tl.IP = m.String()
+	tl.Country = m.String()
+	tl.Region = m.String()
+	return tl
+}
+
+func decode_TL_account_authorizations(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_authorizations)
+	return decode_body_TL_account_authorizations(m)
+}
+func decode_body_TL_account_authorizations(m *DecodeBuf) TL {
+	tl := TL_account_authorizations{}
+	tl.AuthorizationTTLDays = m.Int()
+	tl.Authorizations = DecodeBuf_GenericVector[TL_authorization](m)
+	return tl
+}
+
+func decode_TL_account_password(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_password)
+	return decode_body_TL_account_password(m)
+}
+func decode_body_TL_account_password(m *DecodeBuf) TL {
+	tl := TL_account_password{}
+	flags := m.Int()
+	tl.HasRecovery = flags&(1<<0) != 0
+	tl.HasSecureValues = flags&(1<<1) != 0
+	tl.HasPassword = flags&(1<<2) != 0
+	if flags&(1<<2) != 0 {
+		tl.CurrentAlgo = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.SrpB = m.StringBytes()
+	}
+	if flags&(1<<2) != 0 {
+		tl.SrpID = Ref(m.Long())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Hint = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.EmailUnconfirmedPattern = Ref(m.String())
+	}
+	tl.NewAlgo = m.Object()
+	tl.NewSecureAlgo = m.Object()
+	tl.SecureRandom = m.StringBytes()
+	if flags&(1<<5) != 0 {
+		tl.PendingResetDate = Ref(m.Int())
+	}
+	if flags&(1<<6) != 0 {
+		tl.LoginEmailPattern = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_account_passwordSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_passwordSettings)
+	return decode_body_TL_account_passwordSettings(m)
+}
+func decode_body_TL_account_passwordSettings(m *DecodeBuf) TL {
+	tl := TL_account_passwordSettings{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Email = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.SecureSettings = Ref(decode_TL_secureSecretSettings(m).(TL_secureSecretSettings))
+	}
+	return tl
+}
+
+func decode_TL_account_passwordInputSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_passwordInputSettings)
+	return decode_body_TL_account_passwordInputSettings(m)
+}
+func decode_body_TL_account_passwordInputSettings(m *DecodeBuf) TL {
+	tl := TL_account_passwordInputSettings{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.NewAlgo = m.Object()
+	}
+	if flags&(1<<0) != 0 {
+		tl.NewPasswordHash = m.StringBytes()
+	}
+	if flags&(1<<0) != 0 {
+		tl.Hint = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Email = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.NewSecureSettings = Ref(decode_TL_secureSecretSettings(m).(TL_secureSecretSettings))
+	}
+	return tl
+}
+
+func decode_TL_auth_passwordRecovery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_passwordRecovery)
+	return decode_body_TL_auth_passwordRecovery(m)
+}
+func decode_body_TL_auth_passwordRecovery(m *DecodeBuf) TL {
+	tl := TL_auth_passwordRecovery{}
+	tl.EmailPattern = m.String()
+	return tl
+}
+
+func decode_TL_receivedNotifyMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_receivedNotifyMessage)
+	return decode_body_TL_receivedNotifyMessage(m)
+}
+func decode_body_TL_receivedNotifyMessage(m *DecodeBuf) TL {
+	tl := TL_receivedNotifyMessage{}
+	tl.ID = m.Int()
+	tl.Flags = m.Int()
+	return tl
+}
+
+func decode_TL_chatInviteExported(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatInviteExported)
+	return decode_body_TL_chatInviteExported(m)
+}
+func decode_body_TL_chatInviteExported(m *DecodeBuf) TL {
+	tl := TL_chatInviteExported{}
+	flags := m.Int()
+	tl.Revoked = flags&(1<<0) != 0
+	tl.Permanent = flags&(1<<5) != 0
+	tl.RequestNeeded = flags&(1<<6) != 0
+	tl.Link = m.String()
+	tl.AdminID = m.Long()
+	tl.Date = m.Int()
+	if flags&(1<<4) != 0 {
+		tl.StartDate = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.ExpireDate = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.UsageLimit = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Usage = Ref(m.Int())
+	}
+	if flags&(1<<7) != 0 {
+		tl.Requested = Ref(m.Int())
+	}
+	if flags&(1<<10) != 0 {
+		tl.SubscriptionExpired = Ref(m.Int())
+	}
+	if flags&(1<<8) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<9) != 0 {
+		tl.SubscriptionPricing = Ref(decode_TL_starsSubscriptionPricing(m).(TL_starsSubscriptionPricing))
+	}
+	return tl
+}
+
+func decode_TL_chatInvitePublicJoinRequests(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatInvitePublicJoinRequests)
+	return decode_body_TL_chatInvitePublicJoinRequests(m)
+}
+func decode_body_TL_chatInvitePublicJoinRequests(_ *DecodeBuf) TL {
+	tl := TL_chatInvitePublicJoinRequests{}
+	return tl
+}
+
+func decode_TL_chatInviteAlready(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatInviteAlready)
+	return decode_body_TL_chatInviteAlready(m)
+}
+func decode_body_TL_chatInviteAlready(m *DecodeBuf) TL {
+	tl := TL_chatInviteAlready{}
+	tl.Chat = m.Object()
+	return tl
+}
+
+func decode_TL_chatInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatInvite)
+	return decode_body_TL_chatInvite(m)
+}
+func decode_body_TL_chatInvite(m *DecodeBuf) TL {
+	tl := TL_chatInvite{}
+	flags := m.Int()
+	tl.Channel = flags&(1<<0) != 0
+	tl.Broadcast = flags&(1<<1) != 0
+	tl.Public = flags&(1<<2) != 0
+	tl.Megagroup = flags&(1<<3) != 0
+	tl.RequestNeeded = flags&(1<<6) != 0
+	tl.Verified = flags&(1<<7) != 0
+	tl.Scam = flags&(1<<8) != 0
+	tl.Fake = flags&(1<<9) != 0
+	tl.CanRefulfillSubscription = flags&(1<<11) != 0
+	tl.Title = m.String()
+	if flags&(1<<5) != 0 {
+		tl.About = Ref(m.String())
+	}
+	tl.Photo = m.Object()
+	tl.ParticipantsCount = m.Int()
+	if flags&(1<<4) != 0 {
+		tl.Participants = m.Vector()
+	}
+	tl.Color = m.Int()
+	if flags&(1<<10) != 0 {
+		tl.SubscriptionPricing = Ref(decode_TL_starsSubscriptionPricing(m).(TL_starsSubscriptionPricing))
+	}
+	if flags&(1<<12) != 0 {
+		tl.SubscriptionFormID = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_chatInvitePeek(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatInvitePeek)
+	return decode_body_TL_chatInvitePeek(m)
+}
+func decode_body_TL_chatInvitePeek(m *DecodeBuf) TL {
+	tl := TL_chatInvitePeek{}
+	tl.Chat = m.Object()
+	tl.Expires = m.Int()
+	return tl
+}
+
+func decode_TL_inputStickerSetEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetEmpty)
+	return decode_body_TL_inputStickerSetEmpty(m)
+}
+func decode_body_TL_inputStickerSetEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputStickerSetEmpty{}
+	return tl
+}
+
+func decode_TL_inputStickerSetID(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetID)
+	return decode_body_TL_inputStickerSetID(m)
+}
+func decode_body_TL_inputStickerSetID(m *DecodeBuf) TL {
+	tl := TL_inputStickerSetID{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputStickerSetShortName(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetShortName)
+	return decode_body_TL_inputStickerSetShortName(m)
+}
+func decode_body_TL_inputStickerSetShortName(m *DecodeBuf) TL {
+	tl := TL_inputStickerSetShortName{}
+	tl.ShortName = m.String()
+	return tl
+}
+
+func decode_TL_inputStickerSetAnimatedEmoji(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetAnimatedEmoji)
+	return decode_body_TL_inputStickerSetAnimatedEmoji(m)
+}
+func decode_body_TL_inputStickerSetAnimatedEmoji(_ *DecodeBuf) TL {
+	tl := TL_inputStickerSetAnimatedEmoji{}
+	return tl
+}
+
+func decode_TL_inputStickerSetDice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetDice)
+	return decode_body_TL_inputStickerSetDice(m)
+}
+func decode_body_TL_inputStickerSetDice(m *DecodeBuf) TL {
+	tl := TL_inputStickerSetDice{}
+	tl.Emoticon = m.String()
+	return tl
+}
+
+func decode_TL_inputStickerSetAnimatedEmojiAnimations(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetAnimatedEmojiAnimations)
+	return decode_body_TL_inputStickerSetAnimatedEmojiAnimations(m)
+}
+func decode_body_TL_inputStickerSetAnimatedEmojiAnimations(_ *DecodeBuf) TL {
+	tl := TL_inputStickerSetAnimatedEmojiAnimations{}
+	return tl
+}
+
+func decode_TL_inputStickerSetPremiumGifts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetPremiumGifts)
+	return decode_body_TL_inputStickerSetPremiumGifts(m)
+}
+func decode_body_TL_inputStickerSetPremiumGifts(_ *DecodeBuf) TL {
+	tl := TL_inputStickerSetPremiumGifts{}
+	return tl
+}
+
+func decode_TL_inputStickerSetEmojiGenericAnimations(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetEmojiGenericAnimations)
+	return decode_body_TL_inputStickerSetEmojiGenericAnimations(m)
+}
+func decode_body_TL_inputStickerSetEmojiGenericAnimations(_ *DecodeBuf) TL {
+	tl := TL_inputStickerSetEmojiGenericAnimations{}
+	return tl
+}
+
+func decode_TL_inputStickerSetEmojiDefaultStatuses(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetEmojiDefaultStatuses)
+	return decode_body_TL_inputStickerSetEmojiDefaultStatuses(m)
+}
+func decode_body_TL_inputStickerSetEmojiDefaultStatuses(_ *DecodeBuf) TL {
+	tl := TL_inputStickerSetEmojiDefaultStatuses{}
+	return tl
+}
+
+func decode_TL_inputStickerSetEmojiDefaultTopicIcons(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetEmojiDefaultTopicIcons)
+	return decode_body_TL_inputStickerSetEmojiDefaultTopicIcons(m)
+}
+func decode_body_TL_inputStickerSetEmojiDefaultTopicIcons(_ *DecodeBuf) TL {
+	tl := TL_inputStickerSetEmojiDefaultTopicIcons{}
+	return tl
+}
+
+func decode_TL_inputStickerSetEmojiChannelDefaultStatuses(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetEmojiChannelDefaultStatuses)
+	return decode_body_TL_inputStickerSetEmojiChannelDefaultStatuses(m)
+}
+func decode_body_TL_inputStickerSetEmojiChannelDefaultStatuses(_ *DecodeBuf) TL {
+	tl := TL_inputStickerSetEmojiChannelDefaultStatuses{}
+	return tl
+}
+
+func decode_TL_stickerSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stickerSet)
+	return decode_body_TL_stickerSet(m)
+}
+func decode_body_TL_stickerSet(m *DecodeBuf) TL {
+	tl := TL_stickerSet{}
+	flags := m.Int()
+	tl.Archived = flags&(1<<1) != 0
+	tl.Official = flags&(1<<2) != 0
+	tl.Masks = flags&(1<<3) != 0
+	tl.Emojis = flags&(1<<7) != 0
+	tl.TextColor = flags&(1<<9) != 0
+	tl.ChannelEmojiStatus = flags&(1<<10) != 0
+	tl.Creator = flags&(1<<11) != 0
+	if flags&(1<<0) != 0 {
+		tl.InstalledDate = Ref(m.Int())
+	}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Title = m.String()
+	tl.ShortName = m.String()
+	if flags&(1<<4) != 0 {
+		tl.Thumbs = m.Vector()
+	}
+	if flags&(1<<4) != 0 {
+		tl.ThumbDCID = Ref(m.Int())
+	}
+	if flags&(1<<4) != 0 {
+		tl.ThumbVersion = Ref(m.Int())
+	}
+	if flags&(1<<8) != 0 {
+		tl.ThumbDocumentID = Ref(m.Long())
+	}
+	tl.Count = m.Int()
+	tl.Hash = m.Int()
+	return tl
+}
+
+func decode_TL_messages_stickerSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_stickerSet)
+	return decode_body_TL_messages_stickerSet(m)
+}
+func decode_body_TL_messages_stickerSet(m *DecodeBuf) TL {
+	tl := TL_messages_stickerSet{}
+	tl.Set = decode_TL_stickerSet(m).(TL_stickerSet)
+	tl.Packs = DecodeBuf_GenericVector[TL_stickerPack](m)
+	tl.Keywords = DecodeBuf_GenericVector[TL_stickerKeyword](m)
+	tl.Documents = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_stickerSetNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_stickerSetNotModified)
+	return decode_body_TL_messages_stickerSetNotModified(m)
+}
+func decode_body_TL_messages_stickerSetNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_stickerSetNotModified{}
+	return tl
+}
+
+func decode_TL_botCommand(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botCommand)
+	return decode_body_TL_botCommand(m)
+}
+func decode_body_TL_botCommand(m *DecodeBuf) TL {
+	tl := TL_botCommand{}
+	tl.Command = m.String()
+	tl.Description = m.String()
+	return tl
+}
+
+func decode_TL_botInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInfo)
+	return decode_body_TL_botInfo(m)
+}
+func decode_body_TL_botInfo(m *DecodeBuf) TL {
+	tl := TL_botInfo{}
+	flags := m.Int()
+	tl.HasPreviewMedias = flags&(1<<6) != 0
+	if flags&(1<<0) != 0 {
+		tl.UserID = Ref(m.Long())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Description = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.DescriptionPhoto = m.Object()
+	}
+	if flags&(1<<5) != 0 {
+		tl.DescriptionDocument = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.Commands = DecodeBuf_GenericVector[TL_botCommand](m)
+	}
+	if flags&(1<<3) != 0 {
+		tl.MenuButton = m.Object()
+	}
+	if flags&(1<<7) != 0 {
+		tl.PrivacyPolicyURL = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_keyboardButton(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButton)
+	return decode_body_TL_keyboardButton(m)
+}
+func decode_body_TL_keyboardButton(m *DecodeBuf) TL {
+	tl := TL_keyboardButton{}
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_keyboardButtonURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonURL)
+	return decode_body_TL_keyboardButtonURL(m)
+}
+func decode_body_TL_keyboardButtonURL(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonURL{}
+	tl.Text = m.String()
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_keyboardButtonCallback(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonCallback)
+	return decode_body_TL_keyboardButtonCallback(m)
+}
+func decode_body_TL_keyboardButtonCallback(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonCallback{}
+	flags := m.Int()
+	tl.RequiresPassword = flags&(1<<0) != 0
+	tl.Text = m.String()
+	tl.Data = m.StringBytes()
+	return tl
+}
+
+func decode_TL_keyboardButtonRequestPhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonRequestPhone)
+	return decode_body_TL_keyboardButtonRequestPhone(m)
+}
+func decode_body_TL_keyboardButtonRequestPhone(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonRequestPhone{}
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_keyboardButtonRequestGeoLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonRequestGeoLocation)
+	return decode_body_TL_keyboardButtonRequestGeoLocation(m)
+}
+func decode_body_TL_keyboardButtonRequestGeoLocation(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonRequestGeoLocation{}
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_keyboardButtonSwitchInline(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonSwitchInline)
+	return decode_body_TL_keyboardButtonSwitchInline(m)
+}
+func decode_body_TL_keyboardButtonSwitchInline(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonSwitchInline{}
+	flags := m.Int()
+	tl.SamePeer = flags&(1<<0) != 0
+	tl.Text = m.String()
+	tl.Query = m.String()
+	if flags&(1<<1) != 0 {
+		tl.PeerTypes = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_keyboardButtonGame(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonGame)
+	return decode_body_TL_keyboardButtonGame(m)
+}
+func decode_body_TL_keyboardButtonGame(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonGame{}
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_keyboardButtonBuy(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonBuy)
+	return decode_body_TL_keyboardButtonBuy(m)
+}
+func decode_body_TL_keyboardButtonBuy(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonBuy{}
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_keyboardButtonURLAuth(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonURLAuth)
+	return decode_body_TL_keyboardButtonURLAuth(m)
+}
+func decode_body_TL_keyboardButtonURLAuth(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonURLAuth{}
+	flags := m.Int()
+	tl.Text = m.String()
+	if flags&(1<<0) != 0 {
+		tl.FwdText = Ref(m.String())
+	}
+	tl.URL = m.String()
+	tl.ButtonID = m.Int()
+	return tl
+}
+
+func decode_TL_inputKeyboardButtonURLAuth(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputKeyboardButtonURLAuth)
+	return decode_body_TL_inputKeyboardButtonURLAuth(m)
+}
+func decode_body_TL_inputKeyboardButtonURLAuth(m *DecodeBuf) TL {
+	tl := TL_inputKeyboardButtonURLAuth{}
+	flags := m.Int()
+	tl.RequestWriteAccess = flags&(1<<0) != 0
+	tl.Text = m.String()
+	if flags&(1<<1) != 0 {
+		tl.FwdText = Ref(m.String())
+	}
+	tl.URL = m.String()
+	tl.Bot = m.Object()
+	return tl
+}
+
+func decode_TL_keyboardButtonRequestPoll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonRequestPoll)
+	return decode_body_TL_keyboardButtonRequestPoll(m)
+}
+func decode_body_TL_keyboardButtonRequestPoll(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonRequestPoll{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Quiz = Ref(m.Bool())
+	}
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_inputKeyboardButtonUserProfile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputKeyboardButtonUserProfile)
+	return decode_body_TL_inputKeyboardButtonUserProfile(m)
+}
+func decode_body_TL_inputKeyboardButtonUserProfile(m *DecodeBuf) TL {
+	tl := TL_inputKeyboardButtonUserProfile{}
+	tl.Text = m.String()
+	tl.UserID = m.Object()
+	return tl
+}
+
+func decode_TL_keyboardButtonUserProfile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonUserProfile)
+	return decode_body_TL_keyboardButtonUserProfile(m)
+}
+func decode_body_TL_keyboardButtonUserProfile(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonUserProfile{}
+	tl.Text = m.String()
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_keyboardButtonWebView(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonWebView)
+	return decode_body_TL_keyboardButtonWebView(m)
+}
+func decode_body_TL_keyboardButtonWebView(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonWebView{}
+	tl.Text = m.String()
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_keyboardButtonSimpleWebView(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonSimpleWebView)
+	return decode_body_TL_keyboardButtonSimpleWebView(m)
+}
+func decode_body_TL_keyboardButtonSimpleWebView(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonSimpleWebView{}
+	tl.Text = m.String()
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_keyboardButtonRequestPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonRequestPeer)
+	return decode_body_TL_keyboardButtonRequestPeer(m)
+}
+func decode_body_TL_keyboardButtonRequestPeer(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonRequestPeer{}
+	tl.Text = m.String()
+	tl.ButtonID = m.Int()
+	tl.PeerType = m.Object()
+	tl.MaxQuantity = m.Int()
+	return tl
+}
+
+func decode_TL_inputKeyboardButtonRequestPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputKeyboardButtonRequestPeer)
+	return decode_body_TL_inputKeyboardButtonRequestPeer(m)
+}
+func decode_body_TL_inputKeyboardButtonRequestPeer(m *DecodeBuf) TL {
+	tl := TL_inputKeyboardButtonRequestPeer{}
+	flags := m.Int()
+	tl.NameRequested = flags&(1<<0) != 0
+	tl.UsernameRequested = flags&(1<<1) != 0
+	tl.PhotoRequested = flags&(1<<2) != 0
+	tl.Text = m.String()
+	tl.ButtonID = m.Int()
+	tl.PeerType = m.Object()
+	tl.MaxQuantity = m.Int()
+	return tl
+}
+
+func decode_TL_keyboardButtonRow(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonRow)
+	return decode_body_TL_keyboardButtonRow(m)
+}
+func decode_body_TL_keyboardButtonRow(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonRow{}
+	tl.Buttons = m.Vector()
+	return tl
+}
+
+func decode_TL_replyKeyboardHide(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_replyKeyboardHide)
+	return decode_body_TL_replyKeyboardHide(m)
+}
+func decode_body_TL_replyKeyboardHide(m *DecodeBuf) TL {
+	tl := TL_replyKeyboardHide{}
+	flags := m.Int()
+	tl.Selective = flags&(1<<2) != 0
+	return tl
+}
+
+func decode_TL_replyKeyboardForceReply(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_replyKeyboardForceReply)
+	return decode_body_TL_replyKeyboardForceReply(m)
+}
+func decode_body_TL_replyKeyboardForceReply(m *DecodeBuf) TL {
+	tl := TL_replyKeyboardForceReply{}
+	flags := m.Int()
+	tl.SingleUse = flags&(1<<1) != 0
+	tl.Selective = flags&(1<<2) != 0
+	if flags&(1<<3) != 0 {
+		tl.Placeholder = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_replyKeyboardMarkup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_replyKeyboardMarkup)
+	return decode_body_TL_replyKeyboardMarkup(m)
+}
+func decode_body_TL_replyKeyboardMarkup(m *DecodeBuf) TL {
+	tl := TL_replyKeyboardMarkup{}
+	flags := m.Int()
+	tl.Resize = flags&(1<<0) != 0
+	tl.SingleUse = flags&(1<<1) != 0
+	tl.Selective = flags&(1<<2) != 0
+	tl.Persistent = flags&(1<<4) != 0
+	tl.Rows = DecodeBuf_GenericVector[TL_keyboardButtonRow](m)
+	if flags&(1<<3) != 0 {
+		tl.Placeholder = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_replyInlineMarkup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_replyInlineMarkup)
+	return decode_body_TL_replyInlineMarkup(m)
+}
+func decode_body_TL_replyInlineMarkup(m *DecodeBuf) TL {
+	tl := TL_replyInlineMarkup{}
+	tl.Rows = DecodeBuf_GenericVector[TL_keyboardButtonRow](m)
+	return tl
+}
+
+func decode_TL_messageEntityUnknown(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityUnknown)
+	return decode_body_TL_messageEntityUnknown(m)
+}
+func decode_body_TL_messageEntityUnknown(m *DecodeBuf) TL {
+	tl := TL_messageEntityUnknown{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityMention(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityMention)
+	return decode_body_TL_messageEntityMention(m)
+}
+func decode_body_TL_messageEntityMention(m *DecodeBuf) TL {
+	tl := TL_messageEntityMention{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityHashtag(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityHashtag)
+	return decode_body_TL_messageEntityHashtag(m)
+}
+func decode_body_TL_messageEntityHashtag(m *DecodeBuf) TL {
+	tl := TL_messageEntityHashtag{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityBotCommand(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityBotCommand)
+	return decode_body_TL_messageEntityBotCommand(m)
+}
+func decode_body_TL_messageEntityBotCommand(m *DecodeBuf) TL {
+	tl := TL_messageEntityBotCommand{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityURL)
+	return decode_body_TL_messageEntityURL(m)
+}
+func decode_body_TL_messageEntityURL(m *DecodeBuf) TL {
+	tl := TL_messageEntityURL{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityEmail(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityEmail)
+	return decode_body_TL_messageEntityEmail(m)
+}
+func decode_body_TL_messageEntityEmail(m *DecodeBuf) TL {
+	tl := TL_messageEntityEmail{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityBold(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityBold)
+	return decode_body_TL_messageEntityBold(m)
+}
+func decode_body_TL_messageEntityBold(m *DecodeBuf) TL {
+	tl := TL_messageEntityBold{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityItalic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityItalic)
+	return decode_body_TL_messageEntityItalic(m)
+}
+func decode_body_TL_messageEntityItalic(m *DecodeBuf) TL {
+	tl := TL_messageEntityItalic{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityCode)
+	return decode_body_TL_messageEntityCode(m)
+}
+func decode_body_TL_messageEntityCode(m *DecodeBuf) TL {
+	tl := TL_messageEntityCode{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityPre(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityPre)
+	return decode_body_TL_messageEntityPre(m)
+}
+func decode_body_TL_messageEntityPre(m *DecodeBuf) TL {
+	tl := TL_messageEntityPre{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	tl.Language = m.String()
+	return tl
+}
+
+func decode_TL_messageEntityTextURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityTextURL)
+	return decode_body_TL_messageEntityTextURL(m)
+}
+func decode_body_TL_messageEntityTextURL(m *DecodeBuf) TL {
+	tl := TL_messageEntityTextURL{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_messageEntityMentionName(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityMentionName)
+	return decode_body_TL_messageEntityMentionName(m)
+}
+func decode_body_TL_messageEntityMentionName(m *DecodeBuf) TL {
+	tl := TL_messageEntityMentionName{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_inputMessageEntityMentionName(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessageEntityMentionName)
+	return decode_body_TL_inputMessageEntityMentionName(m)
+}
+func decode_body_TL_inputMessageEntityMentionName(m *DecodeBuf) TL {
+	tl := TL_inputMessageEntityMentionName{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	tl.UserID = m.Object()
+	return tl
+}
+
+func decode_TL_messageEntityPhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityPhone)
+	return decode_body_TL_messageEntityPhone(m)
+}
+func decode_body_TL_messageEntityPhone(m *DecodeBuf) TL {
+	tl := TL_messageEntityPhone{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityCashtag(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityCashtag)
+	return decode_body_TL_messageEntityCashtag(m)
+}
+func decode_body_TL_messageEntityCashtag(m *DecodeBuf) TL {
+	tl := TL_messageEntityCashtag{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityUnderline(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityUnderline)
+	return decode_body_TL_messageEntityUnderline(m)
+}
+func decode_body_TL_messageEntityUnderline(m *DecodeBuf) TL {
+	tl := TL_messageEntityUnderline{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityStrike(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityStrike)
+	return decode_body_TL_messageEntityStrike(m)
+}
+func decode_body_TL_messageEntityStrike(m *DecodeBuf) TL {
+	tl := TL_messageEntityStrike{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityBankCard(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityBankCard)
+	return decode_body_TL_messageEntityBankCard(m)
+}
+func decode_body_TL_messageEntityBankCard(m *DecodeBuf) TL {
+	tl := TL_messageEntityBankCard{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntitySpoiler(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntitySpoiler)
+	return decode_body_TL_messageEntitySpoiler(m)
+}
+func decode_body_TL_messageEntitySpoiler(m *DecodeBuf) TL {
+	tl := TL_messageEntitySpoiler{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_messageEntityCustomEmoji(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityCustomEmoji)
+	return decode_body_TL_messageEntityCustomEmoji(m)
+}
+func decode_body_TL_messageEntityCustomEmoji(m *DecodeBuf) TL {
+	tl := TL_messageEntityCustomEmoji{}
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	tl.DocumentID = m.Long()
+	return tl
+}
+
+func decode_TL_messageEntityBlockquote(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageEntityBlockquote)
+	return decode_body_TL_messageEntityBlockquote(m)
+}
+func decode_body_TL_messageEntityBlockquote(m *DecodeBuf) TL {
+	tl := TL_messageEntityBlockquote{}
+	flags := m.Int()
+	tl.Collapsed = flags&(1<<0) != 0
+	tl.Offset = m.Int()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_inputChannelEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputChannelEmpty)
+	return decode_body_TL_inputChannelEmpty(m)
+}
+func decode_body_TL_inputChannelEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputChannelEmpty{}
+	return tl
+}
+
+func decode_TL_inputChannel(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputChannel)
+	return decode_body_TL_inputChannel(m)
+}
+func decode_body_TL_inputChannel(m *DecodeBuf) TL {
+	tl := TL_inputChannel{}
+	tl.ChannelID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputChannelFromMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputChannelFromMessage)
+	return decode_body_TL_inputChannelFromMessage(m)
+}
+func decode_body_TL_inputChannelFromMessage(m *DecodeBuf) TL {
+	tl := TL_inputChannelFromMessage{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	tl.ChannelID = m.Long()
+	return tl
+}
+
+func decode_TL_contacts_resolvedPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_resolvedPeer)
+	return decode_body_TL_contacts_resolvedPeer(m)
+}
+func decode_body_TL_contacts_resolvedPeer(m *DecodeBuf) TL {
+	tl := TL_contacts_resolvedPeer{}
+	tl.Peer = m.Object()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messageRange(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageRange)
+	return decode_body_TL_messageRange(m)
+}
+func decode_body_TL_messageRange(m *DecodeBuf) TL {
+	tl := TL_messageRange{}
+	tl.MinID = m.Int()
+	tl.MaxID = m.Int()
+	return tl
+}
+
+func decode_TL_updates_channelDifferenceEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates_channelDifferenceEmpty)
+	return decode_body_TL_updates_channelDifferenceEmpty(m)
+}
+func decode_body_TL_updates_channelDifferenceEmpty(m *DecodeBuf) TL {
+	tl := TL_updates_channelDifferenceEmpty{}
+	flags := m.Int()
+	tl.Final = flags&(1<<0) != 0
+	tl.PTS = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.Timeout = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_updates_channelDifferenceTooLong(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates_channelDifferenceTooLong)
+	return decode_body_TL_updates_channelDifferenceTooLong(m)
+}
+func decode_body_TL_updates_channelDifferenceTooLong(m *DecodeBuf) TL {
+	tl := TL_updates_channelDifferenceTooLong{}
+	flags := m.Int()
+	tl.Final = flags&(1<<0) != 0
+	if flags&(1<<1) != 0 {
+		tl.Timeout = Ref(m.Int())
+	}
+	tl.Dialog = m.Object()
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_updates_channelDifference(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updates_channelDifference)
+	return decode_body_TL_updates_channelDifference(m)
+}
+func decode_body_TL_updates_channelDifference(m *DecodeBuf) TL {
+	tl := TL_updates_channelDifference{}
+	flags := m.Int()
+	tl.Final = flags&(1<<0) != 0
+	tl.PTS = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.Timeout = Ref(m.Int())
+	}
+	tl.NewMessages = m.Vector()
+	tl.OtherUpdates = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_channelMessagesFilterEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelMessagesFilterEmpty)
+	return decode_body_TL_channelMessagesFilterEmpty(m)
+}
+func decode_body_TL_channelMessagesFilterEmpty(_ *DecodeBuf) TL {
+	tl := TL_channelMessagesFilterEmpty{}
+	return tl
+}
+
+func decode_TL_channelMessagesFilter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelMessagesFilter)
+	return decode_body_TL_channelMessagesFilter(m)
+}
+func decode_body_TL_channelMessagesFilter(m *DecodeBuf) TL {
+	tl := TL_channelMessagesFilter{}
+	flags := m.Int()
+	tl.ExcludeNewMessages = flags&(1<<1) != 0
+	tl.Ranges = DecodeBuf_GenericVector[TL_messageRange](m)
+	return tl
+}
+
+func decode_TL_channelParticipant(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipant)
+	return decode_body_TL_channelParticipant(m)
+}
+func decode_body_TL_channelParticipant(m *DecodeBuf) TL {
+	tl := TL_channelParticipant{}
+	flags := m.Int()
+	tl.UserID = m.Long()
+	tl.Date = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.SubscriptionUntilDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_channelParticipantSelf(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantSelf)
+	return decode_body_TL_channelParticipantSelf(m)
+}
+func decode_body_TL_channelParticipantSelf(m *DecodeBuf) TL {
+	tl := TL_channelParticipantSelf{}
+	flags := m.Int()
+	tl.ViaRequest = flags&(1<<0) != 0
+	tl.UserID = m.Long()
+	tl.InviterID = m.Long()
+	tl.Date = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.SubscriptionUntilDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_channelParticipantCreator(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantCreator)
+	return decode_body_TL_channelParticipantCreator(m)
+}
+func decode_body_TL_channelParticipantCreator(m *DecodeBuf) TL {
+	tl := TL_channelParticipantCreator{}
+	flags := m.Int()
+	tl.UserID = m.Long()
+	tl.AdminRights = decode_TL_chatAdminRights(m).(TL_chatAdminRights)
+	if flags&(1<<0) != 0 {
+		tl.Rank = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_channelParticipantAdmin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantAdmin)
+	return decode_body_TL_channelParticipantAdmin(m)
+}
+func decode_body_TL_channelParticipantAdmin(m *DecodeBuf) TL {
+	tl := TL_channelParticipantAdmin{}
+	flags := m.Int()
+	tl.CanEdit = flags&(1<<0) != 0
+	tl.Self = flags&(1<<1) != 0
+	tl.UserID = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.InviterID = Ref(m.Long())
+	}
+	tl.PromotedBy = m.Long()
+	tl.Date = m.Int()
+	tl.AdminRights = decode_TL_chatAdminRights(m).(TL_chatAdminRights)
+	if flags&(1<<2) != 0 {
+		tl.Rank = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_channelParticipantBanned(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantBanned)
+	return decode_body_TL_channelParticipantBanned(m)
+}
+func decode_body_TL_channelParticipantBanned(m *DecodeBuf) TL {
+	tl := TL_channelParticipantBanned{}
+	flags := m.Int()
+	tl.Left = flags&(1<<0) != 0
+	tl.Peer = m.Object()
+	tl.KickedBy = m.Long()
+	tl.Date = m.Int()
+	tl.BannedRights = decode_TL_chatBannedRights(m).(TL_chatBannedRights)
+	return tl
+}
+
+func decode_TL_channelParticipantLeft(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantLeft)
+	return decode_body_TL_channelParticipantLeft(m)
+}
+func decode_body_TL_channelParticipantLeft(m *DecodeBuf) TL {
+	tl := TL_channelParticipantLeft{}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_channelParticipantsRecent(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantsRecent)
+	return decode_body_TL_channelParticipantsRecent(m)
+}
+func decode_body_TL_channelParticipantsRecent(_ *DecodeBuf) TL {
+	tl := TL_channelParticipantsRecent{}
+	return tl
+}
+
+func decode_TL_channelParticipantsAdmins(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantsAdmins)
+	return decode_body_TL_channelParticipantsAdmins(m)
+}
+func decode_body_TL_channelParticipantsAdmins(_ *DecodeBuf) TL {
+	tl := TL_channelParticipantsAdmins{}
+	return tl
+}
+
+func decode_TL_channelParticipantsKicked(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantsKicked)
+	return decode_body_TL_channelParticipantsKicked(m)
+}
+func decode_body_TL_channelParticipantsKicked(m *DecodeBuf) TL {
+	tl := TL_channelParticipantsKicked{}
+	tl.Q = m.String()
+	return tl
+}
+
+func decode_TL_channelParticipantsBots(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantsBots)
+	return decode_body_TL_channelParticipantsBots(m)
+}
+func decode_body_TL_channelParticipantsBots(_ *DecodeBuf) TL {
+	tl := TL_channelParticipantsBots{}
+	return tl
+}
+
+func decode_TL_channelParticipantsBanned(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantsBanned)
+	return decode_body_TL_channelParticipantsBanned(m)
+}
+func decode_body_TL_channelParticipantsBanned(m *DecodeBuf) TL {
+	tl := TL_channelParticipantsBanned{}
+	tl.Q = m.String()
+	return tl
+}
+
+func decode_TL_channelParticipantsSearch(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantsSearch)
+	return decode_body_TL_channelParticipantsSearch(m)
+}
+func decode_body_TL_channelParticipantsSearch(m *DecodeBuf) TL {
+	tl := TL_channelParticipantsSearch{}
+	tl.Q = m.String()
+	return tl
+}
+
+func decode_TL_channelParticipantsContacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantsContacts)
+	return decode_body_TL_channelParticipantsContacts(m)
+}
+func decode_body_TL_channelParticipantsContacts(m *DecodeBuf) TL {
+	tl := TL_channelParticipantsContacts{}
+	tl.Q = m.String()
+	return tl
+}
+
+func decode_TL_channelParticipantsMentions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelParticipantsMentions)
+	return decode_body_TL_channelParticipantsMentions(m)
+}
+func decode_body_TL_channelParticipantsMentions(m *DecodeBuf) TL {
+	tl := TL_channelParticipantsMentions{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Q = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.TopMsgID = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_channels_channelParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channels_channelParticipants)
+	return decode_body_TL_channels_channelParticipants(m)
+}
+func decode_body_TL_channels_channelParticipants(m *DecodeBuf) TL {
+	tl := TL_channels_channelParticipants{}
+	tl.Count = m.Int()
+	tl.Participants = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_channels_channelParticipantsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channels_channelParticipantsNotModified)
+	return decode_body_TL_channels_channelParticipantsNotModified(m)
+}
+func decode_body_TL_channels_channelParticipantsNotModified(_ *DecodeBuf) TL {
+	tl := TL_channels_channelParticipantsNotModified{}
+	return tl
+}
+
+func decode_TL_channels_channelParticipant(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channels_channelParticipant)
+	return decode_body_TL_channels_channelParticipant(m)
+}
+func decode_body_TL_channels_channelParticipant(m *DecodeBuf) TL {
+	tl := TL_channels_channelParticipant{}
+	tl.Participant = m.Object()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_help_termsOfService(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_termsOfService)
+	return decode_body_TL_help_termsOfService(m)
+}
+func decode_body_TL_help_termsOfService(m *DecodeBuf) TL {
+	tl := TL_help_termsOfService{}
+	flags := m.Int()
+	tl.Popup = flags&(1<<0) != 0
+	tl.ID = decode_TL_dataJSON(m).(TL_dataJSON)
+	tl.Text = m.String()
+	tl.Entities = m.Vector()
+	if flags&(1<<1) != 0 {
+		tl.MinAgeConfirm = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messages_savedGIFsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_savedGIFsNotModified)
+	return decode_body_TL_messages_savedGIFsNotModified(m)
+}
+func decode_body_TL_messages_savedGIFsNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_savedGIFsNotModified{}
+	return tl
+}
+
+func decode_TL_messages_savedGIFs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_savedGIFs)
+	return decode_body_TL_messages_savedGIFs(m)
+}
+func decode_body_TL_messages_savedGIFs(m *DecodeBuf) TL {
+	tl := TL_messages_savedGIFs{}
+	tl.Hash = m.Long()
+	tl.GIFs = m.Vector()
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageMediaAuto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageMediaAuto)
+	return decode_body_TL_inputBotInlineMessageMediaAuto(m)
+}
+func decode_body_TL_inputBotInlineMessageMediaAuto(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageMediaAuto{}
+	flags := m.Int()
+	tl.InvertMedia = flags&(1<<3) != 0
+	tl.Message = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageText(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageText)
+	return decode_body_TL_inputBotInlineMessageText(m)
+}
+func decode_body_TL_inputBotInlineMessageText(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageText{}
+	flags := m.Int()
+	tl.NoWebpage = flags&(1<<0) != 0
+	tl.InvertMedia = flags&(1<<3) != 0
+	tl.Message = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageMediaGeo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageMediaGeo)
+	return decode_body_TL_inputBotInlineMessageMediaGeo(m)
+}
+func decode_body_TL_inputBotInlineMessageMediaGeo(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageMediaGeo{}
+	flags := m.Int()
+	tl.GeoPoint = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Heading = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Period = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.ProximityNotificationRadius = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageMediaVenue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageMediaVenue)
+	return decode_body_TL_inputBotInlineMessageMediaVenue(m)
+}
+func decode_body_TL_inputBotInlineMessageMediaVenue(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageMediaVenue{}
+	flags := m.Int()
+	tl.GeoPoint = m.Object()
+	tl.Title = m.String()
+	tl.Address = m.String()
+	tl.Provider = m.String()
+	tl.VenueID = m.String()
+	tl.VenueType = m.String()
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageMediaContact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageMediaContact)
+	return decode_body_TL_inputBotInlineMessageMediaContact(m)
+}
+func decode_body_TL_inputBotInlineMessageMediaContact(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageMediaContact{}
+	flags := m.Int()
+	tl.PhoneNumber = m.String()
+	tl.FirstName = m.String()
+	tl.LastName = m.String()
+	tl.Vcard = m.String()
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageGame(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageGame)
+	return decode_body_TL_inputBotInlineMessageGame(m)
+}
+func decode_body_TL_inputBotInlineMessageGame(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageGame{}
+	flags := m.Int()
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageMediaInvoice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageMediaInvoice)
+	return decode_body_TL_inputBotInlineMessageMediaInvoice(m)
+}
+func decode_body_TL_inputBotInlineMessageMediaInvoice(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageMediaInvoice{}
+	flags := m.Int()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Photo = Ref(decode_TL_inputWebDocument(m).(TL_inputWebDocument))
+	}
+	tl.Invoice = decode_TL_invoice(m).(TL_invoice)
+	tl.Payload = m.StringBytes()
+	tl.Provider = m.String()
+	tl.ProviderData = decode_TL_dataJSON(m).(TL_dataJSON)
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageMediaWebPage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageMediaWebPage)
+	return decode_body_TL_inputBotInlineMessageMediaWebPage(m)
+}
+func decode_body_TL_inputBotInlineMessageMediaWebPage(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageMediaWebPage{}
+	flags := m.Int()
+	tl.InvertMedia = flags&(1<<3) != 0
+	tl.ForceLargeMedia = flags&(1<<4) != 0
+	tl.ForceSmallMedia = flags&(1<<5) != 0
+	tl.Optional = flags&(1<<6) != 0
+	tl.Message = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	tl.URL = m.String()
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputBotInlineResult(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineResult)
+	return decode_body_TL_inputBotInlineResult(m)
+}
+func decode_body_TL_inputBotInlineResult(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineResult{}
+	flags := m.Int()
+	tl.ID = m.String()
+	tl.Type = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Description = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.URL = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.Thumb = Ref(decode_TL_inputWebDocument(m).(TL_inputWebDocument))
+	}
+	if flags&(1<<5) != 0 {
+		tl.Content = Ref(decode_TL_inputWebDocument(m).(TL_inputWebDocument))
+	}
+	tl.SendMessage = m.Object()
+	return tl
+}
+
+func decode_TL_inputBotInlineResultPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineResultPhoto)
+	return decode_body_TL_inputBotInlineResultPhoto(m)
+}
+func decode_body_TL_inputBotInlineResultPhoto(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineResultPhoto{}
+	tl.ID = m.String()
+	tl.Type = m.String()
+	tl.Photo = m.Object()
+	tl.SendMessage = m.Object()
+	return tl
+}
+
+func decode_TL_inputBotInlineResultDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineResultDocument)
+	return decode_body_TL_inputBotInlineResultDocument(m)
+}
+func decode_body_TL_inputBotInlineResultDocument(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineResultDocument{}
+	flags := m.Int()
+	tl.ID = m.String()
+	tl.Type = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Description = Ref(m.String())
+	}
+	tl.Document = m.Object()
+	tl.SendMessage = m.Object()
+	return tl
+}
+
+func decode_TL_inputBotInlineResultGame(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineResultGame)
+	return decode_body_TL_inputBotInlineResultGame(m)
+}
+func decode_body_TL_inputBotInlineResultGame(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineResultGame{}
+	tl.ID = m.String()
+	tl.ShortName = m.String()
+	tl.SendMessage = m.Object()
+	return tl
+}
+
+func decode_TL_botInlineMessageMediaAuto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineMessageMediaAuto)
+	return decode_body_TL_botInlineMessageMediaAuto(m)
+}
+func decode_body_TL_botInlineMessageMediaAuto(m *DecodeBuf) TL {
+	tl := TL_botInlineMessageMediaAuto{}
+	flags := m.Int()
+	tl.InvertMedia = flags&(1<<3) != 0
+	tl.Message = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_botInlineMessageText(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineMessageText)
+	return decode_body_TL_botInlineMessageText(m)
+}
+func decode_body_TL_botInlineMessageText(m *DecodeBuf) TL {
+	tl := TL_botInlineMessageText{}
+	flags := m.Int()
+	tl.NoWebpage = flags&(1<<0) != 0
+	tl.InvertMedia = flags&(1<<3) != 0
+	tl.Message = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_botInlineMessageMediaGeo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineMessageMediaGeo)
+	return decode_body_TL_botInlineMessageMediaGeo(m)
+}
+func decode_body_TL_botInlineMessageMediaGeo(m *DecodeBuf) TL {
+	tl := TL_botInlineMessageMediaGeo{}
+	flags := m.Int()
+	tl.Geo = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Heading = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Period = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.ProximityNotificationRadius = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_botInlineMessageMediaVenue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineMessageMediaVenue)
+	return decode_body_TL_botInlineMessageMediaVenue(m)
+}
+func decode_body_TL_botInlineMessageMediaVenue(m *DecodeBuf) TL {
+	tl := TL_botInlineMessageMediaVenue{}
+	flags := m.Int()
+	tl.Geo = m.Object()
+	tl.Title = m.String()
+	tl.Address = m.String()
+	tl.Provider = m.String()
+	tl.VenueID = m.String()
+	tl.VenueType = m.String()
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_botInlineMessageMediaContact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineMessageMediaContact)
+	return decode_body_TL_botInlineMessageMediaContact(m)
+}
+func decode_body_TL_botInlineMessageMediaContact(m *DecodeBuf) TL {
+	tl := TL_botInlineMessageMediaContact{}
+	flags := m.Int()
+	tl.PhoneNumber = m.String()
+	tl.FirstName = m.String()
+	tl.LastName = m.String()
+	tl.Vcard = m.String()
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_botInlineMessageMediaInvoice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineMessageMediaInvoice)
+	return decode_body_TL_botInlineMessageMediaInvoice(m)
+}
+func decode_body_TL_botInlineMessageMediaInvoice(m *DecodeBuf) TL {
+	tl := TL_botInlineMessageMediaInvoice{}
+	flags := m.Int()
+	tl.ShippingAddressRequested = flags&(1<<1) != 0
+	tl.Test = flags&(1<<3) != 0
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Photo = m.Object()
+	}
+	tl.Currency = m.String()
+	tl.TotalAmount = m.Long()
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_botInlineMessageMediaWebPage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineMessageMediaWebPage)
+	return decode_body_TL_botInlineMessageMediaWebPage(m)
+}
+func decode_body_TL_botInlineMessageMediaWebPage(m *DecodeBuf) TL {
+	tl := TL_botInlineMessageMediaWebPage{}
+	flags := m.Int()
+	tl.InvertMedia = flags&(1<<3) != 0
+	tl.ForceLargeMedia = flags&(1<<4) != 0
+	tl.ForceSmallMedia = flags&(1<<5) != 0
+	tl.Manual = flags&(1<<7) != 0
+	tl.Safe = flags&(1<<8) != 0
+	tl.Message = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	tl.URL = m.String()
+	if flags&(1<<2) != 0 {
+		tl.ReplyMarkup = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_botInlineResult(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineResult)
+	return decode_body_TL_botInlineResult(m)
+}
+func decode_body_TL_botInlineResult(m *DecodeBuf) TL {
+	tl := TL_botInlineResult{}
+	flags := m.Int()
+	tl.ID = m.String()
+	tl.Type = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Description = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.URL = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.Thumb = m.Object()
+	}
+	if flags&(1<<5) != 0 {
+		tl.Content = m.Object()
+	}
+	tl.SendMessage = m.Object()
+	return tl
+}
+
+func decode_TL_botInlineMediaResult(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botInlineMediaResult)
+	return decode_body_TL_botInlineMediaResult(m)
+}
+func decode_body_TL_botInlineMediaResult(m *DecodeBuf) TL {
+	tl := TL_botInlineMediaResult{}
+	flags := m.Int()
+	tl.ID = m.String()
+	tl.Type = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Photo = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Document = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Description = Ref(m.String())
+	}
+	tl.SendMessage = m.Object()
+	return tl
+}
+
+func decode_TL_messages_botResults(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_botResults)
+	return decode_body_TL_messages_botResults(m)
+}
+func decode_body_TL_messages_botResults(m *DecodeBuf) TL {
+	tl := TL_messages_botResults{}
+	flags := m.Int()
+	tl.Gallery = flags&(1<<0) != 0
+	tl.QueryID = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.SwitchPM = Ref(decode_TL_inlineBotSwitchPM(m).(TL_inlineBotSwitchPM))
+	}
+	if flags&(1<<3) != 0 {
+		tl.SwitchWebview = Ref(decode_TL_inlineBotWebView(m).(TL_inlineBotWebView))
+	}
+	tl.Results = m.Vector()
+	tl.CacheTime = m.Int()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_exportedMessageLink(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_exportedMessageLink)
+	return decode_body_TL_exportedMessageLink(m)
+}
+func decode_body_TL_exportedMessageLink(m *DecodeBuf) TL {
+	tl := TL_exportedMessageLink{}
+	tl.Link = m.String()
+	tl.HTML = m.String()
+	return tl
+}
+
+func decode_TL_messageFwdHeader(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageFwdHeader)
+	return decode_body_TL_messageFwdHeader(m)
+}
+func decode_body_TL_messageFwdHeader(m *DecodeBuf) TL {
+	tl := TL_messageFwdHeader{}
+	flags := m.Int()
+	tl.Imported = flags&(1<<7) != 0
+	tl.SavedOut = flags&(1<<11) != 0
+	if flags&(1<<0) != 0 {
+		tl.FromID = m.Object()
+	}
+	if flags&(1<<5) != 0 {
+		tl.FromName = Ref(m.String())
+	}
+	tl.Date = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.ChannelPost = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.PostAuthor = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.SavedFromPeer = m.Object()
+	}
+	if flags&(1<<4) != 0 {
+		tl.SavedFromMsgID = Ref(m.Int())
+	}
+	if flags&(1<<8) != 0 {
+		tl.SavedFromID = m.Object()
+	}
+	if flags&(1<<9) != 0 {
+		tl.SavedFromName = Ref(m.String())
+	}
+	if flags&(1<<10) != 0 {
+		tl.SavedDate = Ref(m.Int())
+	}
+	if flags&(1<<6) != 0 {
+		tl.PSAType = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_auth_codeTypeSMS(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_codeTypeSMS)
+	return decode_body_TL_auth_codeTypeSMS(m)
+}
+func decode_body_TL_auth_codeTypeSMS(_ *DecodeBuf) TL {
+	tl := TL_auth_codeTypeSMS{}
+	return tl
+}
+
+func decode_TL_auth_codeTypeCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_codeTypeCall)
+	return decode_body_TL_auth_codeTypeCall(m)
+}
+func decode_body_TL_auth_codeTypeCall(_ *DecodeBuf) TL {
+	tl := TL_auth_codeTypeCall{}
+	return tl
+}
+
+func decode_TL_auth_codeTypeFlashCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_codeTypeFlashCall)
+	return decode_body_TL_auth_codeTypeFlashCall(m)
+}
+func decode_body_TL_auth_codeTypeFlashCall(_ *DecodeBuf) TL {
+	tl := TL_auth_codeTypeFlashCall{}
+	return tl
+}
+
+func decode_TL_auth_codeTypeMissedCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_codeTypeMissedCall)
+	return decode_body_TL_auth_codeTypeMissedCall(m)
+}
+func decode_body_TL_auth_codeTypeMissedCall(_ *DecodeBuf) TL {
+	tl := TL_auth_codeTypeMissedCall{}
+	return tl
+}
+
+func decode_TL_auth_codeTypeFragmentSMS(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_codeTypeFragmentSMS)
+	return decode_body_TL_auth_codeTypeFragmentSMS(m)
+}
+func decode_body_TL_auth_codeTypeFragmentSMS(_ *DecodeBuf) TL {
+	tl := TL_auth_codeTypeFragmentSMS{}
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeApp(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeApp)
+	return decode_body_TL_auth_sentCodeTypeApp(m)
+}
+func decode_body_TL_auth_sentCodeTypeApp(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeApp{}
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeSMS(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeSMS)
+	return decode_body_TL_auth_sentCodeTypeSMS(m)
+}
+func decode_body_TL_auth_sentCodeTypeSMS(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeSMS{}
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeCall)
+	return decode_body_TL_auth_sentCodeTypeCall(m)
+}
+func decode_body_TL_auth_sentCodeTypeCall(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeCall{}
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeFlashCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeFlashCall)
+	return decode_body_TL_auth_sentCodeTypeFlashCall(m)
+}
+func decode_body_TL_auth_sentCodeTypeFlashCall(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeFlashCall{}
+	tl.Pattern = m.String()
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeMissedCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeMissedCall)
+	return decode_body_TL_auth_sentCodeTypeMissedCall(m)
+}
+func decode_body_TL_auth_sentCodeTypeMissedCall(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeMissedCall{}
+	tl.Prefix = m.String()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeEmailCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeEmailCode)
+	return decode_body_TL_auth_sentCodeTypeEmailCode(m)
+}
+func decode_body_TL_auth_sentCodeTypeEmailCode(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeEmailCode{}
+	flags := m.Int()
+	tl.AppleSigninAllowed = flags&(1<<0) != 0
+	tl.GoogleSigninAllowed = flags&(1<<1) != 0
+	tl.EmailPattern = m.String()
+	tl.Length = m.Int()
+	if flags&(1<<3) != 0 {
+		tl.ResetAvailablePeriod = Ref(m.Int())
+	}
+	if flags&(1<<4) != 0 {
+		tl.ResetPendingDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeSetUpEmailRequired(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeSetUpEmailRequired)
+	return decode_body_TL_auth_sentCodeTypeSetUpEmailRequired(m)
+}
+func decode_body_TL_auth_sentCodeTypeSetUpEmailRequired(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeSetUpEmailRequired{}
+	flags := m.Int()
+	tl.AppleSigninAllowed = flags&(1<<0) != 0
+	tl.GoogleSigninAllowed = flags&(1<<1) != 0
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeFragmentSMS(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeFragmentSMS)
+	return decode_body_TL_auth_sentCodeTypeFragmentSMS(m)
+}
+func decode_body_TL_auth_sentCodeTypeFragmentSMS(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeFragmentSMS{}
+	tl.URL = m.String()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeFirebaseSMS(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeFirebaseSMS)
+	return decode_body_TL_auth_sentCodeTypeFirebaseSMS(m)
+}
+func decode_body_TL_auth_sentCodeTypeFirebaseSMS(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeFirebaseSMS{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Nonce = m.StringBytes()
+	}
+	if flags&(1<<2) != 0 {
+		tl.PlayIntegrityProjectID = Ref(m.Long())
+	}
+	if flags&(1<<2) != 0 {
+		tl.PlayIntegrityNonce = m.StringBytes()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Receipt = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.PushTimeout = Ref(m.Int())
+	}
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeSMSWord(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeSMSWord)
+	return decode_body_TL_auth_sentCodeTypeSMSWord(m)
+}
+func decode_body_TL_auth_sentCodeTypeSMSWord(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeSMSWord{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Beginning = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_auth_sentCodeTypeSMSPhrase(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_sentCodeTypeSMSPhrase)
+	return decode_body_TL_auth_sentCodeTypeSMSPhrase(m)
+}
+func decode_body_TL_auth_sentCodeTypeSMSPhrase(m *DecodeBuf) TL {
+	tl := TL_auth_sentCodeTypeSMSPhrase{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Beginning = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_messages_botCallbackAnswer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_botCallbackAnswer)
+	return decode_body_TL_messages_botCallbackAnswer(m)
+}
+func decode_body_TL_messages_botCallbackAnswer(m *DecodeBuf) TL {
+	tl := TL_messages_botCallbackAnswer{}
+	flags := m.Int()
+	tl.Alert = flags&(1<<1) != 0
+	tl.HasURL = flags&(1<<3) != 0
+	tl.NativeUI = flags&(1<<4) != 0
+	if flags&(1<<0) != 0 {
+		tl.Message = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.URL = Ref(m.String())
+	}
+	tl.CacheTime = m.Int()
+	return tl
+}
+
+func decode_TL_messages_messageEditData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_messageEditData)
+	return decode_body_TL_messages_messageEditData(m)
+}
+func decode_body_TL_messages_messageEditData(m *DecodeBuf) TL {
+	tl := TL_messages_messageEditData{}
+	flags := m.Int()
+	tl.Caption = flags&(1<<0) != 0
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageID(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageID)
+	return decode_body_TL_inputBotInlineMessageID(m)
+}
+func decode_body_TL_inputBotInlineMessageID(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageID{}
+	tl.DCID = m.Int()
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputBotInlineMessageID64(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotInlineMessageID64)
+	return decode_body_TL_inputBotInlineMessageID64(m)
+}
+func decode_body_TL_inputBotInlineMessageID64(m *DecodeBuf) TL {
+	tl := TL_inputBotInlineMessageID64{}
+	tl.DCID = m.Int()
+	tl.OwnerID = m.Long()
+	tl.ID = m.Int()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inlineBotSwitchPM(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inlineBotSwitchPM)
+	return decode_body_TL_inlineBotSwitchPM(m)
+}
+func decode_body_TL_inlineBotSwitchPM(m *DecodeBuf) TL {
+	tl := TL_inlineBotSwitchPM{}
+	tl.Text = m.String()
+	tl.StartParam = m.String()
+	return tl
+}
+
+func decode_TL_messages_peerDialogs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_peerDialogs)
+	return decode_body_TL_messages_peerDialogs(m)
+}
+func decode_body_TL_messages_peerDialogs(m *DecodeBuf) TL {
+	tl := TL_messages_peerDialogs{}
+	tl.Dialogs = m.Vector()
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	tl.State = decode_TL_updates_state(m).(TL_updates_state)
+	return tl
+}
+
+func decode_TL_topPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeer)
+	return decode_body_TL_topPeer(m)
+}
+func decode_body_TL_topPeer(m *DecodeBuf) TL {
+	tl := TL_topPeer{}
+	tl.Peer = m.Object()
+	tl.Rating = m.Double()
+	return tl
+}
+
+func decode_TL_topPeerCategoryBotsPM(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryBotsPM)
+	return decode_body_TL_topPeerCategoryBotsPM(m)
+}
+func decode_body_TL_topPeerCategoryBotsPM(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryBotsPM{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryBotsInline(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryBotsInline)
+	return decode_body_TL_topPeerCategoryBotsInline(m)
+}
+func decode_body_TL_topPeerCategoryBotsInline(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryBotsInline{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryCorrespondents(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryCorrespondents)
+	return decode_body_TL_topPeerCategoryCorrespondents(m)
+}
+func decode_body_TL_topPeerCategoryCorrespondents(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryCorrespondents{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryGroups(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryGroups)
+	return decode_body_TL_topPeerCategoryGroups(m)
+}
+func decode_body_TL_topPeerCategoryGroups(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryGroups{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryChannels(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryChannels)
+	return decode_body_TL_topPeerCategoryChannels(m)
+}
+func decode_body_TL_topPeerCategoryChannels(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryChannels{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryPhoneCalls(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryPhoneCalls)
+	return decode_body_TL_topPeerCategoryPhoneCalls(m)
+}
+func decode_body_TL_topPeerCategoryPhoneCalls(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryPhoneCalls{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryForwardUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryForwardUsers)
+	return decode_body_TL_topPeerCategoryForwardUsers(m)
+}
+func decode_body_TL_topPeerCategoryForwardUsers(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryForwardUsers{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryForwardChats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryForwardChats)
+	return decode_body_TL_topPeerCategoryForwardChats(m)
+}
+func decode_body_TL_topPeerCategoryForwardChats(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryForwardChats{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryBotsApp(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryBotsApp)
+	return decode_body_TL_topPeerCategoryBotsApp(m)
+}
+func decode_body_TL_topPeerCategoryBotsApp(_ *DecodeBuf) TL {
+	tl := TL_topPeerCategoryBotsApp{}
+	return tl
+}
+
+func decode_TL_topPeerCategoryPeers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_topPeerCategoryPeers)
+	return decode_body_TL_topPeerCategoryPeers(m)
+}
+func decode_body_TL_topPeerCategoryPeers(m *DecodeBuf) TL {
+	tl := TL_topPeerCategoryPeers{}
+	tl.Category = m.Object()
+	tl.Count = m.Int()
+	tl.Peers = DecodeBuf_GenericVector[TL_topPeer](m)
+	return tl
+}
+
+func decode_TL_contacts_topPeersNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_topPeersNotModified)
+	return decode_body_TL_contacts_topPeersNotModified(m)
+}
+func decode_body_TL_contacts_topPeersNotModified(_ *DecodeBuf) TL {
+	tl := TL_contacts_topPeersNotModified{}
+	return tl
+}
+
+func decode_TL_contacts_topPeers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_topPeers)
+	return decode_body_TL_contacts_topPeers(m)
+}
+func decode_body_TL_contacts_topPeers(m *DecodeBuf) TL {
+	tl := TL_contacts_topPeers{}
+	tl.Categories = DecodeBuf_GenericVector[TL_topPeerCategoryPeers](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_contacts_topPeersDisabled(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_topPeersDisabled)
+	return decode_body_TL_contacts_topPeersDisabled(m)
+}
+func decode_body_TL_contacts_topPeersDisabled(_ *DecodeBuf) TL {
+	tl := TL_contacts_topPeersDisabled{}
+	return tl
+}
+
+func decode_TL_draftMessageEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_draftMessageEmpty)
+	return decode_body_TL_draftMessageEmpty(m)
+}
+func decode_body_TL_draftMessageEmpty(m *DecodeBuf) TL {
+	tl := TL_draftMessageEmpty{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Date = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_draftMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_draftMessage)
+	return decode_body_TL_draftMessage(m)
+}
+func decode_body_TL_draftMessage(m *DecodeBuf) TL {
+	tl := TL_draftMessage{}
+	flags := m.Int()
+	tl.NoWebpage = flags&(1<<1) != 0
+	tl.InvertMedia = flags&(1<<6) != 0
+	if flags&(1<<4) != 0 {
+		tl.ReplyTo = m.Object()
+	}
+	tl.Message = m.String()
+	if flags&(1<<3) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<5) != 0 {
+		tl.Media = m.Object()
+	}
+	tl.Date = m.Int()
+	if flags&(1<<7) != 0 {
+		tl.Effect = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_messages_featuredStickersNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_featuredStickersNotModified)
+	return decode_body_TL_messages_featuredStickersNotModified(m)
+}
+func decode_body_TL_messages_featuredStickersNotModified(m *DecodeBuf) TL {
+	tl := TL_messages_featuredStickersNotModified{}
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_messages_featuredStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_featuredStickers)
+	return decode_body_TL_messages_featuredStickers(m)
+}
+func decode_body_TL_messages_featuredStickers(m *DecodeBuf) TL {
+	tl := TL_messages_featuredStickers{}
+	flags := m.Int()
+	tl.Premium = flags&(1<<0) != 0
+	tl.Hash = m.Long()
+	tl.Count = m.Int()
+	tl.Sets = m.Vector()
+	tl.Unread = m.VectorLong()
+	return tl
+}
+
+func decode_TL_messages_recentStickersNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_recentStickersNotModified)
+	return decode_body_TL_messages_recentStickersNotModified(m)
+}
+func decode_body_TL_messages_recentStickersNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_recentStickersNotModified{}
+	return tl
+}
+
+func decode_TL_messages_recentStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_recentStickers)
+	return decode_body_TL_messages_recentStickers(m)
+}
+func decode_body_TL_messages_recentStickers(m *DecodeBuf) TL {
+	tl := TL_messages_recentStickers{}
+	tl.Hash = m.Long()
+	tl.Packs = DecodeBuf_GenericVector[TL_stickerPack](m)
+	tl.Stickers = m.Vector()
+	tl.Dates = m.VectorInt()
+	return tl
+}
+
+func decode_TL_messages_archivedStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_archivedStickers)
+	return decode_body_TL_messages_archivedStickers(m)
+}
+func decode_body_TL_messages_archivedStickers(m *DecodeBuf) TL {
+	tl := TL_messages_archivedStickers{}
+	tl.Count = m.Int()
+	tl.Sets = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_stickerSetInstallResultSuccess(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_stickerSetInstallResultSuccess)
+	return decode_body_TL_messages_stickerSetInstallResultSuccess(m)
+}
+func decode_body_TL_messages_stickerSetInstallResultSuccess(_ *DecodeBuf) TL {
+	tl := TL_messages_stickerSetInstallResultSuccess{}
+	return tl
+}
+
+func decode_TL_messages_stickerSetInstallResultArchive(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_stickerSetInstallResultArchive)
+	return decode_body_TL_messages_stickerSetInstallResultArchive(m)
+}
+func decode_body_TL_messages_stickerSetInstallResultArchive(m *DecodeBuf) TL {
+	tl := TL_messages_stickerSetInstallResultArchive{}
+	tl.Sets = m.Vector()
+	return tl
+}
+
+func decode_TL_stickerSetCovered(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stickerSetCovered)
+	return decode_body_TL_stickerSetCovered(m)
+}
+func decode_body_TL_stickerSetCovered(m *DecodeBuf) TL {
+	tl := TL_stickerSetCovered{}
+	tl.Set = decode_TL_stickerSet(m).(TL_stickerSet)
+	tl.Cover = m.Object()
+	return tl
+}
+
+func decode_TL_stickerSetMultiCovered(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stickerSetMultiCovered)
+	return decode_body_TL_stickerSetMultiCovered(m)
+}
+func decode_body_TL_stickerSetMultiCovered(m *DecodeBuf) TL {
+	tl := TL_stickerSetMultiCovered{}
+	tl.Set = decode_TL_stickerSet(m).(TL_stickerSet)
+	tl.Covers = m.Vector()
+	return tl
+}
+
+func decode_TL_stickerSetFullCovered(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stickerSetFullCovered)
+	return decode_body_TL_stickerSetFullCovered(m)
+}
+func decode_body_TL_stickerSetFullCovered(m *DecodeBuf) TL {
+	tl := TL_stickerSetFullCovered{}
+	tl.Set = decode_TL_stickerSet(m).(TL_stickerSet)
+	tl.Packs = DecodeBuf_GenericVector[TL_stickerPack](m)
+	tl.Keywords = DecodeBuf_GenericVector[TL_stickerKeyword](m)
+	tl.Documents = m.Vector()
+	return tl
+}
+
+func decode_TL_stickerSetNoCovered(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stickerSetNoCovered)
+	return decode_body_TL_stickerSetNoCovered(m)
+}
+func decode_body_TL_stickerSetNoCovered(m *DecodeBuf) TL {
+	tl := TL_stickerSetNoCovered{}
+	tl.Set = decode_TL_stickerSet(m).(TL_stickerSet)
+	return tl
+}
+
+func decode_TL_maskCoords(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_maskCoords)
+	return decode_body_TL_maskCoords(m)
+}
+func decode_body_TL_maskCoords(m *DecodeBuf) TL {
+	tl := TL_maskCoords{}
+	tl.N = m.Int()
+	tl.X = m.Double()
+	tl.Y = m.Double()
+	tl.Zoom = m.Double()
+	return tl
+}
+
+func decode_TL_inputStickeredMediaPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickeredMediaPhoto)
+	return decode_body_TL_inputStickeredMediaPhoto(m)
+}
+func decode_body_TL_inputStickeredMediaPhoto(m *DecodeBuf) TL {
+	tl := TL_inputStickeredMediaPhoto{}
+	tl.ID = m.Object()
+	return tl
+}
+
+func decode_TL_inputStickeredMediaDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickeredMediaDocument)
+	return decode_body_TL_inputStickeredMediaDocument(m)
+}
+func decode_body_TL_inputStickeredMediaDocument(m *DecodeBuf) TL {
+	tl := TL_inputStickeredMediaDocument{}
+	tl.ID = m.Object()
+	return tl
+}
+
+func decode_TL_game(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_game)
+	return decode_body_TL_game(m)
+}
+func decode_body_TL_game(m *DecodeBuf) TL {
+	tl := TL_game{}
+	flags := m.Int()
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.ShortName = m.String()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	tl.Photo = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Document = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputGameID(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputGameID)
+	return decode_body_TL_inputGameID(m)
+}
+func decode_body_TL_inputGameID(m *DecodeBuf) TL {
+	tl := TL_inputGameID{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputGameShortName(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputGameShortName)
+	return decode_body_TL_inputGameShortName(m)
+}
+func decode_body_TL_inputGameShortName(m *DecodeBuf) TL {
+	tl := TL_inputGameShortName{}
+	tl.BotID = m.Object()
+	tl.ShortName = m.String()
+	return tl
+}
+
+func decode_TL_highScore(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_highScore)
+	return decode_body_TL_highScore(m)
+}
+func decode_body_TL_highScore(m *DecodeBuf) TL {
+	tl := TL_highScore{}
+	tl.Pos = m.Int()
+	tl.UserID = m.Long()
+	tl.Score = m.Int()
+	return tl
+}
+
+func decode_TL_messages_highScores(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_highScores)
+	return decode_body_TL_messages_highScores(m)
+}
+func decode_body_TL_messages_highScores(m *DecodeBuf) TL {
+	tl := TL_messages_highScores{}
+	tl.Scores = DecodeBuf_GenericVector[TL_highScore](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_textEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textEmpty)
+	return decode_body_TL_textEmpty(m)
+}
+func decode_body_TL_textEmpty(_ *DecodeBuf) TL {
+	tl := TL_textEmpty{}
+	return tl
+}
+
+func decode_TL_textPlain(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textPlain)
+	return decode_body_TL_textPlain(m)
+}
+func decode_body_TL_textPlain(m *DecodeBuf) TL {
+	tl := TL_textPlain{}
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_textBold(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textBold)
+	return decode_body_TL_textBold(m)
+}
+func decode_body_TL_textBold(m *DecodeBuf) TL {
+	tl := TL_textBold{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_textItalic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textItalic)
+	return decode_body_TL_textItalic(m)
+}
+func decode_body_TL_textItalic(m *DecodeBuf) TL {
+	tl := TL_textItalic{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_textUnderline(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textUnderline)
+	return decode_body_TL_textUnderline(m)
+}
+func decode_body_TL_textUnderline(m *DecodeBuf) TL {
+	tl := TL_textUnderline{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_textStrike(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textStrike)
+	return decode_body_TL_textStrike(m)
+}
+func decode_body_TL_textStrike(m *DecodeBuf) TL {
+	tl := TL_textStrike{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_textFixed(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textFixed)
+	return decode_body_TL_textFixed(m)
+}
+func decode_body_TL_textFixed(m *DecodeBuf) TL {
+	tl := TL_textFixed{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_textURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textURL)
+	return decode_body_TL_textURL(m)
+}
+func decode_body_TL_textURL(m *DecodeBuf) TL {
+	tl := TL_textURL{}
+	tl.Text = m.Object()
+	tl.URL = m.String()
+	tl.WebpageID = m.Long()
+	return tl
+}
+
+func decode_TL_textEmail(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textEmail)
+	return decode_body_TL_textEmail(m)
+}
+func decode_body_TL_textEmail(m *DecodeBuf) TL {
+	tl := TL_textEmail{}
+	tl.Text = m.Object()
+	tl.Email = m.String()
+	return tl
+}
+
+func decode_TL_textConcat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textConcat)
+	return decode_body_TL_textConcat(m)
+}
+func decode_body_TL_textConcat(m *DecodeBuf) TL {
+	tl := TL_textConcat{}
+	tl.Texts = m.Vector()
+	return tl
+}
+
+func decode_TL_textSubscript(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textSubscript)
+	return decode_body_TL_textSubscript(m)
+}
+func decode_body_TL_textSubscript(m *DecodeBuf) TL {
+	tl := TL_textSubscript{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_textSuperscript(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textSuperscript)
+	return decode_body_TL_textSuperscript(m)
+}
+func decode_body_TL_textSuperscript(m *DecodeBuf) TL {
+	tl := TL_textSuperscript{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_textMarked(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textMarked)
+	return decode_body_TL_textMarked(m)
+}
+func decode_body_TL_textMarked(m *DecodeBuf) TL {
+	tl := TL_textMarked{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_textPhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textPhone)
+	return decode_body_TL_textPhone(m)
+}
+func decode_body_TL_textPhone(m *DecodeBuf) TL {
+	tl := TL_textPhone{}
+	tl.Text = m.Object()
+	tl.Phone = m.String()
+	return tl
+}
+
+func decode_TL_textImage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textImage)
+	return decode_body_TL_textImage(m)
+}
+func decode_body_TL_textImage(m *DecodeBuf) TL {
+	tl := TL_textImage{}
+	tl.DocumentID = m.Long()
+	tl.W = m.Int()
+	tl.H = m.Int()
+	return tl
+}
+
+func decode_TL_textAnchor(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textAnchor)
+	return decode_body_TL_textAnchor(m)
+}
+func decode_body_TL_textAnchor(m *DecodeBuf) TL {
+	tl := TL_textAnchor{}
+	tl.Text = m.Object()
+	tl.Name = m.String()
+	return tl
+}
+
+func decode_TL_pageBlockUnsupported(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockUnsupported)
+	return decode_body_TL_pageBlockUnsupported(m)
+}
+func decode_body_TL_pageBlockUnsupported(_ *DecodeBuf) TL {
+	tl := TL_pageBlockUnsupported{}
+	return tl
+}
+
+func decode_TL_pageBlockTitle(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockTitle)
+	return decode_body_TL_pageBlockTitle(m)
+}
+func decode_body_TL_pageBlockTitle(m *DecodeBuf) TL {
+	tl := TL_pageBlockTitle{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockSubtitle(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockSubtitle)
+	return decode_body_TL_pageBlockSubtitle(m)
+}
+func decode_body_TL_pageBlockSubtitle(m *DecodeBuf) TL {
+	tl := TL_pageBlockSubtitle{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockAuthorDate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockAuthorDate)
+	return decode_body_TL_pageBlockAuthorDate(m)
+}
+func decode_body_TL_pageBlockAuthorDate(m *DecodeBuf) TL {
+	tl := TL_pageBlockAuthorDate{}
+	tl.Author = m.Object()
+	tl.PublishedDate = m.Int()
+	return tl
+}
+
+func decode_TL_pageBlockHeader(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockHeader)
+	return decode_body_TL_pageBlockHeader(m)
+}
+func decode_body_TL_pageBlockHeader(m *DecodeBuf) TL {
+	tl := TL_pageBlockHeader{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockSubheader(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockSubheader)
+	return decode_body_TL_pageBlockSubheader(m)
+}
+func decode_body_TL_pageBlockSubheader(m *DecodeBuf) TL {
+	tl := TL_pageBlockSubheader{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockParagraph(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockParagraph)
+	return decode_body_TL_pageBlockParagraph(m)
+}
+func decode_body_TL_pageBlockParagraph(m *DecodeBuf) TL {
+	tl := TL_pageBlockParagraph{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockPreformatted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockPreformatted)
+	return decode_body_TL_pageBlockPreformatted(m)
+}
+func decode_body_TL_pageBlockPreformatted(m *DecodeBuf) TL {
+	tl := TL_pageBlockPreformatted{}
+	tl.Text = m.Object()
+	tl.Language = m.String()
+	return tl
+}
+
+func decode_TL_pageBlockFooter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockFooter)
+	return decode_body_TL_pageBlockFooter(m)
+}
+func decode_body_TL_pageBlockFooter(m *DecodeBuf) TL {
+	tl := TL_pageBlockFooter{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockDivider(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockDivider)
+	return decode_body_TL_pageBlockDivider(m)
+}
+func decode_body_TL_pageBlockDivider(_ *DecodeBuf) TL {
+	tl := TL_pageBlockDivider{}
+	return tl
+}
+
+func decode_TL_pageBlockAnchor(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockAnchor)
+	return decode_body_TL_pageBlockAnchor(m)
+}
+func decode_body_TL_pageBlockAnchor(m *DecodeBuf) TL {
+	tl := TL_pageBlockAnchor{}
+	tl.Name = m.String()
+	return tl
+}
+
+func decode_TL_pageBlockList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockList)
+	return decode_body_TL_pageBlockList(m)
+}
+func decode_body_TL_pageBlockList(m *DecodeBuf) TL {
+	tl := TL_pageBlockList{}
+	tl.Items = m.Vector()
+	return tl
+}
+
+func decode_TL_pageBlockBlockquote(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockBlockquote)
+	return decode_body_TL_pageBlockBlockquote(m)
+}
+func decode_body_TL_pageBlockBlockquote(m *DecodeBuf) TL {
+	tl := TL_pageBlockBlockquote{}
+	tl.Text = m.Object()
+	tl.Caption = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockPullquote(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockPullquote)
+	return decode_body_TL_pageBlockPullquote(m)
+}
+func decode_body_TL_pageBlockPullquote(m *DecodeBuf) TL {
+	tl := TL_pageBlockPullquote{}
+	tl.Text = m.Object()
+	tl.Caption = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockPhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockPhoto)
+	return decode_body_TL_pageBlockPhoto(m)
+}
+func decode_body_TL_pageBlockPhoto(m *DecodeBuf) TL {
+	tl := TL_pageBlockPhoto{}
+	flags := m.Int()
+	tl.PhotoID = m.Long()
+	tl.Caption = decode_TL_pageCaption(m).(TL_pageCaption)
+	if flags&(1<<0) != 0 {
+		tl.URL = Ref(m.String())
+	}
+	if flags&(1<<0) != 0 {
+		tl.WebpageID = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_pageBlockVideo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockVideo)
+	return decode_body_TL_pageBlockVideo(m)
+}
+func decode_body_TL_pageBlockVideo(m *DecodeBuf) TL {
+	tl := TL_pageBlockVideo{}
+	flags := m.Int()
+	tl.Autoplay = flags&(1<<0) != 0
+	tl.Loop = flags&(1<<1) != 0
+	tl.VideoID = m.Long()
+	tl.Caption = decode_TL_pageCaption(m).(TL_pageCaption)
+	return tl
+}
+
+func decode_TL_pageBlockCover(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockCover)
+	return decode_body_TL_pageBlockCover(m)
+}
+func decode_body_TL_pageBlockCover(m *DecodeBuf) TL {
+	tl := TL_pageBlockCover{}
+	tl.Cover = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockEmbed(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockEmbed)
+	return decode_body_TL_pageBlockEmbed(m)
+}
+func decode_body_TL_pageBlockEmbed(m *DecodeBuf) TL {
+	tl := TL_pageBlockEmbed{}
+	flags := m.Int()
+	tl.FullWidth = flags&(1<<0) != 0
+	tl.AllowScrolling = flags&(1<<3) != 0
+	if flags&(1<<1) != 0 {
+		tl.URL = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.HTML = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.PosterPhotoID = Ref(m.Long())
+	}
+	if flags&(1<<5) != 0 {
+		tl.W = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.H = Ref(m.Int())
+	}
+	tl.Caption = decode_TL_pageCaption(m).(TL_pageCaption)
+	return tl
+}
+
+func decode_TL_pageBlockEmbedPost(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockEmbedPost)
+	return decode_body_TL_pageBlockEmbedPost(m)
+}
+func decode_body_TL_pageBlockEmbedPost(m *DecodeBuf) TL {
+	tl := TL_pageBlockEmbedPost{}
+	tl.URL = m.String()
+	tl.WebpageID = m.Long()
+	tl.AuthorPhotoID = m.Long()
+	tl.Author = m.String()
+	tl.Date = m.Int()
+	tl.Blocks = m.Vector()
+	tl.Caption = decode_TL_pageCaption(m).(TL_pageCaption)
+	return tl
+}
+
+func decode_TL_pageBlockCollage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockCollage)
+	return decode_body_TL_pageBlockCollage(m)
+}
+func decode_body_TL_pageBlockCollage(m *DecodeBuf) TL {
+	tl := TL_pageBlockCollage{}
+	tl.Items = m.Vector()
+	tl.Caption = decode_TL_pageCaption(m).(TL_pageCaption)
+	return tl
+}
+
+func decode_TL_pageBlockSlideshow(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockSlideshow)
+	return decode_body_TL_pageBlockSlideshow(m)
+}
+func decode_body_TL_pageBlockSlideshow(m *DecodeBuf) TL {
+	tl := TL_pageBlockSlideshow{}
+	tl.Items = m.Vector()
+	tl.Caption = decode_TL_pageCaption(m).(TL_pageCaption)
+	return tl
+}
+
+func decode_TL_pageBlockChannel(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockChannel)
+	return decode_body_TL_pageBlockChannel(m)
+}
+func decode_body_TL_pageBlockChannel(m *DecodeBuf) TL {
+	tl := TL_pageBlockChannel{}
+	tl.Channel = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockAudio(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockAudio)
+	return decode_body_TL_pageBlockAudio(m)
+}
+func decode_body_TL_pageBlockAudio(m *DecodeBuf) TL {
+	tl := TL_pageBlockAudio{}
+	tl.AudioID = m.Long()
+	tl.Caption = decode_TL_pageCaption(m).(TL_pageCaption)
+	return tl
+}
+
+func decode_TL_pageBlockKicker(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockKicker)
+	return decode_body_TL_pageBlockKicker(m)
+}
+func decode_body_TL_pageBlockKicker(m *DecodeBuf) TL {
+	tl := TL_pageBlockKicker{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockTable(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockTable)
+	return decode_body_TL_pageBlockTable(m)
+}
+func decode_body_TL_pageBlockTable(m *DecodeBuf) TL {
+	tl := TL_pageBlockTable{}
+	flags := m.Int()
+	tl.Bordered = flags&(1<<0) != 0
+	tl.Striped = flags&(1<<1) != 0
+	tl.Title = m.Object()
+	tl.Rows = DecodeBuf_GenericVector[TL_pageTableRow](m)
+	return tl
+}
+
+func decode_TL_pageBlockOrderedList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockOrderedList)
+	return decode_body_TL_pageBlockOrderedList(m)
+}
+func decode_body_TL_pageBlockOrderedList(m *DecodeBuf) TL {
+	tl := TL_pageBlockOrderedList{}
+	tl.Items = m.Vector()
+	return tl
+}
+
+func decode_TL_pageBlockDetails(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockDetails)
+	return decode_body_TL_pageBlockDetails(m)
+}
+func decode_body_TL_pageBlockDetails(m *DecodeBuf) TL {
+	tl := TL_pageBlockDetails{}
+	flags := m.Int()
+	tl.Open = flags&(1<<0) != 0
+	tl.Blocks = m.Vector()
+	tl.Title = m.Object()
+	return tl
+}
+
+func decode_TL_pageBlockRelatedArticles(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockRelatedArticles)
+	return decode_body_TL_pageBlockRelatedArticles(m)
+}
+func decode_body_TL_pageBlockRelatedArticles(m *DecodeBuf) TL {
+	tl := TL_pageBlockRelatedArticles{}
+	tl.Title = m.Object()
+	tl.Articles = DecodeBuf_GenericVector[TL_pageRelatedArticle](m)
+	return tl
+}
+
+func decode_TL_pageBlockMap(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageBlockMap)
+	return decode_body_TL_pageBlockMap(m)
+}
+func decode_body_TL_pageBlockMap(m *DecodeBuf) TL {
+	tl := TL_pageBlockMap{}
+	tl.Geo = m.Object()
+	tl.Zoom = m.Int()
+	tl.W = m.Int()
+	tl.H = m.Int()
+	tl.Caption = decode_TL_pageCaption(m).(TL_pageCaption)
+	return tl
+}
+
+func decode_TL_phoneCallDiscardReasonMissed(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallDiscardReasonMissed)
+	return decode_body_TL_phoneCallDiscardReasonMissed(m)
+}
+func decode_body_TL_phoneCallDiscardReasonMissed(_ *DecodeBuf) TL {
+	tl := TL_phoneCallDiscardReasonMissed{}
+	return tl
+}
+
+func decode_TL_phoneCallDiscardReasonDisconnect(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallDiscardReasonDisconnect)
+	return decode_body_TL_phoneCallDiscardReasonDisconnect(m)
+}
+func decode_body_TL_phoneCallDiscardReasonDisconnect(_ *DecodeBuf) TL {
+	tl := TL_phoneCallDiscardReasonDisconnect{}
+	return tl
+}
+
+func decode_TL_phoneCallDiscardReasonHangup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallDiscardReasonHangup)
+	return decode_body_TL_phoneCallDiscardReasonHangup(m)
+}
+func decode_body_TL_phoneCallDiscardReasonHangup(_ *DecodeBuf) TL {
+	tl := TL_phoneCallDiscardReasonHangup{}
+	return tl
+}
+
+func decode_TL_phoneCallDiscardReasonBusy(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallDiscardReasonBusy)
+	return decode_body_TL_phoneCallDiscardReasonBusy(m)
+}
+func decode_body_TL_phoneCallDiscardReasonBusy(_ *DecodeBuf) TL {
+	tl := TL_phoneCallDiscardReasonBusy{}
+	return tl
+}
+
+func decode_TL_dataJSON(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dataJSON)
+	return decode_body_TL_dataJSON(m)
+}
+func decode_body_TL_dataJSON(m *DecodeBuf) TL {
+	tl := TL_dataJSON{}
+	tl.Data = m.String()
+	return tl
+}
+
+func decode_TL_labeledPrice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_labeledPrice)
+	return decode_body_TL_labeledPrice(m)
+}
+func decode_body_TL_labeledPrice(m *DecodeBuf) TL {
+	tl := TL_labeledPrice{}
+	tl.Label = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_invoice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_invoice)
+	return decode_body_TL_invoice(m)
+}
+func decode_body_TL_invoice(m *DecodeBuf) TL {
+	tl := TL_invoice{}
+	flags := m.Int()
+	tl.Test = flags&(1<<0) != 0
+	tl.NameRequested = flags&(1<<1) != 0
+	tl.PhoneRequested = flags&(1<<2) != 0
+	tl.EmailRequested = flags&(1<<3) != 0
+	tl.ShippingAddressRequested = flags&(1<<4) != 0
+	tl.Flexible = flags&(1<<5) != 0
+	tl.PhoneToProvider = flags&(1<<6) != 0
+	tl.EmailToProvider = flags&(1<<7) != 0
+	tl.Recurring = flags&(1<<9) != 0
+	tl.Currency = m.String()
+	tl.Prices = DecodeBuf_GenericVector[TL_labeledPrice](m)
+	if flags&(1<<8) != 0 {
+		tl.MaxTipAmount = Ref(m.Long())
+	}
+	if flags&(1<<8) != 0 {
+		tl.SuggestedTipAmounts = m.VectorLong()
+	}
+	if flags&(1<<10) != 0 {
+		tl.TermsURL = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_paymentCharge(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_paymentCharge)
+	return decode_body_TL_paymentCharge(m)
+}
+func decode_body_TL_paymentCharge(m *DecodeBuf) TL {
+	tl := TL_paymentCharge{}
+	tl.ID = m.String()
+	tl.ProviderChargeID = m.String()
+	return tl
+}
+
+func decode_TL_postAddress(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_postAddress)
+	return decode_body_TL_postAddress(m)
+}
+func decode_body_TL_postAddress(m *DecodeBuf) TL {
+	tl := TL_postAddress{}
+	tl.StreetLine1 = m.String()
+	tl.StreetLine2 = m.String()
+	tl.City = m.String()
+	tl.State = m.String()
+	tl.CountryISO2 = m.String()
+	tl.PostCode = m.String()
+	return tl
+}
+
+func decode_TL_paymentRequestedInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_paymentRequestedInfo)
+	return decode_body_TL_paymentRequestedInfo(m)
+}
+func decode_body_TL_paymentRequestedInfo(m *DecodeBuf) TL {
+	tl := TL_paymentRequestedInfo{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Name = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Phone = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Email = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.ShippingAddress = Ref(decode_TL_postAddress(m).(TL_postAddress))
+	}
+	return tl
+}
+
+func decode_TL_paymentSavedCredentialsCard(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_paymentSavedCredentialsCard)
+	return decode_body_TL_paymentSavedCredentialsCard(m)
+}
+func decode_body_TL_paymentSavedCredentialsCard(m *DecodeBuf) TL {
+	tl := TL_paymentSavedCredentialsCard{}
+	tl.ID = m.String()
+	tl.Title = m.String()
+	return tl
+}
+
+func decode_TL_webDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webDocument)
+	return decode_body_TL_webDocument(m)
+}
+func decode_body_TL_webDocument(m *DecodeBuf) TL {
+	tl := TL_webDocument{}
+	tl.URL = m.String()
+	tl.AccessHash = m.Long()
+	tl.Size = m.Int()
+	tl.MIMEType = m.String()
+	tl.Attributes = m.Vector()
+	return tl
+}
+
+func decode_TL_webDocumentNoProxy(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webDocumentNoProxy)
+	return decode_body_TL_webDocumentNoProxy(m)
+}
+func decode_body_TL_webDocumentNoProxy(m *DecodeBuf) TL {
+	tl := TL_webDocumentNoProxy{}
+	tl.URL = m.String()
+	tl.Size = m.Int()
+	tl.MIMEType = m.String()
+	tl.Attributes = m.Vector()
+	return tl
+}
+
+func decode_TL_inputWebDocument(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputWebDocument)
+	return decode_body_TL_inputWebDocument(m)
+}
+func decode_body_TL_inputWebDocument(m *DecodeBuf) TL {
+	tl := TL_inputWebDocument{}
+	tl.URL = m.String()
+	tl.Size = m.Int()
+	tl.MIMEType = m.String()
+	tl.Attributes = m.Vector()
+	return tl
+}
+
+func decode_TL_inputWebFileLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputWebFileLocation)
+	return decode_body_TL_inputWebFileLocation(m)
+}
+func decode_body_TL_inputWebFileLocation(m *DecodeBuf) TL {
+	tl := TL_inputWebFileLocation{}
+	tl.URL = m.String()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputWebFileGeoPointLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputWebFileGeoPointLocation)
+	return decode_body_TL_inputWebFileGeoPointLocation(m)
+}
+func decode_body_TL_inputWebFileGeoPointLocation(m *DecodeBuf) TL {
+	tl := TL_inputWebFileGeoPointLocation{}
+	tl.GeoPoint = m.Object()
+	tl.AccessHash = m.Long()
+	tl.W = m.Int()
+	tl.H = m.Int()
+	tl.Zoom = m.Int()
+	tl.Scale = m.Int()
+	return tl
+}
+
+func decode_TL_inputWebFileAudioAlbumThumbLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputWebFileAudioAlbumThumbLocation)
+	return decode_body_TL_inputWebFileAudioAlbumThumbLocation(m)
+}
+func decode_body_TL_inputWebFileAudioAlbumThumbLocation(m *DecodeBuf) TL {
+	tl := TL_inputWebFileAudioAlbumThumbLocation{}
+	flags := m.Int()
+	tl.Small = flags&(1<<2) != 0
+	if flags&(1<<0) != 0 {
+		tl.Document = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Performer = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_upload_webFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_upload_webFile)
+	return decode_body_TL_upload_webFile(m)
+}
+func decode_body_TL_upload_webFile(m *DecodeBuf) TL {
+	tl := TL_upload_webFile{}
+	tl.Size = m.Int()
+	tl.MIMEType = m.String()
+	tl.FileType = m.Object()
+	tl.Mtime = m.Int()
+	tl.Bytes = m.StringBytes()
+	return tl
+}
+
+func decode_TL_payments_paymentForm(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_paymentForm)
+	return decode_body_TL_payments_paymentForm(m)
+}
+func decode_body_TL_payments_paymentForm(m *DecodeBuf) TL {
+	tl := TL_payments_paymentForm{}
+	flags := m.Int()
+	tl.CanSaveCredentials = flags&(1<<2) != 0
+	tl.PasswordMissing = flags&(1<<3) != 0
+	tl.FormID = m.Long()
+	tl.BotID = m.Long()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<5) != 0 {
+		tl.Photo = m.Object()
+	}
+	tl.Invoice = decode_TL_invoice(m).(TL_invoice)
+	tl.ProviderID = m.Long()
+	tl.URL = m.String()
+	if flags&(1<<4) != 0 {
+		tl.NativeProvider = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.NativeParams = Ref(decode_TL_dataJSON(m).(TL_dataJSON))
+	}
+	if flags&(1<<6) != 0 {
+		tl.AdditionalMethods = DecodeBuf_GenericVector[TL_paymentFormMethod](m)
+	}
+	if flags&(1<<0) != 0 {
+		tl.SavedInfo = Ref(decode_TL_paymentRequestedInfo(m).(TL_paymentRequestedInfo))
+	}
+	if flags&(1<<1) != 0 {
+		tl.SavedCredentials = DecodeBuf_GenericVector[TL_paymentSavedCredentialsCard](m)
+	}
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_payments_paymentFormStars(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_paymentFormStars)
+	return decode_body_TL_payments_paymentFormStars(m)
+}
+func decode_body_TL_payments_paymentFormStars(m *DecodeBuf) TL {
+	tl := TL_payments_paymentFormStars{}
+	flags := m.Int()
+	tl.FormID = m.Long()
+	tl.BotID = m.Long()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<5) != 0 {
+		tl.Photo = m.Object()
+	}
+	tl.Invoice = decode_TL_invoice(m).(TL_invoice)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_payments_validatedRequestedInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_validatedRequestedInfo)
+	return decode_body_TL_payments_validatedRequestedInfo(m)
+}
+func decode_body_TL_payments_validatedRequestedInfo(m *DecodeBuf) TL {
+	tl := TL_payments_validatedRequestedInfo{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.ID = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.ShippingOptions = DecodeBuf_GenericVector[TL_shippingOption](m)
+	}
+	return tl
+}
+
+func decode_TL_payments_paymentResult(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_paymentResult)
+	return decode_body_TL_payments_paymentResult(m)
+}
+func decode_body_TL_payments_paymentResult(m *DecodeBuf) TL {
+	tl := TL_payments_paymentResult{}
+	tl.Updates = m.Object()
+	return tl
+}
+
+func decode_TL_payments_paymentVerificationNeeded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_paymentVerificationNeeded)
+	return decode_body_TL_payments_paymentVerificationNeeded(m)
+}
+func decode_body_TL_payments_paymentVerificationNeeded(m *DecodeBuf) TL {
+	tl := TL_payments_paymentVerificationNeeded{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_payments_paymentReceipt(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_paymentReceipt)
+	return decode_body_TL_payments_paymentReceipt(m)
+}
+func decode_body_TL_payments_paymentReceipt(m *DecodeBuf) TL {
+	tl := TL_payments_paymentReceipt{}
+	flags := m.Int()
+	tl.Date = m.Int()
+	tl.BotID = m.Long()
+	tl.ProviderID = m.Long()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<2) != 0 {
+		tl.Photo = m.Object()
+	}
+	tl.Invoice = decode_TL_invoice(m).(TL_invoice)
+	if flags&(1<<0) != 0 {
+		tl.Info = Ref(decode_TL_paymentRequestedInfo(m).(TL_paymentRequestedInfo))
+	}
+	if flags&(1<<1) != 0 {
+		tl.Shipping = Ref(decode_TL_shippingOption(m).(TL_shippingOption))
+	}
+	if flags&(1<<3) != 0 {
+		tl.TipAmount = Ref(m.Long())
+	}
+	tl.Currency = m.String()
+	tl.TotalAmount = m.Long()
+	tl.CredentialsTitle = m.String()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_payments_paymentReceiptStars(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_paymentReceiptStars)
+	return decode_body_TL_payments_paymentReceiptStars(m)
+}
+func decode_body_TL_payments_paymentReceiptStars(m *DecodeBuf) TL {
+	tl := TL_payments_paymentReceiptStars{}
+	flags := m.Int()
+	tl.Date = m.Int()
+	tl.BotID = m.Long()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<2) != 0 {
+		tl.Photo = m.Object()
+	}
+	tl.Invoice = decode_TL_invoice(m).(TL_invoice)
+	tl.Currency = m.String()
+	tl.TotalAmount = m.Long()
+	tl.TransactionID = m.String()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_payments_savedInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_savedInfo)
+	return decode_body_TL_payments_savedInfo(m)
+}
+func decode_body_TL_payments_savedInfo(m *DecodeBuf) TL {
+	tl := TL_payments_savedInfo{}
+	flags := m.Int()
+	tl.HasSavedCredentials = flags&(1<<1) != 0
+	if flags&(1<<0) != 0 {
+		tl.SavedInfo = Ref(decode_TL_paymentRequestedInfo(m).(TL_paymentRequestedInfo))
+	}
+	return tl
+}
+
+func decode_TL_inputPaymentCredentialsSaved(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPaymentCredentialsSaved)
+	return decode_body_TL_inputPaymentCredentialsSaved(m)
+}
+func decode_body_TL_inputPaymentCredentialsSaved(m *DecodeBuf) TL {
+	tl := TL_inputPaymentCredentialsSaved{}
+	tl.ID = m.String()
+	tl.TmpPassword = m.StringBytes()
+	return tl
+}
+
+func decode_TL_inputPaymentCredentials(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPaymentCredentials)
+	return decode_body_TL_inputPaymentCredentials(m)
+}
+func decode_body_TL_inputPaymentCredentials(m *DecodeBuf) TL {
+	tl := TL_inputPaymentCredentials{}
+	flags := m.Int()
+	tl.Save = flags&(1<<0) != 0
+	tl.Data = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_inputPaymentCredentialsApplePay(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPaymentCredentialsApplePay)
+	return decode_body_TL_inputPaymentCredentialsApplePay(m)
+}
+func decode_body_TL_inputPaymentCredentialsApplePay(m *DecodeBuf) TL {
+	tl := TL_inputPaymentCredentialsApplePay{}
+	tl.PaymentData = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_inputPaymentCredentialsGooglePay(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPaymentCredentialsGooglePay)
+	return decode_body_TL_inputPaymentCredentialsGooglePay(m)
+}
+func decode_body_TL_inputPaymentCredentialsGooglePay(m *DecodeBuf) TL {
+	tl := TL_inputPaymentCredentialsGooglePay{}
+	tl.PaymentToken = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_account_tmpPassword(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_tmpPassword)
+	return decode_body_TL_account_tmpPassword(m)
+}
+func decode_body_TL_account_tmpPassword(m *DecodeBuf) TL {
+	tl := TL_account_tmpPassword{}
+	tl.TmpPassword = m.StringBytes()
+	tl.ValidUntil = m.Int()
+	return tl
+}
+
+func decode_TL_shippingOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_shippingOption)
+	return decode_body_TL_shippingOption(m)
+}
+func decode_body_TL_shippingOption(m *DecodeBuf) TL {
+	tl := TL_shippingOption{}
+	tl.ID = m.String()
+	tl.Title = m.String()
+	tl.Prices = DecodeBuf_GenericVector[TL_labeledPrice](m)
+	return tl
+}
+
+func decode_TL_inputStickerSetItem(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStickerSetItem)
+	return decode_body_TL_inputStickerSetItem(m)
+}
+func decode_body_TL_inputStickerSetItem(m *DecodeBuf) TL {
+	tl := TL_inputStickerSetItem{}
+	flags := m.Int()
+	tl.Document = m.Object()
+	tl.Emoji = m.String()
+	if flags&(1<<0) != 0 {
+		tl.MaskCoords = Ref(decode_TL_maskCoords(m).(TL_maskCoords))
+	}
+	if flags&(1<<1) != 0 {
+		tl.Keywords = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_inputPhoneCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPhoneCall)
+	return decode_body_TL_inputPhoneCall(m)
+}
+func decode_body_TL_inputPhoneCall(m *DecodeBuf) TL {
+	tl := TL_inputPhoneCall{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_phoneCallEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallEmpty)
+	return decode_body_TL_phoneCallEmpty(m)
+}
+func decode_body_TL_phoneCallEmpty(m *DecodeBuf) TL {
+	tl := TL_phoneCallEmpty{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_phoneCallWaiting(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallWaiting)
+	return decode_body_TL_phoneCallWaiting(m)
+}
+func decode_body_TL_phoneCallWaiting(m *DecodeBuf) TL {
+	tl := TL_phoneCallWaiting{}
+	flags := m.Int()
+	tl.Video = flags&(1<<6) != 0
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Date = m.Int()
+	tl.AdminID = m.Long()
+	tl.ParticipantID = m.Long()
+	tl.Protocol = decode_TL_phoneCallProtocol(m).(TL_phoneCallProtocol)
+	if flags&(1<<0) != 0 {
+		tl.ReceiveDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_phoneCallRequested(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallRequested)
+	return decode_body_TL_phoneCallRequested(m)
+}
+func decode_body_TL_phoneCallRequested(m *DecodeBuf) TL {
+	tl := TL_phoneCallRequested{}
+	flags := m.Int()
+	tl.Video = flags&(1<<6) != 0
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Date = m.Int()
+	tl.AdminID = m.Long()
+	tl.ParticipantID = m.Long()
+	tl.GAHash = m.StringBytes()
+	tl.Protocol = decode_TL_phoneCallProtocol(m).(TL_phoneCallProtocol)
+	return tl
+}
+
+func decode_TL_phoneCallAccepted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallAccepted)
+	return decode_body_TL_phoneCallAccepted(m)
+}
+func decode_body_TL_phoneCallAccepted(m *DecodeBuf) TL {
+	tl := TL_phoneCallAccepted{}
+	flags := m.Int()
+	tl.Video = flags&(1<<6) != 0
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Date = m.Int()
+	tl.AdminID = m.Long()
+	tl.ParticipantID = m.Long()
+	tl.GB = m.StringBytes()
+	tl.Protocol = decode_TL_phoneCallProtocol(m).(TL_phoneCallProtocol)
+	return tl
+}
+
+func decode_TL_phoneCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCall)
+	return decode_body_TL_phoneCall(m)
+}
+func decode_body_TL_phoneCall(m *DecodeBuf) TL {
+	tl := TL_phoneCall{}
+	flags := m.Int()
+	tl.P2PAllowed = flags&(1<<5) != 0
+	tl.Video = flags&(1<<6) != 0
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Date = m.Int()
+	tl.AdminID = m.Long()
+	tl.ParticipantID = m.Long()
+	tl.GAOrB = m.StringBytes()
+	tl.KeyFingerprint = m.Long()
+	tl.Protocol = decode_TL_phoneCallProtocol(m).(TL_phoneCallProtocol)
+	tl.Connections = m.Vector()
+	tl.StartDate = m.Int()
+	if flags&(1<<7) != 0 {
+		tl.CustomParameters = Ref(decode_TL_dataJSON(m).(TL_dataJSON))
+	}
+	return tl
+}
+
+func decode_TL_phoneCallDiscarded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallDiscarded)
+	return decode_body_TL_phoneCallDiscarded(m)
+}
+func decode_body_TL_phoneCallDiscarded(m *DecodeBuf) TL {
+	tl := TL_phoneCallDiscarded{}
+	flags := m.Int()
+	tl.NeedRating = flags&(1<<2) != 0
+	tl.NeedDebug = flags&(1<<3) != 0
+	tl.Video = flags&(1<<6) != 0
+	tl.ID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Reason = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Duration = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_phoneConnection(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneConnection)
+	return decode_body_TL_phoneConnection(m)
+}
+func decode_body_TL_phoneConnection(m *DecodeBuf) TL {
+	tl := TL_phoneConnection{}
+	flags := m.Int()
+	tl.TCP = flags&(1<<0) != 0
+	tl.ID = m.Long()
+	tl.IP = m.String()
+	tl.IPv6 = m.String()
+	tl.Port = m.Int()
+	tl.PeerTag = m.StringBytes()
+	return tl
+}
+
+func decode_TL_phoneConnectionWebrtc(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneConnectionWebrtc)
+	return decode_body_TL_phoneConnectionWebrtc(m)
+}
+func decode_body_TL_phoneConnectionWebrtc(m *DecodeBuf) TL {
+	tl := TL_phoneConnectionWebrtc{}
+	flags := m.Int()
+	tl.Turn = flags&(1<<0) != 0
+	tl.STUN = flags&(1<<1) != 0
+	tl.ID = m.Long()
+	tl.IP = m.String()
+	tl.IPv6 = m.String()
+	tl.Port = m.Int()
+	tl.Username = m.String()
+	tl.Password = m.String()
+	return tl
+}
+
+func decode_TL_phoneCallProtocol(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phoneCallProtocol)
+	return decode_body_TL_phoneCallProtocol(m)
+}
+func decode_body_TL_phoneCallProtocol(m *DecodeBuf) TL {
+	tl := TL_phoneCallProtocol{}
+	flags := m.Int()
+	tl.UDPP2P = flags&(1<<0) != 0
+	tl.UDPReflector = flags&(1<<1) != 0
+	tl.MinLayer = m.Int()
+	tl.MaxLayer = m.Int()
+	tl.LibraryVersions = m.VectorString()
+	return tl
+}
+
+func decode_TL_phone_phoneCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phone_phoneCall)
+	return decode_body_TL_phone_phoneCall(m)
+}
+func decode_body_TL_phone_phoneCall(m *DecodeBuf) TL {
+	tl := TL_phone_phoneCall{}
+	tl.PhoneCall = m.Object()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_upload_cdnFileReuploadNeeded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_upload_cdnFileReuploadNeeded)
+	return decode_body_TL_upload_cdnFileReuploadNeeded(m)
+}
+func decode_body_TL_upload_cdnFileReuploadNeeded(m *DecodeBuf) TL {
+	tl := TL_upload_cdnFileReuploadNeeded{}
+	tl.RequestToken = m.StringBytes()
+	return tl
+}
+
+func decode_TL_upload_cdnFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_upload_cdnFile)
+	return decode_body_TL_upload_cdnFile(m)
+}
+func decode_body_TL_upload_cdnFile(m *DecodeBuf) TL {
+	tl := TL_upload_cdnFile{}
+	tl.Bytes = m.StringBytes()
+	return tl
+}
+
+func decode_TL_cdnPublicKey(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_cdnPublicKey)
+	return decode_body_TL_cdnPublicKey(m)
+}
+func decode_body_TL_cdnPublicKey(m *DecodeBuf) TL {
+	tl := TL_cdnPublicKey{}
+	tl.DCID = m.Int()
+	tl.PublicKey = m.String()
+	return tl
+}
+
+func decode_TL_cdnConfig(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_cdnConfig)
+	return decode_body_TL_cdnConfig(m)
+}
+func decode_body_TL_cdnConfig(m *DecodeBuf) TL {
+	tl := TL_cdnConfig{}
+	tl.PublicKeys = DecodeBuf_GenericVector[TL_cdnPublicKey](m)
+	return tl
+}
+
+func decode_TL_langPackString(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_langPackString)
+	return decode_body_TL_langPackString(m)
+}
+func decode_body_TL_langPackString(m *DecodeBuf) TL {
+	tl := TL_langPackString{}
+	tl.Key = m.String()
+	tl.Value = m.String()
+	return tl
+}
+
+func decode_TL_langPackStringPluralized(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_langPackStringPluralized)
+	return decode_body_TL_langPackStringPluralized(m)
+}
+func decode_body_TL_langPackStringPluralized(m *DecodeBuf) TL {
+	tl := TL_langPackStringPluralized{}
+	flags := m.Int()
+	tl.Key = m.String()
+	if flags&(1<<0) != 0 {
+		tl.ZeroValue = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.OneValue = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.TwoValue = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.FewValue = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.ManyValue = Ref(m.String())
+	}
+	tl.OtherValue = m.String()
+	return tl
+}
+
+func decode_TL_langPackStringDeleted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_langPackStringDeleted)
+	return decode_body_TL_langPackStringDeleted(m)
+}
+func decode_body_TL_langPackStringDeleted(m *DecodeBuf) TL {
+	tl := TL_langPackStringDeleted{}
+	tl.Key = m.String()
+	return tl
+}
+
+func decode_TL_langPackDifference(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_langPackDifference)
+	return decode_body_TL_langPackDifference(m)
+}
+func decode_body_TL_langPackDifference(m *DecodeBuf) TL {
+	tl := TL_langPackDifference{}
+	tl.LangCode = m.String()
+	tl.FromVersion = m.Int()
+	tl.Version = m.Int()
+	tl.Strings = m.Vector()
+	return tl
+}
+
+func decode_TL_langPackLanguage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_langPackLanguage)
+	return decode_body_TL_langPackLanguage(m)
+}
+func decode_body_TL_langPackLanguage(m *DecodeBuf) TL {
+	tl := TL_langPackLanguage{}
+	flags := m.Int()
+	tl.Official = flags&(1<<0) != 0
+	tl.RTL = flags&(1<<2) != 0
+	tl.Beta = flags&(1<<3) != 0
+	tl.Name = m.String()
+	tl.NativeName = m.String()
+	tl.LangCode = m.String()
+	if flags&(1<<1) != 0 {
+		tl.BaseLangCode = Ref(m.String())
+	}
+	tl.PluralCode = m.String()
+	tl.StringsCount = m.Int()
+	tl.TranslatedCount = m.Int()
+	tl.TranslationsURL = m.String()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeTitle(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeTitle)
+	return decode_body_TL_channelAdminLogEventActionChangeTitle(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeTitle(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeTitle{}
+	tl.PrevValue = m.String()
+	tl.NewValue = m.String()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeAbout(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeAbout)
+	return decode_body_TL_channelAdminLogEventActionChangeAbout(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeAbout(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeAbout{}
+	tl.PrevValue = m.String()
+	tl.NewValue = m.String()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeUsername(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeUsername)
+	return decode_body_TL_channelAdminLogEventActionChangeUsername(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeUsername(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeUsername{}
+	tl.PrevValue = m.String()
+	tl.NewValue = m.String()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangePhoto(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangePhoto)
+	return decode_body_TL_channelAdminLogEventActionChangePhoto(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangePhoto(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangePhoto{}
+	tl.PrevPhoto = m.Object()
+	tl.NewPhoto = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionToggleInvites(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionToggleInvites)
+	return decode_body_TL_channelAdminLogEventActionToggleInvites(m)
+}
+func decode_body_TL_channelAdminLogEventActionToggleInvites(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionToggleInvites{}
+	tl.NewValue = m.Bool()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionToggleSignatures(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionToggleSignatures)
+	return decode_body_TL_channelAdminLogEventActionToggleSignatures(m)
+}
+func decode_body_TL_channelAdminLogEventActionToggleSignatures(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionToggleSignatures{}
+	tl.NewValue = m.Bool()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionUpdatePinned(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionUpdatePinned)
+	return decode_body_TL_channelAdminLogEventActionUpdatePinned(m)
+}
+func decode_body_TL_channelAdminLogEventActionUpdatePinned(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionUpdatePinned{}
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionEditMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionEditMessage)
+	return decode_body_TL_channelAdminLogEventActionEditMessage(m)
+}
+func decode_body_TL_channelAdminLogEventActionEditMessage(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionEditMessage{}
+	tl.PrevMessage = m.Object()
+	tl.NewMessage = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionDeleteMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionDeleteMessage)
+	return decode_body_TL_channelAdminLogEventActionDeleteMessage(m)
+}
+func decode_body_TL_channelAdminLogEventActionDeleteMessage(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionDeleteMessage{}
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantJoin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantJoin)
+	return decode_body_TL_channelAdminLogEventActionParticipantJoin(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantJoin(_ *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantJoin{}
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantLeave(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantLeave)
+	return decode_body_TL_channelAdminLogEventActionParticipantLeave(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantLeave(_ *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantLeave{}
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantInvite)
+	return decode_body_TL_channelAdminLogEventActionParticipantInvite(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantInvite(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantInvite{}
+	tl.Participant = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantToggleBan(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantToggleBan)
+	return decode_body_TL_channelAdminLogEventActionParticipantToggleBan(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantToggleBan(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantToggleBan{}
+	tl.PrevParticipant = m.Object()
+	tl.NewParticipant = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantToggleAdmin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantToggleAdmin)
+	return decode_body_TL_channelAdminLogEventActionParticipantToggleAdmin(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantToggleAdmin(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantToggleAdmin{}
+	tl.PrevParticipant = m.Object()
+	tl.NewParticipant = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeStickerSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeStickerSet)
+	return decode_body_TL_channelAdminLogEventActionChangeStickerSet(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeStickerSet(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeStickerSet{}
+	tl.PrevStickerset = m.Object()
+	tl.NewStickerset = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionTogglePreHistoryHidden(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionTogglePreHistoryHidden)
+	return decode_body_TL_channelAdminLogEventActionTogglePreHistoryHidden(m)
+}
+func decode_body_TL_channelAdminLogEventActionTogglePreHistoryHidden(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionTogglePreHistoryHidden{}
+	tl.NewValue = m.Bool()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionDefaultBannedRights(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionDefaultBannedRights)
+	return decode_body_TL_channelAdminLogEventActionDefaultBannedRights(m)
+}
+func decode_body_TL_channelAdminLogEventActionDefaultBannedRights(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionDefaultBannedRights{}
+	tl.PrevBannedRights = decode_TL_chatBannedRights(m).(TL_chatBannedRights)
+	tl.NewBannedRights = decode_TL_chatBannedRights(m).(TL_chatBannedRights)
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionStopPoll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionStopPoll)
+	return decode_body_TL_channelAdminLogEventActionStopPoll(m)
+}
+func decode_body_TL_channelAdminLogEventActionStopPoll(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionStopPoll{}
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeLinkedChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeLinkedChat)
+	return decode_body_TL_channelAdminLogEventActionChangeLinkedChat(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeLinkedChat(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeLinkedChat{}
+	tl.PrevValue = m.Long()
+	tl.NewValue = m.Long()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeLocation)
+	return decode_body_TL_channelAdminLogEventActionChangeLocation(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeLocation(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeLocation{}
+	tl.PrevValue = m.Object()
+	tl.NewValue = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionToggleSlowMode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionToggleSlowMode)
+	return decode_body_TL_channelAdminLogEventActionToggleSlowMode(m)
+}
+func decode_body_TL_channelAdminLogEventActionToggleSlowMode(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionToggleSlowMode{}
+	tl.PrevValue = m.Int()
+	tl.NewValue = m.Int()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionStartGroupCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionStartGroupCall)
+	return decode_body_TL_channelAdminLogEventActionStartGroupCall(m)
+}
+func decode_body_TL_channelAdminLogEventActionStartGroupCall(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionStartGroupCall{}
+	tl.Call = decode_TL_inputGroupCall(m).(TL_inputGroupCall)
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionDiscardGroupCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionDiscardGroupCall)
+	return decode_body_TL_channelAdminLogEventActionDiscardGroupCall(m)
+}
+func decode_body_TL_channelAdminLogEventActionDiscardGroupCall(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionDiscardGroupCall{}
+	tl.Call = decode_TL_inputGroupCall(m).(TL_inputGroupCall)
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantMute(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantMute)
+	return decode_body_TL_channelAdminLogEventActionParticipantMute(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantMute(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantMute{}
+	tl.Participant = decode_TL_groupCallParticipant(m).(TL_groupCallParticipant)
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantUnmute(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantUnmute)
+	return decode_body_TL_channelAdminLogEventActionParticipantUnmute(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantUnmute(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantUnmute{}
+	tl.Participant = decode_TL_groupCallParticipant(m).(TL_groupCallParticipant)
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionToggleGroupCallSetting(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionToggleGroupCallSetting)
+	return decode_body_TL_channelAdminLogEventActionToggleGroupCallSetting(m)
+}
+func decode_body_TL_channelAdminLogEventActionToggleGroupCallSetting(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionToggleGroupCallSetting{}
+	tl.JoinMuted = m.Bool()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantJoinByInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantJoinByInvite)
+	return decode_body_TL_channelAdminLogEventActionParticipantJoinByInvite(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantJoinByInvite(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantJoinByInvite{}
+	flags := m.Int()
+	tl.ViaChatlist = flags&(1<<0) != 0
+	tl.Invite = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionExportedInviteDelete(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionExportedInviteDelete)
+	return decode_body_TL_channelAdminLogEventActionExportedInviteDelete(m)
+}
+func decode_body_TL_channelAdminLogEventActionExportedInviteDelete(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionExportedInviteDelete{}
+	tl.Invite = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionExportedInviteRevoke(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionExportedInviteRevoke)
+	return decode_body_TL_channelAdminLogEventActionExportedInviteRevoke(m)
+}
+func decode_body_TL_channelAdminLogEventActionExportedInviteRevoke(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionExportedInviteRevoke{}
+	tl.Invite = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionExportedInviteEdit(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionExportedInviteEdit)
+	return decode_body_TL_channelAdminLogEventActionExportedInviteEdit(m)
+}
+func decode_body_TL_channelAdminLogEventActionExportedInviteEdit(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionExportedInviteEdit{}
+	tl.PrevInvite = m.Object()
+	tl.NewInvite = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantVolume(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantVolume)
+	return decode_body_TL_channelAdminLogEventActionParticipantVolume(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantVolume(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantVolume{}
+	tl.Participant = decode_TL_groupCallParticipant(m).(TL_groupCallParticipant)
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeHistoryTTL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeHistoryTTL)
+	return decode_body_TL_channelAdminLogEventActionChangeHistoryTTL(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeHistoryTTL(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeHistoryTTL{}
+	tl.PrevValue = m.Int()
+	tl.NewValue = m.Int()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionParticipantJoinByRequest(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantJoinByRequest)
+	return decode_body_TL_channelAdminLogEventActionParticipantJoinByRequest(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantJoinByRequest(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantJoinByRequest{}
+	tl.Invite = m.Object()
+	tl.ApprovedBy = m.Long()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionToggleNoForwards(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionToggleNoForwards)
+	return decode_body_TL_channelAdminLogEventActionToggleNoForwards(m)
+}
+func decode_body_TL_channelAdminLogEventActionToggleNoForwards(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionToggleNoForwards{}
+	tl.NewValue = m.Bool()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionSendMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionSendMessage)
+	return decode_body_TL_channelAdminLogEventActionSendMessage(m)
+}
+func decode_body_TL_channelAdminLogEventActionSendMessage(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionSendMessage{}
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeAvailableReactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeAvailableReactions)
+	return decode_body_TL_channelAdminLogEventActionChangeAvailableReactions(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeAvailableReactions(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeAvailableReactions{}
+	tl.PrevValue = m.Object()
+	tl.NewValue = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeUsernames(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeUsernames)
+	return decode_body_TL_channelAdminLogEventActionChangeUsernames(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeUsernames(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeUsernames{}
+	tl.PrevValue = m.VectorString()
+	tl.NewValue = m.VectorString()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionToggleForum(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionToggleForum)
+	return decode_body_TL_channelAdminLogEventActionToggleForum(m)
+}
+func decode_body_TL_channelAdminLogEventActionToggleForum(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionToggleForum{}
+	tl.NewValue = m.Bool()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionCreateTopic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionCreateTopic)
+	return decode_body_TL_channelAdminLogEventActionCreateTopic(m)
+}
+func decode_body_TL_channelAdminLogEventActionCreateTopic(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionCreateTopic{}
+	tl.Topic = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionEditTopic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionEditTopic)
+	return decode_body_TL_channelAdminLogEventActionEditTopic(m)
+}
+func decode_body_TL_channelAdminLogEventActionEditTopic(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionEditTopic{}
+	tl.PrevTopic = m.Object()
+	tl.NewTopic = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionDeleteTopic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionDeleteTopic)
+	return decode_body_TL_channelAdminLogEventActionDeleteTopic(m)
+}
+func decode_body_TL_channelAdminLogEventActionDeleteTopic(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionDeleteTopic{}
+	tl.Topic = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionPINTopic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionPINTopic)
+	return decode_body_TL_channelAdminLogEventActionPINTopic(m)
+}
+func decode_body_TL_channelAdminLogEventActionPINTopic(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionPINTopic{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.PrevTopic = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.NewTopic = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionToggleAntiSpam(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionToggleAntiSpam)
+	return decode_body_TL_channelAdminLogEventActionToggleAntiSpam(m)
+}
+func decode_body_TL_channelAdminLogEventActionToggleAntiSpam(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionToggleAntiSpam{}
+	tl.NewValue = m.Bool()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangePeerColor(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangePeerColor)
+	return decode_body_TL_channelAdminLogEventActionChangePeerColor(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangePeerColor(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangePeerColor{}
+	tl.PrevValue = decode_TL_peerColor(m).(TL_peerColor)
+	tl.NewValue = decode_TL_peerColor(m).(TL_peerColor)
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeProfilePeerColor(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeProfilePeerColor)
+	return decode_body_TL_channelAdminLogEventActionChangeProfilePeerColor(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeProfilePeerColor(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeProfilePeerColor{}
+	tl.PrevValue = decode_TL_peerColor(m).(TL_peerColor)
+	tl.NewValue = decode_TL_peerColor(m).(TL_peerColor)
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeWallpaper(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeWallpaper)
+	return decode_body_TL_channelAdminLogEventActionChangeWallpaper(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeWallpaper(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeWallpaper{}
+	tl.PrevValue = m.Object()
+	tl.NewValue = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeEmojiStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeEmojiStatus)
+	return decode_body_TL_channelAdminLogEventActionChangeEmojiStatus(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeEmojiStatus(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeEmojiStatus{}
+	tl.PrevValue = m.Object()
+	tl.NewValue = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionChangeEmojiStickerSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionChangeEmojiStickerSet)
+	return decode_body_TL_channelAdminLogEventActionChangeEmojiStickerSet(m)
+}
+func decode_body_TL_channelAdminLogEventActionChangeEmojiStickerSet(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionChangeEmojiStickerSet{}
+	tl.PrevStickerset = m.Object()
+	tl.NewStickerset = m.Object()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventActionToggleSignatureProfiles(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionToggleSignatureProfiles)
+	return decode_body_TL_channelAdminLogEventActionToggleSignatureProfiles(m)
+}
+func decode_body_TL_channelAdminLogEventActionToggleSignatureProfiles(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionToggleSignatureProfiles{}
+	tl.NewValue = m.Bool()
+	return tl
+}
+
+func decode_TL_channelAdminLogEvent(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEvent)
+	return decode_body_TL_channelAdminLogEvent(m)
+}
+func decode_body_TL_channelAdminLogEvent(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEvent{}
+	tl.ID = m.Long()
+	tl.Date = m.Int()
+	tl.UserID = m.Long()
+	tl.Action = m.Object()
+	return tl
+}
+
+func decode_TL_channels_adminLogResults(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channels_adminLogResults)
+	return decode_body_TL_channels_adminLogResults(m)
+}
+func decode_body_TL_channels_adminLogResults(m *DecodeBuf) TL {
+	tl := TL_channels_adminLogResults{}
+	tl.Events = DecodeBuf_GenericVector[TL_channelAdminLogEvent](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_channelAdminLogEventsFilter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventsFilter)
+	return decode_body_TL_channelAdminLogEventsFilter(m)
+}
+func decode_body_TL_channelAdminLogEventsFilter(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventsFilter{}
+	flags := m.Int()
+	tl.Join = flags&(1<<0) != 0
+	tl.Leave = flags&(1<<1) != 0
+	tl.Invite = flags&(1<<2) != 0
+	tl.Ban = flags&(1<<3) != 0
+	tl.Unban = flags&(1<<4) != 0
+	tl.Kick = flags&(1<<5) != 0
+	tl.Unkick = flags&(1<<6) != 0
+	tl.Promote = flags&(1<<7) != 0
+	tl.Demote = flags&(1<<8) != 0
+	tl.Info = flags&(1<<9) != 0
+	tl.Settings = flags&(1<<10) != 0
+	tl.Pinned = flags&(1<<11) != 0
+	tl.Edit = flags&(1<<12) != 0
+	tl.Delete = flags&(1<<13) != 0
+	tl.GroupCall = flags&(1<<14) != 0
+	tl.Invites = flags&(1<<15) != 0
+	tl.Send = flags&(1<<16) != 0
+	tl.Forums = flags&(1<<17) != 0
+	return tl
+}
+
+func decode_TL_popularContact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_popularContact)
+	return decode_body_TL_popularContact(m)
+}
+func decode_body_TL_popularContact(m *DecodeBuf) TL {
+	tl := TL_popularContact{}
+	tl.ClientID = m.Long()
+	tl.Importers = m.Int()
+	return tl
+}
+
+func decode_TL_messages_favedStickersNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_favedStickersNotModified)
+	return decode_body_TL_messages_favedStickersNotModified(m)
+}
+func decode_body_TL_messages_favedStickersNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_favedStickersNotModified{}
+	return tl
+}
+
+func decode_TL_messages_favedStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_favedStickers)
+	return decode_body_TL_messages_favedStickers(m)
+}
+func decode_body_TL_messages_favedStickers(m *DecodeBuf) TL {
+	tl := TL_messages_favedStickers{}
+	tl.Hash = m.Long()
+	tl.Packs = DecodeBuf_GenericVector[TL_stickerPack](m)
+	tl.Stickers = m.Vector()
+	return tl
+}
+
+func decode_TL_recentMeURLUnknown(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_recentMeURLUnknown)
+	return decode_body_TL_recentMeURLUnknown(m)
+}
+func decode_body_TL_recentMeURLUnknown(m *DecodeBuf) TL {
+	tl := TL_recentMeURLUnknown{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_recentMeURLUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_recentMeURLUser)
+	return decode_body_TL_recentMeURLUser(m)
+}
+func decode_body_TL_recentMeURLUser(m *DecodeBuf) TL {
+	tl := TL_recentMeURLUser{}
+	tl.URL = m.String()
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_recentMeURLChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_recentMeURLChat)
+	return decode_body_TL_recentMeURLChat(m)
+}
+func decode_body_TL_recentMeURLChat(m *DecodeBuf) TL {
+	tl := TL_recentMeURLChat{}
+	tl.URL = m.String()
+	tl.ChatID = m.Long()
+	return tl
+}
+
+func decode_TL_recentMeURLChatInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_recentMeURLChatInvite)
+	return decode_body_TL_recentMeURLChatInvite(m)
+}
+func decode_body_TL_recentMeURLChatInvite(m *DecodeBuf) TL {
+	tl := TL_recentMeURLChatInvite{}
+	tl.URL = m.String()
+	tl.ChatInvite = m.Object()
+	return tl
+}
+
+func decode_TL_recentMeURLStickerSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_recentMeURLStickerSet)
+	return decode_body_TL_recentMeURLStickerSet(m)
+}
+func decode_body_TL_recentMeURLStickerSet(m *DecodeBuf) TL {
+	tl := TL_recentMeURLStickerSet{}
+	tl.URL = m.String()
+	tl.Set = m.Object()
+	return tl
+}
+
+func decode_TL_help_recentMeURLs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_recentMeURLs)
+	return decode_body_TL_help_recentMeURLs(m)
+}
+func decode_body_TL_help_recentMeURLs(m *DecodeBuf) TL {
+	tl := TL_help_recentMeURLs{}
+	tl.URLs = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_inputSingleMedia(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputSingleMedia)
+	return decode_body_TL_inputSingleMedia(m)
+}
+func decode_body_TL_inputSingleMedia(m *DecodeBuf) TL {
+	tl := TL_inputSingleMedia{}
+	flags := m.Int()
+	tl.Media = m.Object()
+	tl.RandomID = m.Long()
+	tl.Message = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Entities = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_webAuthorization(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webAuthorization)
+	return decode_body_TL_webAuthorization(m)
+}
+func decode_body_TL_webAuthorization(m *DecodeBuf) TL {
+	tl := TL_webAuthorization{}
+	tl.Hash = m.Long()
+	tl.BotID = m.Long()
+	tl.Domain = m.String()
+	tl.Browser = m.String()
+	tl.Platform = m.String()
+	tl.DateCreated = m.Int()
+	tl.DateActive = m.Int()
+	tl.IP = m.String()
+	tl.Region = m.String()
+	return tl
+}
+
+func decode_TL_account_webAuthorizations(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_webAuthorizations)
+	return decode_body_TL_account_webAuthorizations(m)
+}
+func decode_body_TL_account_webAuthorizations(m *DecodeBuf) TL {
+	tl := TL_account_webAuthorizations{}
+	tl.Authorizations = DecodeBuf_GenericVector[TL_webAuthorization](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_inputMessageID(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessageID)
+	return decode_body_TL_inputMessageID(m)
+}
+func decode_body_TL_inputMessageID(m *DecodeBuf) TL {
+	tl := TL_inputMessageID{}
+	tl.ID = m.Int()
+	return tl
+}
+
+func decode_TL_inputMessageReplyTo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessageReplyTo)
+	return decode_body_TL_inputMessageReplyTo(m)
+}
+func decode_body_TL_inputMessageReplyTo(m *DecodeBuf) TL {
+	tl := TL_inputMessageReplyTo{}
+	tl.ID = m.Int()
+	return tl
+}
+
+func decode_TL_inputMessagePinned(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessagePinned)
+	return decode_body_TL_inputMessagePinned(m)
+}
+func decode_body_TL_inputMessagePinned(_ *DecodeBuf) TL {
+	tl := TL_inputMessagePinned{}
+	return tl
+}
+
+func decode_TL_inputMessageCallbackQuery(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMessageCallbackQuery)
+	return decode_body_TL_inputMessageCallbackQuery(m)
+}
+func decode_body_TL_inputMessageCallbackQuery(m *DecodeBuf) TL {
+	tl := TL_inputMessageCallbackQuery{}
+	tl.ID = m.Int()
+	tl.QueryID = m.Long()
+	return tl
+}
+
+func decode_TL_inputDialogPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputDialogPeer)
+	return decode_body_TL_inputDialogPeer(m)
+}
+func decode_body_TL_inputDialogPeer(m *DecodeBuf) TL {
+	tl := TL_inputDialogPeer{}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_inputDialogPeerFolder(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputDialogPeerFolder)
+	return decode_body_TL_inputDialogPeerFolder(m)
+}
+func decode_body_TL_inputDialogPeerFolder(m *DecodeBuf) TL {
+	tl := TL_inputDialogPeerFolder{}
+	tl.FolderID = m.Int()
+	return tl
+}
+
+func decode_TL_dialogPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dialogPeer)
+	return decode_body_TL_dialogPeer(m)
+}
+func decode_body_TL_dialogPeer(m *DecodeBuf) TL {
+	tl := TL_dialogPeer{}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_dialogPeerFolder(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dialogPeerFolder)
+	return decode_body_TL_dialogPeerFolder(m)
+}
+func decode_body_TL_dialogPeerFolder(m *DecodeBuf) TL {
+	tl := TL_dialogPeerFolder{}
+	tl.FolderID = m.Int()
+	return tl
+}
+
+func decode_TL_messages_foundStickerSetsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_foundStickerSetsNotModified)
+	return decode_body_TL_messages_foundStickerSetsNotModified(m)
+}
+func decode_body_TL_messages_foundStickerSetsNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_foundStickerSetsNotModified{}
+	return tl
+}
+
+func decode_TL_messages_foundStickerSets(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_foundStickerSets)
+	return decode_body_TL_messages_foundStickerSets(m)
+}
+func decode_body_TL_messages_foundStickerSets(m *DecodeBuf) TL {
+	tl := TL_messages_foundStickerSets{}
+	tl.Hash = m.Long()
+	tl.Sets = m.Vector()
+	return tl
+}
+
+func decode_TL_fileHash(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_fileHash)
+	return decode_body_TL_fileHash(m)
+}
+func decode_body_TL_fileHash(m *DecodeBuf) TL {
+	tl := TL_fileHash{}
+	tl.Offset = m.Long()
+	tl.Limit = m.Int()
+	tl.Hash = m.StringBytes()
+	return tl
+}
+
+func decode_TL_inputClientProxy(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputClientProxy)
+	return decode_body_TL_inputClientProxy(m)
+}
+func decode_body_TL_inputClientProxy(m *DecodeBuf) TL {
+	tl := TL_inputClientProxy{}
+	tl.Address = m.String()
+	tl.Port = m.Int()
+	return tl
+}
+
+func decode_TL_help_termsOfServiceUpdateEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_termsOfServiceUpdateEmpty)
+	return decode_body_TL_help_termsOfServiceUpdateEmpty(m)
+}
+func decode_body_TL_help_termsOfServiceUpdateEmpty(m *DecodeBuf) TL {
+	tl := TL_help_termsOfServiceUpdateEmpty{}
+	tl.Expires = m.Int()
+	return tl
+}
+
+func decode_TL_help_termsOfServiceUpdate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_termsOfServiceUpdate)
+	return decode_body_TL_help_termsOfServiceUpdate(m)
+}
+func decode_body_TL_help_termsOfServiceUpdate(m *DecodeBuf) TL {
+	tl := TL_help_termsOfServiceUpdate{}
+	tl.Expires = m.Int()
+	tl.TermsOfService = decode_TL_help_termsOfService(m).(TL_help_termsOfService)
+	return tl
+}
+
+func decode_TL_inputSecureFileUploaded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputSecureFileUploaded)
+	return decode_body_TL_inputSecureFileUploaded(m)
+}
+func decode_body_TL_inputSecureFileUploaded(m *DecodeBuf) TL {
+	tl := TL_inputSecureFileUploaded{}
+	tl.ID = m.Long()
+	tl.Parts = m.Int()
+	tl.MD5Checksum = m.String()
+	tl.FileHash = m.StringBytes()
+	tl.Secret = m.StringBytes()
+	return tl
+}
+
+func decode_TL_inputSecureFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputSecureFile)
+	return decode_body_TL_inputSecureFile(m)
+}
+func decode_body_TL_inputSecureFile(m *DecodeBuf) TL {
+	tl := TL_inputSecureFile{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_secureFileEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureFileEmpty)
+	return decode_body_TL_secureFileEmpty(m)
+}
+func decode_body_TL_secureFileEmpty(_ *DecodeBuf) TL {
+	tl := TL_secureFileEmpty{}
+	return tl
+}
+
+func decode_TL_secureFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureFile)
+	return decode_body_TL_secureFile(m)
+}
+func decode_body_TL_secureFile(m *DecodeBuf) TL {
+	tl := TL_secureFile{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Size = m.Long()
+	tl.DCID = m.Int()
+	tl.Date = m.Int()
+	tl.FileHash = m.StringBytes()
+	tl.Secret = m.StringBytes()
+	return tl
+}
+
+func decode_TL_secureData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureData)
+	return decode_body_TL_secureData(m)
+}
+func decode_body_TL_secureData(m *DecodeBuf) TL {
+	tl := TL_secureData{}
+	tl.Data = m.StringBytes()
+	tl.DataHash = m.StringBytes()
+	tl.Secret = m.StringBytes()
+	return tl
+}
+
+func decode_TL_securePlainPhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_securePlainPhone)
+	return decode_body_TL_securePlainPhone(m)
+}
+func decode_body_TL_securePlainPhone(m *DecodeBuf) TL {
+	tl := TL_securePlainPhone{}
+	tl.Phone = m.String()
+	return tl
+}
+
+func decode_TL_securePlainEmail(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_securePlainEmail)
+	return decode_body_TL_securePlainEmail(m)
+}
+func decode_body_TL_securePlainEmail(m *DecodeBuf) TL {
+	tl := TL_securePlainEmail{}
+	tl.Email = m.String()
+	return tl
+}
+
+func decode_TL_secureValueTypePersonalDetails(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypePersonalDetails)
+	return decode_body_TL_secureValueTypePersonalDetails(m)
+}
+func decode_body_TL_secureValueTypePersonalDetails(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypePersonalDetails{}
+	return tl
+}
+
+func decode_TL_secureValueTypePassport(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypePassport)
+	return decode_body_TL_secureValueTypePassport(m)
+}
+func decode_body_TL_secureValueTypePassport(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypePassport{}
+	return tl
+}
+
+func decode_TL_secureValueTypeDriverLicense(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeDriverLicense)
+	return decode_body_TL_secureValueTypeDriverLicense(m)
+}
+func decode_body_TL_secureValueTypeDriverLicense(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeDriverLicense{}
+	return tl
+}
+
+func decode_TL_secureValueTypeIdentityCard(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeIdentityCard)
+	return decode_body_TL_secureValueTypeIdentityCard(m)
+}
+func decode_body_TL_secureValueTypeIdentityCard(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeIdentityCard{}
+	return tl
+}
+
+func decode_TL_secureValueTypeInternalPassport(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeInternalPassport)
+	return decode_body_TL_secureValueTypeInternalPassport(m)
+}
+func decode_body_TL_secureValueTypeInternalPassport(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeInternalPassport{}
+	return tl
+}
+
+func decode_TL_secureValueTypeAddress(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeAddress)
+	return decode_body_TL_secureValueTypeAddress(m)
+}
+func decode_body_TL_secureValueTypeAddress(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeAddress{}
+	return tl
+}
+
+func decode_TL_secureValueTypeUtilityBill(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeUtilityBill)
+	return decode_body_TL_secureValueTypeUtilityBill(m)
+}
+func decode_body_TL_secureValueTypeUtilityBill(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeUtilityBill{}
+	return tl
+}
+
+func decode_TL_secureValueTypeBankStatement(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeBankStatement)
+	return decode_body_TL_secureValueTypeBankStatement(m)
+}
+func decode_body_TL_secureValueTypeBankStatement(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeBankStatement{}
+	return tl
+}
+
+func decode_TL_secureValueTypeRentalAgreement(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeRentalAgreement)
+	return decode_body_TL_secureValueTypeRentalAgreement(m)
+}
+func decode_body_TL_secureValueTypeRentalAgreement(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeRentalAgreement{}
+	return tl
+}
+
+func decode_TL_secureValueTypePassportRegistration(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypePassportRegistration)
+	return decode_body_TL_secureValueTypePassportRegistration(m)
+}
+func decode_body_TL_secureValueTypePassportRegistration(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypePassportRegistration{}
+	return tl
+}
+
+func decode_TL_secureValueTypeTemporaryRegistration(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeTemporaryRegistration)
+	return decode_body_TL_secureValueTypeTemporaryRegistration(m)
+}
+func decode_body_TL_secureValueTypeTemporaryRegistration(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeTemporaryRegistration{}
+	return tl
+}
+
+func decode_TL_secureValueTypePhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypePhone)
+	return decode_body_TL_secureValueTypePhone(m)
+}
+func decode_body_TL_secureValueTypePhone(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypePhone{}
+	return tl
+}
+
+func decode_TL_secureValueTypeEmail(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueTypeEmail)
+	return decode_body_TL_secureValueTypeEmail(m)
+}
+func decode_body_TL_secureValueTypeEmail(_ *DecodeBuf) TL {
+	tl := TL_secureValueTypeEmail{}
+	return tl
+}
+
+func decode_TL_secureValue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValue)
+	return decode_body_TL_secureValue(m)
+}
+func decode_body_TL_secureValue(m *DecodeBuf) TL {
+	tl := TL_secureValue{}
+	flags := m.Int()
+	tl.Type = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Data = Ref(decode_TL_secureData(m).(TL_secureData))
+	}
+	if flags&(1<<1) != 0 {
+		tl.FrontSide = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReverseSide = m.Object()
+	}
+	if flags&(1<<3) != 0 {
+		tl.Selfie = m.Object()
+	}
+	if flags&(1<<6) != 0 {
+		tl.Translation = m.Vector()
+	}
+	if flags&(1<<4) != 0 {
+		tl.Files = m.Vector()
+	}
+	if flags&(1<<5) != 0 {
+		tl.PlainData = m.Object()
+	}
+	tl.Hash = m.StringBytes()
+	return tl
+}
+
+func decode_TL_inputSecureValue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputSecureValue)
+	return decode_body_TL_inputSecureValue(m)
+}
+func decode_body_TL_inputSecureValue(m *DecodeBuf) TL {
+	tl := TL_inputSecureValue{}
+	flags := m.Int()
+	tl.Type = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Data = Ref(decode_TL_secureData(m).(TL_secureData))
+	}
+	if flags&(1<<1) != 0 {
+		tl.FrontSide = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReverseSide = m.Object()
+	}
+	if flags&(1<<3) != 0 {
+		tl.Selfie = m.Object()
+	}
+	if flags&(1<<6) != 0 {
+		tl.Translation = m.Vector()
+	}
+	if flags&(1<<4) != 0 {
+		tl.Files = m.Vector()
+	}
+	if flags&(1<<5) != 0 {
+		tl.PlainData = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_secureValueHash(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueHash)
+	return decode_body_TL_secureValueHash(m)
+}
+func decode_body_TL_secureValueHash(m *DecodeBuf) TL {
+	tl := TL_secureValueHash{}
+	tl.Type = m.Object()
+	tl.Hash = m.StringBytes()
+	return tl
+}
+
+func decode_TL_secureValueErrorData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueErrorData)
+	return decode_body_TL_secureValueErrorData(m)
+}
+func decode_body_TL_secureValueErrorData(m *DecodeBuf) TL {
+	tl := TL_secureValueErrorData{}
+	tl.Type = m.Object()
+	tl.DataHash = m.StringBytes()
+	tl.Field = m.String()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureValueErrorFrontSide(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueErrorFrontSide)
+	return decode_body_TL_secureValueErrorFrontSide(m)
+}
+func decode_body_TL_secureValueErrorFrontSide(m *DecodeBuf) TL {
+	tl := TL_secureValueErrorFrontSide{}
+	tl.Type = m.Object()
+	tl.FileHash = m.StringBytes()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureValueErrorReverseSide(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueErrorReverseSide)
+	return decode_body_TL_secureValueErrorReverseSide(m)
+}
+func decode_body_TL_secureValueErrorReverseSide(m *DecodeBuf) TL {
+	tl := TL_secureValueErrorReverseSide{}
+	tl.Type = m.Object()
+	tl.FileHash = m.StringBytes()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureValueErrorSelfie(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueErrorSelfie)
+	return decode_body_TL_secureValueErrorSelfie(m)
+}
+func decode_body_TL_secureValueErrorSelfie(m *DecodeBuf) TL {
+	tl := TL_secureValueErrorSelfie{}
+	tl.Type = m.Object()
+	tl.FileHash = m.StringBytes()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureValueErrorFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueErrorFile)
+	return decode_body_TL_secureValueErrorFile(m)
+}
+func decode_body_TL_secureValueErrorFile(m *DecodeBuf) TL {
+	tl := TL_secureValueErrorFile{}
+	tl.Type = m.Object()
+	tl.FileHash = m.StringBytes()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureValueErrorFiles(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueErrorFiles)
+	return decode_body_TL_secureValueErrorFiles(m)
+}
+func decode_body_TL_secureValueErrorFiles(m *DecodeBuf) TL {
+	tl := TL_secureValueErrorFiles{}
+	tl.Type = m.Object()
+	tl.FileHash = m.VectorBytes()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureValueError(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueError)
+	return decode_body_TL_secureValueError(m)
+}
+func decode_body_TL_secureValueError(m *DecodeBuf) TL {
+	tl := TL_secureValueError{}
+	tl.Type = m.Object()
+	tl.Hash = m.StringBytes()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureValueErrorTranslationFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueErrorTranslationFile)
+	return decode_body_TL_secureValueErrorTranslationFile(m)
+}
+func decode_body_TL_secureValueErrorTranslationFile(m *DecodeBuf) TL {
+	tl := TL_secureValueErrorTranslationFile{}
+	tl.Type = m.Object()
+	tl.FileHash = m.StringBytes()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureValueErrorTranslationFiles(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureValueErrorTranslationFiles)
+	return decode_body_TL_secureValueErrorTranslationFiles(m)
+}
+func decode_body_TL_secureValueErrorTranslationFiles(m *DecodeBuf) TL {
+	tl := TL_secureValueErrorTranslationFiles{}
+	tl.Type = m.Object()
+	tl.FileHash = m.VectorBytes()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_secureCredentialsEncrypted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureCredentialsEncrypted)
+	return decode_body_TL_secureCredentialsEncrypted(m)
+}
+func decode_body_TL_secureCredentialsEncrypted(m *DecodeBuf) TL {
+	tl := TL_secureCredentialsEncrypted{}
+	tl.Data = m.StringBytes()
+	tl.Hash = m.StringBytes()
+	tl.Secret = m.StringBytes()
+	return tl
+}
+
+func decode_TL_account_authorizationForm(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_authorizationForm)
+	return decode_body_TL_account_authorizationForm(m)
+}
+func decode_body_TL_account_authorizationForm(m *DecodeBuf) TL {
+	tl := TL_account_authorizationForm{}
+	flags := m.Int()
+	tl.RequiredTypes = m.Vector()
+	tl.Values = DecodeBuf_GenericVector[TL_secureValue](m)
+	tl.Errors = m.Vector()
+	tl.Users = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.PrivacyPolicyURL = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_account_sentEmailCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_sentEmailCode)
+	return decode_body_TL_account_sentEmailCode(m)
+}
+func decode_body_TL_account_sentEmailCode(m *DecodeBuf) TL {
+	tl := TL_account_sentEmailCode{}
+	tl.EmailPattern = m.String()
+	tl.Length = m.Int()
+	return tl
+}
+
+func decode_TL_help_deepLinkInfoEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_deepLinkInfoEmpty)
+	return decode_body_TL_help_deepLinkInfoEmpty(m)
+}
+func decode_body_TL_help_deepLinkInfoEmpty(_ *DecodeBuf) TL {
+	tl := TL_help_deepLinkInfoEmpty{}
+	return tl
+}
+
+func decode_TL_help_deepLinkInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_deepLinkInfo)
+	return decode_body_TL_help_deepLinkInfo(m)
+}
+func decode_body_TL_help_deepLinkInfo(m *DecodeBuf) TL {
+	tl := TL_help_deepLinkInfo{}
+	flags := m.Int()
+	tl.UpdateApp = flags&(1<<0) != 0
+	tl.Message = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_savedPhoneContact(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_savedPhoneContact)
+	return decode_body_TL_savedPhoneContact(m)
+}
+func decode_body_TL_savedPhoneContact(m *DecodeBuf) TL {
+	tl := TL_savedPhoneContact{}
+	tl.Phone = m.String()
+	tl.FirstName = m.String()
+	tl.LastName = m.String()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_account_takeout(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_takeout)
+	return decode_body_TL_account_takeout(m)
+}
+func decode_body_TL_account_takeout(m *DecodeBuf) TL {
+	tl := TL_account_takeout{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_passwordKDFAlgoUnknown(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_passwordKDFAlgoUnknown)
+	return decode_body_TL_passwordKDFAlgoUnknown(m)
+}
+func decode_body_TL_passwordKDFAlgoUnknown(_ *DecodeBuf) TL {
+	tl := TL_passwordKDFAlgoUnknown{}
+	return tl
+}
+
+func decode_TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow)
+	return decode_body_TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow(m)
+}
+func decode_body_TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow(m *DecodeBuf) TL {
+	tl := TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{}
+	tl.Salt1 = m.StringBytes()
+	tl.Salt2 = m.StringBytes()
+	tl.G = m.Int()
+	tl.P = m.StringBytes()
+	return tl
+}
+
+func decode_TL_securePasswordKDFAlgoUnknown(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_securePasswordKDFAlgoUnknown)
+	return decode_body_TL_securePasswordKDFAlgoUnknown(m)
+}
+func decode_body_TL_securePasswordKDFAlgoUnknown(_ *DecodeBuf) TL {
+	tl := TL_securePasswordKDFAlgoUnknown{}
+	return tl
+}
+
+func decode_TL_securePasswordKDFAlgoPBKDF2HMACSHA512iter100000(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_securePasswordKDFAlgoPBKDF2HMACSHA512iter100000)
+	return decode_body_TL_securePasswordKDFAlgoPBKDF2HMACSHA512iter100000(m)
+}
+func decode_body_TL_securePasswordKDFAlgoPBKDF2HMACSHA512iter100000(m *DecodeBuf) TL {
+	tl := TL_securePasswordKDFAlgoPBKDF2HMACSHA512iter100000{}
+	tl.Salt = m.StringBytes()
+	return tl
+}
+
+func decode_TL_securePasswordKDFAlgoSHA512(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_securePasswordKDFAlgoSHA512)
+	return decode_body_TL_securePasswordKDFAlgoSHA512(m)
+}
+func decode_body_TL_securePasswordKDFAlgoSHA512(m *DecodeBuf) TL {
+	tl := TL_securePasswordKDFAlgoSHA512{}
+	tl.Salt = m.StringBytes()
+	return tl
+}
+
+func decode_TL_secureSecretSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureSecretSettings)
+	return decode_body_TL_secureSecretSettings(m)
+}
+func decode_body_TL_secureSecretSettings(m *DecodeBuf) TL {
+	tl := TL_secureSecretSettings{}
+	tl.SecureAlgo = m.Object()
+	tl.SecureSecret = m.StringBytes()
+	tl.SecureSecretID = m.Long()
+	return tl
+}
+
+func decode_TL_inputCheckPasswordEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputCheckPasswordEmpty)
+	return decode_body_TL_inputCheckPasswordEmpty(m)
+}
+func decode_body_TL_inputCheckPasswordEmpty(_ *DecodeBuf) TL {
+	tl := TL_inputCheckPasswordEmpty{}
+	return tl
+}
+
+func decode_TL_inputCheckPasswordSRP(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputCheckPasswordSRP)
+	return decode_body_TL_inputCheckPasswordSRP(m)
+}
+func decode_body_TL_inputCheckPasswordSRP(m *DecodeBuf) TL {
+	tl := TL_inputCheckPasswordSRP{}
+	tl.SrpID = m.Long()
+	tl.A = m.StringBytes()
+	tl.M1 = m.StringBytes()
+	return tl
+}
+
+func decode_TL_secureRequiredType(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureRequiredType)
+	return decode_body_TL_secureRequiredType(m)
+}
+func decode_body_TL_secureRequiredType(m *DecodeBuf) TL {
+	tl := TL_secureRequiredType{}
+	flags := m.Int()
+	tl.NativeNames = flags&(1<<0) != 0
+	tl.SelfieRequired = flags&(1<<1) != 0
+	tl.TranslationRequired = flags&(1<<2) != 0
+	tl.Type = m.Object()
+	return tl
+}
+
+func decode_TL_secureRequiredTypeOneOf(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_secureRequiredTypeOneOf)
+	return decode_body_TL_secureRequiredTypeOneOf(m)
+}
+func decode_body_TL_secureRequiredTypeOneOf(m *DecodeBuf) TL {
+	tl := TL_secureRequiredTypeOneOf{}
+	tl.Types = m.Vector()
+	return tl
+}
+
+func decode_TL_help_passportConfigNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_passportConfigNotModified)
+	return decode_body_TL_help_passportConfigNotModified(m)
+}
+func decode_body_TL_help_passportConfigNotModified(_ *DecodeBuf) TL {
+	tl := TL_help_passportConfigNotModified{}
+	return tl
+}
+
+func decode_TL_help_passportConfig(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_passportConfig)
+	return decode_body_TL_help_passportConfig(m)
+}
+func decode_body_TL_help_passportConfig(m *DecodeBuf) TL {
+	tl := TL_help_passportConfig{}
+	tl.Hash = m.Int()
+	tl.CountriesLangs = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_inputAppEvent(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputAppEvent)
+	return decode_body_TL_inputAppEvent(m)
+}
+func decode_body_TL_inputAppEvent(m *DecodeBuf) TL {
+	tl := TL_inputAppEvent{}
+	tl.Time = m.Double()
+	tl.Type = m.String()
+	tl.Peer = m.Long()
+	tl.Data = m.Object()
+	return tl
+}
+
+func decode_TL_jsonObjectValue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_jsonObjectValue)
+	return decode_body_TL_jsonObjectValue(m)
+}
+func decode_body_TL_jsonObjectValue(m *DecodeBuf) TL {
+	tl := TL_jsonObjectValue{}
+	tl.Key = m.String()
+	tl.Value = m.Object()
+	return tl
+}
+
+func decode_TL_jsonNull(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_jsonNull)
+	return decode_body_TL_jsonNull(m)
+}
+func decode_body_TL_jsonNull(_ *DecodeBuf) TL {
+	tl := TL_jsonNull{}
+	return tl
+}
+
+func decode_TL_jsonBool(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_jsonBool)
+	return decode_body_TL_jsonBool(m)
+}
+func decode_body_TL_jsonBool(m *DecodeBuf) TL {
+	tl := TL_jsonBool{}
+	tl.Value = m.Bool()
+	return tl
+}
+
+func decode_TL_jsonNumber(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_jsonNumber)
+	return decode_body_TL_jsonNumber(m)
+}
+func decode_body_TL_jsonNumber(m *DecodeBuf) TL {
+	tl := TL_jsonNumber{}
+	tl.Value = m.Double()
+	return tl
+}
+
+func decode_TL_jsonString(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_jsonString)
+	return decode_body_TL_jsonString(m)
+}
+func decode_body_TL_jsonString(m *DecodeBuf) TL {
+	tl := TL_jsonString{}
+	tl.Value = m.String()
+	return tl
+}
+
+func decode_TL_jsonArray(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_jsonArray)
+	return decode_body_TL_jsonArray(m)
+}
+func decode_body_TL_jsonArray(m *DecodeBuf) TL {
+	tl := TL_jsonArray{}
+	tl.Value = m.Vector()
+	return tl
+}
+
+func decode_TL_jsonObject(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_jsonObject)
+	return decode_body_TL_jsonObject(m)
+}
+func decode_body_TL_jsonObject(m *DecodeBuf) TL {
+	tl := TL_jsonObject{}
+	tl.Value = DecodeBuf_GenericVector[TL_jsonObjectValue](m)
+	return tl
+}
+
+func decode_TL_pageTableCell(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageTableCell)
+	return decode_body_TL_pageTableCell(m)
+}
+func decode_body_TL_pageTableCell(m *DecodeBuf) TL {
+	tl := TL_pageTableCell{}
+	flags := m.Int()
+	tl.Header = flags&(1<<0) != 0
+	tl.AlignCenter = flags&(1<<3) != 0
+	tl.AlignRight = flags&(1<<4) != 0
+	tl.ValignMiddle = flags&(1<<5) != 0
+	tl.ValignBottom = flags&(1<<6) != 0
+	if flags&(1<<7) != 0 {
+		tl.Text = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Colspan = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Rowspan = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_pageTableRow(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageTableRow)
+	return decode_body_TL_pageTableRow(m)
+}
+func decode_body_TL_pageTableRow(m *DecodeBuf) TL {
+	tl := TL_pageTableRow{}
+	tl.Cells = DecodeBuf_GenericVector[TL_pageTableCell](m)
+	return tl
+}
+
+func decode_TL_pageCaption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageCaption)
+	return decode_body_TL_pageCaption(m)
+}
+func decode_body_TL_pageCaption(m *DecodeBuf) TL {
+	tl := TL_pageCaption{}
+	tl.Text = m.Object()
+	tl.Credit = m.Object()
+	return tl
+}
+
+func decode_TL_pageListItemText(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageListItemText)
+	return decode_body_TL_pageListItemText(m)
+}
+func decode_body_TL_pageListItemText(m *DecodeBuf) TL {
+	tl := TL_pageListItemText{}
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageListItemBlocks(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageListItemBlocks)
+	return decode_body_TL_pageListItemBlocks(m)
+}
+func decode_body_TL_pageListItemBlocks(m *DecodeBuf) TL {
+	tl := TL_pageListItemBlocks{}
+	tl.Blocks = m.Vector()
+	return tl
+}
+
+func decode_TL_pageListOrderedItemText(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageListOrderedItemText)
+	return decode_body_TL_pageListOrderedItemText(m)
+}
+func decode_body_TL_pageListOrderedItemText(m *DecodeBuf) TL {
+	tl := TL_pageListOrderedItemText{}
+	tl.Num = m.String()
+	tl.Text = m.Object()
+	return tl
+}
+
+func decode_TL_pageListOrderedItemBlocks(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageListOrderedItemBlocks)
+	return decode_body_TL_pageListOrderedItemBlocks(m)
+}
+func decode_body_TL_pageListOrderedItemBlocks(m *DecodeBuf) TL {
+	tl := TL_pageListOrderedItemBlocks{}
+	tl.Num = m.String()
+	tl.Blocks = m.Vector()
+	return tl
+}
+
+func decode_TL_pageRelatedArticle(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pageRelatedArticle)
+	return decode_body_TL_pageRelatedArticle(m)
+}
+func decode_body_TL_pageRelatedArticle(m *DecodeBuf) TL {
+	tl := TL_pageRelatedArticle{}
+	flags := m.Int()
+	tl.URL = m.String()
+	tl.WebpageID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Description = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.PhotoID = Ref(m.Long())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Author = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.PublishedDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_page(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_page)
+	return decode_body_TL_page(m)
+}
+func decode_body_TL_page(m *DecodeBuf) TL {
+	tl := TL_page{}
+	flags := m.Int()
+	tl.Part = flags&(1<<0) != 0
+	tl.RTL = flags&(1<<1) != 0
+	tl.V2 = flags&(1<<2) != 0
+	tl.URL = m.String()
+	tl.Blocks = m.Vector()
+	tl.Photos = m.Vector()
+	tl.Documents = m.Vector()
+	if flags&(1<<3) != 0 {
+		tl.Views = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_help_supportName(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_supportName)
+	return decode_body_TL_help_supportName(m)
+}
+func decode_body_TL_help_supportName(m *DecodeBuf) TL {
+	tl := TL_help_supportName{}
+	tl.Name = m.String()
+	return tl
+}
+
+func decode_TL_help_userInfoEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_userInfoEmpty)
+	return decode_body_TL_help_userInfoEmpty(m)
+}
+func decode_body_TL_help_userInfoEmpty(_ *DecodeBuf) TL {
+	tl := TL_help_userInfoEmpty{}
+	return tl
+}
+
+func decode_TL_help_userInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_userInfo)
+	return decode_body_TL_help_userInfo(m)
+}
+func decode_body_TL_help_userInfo(m *DecodeBuf) TL {
+	tl := TL_help_userInfo{}
+	tl.Message = m.String()
+	tl.Entities = m.Vector()
+	tl.Author = m.String()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_pollAnswer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pollAnswer)
+	return decode_body_TL_pollAnswer(m)
+}
+func decode_body_TL_pollAnswer(m *DecodeBuf) TL {
+	tl := TL_pollAnswer{}
+	tl.Text = decode_TL_textWithEntities(m).(TL_textWithEntities)
+	tl.Option = m.StringBytes()
+	return tl
+}
+
+func decode_TL_poll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_poll)
+	return decode_body_TL_poll(m)
+}
+func decode_body_TL_poll(m *DecodeBuf) TL {
+	tl := TL_poll{}
+	tl.ID = m.Long()
+	flags := m.Int()
+	tl.Closed = flags&(1<<0) != 0
+	tl.PublicVoters = flags&(1<<1) != 0
+	tl.MultipleChoice = flags&(1<<2) != 0
+	tl.Quiz = flags&(1<<3) != 0
+	tl.Question = decode_TL_textWithEntities(m).(TL_textWithEntities)
+	tl.Answers = DecodeBuf_GenericVector[TL_pollAnswer](m)
+	if flags&(1<<4) != 0 {
+		tl.ClosePeriod = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.CloseDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_pollAnswerVoters(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pollAnswerVoters)
+	return decode_body_TL_pollAnswerVoters(m)
+}
+func decode_body_TL_pollAnswerVoters(m *DecodeBuf) TL {
+	tl := TL_pollAnswerVoters{}
+	flags := m.Int()
+	tl.Chosen = flags&(1<<0) != 0
+	tl.Correct = flags&(1<<1) != 0
+	tl.Option = m.StringBytes()
+	tl.Voters = m.Int()
+	return tl
+}
+
+func decode_TL_pollResults(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_pollResults)
+	return decode_body_TL_pollResults(m)
+}
+func decode_body_TL_pollResults(m *DecodeBuf) TL {
+	tl := TL_pollResults{}
+	flags := m.Int()
+	tl.Min = flags&(1<<0) != 0
+	if flags&(1<<1) != 0 {
+		tl.Results = DecodeBuf_GenericVector[TL_pollAnswerVoters](m)
+	}
+	if flags&(1<<2) != 0 {
+		tl.TotalVoters = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.RecentVoters = m.Vector()
+	}
+	if flags&(1<<4) != 0 {
+		tl.Solution = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.SolutionEntities = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_chatOnlines(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatOnlines)
+	return decode_body_TL_chatOnlines(m)
+}
+func decode_body_TL_chatOnlines(m *DecodeBuf) TL {
+	tl := TL_chatOnlines{}
+	tl.Onlines = m.Int()
+	return tl
+}
+
+func decode_TL_statsURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsURL)
+	return decode_body_TL_statsURL(m)
+}
+func decode_body_TL_statsURL(m *DecodeBuf) TL {
+	tl := TL_statsURL{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_chatAdminRights(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatAdminRights)
+	return decode_body_TL_chatAdminRights(m)
+}
+func decode_body_TL_chatAdminRights(m *DecodeBuf) TL {
+	tl := TL_chatAdminRights{}
+	flags := m.Int()
+	tl.ChangeInfo = flags&(1<<0) != 0
+	tl.PostMessages = flags&(1<<1) != 0
+	tl.EditMessages = flags&(1<<2) != 0
+	tl.DeleteMessages = flags&(1<<3) != 0
+	tl.BanUsers = flags&(1<<4) != 0
+	tl.InviteUsers = flags&(1<<5) != 0
+	tl.PINMessages = flags&(1<<7) != 0
+	tl.AddAdmins = flags&(1<<9) != 0
+	tl.Anonymous = flags&(1<<10) != 0
+	tl.ManageCall = flags&(1<<11) != 0
+	tl.Other = flags&(1<<12) != 0
+	tl.ManageTopics = flags&(1<<13) != 0
+	tl.PostStories = flags&(1<<14) != 0
+	tl.EditStories = flags&(1<<15) != 0
+	tl.DeleteStories = flags&(1<<16) != 0
+	return tl
+}
+
+func decode_TL_chatBannedRights(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatBannedRights)
+	return decode_body_TL_chatBannedRights(m)
+}
+func decode_body_TL_chatBannedRights(m *DecodeBuf) TL {
+	tl := TL_chatBannedRights{}
+	flags := m.Int()
+	tl.ViewMessages = flags&(1<<0) != 0
+	tl.SendMessages = flags&(1<<1) != 0
+	tl.SendMedia = flags&(1<<2) != 0
+	tl.SendStickers = flags&(1<<3) != 0
+	tl.SendGIFs = flags&(1<<4) != 0
+	tl.SendGames = flags&(1<<5) != 0
+	tl.SendInline = flags&(1<<6) != 0
+	tl.EmbedLinks = flags&(1<<7) != 0
+	tl.SendPolls = flags&(1<<8) != 0
+	tl.ChangeInfo = flags&(1<<10) != 0
+	tl.InviteUsers = flags&(1<<15) != 0
+	tl.PINMessages = flags&(1<<17) != 0
+	tl.ManageTopics = flags&(1<<18) != 0
+	tl.SendPhotos = flags&(1<<19) != 0
+	tl.SendVideos = flags&(1<<20) != 0
+	tl.SendRoundvideos = flags&(1<<21) != 0
+	tl.SendAudios = flags&(1<<22) != 0
+	tl.SendVoices = flags&(1<<23) != 0
+	tl.SendDocs = flags&(1<<24) != 0
+	tl.SendPlain = flags&(1<<25) != 0
+	tl.UntilDate = m.Int()
+	return tl
+}
+
+func decode_TL_inputWallPaper(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputWallPaper)
+	return decode_body_TL_inputWallPaper(m)
+}
+func decode_body_TL_inputWallPaper(m *DecodeBuf) TL {
+	tl := TL_inputWallPaper{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputWallPaperSlug(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputWallPaperSlug)
+	return decode_body_TL_inputWallPaperSlug(m)
+}
+func decode_body_TL_inputWallPaperSlug(m *DecodeBuf) TL {
+	tl := TL_inputWallPaperSlug{}
+	tl.Slug = m.String()
+	return tl
+}
+
+func decode_TL_inputWallPaperNoFile(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputWallPaperNoFile)
+	return decode_body_TL_inputWallPaperNoFile(m)
+}
+func decode_body_TL_inputWallPaperNoFile(m *DecodeBuf) TL {
+	tl := TL_inputWallPaperNoFile{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_account_wallPapersNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_wallPapersNotModified)
+	return decode_body_TL_account_wallPapersNotModified(m)
+}
+func decode_body_TL_account_wallPapersNotModified(_ *DecodeBuf) TL {
+	tl := TL_account_wallPapersNotModified{}
+	return tl
+}
+
+func decode_TL_account_wallPapers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_wallPapers)
+	return decode_body_TL_account_wallPapers(m)
+}
+func decode_body_TL_account_wallPapers(m *DecodeBuf) TL {
+	tl := TL_account_wallPapers{}
+	tl.Hash = m.Long()
+	tl.Wallpapers = m.Vector()
+	return tl
+}
+
+func decode_TL_codeSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_codeSettings)
+	return decode_body_TL_codeSettings(m)
+}
+func decode_body_TL_codeSettings(m *DecodeBuf) TL {
+	tl := TL_codeSettings{}
+	flags := m.Int()
+	tl.AllowFlashcall = flags&(1<<0) != 0
+	tl.CurrentNumber = flags&(1<<1) != 0
+	tl.AllowAppHash = flags&(1<<4) != 0
+	tl.AllowMissedCall = flags&(1<<5) != 0
+	tl.AllowFirebase = flags&(1<<7) != 0
+	tl.UnknownNumber = flags&(1<<9) != 0
+	if flags&(1<<6) != 0 {
+		tl.LogoutTokens = m.VectorBytes()
+	}
+	if flags&(1<<8) != 0 {
+		tl.Token = Ref(m.String())
+	}
+	if flags&(1<<8) != 0 {
+		tl.AppSandbox = Ref(m.Bool())
+	}
+	return tl
+}
+
+func decode_TL_wallPaperSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_wallPaperSettings)
+	return decode_body_TL_wallPaperSettings(m)
+}
+func decode_body_TL_wallPaperSettings(m *DecodeBuf) TL {
+	tl := TL_wallPaperSettings{}
+	flags := m.Int()
+	tl.Blur = flags&(1<<1) != 0
+	tl.Motion = flags&(1<<2) != 0
+	if flags&(1<<0) != 0 {
+		tl.BackgroundColor = Ref(m.Int())
+	}
+	if flags&(1<<4) != 0 {
+		tl.SecondBackgroundColor = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.ThirdBackgroundColor = Ref(m.Int())
+	}
+	if flags&(1<<6) != 0 {
+		tl.FourthBackgroundColor = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Intensity = Ref(m.Int())
+	}
+	if flags&(1<<4) != 0 {
+		tl.Rotation = Ref(m.Int())
+	}
+	if flags&(1<<7) != 0 {
+		tl.Emoticon = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_autoDownloadSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_autoDownloadSettings)
+	return decode_body_TL_autoDownloadSettings(m)
+}
+func decode_body_TL_autoDownloadSettings(m *DecodeBuf) TL {
+	tl := TL_autoDownloadSettings{}
+	flags := m.Int()
+	tl.Disabled = flags&(1<<0) != 0
+	tl.VideoPreloadLarge = flags&(1<<1) != 0
+	tl.AudioPreloadNext = flags&(1<<2) != 0
+	tl.PhonecallsLessData = flags&(1<<3) != 0
+	tl.StoriesPreload = flags&(1<<4) != 0
+	tl.PhotoSizeMax = m.Int()
+	tl.VideoSizeMax = m.Long()
+	tl.FileSizeMax = m.Long()
+	tl.VideoUploadMaxbitrate = m.Int()
+	tl.SmallQueueActiveOperationsMax = m.Int()
+	tl.LargeQueueActiveOperationsMax = m.Int()
+	return tl
+}
+
+func decode_TL_account_autoDownloadSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_autoDownloadSettings)
+	return decode_body_TL_account_autoDownloadSettings(m)
+}
+func decode_body_TL_account_autoDownloadSettings(m *DecodeBuf) TL {
+	tl := TL_account_autoDownloadSettings{}
+	tl.Low = decode_TL_autoDownloadSettings(m).(TL_autoDownloadSettings)
+	tl.Medium = decode_TL_autoDownloadSettings(m).(TL_autoDownloadSettings)
+	tl.High = decode_TL_autoDownloadSettings(m).(TL_autoDownloadSettings)
+	return tl
+}
+
+func decode_TL_emojiKeyword(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiKeyword)
+	return decode_body_TL_emojiKeyword(m)
+}
+func decode_body_TL_emojiKeyword(m *DecodeBuf) TL {
+	tl := TL_emojiKeyword{}
+	tl.Keyword = m.String()
+	tl.Emoticons = m.VectorString()
+	return tl
+}
+
+func decode_TL_emojiKeywordDeleted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiKeywordDeleted)
+	return decode_body_TL_emojiKeywordDeleted(m)
+}
+func decode_body_TL_emojiKeywordDeleted(m *DecodeBuf) TL {
+	tl := TL_emojiKeywordDeleted{}
+	tl.Keyword = m.String()
+	tl.Emoticons = m.VectorString()
+	return tl
+}
+
+func decode_TL_emojiKeywordsDifference(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiKeywordsDifference)
+	return decode_body_TL_emojiKeywordsDifference(m)
+}
+func decode_body_TL_emojiKeywordsDifference(m *DecodeBuf) TL {
+	tl := TL_emojiKeywordsDifference{}
+	tl.LangCode = m.String()
+	tl.FromVersion = m.Int()
+	tl.Version = m.Int()
+	tl.Keywords = m.Vector()
+	return tl
+}
+
+func decode_TL_emojiURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiURL)
+	return decode_body_TL_emojiURL(m)
+}
+func decode_body_TL_emojiURL(m *DecodeBuf) TL {
+	tl := TL_emojiURL{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_emojiLanguage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiLanguage)
+	return decode_body_TL_emojiLanguage(m)
+}
+func decode_body_TL_emojiLanguage(m *DecodeBuf) TL {
+	tl := TL_emojiLanguage{}
+	tl.LangCode = m.String()
+	return tl
+}
+
+func decode_TL_folder(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_folder)
+	return decode_body_TL_folder(m)
+}
+func decode_body_TL_folder(m *DecodeBuf) TL {
+	tl := TL_folder{}
+	flags := m.Int()
+	tl.AutofillNewBroadcasts = flags&(1<<0) != 0
+	tl.AutofillPublicGroups = flags&(1<<1) != 0
+	tl.AutofillNewCorrespondents = flags&(1<<2) != 0
+	tl.ID = m.Int()
+	tl.Title = m.String()
+	if flags&(1<<3) != 0 {
+		tl.Photo = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_inputFolderPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputFolderPeer)
+	return decode_body_TL_inputFolderPeer(m)
+}
+func decode_body_TL_inputFolderPeer(m *DecodeBuf) TL {
+	tl := TL_inputFolderPeer{}
+	tl.Peer = m.Object()
+	tl.FolderID = m.Int()
+	return tl
+}
+
+func decode_TL_folderPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_folderPeer)
+	return decode_body_TL_folderPeer(m)
+}
+func decode_body_TL_folderPeer(m *DecodeBuf) TL {
+	tl := TL_folderPeer{}
+	tl.Peer = m.Object()
+	tl.FolderID = m.Int()
+	return tl
+}
+
+func decode_TL_messages_searchCounter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_searchCounter)
+	return decode_body_TL_messages_searchCounter(m)
+}
+func decode_body_TL_messages_searchCounter(m *DecodeBuf) TL {
+	tl := TL_messages_searchCounter{}
+	flags := m.Int()
+	tl.Inexact = flags&(1<<1) != 0
+	tl.Filter = m.Object()
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_urlAuthResultRequest(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_urlAuthResultRequest)
+	return decode_body_TL_urlAuthResultRequest(m)
+}
+func decode_body_TL_urlAuthResultRequest(m *DecodeBuf) TL {
+	tl := TL_urlAuthResultRequest{}
+	flags := m.Int()
+	tl.RequestWriteAccess = flags&(1<<0) != 0
+	tl.Bot = m.Object()
+	tl.Domain = m.String()
+	return tl
+}
+
+func decode_TL_urlAuthResultAccepted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_urlAuthResultAccepted)
+	return decode_body_TL_urlAuthResultAccepted(m)
+}
+func decode_body_TL_urlAuthResultAccepted(m *DecodeBuf) TL {
+	tl := TL_urlAuthResultAccepted{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_urlAuthResultDefault(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_urlAuthResultDefault)
+	return decode_body_TL_urlAuthResultDefault(m)
+}
+func decode_body_TL_urlAuthResultDefault(_ *DecodeBuf) TL {
+	tl := TL_urlAuthResultDefault{}
+	return tl
+}
+
+func decode_TL_channelLocationEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelLocationEmpty)
+	return decode_body_TL_channelLocationEmpty(m)
+}
+func decode_body_TL_channelLocationEmpty(_ *DecodeBuf) TL {
+	tl := TL_channelLocationEmpty{}
+	return tl
+}
+
+func decode_TL_channelLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelLocation)
+	return decode_body_TL_channelLocation(m)
+}
+func decode_body_TL_channelLocation(m *DecodeBuf) TL {
+	tl := TL_channelLocation{}
+	tl.GeoPoint = m.Object()
+	tl.Address = m.String()
+	return tl
+}
+
+func decode_TL_peerLocated(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerLocated)
+	return decode_body_TL_peerLocated(m)
+}
+func decode_body_TL_peerLocated(m *DecodeBuf) TL {
+	tl := TL_peerLocated{}
+	tl.Peer = m.Object()
+	tl.Expires = m.Int()
+	tl.Distance = m.Int()
+	return tl
+}
+
+func decode_TL_peerSelfLocated(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerSelfLocated)
+	return decode_body_TL_peerSelfLocated(m)
+}
+func decode_body_TL_peerSelfLocated(m *DecodeBuf) TL {
+	tl := TL_peerSelfLocated{}
+	tl.Expires = m.Int()
+	return tl
+}
+
+func decode_TL_restrictionReason(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_restrictionReason)
+	return decode_body_TL_restrictionReason(m)
+}
+func decode_body_TL_restrictionReason(m *DecodeBuf) TL {
+	tl := TL_restrictionReason{}
+	tl.Platform = m.String()
+	tl.Reason = m.String()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_inputTheme(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputTheme)
+	return decode_body_TL_inputTheme(m)
+}
+func decode_body_TL_inputTheme(m *DecodeBuf) TL {
+	tl := TL_inputTheme{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputThemeSlug(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputThemeSlug)
+	return decode_body_TL_inputThemeSlug(m)
+}
+func decode_body_TL_inputThemeSlug(m *DecodeBuf) TL {
+	tl := TL_inputThemeSlug{}
+	tl.Slug = m.String()
+	return tl
+}
+
+func decode_TL_theme(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_theme)
+	return decode_body_TL_theme(m)
+}
+func decode_body_TL_theme(m *DecodeBuf) TL {
+	tl := TL_theme{}
+	flags := m.Int()
+	tl.Creator = flags&(1<<0) != 0
+	tl.Default = flags&(1<<1) != 0
+	tl.ForChat = flags&(1<<5) != 0
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Slug = m.String()
+	tl.Title = m.String()
+	if flags&(1<<2) != 0 {
+		tl.Document = m.Object()
+	}
+	if flags&(1<<3) != 0 {
+		tl.Settings = DecodeBuf_GenericVector[TL_themeSettings](m)
+	}
+	if flags&(1<<6) != 0 {
+		tl.Emoticon = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.InstallsCount = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_account_themesNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_themesNotModified)
+	return decode_body_TL_account_themesNotModified(m)
+}
+func decode_body_TL_account_themesNotModified(_ *DecodeBuf) TL {
+	tl := TL_account_themesNotModified{}
+	return tl
+}
+
+func decode_TL_account_themes(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_themes)
+	return decode_body_TL_account_themes(m)
+}
+func decode_body_TL_account_themes(m *DecodeBuf) TL {
+	tl := TL_account_themes{}
+	tl.Hash = m.Long()
+	tl.Themes = DecodeBuf_GenericVector[TL_theme](m)
+	return tl
+}
+
+func decode_TL_auth_loginToken(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_loginToken)
+	return decode_body_TL_auth_loginToken(m)
+}
+func decode_body_TL_auth_loginToken(m *DecodeBuf) TL {
+	tl := TL_auth_loginToken{}
+	tl.Expires = m.Int()
+	tl.Token = m.StringBytes()
+	return tl
+}
+
+func decode_TL_auth_loginTokenMigrateTo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_loginTokenMigrateTo)
+	return decode_body_TL_auth_loginTokenMigrateTo(m)
+}
+func decode_body_TL_auth_loginTokenMigrateTo(m *DecodeBuf) TL {
+	tl := TL_auth_loginTokenMigrateTo{}
+	tl.DCID = m.Int()
+	tl.Token = m.StringBytes()
+	return tl
+}
+
+func decode_TL_auth_loginTokenSuccess(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_loginTokenSuccess)
+	return decode_body_TL_auth_loginTokenSuccess(m)
+}
+func decode_body_TL_auth_loginTokenSuccess(m *DecodeBuf) TL {
+	tl := TL_auth_loginTokenSuccess{}
+	tl.Authorization = m.Object()
+	return tl
+}
+
+func decode_TL_account_contentSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_contentSettings)
+	return decode_body_TL_account_contentSettings(m)
+}
+func decode_body_TL_account_contentSettings(m *DecodeBuf) TL {
+	tl := TL_account_contentSettings{}
+	flags := m.Int()
+	tl.SensitiveEnabled = flags&(1<<0) != 0
+	tl.SensitiveCanChange = flags&(1<<1) != 0
+	return tl
+}
+
+func decode_TL_messages_inactiveChats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_inactiveChats)
+	return decode_body_TL_messages_inactiveChats(m)
+}
+func decode_body_TL_messages_inactiveChats(m *DecodeBuf) TL {
+	tl := TL_messages_inactiveChats{}
+	tl.Dates = m.VectorInt()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_baseThemeClassic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_baseThemeClassic)
+	return decode_body_TL_baseThemeClassic(m)
+}
+func decode_body_TL_baseThemeClassic(_ *DecodeBuf) TL {
+	tl := TL_baseThemeClassic{}
+	return tl
+}
+
+func decode_TL_baseThemeDay(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_baseThemeDay)
+	return decode_body_TL_baseThemeDay(m)
+}
+func decode_body_TL_baseThemeDay(_ *DecodeBuf) TL {
+	tl := TL_baseThemeDay{}
+	return tl
+}
+
+func decode_TL_baseThemeNight(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_baseThemeNight)
+	return decode_body_TL_baseThemeNight(m)
+}
+func decode_body_TL_baseThemeNight(_ *DecodeBuf) TL {
+	tl := TL_baseThemeNight{}
+	return tl
+}
+
+func decode_TL_baseThemeTinted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_baseThemeTinted)
+	return decode_body_TL_baseThemeTinted(m)
+}
+func decode_body_TL_baseThemeTinted(_ *DecodeBuf) TL {
+	tl := TL_baseThemeTinted{}
+	return tl
+}
+
+func decode_TL_baseThemeArctic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_baseThemeArctic)
+	return decode_body_TL_baseThemeArctic(m)
+}
+func decode_body_TL_baseThemeArctic(_ *DecodeBuf) TL {
+	tl := TL_baseThemeArctic{}
+	return tl
+}
+
+func decode_TL_inputThemeSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputThemeSettings)
+	return decode_body_TL_inputThemeSettings(m)
+}
+func decode_body_TL_inputThemeSettings(m *DecodeBuf) TL {
+	tl := TL_inputThemeSettings{}
+	flags := m.Int()
+	tl.MessageColorsAnimated = flags&(1<<2) != 0
+	tl.BaseTheme = m.Object()
+	tl.AccentColor = m.Int()
+	if flags&(1<<3) != 0 {
+		tl.OutboxAccentColor = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.MessageColors = m.VectorInt()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Wallpaper = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.WallpaperSettings = Ref(decode_TL_wallPaperSettings(m).(TL_wallPaperSettings))
+	}
+	return tl
+}
+
+func decode_TL_themeSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_themeSettings)
+	return decode_body_TL_themeSettings(m)
+}
+func decode_body_TL_themeSettings(m *DecodeBuf) TL {
+	tl := TL_themeSettings{}
+	flags := m.Int()
+	tl.MessageColorsAnimated = flags&(1<<2) != 0
+	tl.BaseTheme = m.Object()
+	tl.AccentColor = m.Int()
+	if flags&(1<<3) != 0 {
+		tl.OutboxAccentColor = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.MessageColors = m.VectorInt()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Wallpaper = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_webPageAttributeTheme(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webPageAttributeTheme)
+	return decode_body_TL_webPageAttributeTheme(m)
+}
+func decode_body_TL_webPageAttributeTheme(m *DecodeBuf) TL {
+	tl := TL_webPageAttributeTheme{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Documents = m.Vector()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Settings = Ref(decode_TL_themeSettings(m).(TL_themeSettings))
+	}
+	return tl
+}
+
+func decode_TL_webPageAttributeStory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webPageAttributeStory)
+	return decode_body_TL_webPageAttributeStory(m)
+}
+func decode_body_TL_webPageAttributeStory(m *DecodeBuf) TL {
+	tl := TL_webPageAttributeStory{}
+	flags := m.Int()
+	tl.Peer = m.Object()
+	tl.ID = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Story = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_webPageAttributeStickerSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webPageAttributeStickerSet)
+	return decode_body_TL_webPageAttributeStickerSet(m)
+}
+func decode_body_TL_webPageAttributeStickerSet(m *DecodeBuf) TL {
+	tl := TL_webPageAttributeStickerSet{}
+	flags := m.Int()
+	tl.Emojis = flags&(1<<0) != 0
+	tl.TextColor = flags&(1<<1) != 0
+	tl.Stickers = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_votesList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_votesList)
+	return decode_body_TL_messages_votesList(m)
+}
+func decode_body_TL_messages_votesList(m *DecodeBuf) TL {
+	tl := TL_messages_votesList{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.Votes = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_bankCardOpenURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_bankCardOpenURL)
+	return decode_body_TL_bankCardOpenURL(m)
+}
+func decode_body_TL_bankCardOpenURL(m *DecodeBuf) TL {
+	tl := TL_bankCardOpenURL{}
+	tl.URL = m.String()
+	tl.Name = m.String()
+	return tl
+}
+
+func decode_TL_payments_bankCardData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_bankCardData)
+	return decode_body_TL_payments_bankCardData(m)
+}
+func decode_body_TL_payments_bankCardData(m *DecodeBuf) TL {
+	tl := TL_payments_bankCardData{}
+	tl.Title = m.String()
+	tl.OpenURLs = DecodeBuf_GenericVector[TL_bankCardOpenURL](m)
+	return tl
+}
+
+func decode_TL_dialogFilter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dialogFilter)
+	return decode_body_TL_dialogFilter(m)
+}
+func decode_body_TL_dialogFilter(m *DecodeBuf) TL {
+	tl := TL_dialogFilter{}
+	flags := m.Int()
+	tl.Contacts = flags&(1<<0) != 0
+	tl.NonContacts = flags&(1<<1) != 0
+	tl.Groups = flags&(1<<2) != 0
+	tl.Broadcasts = flags&(1<<3) != 0
+	tl.Bots = flags&(1<<4) != 0
+	tl.ExcludeMuted = flags&(1<<11) != 0
+	tl.ExcludeRead = flags&(1<<12) != 0
+	tl.ExcludeArchived = flags&(1<<13) != 0
+	tl.ID = m.Int()
+	tl.Title = m.String()
+	if flags&(1<<25) != 0 {
+		tl.Emoticon = Ref(m.String())
+	}
+	if flags&(1<<27) != 0 {
+		tl.Color = Ref(m.Int())
+	}
+	tl.PinnedPeers = m.Vector()
+	tl.IncludePeers = m.Vector()
+	tl.ExcludePeers = m.Vector()
+	return tl
+}
+
+func decode_TL_dialogFilterDefault(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dialogFilterDefault)
+	return decode_body_TL_dialogFilterDefault(m)
+}
+func decode_body_TL_dialogFilterDefault(_ *DecodeBuf) TL {
+	tl := TL_dialogFilterDefault{}
+	return tl
+}
+
+func decode_TL_dialogFilterChatlist(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dialogFilterChatlist)
+	return decode_body_TL_dialogFilterChatlist(m)
+}
+func decode_body_TL_dialogFilterChatlist(m *DecodeBuf) TL {
+	tl := TL_dialogFilterChatlist{}
+	flags := m.Int()
+	tl.HasMyInvites = flags&(1<<26) != 0
+	tl.ID = m.Int()
+	tl.Title = m.String()
+	if flags&(1<<25) != 0 {
+		tl.Emoticon = Ref(m.String())
+	}
+	if flags&(1<<27) != 0 {
+		tl.Color = Ref(m.Int())
+	}
+	tl.PinnedPeers = m.Vector()
+	tl.IncludePeers = m.Vector()
+	return tl
+}
+
+func decode_TL_dialogFilterSuggested(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_dialogFilterSuggested)
+	return decode_body_TL_dialogFilterSuggested(m)
+}
+func decode_body_TL_dialogFilterSuggested(m *DecodeBuf) TL {
+	tl := TL_dialogFilterSuggested{}
+	tl.Filter = m.Object()
+	tl.Description = m.String()
+	return tl
+}
+
+func decode_TL_statsDateRangeDays(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsDateRangeDays)
+	return decode_body_TL_statsDateRangeDays(m)
+}
+func decode_body_TL_statsDateRangeDays(m *DecodeBuf) TL {
+	tl := TL_statsDateRangeDays{}
+	tl.MinDate = m.Int()
+	tl.MaxDate = m.Int()
+	return tl
+}
+
+func decode_TL_statsAbsValueAndPrev(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsAbsValueAndPrev)
+	return decode_body_TL_statsAbsValueAndPrev(m)
+}
+func decode_body_TL_statsAbsValueAndPrev(m *DecodeBuf) TL {
+	tl := TL_statsAbsValueAndPrev{}
+	tl.Current = m.Double()
+	tl.Previous = m.Double()
+	return tl
+}
+
+func decode_TL_statsPercentValue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsPercentValue)
+	return decode_body_TL_statsPercentValue(m)
+}
+func decode_body_TL_statsPercentValue(m *DecodeBuf) TL {
+	tl := TL_statsPercentValue{}
+	tl.Part = m.Double()
+	tl.Total = m.Double()
+	return tl
+}
+
+func decode_TL_statsGraphAsync(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsGraphAsync)
+	return decode_body_TL_statsGraphAsync(m)
+}
+func decode_body_TL_statsGraphAsync(m *DecodeBuf) TL {
+	tl := TL_statsGraphAsync{}
+	tl.Token = m.String()
+	return tl
+}
+
+func decode_TL_statsGraphError(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsGraphError)
+	return decode_body_TL_statsGraphError(m)
+}
+func decode_body_TL_statsGraphError(m *DecodeBuf) TL {
+	tl := TL_statsGraphError{}
+	tl.Error = m.String()
+	return tl
+}
+
+func decode_TL_statsGraph(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsGraph)
+	return decode_body_TL_statsGraph(m)
+}
+func decode_body_TL_statsGraph(m *DecodeBuf) TL {
+	tl := TL_statsGraph{}
+	flags := m.Int()
+	tl.JSON = decode_TL_dataJSON(m).(TL_dataJSON)
+	if flags&(1<<0) != 0 {
+		tl.ZoomToken = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_stats_broadcastStats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stats_broadcastStats)
+	return decode_body_TL_stats_broadcastStats(m)
+}
+func decode_body_TL_stats_broadcastStats(m *DecodeBuf) TL {
+	tl := TL_stats_broadcastStats{}
+	tl.Period = decode_TL_statsDateRangeDays(m).(TL_statsDateRangeDays)
+	tl.Followers = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.ViewsPerPost = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.SharesPerPost = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.ReactionsPerPost = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.ViewsPerStory = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.SharesPerStory = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.ReactionsPerStory = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.EnabledNotifications = decode_TL_statsPercentValue(m).(TL_statsPercentValue)
+	tl.GrowthGraph = m.Object()
+	tl.FollowersGraph = m.Object()
+	tl.MuteGraph = m.Object()
+	tl.TopHoursGraph = m.Object()
+	tl.InteractionsGraph = m.Object()
+	tl.IVInteractionsGraph = m.Object()
+	tl.ViewsBySourceGraph = m.Object()
+	tl.NewFollowersBySourceGraph = m.Object()
+	tl.LanguagesGraph = m.Object()
+	tl.ReactionsByEmotionGraph = m.Object()
+	tl.StoryInteractionsGraph = m.Object()
+	tl.StoryReactionsByEmotionGraph = m.Object()
+	tl.RecentPostsInteractions = m.Vector()
+	return tl
+}
+
+func decode_TL_help_promoDataEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_promoDataEmpty)
+	return decode_body_TL_help_promoDataEmpty(m)
+}
+func decode_body_TL_help_promoDataEmpty(m *DecodeBuf) TL {
+	tl := TL_help_promoDataEmpty{}
+	tl.Expires = m.Int()
+	return tl
+}
+
+func decode_TL_help_promoData(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_promoData)
+	return decode_body_TL_help_promoData(m)
+}
+func decode_body_TL_help_promoData(m *DecodeBuf) TL {
+	tl := TL_help_promoData{}
+	flags := m.Int()
+	tl.Proxy = flags&(1<<0) != 0
+	tl.Expires = m.Int()
+	tl.Peer = m.Object()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	if flags&(1<<1) != 0 {
+		tl.PSAType = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.PSAMessage = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_videoSize(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_videoSize)
+	return decode_body_TL_videoSize(m)
+}
+func decode_body_TL_videoSize(m *DecodeBuf) TL {
+	tl := TL_videoSize{}
+	flags := m.Int()
+	tl.Type = m.String()
+	tl.W = m.Int()
+	tl.H = m.Int()
+	tl.Size = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.VideoStartTS = Ref(m.Double())
+	}
+	return tl
+}
+
+func decode_TL_videoSizeEmojiMarkup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_videoSizeEmojiMarkup)
+	return decode_body_TL_videoSizeEmojiMarkup(m)
+}
+func decode_body_TL_videoSizeEmojiMarkup(m *DecodeBuf) TL {
+	tl := TL_videoSizeEmojiMarkup{}
+	tl.EmojiID = m.Long()
+	tl.BackgroundColors = m.VectorInt()
+	return tl
+}
+
+func decode_TL_videoSizeStickerMarkup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_videoSizeStickerMarkup)
+	return decode_body_TL_videoSizeStickerMarkup(m)
+}
+func decode_body_TL_videoSizeStickerMarkup(m *DecodeBuf) TL {
+	tl := TL_videoSizeStickerMarkup{}
+	tl.Stickerset = m.Object()
+	tl.StickerID = m.Long()
+	tl.BackgroundColors = m.VectorInt()
+	return tl
+}
+
+func decode_TL_statsGroupTopPoster(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsGroupTopPoster)
+	return decode_body_TL_statsGroupTopPoster(m)
+}
+func decode_body_TL_statsGroupTopPoster(m *DecodeBuf) TL {
+	tl := TL_statsGroupTopPoster{}
+	tl.UserID = m.Long()
+	tl.Messages = m.Int()
+	tl.AvgChars = m.Int()
+	return tl
+}
+
+func decode_TL_statsGroupTopAdmin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsGroupTopAdmin)
+	return decode_body_TL_statsGroupTopAdmin(m)
+}
+func decode_body_TL_statsGroupTopAdmin(m *DecodeBuf) TL {
+	tl := TL_statsGroupTopAdmin{}
+	tl.UserID = m.Long()
+	tl.Deleted = m.Int()
+	tl.Kicked = m.Int()
+	tl.Banned = m.Int()
+	return tl
+}
+
+func decode_TL_statsGroupTopInviter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_statsGroupTopInviter)
+	return decode_body_TL_statsGroupTopInviter(m)
+}
+func decode_body_TL_statsGroupTopInviter(m *DecodeBuf) TL {
+	tl := TL_statsGroupTopInviter{}
+	tl.UserID = m.Long()
+	tl.Invitations = m.Int()
+	return tl
+}
+
+func decode_TL_stats_megagroupStats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stats_megagroupStats)
+	return decode_body_TL_stats_megagroupStats(m)
+}
+func decode_body_TL_stats_megagroupStats(m *DecodeBuf) TL {
+	tl := TL_stats_megagroupStats{}
+	tl.Period = decode_TL_statsDateRangeDays(m).(TL_statsDateRangeDays)
+	tl.Members = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.Messages = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.Viewers = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.Posters = decode_TL_statsAbsValueAndPrev(m).(TL_statsAbsValueAndPrev)
+	tl.GrowthGraph = m.Object()
+	tl.MembersGraph = m.Object()
+	tl.NewMembersBySourceGraph = m.Object()
+	tl.LanguagesGraph = m.Object()
+	tl.MessagesGraph = m.Object()
+	tl.ActionsGraph = m.Object()
+	tl.TopHoursGraph = m.Object()
+	tl.WeekdaysGraph = m.Object()
+	tl.TopPosters = DecodeBuf_GenericVector[TL_statsGroupTopPoster](m)
+	tl.TopAdmins = DecodeBuf_GenericVector[TL_statsGroupTopAdmin](m)
+	tl.TopInviters = DecodeBuf_GenericVector[TL_statsGroupTopInviter](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_globalPrivacySettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_globalPrivacySettings)
+	return decode_body_TL_globalPrivacySettings(m)
+}
+func decode_body_TL_globalPrivacySettings(m *DecodeBuf) TL {
+	tl := TL_globalPrivacySettings{}
+	flags := m.Int()
+	tl.ArchiveAndMuteNewNoncontactPeers = flags&(1<<0) != 0
+	tl.KeepArchivedUnmuted = flags&(1<<1) != 0
+	tl.KeepArchivedFolders = flags&(1<<2) != 0
+	tl.HideReadMarks = flags&(1<<3) != 0
+	tl.NewNoncontactPeersRequirePremium = flags&(1<<4) != 0
+	return tl
+}
+
+func decode_TL_help_countryCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_countryCode)
+	return decode_body_TL_help_countryCode(m)
+}
+func decode_body_TL_help_countryCode(m *DecodeBuf) TL {
+	tl := TL_help_countryCode{}
+	flags := m.Int()
+	tl.CountryCode = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Prefixes = m.VectorString()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Patterns = m.VectorString()
+	}
+	return tl
+}
+
+func decode_TL_help_country(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_country)
+	return decode_body_TL_help_country(m)
+}
+func decode_body_TL_help_country(m *DecodeBuf) TL {
+	tl := TL_help_country{}
+	flags := m.Int()
+	tl.Hidden = flags&(1<<0) != 0
+	tl.ISO2 = m.String()
+	tl.DefaultName = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Name = Ref(m.String())
+	}
+	tl.CountryCodes = DecodeBuf_GenericVector[TL_help_countryCode](m)
+	return tl
+}
+
+func decode_TL_help_countriesListNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_countriesListNotModified)
+	return decode_body_TL_help_countriesListNotModified(m)
+}
+func decode_body_TL_help_countriesListNotModified(_ *DecodeBuf) TL {
+	tl := TL_help_countriesListNotModified{}
+	return tl
+}
+
+func decode_TL_help_countriesList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_countriesList)
+	return decode_body_TL_help_countriesList(m)
+}
+func decode_body_TL_help_countriesList(m *DecodeBuf) TL {
+	tl := TL_help_countriesList{}
+	tl.Countries = DecodeBuf_GenericVector[TL_help_country](m)
+	tl.Hash = m.Int()
+	return tl
+}
+
+func decode_TL_messageViews(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageViews)
+	return decode_body_TL_messageViews(m)
+}
+func decode_body_TL_messageViews(m *DecodeBuf) TL {
+	tl := TL_messageViews{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Views = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Forwards = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Replies = Ref(decode_TL_messageReplies(m).(TL_messageReplies))
+	}
+	return tl
+}
+
+func decode_TL_messages_messageViews(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_messageViews)
+	return decode_body_TL_messages_messageViews(m)
+}
+func decode_body_TL_messages_messageViews(m *DecodeBuf) TL {
+	tl := TL_messages_messageViews{}
+	tl.Views = DecodeBuf_GenericVector[TL_messageViews](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_discussionMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_discussionMessage)
+	return decode_body_TL_messages_discussionMessage(m)
+}
+func decode_body_TL_messages_discussionMessage(m *DecodeBuf) TL {
+	tl := TL_messages_discussionMessage{}
+	flags := m.Int()
+	tl.Messages = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.MaxID = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.ReadInboxMaxID = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.ReadOutboxMaxID = Ref(m.Int())
+	}
+	tl.UnreadCount = m.Int()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messageReplyHeader(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageReplyHeader)
+	return decode_body_TL_messageReplyHeader(m)
+}
+func decode_body_TL_messageReplyHeader(m *DecodeBuf) TL {
+	tl := TL_messageReplyHeader{}
+	flags := m.Int()
+	tl.ReplyToScheduled = flags&(1<<2) != 0
+	tl.ForumTopic = flags&(1<<3) != 0
+	tl.Quote = flags&(1<<9) != 0
+	if flags&(1<<4) != 0 {
+		tl.ReplyToMsgID = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.ReplyToPeerID = m.Object()
+	}
+	if flags&(1<<5) != 0 {
+		tl.ReplyFrom = Ref(decode_TL_messageFwdHeader(m).(TL_messageFwdHeader))
+	}
+	if flags&(1<<8) != 0 {
+		tl.ReplyMedia = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.ReplyToTopID = Ref(m.Int())
+	}
+	if flags&(1<<6) != 0 {
+		tl.QuoteText = Ref(m.String())
+	}
+	if flags&(1<<7) != 0 {
+		tl.QuoteEntities = m.Vector()
+	}
+	if flags&(1<<10) != 0 {
+		tl.QuoteOffset = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messageReplyStoryHeader(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageReplyStoryHeader)
+	return decode_body_TL_messageReplyStoryHeader(m)
+}
+func decode_body_TL_messageReplyStoryHeader(m *DecodeBuf) TL {
+	tl := TL_messageReplyStoryHeader{}
+	tl.Peer = m.Object()
+	tl.StoryID = m.Int()
+	return tl
+}
+
+func decode_TL_messageReplies(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageReplies)
+	return decode_body_TL_messageReplies(m)
+}
+func decode_body_TL_messageReplies(m *DecodeBuf) TL {
+	tl := TL_messageReplies{}
+	flags := m.Int()
+	tl.Comments = flags&(1<<0) != 0
+	tl.Replies = m.Int()
+	tl.RepliesPTS = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.RecentRepliers = m.Vector()
+	}
+	if flags&(1<<0) != 0 {
+		tl.ChannelID = Ref(m.Long())
+	}
+	if flags&(1<<2) != 0 {
+		tl.MaxID = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.ReadMaxID = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_peerBlocked(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerBlocked)
+	return decode_body_TL_peerBlocked(m)
+}
+func decode_body_TL_peerBlocked(m *DecodeBuf) TL {
+	tl := TL_peerBlocked{}
+	tl.PeerID = m.Object()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_stats_messageStats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stats_messageStats)
+	return decode_body_TL_stats_messageStats(m)
+}
+func decode_body_TL_stats_messageStats(m *DecodeBuf) TL {
+	tl := TL_stats_messageStats{}
+	tl.ViewsGraph = m.Object()
+	tl.ReactionsByEmotionGraph = m.Object()
+	return tl
+}
+
+func decode_TL_groupCallDiscarded(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_groupCallDiscarded)
+	return decode_body_TL_groupCallDiscarded(m)
+}
+func decode_body_TL_groupCallDiscarded(m *DecodeBuf) TL {
+	tl := TL_groupCallDiscarded{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.Duration = m.Int()
+	return tl
+}
+
+func decode_TL_groupCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_groupCall)
+	return decode_body_TL_groupCall(m)
+}
+func decode_body_TL_groupCall(m *DecodeBuf) TL {
+	tl := TL_groupCall{}
+	flags := m.Int()
+	tl.JoinMuted = flags&(1<<1) != 0
+	tl.CanChangeJoinMuted = flags&(1<<2) != 0
+	tl.JoinDateAsc = flags&(1<<6) != 0
+	tl.ScheduleStartSubscribed = flags&(1<<8) != 0
+	tl.CanStartVideo = flags&(1<<9) != 0
+	tl.RecordVideoActive = flags&(1<<11) != 0
+	tl.RTMPStream = flags&(1<<12) != 0
+	tl.ListenersHidden = flags&(1<<13) != 0
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.ParticipantsCount = m.Int()
+	if flags&(1<<3) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.StreamDCID = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.RecordStartDate = Ref(m.Int())
+	}
+	if flags&(1<<7) != 0 {
+		tl.ScheduleDate = Ref(m.Int())
+	}
+	if flags&(1<<10) != 0 {
+		tl.UnmutedVideoCount = Ref(m.Int())
+	}
+	tl.UnmutedVideoLimit = m.Int()
+	tl.Version = m.Int()
+	return tl
+}
+
+func decode_TL_inputGroupCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputGroupCall)
+	return decode_body_TL_inputGroupCall(m)
+}
+func decode_body_TL_inputGroupCall(m *DecodeBuf) TL {
+	tl := TL_inputGroupCall{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_groupCallParticipant(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_groupCallParticipant)
+	return decode_body_TL_groupCallParticipant(m)
+}
+func decode_body_TL_groupCallParticipant(m *DecodeBuf) TL {
+	tl := TL_groupCallParticipant{}
+	flags := m.Int()
+	tl.Muted = flags&(1<<0) != 0
+	tl.Left = flags&(1<<1) != 0
+	tl.CanSelfUnmute = flags&(1<<2) != 0
+	tl.JustJoined = flags&(1<<4) != 0
+	tl.Versioned = flags&(1<<5) != 0
+	tl.Min = flags&(1<<8) != 0
+	tl.MutedByYou = flags&(1<<9) != 0
+	tl.VolumeByAdmin = flags&(1<<10) != 0
+	tl.Self = flags&(1<<12) != 0
+	tl.VideoJoined = flags&(1<<15) != 0
+	tl.Peer = m.Object()
+	tl.Date = m.Int()
+	if flags&(1<<3) != 0 {
+		tl.ActiveDate = Ref(m.Int())
+	}
+	tl.Source = m.Int()
+	if flags&(1<<7) != 0 {
+		tl.Volume = Ref(m.Int())
+	}
+	if flags&(1<<11) != 0 {
+		tl.About = Ref(m.String())
+	}
+	if flags&(1<<13) != 0 {
+		tl.RaiseHandRating = Ref(m.Long())
+	}
+	if flags&(1<<6) != 0 {
+		tl.Video = Ref(decode_TL_groupCallParticipantVideo(m).(TL_groupCallParticipantVideo))
+	}
+	if flags&(1<<14) != 0 {
+		tl.Presentation = Ref(decode_TL_groupCallParticipantVideo(m).(TL_groupCallParticipantVideo))
+	}
+	return tl
+}
+
+func decode_TL_phone_groupCall(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phone_groupCall)
+	return decode_body_TL_phone_groupCall(m)
+}
+func decode_body_TL_phone_groupCall(m *DecodeBuf) TL {
+	tl := TL_phone_groupCall{}
+	tl.Call = m.Object()
+	tl.Participants = DecodeBuf_GenericVector[TL_groupCallParticipant](m)
+	tl.ParticipantsNextOffset = m.String()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_phone_groupParticipants(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phone_groupParticipants)
+	return decode_body_TL_phone_groupParticipants(m)
+}
+func decode_body_TL_phone_groupParticipants(m *DecodeBuf) TL {
+	tl := TL_phone_groupParticipants{}
+	tl.Count = m.Int()
+	tl.Participants = DecodeBuf_GenericVector[TL_groupCallParticipant](m)
+	tl.NextOffset = m.String()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	tl.Version = m.Int()
+	return tl
+}
+
+func decode_TL_inlineQueryPeerTypeSameBotPM(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inlineQueryPeerTypeSameBotPM)
+	return decode_body_TL_inlineQueryPeerTypeSameBotPM(m)
+}
+func decode_body_TL_inlineQueryPeerTypeSameBotPM(_ *DecodeBuf) TL {
+	tl := TL_inlineQueryPeerTypeSameBotPM{}
+	return tl
+}
+
+func decode_TL_inlineQueryPeerTypePM(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inlineQueryPeerTypePM)
+	return decode_body_TL_inlineQueryPeerTypePM(m)
+}
+func decode_body_TL_inlineQueryPeerTypePM(_ *DecodeBuf) TL {
+	tl := TL_inlineQueryPeerTypePM{}
+	return tl
+}
+
+func decode_TL_inlineQueryPeerTypeChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inlineQueryPeerTypeChat)
+	return decode_body_TL_inlineQueryPeerTypeChat(m)
+}
+func decode_body_TL_inlineQueryPeerTypeChat(_ *DecodeBuf) TL {
+	tl := TL_inlineQueryPeerTypeChat{}
+	return tl
+}
+
+func decode_TL_inlineQueryPeerTypeMegagroup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inlineQueryPeerTypeMegagroup)
+	return decode_body_TL_inlineQueryPeerTypeMegagroup(m)
+}
+func decode_body_TL_inlineQueryPeerTypeMegagroup(_ *DecodeBuf) TL {
+	tl := TL_inlineQueryPeerTypeMegagroup{}
+	return tl
+}
+
+func decode_TL_inlineQueryPeerTypeBroadcast(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inlineQueryPeerTypeBroadcast)
+	return decode_body_TL_inlineQueryPeerTypeBroadcast(m)
+}
+func decode_body_TL_inlineQueryPeerTypeBroadcast(_ *DecodeBuf) TL {
+	tl := TL_inlineQueryPeerTypeBroadcast{}
+	return tl
+}
+
+func decode_TL_inlineQueryPeerTypeBotPM(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inlineQueryPeerTypeBotPM)
+	return decode_body_TL_inlineQueryPeerTypeBotPM(m)
+}
+func decode_body_TL_inlineQueryPeerTypeBotPM(_ *DecodeBuf) TL {
+	tl := TL_inlineQueryPeerTypeBotPM{}
+	return tl
+}
+
+func decode_TL_messages_historyImport(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_historyImport)
+	return decode_body_TL_messages_historyImport(m)
+}
+func decode_body_TL_messages_historyImport(m *DecodeBuf) TL {
+	tl := TL_messages_historyImport{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_messages_historyImportParsed(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_historyImportParsed)
+	return decode_body_TL_messages_historyImportParsed(m)
+}
+func decode_body_TL_messages_historyImportParsed(m *DecodeBuf) TL {
+	tl := TL_messages_historyImportParsed{}
+	flags := m.Int()
+	tl.PM = flags&(1<<0) != 0
+	tl.Group = flags&(1<<1) != 0
+	if flags&(1<<2) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_messages_affectedFoundMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_affectedFoundMessages)
+	return decode_body_TL_messages_affectedFoundMessages(m)
+}
+func decode_body_TL_messages_affectedFoundMessages(m *DecodeBuf) TL {
+	tl := TL_messages_affectedFoundMessages{}
+	tl.PTS = m.Int()
+	tl.PTSCount = m.Int()
+	tl.Offset = m.Int()
+	tl.Messages = m.VectorInt()
+	return tl
+}
+
+func decode_TL_chatInviteImporter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatInviteImporter)
+	return decode_body_TL_chatInviteImporter(m)
+}
+func decode_body_TL_chatInviteImporter(m *DecodeBuf) TL {
+	tl := TL_chatInviteImporter{}
+	flags := m.Int()
+	tl.Requested = flags&(1<<0) != 0
+	tl.ViaChatlist = flags&(1<<3) != 0
+	tl.UserID = m.Long()
+	tl.Date = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.About = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.ApprovedBy = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_messages_exportedChatInvites(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_exportedChatInvites)
+	return decode_body_TL_messages_exportedChatInvites(m)
+}
+func decode_body_TL_messages_exportedChatInvites(m *DecodeBuf) TL {
+	tl := TL_messages_exportedChatInvites{}
+	tl.Count = m.Int()
+	tl.Invites = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_exportedChatInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_exportedChatInvite)
+	return decode_body_TL_messages_exportedChatInvite(m)
+}
+func decode_body_TL_messages_exportedChatInvite(m *DecodeBuf) TL {
+	tl := TL_messages_exportedChatInvite{}
+	tl.Invite = m.Object()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_exportedChatInviteReplaced(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_exportedChatInviteReplaced)
+	return decode_body_TL_messages_exportedChatInviteReplaced(m)
+}
+func decode_body_TL_messages_exportedChatInviteReplaced(m *DecodeBuf) TL {
+	tl := TL_messages_exportedChatInviteReplaced{}
+	tl.Invite = m.Object()
+	tl.NewInvite = m.Object()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_chatInviteImporters(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_chatInviteImporters)
+	return decode_body_TL_messages_chatInviteImporters(m)
+}
+func decode_body_TL_messages_chatInviteImporters(m *DecodeBuf) TL {
+	tl := TL_messages_chatInviteImporters{}
+	tl.Count = m.Int()
+	tl.Importers = DecodeBuf_GenericVector[TL_chatInviteImporter](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_chatAdminWithInvites(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatAdminWithInvites)
+	return decode_body_TL_chatAdminWithInvites(m)
+}
+func decode_body_TL_chatAdminWithInvites(m *DecodeBuf) TL {
+	tl := TL_chatAdminWithInvites{}
+	tl.AdminID = m.Long()
+	tl.InvitesCount = m.Int()
+	tl.RevokedInvitesCount = m.Int()
+	return tl
+}
+
+func decode_TL_messages_chatAdminsWithInvites(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_chatAdminsWithInvites)
+	return decode_body_TL_messages_chatAdminsWithInvites(m)
+}
+func decode_body_TL_messages_chatAdminsWithInvites(m *DecodeBuf) TL {
+	tl := TL_messages_chatAdminsWithInvites{}
+	tl.Admins = DecodeBuf_GenericVector[TL_chatAdminWithInvites](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_checkedHistoryImportPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_checkedHistoryImportPeer)
+	return decode_body_TL_messages_checkedHistoryImportPeer(m)
+}
+func decode_body_TL_messages_checkedHistoryImportPeer(m *DecodeBuf) TL {
+	tl := TL_messages_checkedHistoryImportPeer{}
+	tl.ConfirmText = m.String()
+	return tl
+}
+
+func decode_TL_phone_joinAsPeers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phone_joinAsPeers)
+	return decode_body_TL_phone_joinAsPeers(m)
+}
+func decode_body_TL_phone_joinAsPeers(m *DecodeBuf) TL {
+	tl := TL_phone_joinAsPeers{}
+	tl.Peers = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_phone_exportedGroupCallInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phone_exportedGroupCallInvite)
+	return decode_body_TL_phone_exportedGroupCallInvite(m)
+}
+func decode_body_TL_phone_exportedGroupCallInvite(m *DecodeBuf) TL {
+	tl := TL_phone_exportedGroupCallInvite{}
+	tl.Link = m.String()
+	return tl
+}
+
+func decode_TL_groupCallParticipantVideoSourceGroup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_groupCallParticipantVideoSourceGroup)
+	return decode_body_TL_groupCallParticipantVideoSourceGroup(m)
+}
+func decode_body_TL_groupCallParticipantVideoSourceGroup(m *DecodeBuf) TL {
+	tl := TL_groupCallParticipantVideoSourceGroup{}
+	tl.Semantics = m.String()
+	tl.Sources = m.VectorInt()
+	return tl
+}
+
+func decode_TL_groupCallParticipantVideo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_groupCallParticipantVideo)
+	return decode_body_TL_groupCallParticipantVideo(m)
+}
+func decode_body_TL_groupCallParticipantVideo(m *DecodeBuf) TL {
+	tl := TL_groupCallParticipantVideo{}
+	flags := m.Int()
+	tl.Paused = flags&(1<<0) != 0
+	tl.Endpoint = m.String()
+	tl.SourceGroups = DecodeBuf_GenericVector[TL_groupCallParticipantVideoSourceGroup](m)
+	if flags&(1<<1) != 0 {
+		tl.AudioSource = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_stickers_suggestedShortName(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stickers_suggestedShortName)
+	return decode_body_TL_stickers_suggestedShortName(m)
+}
+func decode_body_TL_stickers_suggestedShortName(m *DecodeBuf) TL {
+	tl := TL_stickers_suggestedShortName{}
+	tl.ShortName = m.String()
+	return tl
+}
+
+func decode_TL_botCommandScopeDefault(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botCommandScopeDefault)
+	return decode_body_TL_botCommandScopeDefault(m)
+}
+func decode_body_TL_botCommandScopeDefault(_ *DecodeBuf) TL {
+	tl := TL_botCommandScopeDefault{}
+	return tl
+}
+
+func decode_TL_botCommandScopeUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botCommandScopeUsers)
+	return decode_body_TL_botCommandScopeUsers(m)
+}
+func decode_body_TL_botCommandScopeUsers(_ *DecodeBuf) TL {
+	tl := TL_botCommandScopeUsers{}
+	return tl
+}
+
+func decode_TL_botCommandScopeChats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botCommandScopeChats)
+	return decode_body_TL_botCommandScopeChats(m)
+}
+func decode_body_TL_botCommandScopeChats(_ *DecodeBuf) TL {
+	tl := TL_botCommandScopeChats{}
+	return tl
+}
+
+func decode_TL_botCommandScopeChatAdmins(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botCommandScopeChatAdmins)
+	return decode_body_TL_botCommandScopeChatAdmins(m)
+}
+func decode_body_TL_botCommandScopeChatAdmins(_ *DecodeBuf) TL {
+	tl := TL_botCommandScopeChatAdmins{}
+	return tl
+}
+
+func decode_TL_botCommandScopePeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botCommandScopePeer)
+	return decode_body_TL_botCommandScopePeer(m)
+}
+func decode_body_TL_botCommandScopePeer(m *DecodeBuf) TL {
+	tl := TL_botCommandScopePeer{}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_botCommandScopePeerAdmins(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botCommandScopePeerAdmins)
+	return decode_body_TL_botCommandScopePeerAdmins(m)
+}
+func decode_body_TL_botCommandScopePeerAdmins(m *DecodeBuf) TL {
+	tl := TL_botCommandScopePeerAdmins{}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_botCommandScopePeerUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botCommandScopePeerUser)
+	return decode_body_TL_botCommandScopePeerUser(m)
+}
+func decode_body_TL_botCommandScopePeerUser(m *DecodeBuf) TL {
+	tl := TL_botCommandScopePeerUser{}
+	tl.Peer = m.Object()
+	tl.UserID = m.Object()
+	return tl
+}
+
+func decode_TL_account_resetPasswordFailedWait(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_resetPasswordFailedWait)
+	return decode_body_TL_account_resetPasswordFailedWait(m)
+}
+func decode_body_TL_account_resetPasswordFailedWait(m *DecodeBuf) TL {
+	tl := TL_account_resetPasswordFailedWait{}
+	tl.RetryDate = m.Int()
+	return tl
+}
+
+func decode_TL_account_resetPasswordRequestedWait(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_resetPasswordRequestedWait)
+	return decode_body_TL_account_resetPasswordRequestedWait(m)
+}
+func decode_body_TL_account_resetPasswordRequestedWait(m *DecodeBuf) TL {
+	tl := TL_account_resetPasswordRequestedWait{}
+	tl.UntilDate = m.Int()
+	return tl
+}
+
+func decode_TL_account_resetPasswordOK(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_resetPasswordOK)
+	return decode_body_TL_account_resetPasswordOK(m)
+}
+func decode_body_TL_account_resetPasswordOK(_ *DecodeBuf) TL {
+	tl := TL_account_resetPasswordOK{}
+	return tl
+}
+
+func decode_TL_sponsoredMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sponsoredMessage)
+	return decode_body_TL_sponsoredMessage(m)
+}
+func decode_body_TL_sponsoredMessage(m *DecodeBuf) TL {
+	tl := TL_sponsoredMessage{}
+	flags := m.Int()
+	tl.Recommended = flags&(1<<5) != 0
+	tl.CanReport = flags&(1<<12) != 0
+	tl.RandomID = m.StringBytes()
+	tl.URL = m.String()
+	tl.Title = m.String()
+	tl.Message = m.String()
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<6) != 0 {
+		tl.Photo = m.Object()
+	}
+	if flags&(1<<14) != 0 {
+		tl.Media = m.Object()
+	}
+	if flags&(1<<13) != 0 {
+		tl.Color = Ref(decode_TL_peerColor(m).(TL_peerColor))
+	}
+	tl.ButtonText = m.String()
+	if flags&(1<<7) != 0 {
+		tl.SponsorInfo = Ref(m.String())
+	}
+	if flags&(1<<8) != 0 {
+		tl.AdditionalInfo = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_messages_sponsoredMessages(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_sponsoredMessages)
+	return decode_body_TL_messages_sponsoredMessages(m)
+}
+func decode_body_TL_messages_sponsoredMessages(m *DecodeBuf) TL {
+	tl := TL_messages_sponsoredMessages{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.PostsBetween = Ref(m.Int())
+	}
+	tl.Messages = DecodeBuf_GenericVector[TL_sponsoredMessage](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_sponsoredMessagesEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_sponsoredMessagesEmpty)
+	return decode_body_TL_messages_sponsoredMessagesEmpty(m)
+}
+func decode_body_TL_messages_sponsoredMessagesEmpty(_ *DecodeBuf) TL {
+	tl := TL_messages_sponsoredMessagesEmpty{}
+	return tl
+}
+
+func decode_TL_searchResultsCalendarPeriod(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_searchResultsCalendarPeriod)
+	return decode_body_TL_searchResultsCalendarPeriod(m)
+}
+func decode_body_TL_searchResultsCalendarPeriod(m *DecodeBuf) TL {
+	tl := TL_searchResultsCalendarPeriod{}
+	tl.Date = m.Int()
+	tl.MinMsgID = m.Int()
+	tl.MaxMsgID = m.Int()
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_messages_searchResultsCalendar(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_searchResultsCalendar)
+	return decode_body_TL_messages_searchResultsCalendar(m)
+}
+func decode_body_TL_messages_searchResultsCalendar(m *DecodeBuf) TL {
+	tl := TL_messages_searchResultsCalendar{}
+	flags := m.Int()
+	tl.Inexact = flags&(1<<0) != 0
+	tl.Count = m.Int()
+	tl.MinDate = m.Int()
+	tl.MinMsgID = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.OffsetIDOffset = Ref(m.Int())
+	}
+	tl.Periods = DecodeBuf_GenericVector[TL_searchResultsCalendarPeriod](m)
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_searchResultPosition(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_searchResultPosition)
+	return decode_body_TL_searchResultPosition(m)
+}
+func decode_body_TL_searchResultPosition(m *DecodeBuf) TL {
+	tl := TL_searchResultPosition{}
+	tl.MsgID = m.Int()
+	tl.Date = m.Int()
+	tl.Offset = m.Int()
+	return tl
+}
+
+func decode_TL_messages_searchResultsPositions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_searchResultsPositions)
+	return decode_body_TL_messages_searchResultsPositions(m)
+}
+func decode_body_TL_messages_searchResultsPositions(m *DecodeBuf) TL {
+	tl := TL_messages_searchResultsPositions{}
+	tl.Count = m.Int()
+	tl.Positions = DecodeBuf_GenericVector[TL_searchResultPosition](m)
+	return tl
+}
+
+func decode_TL_channels_sendAsPeers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channels_sendAsPeers)
+	return decode_body_TL_channels_sendAsPeers(m)
+}
+func decode_body_TL_channels_sendAsPeers(m *DecodeBuf) TL {
+	tl := TL_channels_sendAsPeers{}
+	tl.Peers = DecodeBuf_GenericVector[TL_sendAsPeer](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_users_userFull(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_users_userFull)
+	return decode_body_TL_users_userFull(m)
+}
+func decode_body_TL_users_userFull(m *DecodeBuf) TL {
+	tl := TL_users_userFull{}
+	tl.FullUser = decode_TL_userFull(m).(TL_userFull)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_peerSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_peerSettings)
+	return decode_body_TL_messages_peerSettings(m)
+}
+func decode_body_TL_messages_peerSettings(m *DecodeBuf) TL {
+	tl := TL_messages_peerSettings{}
+	tl.Settings = decode_TL_peerSettings(m).(TL_peerSettings)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_auth_loggedOut(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_loggedOut)
+	return decode_body_TL_auth_loggedOut(m)
+}
+func decode_body_TL_auth_loggedOut(m *DecodeBuf) TL {
+	tl := TL_auth_loggedOut{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.FutureAuthToken = m.StringBytes()
+	}
+	return tl
+}
+
+func decode_TL_reactionCount(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reactionCount)
+	return decode_body_TL_reactionCount(m)
+}
+func decode_body_TL_reactionCount(m *DecodeBuf) TL {
+	tl := TL_reactionCount{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.ChosenOrder = Ref(m.Int())
+	}
+	tl.Reaction = m.Object()
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_messageReactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageReactions)
+	return decode_body_TL_messageReactions(m)
+}
+func decode_body_TL_messageReactions(m *DecodeBuf) TL {
+	tl := TL_messageReactions{}
+	flags := m.Int()
+	tl.Min = flags&(1<<0) != 0
+	tl.CanSeeList = flags&(1<<2) != 0
+	tl.ReactionsAsTags = flags&(1<<3) != 0
+	tl.Results = DecodeBuf_GenericVector[TL_reactionCount](m)
+	if flags&(1<<1) != 0 {
+		tl.RecentReactions = DecodeBuf_GenericVector[TL_messagePeerReaction](m)
+	}
+	if flags&(1<<4) != 0 {
+		tl.TopReactors = DecodeBuf_GenericVector[TL_messageReactor](m)
+	}
+	return tl
+}
+
+func decode_TL_messages_messageReactionsList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_messageReactionsList)
+	return decode_body_TL_messages_messageReactionsList(m)
+}
+func decode_body_TL_messages_messageReactionsList(m *DecodeBuf) TL {
+	tl := TL_messages_messageReactionsList{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.Reactions = DecodeBuf_GenericVector[TL_messagePeerReaction](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_availableReaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_availableReaction)
+	return decode_body_TL_availableReaction(m)
+}
+func decode_body_TL_availableReaction(m *DecodeBuf) TL {
+	tl := TL_availableReaction{}
+	flags := m.Int()
+	tl.Inactive = flags&(1<<0) != 0
+	tl.Premium = flags&(1<<2) != 0
+	tl.Reaction = m.String()
+	tl.Title = m.String()
+	tl.StaticIcon = m.Object()
+	tl.AppearAnimation = m.Object()
+	tl.SelectAnimation = m.Object()
+	tl.ActivateAnimation = m.Object()
+	tl.EffectAnimation = m.Object()
+	if flags&(1<<1) != 0 {
+		tl.AroundAnimation = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.CenterIcon = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_messages_availableReactionsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_availableReactionsNotModified)
+	return decode_body_TL_messages_availableReactionsNotModified(m)
+}
+func decode_body_TL_messages_availableReactionsNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_availableReactionsNotModified{}
+	return tl
+}
+
+func decode_TL_messages_availableReactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_availableReactions)
+	return decode_body_TL_messages_availableReactions(m)
+}
+func decode_body_TL_messages_availableReactions(m *DecodeBuf) TL {
+	tl := TL_messages_availableReactions{}
+	tl.Hash = m.Int()
+	tl.Reactions = DecodeBuf_GenericVector[TL_availableReaction](m)
+	return tl
+}
+
+func decode_TL_messagePeerReaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messagePeerReaction)
+	return decode_body_TL_messagePeerReaction(m)
+}
+func decode_body_TL_messagePeerReaction(m *DecodeBuf) TL {
+	tl := TL_messagePeerReaction{}
+	flags := m.Int()
+	tl.Big = flags&(1<<0) != 0
+	tl.Unread = flags&(1<<1) != 0
+	tl.My = flags&(1<<2) != 0
+	tl.PeerID = m.Object()
+	tl.Date = m.Int()
+	tl.Reaction = m.Object()
+	return tl
+}
+
+func decode_TL_groupCallStreamChannel(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_groupCallStreamChannel)
+	return decode_body_TL_groupCallStreamChannel(m)
+}
+func decode_body_TL_groupCallStreamChannel(m *DecodeBuf) TL {
+	tl := TL_groupCallStreamChannel{}
+	tl.Channel = m.Int()
+	tl.Scale = m.Int()
+	tl.LastTimestampMS = m.Long()
+	return tl
+}
+
+func decode_TL_phone_groupCallStreamChannels(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phone_groupCallStreamChannels)
+	return decode_body_TL_phone_groupCallStreamChannels(m)
+}
+func decode_body_TL_phone_groupCallStreamChannels(m *DecodeBuf) TL {
+	tl := TL_phone_groupCallStreamChannels{}
+	tl.Channels = DecodeBuf_GenericVector[TL_groupCallStreamChannel](m)
+	return tl
+}
+
+func decode_TL_phone_groupCallStreamRTMPURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_phone_groupCallStreamRTMPURL)
+	return decode_body_TL_phone_groupCallStreamRTMPURL(m)
+}
+func decode_body_TL_phone_groupCallStreamRTMPURL(m *DecodeBuf) TL {
+	tl := TL_phone_groupCallStreamRTMPURL{}
+	tl.URL = m.String()
+	tl.Key = m.String()
+	return tl
+}
+
+func decode_TL_attachMenuBotIconColor(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuBotIconColor)
+	return decode_body_TL_attachMenuBotIconColor(m)
+}
+func decode_body_TL_attachMenuBotIconColor(m *DecodeBuf) TL {
+	tl := TL_attachMenuBotIconColor{}
+	tl.Name = m.String()
+	tl.Color = m.Int()
+	return tl
+}
+
+func decode_TL_attachMenuBotIcon(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuBotIcon)
+	return decode_body_TL_attachMenuBotIcon(m)
+}
+func decode_body_TL_attachMenuBotIcon(m *DecodeBuf) TL {
+	tl := TL_attachMenuBotIcon{}
+	flags := m.Int()
+	tl.Name = m.String()
+	tl.Icon = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Colors = DecodeBuf_GenericVector[TL_attachMenuBotIconColor](m)
+	}
+	return tl
+}
+
+func decode_TL_attachMenuBot(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuBot)
+	return decode_body_TL_attachMenuBot(m)
+}
+func decode_body_TL_attachMenuBot(m *DecodeBuf) TL {
+	tl := TL_attachMenuBot{}
+	flags := m.Int()
+	tl.Inactive = flags&(1<<0) != 0
+	tl.HasSettings = flags&(1<<1) != 0
+	tl.RequestWriteAccess = flags&(1<<2) != 0
+	tl.ShowInAttachMenu = flags&(1<<3) != 0
+	tl.ShowInSideMenu = flags&(1<<4) != 0
+	tl.SideMenuDisclaimerNeeded = flags&(1<<5) != 0
+	tl.BotID = m.Long()
+	tl.ShortName = m.String()
+	if flags&(1<<3) != 0 {
+		tl.PeerTypes = m.Vector()
+	}
+	tl.Icons = DecodeBuf_GenericVector[TL_attachMenuBotIcon](m)
+	return tl
+}
+
+func decode_TL_attachMenuBotsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuBotsNotModified)
+	return decode_body_TL_attachMenuBotsNotModified(m)
+}
+func decode_body_TL_attachMenuBotsNotModified(_ *DecodeBuf) TL {
+	tl := TL_attachMenuBotsNotModified{}
+	return tl
+}
+
+func decode_TL_attachMenuBots(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuBots)
+	return decode_body_TL_attachMenuBots(m)
+}
+func decode_body_TL_attachMenuBots(m *DecodeBuf) TL {
+	tl := TL_attachMenuBots{}
+	tl.Hash = m.Long()
+	tl.Bots = DecodeBuf_GenericVector[TL_attachMenuBot](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_attachMenuBotsBot(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuBotsBot)
+	return decode_body_TL_attachMenuBotsBot(m)
+}
+func decode_body_TL_attachMenuBotsBot(m *DecodeBuf) TL {
+	tl := TL_attachMenuBotsBot{}
+	tl.Bot = decode_TL_attachMenuBot(m).(TL_attachMenuBot)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_webViewResultURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webViewResultURL)
+	return decode_body_TL_webViewResultURL(m)
+}
+func decode_body_TL_webViewResultURL(m *DecodeBuf) TL {
+	tl := TL_webViewResultURL{}
+	flags := m.Int()
+	tl.Fullsize = flags&(1<<1) != 0
+	if flags&(1<<0) != 0 {
+		tl.QueryID = Ref(m.Long())
+	}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_webViewMessageSent(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_webViewMessageSent)
+	return decode_body_TL_webViewMessageSent(m)
+}
+func decode_body_TL_webViewMessageSent(m *DecodeBuf) TL {
+	tl := TL_webViewMessageSent{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.MsgID = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_botMenuButtonDefault(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botMenuButtonDefault)
+	return decode_body_TL_botMenuButtonDefault(m)
+}
+func decode_body_TL_botMenuButtonDefault(_ *DecodeBuf) TL {
+	tl := TL_botMenuButtonDefault{}
+	return tl
+}
+
+func decode_TL_botMenuButtonCommands(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botMenuButtonCommands)
+	return decode_body_TL_botMenuButtonCommands(m)
+}
+func decode_body_TL_botMenuButtonCommands(_ *DecodeBuf) TL {
+	tl := TL_botMenuButtonCommands{}
+	return tl
+}
+
+func decode_TL_botMenuButton(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botMenuButton)
+	return decode_body_TL_botMenuButton(m)
+}
+func decode_body_TL_botMenuButton(m *DecodeBuf) TL {
+	tl := TL_botMenuButton{}
+	tl.Text = m.String()
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_account_savedRingtonesNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_savedRingtonesNotModified)
+	return decode_body_TL_account_savedRingtonesNotModified(m)
+}
+func decode_body_TL_account_savedRingtonesNotModified(_ *DecodeBuf) TL {
+	tl := TL_account_savedRingtonesNotModified{}
+	return tl
+}
+
+func decode_TL_account_savedRingtones(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_savedRingtones)
+	return decode_body_TL_account_savedRingtones(m)
+}
+func decode_body_TL_account_savedRingtones(m *DecodeBuf) TL {
+	tl := TL_account_savedRingtones{}
+	tl.Hash = m.Long()
+	tl.Ringtones = m.Vector()
+	return tl
+}
+
+func decode_TL_notificationSoundDefault(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notificationSoundDefault)
+	return decode_body_TL_notificationSoundDefault(m)
+}
+func decode_body_TL_notificationSoundDefault(_ *DecodeBuf) TL {
+	tl := TL_notificationSoundDefault{}
+	return tl
+}
+
+func decode_TL_notificationSoundNone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notificationSoundNone)
+	return decode_body_TL_notificationSoundNone(m)
+}
+func decode_body_TL_notificationSoundNone(_ *DecodeBuf) TL {
+	tl := TL_notificationSoundNone{}
+	return tl
+}
+
+func decode_TL_notificationSoundLocal(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notificationSoundLocal)
+	return decode_body_TL_notificationSoundLocal(m)
+}
+func decode_body_TL_notificationSoundLocal(m *DecodeBuf) TL {
+	tl := TL_notificationSoundLocal{}
+	tl.Title = m.String()
+	tl.Data = m.String()
+	return tl
+}
+
+func decode_TL_notificationSoundRingtone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_notificationSoundRingtone)
+	return decode_body_TL_notificationSoundRingtone(m)
+}
+func decode_body_TL_notificationSoundRingtone(m *DecodeBuf) TL {
+	tl := TL_notificationSoundRingtone{}
+	tl.ID = m.Long()
+	return tl
+}
+
+func decode_TL_account_savedRingtone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_savedRingtone)
+	return decode_body_TL_account_savedRingtone(m)
+}
+func decode_body_TL_account_savedRingtone(_ *DecodeBuf) TL {
+	tl := TL_account_savedRingtone{}
+	return tl
+}
+
+func decode_TL_account_savedRingtoneConverted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_savedRingtoneConverted)
+	return decode_body_TL_account_savedRingtoneConverted(m)
+}
+func decode_body_TL_account_savedRingtoneConverted(m *DecodeBuf) TL {
+	tl := TL_account_savedRingtoneConverted{}
+	tl.Document = m.Object()
+	return tl
+}
+
+func decode_TL_attachMenuPeerTypeSameBotPM(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuPeerTypeSameBotPM)
+	return decode_body_TL_attachMenuPeerTypeSameBotPM(m)
+}
+func decode_body_TL_attachMenuPeerTypeSameBotPM(_ *DecodeBuf) TL {
+	tl := TL_attachMenuPeerTypeSameBotPM{}
+	return tl
+}
+
+func decode_TL_attachMenuPeerTypeBotPM(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuPeerTypeBotPM)
+	return decode_body_TL_attachMenuPeerTypeBotPM(m)
+}
+func decode_body_TL_attachMenuPeerTypeBotPM(_ *DecodeBuf) TL {
+	tl := TL_attachMenuPeerTypeBotPM{}
+	return tl
+}
+
+func decode_TL_attachMenuPeerTypePM(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuPeerTypePM)
+	return decode_body_TL_attachMenuPeerTypePM(m)
+}
+func decode_body_TL_attachMenuPeerTypePM(_ *DecodeBuf) TL {
+	tl := TL_attachMenuPeerTypePM{}
+	return tl
+}
+
+func decode_TL_attachMenuPeerTypeChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuPeerTypeChat)
+	return decode_body_TL_attachMenuPeerTypeChat(m)
+}
+func decode_body_TL_attachMenuPeerTypeChat(_ *DecodeBuf) TL {
+	tl := TL_attachMenuPeerTypeChat{}
+	return tl
+}
+
+func decode_TL_attachMenuPeerTypeBroadcast(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_attachMenuPeerTypeBroadcast)
+	return decode_body_TL_attachMenuPeerTypeBroadcast(m)
+}
+func decode_body_TL_attachMenuPeerTypeBroadcast(_ *DecodeBuf) TL {
+	tl := TL_attachMenuPeerTypeBroadcast{}
+	return tl
+}
+
+func decode_TL_inputInvoiceMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputInvoiceMessage)
+	return decode_body_TL_inputInvoiceMessage(m)
+}
+func decode_body_TL_inputInvoiceMessage(m *DecodeBuf) TL {
+	tl := TL_inputInvoiceMessage{}
+	tl.Peer = m.Object()
+	tl.MsgID = m.Int()
+	return tl
+}
+
+func decode_TL_inputInvoiceSlug(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputInvoiceSlug)
+	return decode_body_TL_inputInvoiceSlug(m)
+}
+func decode_body_TL_inputInvoiceSlug(m *DecodeBuf) TL {
+	tl := TL_inputInvoiceSlug{}
+	tl.Slug = m.String()
+	return tl
+}
+
+func decode_TL_inputInvoicePremiumGiftCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputInvoicePremiumGiftCode)
+	return decode_body_TL_inputInvoicePremiumGiftCode(m)
+}
+func decode_body_TL_inputInvoicePremiumGiftCode(m *DecodeBuf) TL {
+	tl := TL_inputInvoicePremiumGiftCode{}
+	tl.Purpose = m.Object()
+	tl.Option = decode_TL_premiumGiftCodeOption(m).(TL_premiumGiftCodeOption)
+	return tl
+}
+
+func decode_TL_inputInvoiceStars(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputInvoiceStars)
+	return decode_body_TL_inputInvoiceStars(m)
+}
+func decode_body_TL_inputInvoiceStars(m *DecodeBuf) TL {
+	tl := TL_inputInvoiceStars{}
+	tl.Purpose = m.Object()
+	return tl
+}
+
+func decode_TL_inputInvoiceChatInviteSubscription(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputInvoiceChatInviteSubscription)
+	return decode_body_TL_inputInvoiceChatInviteSubscription(m)
+}
+func decode_body_TL_inputInvoiceChatInviteSubscription(m *DecodeBuf) TL {
+	tl := TL_inputInvoiceChatInviteSubscription{}
+	tl.Hash = m.String()
+	return tl
+}
+
+func decode_TL_payments_exportedInvoice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_exportedInvoice)
+	return decode_body_TL_payments_exportedInvoice(m)
+}
+func decode_body_TL_payments_exportedInvoice(m *DecodeBuf) TL {
+	tl := TL_payments_exportedInvoice{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_messages_transcribedAudio(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_transcribedAudio)
+	return decode_body_TL_messages_transcribedAudio(m)
+}
+func decode_body_TL_messages_transcribedAudio(m *DecodeBuf) TL {
+	tl := TL_messages_transcribedAudio{}
+	flags := m.Int()
+	tl.Pending = flags&(1<<0) != 0
+	tl.TranscriptionID = m.Long()
+	tl.Text = m.String()
+	if flags&(1<<1) != 0 {
+		tl.TrialRemainsNum = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.TrialRemainsUntilDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_help_premiumPromo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_premiumPromo)
+	return decode_body_TL_help_premiumPromo(m)
+}
+func decode_body_TL_help_premiumPromo(m *DecodeBuf) TL {
+	tl := TL_help_premiumPromo{}
+	tl.StatusText = m.String()
+	tl.StatusEntities = m.Vector()
+	tl.VideoSections = m.VectorString()
+	tl.Videos = m.Vector()
+	tl.PeriodOptions = DecodeBuf_GenericVector[TL_premiumSubscriptionOption](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_inputStorePaymentPremiumSubscription(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStorePaymentPremiumSubscription)
+	return decode_body_TL_inputStorePaymentPremiumSubscription(m)
+}
+func decode_body_TL_inputStorePaymentPremiumSubscription(m *DecodeBuf) TL {
+	tl := TL_inputStorePaymentPremiumSubscription{}
+	flags := m.Int()
+	tl.Restore = flags&(1<<0) != 0
+	tl.Upgrade = flags&(1<<1) != 0
+	return tl
+}
+
+func decode_TL_inputStorePaymentGiftPremium(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStorePaymentGiftPremium)
+	return decode_body_TL_inputStorePaymentGiftPremium(m)
+}
+func decode_body_TL_inputStorePaymentGiftPremium(m *DecodeBuf) TL {
+	tl := TL_inputStorePaymentGiftPremium{}
+	tl.UserID = m.Object()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_inputStorePaymentPremiumGiftCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStorePaymentPremiumGiftCode)
+	return decode_body_TL_inputStorePaymentPremiumGiftCode(m)
+}
+func decode_body_TL_inputStorePaymentPremiumGiftCode(m *DecodeBuf) TL {
+	tl := TL_inputStorePaymentPremiumGiftCode{}
+	flags := m.Int()
+	tl.Users = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.BoostPeer = m.Object()
+	}
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_inputStorePaymentPremiumGiveaway(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStorePaymentPremiumGiveaway)
+	return decode_body_TL_inputStorePaymentPremiumGiveaway(m)
+}
+func decode_body_TL_inputStorePaymentPremiumGiveaway(m *DecodeBuf) TL {
+	tl := TL_inputStorePaymentPremiumGiveaway{}
+	flags := m.Int()
+	tl.OnlyNewSubscribers = flags&(1<<0) != 0
+	tl.WinnersAreVisible = flags&(1<<3) != 0
+	tl.BoostPeer = m.Object()
+	if flags&(1<<1) != 0 {
+		tl.AdditionalPeers = m.Vector()
+	}
+	if flags&(1<<2) != 0 {
+		tl.CountriesISO2 = m.VectorString()
+	}
+	if flags&(1<<4) != 0 {
+		tl.PrizeDescription = Ref(m.String())
+	}
+	tl.RandomID = m.Long()
+	tl.UntilDate = m.Int()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_inputStorePaymentStarsTopup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStorePaymentStarsTopup)
+	return decode_body_TL_inputStorePaymentStarsTopup(m)
+}
+func decode_body_TL_inputStorePaymentStarsTopup(m *DecodeBuf) TL {
+	tl := TL_inputStorePaymentStarsTopup{}
+	tl.Stars = m.Long()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_inputStorePaymentStarsGift(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStorePaymentStarsGift)
+	return decode_body_TL_inputStorePaymentStarsGift(m)
+}
+func decode_body_TL_inputStorePaymentStarsGift(m *DecodeBuf) TL {
+	tl := TL_inputStorePaymentStarsGift{}
+	tl.UserID = m.Object()
+	tl.Stars = m.Long()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_premiumGiftOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_premiumGiftOption)
+	return decode_body_TL_premiumGiftOption(m)
+}
+func decode_body_TL_premiumGiftOption(m *DecodeBuf) TL {
+	tl := TL_premiumGiftOption{}
+	flags := m.Int()
+	tl.Months = m.Int()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	tl.BotURL = m.String()
+	if flags&(1<<0) != 0 {
+		tl.StoreProduct = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_paymentFormMethod(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_paymentFormMethod)
+	return decode_body_TL_paymentFormMethod(m)
+}
+func decode_body_TL_paymentFormMethod(m *DecodeBuf) TL {
+	tl := TL_paymentFormMethod{}
+	tl.URL = m.String()
+	tl.Title = m.String()
+	return tl
+}
+
+func decode_TL_emojiStatusEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiStatusEmpty)
+	return decode_body_TL_emojiStatusEmpty(m)
+}
+func decode_body_TL_emojiStatusEmpty(_ *DecodeBuf) TL {
+	tl := TL_emojiStatusEmpty{}
+	return tl
+}
+
+func decode_TL_emojiStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiStatus)
+	return decode_body_TL_emojiStatus(m)
+}
+func decode_body_TL_emojiStatus(m *DecodeBuf) TL {
+	tl := TL_emojiStatus{}
+	tl.DocumentID = m.Long()
+	return tl
+}
+
+func decode_TL_emojiStatusUntil(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiStatusUntil)
+	return decode_body_TL_emojiStatusUntil(m)
+}
+func decode_body_TL_emojiStatusUntil(m *DecodeBuf) TL {
+	tl := TL_emojiStatusUntil{}
+	tl.DocumentID = m.Long()
+	tl.Until = m.Int()
+	return tl
+}
+
+func decode_TL_account_emojiStatusesNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_emojiStatusesNotModified)
+	return decode_body_TL_account_emojiStatusesNotModified(m)
+}
+func decode_body_TL_account_emojiStatusesNotModified(_ *DecodeBuf) TL {
+	tl := TL_account_emojiStatusesNotModified{}
+	return tl
+}
+
+func decode_TL_account_emojiStatuses(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_emojiStatuses)
+	return decode_body_TL_account_emojiStatuses(m)
+}
+func decode_body_TL_account_emojiStatuses(m *DecodeBuf) TL {
+	tl := TL_account_emojiStatuses{}
+	tl.Hash = m.Long()
+	tl.Statuses = m.Vector()
+	return tl
+}
+
+func decode_TL_reactionEmpty(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reactionEmpty)
+	return decode_body_TL_reactionEmpty(m)
+}
+func decode_body_TL_reactionEmpty(_ *DecodeBuf) TL {
+	tl := TL_reactionEmpty{}
+	return tl
+}
+
+func decode_TL_reactionEmoji(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reactionEmoji)
+	return decode_body_TL_reactionEmoji(m)
+}
+func decode_body_TL_reactionEmoji(m *DecodeBuf) TL {
+	tl := TL_reactionEmoji{}
+	tl.Emoticon = m.String()
+	return tl
+}
+
+func decode_TL_reactionCustomEmoji(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reactionCustomEmoji)
+	return decode_body_TL_reactionCustomEmoji(m)
+}
+func decode_body_TL_reactionCustomEmoji(m *DecodeBuf) TL {
+	tl := TL_reactionCustomEmoji{}
+	tl.DocumentID = m.Long()
+	return tl
+}
+
+func decode_TL_reactionPaid(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reactionPaid)
+	return decode_body_TL_reactionPaid(m)
+}
+func decode_body_TL_reactionPaid(_ *DecodeBuf) TL {
+	tl := TL_reactionPaid{}
+	return tl
+}
+
+func decode_TL_chatReactionsNone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatReactionsNone)
+	return decode_body_TL_chatReactionsNone(m)
+}
+func decode_body_TL_chatReactionsNone(_ *DecodeBuf) TL {
+	tl := TL_chatReactionsNone{}
+	return tl
+}
+
+func decode_TL_chatReactionsAll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatReactionsAll)
+	return decode_body_TL_chatReactionsAll(m)
+}
+func decode_body_TL_chatReactionsAll(m *DecodeBuf) TL {
+	tl := TL_chatReactionsAll{}
+	flags := m.Int()
+	tl.AllowCustom = flags&(1<<0) != 0
+	return tl
+}
+
+func decode_TL_chatReactionsSome(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatReactionsSome)
+	return decode_body_TL_chatReactionsSome(m)
+}
+func decode_body_TL_chatReactionsSome(m *DecodeBuf) TL {
+	tl := TL_chatReactionsSome{}
+	tl.Reactions = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_reactionsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_reactionsNotModified)
+	return decode_body_TL_messages_reactionsNotModified(m)
+}
+func decode_body_TL_messages_reactionsNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_reactionsNotModified{}
+	return tl
+}
+
+func decode_TL_messages_reactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_reactions)
+	return decode_body_TL_messages_reactions(m)
+}
+func decode_body_TL_messages_reactions(m *DecodeBuf) TL {
+	tl := TL_messages_reactions{}
+	tl.Hash = m.Long()
+	tl.Reactions = m.Vector()
+	return tl
+}
+
+func decode_TL_emailVerifyPurposeLoginSetup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emailVerifyPurposeLoginSetup)
+	return decode_body_TL_emailVerifyPurposeLoginSetup(m)
+}
+func decode_body_TL_emailVerifyPurposeLoginSetup(m *DecodeBuf) TL {
+	tl := TL_emailVerifyPurposeLoginSetup{}
+	tl.PhoneNumber = m.String()
+	tl.PhoneCodeHash = m.String()
+	return tl
+}
+
+func decode_TL_emailVerifyPurposeLoginChange(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emailVerifyPurposeLoginChange)
+	return decode_body_TL_emailVerifyPurposeLoginChange(m)
+}
+func decode_body_TL_emailVerifyPurposeLoginChange(_ *DecodeBuf) TL {
+	tl := TL_emailVerifyPurposeLoginChange{}
+	return tl
+}
+
+func decode_TL_emailVerifyPurposePassport(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emailVerifyPurposePassport)
+	return decode_body_TL_emailVerifyPurposePassport(m)
+}
+func decode_body_TL_emailVerifyPurposePassport(_ *DecodeBuf) TL {
+	tl := TL_emailVerifyPurposePassport{}
+	return tl
+}
+
+func decode_TL_emailVerificationCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emailVerificationCode)
+	return decode_body_TL_emailVerificationCode(m)
+}
+func decode_body_TL_emailVerificationCode(m *DecodeBuf) TL {
+	tl := TL_emailVerificationCode{}
+	tl.Code = m.String()
+	return tl
+}
+
+func decode_TL_emailVerificationGoogle(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emailVerificationGoogle)
+	return decode_body_TL_emailVerificationGoogle(m)
+}
+func decode_body_TL_emailVerificationGoogle(m *DecodeBuf) TL {
+	tl := TL_emailVerificationGoogle{}
+	tl.Token = m.String()
+	return tl
+}
+
+func decode_TL_emailVerificationApple(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emailVerificationApple)
+	return decode_body_TL_emailVerificationApple(m)
+}
+func decode_body_TL_emailVerificationApple(m *DecodeBuf) TL {
+	tl := TL_emailVerificationApple{}
+	tl.Token = m.String()
+	return tl
+}
+
+func decode_TL_account_emailVerified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_emailVerified)
+	return decode_body_TL_account_emailVerified(m)
+}
+func decode_body_TL_account_emailVerified(m *DecodeBuf) TL {
+	tl := TL_account_emailVerified{}
+	tl.Email = m.String()
+	return tl
+}
+
+func decode_TL_account_emailVerifiedLogin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_emailVerifiedLogin)
+	return decode_body_TL_account_emailVerifiedLogin(m)
+}
+func decode_body_TL_account_emailVerifiedLogin(m *DecodeBuf) TL {
+	tl := TL_account_emailVerifiedLogin{}
+	tl.Email = m.String()
+	tl.SentCode = m.Object()
+	return tl
+}
+
+func decode_TL_premiumSubscriptionOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_premiumSubscriptionOption)
+	return decode_body_TL_premiumSubscriptionOption(m)
+}
+func decode_body_TL_premiumSubscriptionOption(m *DecodeBuf) TL {
+	tl := TL_premiumSubscriptionOption{}
+	flags := m.Int()
+	tl.Current = flags&(1<<1) != 0
+	tl.CanPurchaseUpgrade = flags&(1<<2) != 0
+	if flags&(1<<3) != 0 {
+		tl.Transaction = Ref(m.String())
+	}
+	tl.Months = m.Int()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	tl.BotURL = m.String()
+	if flags&(1<<0) != 0 {
+		tl.StoreProduct = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_sendAsPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sendAsPeer)
+	return decode_body_TL_sendAsPeer(m)
+}
+func decode_body_TL_sendAsPeer(m *DecodeBuf) TL {
+	tl := TL_sendAsPeer{}
+	flags := m.Int()
+	tl.PremiumRequired = flags&(1<<0) != 0
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_messageExtendedMediaPreview(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageExtendedMediaPreview)
+	return decode_body_TL_messageExtendedMediaPreview(m)
+}
+func decode_body_TL_messageExtendedMediaPreview(m *DecodeBuf) TL {
+	tl := TL_messageExtendedMediaPreview{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.W = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.H = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Thumb = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.VideoDuration = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_messageExtendedMedia(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageExtendedMedia)
+	return decode_body_TL_messageExtendedMedia(m)
+}
+func decode_body_TL_messageExtendedMedia(m *DecodeBuf) TL {
+	tl := TL_messageExtendedMedia{}
+	tl.Media = m.Object()
+	return tl
+}
+
+func decode_TL_stickerKeyword(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stickerKeyword)
+	return decode_body_TL_stickerKeyword(m)
+}
+func decode_body_TL_stickerKeyword(m *DecodeBuf) TL {
+	tl := TL_stickerKeyword{}
+	tl.DocumentID = m.Long()
+	tl.Keyword = m.VectorString()
+	return tl
+}
+
+func decode_TL_username(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_username)
+	return decode_body_TL_username(m)
+}
+func decode_body_TL_username(m *DecodeBuf) TL {
+	tl := TL_username{}
+	flags := m.Int()
+	tl.Editable = flags&(1<<0) != 0
+	tl.Active = flags&(1<<1) != 0
+	tl.Username = m.String()
+	return tl
+}
+
+func decode_TL_forumTopicDeleted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_forumTopicDeleted)
+	return decode_body_TL_forumTopicDeleted(m)
+}
+func decode_body_TL_forumTopicDeleted(m *DecodeBuf) TL {
+	tl := TL_forumTopicDeleted{}
+	tl.ID = m.Int()
+	return tl
+}
+
+func decode_TL_forumTopic(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_forumTopic)
+	return decode_body_TL_forumTopic(m)
+}
+func decode_body_TL_forumTopic(m *DecodeBuf) TL {
+	tl := TL_forumTopic{}
+	flags := m.Int()
+	tl.My = flags&(1<<1) != 0
+	tl.Closed = flags&(1<<2) != 0
+	tl.Pinned = flags&(1<<3) != 0
+	tl.Short = flags&(1<<5) != 0
+	tl.Hidden = flags&(1<<6) != 0
+	tl.ID = m.Int()
+	tl.Date = m.Int()
+	tl.Title = m.String()
+	tl.IconColor = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.IconEmojiID = Ref(m.Long())
+	}
+	tl.TopMessage = m.Int()
+	tl.ReadInboxMaxID = m.Int()
+	tl.ReadOutboxMaxID = m.Int()
+	tl.UnreadCount = m.Int()
+	tl.UnreadMentionsCount = m.Int()
+	tl.UnreadReactionsCount = m.Int()
+	tl.FromID = m.Object()
+	tl.NotifySettings = decode_TL_peerNotifySettings(m).(TL_peerNotifySettings)
+	if flags&(1<<4) != 0 {
+		tl.Draft = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_messages_forumTopics(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_forumTopics)
+	return decode_body_TL_messages_forumTopics(m)
+}
+func decode_body_TL_messages_forumTopics(m *DecodeBuf) TL {
+	tl := TL_messages_forumTopics{}
+	flags := m.Int()
+	tl.OrderByCreateDate = flags&(1<<0) != 0
+	tl.Count = m.Int()
+	tl.Topics = m.Vector()
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	tl.PTS = m.Int()
+	return tl
+}
+
+func decode_TL_defaultHistoryTTL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_defaultHistoryTTL)
+	return decode_body_TL_defaultHistoryTTL(m)
+}
+func decode_body_TL_defaultHistoryTTL(m *DecodeBuf) TL {
+	tl := TL_defaultHistoryTTL{}
+	tl.Period = m.Int()
+	return tl
+}
+
+func decode_TL_exportedContactToken(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_exportedContactToken)
+	return decode_body_TL_exportedContactToken(m)
+}
+func decode_body_TL_exportedContactToken(m *DecodeBuf) TL {
+	tl := TL_exportedContactToken{}
+	tl.URL = m.String()
+	tl.Expires = m.Int()
+	return tl
+}
+
+func decode_TL_requestPeerTypeUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_requestPeerTypeUser)
+	return decode_body_TL_requestPeerTypeUser(m)
+}
+func decode_body_TL_requestPeerTypeUser(m *DecodeBuf) TL {
+	tl := TL_requestPeerTypeUser{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Bot = Ref(m.Bool())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Premium = Ref(m.Bool())
+	}
+	return tl
+}
+
+func decode_TL_requestPeerTypeChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_requestPeerTypeChat)
+	return decode_body_TL_requestPeerTypeChat(m)
+}
+func decode_body_TL_requestPeerTypeChat(m *DecodeBuf) TL {
+	tl := TL_requestPeerTypeChat{}
+	flags := m.Int()
+	tl.Creator = flags&(1<<0) != 0
+	tl.BotParticipant = flags&(1<<5) != 0
+	if flags&(1<<3) != 0 {
+		tl.HasUsername = Ref(m.Bool())
+	}
+	if flags&(1<<4) != 0 {
+		tl.Forum = Ref(m.Bool())
+	}
+	if flags&(1<<1) != 0 {
+		tl.UserAdminRights = Ref(decode_TL_chatAdminRights(m).(TL_chatAdminRights))
+	}
+	if flags&(1<<2) != 0 {
+		tl.BotAdminRights = Ref(decode_TL_chatAdminRights(m).(TL_chatAdminRights))
+	}
+	return tl
+}
+
+func decode_TL_requestPeerTypeBroadcast(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_requestPeerTypeBroadcast)
+	return decode_body_TL_requestPeerTypeBroadcast(m)
+}
+func decode_body_TL_requestPeerTypeBroadcast(m *DecodeBuf) TL {
+	tl := TL_requestPeerTypeBroadcast{}
+	flags := m.Int()
+	tl.Creator = flags&(1<<0) != 0
+	if flags&(1<<3) != 0 {
+		tl.HasUsername = Ref(m.Bool())
+	}
+	if flags&(1<<1) != 0 {
+		tl.UserAdminRights = Ref(decode_TL_chatAdminRights(m).(TL_chatAdminRights))
+	}
+	if flags&(1<<2) != 0 {
+		tl.BotAdminRights = Ref(decode_TL_chatAdminRights(m).(TL_chatAdminRights))
+	}
+	return tl
+}
+
+func decode_TL_emojiListNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiListNotModified)
+	return decode_body_TL_emojiListNotModified(m)
+}
+func decode_body_TL_emojiListNotModified(_ *DecodeBuf) TL {
+	tl := TL_emojiListNotModified{}
+	return tl
+}
+
+func decode_TL_emojiList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiList)
+	return decode_body_TL_emojiList(m)
+}
+func decode_body_TL_emojiList(m *DecodeBuf) TL {
+	tl := TL_emojiList{}
+	tl.Hash = m.Long()
+	tl.DocumentID = m.VectorLong()
+	return tl
+}
+
+func decode_TL_emojiGroup(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiGroup)
+	return decode_body_TL_emojiGroup(m)
+}
+func decode_body_TL_emojiGroup(m *DecodeBuf) TL {
+	tl := TL_emojiGroup{}
+	tl.Title = m.String()
+	tl.IconEmojiID = m.Long()
+	tl.Emoticons = m.VectorString()
+	return tl
+}
+
+func decode_TL_emojiGroupGreeting(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiGroupGreeting)
+	return decode_body_TL_emojiGroupGreeting(m)
+}
+func decode_body_TL_emojiGroupGreeting(m *DecodeBuf) TL {
+	tl := TL_emojiGroupGreeting{}
+	tl.Title = m.String()
+	tl.IconEmojiID = m.Long()
+	tl.Emoticons = m.VectorString()
+	return tl
+}
+
+func decode_TL_emojiGroupPremium(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_emojiGroupPremium)
+	return decode_body_TL_emojiGroupPremium(m)
+}
+func decode_body_TL_emojiGroupPremium(m *DecodeBuf) TL {
+	tl := TL_emojiGroupPremium{}
+	tl.Title = m.String()
+	tl.IconEmojiID = m.Long()
+	return tl
+}
+
+func decode_TL_messages_emojiGroupsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_emojiGroupsNotModified)
+	return decode_body_TL_messages_emojiGroupsNotModified(m)
+}
+func decode_body_TL_messages_emojiGroupsNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_emojiGroupsNotModified{}
+	return tl
+}
+
+func decode_TL_messages_emojiGroups(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_emojiGroups)
+	return decode_body_TL_messages_emojiGroups(m)
+}
+func decode_body_TL_messages_emojiGroups(m *DecodeBuf) TL {
+	tl := TL_messages_emojiGroups{}
+	tl.Hash = m.Int()
+	tl.Groups = m.Vector()
+	return tl
+}
+
+func decode_TL_textWithEntities(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_textWithEntities)
+	return decode_body_TL_textWithEntities(m)
+}
+func decode_body_TL_textWithEntities(m *DecodeBuf) TL {
+	tl := TL_textWithEntities{}
+	tl.Text = m.String()
+	tl.Entities = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_translateResult(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_translateResult)
+	return decode_body_TL_messages_translateResult(m)
+}
+func decode_body_TL_messages_translateResult(m *DecodeBuf) TL {
+	tl := TL_messages_translateResult{}
+	tl.Result = DecodeBuf_GenericVector[TL_textWithEntities](m)
+	return tl
+}
+
+func decode_TL_autoSaveSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_autoSaveSettings)
+	return decode_body_TL_autoSaveSettings(m)
+}
+func decode_body_TL_autoSaveSettings(m *DecodeBuf) TL {
+	tl := TL_autoSaveSettings{}
+	flags := m.Int()
+	tl.Photos = flags&(1<<0) != 0
+	tl.Videos = flags&(1<<1) != 0
+	if flags&(1<<2) != 0 {
+		tl.VideoMaxSize = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_autoSaveException(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_autoSaveException)
+	return decode_body_TL_autoSaveException(m)
+}
+func decode_body_TL_autoSaveException(m *DecodeBuf) TL {
+	tl := TL_autoSaveException{}
+	tl.Peer = m.Object()
+	tl.Settings = decode_TL_autoSaveSettings(m).(TL_autoSaveSettings)
+	return tl
+}
+
+func decode_TL_account_autoSaveSettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_autoSaveSettings)
+	return decode_body_TL_account_autoSaveSettings(m)
+}
+func decode_body_TL_account_autoSaveSettings(m *DecodeBuf) TL {
+	tl := TL_account_autoSaveSettings{}
+	tl.UsersSettings = decode_TL_autoSaveSettings(m).(TL_autoSaveSettings)
+	tl.ChatsSettings = decode_TL_autoSaveSettings(m).(TL_autoSaveSettings)
+	tl.BroadcastsSettings = decode_TL_autoSaveSettings(m).(TL_autoSaveSettings)
+	tl.Exceptions = DecodeBuf_GenericVector[TL_autoSaveException](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_help_appConfigNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_appConfigNotModified)
+	return decode_body_TL_help_appConfigNotModified(m)
+}
+func decode_body_TL_help_appConfigNotModified(_ *DecodeBuf) TL {
+	tl := TL_help_appConfigNotModified{}
+	return tl
+}
+
+func decode_TL_help_appConfig(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_appConfig)
+	return decode_body_TL_help_appConfig(m)
+}
+func decode_body_TL_help_appConfig(m *DecodeBuf) TL {
+	tl := TL_help_appConfig{}
+	tl.Hash = m.Int()
+	tl.Config = m.Object()
+	return tl
+}
+
+func decode_TL_inputBotAppID(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotAppID)
+	return decode_body_TL_inputBotAppID(m)
+}
+func decode_body_TL_inputBotAppID(m *DecodeBuf) TL {
+	tl := TL_inputBotAppID{}
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	return tl
+}
+
+func decode_TL_inputBotAppShortName(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBotAppShortName)
+	return decode_body_TL_inputBotAppShortName(m)
+}
+func decode_body_TL_inputBotAppShortName(m *DecodeBuf) TL {
+	tl := TL_inputBotAppShortName{}
+	tl.BotID = m.Object()
+	tl.ShortName = m.String()
+	return tl
+}
+
+func decode_TL_botAppNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botAppNotModified)
+	return decode_body_TL_botAppNotModified(m)
+}
+func decode_body_TL_botAppNotModified(_ *DecodeBuf) TL {
+	tl := TL_botAppNotModified{}
+	return tl
+}
+
+func decode_TL_botApp(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botApp)
+	return decode_body_TL_botApp(m)
+}
+func decode_body_TL_botApp(m *DecodeBuf) TL {
+	tl := TL_botApp{}
+	flags := m.Int()
+	tl.ID = m.Long()
+	tl.AccessHash = m.Long()
+	tl.ShortName = m.String()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	tl.Photo = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Document = m.Object()
+	}
+	tl.Hash = m.Long()
+	return tl
+}
+
+func decode_TL_messages_botApp(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_botApp)
+	return decode_body_TL_messages_botApp(m)
+}
+func decode_body_TL_messages_botApp(m *DecodeBuf) TL {
+	tl := TL_messages_botApp{}
+	flags := m.Int()
+	tl.Inactive = flags&(1<<0) != 0
+	tl.RequestWriteAccess = flags&(1<<1) != 0
+	tl.HasSettings = flags&(1<<2) != 0
+	tl.App = m.Object()
+	return tl
+}
+
+func decode_TL_inlineBotWebView(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inlineBotWebView)
+	return decode_body_TL_inlineBotWebView(m)
+}
+func decode_body_TL_inlineBotWebView(m *DecodeBuf) TL {
+	tl := TL_inlineBotWebView{}
+	tl.Text = m.String()
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_readParticipantDate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_readParticipantDate)
+	return decode_body_TL_readParticipantDate(m)
+}
+func decode_body_TL_readParticipantDate(m *DecodeBuf) TL {
+	tl := TL_readParticipantDate{}
+	tl.UserID = m.Long()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_inputChatlistDialogFilter(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputChatlistDialogFilter)
+	return decode_body_TL_inputChatlistDialogFilter(m)
+}
+func decode_body_TL_inputChatlistDialogFilter(m *DecodeBuf) TL {
+	tl := TL_inputChatlistDialogFilter{}
+	tl.FilterID = m.Int()
+	return tl
+}
+
+func decode_TL_exportedChatlistInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_exportedChatlistInvite)
+	return decode_body_TL_exportedChatlistInvite(m)
+}
+func decode_body_TL_exportedChatlistInvite(m *DecodeBuf) TL {
+	tl := TL_exportedChatlistInvite{}
+	m.Int() //unused flags
+	tl.Title = m.String()
+	tl.URL = m.String()
+	tl.Peers = m.Vector()
+	return tl
+}
+
+func decode_TL_chatlists_exportedChatlistInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatlists_exportedChatlistInvite)
+	return decode_body_TL_chatlists_exportedChatlistInvite(m)
+}
+func decode_body_TL_chatlists_exportedChatlistInvite(m *DecodeBuf) TL {
+	tl := TL_chatlists_exportedChatlistInvite{}
+	tl.Filter = m.Object()
+	tl.Invite = decode_TL_exportedChatlistInvite(m).(TL_exportedChatlistInvite)
+	return tl
+}
+
+func decode_TL_chatlists_exportedInvites(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatlists_exportedInvites)
+	return decode_body_TL_chatlists_exportedInvites(m)
+}
+func decode_body_TL_chatlists_exportedInvites(m *DecodeBuf) TL {
+	tl := TL_chatlists_exportedInvites{}
+	tl.Invites = DecodeBuf_GenericVector[TL_exportedChatlistInvite](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_chatlists_chatlistInviteAlready(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatlists_chatlistInviteAlready)
+	return decode_body_TL_chatlists_chatlistInviteAlready(m)
+}
+func decode_body_TL_chatlists_chatlistInviteAlready(m *DecodeBuf) TL {
+	tl := TL_chatlists_chatlistInviteAlready{}
+	tl.FilterID = m.Int()
+	tl.MissingPeers = m.Vector()
+	tl.AlreadyPeers = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_chatlists_chatlistInvite(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatlists_chatlistInvite)
+	return decode_body_TL_chatlists_chatlistInvite(m)
+}
+func decode_body_TL_chatlists_chatlistInvite(m *DecodeBuf) TL {
+	tl := TL_chatlists_chatlistInvite{}
+	flags := m.Int()
+	tl.Title = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Emoticon = Ref(m.String())
+	}
+	tl.Peers = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_chatlists_chatlistUpdates(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_chatlists_chatlistUpdates)
+	return decode_body_TL_chatlists_chatlistUpdates(m)
+}
+func decode_body_TL_chatlists_chatlistUpdates(m *DecodeBuf) TL {
+	tl := TL_chatlists_chatlistUpdates{}
+	tl.MissingPeers = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_bots_botInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_bots_botInfo)
+	return decode_body_TL_bots_botInfo(m)
+}
+func decode_body_TL_bots_botInfo(m *DecodeBuf) TL {
+	tl := TL_bots_botInfo{}
+	tl.Name = m.String()
+	tl.About = m.String()
+	tl.Description = m.String()
+	return tl
+}
+
+func decode_TL_messagePeerVote(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messagePeerVote)
+	return decode_body_TL_messagePeerVote(m)
+}
+func decode_body_TL_messagePeerVote(m *DecodeBuf) TL {
+	tl := TL_messagePeerVote{}
+	tl.Peer = m.Object()
+	tl.Option = m.StringBytes()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_messagePeerVoteInputOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messagePeerVoteInputOption)
+	return decode_body_TL_messagePeerVoteInputOption(m)
+}
+func decode_body_TL_messagePeerVoteInputOption(m *DecodeBuf) TL {
+	tl := TL_messagePeerVoteInputOption{}
+	tl.Peer = m.Object()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_messagePeerVoteMultiple(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messagePeerVoteMultiple)
+	return decode_body_TL_messagePeerVoteMultiple(m)
+}
+func decode_body_TL_messagePeerVoteMultiple(m *DecodeBuf) TL {
+	tl := TL_messagePeerVoteMultiple{}
+	tl.Peer = m.Object()
+	tl.Options = m.VectorBytes()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_storyViews(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyViews)
+	return decode_body_TL_storyViews(m)
+}
+func decode_body_TL_storyViews(m *DecodeBuf) TL {
+	tl := TL_storyViews{}
+	flags := m.Int()
+	tl.HasViewers = flags&(1<<1) != 0
+	tl.ViewsCount = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.ForwardsCount = Ref(m.Int())
+	}
+	if flags&(1<<3) != 0 {
+		tl.Reactions = DecodeBuf_GenericVector[TL_reactionCount](m)
+	}
+	if flags&(1<<4) != 0 {
+		tl.ReactionsCount = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.RecentViewers = m.VectorLong()
+	}
+	return tl
+}
+
+func decode_TL_storyItemDeleted(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyItemDeleted)
+	return decode_body_TL_storyItemDeleted(m)
+}
+func decode_body_TL_storyItemDeleted(m *DecodeBuf) TL {
+	tl := TL_storyItemDeleted{}
+	tl.ID = m.Int()
+	return tl
+}
+
+func decode_TL_storyItemSkipped(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyItemSkipped)
+	return decode_body_TL_storyItemSkipped(m)
+}
+func decode_body_TL_storyItemSkipped(m *DecodeBuf) TL {
+	tl := TL_storyItemSkipped{}
+	flags := m.Int()
+	tl.CloseFriends = flags&(1<<8) != 0
+	tl.ID = m.Int()
+	tl.Date = m.Int()
+	tl.ExpireDate = m.Int()
+	return tl
+}
+
+func decode_TL_storyItem(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyItem)
+	return decode_body_TL_storyItem(m)
+}
+func decode_body_TL_storyItem(m *DecodeBuf) TL {
+	tl := TL_storyItem{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<5) != 0
+	tl.Public = flags&(1<<7) != 0
+	tl.CloseFriends = flags&(1<<8) != 0
+	tl.Min = flags&(1<<9) != 0
+	tl.Noforwards = flags&(1<<10) != 0
+	tl.Edited = flags&(1<<11) != 0
+	tl.Contacts = flags&(1<<12) != 0
+	tl.SelectedContacts = flags&(1<<13) != 0
+	tl.Out = flags&(1<<16) != 0
+	tl.ID = m.Int()
+	tl.Date = m.Int()
+	if flags&(1<<18) != 0 {
+		tl.FromID = m.Object()
+	}
+	if flags&(1<<17) != 0 {
+		tl.FwdFrom = Ref(decode_TL_storyFwdHeader(m).(TL_storyFwdHeader))
+	}
+	tl.ExpireDate = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Caption = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Entities = m.Vector()
+	}
+	tl.Media = m.Object()
+	if flags&(1<<14) != 0 {
+		tl.MediaAreas = m.Vector()
+	}
+	if flags&(1<<2) != 0 {
+		tl.Privacy = m.Vector()
+	}
+	if flags&(1<<3) != 0 {
+		tl.Views = Ref(decode_TL_storyViews(m).(TL_storyViews))
+	}
+	if flags&(1<<15) != 0 {
+		tl.SentReaction = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_stories_allStoriesNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stories_allStoriesNotModified)
+	return decode_body_TL_stories_allStoriesNotModified(m)
+}
+func decode_body_TL_stories_allStoriesNotModified(m *DecodeBuf) TL {
+	tl := TL_stories_allStoriesNotModified{}
+	m.Int() //unused flags
+	tl.State = m.String()
+	tl.StealthMode = decode_TL_storiesStealthMode(m).(TL_storiesStealthMode)
+	return tl
+}
+
+func decode_TL_stories_allStories(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stories_allStories)
+	return decode_body_TL_stories_allStories(m)
+}
+func decode_body_TL_stories_allStories(m *DecodeBuf) TL {
+	tl := TL_stories_allStories{}
+	flags := m.Int()
+	tl.HasMore = flags&(1<<0) != 0
+	tl.Count = m.Int()
+	tl.State = m.String()
+	tl.PeerStories = DecodeBuf_GenericVector[TL_peerStories](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	tl.StealthMode = decode_TL_storiesStealthMode(m).(TL_storiesStealthMode)
+	return tl
+}
+
+func decode_TL_stories_stories(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stories_stories)
+	return decode_body_TL_stories_stories(m)
+}
+func decode_body_TL_stories_stories(m *DecodeBuf) TL {
+	tl := TL_stories_stories{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.Stories = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.PinnedToTop = m.VectorInt()
+	}
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_storyView(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyView)
+	return decode_body_TL_storyView(m)
+}
+func decode_body_TL_storyView(m *DecodeBuf) TL {
+	tl := TL_storyView{}
+	flags := m.Int()
+	tl.Blocked = flags&(1<<0) != 0
+	tl.BlockedMyStoriesFrom = flags&(1<<1) != 0
+	tl.UserID = m.Long()
+	tl.Date = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.Reaction = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_storyViewPublicForward(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyViewPublicForward)
+	return decode_body_TL_storyViewPublicForward(m)
+}
+func decode_body_TL_storyViewPublicForward(m *DecodeBuf) TL {
+	tl := TL_storyViewPublicForward{}
+	flags := m.Int()
+	tl.Blocked = flags&(1<<0) != 0
+	tl.BlockedMyStoriesFrom = flags&(1<<1) != 0
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_storyViewPublicRepost(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyViewPublicRepost)
+	return decode_body_TL_storyViewPublicRepost(m)
+}
+func decode_body_TL_storyViewPublicRepost(m *DecodeBuf) TL {
+	tl := TL_storyViewPublicRepost{}
+	flags := m.Int()
+	tl.Blocked = flags&(1<<0) != 0
+	tl.BlockedMyStoriesFrom = flags&(1<<1) != 0
+	tl.PeerID = m.Object()
+	tl.Story = m.Object()
+	return tl
+}
+
+func decode_TL_stories_storyViewsList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stories_storyViewsList)
+	return decode_body_TL_stories_storyViewsList(m)
+}
+func decode_body_TL_stories_storyViewsList(m *DecodeBuf) TL {
+	tl := TL_stories_storyViewsList{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.ViewsCount = m.Int()
+	tl.ForwardsCount = m.Int()
+	tl.ReactionsCount = m.Int()
+	tl.Views = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_stories_storyViews(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stories_storyViews)
+	return decode_body_TL_stories_storyViews(m)
+}
+func decode_body_TL_stories_storyViews(m *DecodeBuf) TL {
+	tl := TL_stories_storyViews{}
+	tl.Views = DecodeBuf_GenericVector[TL_storyViews](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_inputReplyToMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReplyToMessage)
+	return decode_body_TL_inputReplyToMessage(m)
+}
+func decode_body_TL_inputReplyToMessage(m *DecodeBuf) TL {
+	tl := TL_inputReplyToMessage{}
+	flags := m.Int()
+	tl.ReplyToMsgID = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.TopMsgID = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.ReplyToPeerID = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.QuoteText = Ref(m.String())
+	}
+	if flags&(1<<3) != 0 {
+		tl.QuoteEntities = m.Vector()
+	}
+	if flags&(1<<4) != 0 {
+		tl.QuoteOffset = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_inputReplyToStory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputReplyToStory)
+	return decode_body_TL_inputReplyToStory(m)
+}
+func decode_body_TL_inputReplyToStory(m *DecodeBuf) TL {
+	tl := TL_inputReplyToStory{}
+	tl.Peer = m.Object()
+	tl.StoryID = m.Int()
+	return tl
+}
+
+func decode_TL_exportedStoryLink(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_exportedStoryLink)
+	return decode_body_TL_exportedStoryLink(m)
+}
+func decode_body_TL_exportedStoryLink(m *DecodeBuf) TL {
+	tl := TL_exportedStoryLink{}
+	tl.Link = m.String()
+	return tl
+}
+
+func decode_TL_storiesStealthMode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storiesStealthMode)
+	return decode_body_TL_storiesStealthMode(m)
+}
+func decode_body_TL_storiesStealthMode(m *DecodeBuf) TL {
+	tl := TL_storiesStealthMode{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.ActiveUntilDate = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.CooldownUntilDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_mediaAreaCoordinates(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_mediaAreaCoordinates)
+	return decode_body_TL_mediaAreaCoordinates(m)
+}
+func decode_body_TL_mediaAreaCoordinates(m *DecodeBuf) TL {
+	tl := TL_mediaAreaCoordinates{}
+	flags := m.Int()
+	tl.X = m.Double()
+	tl.Y = m.Double()
+	tl.W = m.Double()
+	tl.H = m.Double()
+	tl.Rotation = m.Double()
+	if flags&(1<<0) != 0 {
+		tl.Radius = Ref(m.Double())
+	}
+	return tl
+}
+
+func decode_TL_mediaAreaVenue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_mediaAreaVenue)
+	return decode_body_TL_mediaAreaVenue(m)
+}
+func decode_body_TL_mediaAreaVenue(m *DecodeBuf) TL {
+	tl := TL_mediaAreaVenue{}
+	tl.Coordinates = decode_TL_mediaAreaCoordinates(m).(TL_mediaAreaCoordinates)
+	tl.Geo = m.Object()
+	tl.Title = m.String()
+	tl.Address = m.String()
+	tl.Provider = m.String()
+	tl.VenueID = m.String()
+	tl.VenueType = m.String()
+	return tl
+}
+
+func decode_TL_inputMediaAreaVenue(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaAreaVenue)
+	return decode_body_TL_inputMediaAreaVenue(m)
+}
+func decode_body_TL_inputMediaAreaVenue(m *DecodeBuf) TL {
+	tl := TL_inputMediaAreaVenue{}
+	tl.Coordinates = decode_TL_mediaAreaCoordinates(m).(TL_mediaAreaCoordinates)
+	tl.QueryID = m.Long()
+	tl.ResultID = m.String()
+	return tl
+}
+
+func decode_TL_mediaAreaGeoPoint(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_mediaAreaGeoPoint)
+	return decode_body_TL_mediaAreaGeoPoint(m)
+}
+func decode_body_TL_mediaAreaGeoPoint(m *DecodeBuf) TL {
+	tl := TL_mediaAreaGeoPoint{}
+	flags := m.Int()
+	tl.Coordinates = decode_TL_mediaAreaCoordinates(m).(TL_mediaAreaCoordinates)
+	tl.Geo = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Address = Ref(decode_TL_geoPointAddress(m).(TL_geoPointAddress))
+	}
+	return tl
+}
+
+func decode_TL_mediaAreaSuggestedReaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_mediaAreaSuggestedReaction)
+	return decode_body_TL_mediaAreaSuggestedReaction(m)
+}
+func decode_body_TL_mediaAreaSuggestedReaction(m *DecodeBuf) TL {
+	tl := TL_mediaAreaSuggestedReaction{}
+	flags := m.Int()
+	tl.Dark = flags&(1<<0) != 0
+	tl.Flipped = flags&(1<<1) != 0
+	tl.Coordinates = decode_TL_mediaAreaCoordinates(m).(TL_mediaAreaCoordinates)
+	tl.Reaction = m.Object()
+	return tl
+}
+
+func decode_TL_mediaAreaChannelPost(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_mediaAreaChannelPost)
+	return decode_body_TL_mediaAreaChannelPost(m)
+}
+func decode_body_TL_mediaAreaChannelPost(m *DecodeBuf) TL {
+	tl := TL_mediaAreaChannelPost{}
+	tl.Coordinates = decode_TL_mediaAreaCoordinates(m).(TL_mediaAreaCoordinates)
+	tl.ChannelID = m.Long()
+	tl.MsgID = m.Int()
+	return tl
+}
+
+func decode_TL_inputMediaAreaChannelPost(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputMediaAreaChannelPost)
+	return decode_body_TL_inputMediaAreaChannelPost(m)
+}
+func decode_body_TL_inputMediaAreaChannelPost(m *DecodeBuf) TL {
+	tl := TL_inputMediaAreaChannelPost{}
+	tl.Coordinates = decode_TL_mediaAreaCoordinates(m).(TL_mediaAreaCoordinates)
+	tl.Channel = m.Object()
+	tl.MsgID = m.Int()
+	return tl
+}
+
+func decode_TL_mediaAreaURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_mediaAreaURL)
+	return decode_body_TL_mediaAreaURL(m)
+}
+func decode_body_TL_mediaAreaURL(m *DecodeBuf) TL {
+	tl := TL_mediaAreaURL{}
+	tl.Coordinates = decode_TL_mediaAreaCoordinates(m).(TL_mediaAreaCoordinates)
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_mediaAreaWeather(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_mediaAreaWeather)
+	return decode_body_TL_mediaAreaWeather(m)
+}
+func decode_body_TL_mediaAreaWeather(m *DecodeBuf) TL {
+	tl := TL_mediaAreaWeather{}
+	tl.Coordinates = decode_TL_mediaAreaCoordinates(m).(TL_mediaAreaCoordinates)
+	tl.Emoji = m.String()
+	tl.TemperatureC = m.Double()
+	tl.Color = m.Int()
+	return tl
+}
+
+func decode_TL_peerStories(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerStories)
+	return decode_body_TL_peerStories(m)
+}
+func decode_body_TL_peerStories(m *DecodeBuf) TL {
+	tl := TL_peerStories{}
+	flags := m.Int()
+	tl.Peer = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.MaxReadID = Ref(m.Int())
+	}
+	tl.Stories = m.Vector()
+	return tl
+}
+
+func decode_TL_stories_peerStories(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stories_peerStories)
+	return decode_body_TL_stories_peerStories(m)
+}
+func decode_body_TL_stories_peerStories(m *DecodeBuf) TL {
+	tl := TL_stories_peerStories{}
+	tl.Stories = decode_TL_peerStories(m).(TL_peerStories)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_webPage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_webPage)
+	return decode_body_TL_messages_webPage(m)
+}
+func decode_body_TL_messages_webPage(m *DecodeBuf) TL {
+	tl := TL_messages_webPage{}
+	tl.Webpage = m.Object()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_premiumGiftCodeOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_premiumGiftCodeOption)
+	return decode_body_TL_premiumGiftCodeOption(m)
+}
+func decode_body_TL_premiumGiftCodeOption(m *DecodeBuf) TL {
+	tl := TL_premiumGiftCodeOption{}
+	flags := m.Int()
+	tl.Users = m.Int()
+	tl.Months = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.StoreProduct = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.StoreQuantity = Ref(m.Int())
+	}
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_payments_checkedGiftCode(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_checkedGiftCode)
+	return decode_body_TL_payments_checkedGiftCode(m)
+}
+func decode_body_TL_payments_checkedGiftCode(m *DecodeBuf) TL {
+	tl := TL_payments_checkedGiftCode{}
+	flags := m.Int()
+	tl.ViaGiveaway = flags&(1<<2) != 0
+	if flags&(1<<4) != 0 {
+		tl.FromID = m.Object()
+	}
+	if flags&(1<<3) != 0 {
+		tl.GiveawayMsgID = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.ToID = Ref(m.Long())
+	}
+	tl.Date = m.Int()
+	tl.Months = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.UsedDate = Ref(m.Int())
+	}
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_payments_giveawayInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_giveawayInfo)
+	return decode_body_TL_payments_giveawayInfo(m)
+}
+func decode_body_TL_payments_giveawayInfo(m *DecodeBuf) TL {
+	tl := TL_payments_giveawayInfo{}
+	flags := m.Int()
+	tl.Participating = flags&(1<<0) != 0
+	tl.PreparingResults = flags&(1<<3) != 0
+	tl.StartDate = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.JoinedTooEarlyDate = Ref(m.Int())
+	}
+	if flags&(1<<2) != 0 {
+		tl.AdminDisallowedChatID = Ref(m.Long())
+	}
+	if flags&(1<<4) != 0 {
+		tl.DisallowedCountry = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_payments_giveawayInfoResults(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_giveawayInfoResults)
+	return decode_body_TL_payments_giveawayInfoResults(m)
+}
+func decode_body_TL_payments_giveawayInfoResults(m *DecodeBuf) TL {
+	tl := TL_payments_giveawayInfoResults{}
+	flags := m.Int()
+	tl.Winner = flags&(1<<0) != 0
+	tl.Refunded = flags&(1<<1) != 0
+	tl.StartDate = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.GiftCodeSlug = Ref(m.String())
+	}
+	tl.FinishDate = m.Int()
+	tl.WinnersCount = m.Int()
+	tl.ActivatedCount = m.Int()
+	return tl
+}
+
+func decode_TL_prepaidGiveaway(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_prepaidGiveaway)
+	return decode_body_TL_prepaidGiveaway(m)
+}
+func decode_body_TL_prepaidGiveaway(m *DecodeBuf) TL {
+	tl := TL_prepaidGiveaway{}
+	tl.ID = m.Long()
+	tl.Months = m.Int()
+	tl.Quantity = m.Int()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_boost(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_boost)
+	return decode_body_TL_boost(m)
+}
+func decode_body_TL_boost(m *DecodeBuf) TL {
+	tl := TL_boost{}
+	flags := m.Int()
+	tl.Gift = flags&(1<<1) != 0
+	tl.Giveaway = flags&(1<<2) != 0
+	tl.Unclaimed = flags&(1<<3) != 0
+	tl.ID = m.String()
+	if flags&(1<<0) != 0 {
+		tl.UserID = Ref(m.Long())
+	}
+	if flags&(1<<2) != 0 {
+		tl.GiveawayMsgID = Ref(m.Int())
+	}
+	tl.Date = m.Int()
+	tl.Expires = m.Int()
+	if flags&(1<<4) != 0 {
+		tl.UsedGiftSlug = Ref(m.String())
+	}
+	if flags&(1<<5) != 0 {
+		tl.Multiplier = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_premium_boostsList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_premium_boostsList)
+	return decode_body_TL_premium_boostsList(m)
+}
+func decode_body_TL_premium_boostsList(m *DecodeBuf) TL {
+	tl := TL_premium_boostsList{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.Boosts = DecodeBuf_GenericVector[TL_boost](m)
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_myBoost(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_myBoost)
+	return decode_body_TL_myBoost(m)
+}
+func decode_body_TL_myBoost(m *DecodeBuf) TL {
+	tl := TL_myBoost{}
+	flags := m.Int()
+	tl.Slot = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Peer = m.Object()
+	}
+	tl.Date = m.Int()
+	tl.Expires = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.CooldownUntilDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_premium_myBoosts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_premium_myBoosts)
+	return decode_body_TL_premium_myBoosts(m)
+}
+func decode_body_TL_premium_myBoosts(m *DecodeBuf) TL {
+	tl := TL_premium_myBoosts{}
+	tl.MyBoosts = DecodeBuf_GenericVector[TL_myBoost](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_premium_boostsStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_premium_boostsStatus)
+	return decode_body_TL_premium_boostsStatus(m)
+}
+func decode_body_TL_premium_boostsStatus(m *DecodeBuf) TL {
+	tl := TL_premium_boostsStatus{}
+	flags := m.Int()
+	tl.MyBoost = flags&(1<<2) != 0
+	tl.Level = m.Int()
+	tl.CurrentLevelBoosts = m.Int()
+	tl.Boosts = m.Int()
+	if flags&(1<<4) != 0 {
+		tl.GiftBoosts = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.NextLevelBoosts = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.PremiumAudience = Ref(decode_TL_statsPercentValue(m).(TL_statsPercentValue))
+	}
+	tl.BoostURL = m.String()
+	if flags&(1<<3) != 0 {
+		tl.PrepaidGiveaways = DecodeBuf_GenericVector[TL_prepaidGiveaway](m)
+	}
+	if flags&(1<<2) != 0 {
+		tl.MyBoostSlots = m.VectorInt()
+	}
+	return tl
+}
+
+func decode_TL_storyFwdHeader(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyFwdHeader)
+	return decode_body_TL_storyFwdHeader(m)
+}
+func decode_body_TL_storyFwdHeader(m *DecodeBuf) TL {
+	tl := TL_storyFwdHeader{}
+	flags := m.Int()
+	tl.Modified = flags&(1<<3) != 0
+	if flags&(1<<0) != 0 {
+		tl.From = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.FromName = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.StoryID = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_postInteractionCountersMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_postInteractionCountersMessage)
+	return decode_body_TL_postInteractionCountersMessage(m)
+}
+func decode_body_TL_postInteractionCountersMessage(m *DecodeBuf) TL {
+	tl := TL_postInteractionCountersMessage{}
+	tl.MsgID = m.Int()
+	tl.Views = m.Int()
+	tl.Forwards = m.Int()
+	tl.Reactions = m.Int()
+	return tl
+}
+
+func decode_TL_postInteractionCountersStory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_postInteractionCountersStory)
+	return decode_body_TL_postInteractionCountersStory(m)
+}
+func decode_body_TL_postInteractionCountersStory(m *DecodeBuf) TL {
+	tl := TL_postInteractionCountersStory{}
+	tl.StoryID = m.Int()
+	tl.Views = m.Int()
+	tl.Forwards = m.Int()
+	tl.Reactions = m.Int()
+	return tl
+}
+
+func decode_TL_stats_storyStats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stats_storyStats)
+	return decode_body_TL_stats_storyStats(m)
+}
+func decode_body_TL_stats_storyStats(m *DecodeBuf) TL {
+	tl := TL_stats_storyStats{}
+	tl.ViewsGraph = m.Object()
+	tl.ReactionsByEmotionGraph = m.Object()
+	return tl
+}
+
+func decode_TL_publicForwardMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_publicForwardMessage)
+	return decode_body_TL_publicForwardMessage(m)
+}
+func decode_body_TL_publicForwardMessage(m *DecodeBuf) TL {
+	tl := TL_publicForwardMessage{}
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_publicForwardStory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_publicForwardStory)
+	return decode_body_TL_publicForwardStory(m)
+}
+func decode_body_TL_publicForwardStory(m *DecodeBuf) TL {
+	tl := TL_publicForwardStory{}
+	tl.Peer = m.Object()
+	tl.Story = m.Object()
+	return tl
+}
+
+func decode_TL_stats_publicForwards(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stats_publicForwards)
+	return decode_body_TL_stats_publicForwards(m)
+}
+func decode_body_TL_stats_publicForwards(m *DecodeBuf) TL {
+	tl := TL_stats_publicForwards{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.Forwards = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_peerColor(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_peerColor)
+	return decode_body_TL_peerColor(m)
+}
+func decode_body_TL_peerColor(m *DecodeBuf) TL {
+	tl := TL_peerColor{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Color = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.BackgroundEmojiID = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_help_peerColorSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_peerColorSet)
+	return decode_body_TL_help_peerColorSet(m)
+}
+func decode_body_TL_help_peerColorSet(m *DecodeBuf) TL {
+	tl := TL_help_peerColorSet{}
+	tl.Colors = m.VectorInt()
+	return tl
+}
+
+func decode_TL_help_peerColorProfileSet(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_peerColorProfileSet)
+	return decode_body_TL_help_peerColorProfileSet(m)
+}
+func decode_body_TL_help_peerColorProfileSet(m *DecodeBuf) TL {
+	tl := TL_help_peerColorProfileSet{}
+	tl.PaletteColors = m.VectorInt()
+	tl.BgColors = m.VectorInt()
+	tl.StoryColors = m.VectorInt()
+	return tl
+}
+
+func decode_TL_help_peerColorOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_peerColorOption)
+	return decode_body_TL_help_peerColorOption(m)
+}
+func decode_body_TL_help_peerColorOption(m *DecodeBuf) TL {
+	tl := TL_help_peerColorOption{}
+	flags := m.Int()
+	tl.Hidden = flags&(1<<0) != 0
+	tl.ColorID = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.Colors = m.Object()
+	}
+	if flags&(1<<2) != 0 {
+		tl.DarkColors = m.Object()
+	}
+	if flags&(1<<3) != 0 {
+		tl.ChannelMinLevel = Ref(m.Int())
+	}
+	if flags&(1<<4) != 0 {
+		tl.GroupMinLevel = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_help_peerColorsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_peerColorsNotModified)
+	return decode_body_TL_help_peerColorsNotModified(m)
+}
+func decode_body_TL_help_peerColorsNotModified(_ *DecodeBuf) TL {
+	tl := TL_help_peerColorsNotModified{}
+	return tl
+}
+
+func decode_TL_help_peerColors(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_peerColors)
+	return decode_body_TL_help_peerColors(m)
+}
+func decode_body_TL_help_peerColors(m *DecodeBuf) TL {
+	tl := TL_help_peerColors{}
+	tl.Hash = m.Int()
+	tl.Colors = DecodeBuf_GenericVector[TL_help_peerColorOption](m)
+	return tl
+}
+
+func decode_TL_storyReaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyReaction)
+	return decode_body_TL_storyReaction(m)
+}
+func decode_body_TL_storyReaction(m *DecodeBuf) TL {
+	tl := TL_storyReaction{}
+	tl.PeerID = m.Object()
+	tl.Date = m.Int()
+	tl.Reaction = m.Object()
+	return tl
+}
+
+func decode_TL_storyReactionPublicForward(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyReactionPublicForward)
+	return decode_body_TL_storyReactionPublicForward(m)
+}
+func decode_body_TL_storyReactionPublicForward(m *DecodeBuf) TL {
+	tl := TL_storyReactionPublicForward{}
+	tl.Message = m.Object()
+	return tl
+}
+
+func decode_TL_storyReactionPublicRepost(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_storyReactionPublicRepost)
+	return decode_body_TL_storyReactionPublicRepost(m)
+}
+func decode_body_TL_storyReactionPublicRepost(m *DecodeBuf) TL {
+	tl := TL_storyReactionPublicRepost{}
+	tl.PeerID = m.Object()
+	tl.Story = m.Object()
+	return tl
+}
+
+func decode_TL_stories_storyReactionsList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stories_storyReactionsList)
+	return decode_body_TL_stories_storyReactionsList(m)
+}
+func decode_body_TL_stories_storyReactionsList(m *DecodeBuf) TL {
+	tl := TL_stories_storyReactionsList{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.Reactions = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_savedDialog(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_savedDialog)
+	return decode_body_TL_savedDialog(m)
+}
+func decode_body_TL_savedDialog(m *DecodeBuf) TL {
+	tl := TL_savedDialog{}
+	flags := m.Int()
+	tl.Pinned = flags&(1<<2) != 0
+	tl.Peer = m.Object()
+	tl.TopMessage = m.Int()
+	return tl
+}
+
+func decode_TL_messages_savedDialogs(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_savedDialogs)
+	return decode_body_TL_messages_savedDialogs(m)
+}
+func decode_body_TL_messages_savedDialogs(m *DecodeBuf) TL {
+	tl := TL_messages_savedDialogs{}
+	tl.Dialogs = DecodeBuf_GenericVector[TL_savedDialog](m)
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_savedDialogsSlice(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_savedDialogsSlice)
+	return decode_body_TL_messages_savedDialogsSlice(m)
+}
+func decode_body_TL_messages_savedDialogsSlice(m *DecodeBuf) TL {
+	tl := TL_messages_savedDialogsSlice{}
+	tl.Count = m.Int()
+	tl.Dialogs = DecodeBuf_GenericVector[TL_savedDialog](m)
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_savedDialogsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_savedDialogsNotModified)
+	return decode_body_TL_messages_savedDialogsNotModified(m)
+}
+func decode_body_TL_messages_savedDialogsNotModified(m *DecodeBuf) TL {
+	tl := TL_messages_savedDialogsNotModified{}
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_savedReactionTag(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_savedReactionTag)
+	return decode_body_TL_savedReactionTag(m)
+}
+func decode_body_TL_savedReactionTag(m *DecodeBuf) TL {
+	tl := TL_savedReactionTag{}
+	flags := m.Int()
+	tl.Reaction = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_messages_savedReactionTagsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_savedReactionTagsNotModified)
+	return decode_body_TL_messages_savedReactionTagsNotModified(m)
+}
+func decode_body_TL_messages_savedReactionTagsNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_savedReactionTagsNotModified{}
+	return tl
+}
+
+func decode_TL_messages_savedReactionTags(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_savedReactionTags)
+	return decode_body_TL_messages_savedReactionTags(m)
+}
+func decode_body_TL_messages_savedReactionTags(m *DecodeBuf) TL {
+	tl := TL_messages_savedReactionTags{}
+	tl.Tags = DecodeBuf_GenericVector[TL_savedReactionTag](m)
+	tl.Hash = m.Long()
+	return tl
+}
+
+func decode_TL_outboxReadDate(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_outboxReadDate)
+	return decode_body_TL_outboxReadDate(m)
+}
+func decode_body_TL_outboxReadDate(m *DecodeBuf) TL {
+	tl := TL_outboxReadDate{}
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_smsjobs_eligibleToJoin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_smsjobs_eligibleToJoin)
+	return decode_body_TL_smsjobs_eligibleToJoin(m)
+}
+func decode_body_TL_smsjobs_eligibleToJoin(m *DecodeBuf) TL {
+	tl := TL_smsjobs_eligibleToJoin{}
+	tl.TermsURL = m.String()
+	tl.MonthlySentSMS = m.Int()
+	return tl
+}
+
+func decode_TL_smsjobs_status(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_smsjobs_status)
+	return decode_body_TL_smsjobs_status(m)
+}
+func decode_body_TL_smsjobs_status(m *DecodeBuf) TL {
+	tl := TL_smsjobs_status{}
+	flags := m.Int()
+	tl.AllowInternational = flags&(1<<0) != 0
+	tl.RecentSent = m.Int()
+	tl.RecentSince = m.Int()
+	tl.RecentRemains = m.Int()
+	tl.TotalSent = m.Int()
+	tl.TotalSince = m.Int()
+	if flags&(1<<1) != 0 {
+		tl.LastGiftSlug = Ref(m.String())
+	}
+	tl.TermsURL = m.String()
+	return tl
+}
+
+func decode_TL_smsJob(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_smsJob)
+	return decode_body_TL_smsJob(m)
+}
+func decode_body_TL_smsJob(m *DecodeBuf) TL {
+	tl := TL_smsJob{}
+	tl.JobID = m.String()
+	tl.PhoneNumber = m.String()
+	tl.Text = m.String()
+	return tl
+}
+
+func decode_TL_businessWeeklyOpen(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessWeeklyOpen)
+	return decode_body_TL_businessWeeklyOpen(m)
+}
+func decode_body_TL_businessWeeklyOpen(m *DecodeBuf) TL {
+	tl := TL_businessWeeklyOpen{}
+	tl.StartMinute = m.Int()
+	tl.EndMinute = m.Int()
+	return tl
+}
+
+func decode_TL_businessWorkHours(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessWorkHours)
+	return decode_body_TL_businessWorkHours(m)
+}
+func decode_body_TL_businessWorkHours(m *DecodeBuf) TL {
+	tl := TL_businessWorkHours{}
+	flags := m.Int()
+	tl.OpenNow = flags&(1<<0) != 0
+	tl.TimezoneID = m.String()
+	tl.WeeklyOpen = DecodeBuf_GenericVector[TL_businessWeeklyOpen](m)
+	return tl
+}
+
+func decode_TL_businessLocation(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessLocation)
+	return decode_body_TL_businessLocation(m)
+}
+func decode_body_TL_businessLocation(m *DecodeBuf) TL {
+	tl := TL_businessLocation{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.GeoPoint = m.Object()
+	}
+	tl.Address = m.String()
+	return tl
+}
+
+func decode_TL_inputBusinessRecipients(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBusinessRecipients)
+	return decode_body_TL_inputBusinessRecipients(m)
+}
+func decode_body_TL_inputBusinessRecipients(m *DecodeBuf) TL {
+	tl := TL_inputBusinessRecipients{}
+	flags := m.Int()
+	tl.ExistingChats = flags&(1<<0) != 0
+	tl.NewChats = flags&(1<<1) != 0
+	tl.Contacts = flags&(1<<2) != 0
+	tl.NonContacts = flags&(1<<3) != 0
+	tl.ExcludeSelected = flags&(1<<5) != 0
+	if flags&(1<<4) != 0 {
+		tl.Users = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_businessRecipients(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessRecipients)
+	return decode_body_TL_businessRecipients(m)
+}
+func decode_body_TL_businessRecipients(m *DecodeBuf) TL {
+	tl := TL_businessRecipients{}
+	flags := m.Int()
+	tl.ExistingChats = flags&(1<<0) != 0
+	tl.NewChats = flags&(1<<1) != 0
+	tl.Contacts = flags&(1<<2) != 0
+	tl.NonContacts = flags&(1<<3) != 0
+	tl.ExcludeSelected = flags&(1<<5) != 0
+	if flags&(1<<4) != 0 {
+		tl.Users = m.VectorLong()
+	}
+	return tl
+}
+
+func decode_TL_businessAwayMessageScheduleAlways(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessAwayMessageScheduleAlways)
+	return decode_body_TL_businessAwayMessageScheduleAlways(m)
+}
+func decode_body_TL_businessAwayMessageScheduleAlways(_ *DecodeBuf) TL {
+	tl := TL_businessAwayMessageScheduleAlways{}
+	return tl
+}
+
+func decode_TL_businessAwayMessageScheduleOutsideWorkHours(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessAwayMessageScheduleOutsideWorkHours)
+	return decode_body_TL_businessAwayMessageScheduleOutsideWorkHours(m)
+}
+func decode_body_TL_businessAwayMessageScheduleOutsideWorkHours(_ *DecodeBuf) TL {
+	tl := TL_businessAwayMessageScheduleOutsideWorkHours{}
+	return tl
+}
+
+func decode_TL_businessAwayMessageScheduleCustom(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessAwayMessageScheduleCustom)
+	return decode_body_TL_businessAwayMessageScheduleCustom(m)
+}
+func decode_body_TL_businessAwayMessageScheduleCustom(m *DecodeBuf) TL {
+	tl := TL_businessAwayMessageScheduleCustom{}
+	tl.StartDate = m.Int()
+	tl.EndDate = m.Int()
+	return tl
+}
+
+func decode_TL_inputBusinessGreetingMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBusinessGreetingMessage)
+	return decode_body_TL_inputBusinessGreetingMessage(m)
+}
+func decode_body_TL_inputBusinessGreetingMessage(m *DecodeBuf) TL {
+	tl := TL_inputBusinessGreetingMessage{}
+	tl.ShortcutID = m.Int()
+	tl.Recipients = decode_TL_inputBusinessRecipients(m).(TL_inputBusinessRecipients)
+	tl.NoActivityDays = m.Int()
+	return tl
+}
+
+func decode_TL_businessGreetingMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessGreetingMessage)
+	return decode_body_TL_businessGreetingMessage(m)
+}
+func decode_body_TL_businessGreetingMessage(m *DecodeBuf) TL {
+	tl := TL_businessGreetingMessage{}
+	tl.ShortcutID = m.Int()
+	tl.Recipients = decode_TL_businessRecipients(m).(TL_businessRecipients)
+	tl.NoActivityDays = m.Int()
+	return tl
+}
+
+func decode_TL_inputBusinessAwayMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBusinessAwayMessage)
+	return decode_body_TL_inputBusinessAwayMessage(m)
+}
+func decode_body_TL_inputBusinessAwayMessage(m *DecodeBuf) TL {
+	tl := TL_inputBusinessAwayMessage{}
+	flags := m.Int()
+	tl.OfflineOnly = flags&(1<<0) != 0
+	tl.ShortcutID = m.Int()
+	tl.Schedule = m.Object()
+	tl.Recipients = decode_TL_inputBusinessRecipients(m).(TL_inputBusinessRecipients)
+	return tl
+}
+
+func decode_TL_businessAwayMessage(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessAwayMessage)
+	return decode_body_TL_businessAwayMessage(m)
+}
+func decode_body_TL_businessAwayMessage(m *DecodeBuf) TL {
+	tl := TL_businessAwayMessage{}
+	flags := m.Int()
+	tl.OfflineOnly = flags&(1<<0) != 0
+	tl.ShortcutID = m.Int()
+	tl.Schedule = m.Object()
+	tl.Recipients = decode_TL_businessRecipients(m).(TL_businessRecipients)
+	return tl
+}
+
+func decode_TL_timezone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_timezone)
+	return decode_body_TL_timezone(m)
+}
+func decode_body_TL_timezone(m *DecodeBuf) TL {
+	tl := TL_timezone{}
+	tl.ID = m.String()
+	tl.Name = m.String()
+	tl.UtcOffset = m.Int()
+	return tl
+}
+
+func decode_TL_help_timezonesListNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_timezonesListNotModified)
+	return decode_body_TL_help_timezonesListNotModified(m)
+}
+func decode_body_TL_help_timezonesListNotModified(_ *DecodeBuf) TL {
+	tl := TL_help_timezonesListNotModified{}
+	return tl
+}
+
+func decode_TL_help_timezonesList(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_help_timezonesList)
+	return decode_body_TL_help_timezonesList(m)
+}
+func decode_body_TL_help_timezonesList(m *DecodeBuf) TL {
+	tl := TL_help_timezonesList{}
+	tl.Timezones = DecodeBuf_GenericVector[TL_timezone](m)
+	tl.Hash = m.Int()
+	return tl
+}
+
+func decode_TL_quickReply(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_quickReply)
+	return decode_body_TL_quickReply(m)
+}
+func decode_body_TL_quickReply(m *DecodeBuf) TL {
+	tl := TL_quickReply{}
+	tl.ShortcutID = m.Int()
+	tl.Shortcut = m.String()
+	tl.TopMessage = m.Int()
+	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_inputQuickReplyShortcut(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputQuickReplyShortcut)
+	return decode_body_TL_inputQuickReplyShortcut(m)
+}
+func decode_body_TL_inputQuickReplyShortcut(m *DecodeBuf) TL {
+	tl := TL_inputQuickReplyShortcut{}
+	tl.Shortcut = m.String()
+	return tl
+}
+
+func decode_TL_inputQuickReplyShortcutID(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputQuickReplyShortcutID)
+	return decode_body_TL_inputQuickReplyShortcutID(m)
+}
+func decode_body_TL_inputQuickReplyShortcutID(m *DecodeBuf) TL {
+	tl := TL_inputQuickReplyShortcutID{}
+	tl.ShortcutID = m.Int()
+	return tl
+}
+
+func decode_TL_messages_quickReplies(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_quickReplies)
+	return decode_body_TL_messages_quickReplies(m)
+}
+func decode_body_TL_messages_quickReplies(m *DecodeBuf) TL {
+	tl := TL_messages_quickReplies{}
+	tl.QuickReplies = DecodeBuf_GenericVector[TL_quickReply](m)
+	tl.Messages = m.Vector()
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_quickRepliesNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_quickRepliesNotModified)
+	return decode_body_TL_messages_quickRepliesNotModified(m)
+}
+func decode_body_TL_messages_quickRepliesNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_quickRepliesNotModified{}
+	return tl
+}
+
+func decode_TL_connectedBot(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_connectedBot)
+	return decode_body_TL_connectedBot(m)
+}
+func decode_body_TL_connectedBot(m *DecodeBuf) TL {
+	tl := TL_connectedBot{}
+	flags := m.Int()
+	tl.CanReply = flags&(1<<0) != 0
+	tl.BotID = m.Long()
+	tl.Recipients = decode_TL_businessBotRecipients(m).(TL_businessBotRecipients)
+	return tl
+}
+
+func decode_TL_account_connectedBots(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_connectedBots)
+	return decode_body_TL_account_connectedBots(m)
+}
+func decode_body_TL_account_connectedBots(m *DecodeBuf) TL {
+	tl := TL_account_connectedBots{}
+	tl.ConnectedBots = DecodeBuf_GenericVector[TL_connectedBot](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messages_dialogFilters(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_dialogFilters)
+	return decode_body_TL_messages_dialogFilters(m)
+}
+func decode_body_TL_messages_dialogFilters(m *DecodeBuf) TL {
+	tl := TL_messages_dialogFilters{}
+	flags := m.Int()
+	tl.TagsEnabled = flags&(1<<0) != 0
+	tl.Filters = m.Vector()
+	return tl
+}
+
+func decode_TL_birthday(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_birthday)
+	return decode_body_TL_birthday(m)
+}
+func decode_body_TL_birthday(m *DecodeBuf) TL {
+	tl := TL_birthday{}
+	flags := m.Int()
+	tl.Day = m.Int()
+	tl.Month = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Year = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_botBusinessConnection(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botBusinessConnection)
+	return decode_body_TL_botBusinessConnection(m)
+}
+func decode_body_TL_botBusinessConnection(m *DecodeBuf) TL {
+	tl := TL_botBusinessConnection{}
+	flags := m.Int()
+	tl.CanReply = flags&(1<<0) != 0
+	tl.Disabled = flags&(1<<1) != 0
+	tl.ConnectionID = m.String()
+	tl.UserID = m.Long()
+	tl.DCID = m.Int()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_inputBusinessIntro(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBusinessIntro)
+	return decode_body_TL_inputBusinessIntro(m)
+}
+func decode_body_TL_inputBusinessIntro(m *DecodeBuf) TL {
+	tl := TL_inputBusinessIntro{}
+	flags := m.Int()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Sticker = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_businessIntro(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessIntro)
+	return decode_body_TL_businessIntro(m)
+}
+func decode_body_TL_businessIntro(m *DecodeBuf) TL {
+	tl := TL_businessIntro{}
+	flags := m.Int()
+	tl.Title = m.String()
+	tl.Description = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Sticker = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_messages_myStickers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_myStickers)
+	return decode_body_TL_messages_myStickers(m)
+}
+func decode_body_TL_messages_myStickers(m *DecodeBuf) TL {
+	tl := TL_messages_myStickers{}
+	tl.Count = m.Int()
+	tl.Sets = m.Vector()
+	return tl
+}
+
+func decode_TL_inputCollectibleUsername(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputCollectibleUsername)
+	return decode_body_TL_inputCollectibleUsername(m)
+}
+func decode_body_TL_inputCollectibleUsername(m *DecodeBuf) TL {
+	tl := TL_inputCollectibleUsername{}
+	tl.Username = m.String()
+	return tl
+}
+
+func decode_TL_inputCollectiblePhone(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputCollectiblePhone)
+	return decode_body_TL_inputCollectiblePhone(m)
+}
+func decode_body_TL_inputCollectiblePhone(m *DecodeBuf) TL {
+	tl := TL_inputCollectiblePhone{}
+	tl.Phone = m.String()
+	return tl
+}
+
+func decode_TL_fragment_collectibleInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_fragment_collectibleInfo)
+	return decode_body_TL_fragment_collectibleInfo(m)
+}
+func decode_body_TL_fragment_collectibleInfo(m *DecodeBuf) TL {
+	tl := TL_fragment_collectibleInfo{}
+	tl.PurchaseDate = m.Int()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	tl.CryptoCurrency = m.String()
+	tl.CryptoAmount = m.Long()
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_inputBusinessBotRecipients(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBusinessBotRecipients)
+	return decode_body_TL_inputBusinessBotRecipients(m)
+}
+func decode_body_TL_inputBusinessBotRecipients(m *DecodeBuf) TL {
+	tl := TL_inputBusinessBotRecipients{}
+	flags := m.Int()
+	tl.ExistingChats = flags&(1<<0) != 0
+	tl.NewChats = flags&(1<<1) != 0
+	tl.Contacts = flags&(1<<2) != 0
+	tl.NonContacts = flags&(1<<3) != 0
+	tl.ExcludeSelected = flags&(1<<5) != 0
+	if flags&(1<<4) != 0 {
+		tl.Users = m.Vector()
+	}
+	if flags&(1<<6) != 0 {
+		tl.ExcludeUsers = m.Vector()
+	}
+	return tl
+}
+
+func decode_TL_businessBotRecipients(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessBotRecipients)
+	return decode_body_TL_businessBotRecipients(m)
+}
+func decode_body_TL_businessBotRecipients(m *DecodeBuf) TL {
+	tl := TL_businessBotRecipients{}
+	flags := m.Int()
+	tl.ExistingChats = flags&(1<<0) != 0
+	tl.NewChats = flags&(1<<1) != 0
+	tl.Contacts = flags&(1<<2) != 0
+	tl.NonContacts = flags&(1<<3) != 0
+	tl.ExcludeSelected = flags&(1<<5) != 0
+	if flags&(1<<4) != 0 {
+		tl.Users = m.VectorLong()
+	}
+	if flags&(1<<6) != 0 {
+		tl.ExcludeUsers = m.VectorLong()
+	}
+	return tl
+}
+
+func decode_TL_contactBirthday(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contactBirthday)
+	return decode_body_TL_contactBirthday(m)
+}
+func decode_body_TL_contactBirthday(m *DecodeBuf) TL {
+	tl := TL_contactBirthday{}
+	tl.ContactID = m.Long()
+	tl.Birthday = decode_TL_birthday(m).(TL_birthday)
+	return tl
+}
+
+func decode_TL_contacts_contactBirthdays(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_contacts_contactBirthdays)
+	return decode_body_TL_contacts_contactBirthdays(m)
+}
+func decode_body_TL_contacts_contactBirthdays(m *DecodeBuf) TL {
+	tl := TL_contacts_contactBirthdays{}
+	tl.Contacts = DecodeBuf_GenericVector[TL_contactBirthday](m)
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_missingInvitee(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_missingInvitee)
+	return decode_body_TL_missingInvitee(m)
+}
+func decode_body_TL_missingInvitee(m *DecodeBuf) TL {
+	tl := TL_missingInvitee{}
+	flags := m.Int()
+	tl.PremiumWouldAllowInvite = flags&(1<<0) != 0
+	tl.PremiumRequiredForPM = flags&(1<<1) != 0
+	tl.UserID = m.Long()
+	return tl
+}
+
+func decode_TL_messages_invitedUsers(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_invitedUsers)
+	return decode_body_TL_messages_invitedUsers(m)
+}
+func decode_body_TL_messages_invitedUsers(m *DecodeBuf) TL {
+	tl := TL_messages_invitedUsers{}
+	tl.Updates = m.Object()
+	tl.MissingInvitees = DecodeBuf_GenericVector[TL_missingInvitee](m)
+	return tl
+}
+
+func decode_TL_inputBusinessChatLink(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputBusinessChatLink)
+	return decode_body_TL_inputBusinessChatLink(m)
+}
+func decode_body_TL_inputBusinessChatLink(m *DecodeBuf) TL {
+	tl := TL_inputBusinessChatLink{}
+	flags := m.Int()
+	tl.Message = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_businessChatLink(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_businessChatLink)
+	return decode_body_TL_businessChatLink(m)
+}
+func decode_body_TL_businessChatLink(m *DecodeBuf) TL {
+	tl := TL_businessChatLink{}
+	flags := m.Int()
+	tl.Link = m.String()
+	tl.Message = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Entities = m.Vector()
+	}
+	if flags&(1<<1) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	tl.Views = m.Int()
+	return tl
+}
+
+func decode_TL_account_businessChatLinks(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_businessChatLinks)
+	return decode_body_TL_account_businessChatLinks(m)
+}
+func decode_body_TL_account_businessChatLinks(m *DecodeBuf) TL {
+	tl := TL_account_businessChatLinks{}
+	tl.Links = DecodeBuf_GenericVector[TL_businessChatLink](m)
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_account_resolvedBusinessChatLinks(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_resolvedBusinessChatLinks)
+	return decode_body_TL_account_resolvedBusinessChatLinks(m)
+}
+func decode_body_TL_account_resolvedBusinessChatLinks(m *DecodeBuf) TL {
+	tl := TL_account_resolvedBusinessChatLinks{}
+	flags := m.Int()
+	tl.Peer = m.Object()
+	tl.Message = m.String()
+	if flags&(1<<0) != 0 {
+		tl.Entities = m.Vector()
+	}
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_requestedPeerUser(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_requestedPeerUser)
+	return decode_body_TL_requestedPeerUser(m)
+}
+func decode_body_TL_requestedPeerUser(m *DecodeBuf) TL {
+	tl := TL_requestedPeerUser{}
+	flags := m.Int()
+	tl.UserID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.FirstName = Ref(m.String())
+	}
+	if flags&(1<<0) != 0 {
+		tl.LastName = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Username = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Photo = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_requestedPeerChat(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_requestedPeerChat)
+	return decode_body_TL_requestedPeerChat(m)
+}
+func decode_body_TL_requestedPeerChat(m *DecodeBuf) TL {
+	tl := TL_requestedPeerChat{}
+	flags := m.Int()
+	tl.ChatID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Photo = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_requestedPeerChannel(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_requestedPeerChannel)
+	return decode_body_TL_requestedPeerChannel(m)
+}
+func decode_body_TL_requestedPeerChannel(m *DecodeBuf) TL {
+	tl := TL_requestedPeerChannel{}
+	flags := m.Int()
+	tl.ChannelID = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Username = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Photo = m.Object()
+	}
+	return tl
+}
+
+func decode_TL_sponsoredMessageReportOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_sponsoredMessageReportOption)
+	return decode_body_TL_sponsoredMessageReportOption(m)
+}
+func decode_body_TL_sponsoredMessageReportOption(m *DecodeBuf) TL {
+	tl := TL_sponsoredMessageReportOption{}
+	tl.Text = m.String()
+	tl.Option = m.StringBytes()
+	return tl
+}
+
+func decode_TL_channels_sponsoredMessageReportResultChooseOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channels_sponsoredMessageReportResultChooseOption)
+	return decode_body_TL_channels_sponsoredMessageReportResultChooseOption(m)
+}
+func decode_body_TL_channels_sponsoredMessageReportResultChooseOption(m *DecodeBuf) TL {
+	tl := TL_channels_sponsoredMessageReportResultChooseOption{}
+	tl.Title = m.String()
+	tl.Options = DecodeBuf_GenericVector[TL_sponsoredMessageReportOption](m)
+	return tl
+}
+
+func decode_TL_channels_sponsoredMessageReportResultAdsHidden(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channels_sponsoredMessageReportResultAdsHidden)
+	return decode_body_TL_channels_sponsoredMessageReportResultAdsHidden(m)
+}
+func decode_body_TL_channels_sponsoredMessageReportResultAdsHidden(_ *DecodeBuf) TL {
+	tl := TL_channels_sponsoredMessageReportResultAdsHidden{}
+	return tl
+}
+
+func decode_TL_channels_sponsoredMessageReportResultReported(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channels_sponsoredMessageReportResultReported)
+	return decode_body_TL_channels_sponsoredMessageReportResultReported(m)
+}
+func decode_body_TL_channels_sponsoredMessageReportResultReported(_ *DecodeBuf) TL {
+	tl := TL_channels_sponsoredMessageReportResultReported{}
+	return tl
+}
+
+func decode_TL_stats_broadcastRevenueStats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stats_broadcastRevenueStats)
+	return decode_body_TL_stats_broadcastRevenueStats(m)
+}
+func decode_body_TL_stats_broadcastRevenueStats(m *DecodeBuf) TL {
+	tl := TL_stats_broadcastRevenueStats{}
+	tl.TopHoursGraph = m.Object()
+	tl.RevenueGraph = m.Object()
+	tl.Balances = decode_TL_broadcastRevenueBalances(m).(TL_broadcastRevenueBalances)
+	tl.UsdRate = m.Double()
+	return tl
+}
+
+func decode_TL_stats_broadcastRevenueWithdrawalURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stats_broadcastRevenueWithdrawalURL)
+	return decode_body_TL_stats_broadcastRevenueWithdrawalURL(m)
+}
+func decode_body_TL_stats_broadcastRevenueWithdrawalURL(m *DecodeBuf) TL {
+	tl := TL_stats_broadcastRevenueWithdrawalURL{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_broadcastRevenueTransactionProceeds(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_broadcastRevenueTransactionProceeds)
+	return decode_body_TL_broadcastRevenueTransactionProceeds(m)
+}
+func decode_body_TL_broadcastRevenueTransactionProceeds(m *DecodeBuf) TL {
+	tl := TL_broadcastRevenueTransactionProceeds{}
+	tl.Amount = m.Long()
+	tl.FromDate = m.Int()
+	tl.ToDate = m.Int()
+	return tl
+}
+
+func decode_TL_broadcastRevenueTransactionWithdrawal(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_broadcastRevenueTransactionWithdrawal)
+	return decode_body_TL_broadcastRevenueTransactionWithdrawal(m)
+}
+func decode_body_TL_broadcastRevenueTransactionWithdrawal(m *DecodeBuf) TL {
+	tl := TL_broadcastRevenueTransactionWithdrawal{}
+	flags := m.Int()
+	tl.Pending = flags&(1<<0) != 0
+	tl.Failed = flags&(1<<2) != 0
+	tl.Amount = m.Long()
+	tl.Date = m.Int()
+	tl.Provider = m.String()
+	if flags&(1<<1) != 0 {
+		tl.TransactionDate = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.TransactionURL = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_broadcastRevenueTransactionRefund(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_broadcastRevenueTransactionRefund)
+	return decode_body_TL_broadcastRevenueTransactionRefund(m)
+}
+func decode_body_TL_broadcastRevenueTransactionRefund(m *DecodeBuf) TL {
+	tl := TL_broadcastRevenueTransactionRefund{}
+	tl.Amount = m.Long()
+	tl.Date = m.Int()
+	tl.Provider = m.String()
+	return tl
+}
+
+func decode_TL_stats_broadcastRevenueTransactions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stats_broadcastRevenueTransactions)
+	return decode_body_TL_stats_broadcastRevenueTransactions(m)
+}
+func decode_body_TL_stats_broadcastRevenueTransactions(m *DecodeBuf) TL {
+	tl := TL_stats_broadcastRevenueTransactions{}
+	tl.Count = m.Int()
+	tl.Transactions = m.Vector()
+	return tl
+}
+
+func decode_TL_reactionNotificationsFromContacts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reactionNotificationsFromContacts)
+	return decode_body_TL_reactionNotificationsFromContacts(m)
+}
+func decode_body_TL_reactionNotificationsFromContacts(_ *DecodeBuf) TL {
+	tl := TL_reactionNotificationsFromContacts{}
+	return tl
+}
+
+func decode_TL_reactionNotificationsFromAll(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reactionNotificationsFromAll)
+	return decode_body_TL_reactionNotificationsFromAll(m)
+}
+func decode_body_TL_reactionNotificationsFromAll(_ *DecodeBuf) TL {
+	tl := TL_reactionNotificationsFromAll{}
+	return tl
+}
+
+func decode_TL_reactionsNotifySettings(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reactionsNotifySettings)
+	return decode_body_TL_reactionsNotifySettings(m)
+}
+func decode_body_TL_reactionsNotifySettings(m *DecodeBuf) TL {
+	tl := TL_reactionsNotifySettings{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.MessagesNotifyFrom = m.Object()
+	}
+	if flags&(1<<1) != 0 {
+		tl.StoriesNotifyFrom = m.Object()
+	}
+	tl.Sound = m.Object()
+	tl.ShowPreviews = m.Bool()
+	return tl
+}
+
+func decode_TL_broadcastRevenueBalances(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_broadcastRevenueBalances)
+	return decode_body_TL_broadcastRevenueBalances(m)
+}
+func decode_body_TL_broadcastRevenueBalances(m *DecodeBuf) TL {
+	tl := TL_broadcastRevenueBalances{}
+	tl.CurrentBalance = m.Long()
+	tl.AvailableBalance = m.Long()
+	tl.OverallRevenue = m.Long()
+	return tl
+}
+
+func decode_TL_availableEffect(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_availableEffect)
+	return decode_body_TL_availableEffect(m)
+}
+func decode_body_TL_availableEffect(m *DecodeBuf) TL {
+	tl := TL_availableEffect{}
+	flags := m.Int()
+	tl.PremiumRequired = flags&(1<<2) != 0
+	tl.ID = m.Long()
+	tl.Emoticon = m.String()
+	if flags&(1<<0) != 0 {
+		tl.StaticIconID = Ref(m.Long())
+	}
+	tl.EffectStickerID = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.EffectAnimationID = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_messages_availableEffectsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_availableEffectsNotModified)
+	return decode_body_TL_messages_availableEffectsNotModified(m)
+}
+func decode_body_TL_messages_availableEffectsNotModified(_ *DecodeBuf) TL {
+	tl := TL_messages_availableEffectsNotModified{}
+	return tl
+}
+
+func decode_TL_messages_availableEffects(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messages_availableEffects)
+	return decode_body_TL_messages_availableEffects(m)
+}
+func decode_body_TL_messages_availableEffects(m *DecodeBuf) TL {
+	tl := TL_messages_availableEffects{}
+	tl.Hash = m.Int()
+	tl.Effects = DecodeBuf_GenericVector[TL_availableEffect](m)
+	tl.Documents = m.Vector()
+	return tl
+}
+
+func decode_TL_factCheck(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_factCheck)
+	return decode_body_TL_factCheck(m)
+}
+func decode_body_TL_factCheck(m *DecodeBuf) TL {
+	tl := TL_factCheck{}
+	flags := m.Int()
+	tl.NeedCheck = flags&(1<<0) != 0
+	if flags&(1<<1) != 0 {
+		tl.Country = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Text = Ref(decode_TL_textWithEntities(m).(TL_textWithEntities))
+	}
+	tl.Hash = m.Long()
+	return tl
+}
+
+func decode_TL_starsTransactionPeerUnsupported(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransactionPeerUnsupported)
+	return decode_body_TL_starsTransactionPeerUnsupported(m)
+}
+func decode_body_TL_starsTransactionPeerUnsupported(_ *DecodeBuf) TL {
+	tl := TL_starsTransactionPeerUnsupported{}
+	return tl
+}
+
+func decode_TL_starsTransactionPeerAppStore(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransactionPeerAppStore)
+	return decode_body_TL_starsTransactionPeerAppStore(m)
+}
+func decode_body_TL_starsTransactionPeerAppStore(_ *DecodeBuf) TL {
+	tl := TL_starsTransactionPeerAppStore{}
+	return tl
+}
+
+func decode_TL_starsTransactionPeerPlayMarket(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransactionPeerPlayMarket)
+	return decode_body_TL_starsTransactionPeerPlayMarket(m)
+}
+func decode_body_TL_starsTransactionPeerPlayMarket(_ *DecodeBuf) TL {
+	tl := TL_starsTransactionPeerPlayMarket{}
+	return tl
+}
+
+func decode_TL_starsTransactionPeerPremiumBot(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransactionPeerPremiumBot)
+	return decode_body_TL_starsTransactionPeerPremiumBot(m)
+}
+func decode_body_TL_starsTransactionPeerPremiumBot(_ *DecodeBuf) TL {
+	tl := TL_starsTransactionPeerPremiumBot{}
+	return tl
+}
+
+func decode_TL_starsTransactionPeerFragment(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransactionPeerFragment)
+	return decode_body_TL_starsTransactionPeerFragment(m)
+}
+func decode_body_TL_starsTransactionPeerFragment(_ *DecodeBuf) TL {
+	tl := TL_starsTransactionPeerFragment{}
+	return tl
+}
+
+func decode_TL_starsTransactionPeer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransactionPeer)
+	return decode_body_TL_starsTransactionPeer(m)
+}
+func decode_body_TL_starsTransactionPeer(m *DecodeBuf) TL {
+	tl := TL_starsTransactionPeer{}
+	tl.Peer = m.Object()
+	return tl
+}
+
+func decode_TL_starsTransactionPeerAds(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransactionPeerAds)
+	return decode_body_TL_starsTransactionPeerAds(m)
+}
+func decode_body_TL_starsTransactionPeerAds(_ *DecodeBuf) TL {
+	tl := TL_starsTransactionPeerAds{}
+	return tl
+}
+
+func decode_TL_starsTopupOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTopupOption)
+	return decode_body_TL_starsTopupOption(m)
+}
+func decode_body_TL_starsTopupOption(m *DecodeBuf) TL {
+	tl := TL_starsTopupOption{}
+	flags := m.Int()
+	tl.Extended = flags&(1<<1) != 0
+	tl.Stars = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.StoreProduct = Ref(m.String())
+	}
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_starsTransaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransaction)
+	return decode_body_TL_starsTransaction(m)
+}
+func decode_body_TL_starsTransaction(m *DecodeBuf) TL {
+	tl := TL_starsTransaction{}
+	flags := m.Int()
+	tl.Refund = flags&(1<<3) != 0
+	tl.Pending = flags&(1<<4) != 0
+	tl.Failed = flags&(1<<6) != 0
+	tl.Gift = flags&(1<<10) != 0
+	tl.Reaction = flags&(1<<11) != 0
+	tl.ID = m.String()
+	tl.Stars = m.Long()
+	tl.Date = m.Int()
+	tl.Peer = m.Object()
+	if flags&(1<<0) != 0 {
+		tl.Title = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.Description = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Photo = m.Object()
+	}
+	if flags&(1<<5) != 0 {
+		tl.TransactionDate = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.TransactionURL = Ref(m.String())
+	}
+	if flags&(1<<7) != 0 {
+		tl.BotPayload = m.StringBytes()
+	}
+	if flags&(1<<8) != 0 {
+		tl.MsgID = Ref(m.Int())
+	}
+	if flags&(1<<9) != 0 {
+		tl.ExtendedMedia = m.Vector()
+	}
+	if flags&(1<<12) != 0 {
+		tl.SubscriptionPeriod = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_payments_starsStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_starsStatus)
+	return decode_body_TL_payments_starsStatus(m)
+}
+func decode_body_TL_payments_starsStatus(m *DecodeBuf) TL {
+	tl := TL_payments_starsStatus{}
+	flags := m.Int()
+	tl.Balance = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.Subscriptions = DecodeBuf_GenericVector[TL_starsSubscription](m)
+	}
+	if flags&(1<<2) != 0 {
+		tl.SubscriptionsNextOffset = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.SubscriptionsMissingBalance = Ref(m.Long())
+	}
+	if flags&(1<<3) != 0 {
+		tl.History = DecodeBuf_GenericVector[TL_starsTransaction](m)
+	}
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_foundStory(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_foundStory)
+	return decode_body_TL_foundStory(m)
+}
+func decode_body_TL_foundStory(m *DecodeBuf) TL {
+	tl := TL_foundStory{}
+	tl.Peer = m.Object()
+	tl.Story = m.Object()
+	return tl
+}
+
+func decode_TL_stories_foundStories(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_stories_foundStories)
+	return decode_body_TL_stories_foundStories(m)
+}
+func decode_body_TL_stories_foundStories(m *DecodeBuf) TL {
+	tl := TL_stories_foundStories{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.Stories = DecodeBuf_GenericVector[TL_foundStory](m)
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	tl.Chats = m.Vector()
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_geoPointAddress(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_geoPointAddress)
+	return decode_body_TL_geoPointAddress(m)
+}
+func decode_body_TL_geoPointAddress(m *DecodeBuf) TL {
+	tl := TL_geoPointAddress{}
+	flags := m.Int()
+	tl.CountryISO2 = m.String()
+	if flags&(1<<0) != 0 {
+		tl.State = Ref(m.String())
+	}
+	if flags&(1<<1) != 0 {
+		tl.City = Ref(m.String())
+	}
+	if flags&(1<<2) != 0 {
+		tl.Street = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_starsRevenueStatus(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsRevenueStatus)
+	return decode_body_TL_starsRevenueStatus(m)
+}
+func decode_body_TL_starsRevenueStatus(m *DecodeBuf) TL {
+	tl := TL_starsRevenueStatus{}
+	flags := m.Int()
+	tl.WithdrawalEnabled = flags&(1<<0) != 0
+	tl.CurrentBalance = m.Long()
+	tl.AvailableBalance = m.Long()
+	tl.OverallRevenue = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.NextWithdrawalAt = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_payments_starsRevenueStats(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_starsRevenueStats)
+	return decode_body_TL_payments_starsRevenueStats(m)
+}
+func decode_body_TL_payments_starsRevenueStats(m *DecodeBuf) TL {
+	tl := TL_payments_starsRevenueStats{}
+	tl.RevenueGraph = m.Object()
+	tl.Status = decode_TL_starsRevenueStatus(m).(TL_starsRevenueStatus)
+	tl.UsdRate = m.Double()
+	return tl
+}
+
+func decode_TL_payments_starsRevenueWithdrawalURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_starsRevenueWithdrawalURL)
+	return decode_body_TL_payments_starsRevenueWithdrawalURL(m)
+}
+func decode_body_TL_payments_starsRevenueWithdrawalURL(m *DecodeBuf) TL {
+	tl := TL_payments_starsRevenueWithdrawalURL{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_payments_starsRevenueAdsAccountURL(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_starsRevenueAdsAccountURL)
+	return decode_body_TL_payments_starsRevenueAdsAccountURL(m)
+}
+func decode_body_TL_payments_starsRevenueAdsAccountURL(m *DecodeBuf) TL {
+	tl := TL_payments_starsRevenueAdsAccountURL{}
+	tl.URL = m.String()
+	return tl
+}
+
+func decode_TL_inputStarsTransaction(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStarsTransaction)
+	return decode_body_TL_inputStarsTransaction(m)
+}
+func decode_body_TL_inputStarsTransaction(m *DecodeBuf) TL {
+	tl := TL_inputStarsTransaction{}
+	flags := m.Int()
+	tl.Refund = flags&(1<<0) != 0
+	tl.ID = m.String()
+	return tl
+}
+
+func decode_TL_starsGiftOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsGiftOption)
+	return decode_body_TL_starsGiftOption(m)
+}
+func decode_body_TL_starsGiftOption(m *DecodeBuf) TL {
+	tl := TL_starsGiftOption{}
+	flags := m.Int()
+	tl.Extended = flags&(1<<1) != 0
+	tl.Stars = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.StoreProduct = Ref(m.String())
+	}
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_bots_popularAppBots(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_bots_popularAppBots)
+	return decode_body_TL_bots_popularAppBots(m)
+}
+func decode_body_TL_bots_popularAppBots(m *DecodeBuf) TL {
+	tl := TL_bots_popularAppBots{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_botPreviewMedia(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_botPreviewMedia)
+	return decode_body_TL_botPreviewMedia(m)
+}
+func decode_body_TL_botPreviewMedia(m *DecodeBuf) TL {
+	tl := TL_botPreviewMedia{}
+	tl.Date = m.Int()
+	tl.Media = m.Object()
+	return tl
+}
+
+func decode_TL_bots_previewInfo(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_bots_previewInfo)
+	return decode_body_TL_bots_previewInfo(m)
+}
+func decode_body_TL_bots_previewInfo(m *DecodeBuf) TL {
+	tl := TL_bots_previewInfo{}
+	tl.Media = DecodeBuf_GenericVector[TL_botPreviewMedia](m)
+	tl.LangCodes = m.VectorString()
+	return tl
+}
+
+func decode_TL_starsSubscriptionPricing(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsSubscriptionPricing)
+	return decode_body_TL_starsSubscriptionPricing(m)
+}
+func decode_body_TL_starsSubscriptionPricing(m *DecodeBuf) TL {
+	tl := TL_starsSubscriptionPricing{}
+	tl.Period = m.Int()
+	tl.Amount = m.Long()
+	return tl
+}
+
+func decode_TL_starsSubscription(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsSubscription)
+	return decode_body_TL_starsSubscription(m)
+}
+func decode_body_TL_starsSubscription(m *DecodeBuf) TL {
+	tl := TL_starsSubscription{}
+	flags := m.Int()
+	tl.Canceled = flags&(1<<0) != 0
+	tl.CanRefulfill = flags&(1<<1) != 0
+	tl.MissingBalance = flags&(1<<2) != 0
+	tl.ID = m.String()
+	tl.Peer = m.Object()
+	tl.UntilDate = m.Int()
+	tl.Pricing = decode_TL_starsSubscriptionPricing(m).(TL_starsSubscriptionPricing)
+	if flags&(1<<3) != 0 {
+		tl.ChatInviteHash = Ref(m.String())
+	}
+	return tl
+}
+
+func decode_TL_messageReactor(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageReactor)
+	return decode_body_TL_messageReactor(m)
+}
+func decode_body_TL_messageReactor(m *DecodeBuf) TL {
+	tl := TL_messageReactor{}
+	flags := m.Int()
+	tl.Top = flags&(1<<0) != 0
+	tl.My = flags&(1<<1) != 0
+	tl.Anonymous = flags&(1<<2) != 0
+	if flags&(1<<3) != 0 {
+		tl.PeerID = m.Object()
+	}
+	tl.Count = m.Int()
+	return tl
+}
+
 func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 	objStartOffset := m.off - 4 //4 bytes of constructor name have been already read
 	switch constructor {
 	case CRC_resPQ:
-		tl := TL_resPQ{}
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.PQ = m.String()
-		tl.ServerPublicKeyFingerprints = m.VectorLong()
-		r = tl
+		r = decode_body_TL_resPQ(m)
 	case CRC_pqInnerData:
-		tl := TL_pqInnerData{}
-		tl.PQ = m.String()
-		tl.P = m.String()
-		tl.Q = m.String()
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.NewNonce = m.Bytes32()
-		r = tl
+		r = decode_body_TL_pqInnerData(m)
 	case CRC_pqInnerDataDC:
-		tl := TL_pqInnerDataDC{}
-		tl.PQ = m.String()
-		tl.P = m.String()
-		tl.Q = m.String()
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.NewNonce = m.Bytes32()
-		tl.DC = m.Int()
-		r = tl
+		r = decode_body_TL_pqInnerDataDC(m)
 	case CRC_pqInnerDataTemp:
-		tl := TL_pqInnerDataTemp{}
-		tl.PQ = m.String()
-		tl.P = m.String()
-		tl.Q = m.String()
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.NewNonce = m.Bytes32()
-		tl.ExpiresIn = m.Int()
-		r = tl
+		r = decode_body_TL_pqInnerDataTemp(m)
 	case CRC_pqInnerDataTempDC:
-		tl := TL_pqInnerDataTempDC{}
-		tl.PQ = m.String()
-		tl.P = m.String()
-		tl.Q = m.String()
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.NewNonce = m.Bytes32()
-		tl.DC = m.Int()
-		tl.ExpiresIn = m.Int()
-		r = tl
+		r = decode_body_TL_pqInnerDataTempDC(m)
 	case CRC_bindAuthKeyInner:
-		tl := TL_bindAuthKeyInner{}
-		tl.Nonce = m.Long()
-		tl.TempAuthKeyID = m.Long()
-		tl.PermAuthKeyID = m.Long()
-		tl.TempSessionID = m.Long()
-		tl.ExpiresAt = m.Int()
-		r = tl
+		r = decode_body_TL_bindAuthKeyInner(m)
 	case CRC_serverDHParamsFail:
-		tl := TL_serverDHParamsFail{}
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.NewNonceHash = m.Bytes16()
-		r = tl
+		r = decode_body_TL_serverDHParamsFail(m)
 	case CRC_serverDHParamsOK:
-		tl := TL_serverDHParamsOK{}
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.EncryptedAnswer = m.String()
-		r = tl
+		r = decode_body_TL_serverDHParamsOK(m)
 	case CRC_serverDHInnerData:
-		tl := TL_serverDHInnerData{}
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.G = m.Int()
-		tl.DHPrime = m.String()
-		tl.GA = m.String()
-		tl.ServerTime = m.Int()
-		r = tl
+		r = decode_body_TL_serverDHInnerData(m)
 	case CRC_clientDHInnerData:
-		tl := TL_clientDHInnerData{}
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.RetryID = m.Long()
-		tl.GB = m.String()
-		r = tl
+		r = decode_body_TL_clientDHInnerData(m)
 	case CRC_dhGenOK:
-		tl := TL_dhGenOK{}
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.NewNonceHash1 = m.Bytes16()
-		r = tl
+		r = decode_body_TL_dhGenOK(m)
 	case CRC_dhGenRetry:
-		tl := TL_dhGenRetry{}
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.NewNonceHash2 = m.Bytes16()
-		r = tl
+		r = decode_body_TL_dhGenRetry(m)
 	case CRC_dhGenFail:
-		tl := TL_dhGenFail{}
-		tl.Nonce = m.Bytes16()
-		tl.ServerNonce = m.Bytes16()
-		tl.NewNonceHash3 = m.Bytes16()
-		r = tl
+		r = decode_body_TL_dhGenFail(m)
 	case CRC_destroyAuthKeyOK:
-		tl := TL_destroyAuthKeyOK{}
-		r = tl
+		r = decode_body_TL_destroyAuthKeyOK(m)
 	case CRC_destroyAuthKeyNone:
-		tl := TL_destroyAuthKeyNone{}
-		r = tl
+		r = decode_body_TL_destroyAuthKeyNone(m)
 	case CRC_destroyAuthKeyFail:
-		tl := TL_destroyAuthKeyFail{}
-		r = tl
+		r = decode_body_TL_destroyAuthKeyFail(m)
 	case CRC_msgsACK:
-		tl := TL_msgsACK{}
-		tl.MsgIDs = m.VectorLong()
-		r = tl
+		r = decode_body_TL_msgsACK(m)
 	case CRC_badMsgNotification:
-		tl := TL_badMsgNotification{}
-		tl.BadMsgID = m.Long()
-		tl.BadMsgSeqno = m.Int()
-		tl.ErrorCode = m.Int()
-		r = tl
+		r = decode_body_TL_badMsgNotification(m)
 	case CRC_badServerSalt:
-		tl := TL_badServerSalt{}
-		tl.BadMsgID = m.Long()
-		tl.BadMsgSeqno = m.Int()
-		tl.ErrorCode = m.Int()
-		tl.NewServerSalt = m.Long()
-		r = tl
+		r = decode_body_TL_badServerSalt(m)
 	case CRC_msgsStateReq:
-		tl := TL_msgsStateReq{}
-		tl.MsgIDs = m.VectorLong()
-		r = tl
+		r = decode_body_TL_msgsStateReq(m)
 	case CRC_msgsStateInfo:
-		tl := TL_msgsStateInfo{}
-		tl.ReqMsgID = m.Long()
-		tl.Info = m.String()
-		r = tl
+		r = decode_body_TL_msgsStateInfo(m)
 	case CRC_msgsAllInfo:
-		tl := TL_msgsAllInfo{}
-		tl.MsgIDs = m.VectorLong()
-		tl.Info = m.String()
-		r = tl
+		r = decode_body_TL_msgsAllInfo(m)
 	case CRC_msgDetailedInfo:
-		tl := TL_msgDetailedInfo{}
-		tl.MsgID = m.Long()
-		tl.AnswerMsgID = m.Long()
-		tl.Bytes = m.Int()
-		tl.Status = m.Int()
-		r = tl
+		r = decode_body_TL_msgDetailedInfo(m)
 	case CRC_msgNewDetailedInfo:
-		tl := TL_msgNewDetailedInfo{}
-		tl.AnswerMsgID = m.Long()
-		tl.Bytes = m.Int()
-		tl.Status = m.Int()
-		r = tl
+		r = decode_body_TL_msgNewDetailedInfo(m)
 	case CRC_msgResendReq:
-		tl := TL_msgResendReq{}
-		tl.MsgIDs = m.VectorLong()
-		r = tl
+		r = decode_body_TL_msgResendReq(m)
 	case CRC_rpcError:
-		tl := TL_rpcError{}
-		tl.ErrorCode = m.Int()
-		tl.ErrorMessage = m.String()
-		r = tl
+		r = decode_body_TL_rpcError(m)
 	case CRC_rpcAnswerUnknown:
-		tl := TL_rpcAnswerUnknown{}
-		r = tl
+		r = decode_body_TL_rpcAnswerUnknown(m)
 	case CRC_rpcAnswerDroppedRunning:
-		tl := TL_rpcAnswerDroppedRunning{}
-		r = tl
+		r = decode_body_TL_rpcAnswerDroppedRunning(m)
 	case CRC_rpcAnswerDropped:
-		tl := TL_rpcAnswerDropped{}
-		tl.MsgID = m.Long()
-		tl.SeqNo = m.Int()
-		tl.Bytes = m.Int()
-		r = tl
+		r = decode_body_TL_rpcAnswerDropped(m)
 	case CRC_futureSalt:
-		tl := TL_futureSalt{}
-		tl.ValidSince = m.Int()
-		tl.ValidUntil = m.Int()
-		tl.Salt = m.Long()
-		r = tl
+		r = decode_body_TL_futureSalt(m)
 	case CRC_futureSalts:
-		tl := TL_futureSalts{}
-		tl.ReqMsgID = m.Long()
-		tl.Now = m.Int()
-		tl.Salts = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_futureSalts(m)
 	case CRC_pong:
-		tl := TL_pong{}
-		tl.MsgID = m.Long()
-		tl.PingID = m.Long()
-		r = tl
+		r = decode_body_TL_pong(m)
 	case CRC_destroySessionOK:
-		tl := TL_destroySessionOK{}
-		tl.SessionID = m.Long()
-		r = tl
+		r = decode_body_TL_destroySessionOK(m)
 	case CRC_destroySessionNone:
-		tl := TL_destroySessionNone{}
-		tl.SessionID = m.Long()
-		r = tl
+		r = decode_body_TL_destroySessionNone(m)
 	case CRC_newSessionCreated:
-		tl := TL_newSessionCreated{}
-		tl.FirstMsgID = m.Long()
-		tl.UniqueID = m.Long()
-		tl.ServerSalt = m.Long()
-		r = tl
+		r = decode_body_TL_newSessionCreated(m)
 	case CRC_httpWait:
-		tl := TL_httpWait{}
-		tl.MaxDelay = m.Int()
-		tl.WaitAfter = m.Int()
-		tl.MaxWait = m.Int()
-		r = tl
+		r = decode_body_TL_httpWait(m)
 	case CRC_ipPort:
-		tl := TL_ipPort{}
-		tl.IPv4 = m.Int()
-		tl.Port = m.Int()
-		r = tl
+		r = decode_body_TL_ipPort(m)
 	case CRC_ipPortSecret:
-		tl := TL_ipPortSecret{}
-		tl.IPv4 = m.Int()
-		tl.Port = m.Int()
-		tl.Secret = m.StringBytes()
-		r = tl
+		r = decode_body_TL_ipPortSecret(m)
 	case CRC_accessPointRule:
-		tl := TL_accessPointRule{}
-		tl.PhonePrefixRules = m.String()
-		tl.DCID = m.Int()
-		tl.IPs = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_accessPointRule(m)
 	case CRC_help_configSimple:
-		tl := TL_help_configSimple{}
-		tl.Date = m.Int()
-		tl.Expires = m.Int()
-		tl.Rules = DecodeBuf_GenericVector[TL_accessPointRule](m)
-		r = tl
+		r = decode_body_TL_help_configSimple(m)
 	case CRC_tlsClientHello:
-		tl := TL_tlsClientHello{}
-		tl.Blocks = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_tlsClientHello(m)
 	case CRC_tlsBlockString:
-		tl := TL_tlsBlockString{}
-		tl.Data = m.String()
-		r = tl
+		r = decode_body_TL_tlsBlockString(m)
 	case CRC_tlsBlockRandom:
-		tl := TL_tlsBlockRandom{}
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_tlsBlockRandom(m)
 	case CRC_tlsBlockZero:
-		tl := TL_tlsBlockZero{}
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_tlsBlockZero(m)
 	case CRC_tlsBlockDomain:
-		tl := TL_tlsBlockDomain{}
-		r = tl
+		r = decode_body_TL_tlsBlockDomain(m)
 	case CRC_tlsBlockGrease:
-		tl := TL_tlsBlockGrease{}
-		tl.Seed = m.Int()
-		r = tl
+		r = decode_body_TL_tlsBlockGrease(m)
 	case CRC_tlsBlockPublicKey:
-		tl := TL_tlsBlockPublicKey{}
-		r = tl
+		r = decode_body_TL_tlsBlockPublicKey(m)
 	case CRC_tlsBlockScope:
-		tl := TL_tlsBlockScope{}
-		tl.Entries = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_tlsBlockScope(m)
 	case CRC_tlsBlockPermutation:
-		tl := TL_tlsBlockPermutation{}
-		tl.Entries = m.Vector2d()
-		r = tl
+		r = decode_body_TL_tlsBlockPermutation(m)
 	case CRC_boolFalse:
-		tl := TL_boolFalse{}
-		r = tl
+		r = decode_body_TL_boolFalse(m)
 	case CRC_boolTrue:
-		tl := TL_boolTrue{}
-		r = tl
+		r = decode_body_TL_boolTrue(m)
 	case CRC_true:
-		tl := TL_true{}
-		r = tl
+		r = decode_body_TL_true(m)
 	case CRC_error:
-		tl := TL_error{}
-		tl.Code = m.Int()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_error(m)
 	case CRC_null:
-		tl := TL_null{}
-		r = tl
+		r = decode_body_TL_null(m)
 	case CRC_inputPeerEmpty:
-		tl := TL_inputPeerEmpty{}
-		r = tl
+		r = decode_body_TL_inputPeerEmpty(m)
 	case CRC_inputPeerSelf:
-		tl := TL_inputPeerSelf{}
-		r = tl
+		r = decode_body_TL_inputPeerSelf(m)
 	case CRC_inputPeerChat:
-		tl := TL_inputPeerChat{}
-		tl.ChatID = m.Long()
-		r = tl
+		r = decode_body_TL_inputPeerChat(m)
 	case CRC_inputPeerUser:
-		tl := TL_inputPeerUser{}
-		tl.UserID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputPeerUser(m)
 	case CRC_inputPeerChannel:
-		tl := TL_inputPeerChannel{}
-		tl.ChannelID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputPeerChannel(m)
 	case CRC_inputPeerUserFromMessage:
-		tl := TL_inputPeerUserFromMessage{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_inputPeerUserFromMessage(m)
 	case CRC_inputPeerChannelFromMessage:
-		tl := TL_inputPeerChannelFromMessage{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.ChannelID = m.Long()
-		r = tl
+		r = decode_body_TL_inputPeerChannelFromMessage(m)
 	case CRC_inputUserEmpty:
-		tl := TL_inputUserEmpty{}
-		r = tl
+		r = decode_body_TL_inputUserEmpty(m)
 	case CRC_inputUserSelf:
-		tl := TL_inputUserSelf{}
-		r = tl
+		r = decode_body_TL_inputUserSelf(m)
 	case CRC_inputUser:
-		tl := TL_inputUser{}
-		tl.UserID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputUser(m)
 	case CRC_inputUserFromMessage:
-		tl := TL_inputUserFromMessage{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_inputUserFromMessage(m)
 	case CRC_inputPhoneContact:
-		tl := TL_inputPhoneContact{}
-		tl.ClientID = m.Long()
-		tl.Phone = m.String()
-		tl.FirstName = m.String()
-		tl.LastName = m.String()
-		r = tl
+		r = decode_body_TL_inputPhoneContact(m)
 	case CRC_inputFile:
-		tl := TL_inputFile{}
-		tl.ID = m.Long()
-		tl.Parts = m.Int()
-		tl.Name = m.String()
-		tl.MD5Checksum = m.String()
-		r = tl
+		r = decode_body_TL_inputFile(m)
 	case CRC_inputFileBig:
-		tl := TL_inputFileBig{}
-		tl.ID = m.Long()
-		tl.Parts = m.Int()
-		tl.Name = m.String()
-		r = tl
+		r = decode_body_TL_inputFileBig(m)
 	case CRC_inputFileStoryDocument:
-		tl := TL_inputFileStoryDocument{}
-		tl.ID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputFileStoryDocument(m)
 	case CRC_inputMediaEmpty:
-		tl := TL_inputMediaEmpty{}
-		r = tl
+		r = decode_body_TL_inputMediaEmpty(m)
 	case CRC_inputMediaUploadedPhoto:
-		tl := TL_inputMediaUploadedPhoto{}
-		flags := m.Int()
-		tl.Spoiler = flags&(1<<2) != 0
-		tl.File = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Stickers = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.TTLSeconds = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputMediaUploadedPhoto(m)
 	case CRC_inputMediaPhoto:
-		tl := TL_inputMediaPhoto{}
-		flags := m.Int()
-		tl.Spoiler = flags&(1<<1) != 0
-		tl.ID = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.TTLSeconds = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputMediaPhoto(m)
 	case CRC_inputMediaGeoPoint:
-		tl := TL_inputMediaGeoPoint{}
-		tl.GeoPoint = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputMediaGeoPoint(m)
 	case CRC_inputMediaContact:
-		tl := TL_inputMediaContact{}
-		tl.PhoneNumber = m.String()
-		tl.FirstName = m.String()
-		tl.LastName = m.String()
-		tl.Vcard = m.String()
-		r = tl
+		r = decode_body_TL_inputMediaContact(m)
 	case CRC_inputMediaUploadedDocument:
-		tl := TL_inputMediaUploadedDocument{}
-		flags := m.Int()
-		tl.NosoundVideo = flags&(1<<3) != 0
-		tl.ForceFile = flags&(1<<4) != 0
-		tl.Spoiler = flags&(1<<5) != 0
-		tl.File = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<2) != 0 {
-			tl.Thumb = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.MIMEType = m.String()
-		tl.Attributes = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Stickers = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.TTLSeconds = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputMediaUploadedDocument(m)
 	case CRC_inputMediaDocument:
-		tl := TL_inputMediaDocument{}
-		flags := m.Int()
-		tl.Spoiler = flags&(1<<2) != 0
-		tl.ID = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.TTLSeconds = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Query = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_inputMediaDocument(m)
 	case CRC_inputMediaVenue:
-		tl := TL_inputMediaVenue{}
-		tl.GeoPoint = DecodeBuf_GenericObject[TL](m)
-		tl.Title = m.String()
-		tl.Address = m.String()
-		tl.Provider = m.String()
-		tl.VenueID = m.String()
-		tl.VenueType = m.String()
-		r = tl
+		r = decode_body_TL_inputMediaVenue(m)
 	case CRC_inputMediaPhotoExternal:
-		tl := TL_inputMediaPhotoExternal{}
-		flags := m.Int()
-		tl.Spoiler = flags&(1<<1) != 0
-		tl.URL = m.String()
-		if flags&(1<<0) != 0 {
-			tl.TTLSeconds = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputMediaPhotoExternal(m)
 	case CRC_inputMediaDocumentExternal:
-		tl := TL_inputMediaDocumentExternal{}
-		flags := m.Int()
-		tl.Spoiler = flags&(1<<1) != 0
-		tl.URL = m.String()
-		if flags&(1<<0) != 0 {
-			tl.TTLSeconds = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputMediaDocumentExternal(m)
 	case CRC_inputMediaGame:
-		tl := TL_inputMediaGame{}
-		tl.ID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputMediaGame(m)
 	case CRC_inputMediaInvoice:
-		tl := TL_inputMediaInvoice{}
-		flags := m.Int()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Photo = Ref(DecodeBuf_GenericObject[TL_inputWebDocument](m))
-		}
-		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
-		tl.Payload = m.StringBytes()
-		if flags&(1<<3) != 0 {
-			tl.Provider = Ref(m.String())
-		}
-		tl.ProviderData = DecodeBuf_GenericObject[TL_dataJSON](m)
-		if flags&(1<<1) != 0 {
-			tl.StartParam = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.ExtendedMedia = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputMediaInvoice(m)
 	case CRC_inputMediaGeoLive:
-		tl := TL_inputMediaGeoLive{}
-		flags := m.Int()
-		tl.Stopped = flags&(1<<0) != 0
-		tl.GeoPoint = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<2) != 0 {
-			tl.Heading = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Period = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.ProximityNotificationRadius = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputMediaGeoLive(m)
 	case CRC_inputMediaPoll:
-		tl := TL_inputMediaPoll{}
-		flags := m.Int()
-		tl.Poll = DecodeBuf_GenericObject[TL_poll](m)
-		if flags&(1<<0) != 0 {
-			tl.CorrectAnswers = m.VectorBytes()
-		}
-		if flags&(1<<1) != 0 {
-			tl.Solution = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.SolutionEntities = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputMediaPoll(m)
 	case CRC_inputMediaDice:
-		tl := TL_inputMediaDice{}
-		tl.Emoticon = m.String()
-		r = tl
+		r = decode_body_TL_inputMediaDice(m)
 	case CRC_inputMediaStory:
-		tl := TL_inputMediaStory{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.ID = m.Int()
-		r = tl
+		r = decode_body_TL_inputMediaStory(m)
 	case CRC_inputMediaWebPage:
-		tl := TL_inputMediaWebPage{}
-		flags := m.Int()
-		tl.ForceLargeMedia = flags&(1<<0) != 0
-		tl.ForceSmallMedia = flags&(1<<1) != 0
-		tl.Optional = flags&(1<<2) != 0
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_inputMediaWebPage(m)
 	case CRC_inputMediaPaidMedia:
-		tl := TL_inputMediaPaidMedia{}
-		tl.StarsAmount = m.Long()
-		tl.ExtendedMedia = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_inputMediaPaidMedia(m)
 	case CRC_inputChatPhotoEmpty:
-		tl := TL_inputChatPhotoEmpty{}
-		r = tl
+		r = decode_body_TL_inputChatPhotoEmpty(m)
 	case CRC_inputChatUploadedPhoto:
-		tl := TL_inputChatUploadedPhoto{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.File = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Video = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.VideoStartTS = Ref(m.Double())
-		}
-		if flags&(1<<3) != 0 {
-			tl.VideoEmojiMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputChatUploadedPhoto(m)
 	case CRC_inputChatPhoto:
-		tl := TL_inputChatPhoto{}
-		tl.ID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputChatPhoto(m)
 	case CRC_inputGeoPointEmpty:
-		tl := TL_inputGeoPointEmpty{}
-		r = tl
+		r = decode_body_TL_inputGeoPointEmpty(m)
 	case CRC_inputGeoPoint:
-		tl := TL_inputGeoPoint{}
-		flags := m.Int()
-		tl.Lat = m.Double()
-		tl.Long = m.Double()
-		if flags&(1<<0) != 0 {
-			tl.AccuracyRadius = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputGeoPoint(m)
 	case CRC_inputPhotoEmpty:
-		tl := TL_inputPhotoEmpty{}
-		r = tl
+		r = decode_body_TL_inputPhotoEmpty(m)
 	case CRC_inputPhoto:
-		tl := TL_inputPhoto{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.FileReference = m.StringBytes()
-		r = tl
+		r = decode_body_TL_inputPhoto(m)
 	case CRC_inputFileLocation:
-		tl := TL_inputFileLocation{}
-		tl.VolumeID = m.Long()
-		tl.LocalID = m.Int()
-		tl.Secret = m.Long()
-		tl.FileReference = m.StringBytes()
-		r = tl
+		r = decode_body_TL_inputFileLocation(m)
 	case CRC_inputEncryptedFileLocation:
-		tl := TL_inputEncryptedFileLocation{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputEncryptedFileLocation(m)
 	case CRC_inputDocumentFileLocation:
-		tl := TL_inputDocumentFileLocation{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.FileReference = m.StringBytes()
-		tl.ThumbSize = m.String()
-		r = tl
+		r = decode_body_TL_inputDocumentFileLocation(m)
 	case CRC_inputSecureFileLocation:
-		tl := TL_inputSecureFileLocation{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputSecureFileLocation(m)
 	case CRC_inputTakeoutFileLocation:
-		tl := TL_inputTakeoutFileLocation{}
-		r = tl
+		r = decode_body_TL_inputTakeoutFileLocation(m)
 	case CRC_inputPhotoFileLocation:
-		tl := TL_inputPhotoFileLocation{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.FileReference = m.StringBytes()
-		tl.ThumbSize = m.String()
-		r = tl
+		r = decode_body_TL_inputPhotoFileLocation(m)
 	case CRC_inputPhotoLegacyFileLocation:
-		tl := TL_inputPhotoLegacyFileLocation{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.FileReference = m.StringBytes()
-		tl.VolumeID = m.Long()
-		tl.LocalID = m.Int()
-		tl.Secret = m.Long()
-		r = tl
+		r = decode_body_TL_inputPhotoLegacyFileLocation(m)
 	case CRC_inputPeerPhotoFileLocation:
-		tl := TL_inputPeerPhotoFileLocation{}
-		flags := m.Int()
-		tl.Big = flags&(1<<0) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.PhotoID = m.Long()
-		r = tl
+		r = decode_body_TL_inputPeerPhotoFileLocation(m)
 	case CRC_inputStickerSetThumb:
-		tl := TL_inputStickerSetThumb{}
-		tl.Stickerset = DecodeBuf_GenericObject[TL](m)
-		tl.ThumbVersion = m.Int()
-		r = tl
+		r = decode_body_TL_inputStickerSetThumb(m)
 	case CRC_inputGroupCallStream:
-		tl := TL_inputGroupCallStream{}
-		flags := m.Int()
-		tl.Call = DecodeBuf_GenericObject[TL_inputGroupCall](m)
-		tl.TimeMS = m.Long()
-		tl.Scale = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.VideoChannel = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.VideoQuality = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputGroupCallStream(m)
 	case CRC_peerUser:
-		tl := TL_peerUser{}
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_peerUser(m)
 	case CRC_peerChat:
-		tl := TL_peerChat{}
-		tl.ChatID = m.Long()
-		r = tl
+		r = decode_body_TL_peerChat(m)
 	case CRC_peerChannel:
-		tl := TL_peerChannel{}
-		tl.ChannelID = m.Long()
-		r = tl
+		r = decode_body_TL_peerChannel(m)
 	case CRC_storage_fileUnknown:
-		tl := TL_storage_fileUnknown{}
-		r = tl
+		r = decode_body_TL_storage_fileUnknown(m)
 	case CRC_storage_filePartial:
-		tl := TL_storage_filePartial{}
-		r = tl
+		r = decode_body_TL_storage_filePartial(m)
 	case CRC_storage_fileJPEG:
-		tl := TL_storage_fileJPEG{}
-		r = tl
+		r = decode_body_TL_storage_fileJPEG(m)
 	case CRC_storage_fileGIF:
-		tl := TL_storage_fileGIF{}
-		r = tl
+		r = decode_body_TL_storage_fileGIF(m)
 	case CRC_storage_filePNG:
-		tl := TL_storage_filePNG{}
-		r = tl
+		r = decode_body_TL_storage_filePNG(m)
 	case CRC_storage_filePDF:
-		tl := TL_storage_filePDF{}
-		r = tl
+		r = decode_body_TL_storage_filePDF(m)
 	case CRC_storage_fileMP3:
-		tl := TL_storage_fileMP3{}
-		r = tl
+		r = decode_body_TL_storage_fileMP3(m)
 	case CRC_storage_fileMOV:
-		tl := TL_storage_fileMOV{}
-		r = tl
+		r = decode_body_TL_storage_fileMOV(m)
 	case CRC_storage_fileMP4:
-		tl := TL_storage_fileMP4{}
-		r = tl
+		r = decode_body_TL_storage_fileMP4(m)
 	case CRC_storage_fileWEBP:
-		tl := TL_storage_fileWEBP{}
-		r = tl
+		r = decode_body_TL_storage_fileWEBP(m)
 	case CRC_userEmpty:
-		tl := TL_userEmpty{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_userEmpty(m)
 	case CRC_user:
-		tl := TL_user{}
-		flags := m.Int()
-		tl.Self = flags&(1<<10) != 0
-		tl.Contact = flags&(1<<11) != 0
-		tl.MutualContact = flags&(1<<12) != 0
-		tl.Deleted = flags&(1<<13) != 0
-		tl.Bot = flags&(1<<14) != 0
-		tl.BotChatHistory = flags&(1<<15) != 0
-		tl.BotNochats = flags&(1<<16) != 0
-		tl.Verified = flags&(1<<17) != 0
-		tl.Restricted = flags&(1<<18) != 0
-		tl.Min = flags&(1<<20) != 0
-		tl.BotInlineGeo = flags&(1<<21) != 0
-		tl.Support = flags&(1<<23) != 0
-		tl.Scam = flags&(1<<24) != 0
-		tl.ApplyMinPhoto = flags&(1<<25) != 0
-		tl.Fake = flags&(1<<26) != 0
-		tl.BotAttachMenu = flags&(1<<27) != 0
-		tl.Premium = flags&(1<<28) != 0
-		tl.AttachMenuEnabled = flags&(1<<29) != 0
-		flags2 := m.Int()
-		tl.BotCanEdit = flags2&(1<<1) != 0
-		tl.CloseFriend = flags2&(1<<2) != 0
-		tl.StoriesHidden = flags2&(1<<3) != 0
-		tl.StoriesUnavailable = flags2&(1<<4) != 0
-		tl.ContactRequirePremium = flags2&(1<<10) != 0
-		tl.BotBusiness = flags2&(1<<11) != 0
-		tl.BotHasMainApp = flags2&(1<<13) != 0
-		tl.ID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.AccessHash = Ref(m.Long())
-		}
-		if flags&(1<<1) != 0 {
-			tl.FirstName = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.LastName = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Username = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.Phone = Ref(m.String())
-		}
-		if flags&(1<<5) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.Status = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<14) != 0 {
-			tl.BotInfoVersion = Ref(m.Int())
-		}
-		if flags&(1<<18) != 0 {
-			tl.RestrictionReason = DecodeBuf_GenericVector[TL_restrictionReason](m)
-		}
-		if flags&(1<<19) != 0 {
-			tl.BotInlinePlaceholder = Ref(m.String())
-		}
-		if flags&(1<<22) != 0 {
-			tl.LangCode = Ref(m.String())
-		}
-		if flags&(1<<30) != 0 {
-			tl.EmojiStatus = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags2&(1<<0) != 0 {
-			tl.Usernames = DecodeBuf_GenericVector[TL_username](m)
-		}
-		if flags2&(1<<5) != 0 {
-			tl.StoriesMaxID = Ref(m.Int())
-		}
-		if flags2&(1<<8) != 0 {
-			tl.Color = Ref(DecodeBuf_GenericObject[TL_peerColor](m))
-		}
-		if flags2&(1<<9) != 0 {
-			tl.ProfileColor = Ref(DecodeBuf_GenericObject[TL_peerColor](m))
-		}
-		if flags2&(1<<12) != 0 {
-			tl.BotActiveUsers = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_user(m)
 	case CRC_userProfilePhotoEmpty:
-		tl := TL_userProfilePhotoEmpty{}
-		r = tl
+		r = decode_body_TL_userProfilePhotoEmpty(m)
 	case CRC_userProfilePhoto:
-		tl := TL_userProfilePhoto{}
-		flags := m.Int()
-		tl.HasVideo = flags&(1<<0) != 0
-		tl.Personal = flags&(1<<2) != 0
-		tl.PhotoID = m.Long()
-		if flags&(1<<1) != 0 {
-			tl.StrippedThumb = m.StringBytes()
-		}
-		tl.DCID = m.Int()
-		r = tl
+		r = decode_body_TL_userProfilePhoto(m)
 	case CRC_userStatusEmpty:
-		tl := TL_userStatusEmpty{}
-		r = tl
+		r = decode_body_TL_userStatusEmpty(m)
 	case CRC_userStatusOnline:
-		tl := TL_userStatusOnline{}
-		tl.Expires = m.Int()
-		r = tl
+		r = decode_body_TL_userStatusOnline(m)
 	case CRC_userStatusOffline:
-		tl := TL_userStatusOffline{}
-		tl.WasOnline = m.Int()
-		r = tl
+		r = decode_body_TL_userStatusOffline(m)
 	case CRC_userStatusRecently:
-		tl := TL_userStatusRecently{}
-		flags := m.Int()
-		tl.ByMe = flags&(1<<0) != 0
-		r = tl
+		r = decode_body_TL_userStatusRecently(m)
 	case CRC_userStatusLastWeek:
-		tl := TL_userStatusLastWeek{}
-		flags := m.Int()
-		tl.ByMe = flags&(1<<0) != 0
-		r = tl
+		r = decode_body_TL_userStatusLastWeek(m)
 	case CRC_userStatusLastMonth:
-		tl := TL_userStatusLastMonth{}
-		flags := m.Int()
-		tl.ByMe = flags&(1<<0) != 0
-		r = tl
+		r = decode_body_TL_userStatusLastMonth(m)
 	case CRC_chatEmpty:
-		tl := TL_chatEmpty{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_chatEmpty(m)
 	case CRC_chat:
-		tl := TL_chat{}
-		flags := m.Int()
-		tl.Creator = flags&(1<<0) != 0
-		tl.Left = flags&(1<<2) != 0
-		tl.Deactivated = flags&(1<<5) != 0
-		tl.CallActive = flags&(1<<23) != 0
-		tl.CallNotEmpty = flags&(1<<24) != 0
-		tl.Noforwards = flags&(1<<25) != 0
-		tl.ID = m.Long()
-		tl.Title = m.String()
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		tl.ParticipantsCount = m.Int()
-		tl.Date = m.Int()
-		tl.Version = m.Int()
-		if flags&(1<<6) != 0 {
-			tl.MigratedTo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<14) != 0 {
-			tl.AdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
-		}
-		if flags&(1<<18) != 0 {
-			tl.DefaultBannedRights = Ref(DecodeBuf_GenericObject[TL_chatBannedRights](m))
-		}
-		r = tl
+		r = decode_body_TL_chat(m)
 	case CRC_chatForbidden:
-		tl := TL_chatForbidden{}
-		tl.ID = m.Long()
-		tl.Title = m.String()
-		r = tl
+		r = decode_body_TL_chatForbidden(m)
 	case CRC_channel:
-		tl := TL_channel{}
-		flags := m.Int()
-		tl.Creator = flags&(1<<0) != 0
-		tl.Left = flags&(1<<2) != 0
-		tl.Broadcast = flags&(1<<5) != 0
-		tl.Verified = flags&(1<<7) != 0
-		tl.Megagroup = flags&(1<<8) != 0
-		tl.Restricted = flags&(1<<9) != 0
-		tl.Signatures = flags&(1<<11) != 0
-		tl.Min = flags&(1<<12) != 0
-		tl.Scam = flags&(1<<19) != 0
-		tl.HasLink = flags&(1<<20) != 0
-		tl.HasGeo = flags&(1<<21) != 0
-		tl.SlowmodeEnabled = flags&(1<<22) != 0
-		tl.CallActive = flags&(1<<23) != 0
-		tl.CallNotEmpty = flags&(1<<24) != 0
-		tl.Fake = flags&(1<<25) != 0
-		tl.Gigagroup = flags&(1<<26) != 0
-		tl.Noforwards = flags&(1<<27) != 0
-		tl.JoinToSend = flags&(1<<28) != 0
-		tl.JoinRequest = flags&(1<<29) != 0
-		tl.Forum = flags&(1<<30) != 0
-		flags2 := m.Int()
-		tl.StoriesHidden = flags2&(1<<1) != 0
-		tl.StoriesHiddenMin = flags2&(1<<2) != 0
-		tl.StoriesUnavailable = flags2&(1<<3) != 0
-		tl.SignatureProfiles = flags2&(1<<12) != 0
-		tl.ID = m.Long()
-		if flags&(1<<13) != 0 {
-			tl.AccessHash = Ref(m.Long())
-		}
-		tl.Title = m.String()
-		if flags&(1<<6) != 0 {
-			tl.Username = Ref(m.String())
-		}
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		if flags&(1<<9) != 0 {
-			tl.RestrictionReason = DecodeBuf_GenericVector[TL_restrictionReason](m)
-		}
-		if flags&(1<<14) != 0 {
-			tl.AdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
-		}
-		if flags&(1<<15) != 0 {
-			tl.BannedRights = Ref(DecodeBuf_GenericObject[TL_chatBannedRights](m))
-		}
-		if flags&(1<<18) != 0 {
-			tl.DefaultBannedRights = Ref(DecodeBuf_GenericObject[TL_chatBannedRights](m))
-		}
-		if flags&(1<<17) != 0 {
-			tl.ParticipantsCount = Ref(m.Int())
-		}
-		if flags2&(1<<0) != 0 {
-			tl.Usernames = DecodeBuf_GenericVector[TL_username](m)
-		}
-		if flags2&(1<<4) != 0 {
-			tl.StoriesMaxID = Ref(m.Int())
-		}
-		if flags2&(1<<7) != 0 {
-			tl.Color = Ref(DecodeBuf_GenericObject[TL_peerColor](m))
-		}
-		if flags2&(1<<8) != 0 {
-			tl.ProfileColor = Ref(DecodeBuf_GenericObject[TL_peerColor](m))
-		}
-		if flags2&(1<<9) != 0 {
-			tl.EmojiStatus = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags2&(1<<10) != 0 {
-			tl.Level = Ref(m.Int())
-		}
-		if flags2&(1<<11) != 0 {
-			tl.SubscriptionUntilDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_channel(m)
 	case CRC_channelForbidden:
-		tl := TL_channelForbidden{}
-		flags := m.Int()
-		tl.Broadcast = flags&(1<<5) != 0
-		tl.Megagroup = flags&(1<<8) != 0
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Title = m.String()
-		if flags&(1<<16) != 0 {
-			tl.UntilDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_channelForbidden(m)
 	case CRC_chatFull:
-		tl := TL_chatFull{}
-		flags := m.Int()
-		tl.CanSetUsername = flags&(1<<7) != 0
-		tl.HasScheduled = flags&(1<<8) != 0
-		tl.TranslationsDisabled = flags&(1<<19) != 0
-		tl.ID = m.Long()
-		tl.About = m.String()
-		tl.Participants = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<2) != 0 {
-			tl.ChatPhoto = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.NotifySettings = DecodeBuf_GenericObject[TL_peerNotifySettings](m)
-		if flags&(1<<13) != 0 {
-			tl.ExportedInvite = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<3) != 0 {
-			tl.BotInfo = DecodeBuf_GenericVector[TL_botInfo](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.PinnedMsgID = Ref(m.Int())
-		}
-		if flags&(1<<11) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		if flags&(1<<12) != 0 {
-			tl.Call = Ref(DecodeBuf_GenericObject[TL_inputGroupCall](m))
-		}
-		if flags&(1<<14) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		if flags&(1<<15) != 0 {
-			tl.GroupcallDefaultJoinAs = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<16) != 0 {
-			tl.ThemeEmoticon = Ref(m.String())
-		}
-		if flags&(1<<17) != 0 {
-			tl.RequestsPending = Ref(m.Int())
-		}
-		if flags&(1<<17) != 0 {
-			tl.RecentRequesters = m.VectorLong()
-		}
-		if flags&(1<<18) != 0 {
-			tl.AvailableReactions = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<20) != 0 {
-			tl.ReactionsLimit = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_chatFull(m)
 	case CRC_channelFull:
-		tl := TL_channelFull{}
-		flags := m.Int()
-		tl.CanViewParticipants = flags&(1<<3) != 0
-		tl.CanSetUsername = flags&(1<<6) != 0
-		tl.CanSetStickers = flags&(1<<7) != 0
-		tl.HiddenPrehistory = flags&(1<<10) != 0
-		tl.CanSetLocation = flags&(1<<16) != 0
-		tl.HasScheduled = flags&(1<<19) != 0
-		tl.CanViewStats = flags&(1<<20) != 0
-		tl.Blocked = flags&(1<<22) != 0
-		flags2 := m.Int()
-		tl.CanDeleteChannel = flags2&(1<<0) != 0
-		tl.Antispam = flags2&(1<<1) != 0
-		tl.ParticipantsHidden = flags2&(1<<2) != 0
-		tl.TranslationsDisabled = flags2&(1<<3) != 0
-		tl.StoriesPinnedAvailable = flags2&(1<<5) != 0
-		tl.ViewForumAsMessages = flags2&(1<<6) != 0
-		tl.RestrictedSponsored = flags2&(1<<11) != 0
-		tl.CanViewRevenue = flags2&(1<<12) != 0
-		tl.PaidMediaAllowed = flags2&(1<<14) != 0
-		tl.CanViewStarsRevenue = flags2&(1<<15) != 0
-		tl.PaidReactionsAvailable = flags2&(1<<16) != 0
-		tl.ID = m.Long()
-		tl.About = m.String()
-		if flags&(1<<0) != 0 {
-			tl.ParticipantsCount = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.AdminsCount = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.KickedCount = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.BannedCount = Ref(m.Int())
-		}
-		if flags&(1<<13) != 0 {
-			tl.OnlineCount = Ref(m.Int())
-		}
-		tl.ReadInboxMaxID = m.Int()
-		tl.ReadOutboxMaxID = m.Int()
-		tl.UnreadCount = m.Int()
-		tl.ChatPhoto = DecodeBuf_GenericObject[TL](m)
-		tl.NotifySettings = DecodeBuf_GenericObject[TL_peerNotifySettings](m)
-		if flags&(1<<23) != 0 {
-			tl.ExportedInvite = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.BotInfo = DecodeBuf_GenericVector[TL_botInfo](m)
-		if flags&(1<<4) != 0 {
-			tl.MigratedFromChatID = Ref(m.Long())
-		}
-		if flags&(1<<4) != 0 {
-			tl.MigratedFromMaxID = Ref(m.Int())
-		}
-		if flags&(1<<5) != 0 {
-			tl.PinnedMsgID = Ref(m.Int())
-		}
-		if flags&(1<<8) != 0 {
-			tl.Stickerset = Ref(DecodeBuf_GenericObject[TL_stickerSet](m))
-		}
-		if flags&(1<<9) != 0 {
-			tl.AvailableMinID = Ref(m.Int())
-		}
-		if flags&(1<<11) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		if flags&(1<<14) != 0 {
-			tl.LinkedChatID = Ref(m.Long())
-		}
-		if flags&(1<<15) != 0 {
-			tl.Location = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<17) != 0 {
-			tl.SlowmodeSeconds = Ref(m.Int())
-		}
-		if flags&(1<<18) != 0 {
-			tl.SlowmodeNextSendDate = Ref(m.Int())
-		}
-		if flags&(1<<12) != 0 {
-			tl.StatsDC = Ref(m.Int())
-		}
-		tl.PTS = m.Int()
-		if flags&(1<<21) != 0 {
-			tl.Call = Ref(DecodeBuf_GenericObject[TL_inputGroupCall](m))
-		}
-		if flags&(1<<24) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		if flags&(1<<25) != 0 {
-			tl.PendingSuggestions = m.VectorString()
-		}
-		if flags&(1<<26) != 0 {
-			tl.GroupcallDefaultJoinAs = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<27) != 0 {
-			tl.ThemeEmoticon = Ref(m.String())
-		}
-		if flags&(1<<28) != 0 {
-			tl.RequestsPending = Ref(m.Int())
-		}
-		if flags&(1<<28) != 0 {
-			tl.RecentRequesters = m.VectorLong()
-		}
-		if flags&(1<<29) != 0 {
-			tl.DefaultSendAs = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<30) != 0 {
-			tl.AvailableReactions = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags2&(1<<13) != 0 {
-			tl.ReactionsLimit = Ref(m.Int())
-		}
-		if flags2&(1<<4) != 0 {
-			tl.Stories = Ref(DecodeBuf_GenericObject[TL_peerStories](m))
-		}
-		if flags2&(1<<7) != 0 {
-			tl.Wallpaper = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags2&(1<<8) != 0 {
-			tl.BoostsApplied = Ref(m.Int())
-		}
-		if flags2&(1<<9) != 0 {
-			tl.BoostsUnrestrict = Ref(m.Int())
-		}
-		if flags2&(1<<10) != 0 {
-			tl.Emojiset = Ref(DecodeBuf_GenericObject[TL_stickerSet](m))
-		}
-		r = tl
+		r = decode_body_TL_channelFull(m)
 	case CRC_chatParticipant:
-		tl := TL_chatParticipant{}
-		tl.UserID = m.Long()
-		tl.InviterID = m.Long()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_chatParticipant(m)
 	case CRC_chatParticipantCreator:
-		tl := TL_chatParticipantCreator{}
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_chatParticipantCreator(m)
 	case CRC_chatParticipantAdmin:
-		tl := TL_chatParticipantAdmin{}
-		tl.UserID = m.Long()
-		tl.InviterID = m.Long()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_chatParticipantAdmin(m)
 	case CRC_chatParticipantsForbidden:
-		tl := TL_chatParticipantsForbidden{}
-		flags := m.Int()
-		tl.ChatID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.SelfParticipant = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_chatParticipantsForbidden(m)
 	case CRC_chatParticipants:
-		tl := TL_chatParticipants{}
-		tl.ChatID = m.Long()
-		tl.Participants = DecodeBuf_GenericVector[TL](m)
-		tl.Version = m.Int()
-		r = tl
+		r = decode_body_TL_chatParticipants(m)
 	case CRC_chatPhotoEmpty:
-		tl := TL_chatPhotoEmpty{}
-		r = tl
+		r = decode_body_TL_chatPhotoEmpty(m)
 	case CRC_chatPhoto:
-		tl := TL_chatPhoto{}
-		flags := m.Int()
-		tl.HasVideo = flags&(1<<0) != 0
-		tl.PhotoID = m.Long()
-		if flags&(1<<1) != 0 {
-			tl.StrippedThumb = m.StringBytes()
-		}
-		tl.DCID = m.Int()
-		r = tl
+		r = decode_body_TL_chatPhoto(m)
 	case CRC_messageEmpty:
-		tl := TL_messageEmpty{}
-		flags := m.Int()
-		tl.ID = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_messageEmpty(m)
 	case CRC_message:
-		tl := TL_message{}
-		flags := m.Int()
-		tl.Out = flags&(1<<1) != 0
-		tl.Mentioned = flags&(1<<4) != 0
-		tl.MediaUnread = flags&(1<<5) != 0
-		tl.Silent = flags&(1<<13) != 0
-		tl.Post = flags&(1<<14) != 0
-		tl.FromScheduled = flags&(1<<18) != 0
-		tl.Legacy = flags&(1<<19) != 0
-		tl.EditHide = flags&(1<<21) != 0
-		tl.Pinned = flags&(1<<24) != 0
-		tl.Noforwards = flags&(1<<26) != 0
-		tl.InvertMedia = flags&(1<<27) != 0
-		flags2 := m.Int()
-		tl.Offline = flags2&(1<<1) != 0
-		tl.ID = m.Int()
-		if flags&(1<<8) != 0 {
-			tl.FromID = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<29) != 0 {
-			tl.FromBoostsApplied = Ref(m.Int())
-		}
-		tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<28) != 0 {
-			tl.SavedPeerID = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.FwdFrom = Ref(DecodeBuf_GenericObject[TL_messageFwdHeader](m))
-		}
-		if flags&(1<<11) != 0 {
-			tl.ViaBotID = Ref(m.Long())
-		}
-		if flags2&(1<<0) != 0 {
-			tl.ViaBusinessBotID = Ref(m.Long())
-		}
-		if flags&(1<<3) != 0 {
-			tl.ReplyTo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Date = m.Int()
-		tl.Message = m.String()
-		if flags&(1<<9) != 0 {
-			tl.Media = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<7) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<10) != 0 {
-			tl.Views = Ref(m.Int())
-		}
-		if flags&(1<<10) != 0 {
-			tl.Forwards = Ref(m.Int())
-		}
-		if flags&(1<<23) != 0 {
-			tl.Replies = Ref(DecodeBuf_GenericObject[TL_messageReplies](m))
-		}
-		if flags&(1<<15) != 0 {
-			tl.EditDate = Ref(m.Int())
-		}
-		if flags&(1<<16) != 0 {
-			tl.PostAuthor = Ref(m.String())
-		}
-		if flags&(1<<17) != 0 {
-			tl.GroupedID = Ref(m.Long())
-		}
-		if flags&(1<<20) != 0 {
-			tl.Reactions = Ref(DecodeBuf_GenericObject[TL_messageReactions](m))
-		}
-		if flags&(1<<22) != 0 {
-			tl.RestrictionReason = DecodeBuf_GenericVector[TL_restrictionReason](m)
-		}
-		if flags&(1<<25) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		if flags&(1<<30) != 0 {
-			tl.QuickReplyShortcutID = Ref(m.Int())
-		}
-		if flags2&(1<<2) != 0 {
-			tl.Effect = Ref(m.Long())
-		}
-		if flags2&(1<<3) != 0 {
-			tl.Factcheck = Ref(DecodeBuf_GenericObject[TL_factCheck](m))
-		}
-		r = tl
+		r = decode_body_TL_message(m)
 	case CRC_messageService:
-		tl := TL_messageService{}
-		flags := m.Int()
-		tl.Out = flags&(1<<1) != 0
-		tl.Mentioned = flags&(1<<4) != 0
-		tl.MediaUnread = flags&(1<<5) != 0
-		tl.Silent = flags&(1<<13) != 0
-		tl.Post = flags&(1<<14) != 0
-		tl.Legacy = flags&(1<<19) != 0
-		tl.ID = m.Int()
-		if flags&(1<<8) != 0 {
-			tl.FromID = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<3) != 0 {
-			tl.ReplyTo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Date = m.Int()
-		tl.Action = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<25) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageService(m)
 	case CRC_messageMediaEmpty:
-		tl := TL_messageMediaEmpty{}
-		r = tl
+		r = decode_body_TL_messageMediaEmpty(m)
 	case CRC_messageMediaPhoto:
-		tl := TL_messageMediaPhoto{}
-		flags := m.Int()
-		tl.Spoiler = flags&(1<<3) != 0
-		if flags&(1<<0) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.TTLSeconds = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageMediaPhoto(m)
 	case CRC_messageMediaGeo:
-		tl := TL_messageMediaGeo{}
-		tl.Geo = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messageMediaGeo(m)
 	case CRC_messageMediaContact:
-		tl := TL_messageMediaContact{}
-		tl.PhoneNumber = m.String()
-		tl.FirstName = m.String()
-		tl.LastName = m.String()
-		tl.Vcard = m.String()
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_messageMediaContact(m)
 	case CRC_messageMediaUnsupported:
-		tl := TL_messageMediaUnsupported{}
-		r = tl
+		r = decode_body_TL_messageMediaUnsupported(m)
 	case CRC_messageMediaDocument:
-		tl := TL_messageMediaDocument{}
-		flags := m.Int()
-		tl.Nopremium = flags&(1<<3) != 0
-		tl.Spoiler = flags&(1<<4) != 0
-		tl.Video = flags&(1<<6) != 0
-		tl.Round = flags&(1<<7) != 0
-		tl.Voice = flags&(1<<8) != 0
-		if flags&(1<<0) != 0 {
-			tl.Document = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.AltDocument = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.TTLSeconds = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageMediaDocument(m)
 	case CRC_messageMediaWebPage:
-		tl := TL_messageMediaWebPage{}
-		flags := m.Int()
-		tl.ForceLargeMedia = flags&(1<<0) != 0
-		tl.ForceSmallMedia = flags&(1<<1) != 0
-		tl.Manual = flags&(1<<3) != 0
-		tl.Safe = flags&(1<<4) != 0
-		tl.Webpage = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messageMediaWebPage(m)
 	case CRC_messageMediaVenue:
-		tl := TL_messageMediaVenue{}
-		tl.Geo = DecodeBuf_GenericObject[TL](m)
-		tl.Title = m.String()
-		tl.Address = m.String()
-		tl.Provider = m.String()
-		tl.VenueID = m.String()
-		tl.VenueType = m.String()
-		r = tl
+		r = decode_body_TL_messageMediaVenue(m)
 	case CRC_messageMediaGame:
-		tl := TL_messageMediaGame{}
-		tl.Game = DecodeBuf_GenericObject[TL_game](m)
-		r = tl
+		r = decode_body_TL_messageMediaGame(m)
 	case CRC_messageMediaInvoice:
-		tl := TL_messageMediaInvoice{}
-		flags := m.Int()
-		tl.ShippingAddressRequested = flags&(1<<1) != 0
-		tl.Test = flags&(1<<3) != 0
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReceiptMsgID = Ref(m.Int())
-		}
-		tl.Currency = m.String()
-		tl.TotalAmount = m.Long()
-		tl.StartParam = m.String()
-		if flags&(1<<4) != 0 {
-			tl.ExtendedMedia = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_messageMediaInvoice(m)
 	case CRC_messageMediaGeoLive:
-		tl := TL_messageMediaGeoLive{}
-		flags := m.Int()
-		tl.Geo = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Heading = Ref(m.Int())
-		}
-		tl.Period = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.ProximityNotificationRadius = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageMediaGeoLive(m)
 	case CRC_messageMediaPoll:
-		tl := TL_messageMediaPoll{}
-		tl.Poll = DecodeBuf_GenericObject[TL_poll](m)
-		tl.Results = DecodeBuf_GenericObject[TL_pollResults](m)
-		r = tl
+		r = decode_body_TL_messageMediaPoll(m)
 	case CRC_messageMediaDice:
-		tl := TL_messageMediaDice{}
-		tl.Value = m.Int()
-		tl.Emoticon = m.String()
-		r = tl
+		r = decode_body_TL_messageMediaDice(m)
 	case CRC_messageMediaStory:
-		tl := TL_messageMediaStory{}
-		flags := m.Int()
-		tl.ViaMention = flags&(1<<1) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.ID = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Story = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_messageMediaStory(m)
 	case CRC_messageMediaGiveaway:
-		tl := TL_messageMediaGiveaway{}
-		flags := m.Int()
-		tl.OnlyNewSubscribers = flags&(1<<0) != 0
-		tl.WinnersAreVisible = flags&(1<<2) != 0
-		tl.Channels = m.VectorLong()
-		if flags&(1<<1) != 0 {
-			tl.CountriesISO2 = m.VectorString()
-		}
-		if flags&(1<<3) != 0 {
-			tl.PrizeDescription = Ref(m.String())
-		}
-		tl.Quantity = m.Int()
-		tl.Months = m.Int()
-		tl.UntilDate = m.Int()
-		r = tl
+		r = decode_body_TL_messageMediaGiveaway(m)
 	case CRC_messageMediaGiveawayResults:
-		tl := TL_messageMediaGiveawayResults{}
-		flags := m.Int()
-		tl.OnlyNewSubscribers = flags&(1<<0) != 0
-		tl.Refunded = flags&(1<<2) != 0
-		tl.ChannelID = m.Long()
-		if flags&(1<<3) != 0 {
-			tl.AdditionalPeersCount = Ref(m.Int())
-		}
-		tl.LaunchMsgID = m.Int()
-		tl.WinnersCount = m.Int()
-		tl.UnclaimedCount = m.Int()
-		tl.Winners = m.VectorLong()
-		tl.Months = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.PrizeDescription = Ref(m.String())
-		}
-		tl.UntilDate = m.Int()
-		r = tl
+		r = decode_body_TL_messageMediaGiveawayResults(m)
 	case CRC_messageMediaPaidMedia:
-		tl := TL_messageMediaPaidMedia{}
-		tl.StarsAmount = m.Long()
-		tl.ExtendedMedia = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messageMediaPaidMedia(m)
 	case CRC_messageActionEmpty:
-		tl := TL_messageActionEmpty{}
-		r = tl
+		r = decode_body_TL_messageActionEmpty(m)
 	case CRC_messageActionChatCreate:
-		tl := TL_messageActionChatCreate{}
-		tl.Title = m.String()
-		tl.Users = m.VectorLong()
-		r = tl
+		r = decode_body_TL_messageActionChatCreate(m)
 	case CRC_messageActionChatEditTitle:
-		tl := TL_messageActionChatEditTitle{}
-		tl.Title = m.String()
-		r = tl
+		r = decode_body_TL_messageActionChatEditTitle(m)
 	case CRC_messageActionChatEditPhoto:
-		tl := TL_messageActionChatEditPhoto{}
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messageActionChatEditPhoto(m)
 	case CRC_messageActionChatDeletePhoto:
-		tl := TL_messageActionChatDeletePhoto{}
-		r = tl
+		r = decode_body_TL_messageActionChatDeletePhoto(m)
 	case CRC_messageActionChatAddUser:
-		tl := TL_messageActionChatAddUser{}
-		tl.Users = m.VectorLong()
-		r = tl
+		r = decode_body_TL_messageActionChatAddUser(m)
 	case CRC_messageActionChatDeleteUser:
-		tl := TL_messageActionChatDeleteUser{}
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_messageActionChatDeleteUser(m)
 	case CRC_messageActionChatJoinedByLink:
-		tl := TL_messageActionChatJoinedByLink{}
-		tl.InviterID = m.Long()
-		r = tl
+		r = decode_body_TL_messageActionChatJoinedByLink(m)
 	case CRC_messageActionChannelCreate:
-		tl := TL_messageActionChannelCreate{}
-		tl.Title = m.String()
-		r = tl
+		r = decode_body_TL_messageActionChannelCreate(m)
 	case CRC_messageActionChatMigrateTo:
-		tl := TL_messageActionChatMigrateTo{}
-		tl.ChannelID = m.Long()
-		r = tl
+		r = decode_body_TL_messageActionChatMigrateTo(m)
 	case CRC_messageActionChannelMigrateFrom:
-		tl := TL_messageActionChannelMigrateFrom{}
-		tl.Title = m.String()
-		tl.ChatID = m.Long()
-		r = tl
+		r = decode_body_TL_messageActionChannelMigrateFrom(m)
 	case CRC_messageActionPINMessage:
-		tl := TL_messageActionPINMessage{}
-		r = tl
+		r = decode_body_TL_messageActionPINMessage(m)
 	case CRC_messageActionHistoryClear:
-		tl := TL_messageActionHistoryClear{}
-		r = tl
+		r = decode_body_TL_messageActionHistoryClear(m)
 	case CRC_messageActionGameScore:
-		tl := TL_messageActionGameScore{}
-		tl.GameID = m.Long()
-		tl.Score = m.Int()
-		r = tl
+		r = decode_body_TL_messageActionGameScore(m)
 	case CRC_messageActionPaymentSentMe:
-		tl := TL_messageActionPaymentSentMe{}
-		flags := m.Int()
-		tl.RecurringInit = flags&(1<<2) != 0
-		tl.RecurringUsed = flags&(1<<3) != 0
-		tl.Currency = m.String()
-		tl.TotalAmount = m.Long()
-		tl.Payload = m.StringBytes()
-		if flags&(1<<0) != 0 {
-			tl.Info = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
-		}
-		if flags&(1<<1) != 0 {
-			tl.ShippingOptionID = Ref(m.String())
-		}
-		tl.Charge = DecodeBuf_GenericObject[TL_paymentCharge](m)
-		r = tl
+		r = decode_body_TL_messageActionPaymentSentMe(m)
 	case CRC_messageActionPaymentSent:
-		tl := TL_messageActionPaymentSent{}
-		flags := m.Int()
-		tl.RecurringInit = flags&(1<<2) != 0
-		tl.RecurringUsed = flags&(1<<3) != 0
-		tl.Currency = m.String()
-		tl.TotalAmount = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.InvoiceSlug = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_messageActionPaymentSent(m)
 	case CRC_messageActionPhoneCall:
-		tl := TL_messageActionPhoneCall{}
-		flags := m.Int()
-		tl.Video = flags&(1<<2) != 0
-		tl.CallID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Reason = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Duration = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageActionPhoneCall(m)
 	case CRC_messageActionScreenshotTaken:
-		tl := TL_messageActionScreenshotTaken{}
-		r = tl
+		r = decode_body_TL_messageActionScreenshotTaken(m)
 	case CRC_messageActionCustomAction:
-		tl := TL_messageActionCustomAction{}
-		tl.Message = m.String()
-		r = tl
+		r = decode_body_TL_messageActionCustomAction(m)
 	case CRC_messageActionBotAllowed:
-		tl := TL_messageActionBotAllowed{}
-		flags := m.Int()
-		tl.AttachMenu = flags&(1<<1) != 0
-		tl.FromRequest = flags&(1<<3) != 0
-		if flags&(1<<0) != 0 {
-			tl.Domain = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.App = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_messageActionBotAllowed(m)
 	case CRC_messageActionSecureValuesSentMe:
-		tl := TL_messageActionSecureValuesSentMe{}
-		tl.Values = DecodeBuf_GenericVector[TL_secureValue](m)
-		tl.Credentials = DecodeBuf_GenericObject[TL_secureCredentialsEncrypted](m)
-		r = tl
+		r = decode_body_TL_messageActionSecureValuesSentMe(m)
 	case CRC_messageActionSecureValuesSent:
-		tl := TL_messageActionSecureValuesSent{}
-		tl.Types = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messageActionSecureValuesSent(m)
 	case CRC_messageActionContactSignUp:
-		tl := TL_messageActionContactSignUp{}
-		r = tl
+		r = decode_body_TL_messageActionContactSignUp(m)
 	case CRC_messageActionGeoProximityReached:
-		tl := TL_messageActionGeoProximityReached{}
-		tl.FromID = DecodeBuf_GenericObject[TL](m)
-		tl.ToID = DecodeBuf_GenericObject[TL](m)
-		tl.Distance = m.Int()
-		r = tl
+		r = decode_body_TL_messageActionGeoProximityReached(m)
 	case CRC_messageActionGroupCall:
-		tl := TL_messageActionGroupCall{}
-		flags := m.Int()
-		tl.Call = DecodeBuf_GenericObject[TL_inputGroupCall](m)
-		if flags&(1<<0) != 0 {
-			tl.Duration = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageActionGroupCall(m)
 	case CRC_messageActionInviteToGroupCall:
-		tl := TL_messageActionInviteToGroupCall{}
-		tl.Call = DecodeBuf_GenericObject[TL_inputGroupCall](m)
-		tl.Users = m.VectorLong()
-		r = tl
+		r = decode_body_TL_messageActionInviteToGroupCall(m)
 	case CRC_messageActionSetMessagesTTL:
-		tl := TL_messageActionSetMessagesTTL{}
-		flags := m.Int()
-		tl.Period = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.AutoSettingFrom = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_messageActionSetMessagesTTL(m)
 	case CRC_messageActionGroupCallScheduled:
-		tl := TL_messageActionGroupCallScheduled{}
-		tl.Call = DecodeBuf_GenericObject[TL_inputGroupCall](m)
-		tl.ScheduleDate = m.Int()
-		r = tl
+		r = decode_body_TL_messageActionGroupCallScheduled(m)
 	case CRC_messageActionSetChatTheme:
-		tl := TL_messageActionSetChatTheme{}
-		tl.Emoticon = m.String()
-		r = tl
+		r = decode_body_TL_messageActionSetChatTheme(m)
 	case CRC_messageActionChatJoinedByRequest:
-		tl := TL_messageActionChatJoinedByRequest{}
-		r = tl
+		r = decode_body_TL_messageActionChatJoinedByRequest(m)
 	case CRC_messageActionWebViewDataSentMe:
-		tl := TL_messageActionWebViewDataSentMe{}
-		tl.Text = m.String()
-		tl.Data = m.String()
-		r = tl
+		r = decode_body_TL_messageActionWebViewDataSentMe(m)
 	case CRC_messageActionWebViewDataSent:
-		tl := TL_messageActionWebViewDataSent{}
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_messageActionWebViewDataSent(m)
 	case CRC_messageActionGiftPremium:
-		tl := TL_messageActionGiftPremium{}
-		flags := m.Int()
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		tl.Months = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.CryptoCurrency = Ref(m.String())
-		}
-		if flags&(1<<0) != 0 {
-			tl.CryptoAmount = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_messageActionGiftPremium(m)
 	case CRC_messageActionTopicCreate:
-		tl := TL_messageActionTopicCreate{}
-		flags := m.Int()
-		tl.Title = m.String()
-		tl.IconColor = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.IconEmojiID = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_messageActionTopicCreate(m)
 	case CRC_messageActionTopicEdit:
-		tl := TL_messageActionTopicEdit{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.IconEmojiID = Ref(m.Long())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Closed = Ref(m.Bool())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Hidden = Ref(m.Bool())
-		}
-		r = tl
+		r = decode_body_TL_messageActionTopicEdit(m)
 	case CRC_messageActionSuggestProfilePhoto:
-		tl := TL_messageActionSuggestProfilePhoto{}
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messageActionSuggestProfilePhoto(m)
 	case CRC_messageActionRequestedPeer:
-		tl := TL_messageActionRequestedPeer{}
-		tl.ButtonID = m.Int()
-		tl.Peers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messageActionRequestedPeer(m)
 	case CRC_messageActionSetChatWallPaper:
-		tl := TL_messageActionSetChatWallPaper{}
-		flags := m.Int()
-		tl.Same = flags&(1<<0) != 0
-		tl.ForBoth = flags&(1<<1) != 0
-		tl.Wallpaper = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messageActionSetChatWallPaper(m)
 	case CRC_messageActionGiftCode:
-		tl := TL_messageActionGiftCode{}
-		flags := m.Int()
-		tl.ViaGiveaway = flags&(1<<0) != 0
-		tl.Unclaimed = flags&(1<<2) != 0
-		if flags&(1<<1) != 0 {
-			tl.BoostPeer = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Months = m.Int()
-		tl.Slug = m.String()
-		if flags&(1<<2) != 0 {
-			tl.Currency = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Amount = Ref(m.Long())
-		}
-		if flags&(1<<3) != 0 {
-			tl.CryptoCurrency = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.CryptoAmount = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_messageActionGiftCode(m)
 	case CRC_messageActionGiveawayLaunch:
-		tl := TL_messageActionGiveawayLaunch{}
-		r = tl
+		r = decode_body_TL_messageActionGiveawayLaunch(m)
 	case CRC_messageActionGiveawayResults:
-		tl := TL_messageActionGiveawayResults{}
-		tl.WinnersCount = m.Int()
-		tl.UnclaimedCount = m.Int()
-		r = tl
+		r = decode_body_TL_messageActionGiveawayResults(m)
 	case CRC_messageActionBoostApply:
-		tl := TL_messageActionBoostApply{}
-		tl.Boosts = m.Int()
-		r = tl
+		r = decode_body_TL_messageActionBoostApply(m)
 	case CRC_messageActionRequestedPeerSentMe:
-		tl := TL_messageActionRequestedPeerSentMe{}
-		tl.ButtonID = m.Int()
-		tl.Peers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messageActionRequestedPeerSentMe(m)
 	case CRC_messageActionPaymentRefunded:
-		tl := TL_messageActionPaymentRefunded{}
-		flags := m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Currency = m.String()
-		tl.TotalAmount = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Payload = m.StringBytes()
-		}
-		tl.Charge = DecodeBuf_GenericObject[TL_paymentCharge](m)
-		r = tl
+		r = decode_body_TL_messageActionPaymentRefunded(m)
 	case CRC_messageActionGiftStars:
-		tl := TL_messageActionGiftStars{}
-		flags := m.Int()
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		tl.Stars = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.CryptoCurrency = Ref(m.String())
-		}
-		if flags&(1<<0) != 0 {
-			tl.CryptoAmount = Ref(m.Long())
-		}
-		if flags&(1<<1) != 0 {
-			tl.TransactionID = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_messageActionGiftStars(m)
 	case CRC_dialog:
-		tl := TL_dialog{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<2) != 0
-		tl.UnreadMark = flags&(1<<3) != 0
-		tl.ViewForumAsMessages = flags&(1<<6) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.TopMessage = m.Int()
-		tl.ReadInboxMaxID = m.Int()
-		tl.ReadOutboxMaxID = m.Int()
-		tl.UnreadCount = m.Int()
-		tl.UnreadMentionsCount = m.Int()
-		tl.UnreadReactionsCount = m.Int()
-		tl.NotifySettings = DecodeBuf_GenericObject[TL_peerNotifySettings](m)
-		if flags&(1<<0) != 0 {
-			tl.PTS = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Draft = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		if flags&(1<<5) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_dialog(m)
 	case CRC_dialogFolder:
-		tl := TL_dialogFolder{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<2) != 0
-		tl.Folder = DecodeBuf_GenericObject[TL_folder](m)
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.TopMessage = m.Int()
-		tl.UnreadMutedPeersCount = m.Int()
-		tl.UnreadUnmutedPeersCount = m.Int()
-		tl.UnreadMutedMessagesCount = m.Int()
-		tl.UnreadUnmutedMessagesCount = m.Int()
-		r = tl
+		r = decode_body_TL_dialogFolder(m)
 	case CRC_photoEmpty:
-		tl := TL_photoEmpty{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_photoEmpty(m)
 	case CRC_photo:
-		tl := TL_photo{}
-		flags := m.Int()
-		tl.HasStickers = flags&(1<<0) != 0
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.FileReference = m.StringBytes()
-		tl.Date = m.Int()
-		tl.Sizes = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<1) != 0 {
-			tl.VideoSizes = DecodeBuf_GenericVector[TL](m)
-		}
-		tl.DCID = m.Int()
-		r = tl
+		r = decode_body_TL_photo(m)
 	case CRC_photoSizeEmpty:
-		tl := TL_photoSizeEmpty{}
-		tl.Type = m.String()
-		r = tl
+		r = decode_body_TL_photoSizeEmpty(m)
 	case CRC_photoSize:
-		tl := TL_photoSize{}
-		tl.Type = m.String()
-		tl.W = m.Int()
-		tl.H = m.Int()
-		tl.Size = m.Int()
-		r = tl
+		r = decode_body_TL_photoSize(m)
 	case CRC_photoCachedSize:
-		tl := TL_photoCachedSize{}
-		tl.Type = m.String()
-		tl.W = m.Int()
-		tl.H = m.Int()
-		tl.Bytes = m.StringBytes()
-		r = tl
+		r = decode_body_TL_photoCachedSize(m)
 	case CRC_photoStrippedSize:
-		tl := TL_photoStrippedSize{}
-		tl.Type = m.String()
-		tl.Bytes = m.StringBytes()
-		r = tl
+		r = decode_body_TL_photoStrippedSize(m)
 	case CRC_photoSizeProgressive:
-		tl := TL_photoSizeProgressive{}
-		tl.Type = m.String()
-		tl.W = m.Int()
-		tl.H = m.Int()
-		tl.Sizes = m.VectorInt()
-		r = tl
+		r = decode_body_TL_photoSizeProgressive(m)
 	case CRC_photoPathSize:
-		tl := TL_photoPathSize{}
-		tl.Type = m.String()
-		tl.Bytes = m.StringBytes()
-		r = tl
+		r = decode_body_TL_photoPathSize(m)
 	case CRC_geoPointEmpty:
-		tl := TL_geoPointEmpty{}
-		r = tl
+		r = decode_body_TL_geoPointEmpty(m)
 	case CRC_geoPoint:
-		tl := TL_geoPoint{}
-		flags := m.Int()
-		tl.Long = m.Double()
-		tl.Lat = m.Double()
-		tl.AccessHash = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.AccuracyRadius = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_geoPoint(m)
 	case CRC_auth_sentCode:
-		tl := TL_auth_sentCode{}
-		flags := m.Int()
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.PhoneCodeHash = m.String()
-		if flags&(1<<1) != 0 {
-			tl.NextType = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.Timeout = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_auth_sentCode(m)
 	case CRC_auth_sentCodeSuccess:
-		tl := TL_auth_sentCodeSuccess{}
-		tl.Authorization = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_auth_sentCodeSuccess(m)
 	case CRC_auth_authorization:
-		tl := TL_auth_authorization{}
-		flags := m.Int()
-		tl.SetupPasswordRequired = flags&(1<<1) != 0
-		if flags&(1<<1) != 0 {
-			tl.OtherwiseReloginDays = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.TmpSessions = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.FutureAuthToken = m.StringBytes()
-		}
-		tl.User = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_auth_authorization(m)
 	case CRC_auth_authorizationSignUpRequired:
-		tl := TL_auth_authorizationSignUpRequired{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.TermsOfService = Ref(DecodeBuf_GenericObject[TL_help_termsOfService](m))
-		}
-		r = tl
+		r = decode_body_TL_auth_authorizationSignUpRequired(m)
 	case CRC_auth_exportedAuthorization:
-		tl := TL_auth_exportedAuthorization{}
-		tl.ID = m.Long()
-		tl.Bytes = m.StringBytes()
-		r = tl
+		r = decode_body_TL_auth_exportedAuthorization(m)
 	case CRC_inputNotifyPeer:
-		tl := TL_inputNotifyPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputNotifyPeer(m)
 	case CRC_inputNotifyUsers:
-		tl := TL_inputNotifyUsers{}
-		r = tl
+		r = decode_body_TL_inputNotifyUsers(m)
 	case CRC_inputNotifyChats:
-		tl := TL_inputNotifyChats{}
-		r = tl
+		r = decode_body_TL_inputNotifyChats(m)
 	case CRC_inputNotifyBroadcasts:
-		tl := TL_inputNotifyBroadcasts{}
-		r = tl
+		r = decode_body_TL_inputNotifyBroadcasts(m)
 	case CRC_inputNotifyForumTopic:
-		tl := TL_inputNotifyForumTopic{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.TopMsgID = m.Int()
-		r = tl
+		r = decode_body_TL_inputNotifyForumTopic(m)
 	case CRC_inputPeerNotifySettings:
-		tl := TL_inputPeerNotifySettings{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.ShowPreviews = Ref(m.Bool())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Silent = Ref(m.Bool())
-		}
-		if flags&(1<<2) != 0 {
-			tl.MuteUntil = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Sound = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.StoriesMuted = Ref(m.Bool())
-		}
-		if flags&(1<<7) != 0 {
-			tl.StoriesHideSender = Ref(m.Bool())
-		}
-		if flags&(1<<8) != 0 {
-			tl.StoriesSound = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputPeerNotifySettings(m)
 	case CRC_peerNotifySettings:
-		tl := TL_peerNotifySettings{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.ShowPreviews = Ref(m.Bool())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Silent = Ref(m.Bool())
-		}
-		if flags&(1<<2) != 0 {
-			tl.MuteUntil = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.IOSSound = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.AndroidSound = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.OtherSound = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.StoriesMuted = Ref(m.Bool())
-		}
-		if flags&(1<<7) != 0 {
-			tl.StoriesHideSender = Ref(m.Bool())
-		}
-		if flags&(1<<8) != 0 {
-			tl.StoriesIOSSound = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<9) != 0 {
-			tl.StoriesAndroidSound = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<10) != 0 {
-			tl.StoriesOtherSound = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_peerNotifySettings(m)
 	case CRC_peerSettings:
-		tl := TL_peerSettings{}
-		flags := m.Int()
-		tl.ReportSpam = flags&(1<<0) != 0
-		tl.AddContact = flags&(1<<1) != 0
-		tl.BlockContact = flags&(1<<2) != 0
-		tl.ShareContact = flags&(1<<3) != 0
-		tl.NeedContactsException = flags&(1<<4) != 0
-		tl.ReportGeo = flags&(1<<5) != 0
-		tl.Autoarchived = flags&(1<<7) != 0
-		tl.InviteMembers = flags&(1<<8) != 0
-		tl.RequestChatBroadcast = flags&(1<<10) != 0
-		tl.BusinessBotPaused = flags&(1<<11) != 0
-		tl.BusinessBotCanReply = flags&(1<<12) != 0
-		if flags&(1<<6) != 0 {
-			tl.GeoDistance = Ref(m.Int())
-		}
-		if flags&(1<<9) != 0 {
-			tl.RequestChatTitle = Ref(m.String())
-		}
-		if flags&(1<<9) != 0 {
-			tl.RequestChatDate = Ref(m.Int())
-		}
-		if flags&(1<<13) != 0 {
-			tl.BusinessBotID = Ref(m.Long())
-		}
-		if flags&(1<<13) != 0 {
-			tl.BusinessBotManageURL = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_peerSettings(m)
 	case CRC_wallPaper:
-		tl := TL_wallPaper{}
-		tl.ID = m.Long()
-		flags := m.Int()
-		tl.Creator = flags&(1<<0) != 0
-		tl.Default = flags&(1<<1) != 0
-		tl.Pattern = flags&(1<<3) != 0
-		tl.Dark = flags&(1<<4) != 0
-		tl.AccessHash = m.Long()
-		tl.Slug = m.String()
-		tl.Document = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<2) != 0 {
-			tl.Settings = Ref(DecodeBuf_GenericObject[TL_wallPaperSettings](m))
-		}
-		r = tl
+		r = decode_body_TL_wallPaper(m)
 	case CRC_wallPaperNoFile:
-		tl := TL_wallPaperNoFile{}
-		tl.ID = m.Long()
-		flags := m.Int()
-		tl.Default = flags&(1<<1) != 0
-		tl.Dark = flags&(1<<4) != 0
-		if flags&(1<<2) != 0 {
-			tl.Settings = Ref(DecodeBuf_GenericObject[TL_wallPaperSettings](m))
-		}
-		r = tl
+		r = decode_body_TL_wallPaperNoFile(m)
 	case CRC_inputReportReasonSpam:
-		tl := TL_inputReportReasonSpam{}
-		r = tl
+		r = decode_body_TL_inputReportReasonSpam(m)
 	case CRC_inputReportReasonViolence:
-		tl := TL_inputReportReasonViolence{}
-		r = tl
+		r = decode_body_TL_inputReportReasonViolence(m)
 	case CRC_inputReportReasonPornography:
-		tl := TL_inputReportReasonPornography{}
-		r = tl
+		r = decode_body_TL_inputReportReasonPornography(m)
 	case CRC_inputReportReasonChildAbuse:
-		tl := TL_inputReportReasonChildAbuse{}
-		r = tl
+		r = decode_body_TL_inputReportReasonChildAbuse(m)
 	case CRC_inputReportReasonOther:
-		tl := TL_inputReportReasonOther{}
-		r = tl
+		r = decode_body_TL_inputReportReasonOther(m)
 	case CRC_inputReportReasonCopyright:
-		tl := TL_inputReportReasonCopyright{}
-		r = tl
+		r = decode_body_TL_inputReportReasonCopyright(m)
 	case CRC_inputReportReasonGeoIrrelevant:
-		tl := TL_inputReportReasonGeoIrrelevant{}
-		r = tl
+		r = decode_body_TL_inputReportReasonGeoIrrelevant(m)
 	case CRC_inputReportReasonFake:
-		tl := TL_inputReportReasonFake{}
-		r = tl
+		r = decode_body_TL_inputReportReasonFake(m)
 	case CRC_inputReportReasonIllegalDrugs:
-		tl := TL_inputReportReasonIllegalDrugs{}
-		r = tl
+		r = decode_body_TL_inputReportReasonIllegalDrugs(m)
 	case CRC_inputReportReasonPersonalDetails:
-		tl := TL_inputReportReasonPersonalDetails{}
-		r = tl
+		r = decode_body_TL_inputReportReasonPersonalDetails(m)
 	case CRC_userFull:
-		tl := TL_userFull{}
-		flags := m.Int()
-		tl.Blocked = flags&(1<<0) != 0
-		tl.PhoneCallsAvailable = flags&(1<<4) != 0
-		tl.PhoneCallsPrivate = flags&(1<<5) != 0
-		tl.CanPINMessage = flags&(1<<7) != 0
-		tl.HasScheduled = flags&(1<<12) != 0
-		tl.VideoCallsAvailable = flags&(1<<13) != 0
-		tl.VoiceMessagesForbidden = flags&(1<<20) != 0
-		tl.TranslationsDisabled = flags&(1<<23) != 0
-		tl.StoriesPinnedAvailable = flags&(1<<26) != 0
-		tl.BlockedMyStoriesFrom = flags&(1<<27) != 0
-		tl.WallpaperOverridden = flags&(1<<28) != 0
-		tl.ContactRequirePremium = flags&(1<<29) != 0
-		tl.ReadDatesPrivate = flags&(1<<30) != 0
-		flags2 := m.Int()
-		tl.SponsoredEnabled = flags2&(1<<7) != 0
-		tl.ID = m.Long()
-		if flags&(1<<1) != 0 {
-			tl.About = Ref(m.String())
-		}
-		tl.Settings = DecodeBuf_GenericObject[TL_peerSettings](m)
-		if flags&(1<<21) != 0 {
-			tl.PersonalPhoto = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.ProfilePhoto = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<22) != 0 {
-			tl.FallbackPhoto = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.NotifySettings = DecodeBuf_GenericObject[TL_peerNotifySettings](m)
-		if flags&(1<<3) != 0 {
-			tl.BotInfo = Ref(DecodeBuf_GenericObject[TL_botInfo](m))
-		}
-		if flags&(1<<6) != 0 {
-			tl.PinnedMsgID = Ref(m.Int())
-		}
-		tl.CommonChatsCount = m.Int()
-		if flags&(1<<11) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		if flags&(1<<14) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		if flags&(1<<15) != 0 {
-			tl.ThemeEmoticon = Ref(m.String())
-		}
-		if flags&(1<<16) != 0 {
-			tl.PrivateForwardName = Ref(m.String())
-		}
-		if flags&(1<<17) != 0 {
-			tl.BotGroupAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
-		}
-		if flags&(1<<18) != 0 {
-			tl.BotBroadcastAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
-		}
-		if flags&(1<<19) != 0 {
-			tl.PremiumGifts = DecodeBuf_GenericVector[TL_premiumGiftOption](m)
-		}
-		if flags&(1<<24) != 0 {
-			tl.Wallpaper = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<25) != 0 {
-			tl.Stories = Ref(DecodeBuf_GenericObject[TL_peerStories](m))
-		}
-		if flags2&(1<<0) != 0 {
-			tl.BusinessWorkHours = Ref(DecodeBuf_GenericObject[TL_businessWorkHours](m))
-		}
-		if flags2&(1<<1) != 0 {
-			tl.BusinessLocation = Ref(DecodeBuf_GenericObject[TL_businessLocation](m))
-		}
-		if flags2&(1<<2) != 0 {
-			tl.BusinessGreetingMessage = Ref(DecodeBuf_GenericObject[TL_businessGreetingMessage](m))
-		}
-		if flags2&(1<<3) != 0 {
-			tl.BusinessAwayMessage = Ref(DecodeBuf_GenericObject[TL_businessAwayMessage](m))
-		}
-		if flags2&(1<<4) != 0 {
-			tl.BusinessIntro = Ref(DecodeBuf_GenericObject[TL_businessIntro](m))
-		}
-		if flags2&(1<<5) != 0 {
-			tl.Birthday = Ref(DecodeBuf_GenericObject[TL_birthday](m))
-		}
-		if flags2&(1<<6) != 0 {
-			tl.PersonalChannelID = Ref(m.Long())
-		}
-		if flags2&(1<<6) != 0 {
-			tl.PersonalChannelMessage = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_userFull(m)
 	case CRC_contact:
-		tl := TL_contact{}
-		tl.UserID = m.Long()
-		tl.Mutual = m.Bool()
-		r = tl
+		r = decode_body_TL_contact(m)
 	case CRC_importedContact:
-		tl := TL_importedContact{}
-		tl.UserID = m.Long()
-		tl.ClientID = m.Long()
-		r = tl
+		r = decode_body_TL_importedContact(m)
 	case CRC_contactStatus:
-		tl := TL_contactStatus{}
-		tl.UserID = m.Long()
-		tl.Status = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_contactStatus(m)
 	case CRC_contacts_contactsNotModified:
-		tl := TL_contacts_contactsNotModified{}
-		r = tl
+		r = decode_body_TL_contacts_contactsNotModified(m)
 	case CRC_contacts_contacts:
-		tl := TL_contacts_contacts{}
-		tl.Contacts = DecodeBuf_GenericVector[TL_contact](m)
-		tl.SavedCount = m.Int()
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_contacts_contacts(m)
 	case CRC_contacts_importedContacts:
-		tl := TL_contacts_importedContacts{}
-		tl.Imported = DecodeBuf_GenericVector[TL_importedContact](m)
-		tl.PopularInvites = DecodeBuf_GenericVector[TL_popularContact](m)
-		tl.RetryContacts = m.VectorLong()
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_contacts_importedContacts(m)
 	case CRC_contacts_blocked:
-		tl := TL_contacts_blocked{}
-		tl.Blocked = DecodeBuf_GenericVector[TL_peerBlocked](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_contacts_blocked(m)
 	case CRC_contacts_blockedSlice:
-		tl := TL_contacts_blockedSlice{}
-		tl.Count = m.Int()
-		tl.Blocked = DecodeBuf_GenericVector[TL_peerBlocked](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_contacts_blockedSlice(m)
 	case CRC_messages_dialogs:
-		tl := TL_messages_dialogs{}
-		tl.Dialogs = DecodeBuf_GenericVector[TL](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_dialogs(m)
 	case CRC_messages_dialogsSlice:
-		tl := TL_messages_dialogsSlice{}
-		tl.Count = m.Int()
-		tl.Dialogs = DecodeBuf_GenericVector[TL](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_dialogsSlice(m)
 	case CRC_messages_dialogsNotModified:
-		tl := TL_messages_dialogsNotModified{}
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_messages_dialogsNotModified(m)
 	case CRC_messages_messages:
-		tl := TL_messages_messages{}
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_messages(m)
 	case CRC_messages_messagesSlice:
-		tl := TL_messages_messagesSlice{}
-		flags := m.Int()
-		tl.Inexact = flags&(1<<1) != 0
-		tl.Count = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.NextRate = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.OffsetIDOffset = Ref(m.Int())
-		}
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_messagesSlice(m)
 	case CRC_messages_channelMessages:
-		tl := TL_messages_channelMessages{}
-		flags := m.Int()
-		tl.Inexact = flags&(1<<1) != 0
-		tl.PTS = m.Int()
-		tl.Count = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.OffsetIDOffset = Ref(m.Int())
-		}
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Topics = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_channelMessages(m)
 	case CRC_messages_messagesNotModified:
-		tl := TL_messages_messagesNotModified{}
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_messages_messagesNotModified(m)
 	case CRC_messages_chats:
-		tl := TL_messages_chats{}
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_chats(m)
 	case CRC_messages_chatsSlice:
-		tl := TL_messages_chatsSlice{}
-		tl.Count = m.Int()
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_chatsSlice(m)
 	case CRC_messages_chatFull:
-		tl := TL_messages_chatFull{}
-		tl.FullChat = DecodeBuf_GenericObject[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_chatFull(m)
 	case CRC_messages_affectedHistory:
-		tl := TL_messages_affectedHistory{}
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		tl.Offset = m.Int()
-		r = tl
+		r = decode_body_TL_messages_affectedHistory(m)
 	case CRC_inputMessagesFilterEmpty:
-		tl := TL_inputMessagesFilterEmpty{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterEmpty(m)
 	case CRC_inputMessagesFilterPhotos:
-		tl := TL_inputMessagesFilterPhotos{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterPhotos(m)
 	case CRC_inputMessagesFilterVideo:
-		tl := TL_inputMessagesFilterVideo{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterVideo(m)
 	case CRC_inputMessagesFilterPhotoVideo:
-		tl := TL_inputMessagesFilterPhotoVideo{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterPhotoVideo(m)
 	case CRC_inputMessagesFilterDocument:
-		tl := TL_inputMessagesFilterDocument{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterDocument(m)
 	case CRC_inputMessagesFilterURL:
-		tl := TL_inputMessagesFilterURL{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterURL(m)
 	case CRC_inputMessagesFilterGIF:
-		tl := TL_inputMessagesFilterGIF{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterGIF(m)
 	case CRC_inputMessagesFilterVoice:
-		tl := TL_inputMessagesFilterVoice{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterVoice(m)
 	case CRC_inputMessagesFilterMusic:
-		tl := TL_inputMessagesFilterMusic{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterMusic(m)
 	case CRC_inputMessagesFilterChatPhotos:
-		tl := TL_inputMessagesFilterChatPhotos{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterChatPhotos(m)
 	case CRC_inputMessagesFilterPhoneCalls:
-		tl := TL_inputMessagesFilterPhoneCalls{}
-		flags := m.Int()
-		tl.Missed = flags&(1<<0) != 0
-		r = tl
+		r = decode_body_TL_inputMessagesFilterPhoneCalls(m)
 	case CRC_inputMessagesFilterRoundVoice:
-		tl := TL_inputMessagesFilterRoundVoice{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterRoundVoice(m)
 	case CRC_inputMessagesFilterRoundVideo:
-		tl := TL_inputMessagesFilterRoundVideo{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterRoundVideo(m)
 	case CRC_inputMessagesFilterMyMentions:
-		tl := TL_inputMessagesFilterMyMentions{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterMyMentions(m)
 	case CRC_inputMessagesFilterGeo:
-		tl := TL_inputMessagesFilterGeo{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterGeo(m)
 	case CRC_inputMessagesFilterContacts:
-		tl := TL_inputMessagesFilterContacts{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterContacts(m)
 	case CRC_inputMessagesFilterPinned:
-		tl := TL_inputMessagesFilterPinned{}
-		r = tl
+		r = decode_body_TL_inputMessagesFilterPinned(m)
 	case CRC_updateNewMessage:
-		tl := TL_updateNewMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateNewMessage(m)
 	case CRC_updateMessageID:
-		tl := TL_updateMessageID{}
-		tl.ID = m.Int()
-		tl.RandomID = m.Long()
-		r = tl
+		r = decode_body_TL_updateMessageID(m)
 	case CRC_updateDeleteMessages:
-		tl := TL_updateDeleteMessages{}
-		tl.Messages = m.VectorInt()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateDeleteMessages(m)
 	case CRC_updateUserTyping:
-		tl := TL_updateUserTyping{}
-		tl.UserID = m.Long()
-		tl.Action = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateUserTyping(m)
 	case CRC_updateChatUserTyping:
-		tl := TL_updateChatUserTyping{}
-		tl.ChatID = m.Long()
-		tl.FromID = DecodeBuf_GenericObject[TL](m)
-		tl.Action = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateChatUserTyping(m)
 	case CRC_updateChatParticipants:
-		tl := TL_updateChatParticipants{}
-		tl.Participants = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateChatParticipants(m)
 	case CRC_updateUserStatus:
-		tl := TL_updateUserStatus{}
-		tl.UserID = m.Long()
-		tl.Status = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateUserStatus(m)
 	case CRC_updateUserName:
-		tl := TL_updateUserName{}
-		tl.UserID = m.Long()
-		tl.FirstName = m.String()
-		tl.LastName = m.String()
-		tl.Usernames = DecodeBuf_GenericVector[TL_username](m)
-		r = tl
+		r = decode_body_TL_updateUserName(m)
 	case CRC_updateNewAuthorization:
-		tl := TL_updateNewAuthorization{}
-		flags := m.Int()
-		tl.Unconfirmed = flags&(1<<0) != 0
-		tl.Hash = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Date = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.Device = Ref(m.String())
-		}
-		if flags&(1<<0) != 0 {
-			tl.Location = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_updateNewAuthorization(m)
 	case CRC_updateNewEncryptedMessage:
-		tl := TL_updateNewEncryptedMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateNewEncryptedMessage(m)
 	case CRC_updateEncryptedChatTyping:
-		tl := TL_updateEncryptedChatTyping{}
-		tl.ChatID = m.Int()
-		r = tl
+		r = decode_body_TL_updateEncryptedChatTyping(m)
 	case CRC_updateEncryption:
-		tl := TL_updateEncryption{}
-		tl.Chat = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_updateEncryption(m)
 	case CRC_updateEncryptedMessagesRead:
-		tl := TL_updateEncryptedMessagesRead{}
-		tl.ChatID = m.Int()
-		tl.MaxDate = m.Int()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_updateEncryptedMessagesRead(m)
 	case CRC_updateChatParticipantAdd:
-		tl := TL_updateChatParticipantAdd{}
-		tl.ChatID = m.Long()
-		tl.UserID = m.Long()
-		tl.InviterID = m.Long()
-		tl.Date = m.Int()
-		tl.Version = m.Int()
-		r = tl
+		r = decode_body_TL_updateChatParticipantAdd(m)
 	case CRC_updateChatParticipantDelete:
-		tl := TL_updateChatParticipantDelete{}
-		tl.ChatID = m.Long()
-		tl.UserID = m.Long()
-		tl.Version = m.Int()
-		r = tl
+		r = decode_body_TL_updateChatParticipantDelete(m)
 	case CRC_updateDCOptions:
-		tl := TL_updateDCOptions{}
-		tl.DCOptions = DecodeBuf_GenericVector[TL_dcOption](m)
-		r = tl
+		r = decode_body_TL_updateDCOptions(m)
 	case CRC_updateNotifySettings:
-		tl := TL_updateNotifySettings{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.NotifySettings = DecodeBuf_GenericObject[TL_peerNotifySettings](m)
-		r = tl
+		r = decode_body_TL_updateNotifySettings(m)
 	case CRC_updateServiceNotification:
-		tl := TL_updateServiceNotification{}
-		flags := m.Int()
-		tl.Popup = flags&(1<<0) != 0
-		tl.InvertMedia = flags&(1<<2) != 0
-		if flags&(1<<1) != 0 {
-			tl.InboxDate = Ref(m.Int())
-		}
-		tl.Type = m.String()
-		tl.Message = m.String()
-		tl.Media = DecodeBuf_GenericObject[TL](m)
-		tl.Entities = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_updateServiceNotification(m)
 	case CRC_updatePrivacy:
-		tl := TL_updatePrivacy{}
-		tl.Key = DecodeBuf_GenericObject[TL](m)
-		tl.Rules = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_updatePrivacy(m)
 	case CRC_updateUserPhone:
-		tl := TL_updateUserPhone{}
-		tl.UserID = m.Long()
-		tl.Phone = m.String()
-		r = tl
+		r = decode_body_TL_updateUserPhone(m)
 	case CRC_updateReadHistoryInbox:
-		tl := TL_updateReadHistoryInbox{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MaxID = m.Int()
-		tl.StillUnreadCount = m.Int()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateReadHistoryInbox(m)
 	case CRC_updateReadHistoryOutbox:
-		tl := TL_updateReadHistoryOutbox{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MaxID = m.Int()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateReadHistoryOutbox(m)
 	case CRC_updateWebPage:
-		tl := TL_updateWebPage{}
-		tl.Webpage = DecodeBuf_GenericObject[TL](m)
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateWebPage(m)
 	case CRC_updateReadMessagesContents:
-		tl := TL_updateReadMessagesContents{}
-		flags := m.Int()
-		tl.Messages = m.VectorInt()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Date = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_updateReadMessagesContents(m)
 	case CRC_updateChannelTooLong:
-		tl := TL_updateChannelTooLong{}
-		flags := m.Int()
-		tl.ChannelID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.PTS = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_updateChannelTooLong(m)
 	case CRC_updateChannel:
-		tl := TL_updateChannel{}
-		tl.ChannelID = m.Long()
-		r = tl
+		r = decode_body_TL_updateChannel(m)
 	case CRC_updateNewChannelMessage:
-		tl := TL_updateNewChannelMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateNewChannelMessage(m)
 	case CRC_updateReadChannelInbox:
-		tl := TL_updateReadChannelInbox{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		tl.ChannelID = m.Long()
-		tl.MaxID = m.Int()
-		tl.StillUnreadCount = m.Int()
-		tl.PTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateReadChannelInbox(m)
 	case CRC_updateDeleteChannelMessages:
-		tl := TL_updateDeleteChannelMessages{}
-		tl.ChannelID = m.Long()
-		tl.Messages = m.VectorInt()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateDeleteChannelMessages(m)
 	case CRC_updateChannelMessageViews:
-		tl := TL_updateChannelMessageViews{}
-		tl.ChannelID = m.Long()
-		tl.ID = m.Int()
-		tl.Views = m.Int()
-		r = tl
+		r = decode_body_TL_updateChannelMessageViews(m)
 	case CRC_updateChatParticipantAdmin:
-		tl := TL_updateChatParticipantAdmin{}
-		tl.ChatID = m.Long()
-		tl.UserID = m.Long()
-		tl.IsAdmin = m.Bool()
-		tl.Version = m.Int()
-		r = tl
+		r = decode_body_TL_updateChatParticipantAdmin(m)
 	case CRC_updateNewStickerSet:
-		tl := TL_updateNewStickerSet{}
-		tl.Stickerset = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateNewStickerSet(m)
 	case CRC_updateStickerSetsOrder:
-		tl := TL_updateStickerSetsOrder{}
-		flags := m.Int()
-		tl.Masks = flags&(1<<0) != 0
-		tl.Emojis = flags&(1<<1) != 0
-		tl.Order = m.VectorLong()
-		r = tl
+		r = decode_body_TL_updateStickerSetsOrder(m)
 	case CRC_updateStickerSets:
-		tl := TL_updateStickerSets{}
-		flags := m.Int()
-		tl.Masks = flags&(1<<0) != 0
-		tl.Emojis = flags&(1<<1) != 0
-		r = tl
+		r = decode_body_TL_updateStickerSets(m)
 	case CRC_updateSavedGIFs:
-		tl := TL_updateSavedGIFs{}
-		r = tl
+		r = decode_body_TL_updateSavedGIFs(m)
 	case CRC_updateBotInlineQuery:
-		tl := TL_updateBotInlineQuery{}
-		flags := m.Int()
-		tl.QueryID = m.Long()
-		tl.UserID = m.Long()
-		tl.Query = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Geo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.PeerType = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Offset = m.String()
-		r = tl
+		r = decode_body_TL_updateBotInlineQuery(m)
 	case CRC_updateBotInlineSend:
-		tl := TL_updateBotInlineSend{}
-		flags := m.Int()
-		tl.UserID = m.Long()
-		tl.Query = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Geo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.ID = m.String()
-		if flags&(1<<1) != 0 {
-			tl.MsgID = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_updateBotInlineSend(m)
 	case CRC_updateEditChannelMessage:
-		tl := TL_updateEditChannelMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateEditChannelMessage(m)
 	case CRC_updateBotCallbackQuery:
-		tl := TL_updateBotCallbackQuery{}
-		flags := m.Int()
-		tl.QueryID = m.Long()
-		tl.UserID = m.Long()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.ChatInstance = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Data = m.StringBytes()
-		}
-		if flags&(1<<1) != 0 {
-			tl.GameShortName = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_updateBotCallbackQuery(m)
 	case CRC_updateEditMessage:
-		tl := TL_updateEditMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateEditMessage(m)
 	case CRC_updateInlineBotCallbackQuery:
-		tl := TL_updateInlineBotCallbackQuery{}
-		flags := m.Int()
-		tl.QueryID = m.Long()
-		tl.UserID = m.Long()
-		tl.MsgID = DecodeBuf_GenericObject[TL](m)
-		tl.ChatInstance = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Data = m.StringBytes()
-		}
-		if flags&(1<<1) != 0 {
-			tl.GameShortName = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_updateInlineBotCallbackQuery(m)
 	case CRC_updateReadChannelOutbox:
-		tl := TL_updateReadChannelOutbox{}
-		tl.ChannelID = m.Long()
-		tl.MaxID = m.Int()
-		r = tl
+		r = decode_body_TL_updateReadChannelOutbox(m)
 	case CRC_updateDraftMessage:
-		tl := TL_updateDraftMessage{}
-		flags := m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Ref(m.Int())
-		}
-		tl.Draft = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateDraftMessage(m)
 	case CRC_updateReadFeaturedStickers:
-		tl := TL_updateReadFeaturedStickers{}
-		r = tl
+		r = decode_body_TL_updateReadFeaturedStickers(m)
 	case CRC_updateRecentStickers:
-		tl := TL_updateRecentStickers{}
-		r = tl
+		r = decode_body_TL_updateRecentStickers(m)
 	case CRC_updateConfig:
-		tl := TL_updateConfig{}
-		r = tl
+		r = decode_body_TL_updateConfig(m)
 	case CRC_updatePTSChanged:
-		tl := TL_updatePTSChanged{}
-		r = tl
+		r = decode_body_TL_updatePTSChanged(m)
 	case CRC_updateChannelWebPage:
-		tl := TL_updateChannelWebPage{}
-		tl.ChannelID = m.Long()
-		tl.Webpage = DecodeBuf_GenericObject[TL](m)
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateChannelWebPage(m)
 	case CRC_updateDialogPinned:
-		tl := TL_updateDialogPinned{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<0) != 0
-		if flags&(1<<1) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateDialogPinned(m)
 	case CRC_updatePinnedDialogs:
-		tl := TL_updatePinnedDialogs{}
-		flags := m.Int()
-		if flags&(1<<1) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.Order = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_updatePinnedDialogs(m)
 	case CRC_updateBotWebhookJSON:
-		tl := TL_updateBotWebhookJSON{}
-		tl.Data = DecodeBuf_GenericObject[TL_dataJSON](m)
-		r = tl
+		r = decode_body_TL_updateBotWebhookJSON(m)
 	case CRC_updateBotWebhookJSONQuery:
-		tl := TL_updateBotWebhookJSONQuery{}
-		tl.QueryID = m.Long()
-		tl.Data = DecodeBuf_GenericObject[TL_dataJSON](m)
-		tl.Timeout = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotWebhookJSONQuery(m)
 	case CRC_updateBotShippingQuery:
-		tl := TL_updateBotShippingQuery{}
-		tl.QueryID = m.Long()
-		tl.UserID = m.Long()
-		tl.Payload = m.StringBytes()
-		tl.ShippingAddress = DecodeBuf_GenericObject[TL_postAddress](m)
-		r = tl
+		r = decode_body_TL_updateBotShippingQuery(m)
 	case CRC_updateBotPrecheckoutQuery:
-		tl := TL_updateBotPrecheckoutQuery{}
-		flags := m.Int()
-		tl.QueryID = m.Long()
-		tl.UserID = m.Long()
-		tl.Payload = m.StringBytes()
-		if flags&(1<<0) != 0 {
-			tl.Info = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
-		}
-		if flags&(1<<1) != 0 {
-			tl.ShippingOptionID = Ref(m.String())
-		}
-		tl.Currency = m.String()
-		tl.TotalAmount = m.Long()
-		r = tl
+		r = decode_body_TL_updateBotPrecheckoutQuery(m)
 	case CRC_updatePhoneCall:
-		tl := TL_updatePhoneCall{}
-		tl.PhoneCall = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updatePhoneCall(m)
 	case CRC_updateLangPackTooLong:
-		tl := TL_updateLangPackTooLong{}
-		tl.LangCode = m.String()
-		r = tl
+		r = decode_body_TL_updateLangPackTooLong(m)
 	case CRC_updateLangPack:
-		tl := TL_updateLangPack{}
-		tl.Difference = DecodeBuf_GenericObject[TL_langPackDifference](m)
-		r = tl
+		r = decode_body_TL_updateLangPack(m)
 	case CRC_updateFavedStickers:
-		tl := TL_updateFavedStickers{}
-		r = tl
+		r = decode_body_TL_updateFavedStickers(m)
 	case CRC_updateChannelReadMessagesContents:
-		tl := TL_updateChannelReadMessagesContents{}
-		flags := m.Int()
-		tl.ChannelID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Ref(m.Int())
-		}
-		tl.Messages = m.VectorInt()
-		r = tl
+		r = decode_body_TL_updateChannelReadMessagesContents(m)
 	case CRC_updateContactsReset:
-		tl := TL_updateContactsReset{}
-		r = tl
+		r = decode_body_TL_updateContactsReset(m)
 	case CRC_updateChannelAvailableMessages:
-		tl := TL_updateChannelAvailableMessages{}
-		tl.ChannelID = m.Long()
-		tl.AvailableMinID = m.Int()
-		r = tl
+		r = decode_body_TL_updateChannelAvailableMessages(m)
 	case CRC_updateDialogUnreadMark:
-		tl := TL_updateDialogUnreadMark{}
-		flags := m.Int()
-		tl.Unread = flags&(1<<0) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateDialogUnreadMark(m)
 	case CRC_updateMessagePoll:
-		tl := TL_updateMessagePoll{}
-		flags := m.Int()
-		tl.PollID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Poll = Ref(DecodeBuf_GenericObject[TL_poll](m))
-		}
-		tl.Results = DecodeBuf_GenericObject[TL_pollResults](m)
-		r = tl
+		r = decode_body_TL_updateMessagePoll(m)
 	case CRC_updateChatDefaultBannedRights:
-		tl := TL_updateChatDefaultBannedRights{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.DefaultBannedRights = DecodeBuf_GenericObject[TL_chatBannedRights](m)
-		tl.Version = m.Int()
-		r = tl
+		r = decode_body_TL_updateChatDefaultBannedRights(m)
 	case CRC_updateFolderPeers:
-		tl := TL_updateFolderPeers{}
-		tl.FolderPeers = DecodeBuf_GenericVector[TL_folderPeer](m)
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updateFolderPeers(m)
 	case CRC_updatePeerSettings:
-		tl := TL_updatePeerSettings{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Settings = DecodeBuf_GenericObject[TL_peerSettings](m)
-		r = tl
+		r = decode_body_TL_updatePeerSettings(m)
 	case CRC_updatePeerLocated:
-		tl := TL_updatePeerLocated{}
-		tl.Peers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_updatePeerLocated(m)
 	case CRC_updateNewScheduledMessage:
-		tl := TL_updateNewScheduledMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateNewScheduledMessage(m)
 	case CRC_updateDeleteScheduledMessages:
-		tl := TL_updateDeleteScheduledMessages{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Messages = m.VectorInt()
-		r = tl
+		r = decode_body_TL_updateDeleteScheduledMessages(m)
 	case CRC_updateTheme:
-		tl := TL_updateTheme{}
-		tl.Theme = DecodeBuf_GenericObject[TL_theme](m)
-		r = tl
+		r = decode_body_TL_updateTheme(m)
 	case CRC_updateGeoLiveViewed:
-		tl := TL_updateGeoLiveViewed{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		r = tl
+		r = decode_body_TL_updateGeoLiveViewed(m)
 	case CRC_updateLoginToken:
-		tl := TL_updateLoginToken{}
-		r = tl
+		r = decode_body_TL_updateLoginToken(m)
 	case CRC_updateMessagePollVote:
-		tl := TL_updateMessagePollVote{}
-		tl.PollID = m.Long()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Options = m.VectorBytes()
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateMessagePollVote(m)
 	case CRC_updateDialogFilter:
-		tl := TL_updateDialogFilter{}
-		flags := m.Int()
-		tl.ID = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Filter = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_updateDialogFilter(m)
 	case CRC_updateDialogFilterOrder:
-		tl := TL_updateDialogFilterOrder{}
-		tl.Order = m.VectorInt()
-		r = tl
+		r = decode_body_TL_updateDialogFilterOrder(m)
 	case CRC_updateDialogFilters:
-		tl := TL_updateDialogFilters{}
-		r = tl
+		r = decode_body_TL_updateDialogFilters(m)
 	case CRC_updatePhoneCallSignalingData:
-		tl := TL_updatePhoneCallSignalingData{}
-		tl.PhoneCallID = m.Long()
-		tl.Data = m.StringBytes()
-		r = tl
+		r = decode_body_TL_updatePhoneCallSignalingData(m)
 	case CRC_updateChannelMessageForwards:
-		tl := TL_updateChannelMessageForwards{}
-		tl.ChannelID = m.Long()
-		tl.ID = m.Int()
-		tl.Forwards = m.Int()
-		r = tl
+		r = decode_body_TL_updateChannelMessageForwards(m)
 	case CRC_updateReadChannelDiscussionInbox:
-		tl := TL_updateReadChannelDiscussionInbox{}
-		flags := m.Int()
-		tl.ChannelID = m.Long()
-		tl.TopMsgID = m.Int()
-		tl.ReadMaxID = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.BroadcastID = Ref(m.Long())
-		}
-		if flags&(1<<0) != 0 {
-			tl.BroadcastPost = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_updateReadChannelDiscussionInbox(m)
 	case CRC_updateReadChannelDiscussionOutbox:
-		tl := TL_updateReadChannelDiscussionOutbox{}
-		tl.ChannelID = m.Long()
-		tl.TopMsgID = m.Int()
-		tl.ReadMaxID = m.Int()
-		r = tl
+		r = decode_body_TL_updateReadChannelDiscussionOutbox(m)
 	case CRC_updatePeerBlocked:
-		tl := TL_updatePeerBlocked{}
-		flags := m.Int()
-		tl.Blocked = flags&(1<<0) != 0
-		tl.BlockedMyStoriesFrom = flags&(1<<1) != 0
-		tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updatePeerBlocked(m)
 	case CRC_updateChannelUserTyping:
-		tl := TL_updateChannelUserTyping{}
-		flags := m.Int()
-		tl.ChannelID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Ref(m.Int())
-		}
-		tl.FromID = DecodeBuf_GenericObject[TL](m)
-		tl.Action = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateChannelUserTyping(m)
 	case CRC_updatePinnedMessages:
-		tl := TL_updatePinnedMessages{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<0) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Messages = m.VectorInt()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updatePinnedMessages(m)
 	case CRC_updatePinnedChannelMessages:
-		tl := TL_updatePinnedChannelMessages{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<0) != 0
-		tl.ChannelID = m.Long()
-		tl.Messages = m.VectorInt()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_updatePinnedChannelMessages(m)
 	case CRC_updateChat:
-		tl := TL_updateChat{}
-		tl.ChatID = m.Long()
-		r = tl
+		r = decode_body_TL_updateChat(m)
 	case CRC_updateGroupCallParticipants:
-		tl := TL_updateGroupCallParticipants{}
-		tl.Call = DecodeBuf_GenericObject[TL_inputGroupCall](m)
-		tl.Participants = DecodeBuf_GenericVector[TL_groupCallParticipant](m)
-		tl.Version = m.Int()
-		r = tl
+		r = decode_body_TL_updateGroupCallParticipants(m)
 	case CRC_updateGroupCall:
-		tl := TL_updateGroupCall{}
-		tl.ChatID = m.Long()
-		tl.Call = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateGroupCall(m)
 	case CRC_updatePeerHistoryTTL:
-		tl := TL_updatePeerHistoryTTL{}
-		flags := m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_updatePeerHistoryTTL(m)
 	case CRC_updateChatParticipant:
-		tl := TL_updateChatParticipant{}
-		flags := m.Int()
-		tl.ChatID = m.Long()
-		tl.Date = m.Int()
-		tl.ActorID = m.Long()
-		tl.UserID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.PrevParticipant = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.NewParticipant = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.Invite = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateChatParticipant(m)
 	case CRC_updateChannelParticipant:
-		tl := TL_updateChannelParticipant{}
-		flags := m.Int()
-		tl.ViaChatlist = flags&(1<<3) != 0
-		tl.ChannelID = m.Long()
-		tl.Date = m.Int()
-		tl.ActorID = m.Long()
-		tl.UserID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.PrevParticipant = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.NewParticipant = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.Invite = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateChannelParticipant(m)
 	case CRC_updateBotStopped:
-		tl := TL_updateBotStopped{}
-		tl.UserID = m.Long()
-		tl.Date = m.Int()
-		tl.Stopped = m.Bool()
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotStopped(m)
 	case CRC_updateGroupCallConnection:
-		tl := TL_updateGroupCallConnection{}
-		flags := m.Int()
-		tl.Presentation = flags&(1<<0) != 0
-		tl.Params = DecodeBuf_GenericObject[TL_dataJSON](m)
-		r = tl
+		r = decode_body_TL_updateGroupCallConnection(m)
 	case CRC_updateBotCommands:
-		tl := TL_updateBotCommands{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.BotID = m.Long()
-		tl.Commands = DecodeBuf_GenericVector[TL_botCommand](m)
-		r = tl
+		r = decode_body_TL_updateBotCommands(m)
 	case CRC_updatePendingJoinRequests:
-		tl := TL_updatePendingJoinRequests{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.RequestsPending = m.Int()
-		tl.RecentRequesters = m.VectorLong()
-		r = tl
+		r = decode_body_TL_updatePendingJoinRequests(m)
 	case CRC_updateBotChatInviteRequester:
-		tl := TL_updateBotChatInviteRequester{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		tl.UserID = m.Long()
-		tl.About = m.String()
-		tl.Invite = DecodeBuf_GenericObject[TL](m)
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotChatInviteRequester(m)
 	case CRC_updateMessageReactions:
-		tl := TL_updateMessageReactions{}
-		flags := m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Ref(m.Int())
-		}
-		tl.Reactions = DecodeBuf_GenericObject[TL_messageReactions](m)
-		r = tl
+		r = decode_body_TL_updateMessageReactions(m)
 	case CRC_updateAttachMenuBots:
-		tl := TL_updateAttachMenuBots{}
-		r = tl
+		r = decode_body_TL_updateAttachMenuBots(m)
 	case CRC_updateWebViewResultSent:
-		tl := TL_updateWebViewResultSent{}
-		tl.QueryID = m.Long()
-		r = tl
+		r = decode_body_TL_updateWebViewResultSent(m)
 	case CRC_updateBotMenuButton:
-		tl := TL_updateBotMenuButton{}
-		tl.BotID = m.Long()
-		tl.Button = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateBotMenuButton(m)
 	case CRC_updateSavedRingtones:
-		tl := TL_updateSavedRingtones{}
-		r = tl
+		r = decode_body_TL_updateSavedRingtones(m)
 	case CRC_updateTranscribedAudio:
-		tl := TL_updateTranscribedAudio{}
-		flags := m.Int()
-		tl.Pending = flags&(1<<0) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.TranscriptionID = m.Long()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_updateTranscribedAudio(m)
 	case CRC_updateReadFeaturedEmojiStickers:
-		tl := TL_updateReadFeaturedEmojiStickers{}
-		r = tl
+		r = decode_body_TL_updateReadFeaturedEmojiStickers(m)
 	case CRC_updateUserEmojiStatus:
-		tl := TL_updateUserEmojiStatus{}
-		tl.UserID = m.Long()
-		tl.EmojiStatus = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateUserEmojiStatus(m)
 	case CRC_updateRecentEmojiStatuses:
-		tl := TL_updateRecentEmojiStatuses{}
-		r = tl
+		r = decode_body_TL_updateRecentEmojiStatuses(m)
 	case CRC_updateRecentReactions:
-		tl := TL_updateRecentReactions{}
-		r = tl
+		r = decode_body_TL_updateRecentReactions(m)
 	case CRC_updateMoveStickerSetToTop:
-		tl := TL_updateMoveStickerSetToTop{}
-		flags := m.Int()
-		tl.Masks = flags&(1<<0) != 0
-		tl.Emojis = flags&(1<<1) != 0
-		tl.Stickerset = m.Long()
-		r = tl
+		r = decode_body_TL_updateMoveStickerSetToTop(m)
 	case CRC_updateMessageExtendedMedia:
-		tl := TL_updateMessageExtendedMedia{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.ExtendedMedia = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_updateMessageExtendedMedia(m)
 	case CRC_updateChannelPinnedTopic:
-		tl := TL_updateChannelPinnedTopic{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<0) != 0
-		tl.ChannelID = m.Long()
-		tl.TopicID = m.Int()
-		r = tl
+		r = decode_body_TL_updateChannelPinnedTopic(m)
 	case CRC_updateChannelPinnedTopics:
-		tl := TL_updateChannelPinnedTopics{}
-		flags := m.Int()
-		tl.ChannelID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Order = m.VectorInt()
-		}
-		r = tl
+		r = decode_body_TL_updateChannelPinnedTopics(m)
 	case CRC_updateUser:
-		tl := TL_updateUser{}
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_updateUser(m)
 	case CRC_updateAutoSaveSettings:
-		tl := TL_updateAutoSaveSettings{}
-		r = tl
+		r = decode_body_TL_updateAutoSaveSettings(m)
 	case CRC_updateStory:
-		tl := TL_updateStory{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Story = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateStory(m)
 	case CRC_updateReadStories:
-		tl := TL_updateReadStories{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MaxID = m.Int()
-		r = tl
+		r = decode_body_TL_updateReadStories(m)
 	case CRC_updateStoryID:
-		tl := TL_updateStoryID{}
-		tl.ID = m.Int()
-		tl.RandomID = m.Long()
-		r = tl
+		r = decode_body_TL_updateStoryID(m)
 	case CRC_updateStoriesStealthMode:
-		tl := TL_updateStoriesStealthMode{}
-		tl.StealthMode = DecodeBuf_GenericObject[TL_storiesStealthMode](m)
-		r = tl
+		r = decode_body_TL_updateStoriesStealthMode(m)
 	case CRC_updateSentStoryReaction:
-		tl := TL_updateSentStoryReaction{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.StoryID = m.Int()
-		tl.Reaction = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateSentStoryReaction(m)
 	case CRC_updateBotChatBoost:
-		tl := TL_updateBotChatBoost{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Boost = DecodeBuf_GenericObject[TL_boost](m)
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotChatBoost(m)
 	case CRC_updateChannelViewForumAsMessages:
-		tl := TL_updateChannelViewForumAsMessages{}
-		tl.ChannelID = m.Long()
-		tl.Enabled = m.Bool()
-		r = tl
+		r = decode_body_TL_updateChannelViewForumAsMessages(m)
 	case CRC_updatePeerWallpaper:
-		tl := TL_updatePeerWallpaper{}
-		flags := m.Int()
-		tl.WallpaperOverridden = flags&(1<<1) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Wallpaper = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_updatePeerWallpaper(m)
 	case CRC_updateBotMessageReaction:
-		tl := TL_updateBotMessageReaction{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.Date = m.Int()
-		tl.Actor = DecodeBuf_GenericObject[TL](m)
-		tl.OldReactions = DecodeBuf_GenericVector[TL](m)
-		tl.NewReactions = DecodeBuf_GenericVector[TL](m)
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotMessageReaction(m)
 	case CRC_updateBotMessageReactions:
-		tl := TL_updateBotMessageReactions{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.Date = m.Int()
-		tl.Reactions = DecodeBuf_GenericVector[TL_reactionCount](m)
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotMessageReactions(m)
 	case CRC_updateSavedDialogPinned:
-		tl := TL_updateSavedDialogPinned{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<0) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateSavedDialogPinned(m)
 	case CRC_updatePinnedSavedDialogs:
-		tl := TL_updatePinnedSavedDialogs{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Order = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_updatePinnedSavedDialogs(m)
 	case CRC_updateSavedReactionTags:
-		tl := TL_updateSavedReactionTags{}
-		r = tl
+		r = decode_body_TL_updateSavedReactionTags(m)
 	case CRC_updateSMSJob:
-		tl := TL_updateSMSJob{}
-		tl.JobID = m.String()
-		r = tl
+		r = decode_body_TL_updateSMSJob(m)
 	case CRC_updateQuickReplies:
-		tl := TL_updateQuickReplies{}
-		tl.QuickReplies = DecodeBuf_GenericVector[TL_quickReply](m)
-		r = tl
+		r = decode_body_TL_updateQuickReplies(m)
 	case CRC_updateNewQuickReply:
-		tl := TL_updateNewQuickReply{}
-		tl.QuickReply = DecodeBuf_GenericObject[TL_quickReply](m)
-		r = tl
+		r = decode_body_TL_updateNewQuickReply(m)
 	case CRC_updateDeleteQuickReply:
-		tl := TL_updateDeleteQuickReply{}
-		tl.ShortcutID = m.Int()
-		r = tl
+		r = decode_body_TL_updateDeleteQuickReply(m)
 	case CRC_updateQuickReplyMessage:
-		tl := TL_updateQuickReplyMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateQuickReplyMessage(m)
 	case CRC_updateDeleteQuickReplyMessages:
-		tl := TL_updateDeleteQuickReplyMessages{}
-		tl.ShortcutID = m.Int()
-		tl.Messages = m.VectorInt()
-		r = tl
+		r = decode_body_TL_updateDeleteQuickReplyMessages(m)
 	case CRC_updateBotBusinessConnect:
-		tl := TL_updateBotBusinessConnect{}
-		tl.Connection = DecodeBuf_GenericObject[TL_botBusinessConnection](m)
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotBusinessConnect(m)
 	case CRC_updateBotNewBusinessMessage:
-		tl := TL_updateBotNewBusinessMessage{}
-		flags := m.Int()
-		tl.ConnectionID = m.String()
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.ReplyToMessage = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotNewBusinessMessage(m)
 	case CRC_updateBotEditBusinessMessage:
-		tl := TL_updateBotEditBusinessMessage{}
-		flags := m.Int()
-		tl.ConnectionID = m.String()
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.ReplyToMessage = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotEditBusinessMessage(m)
 	case CRC_updateBotDeleteBusinessMessage:
-		tl := TL_updateBotDeleteBusinessMessage{}
-		tl.ConnectionID = m.String()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Messages = m.VectorInt()
-		tl.QTS = m.Int()
-		r = tl
+		r = decode_body_TL_updateBotDeleteBusinessMessage(m)
 	case CRC_updateNewStoryReaction:
-		tl := TL_updateNewStoryReaction{}
-		tl.StoryID = m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Reaction = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_updateNewStoryReaction(m)
 	case CRC_updateBroadcastRevenueTransactions:
-		tl := TL_updateBroadcastRevenueTransactions{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Balances = DecodeBuf_GenericObject[TL_broadcastRevenueBalances](m)
-		r = tl
+		r = decode_body_TL_updateBroadcastRevenueTransactions(m)
 	case CRC_updateStarsBalance:
-		tl := TL_updateStarsBalance{}
-		tl.Balance = m.Long()
-		r = tl
+		r = decode_body_TL_updateStarsBalance(m)
 	case CRC_updateBusinessBotCallbackQuery:
-		tl := TL_updateBusinessBotCallbackQuery{}
-		flags := m.Int()
-		tl.QueryID = m.Long()
-		tl.UserID = m.Long()
-		tl.ConnectionID = m.String()
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<2) != 0 {
-			tl.ReplyToMessage = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.ChatInstance = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Data = m.StringBytes()
-		}
-		r = tl
+		r = decode_body_TL_updateBusinessBotCallbackQuery(m)
 	case CRC_updateStarsRevenueStatus:
-		tl := TL_updateStarsRevenueStatus{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Status = DecodeBuf_GenericObject[TL_starsRevenueStatus](m)
-		r = tl
+		r = decode_body_TL_updateStarsRevenueStatus(m)
 	case CRC_updates_state:
-		tl := TL_updates_state{}
-		tl.PTS = m.Int()
-		tl.QTS = m.Int()
-		tl.Date = m.Int()
-		tl.Seq = m.Int()
-		tl.UnreadCount = m.Int()
-		r = tl
+		r = decode_body_TL_updates_state(m)
 	case CRC_updates_differenceEmpty:
-		tl := TL_updates_differenceEmpty{}
-		tl.Date = m.Int()
-		tl.Seq = m.Int()
-		r = tl
+		r = decode_body_TL_updates_differenceEmpty(m)
 	case CRC_updates_difference:
-		tl := TL_updates_difference{}
-		tl.NewMessages = DecodeBuf_GenericVector[TL](m)
-		tl.NewEncryptedMessages = DecodeBuf_GenericVector[TL](m)
-		tl.OtherUpdates = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		tl.State = DecodeBuf_GenericObject[TL_updates_state](m)
-		r = tl
+		r = decode_body_TL_updates_difference(m)
 	case CRC_updates_differenceSlice:
-		tl := TL_updates_differenceSlice{}
-		tl.NewMessages = DecodeBuf_GenericVector[TL](m)
-		tl.NewEncryptedMessages = DecodeBuf_GenericVector[TL](m)
-		tl.OtherUpdates = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		tl.IntermediateState = DecodeBuf_GenericObject[TL_updates_state](m)
-		r = tl
+		r = decode_body_TL_updates_differenceSlice(m)
 	case CRC_updates_differenceTooLong:
-		tl := TL_updates_differenceTooLong{}
-		tl.PTS = m.Int()
-		r = tl
+		r = decode_body_TL_updates_differenceTooLong(m)
 	case CRC_updatesTooLong:
-		tl := TL_updatesTooLong{}
-		r = tl
+		r = decode_body_TL_updatesTooLong(m)
 	case CRC_updateShortMessage:
-		tl := TL_updateShortMessage{}
-		flags := m.Int()
-		tl.Out = flags&(1<<1) != 0
-		tl.Mentioned = flags&(1<<4) != 0
-		tl.MediaUnread = flags&(1<<5) != 0
-		tl.Silent = flags&(1<<13) != 0
-		tl.ID = m.Int()
-		tl.UserID = m.Long()
-		tl.Message = m.String()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		tl.Date = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.FwdFrom = Ref(DecodeBuf_GenericObject[TL_messageFwdHeader](m))
-		}
-		if flags&(1<<11) != 0 {
-			tl.ViaBotID = Ref(m.Long())
-		}
-		if flags&(1<<3) != 0 {
-			tl.ReplyTo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<7) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<25) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_updateShortMessage(m)
 	case CRC_updateShortChatMessage:
-		tl := TL_updateShortChatMessage{}
-		flags := m.Int()
-		tl.Out = flags&(1<<1) != 0
-		tl.Mentioned = flags&(1<<4) != 0
-		tl.MediaUnread = flags&(1<<5) != 0
-		tl.Silent = flags&(1<<13) != 0
-		tl.ID = m.Int()
-		tl.FromID = m.Long()
-		tl.ChatID = m.Long()
-		tl.Message = m.String()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		tl.Date = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.FwdFrom = Ref(DecodeBuf_GenericObject[TL_messageFwdHeader](m))
-		}
-		if flags&(1<<11) != 0 {
-			tl.ViaBotID = Ref(m.Long())
-		}
-		if flags&(1<<3) != 0 {
-			tl.ReplyTo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<7) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<25) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_updateShortChatMessage(m)
 	case CRC_updateShort:
-		tl := TL_updateShort{}
-		tl.Update = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_updateShort(m)
 	case CRC_updatesCombined:
-		tl := TL_updatesCombined{}
-		tl.Updates = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Date = m.Int()
-		tl.SeqStart = m.Int()
-		tl.Seq = m.Int()
-		r = tl
+		r = decode_body_TL_updatesCombined(m)
 	case CRC_updates:
-		tl := TL_updates{}
-		tl.Updates = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Date = m.Int()
-		tl.Seq = m.Int()
-		r = tl
+		r = decode_body_TL_updates(m)
 	case CRC_updateShortSentMessage:
-		tl := TL_updateShortSentMessage{}
-		flags := m.Int()
-		tl.Out = flags&(1<<1) != 0
-		tl.ID = m.Int()
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		tl.Date = m.Int()
-		if flags&(1<<9) != 0 {
-			tl.Media = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<7) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<25) != 0 {
-			tl.TTLPeriod = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_updateShortSentMessage(m)
 	case CRC_photos_photos:
-		tl := TL_photos_photos{}
-		tl.Photos = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_photos_photos(m)
 	case CRC_photos_photosSlice:
-		tl := TL_photos_photosSlice{}
-		tl.Count = m.Int()
-		tl.Photos = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_photos_photosSlice(m)
 	case CRC_photos_photo:
-		tl := TL_photos_photo{}
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_photos_photo(m)
 	case CRC_upload_file:
-		tl := TL_upload_file{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.Mtime = m.Int()
-		tl.Bytes = m.StringBytes()
-		r = tl
+		r = decode_body_TL_upload_file(m)
 	case CRC_upload_fileCDNRedirect:
-		tl := TL_upload_fileCDNRedirect{}
-		tl.DCID = m.Int()
-		tl.FileToken = m.StringBytes()
-		tl.EncryptionKey = m.StringBytes()
-		tl.EncryptionIV = m.StringBytes()
-		tl.FileHashes = DecodeBuf_GenericVector[TL_fileHash](m)
-		r = tl
+		r = decode_body_TL_upload_fileCDNRedirect(m)
 	case CRC_dcOption:
-		tl := TL_dcOption{}
-		flags := m.Int()
-		tl.IPv6 = flags&(1<<0) != 0
-		tl.MediaOnly = flags&(1<<1) != 0
-		tl.TCPOOnly = flags&(1<<2) != 0
-		tl.CDN = flags&(1<<3) != 0
-		tl.Static = flags&(1<<4) != 0
-		tl.ThisPortOnly = flags&(1<<5) != 0
-		tl.ID = m.Int()
-		tl.IPAddress = m.String()
-		tl.Port = m.Int()
-		if flags&(1<<10) != 0 {
-			tl.Secret = m.StringBytes()
-		}
-		r = tl
+		r = decode_body_TL_dcOption(m)
 	case CRC_config:
-		tl := TL_config{}
-		flags := m.Int()
-		tl.DefaultP2PContacts = flags&(1<<3) != 0
-		tl.PreloadFeaturedStickers = flags&(1<<4) != 0
-		tl.RevokePMInbox = flags&(1<<6) != 0
-		tl.BlockedMode = flags&(1<<8) != 0
-		tl.ForceTryIPv6 = flags&(1<<14) != 0
-		tl.Date = m.Int()
-		tl.Expires = m.Int()
-		tl.TestMode = m.Bool()
-		tl.ThisDC = m.Int()
-		tl.DCOptions = DecodeBuf_GenericVector[TL_dcOption](m)
-		tl.DCTXTDomainName = m.String()
-		tl.ChatSizeMax = m.Int()
-		tl.MegagroupSizeMax = m.Int()
-		tl.ForwardedCountMax = m.Int()
-		tl.OnlineUpdatePeriodMS = m.Int()
-		tl.OfflineBlurTimeoutMS = m.Int()
-		tl.OfflineIdleTimeoutMS = m.Int()
-		tl.OnlineCloudTimeoutMS = m.Int()
-		tl.NotifyCloudDelayMS = m.Int()
-		tl.NotifyDefaultDelayMS = m.Int()
-		tl.PushChatPeriodMS = m.Int()
-		tl.PushChatLimit = m.Int()
-		tl.EditTimeLimit = m.Int()
-		tl.RevokeTimeLimit = m.Int()
-		tl.RevokePMTimeLimit = m.Int()
-		tl.RatingEDecay = m.Int()
-		tl.StickersRecentLimit = m.Int()
-		tl.ChannelsReadMediaPeriod = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.TmpSessions = Ref(m.Int())
-		}
-		tl.CallReceiveTimeoutMS = m.Int()
-		tl.CallRingTimeoutMS = m.Int()
-		tl.CallConnectTimeoutMS = m.Int()
-		tl.CallPacketTimeoutMS = m.Int()
-		tl.MeURLPrefix = m.String()
-		if flags&(1<<7) != 0 {
-			tl.AutoupdateURLPrefix = Ref(m.String())
-		}
-		if flags&(1<<9) != 0 {
-			tl.GIFSearchUsername = Ref(m.String())
-		}
-		if flags&(1<<10) != 0 {
-			tl.VenueSearchUsername = Ref(m.String())
-		}
-		if flags&(1<<11) != 0 {
-			tl.ImgSearchUsername = Ref(m.String())
-		}
-		if flags&(1<<12) != 0 {
-			tl.StaticMapsProvider = Ref(m.String())
-		}
-		tl.CaptionLengthMax = m.Int()
-		tl.MessageLengthMax = m.Int()
-		tl.WebfileDCID = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.SuggestedLangCode = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.LangPackVersion = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.BaseLangPackVersion = Ref(m.Int())
-		}
-		if flags&(1<<15) != 0 {
-			tl.ReactionsDefault = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<16) != 0 {
-			tl.AutologinToken = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_config(m)
 	case CRC_nearestDC:
-		tl := TL_nearestDC{}
-		tl.Country = m.String()
-		tl.ThisDC = m.Int()
-		tl.NearestDC = m.Int()
-		r = tl
+		r = decode_body_TL_nearestDC(m)
 	case CRC_help_appUpdate:
-		tl := TL_help_appUpdate{}
-		flags := m.Int()
-		tl.CanNotSkip = flags&(1<<0) != 0
-		tl.ID = m.Int()
-		tl.Version = m.String()
-		tl.Text = m.String()
-		tl.Entities = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<1) != 0 {
-			tl.Document = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.URL = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Sticker = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_help_appUpdate(m)
 	case CRC_help_noAppUpdate:
-		tl := TL_help_noAppUpdate{}
-		r = tl
+		r = decode_body_TL_help_noAppUpdate(m)
 	case CRC_help_inviteText:
-		tl := TL_help_inviteText{}
-		tl.Message = m.String()
-		r = tl
+		r = decode_body_TL_help_inviteText(m)
 	case CRC_encryptedChatEmpty:
-		tl := TL_encryptedChatEmpty{}
-		tl.ID = m.Int()
-		r = tl
+		r = decode_body_TL_encryptedChatEmpty(m)
 	case CRC_encryptedChatWaiting:
-		tl := TL_encryptedChatWaiting{}
-		tl.ID = m.Int()
-		tl.AccessHash = m.Long()
-		tl.Date = m.Int()
-		tl.AdminID = m.Long()
-		tl.ParticipantID = m.Long()
-		r = tl
+		r = decode_body_TL_encryptedChatWaiting(m)
 	case CRC_encryptedChatRequested:
-		tl := TL_encryptedChatRequested{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.FolderID = Ref(m.Int())
-		}
-		tl.ID = m.Int()
-		tl.AccessHash = m.Long()
-		tl.Date = m.Int()
-		tl.AdminID = m.Long()
-		tl.ParticipantID = m.Long()
-		tl.GA = m.StringBytes()
-		r = tl
+		r = decode_body_TL_encryptedChatRequested(m)
 	case CRC_encryptedChat:
-		tl := TL_encryptedChat{}
-		tl.ID = m.Int()
-		tl.AccessHash = m.Long()
-		tl.Date = m.Int()
-		tl.AdminID = m.Long()
-		tl.ParticipantID = m.Long()
-		tl.GAOrB = m.StringBytes()
-		tl.KeyFingerprint = m.Long()
-		r = tl
+		r = decode_body_TL_encryptedChat(m)
 	case CRC_encryptedChatDiscarded:
-		tl := TL_encryptedChatDiscarded{}
-		flags := m.Int()
-		tl.HistoryDeleted = flags&(1<<0) != 0
-		tl.ID = m.Int()
-		r = tl
+		r = decode_body_TL_encryptedChatDiscarded(m)
 	case CRC_inputEncryptedChat:
-		tl := TL_inputEncryptedChat{}
-		tl.ChatID = m.Int()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputEncryptedChat(m)
 	case CRC_encryptedFileEmpty:
-		tl := TL_encryptedFileEmpty{}
-		r = tl
+		r = decode_body_TL_encryptedFileEmpty(m)
 	case CRC_encryptedFile:
-		tl := TL_encryptedFile{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Size = m.Long()
-		tl.DCID = m.Int()
-		tl.KeyFingerprint = m.Int()
-		r = tl
+		r = decode_body_TL_encryptedFile(m)
 	case CRC_inputEncryptedFileEmpty:
-		tl := TL_inputEncryptedFileEmpty{}
-		r = tl
+		r = decode_body_TL_inputEncryptedFileEmpty(m)
 	case CRC_inputEncryptedFileUploaded:
-		tl := TL_inputEncryptedFileUploaded{}
-		tl.ID = m.Long()
-		tl.Parts = m.Int()
-		tl.MD5Checksum = m.String()
-		tl.KeyFingerprint = m.Int()
-		r = tl
+		r = decode_body_TL_inputEncryptedFileUploaded(m)
 	case CRC_inputEncryptedFile:
-		tl := TL_inputEncryptedFile{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputEncryptedFile(m)
 	case CRC_inputEncryptedFileBigUploaded:
-		tl := TL_inputEncryptedFileBigUploaded{}
-		tl.ID = m.Long()
-		tl.Parts = m.Int()
-		tl.KeyFingerprint = m.Int()
-		r = tl
+		r = decode_body_TL_inputEncryptedFileBigUploaded(m)
 	case CRC_encryptedMessage:
-		tl := TL_encryptedMessage{}
-		tl.RandomID = m.Long()
-		tl.ChatID = m.Int()
-		tl.Date = m.Int()
-		tl.Bytes = m.StringBytes()
-		tl.File = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_encryptedMessage(m)
 	case CRC_encryptedMessageService:
-		tl := TL_encryptedMessageService{}
-		tl.RandomID = m.Long()
-		tl.ChatID = m.Int()
-		tl.Date = m.Int()
-		tl.Bytes = m.StringBytes()
-		r = tl
+		r = decode_body_TL_encryptedMessageService(m)
 	case CRC_messages_dhConfigNotModified:
-		tl := TL_messages_dhConfigNotModified{}
-		tl.Random = m.StringBytes()
-		r = tl
+		r = decode_body_TL_messages_dhConfigNotModified(m)
 	case CRC_messages_dhConfig:
-		tl := TL_messages_dhConfig{}
-		tl.G = m.Int()
-		tl.P = m.StringBytes()
-		tl.Version = m.Int()
-		tl.Random = m.StringBytes()
-		r = tl
+		r = decode_body_TL_messages_dhConfig(m)
 	case CRC_messages_sentEncryptedMessage:
-		tl := TL_messages_sentEncryptedMessage{}
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_messages_sentEncryptedMessage(m)
 	case CRC_messages_sentEncryptedFile:
-		tl := TL_messages_sentEncryptedFile{}
-		tl.Date = m.Int()
-		tl.File = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messages_sentEncryptedFile(m)
 	case CRC_inputDocumentEmpty:
-		tl := TL_inputDocumentEmpty{}
-		r = tl
+		r = decode_body_TL_inputDocumentEmpty(m)
 	case CRC_inputDocument:
-		tl := TL_inputDocument{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.FileReference = m.StringBytes()
-		r = tl
+		r = decode_body_TL_inputDocument(m)
 	case CRC_documentEmpty:
-		tl := TL_documentEmpty{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_documentEmpty(m)
 	case CRC_document:
-		tl := TL_document{}
-		flags := m.Int()
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.FileReference = m.StringBytes()
-		tl.Date = m.Int()
-		tl.MIMEType = m.String()
-		tl.Size = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Thumbs = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.VideoThumbs = DecodeBuf_GenericVector[TL](m)
-		}
-		tl.DCID = m.Int()
-		tl.Attributes = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_document(m)
 	case CRC_help_support:
-		tl := TL_help_support{}
-		tl.PhoneNumber = m.String()
-		tl.User = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_help_support(m)
 	case CRC_notifyPeer:
-		tl := TL_notifyPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_notifyPeer(m)
 	case CRC_notifyUsers:
-		tl := TL_notifyUsers{}
-		r = tl
+		r = decode_body_TL_notifyUsers(m)
 	case CRC_notifyChats:
-		tl := TL_notifyChats{}
-		r = tl
+		r = decode_body_TL_notifyChats(m)
 	case CRC_notifyBroadcasts:
-		tl := TL_notifyBroadcasts{}
-		r = tl
+		r = decode_body_TL_notifyBroadcasts(m)
 	case CRC_notifyForumTopic:
-		tl := TL_notifyForumTopic{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.TopMsgID = m.Int()
-		r = tl
+		r = decode_body_TL_notifyForumTopic(m)
 	case CRC_sendMessageTypingAction:
-		tl := TL_sendMessageTypingAction{}
-		r = tl
+		r = decode_body_TL_sendMessageTypingAction(m)
 	case CRC_sendMessageCancelAction:
-		tl := TL_sendMessageCancelAction{}
-		r = tl
+		r = decode_body_TL_sendMessageCancelAction(m)
 	case CRC_sendMessageRecordVideoAction:
-		tl := TL_sendMessageRecordVideoAction{}
-		r = tl
+		r = decode_body_TL_sendMessageRecordVideoAction(m)
 	case CRC_sendMessageUploadVideoAction:
-		tl := TL_sendMessageUploadVideoAction{}
-		tl.Progress = m.Int()
-		r = tl
+		r = decode_body_TL_sendMessageUploadVideoAction(m)
 	case CRC_sendMessageRecordAudioAction:
-		tl := TL_sendMessageRecordAudioAction{}
-		r = tl
+		r = decode_body_TL_sendMessageRecordAudioAction(m)
 	case CRC_sendMessageUploadAudioAction:
-		tl := TL_sendMessageUploadAudioAction{}
-		tl.Progress = m.Int()
-		r = tl
+		r = decode_body_TL_sendMessageUploadAudioAction(m)
 	case CRC_sendMessageUploadPhotoAction:
-		tl := TL_sendMessageUploadPhotoAction{}
-		tl.Progress = m.Int()
-		r = tl
+		r = decode_body_TL_sendMessageUploadPhotoAction(m)
 	case CRC_sendMessageUploadDocumentAction:
-		tl := TL_sendMessageUploadDocumentAction{}
-		tl.Progress = m.Int()
-		r = tl
+		r = decode_body_TL_sendMessageUploadDocumentAction(m)
 	case CRC_sendMessageGeoLocationAction:
-		tl := TL_sendMessageGeoLocationAction{}
-		r = tl
+		r = decode_body_TL_sendMessageGeoLocationAction(m)
 	case CRC_sendMessageChooseContactAction:
-		tl := TL_sendMessageChooseContactAction{}
-		r = tl
+		r = decode_body_TL_sendMessageChooseContactAction(m)
 	case CRC_sendMessageGamePlayAction:
-		tl := TL_sendMessageGamePlayAction{}
-		r = tl
+		r = decode_body_TL_sendMessageGamePlayAction(m)
 	case CRC_sendMessageRecordRoundAction:
-		tl := TL_sendMessageRecordRoundAction{}
-		r = tl
+		r = decode_body_TL_sendMessageRecordRoundAction(m)
 	case CRC_sendMessageUploadRoundAction:
-		tl := TL_sendMessageUploadRoundAction{}
-		tl.Progress = m.Int()
-		r = tl
+		r = decode_body_TL_sendMessageUploadRoundAction(m)
 	case CRC_speakingInGroupCallAction:
-		tl := TL_speakingInGroupCallAction{}
-		r = tl
+		r = decode_body_TL_speakingInGroupCallAction(m)
 	case CRC_sendMessageHistoryImportAction:
-		tl := TL_sendMessageHistoryImportAction{}
-		tl.Progress = m.Int()
-		r = tl
+		r = decode_body_TL_sendMessageHistoryImportAction(m)
 	case CRC_sendMessageChooseStickerAction:
-		tl := TL_sendMessageChooseStickerAction{}
-		r = tl
+		r = decode_body_TL_sendMessageChooseStickerAction(m)
 	case CRC_sendMessageEmojiInteraction:
-		tl := TL_sendMessageEmojiInteraction{}
-		tl.Emoticon = m.String()
-		tl.MsgID = m.Int()
-		tl.Interaction = DecodeBuf_GenericObject[TL_dataJSON](m)
-		r = tl
+		r = decode_body_TL_sendMessageEmojiInteraction(m)
 	case CRC_sendMessageEmojiInteractionSeen:
-		tl := TL_sendMessageEmojiInteractionSeen{}
-		tl.Emoticon = m.String()
-		r = tl
+		r = decode_body_TL_sendMessageEmojiInteractionSeen(m)
 	case CRC_contacts_found:
-		tl := TL_contacts_found{}
-		tl.MyResults = DecodeBuf_GenericVector[TL](m)
-		tl.Results = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_contacts_found(m)
 	case CRC_inputPrivacyKeyStatusTimestamp:
-		tl := TL_inputPrivacyKeyStatusTimestamp{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyStatusTimestamp(m)
 	case CRC_inputPrivacyKeyChatInvite:
-		tl := TL_inputPrivacyKeyChatInvite{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyChatInvite(m)
 	case CRC_inputPrivacyKeyPhoneCall:
-		tl := TL_inputPrivacyKeyPhoneCall{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyPhoneCall(m)
 	case CRC_inputPrivacyKeyPhoneP2P:
-		tl := TL_inputPrivacyKeyPhoneP2P{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyPhoneP2P(m)
 	case CRC_inputPrivacyKeyForwards:
-		tl := TL_inputPrivacyKeyForwards{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyForwards(m)
 	case CRC_inputPrivacyKeyProfilePhoto:
-		tl := TL_inputPrivacyKeyProfilePhoto{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyProfilePhoto(m)
 	case CRC_inputPrivacyKeyPhoneNumber:
-		tl := TL_inputPrivacyKeyPhoneNumber{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyPhoneNumber(m)
 	case CRC_inputPrivacyKeyAddedByPhone:
-		tl := TL_inputPrivacyKeyAddedByPhone{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyAddedByPhone(m)
 	case CRC_inputPrivacyKeyVoiceMessages:
-		tl := TL_inputPrivacyKeyVoiceMessages{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyVoiceMessages(m)
 	case CRC_inputPrivacyKeyAbout:
-		tl := TL_inputPrivacyKeyAbout{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyAbout(m)
 	case CRC_inputPrivacyKeyBirthday:
-		tl := TL_inputPrivacyKeyBirthday{}
-		r = tl
+		r = decode_body_TL_inputPrivacyKeyBirthday(m)
 	case CRC_privacyKeyStatusTimestamp:
-		tl := TL_privacyKeyStatusTimestamp{}
-		r = tl
+		r = decode_body_TL_privacyKeyStatusTimestamp(m)
 	case CRC_privacyKeyChatInvite:
-		tl := TL_privacyKeyChatInvite{}
-		r = tl
+		r = decode_body_TL_privacyKeyChatInvite(m)
 	case CRC_privacyKeyPhoneCall:
-		tl := TL_privacyKeyPhoneCall{}
-		r = tl
+		r = decode_body_TL_privacyKeyPhoneCall(m)
 	case CRC_privacyKeyPhoneP2P:
-		tl := TL_privacyKeyPhoneP2P{}
-		r = tl
+		r = decode_body_TL_privacyKeyPhoneP2P(m)
 	case CRC_privacyKeyForwards:
-		tl := TL_privacyKeyForwards{}
-		r = tl
+		r = decode_body_TL_privacyKeyForwards(m)
 	case CRC_privacyKeyProfilePhoto:
-		tl := TL_privacyKeyProfilePhoto{}
-		r = tl
+		r = decode_body_TL_privacyKeyProfilePhoto(m)
 	case CRC_privacyKeyPhoneNumber:
-		tl := TL_privacyKeyPhoneNumber{}
-		r = tl
+		r = decode_body_TL_privacyKeyPhoneNumber(m)
 	case CRC_privacyKeyAddedByPhone:
-		tl := TL_privacyKeyAddedByPhone{}
-		r = tl
+		r = decode_body_TL_privacyKeyAddedByPhone(m)
 	case CRC_privacyKeyVoiceMessages:
-		tl := TL_privacyKeyVoiceMessages{}
-		r = tl
+		r = decode_body_TL_privacyKeyVoiceMessages(m)
 	case CRC_privacyKeyAbout:
-		tl := TL_privacyKeyAbout{}
-		r = tl
+		r = decode_body_TL_privacyKeyAbout(m)
 	case CRC_privacyKeyBirthday:
-		tl := TL_privacyKeyBirthday{}
-		r = tl
+		r = decode_body_TL_privacyKeyBirthday(m)
 	case CRC_inputPrivacyValueAllowContacts:
-		tl := TL_inputPrivacyValueAllowContacts{}
-		r = tl
+		r = decode_body_TL_inputPrivacyValueAllowContacts(m)
 	case CRC_inputPrivacyValueAllowAll:
-		tl := TL_inputPrivacyValueAllowAll{}
-		r = tl
+		r = decode_body_TL_inputPrivacyValueAllowAll(m)
 	case CRC_inputPrivacyValueAllowUsers:
-		tl := TL_inputPrivacyValueAllowUsers{}
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_inputPrivacyValueAllowUsers(m)
 	case CRC_inputPrivacyValueDisallowContacts:
-		tl := TL_inputPrivacyValueDisallowContacts{}
-		r = tl
+		r = decode_body_TL_inputPrivacyValueDisallowContacts(m)
 	case CRC_inputPrivacyValueDisallowAll:
-		tl := TL_inputPrivacyValueDisallowAll{}
-		r = tl
+		r = decode_body_TL_inputPrivacyValueDisallowAll(m)
 	case CRC_inputPrivacyValueDisallowUsers:
-		tl := TL_inputPrivacyValueDisallowUsers{}
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_inputPrivacyValueDisallowUsers(m)
 	case CRC_inputPrivacyValueAllowChatParticipants:
-		tl := TL_inputPrivacyValueAllowChatParticipants{}
-		tl.Chats = m.VectorLong()
-		r = tl
+		r = decode_body_TL_inputPrivacyValueAllowChatParticipants(m)
 	case CRC_inputPrivacyValueDisallowChatParticipants:
-		tl := TL_inputPrivacyValueDisallowChatParticipants{}
-		tl.Chats = m.VectorLong()
-		r = tl
+		r = decode_body_TL_inputPrivacyValueDisallowChatParticipants(m)
 	case CRC_inputPrivacyValueAllowCloseFriends:
-		tl := TL_inputPrivacyValueAllowCloseFriends{}
-		r = tl
+		r = decode_body_TL_inputPrivacyValueAllowCloseFriends(m)
 	case CRC_inputPrivacyValueAllowPremium:
-		tl := TL_inputPrivacyValueAllowPremium{}
-		r = tl
+		r = decode_body_TL_inputPrivacyValueAllowPremium(m)
 	case CRC_privacyValueAllowContacts:
-		tl := TL_privacyValueAllowContacts{}
-		r = tl
+		r = decode_body_TL_privacyValueAllowContacts(m)
 	case CRC_privacyValueAllowAll:
-		tl := TL_privacyValueAllowAll{}
-		r = tl
+		r = decode_body_TL_privacyValueAllowAll(m)
 	case CRC_privacyValueAllowUsers:
-		tl := TL_privacyValueAllowUsers{}
-		tl.Users = m.VectorLong()
-		r = tl
+		r = decode_body_TL_privacyValueAllowUsers(m)
 	case CRC_privacyValueDisallowContacts:
-		tl := TL_privacyValueDisallowContacts{}
-		r = tl
+		r = decode_body_TL_privacyValueDisallowContacts(m)
 	case CRC_privacyValueDisallowAll:
-		tl := TL_privacyValueDisallowAll{}
-		r = tl
+		r = decode_body_TL_privacyValueDisallowAll(m)
 	case CRC_privacyValueDisallowUsers:
-		tl := TL_privacyValueDisallowUsers{}
-		tl.Users = m.VectorLong()
-		r = tl
+		r = decode_body_TL_privacyValueDisallowUsers(m)
 	case CRC_privacyValueAllowChatParticipants:
-		tl := TL_privacyValueAllowChatParticipants{}
-		tl.Chats = m.VectorLong()
-		r = tl
+		r = decode_body_TL_privacyValueAllowChatParticipants(m)
 	case CRC_privacyValueDisallowChatParticipants:
-		tl := TL_privacyValueDisallowChatParticipants{}
-		tl.Chats = m.VectorLong()
-		r = tl
+		r = decode_body_TL_privacyValueDisallowChatParticipants(m)
 	case CRC_privacyValueAllowCloseFriends:
-		tl := TL_privacyValueAllowCloseFriends{}
-		r = tl
+		r = decode_body_TL_privacyValueAllowCloseFriends(m)
 	case CRC_privacyValueAllowPremium:
-		tl := TL_privacyValueAllowPremium{}
-		r = tl
+		r = decode_body_TL_privacyValueAllowPremium(m)
 	case CRC_account_privacyRules:
-		tl := TL_account_privacyRules{}
-		tl.Rules = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_privacyRules(m)
 	case CRC_accountDaysTTL:
-		tl := TL_accountDaysTTL{}
-		tl.Days = m.Int()
-		r = tl
+		r = decode_body_TL_accountDaysTTL(m)
 	case CRC_documentAttributeImageSize:
-		tl := TL_documentAttributeImageSize{}
-		tl.W = m.Int()
-		tl.H = m.Int()
-		r = tl
+		r = decode_body_TL_documentAttributeImageSize(m)
 	case CRC_documentAttributeAnimated:
-		tl := TL_documentAttributeAnimated{}
-		r = tl
+		r = decode_body_TL_documentAttributeAnimated(m)
 	case CRC_documentAttributeSticker:
-		tl := TL_documentAttributeSticker{}
-		flags := m.Int()
-		tl.Mask = flags&(1<<1) != 0
-		tl.Alt = m.String()
-		tl.Stickerset = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.MaskCoords = Ref(DecodeBuf_GenericObject[TL_maskCoords](m))
-		}
-		r = tl
+		r = decode_body_TL_documentAttributeSticker(m)
 	case CRC_documentAttributeVideo:
-		tl := TL_documentAttributeVideo{}
-		flags := m.Int()
-		tl.RoundMessage = flags&(1<<0) != 0
-		tl.SupportsStreaming = flags&(1<<1) != 0
-		tl.Nosound = flags&(1<<3) != 0
-		tl.Duration = m.Double()
-		tl.W = m.Int()
-		tl.H = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.PreloadPrefixSize = Ref(m.Int())
-		}
-		if flags&(1<<4) != 0 {
-			tl.VideoStartTS = Ref(m.Double())
-		}
-		r = tl
+		r = decode_body_TL_documentAttributeVideo(m)
 	case CRC_documentAttributeAudio:
-		tl := TL_documentAttributeAudio{}
-		flags := m.Int()
-		tl.Voice = flags&(1<<10) != 0
-		tl.Duration = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Performer = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Waveform = m.StringBytes()
-		}
-		r = tl
+		r = decode_body_TL_documentAttributeAudio(m)
 	case CRC_documentAttributeFilename:
-		tl := TL_documentAttributeFilename{}
-		tl.FileName = m.String()
-		r = tl
+		r = decode_body_TL_documentAttributeFilename(m)
 	case CRC_documentAttributeHasStickers:
-		tl := TL_documentAttributeHasStickers{}
-		r = tl
+		r = decode_body_TL_documentAttributeHasStickers(m)
 	case CRC_documentAttributeCustomEmoji:
-		tl := TL_documentAttributeCustomEmoji{}
-		flags := m.Int()
-		tl.Free = flags&(1<<0) != 0
-		tl.TextColor = flags&(1<<1) != 0
-		tl.Alt = m.String()
-		tl.Stickerset = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_documentAttributeCustomEmoji(m)
 	case CRC_messages_stickersNotModified:
-		tl := TL_messages_stickersNotModified{}
-		r = tl
+		r = decode_body_TL_messages_stickersNotModified(m)
 	case CRC_messages_stickers:
-		tl := TL_messages_stickers{}
-		tl.Hash = m.Long()
-		tl.Stickers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_stickers(m)
 	case CRC_stickerPack:
-		tl := TL_stickerPack{}
-		tl.Emoticon = m.String()
-		tl.Documents = m.VectorLong()
-		r = tl
+		r = decode_body_TL_stickerPack(m)
 	case CRC_messages_allStickersNotModified:
-		tl := TL_messages_allStickersNotModified{}
-		r = tl
+		r = decode_body_TL_messages_allStickersNotModified(m)
 	case CRC_messages_allStickers:
-		tl := TL_messages_allStickers{}
-		tl.Hash = m.Long()
-		tl.Sets = DecodeBuf_GenericVector[TL_stickerSet](m)
-		r = tl
+		r = decode_body_TL_messages_allStickers(m)
 	case CRC_messages_affectedMessages:
-		tl := TL_messages_affectedMessages{}
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		r = tl
+		r = decode_body_TL_messages_affectedMessages(m)
 	case CRC_webPageEmpty:
-		tl := TL_webPageEmpty{}
-		flags := m.Int()
-		tl.ID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.URL = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_webPageEmpty(m)
 	case CRC_webPagePending:
-		tl := TL_webPagePending{}
-		flags := m.Int()
-		tl.ID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.URL = Ref(m.String())
-		}
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_webPagePending(m)
 	case CRC_webPage:
-		tl := TL_webPage{}
-		flags := m.Int()
-		tl.HasLargeMedia = flags&(1<<13) != 0
-		tl.ID = m.Long()
-		tl.URL = m.String()
-		tl.DisplayURL = m.String()
-		tl.Hash = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Type = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.SiteName = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Description = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.EmbedURL = Ref(m.String())
-		}
-		if flags&(1<<5) != 0 {
-			tl.EmbedType = Ref(m.String())
-		}
-		if flags&(1<<6) != 0 {
-			tl.EmbedWidth = Ref(m.Int())
-		}
-		if flags&(1<<6) != 0 {
-			tl.EmbedHeight = Ref(m.Int())
-		}
-		if flags&(1<<7) != 0 {
-			tl.Duration = Ref(m.Int())
-		}
-		if flags&(1<<8) != 0 {
-			tl.Author = Ref(m.String())
-		}
-		if flags&(1<<9) != 0 {
-			tl.Document = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<10) != 0 {
-			tl.CachedPage = Ref(DecodeBuf_GenericObject[TL_page](m))
-		}
-		if flags&(1<<12) != 0 {
-			tl.Attributes = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_webPage(m)
 	case CRC_webPageNotModified:
-		tl := TL_webPageNotModified{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.CachedPageViews = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_webPageNotModified(m)
 	case CRC_authorization:
-		tl := TL_authorization{}
-		flags := m.Int()
-		tl.Current = flags&(1<<0) != 0
-		tl.OfficialApp = flags&(1<<1) != 0
-		tl.PasswordPending = flags&(1<<2) != 0
-		tl.EncryptedRequestsDisabled = flags&(1<<3) != 0
-		tl.CallRequestsDisabled = flags&(1<<4) != 0
-		tl.Unconfirmed = flags&(1<<5) != 0
-		tl.Hash = m.Long()
-		tl.DeviceModel = m.String()
-		tl.Platform = m.String()
-		tl.SystemVersion = m.String()
-		tl.APIID = m.Int()
-		tl.AppName = m.String()
-		tl.AppVersion = m.String()
-		tl.DateCreated = m.Int()
-		tl.DateActive = m.Int()
-		tl.IP = m.String()
-		tl.Country = m.String()
-		tl.Region = m.String()
-		r = tl
+		r = decode_body_TL_authorization(m)
 	case CRC_account_authorizations:
-		tl := TL_account_authorizations{}
-		tl.AuthorizationTTLDays = m.Int()
-		tl.Authorizations = DecodeBuf_GenericVector[TL_authorization](m)
-		r = tl
+		r = decode_body_TL_account_authorizations(m)
 	case CRC_account_password:
-		tl := TL_account_password{}
-		flags := m.Int()
-		tl.HasRecovery = flags&(1<<0) != 0
-		tl.HasSecureValues = flags&(1<<1) != 0
-		tl.HasPassword = flags&(1<<2) != 0
-		if flags&(1<<2) != 0 {
-			tl.CurrentAlgo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.SrpB = m.StringBytes()
-		}
-		if flags&(1<<2) != 0 {
-			tl.SrpID = Ref(m.Long())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Hint = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.EmailUnconfirmedPattern = Ref(m.String())
-		}
-		tl.NewAlgo = DecodeBuf_GenericObject[TL](m)
-		tl.NewSecureAlgo = DecodeBuf_GenericObject[TL](m)
-		tl.SecureRandom = m.StringBytes()
-		if flags&(1<<5) != 0 {
-			tl.PendingResetDate = Ref(m.Int())
-		}
-		if flags&(1<<6) != 0 {
-			tl.LoginEmailPattern = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_account_password(m)
 	case CRC_account_passwordSettings:
-		tl := TL_account_passwordSettings{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Email = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.SecureSettings = Ref(DecodeBuf_GenericObject[TL_secureSecretSettings](m))
-		}
-		r = tl
+		r = decode_body_TL_account_passwordSettings(m)
 	case CRC_account_passwordInputSettings:
-		tl := TL_account_passwordInputSettings{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.NewAlgo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<0) != 0 {
-			tl.NewPasswordHash = m.StringBytes()
-		}
-		if flags&(1<<0) != 0 {
-			tl.Hint = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Email = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.NewSecureSettings = Ref(DecodeBuf_GenericObject[TL_secureSecretSettings](m))
-		}
-		r = tl
+		r = decode_body_TL_account_passwordInputSettings(m)
 	case CRC_auth_passwordRecovery:
-		tl := TL_auth_passwordRecovery{}
-		tl.EmailPattern = m.String()
-		r = tl
+		r = decode_body_TL_auth_passwordRecovery(m)
 	case CRC_receivedNotifyMessage:
-		tl := TL_receivedNotifyMessage{}
-		tl.ID = m.Int()
-		tl.Flags = m.Int()
-		r = tl
+		r = decode_body_TL_receivedNotifyMessage(m)
 	case CRC_chatInviteExported:
-		tl := TL_chatInviteExported{}
-		flags := m.Int()
-		tl.Revoked = flags&(1<<0) != 0
-		tl.Permanent = flags&(1<<5) != 0
-		tl.RequestNeeded = flags&(1<<6) != 0
-		tl.Link = m.String()
-		tl.AdminID = m.Long()
-		tl.Date = m.Int()
-		if flags&(1<<4) != 0 {
-			tl.StartDate = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.ExpireDate = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.UsageLimit = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Usage = Ref(m.Int())
-		}
-		if flags&(1<<7) != 0 {
-			tl.Requested = Ref(m.Int())
-		}
-		if flags&(1<<10) != 0 {
-			tl.SubscriptionExpired = Ref(m.Int())
-		}
-		if flags&(1<<8) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<9) != 0 {
-			tl.SubscriptionPricing = Ref(DecodeBuf_GenericObject[TL_starsSubscriptionPricing](m))
-		}
-		r = tl
+		r = decode_body_TL_chatInviteExported(m)
 	case CRC_chatInvitePublicJoinRequests:
-		tl := TL_chatInvitePublicJoinRequests{}
-		r = tl
+		r = decode_body_TL_chatInvitePublicJoinRequests(m)
 	case CRC_chatInviteAlready:
-		tl := TL_chatInviteAlready{}
-		tl.Chat = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_chatInviteAlready(m)
 	case CRC_chatInvite:
-		tl := TL_chatInvite{}
-		flags := m.Int()
-		tl.Channel = flags&(1<<0) != 0
-		tl.Broadcast = flags&(1<<1) != 0
-		tl.Public = flags&(1<<2) != 0
-		tl.Megagroup = flags&(1<<3) != 0
-		tl.RequestNeeded = flags&(1<<6) != 0
-		tl.Verified = flags&(1<<7) != 0
-		tl.Scam = flags&(1<<8) != 0
-		tl.Fake = flags&(1<<9) != 0
-		tl.CanRefulfillSubscription = flags&(1<<11) != 0
-		tl.Title = m.String()
-		if flags&(1<<5) != 0 {
-			tl.About = Ref(m.String())
-		}
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		tl.ParticipantsCount = m.Int()
-		if flags&(1<<4) != 0 {
-			tl.Participants = DecodeBuf_GenericVector[TL](m)
-		}
-		tl.Color = m.Int()
-		if flags&(1<<10) != 0 {
-			tl.SubscriptionPricing = Ref(DecodeBuf_GenericObject[TL_starsSubscriptionPricing](m))
-		}
-		if flags&(1<<12) != 0 {
-			tl.SubscriptionFormID = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_chatInvite(m)
 	case CRC_chatInvitePeek:
-		tl := TL_chatInvitePeek{}
-		tl.Chat = DecodeBuf_GenericObject[TL](m)
-		tl.Expires = m.Int()
-		r = tl
+		r = decode_body_TL_chatInvitePeek(m)
 	case CRC_inputStickerSetEmpty:
-		tl := TL_inputStickerSetEmpty{}
-		r = tl
+		r = decode_body_TL_inputStickerSetEmpty(m)
 	case CRC_inputStickerSetID:
-		tl := TL_inputStickerSetID{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputStickerSetID(m)
 	case CRC_inputStickerSetShortName:
-		tl := TL_inputStickerSetShortName{}
-		tl.ShortName = m.String()
-		r = tl
+		r = decode_body_TL_inputStickerSetShortName(m)
 	case CRC_inputStickerSetAnimatedEmoji:
-		tl := TL_inputStickerSetAnimatedEmoji{}
-		r = tl
+		r = decode_body_TL_inputStickerSetAnimatedEmoji(m)
 	case CRC_inputStickerSetDice:
-		tl := TL_inputStickerSetDice{}
-		tl.Emoticon = m.String()
-		r = tl
+		r = decode_body_TL_inputStickerSetDice(m)
 	case CRC_inputStickerSetAnimatedEmojiAnimations:
-		tl := TL_inputStickerSetAnimatedEmojiAnimations{}
-		r = tl
+		r = decode_body_TL_inputStickerSetAnimatedEmojiAnimations(m)
 	case CRC_inputStickerSetPremiumGifts:
-		tl := TL_inputStickerSetPremiumGifts{}
-		r = tl
+		r = decode_body_TL_inputStickerSetPremiumGifts(m)
 	case CRC_inputStickerSetEmojiGenericAnimations:
-		tl := TL_inputStickerSetEmojiGenericAnimations{}
-		r = tl
+		r = decode_body_TL_inputStickerSetEmojiGenericAnimations(m)
 	case CRC_inputStickerSetEmojiDefaultStatuses:
-		tl := TL_inputStickerSetEmojiDefaultStatuses{}
-		r = tl
+		r = decode_body_TL_inputStickerSetEmojiDefaultStatuses(m)
 	case CRC_inputStickerSetEmojiDefaultTopicIcons:
-		tl := TL_inputStickerSetEmojiDefaultTopicIcons{}
-		r = tl
+		r = decode_body_TL_inputStickerSetEmojiDefaultTopicIcons(m)
 	case CRC_inputStickerSetEmojiChannelDefaultStatuses:
-		tl := TL_inputStickerSetEmojiChannelDefaultStatuses{}
-		r = tl
+		r = decode_body_TL_inputStickerSetEmojiChannelDefaultStatuses(m)
 	case CRC_stickerSet:
-		tl := TL_stickerSet{}
-		flags := m.Int()
-		tl.Archived = flags&(1<<1) != 0
-		tl.Official = flags&(1<<2) != 0
-		tl.Masks = flags&(1<<3) != 0
-		tl.Emojis = flags&(1<<7) != 0
-		tl.TextColor = flags&(1<<9) != 0
-		tl.ChannelEmojiStatus = flags&(1<<10) != 0
-		tl.Creator = flags&(1<<11) != 0
-		if flags&(1<<0) != 0 {
-			tl.InstalledDate = Ref(m.Int())
-		}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Title = m.String()
-		tl.ShortName = m.String()
-		if flags&(1<<4) != 0 {
-			tl.Thumbs = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.ThumbDCID = Ref(m.Int())
-		}
-		if flags&(1<<4) != 0 {
-			tl.ThumbVersion = Ref(m.Int())
-		}
-		if flags&(1<<8) != 0 {
-			tl.ThumbDocumentID = Ref(m.Long())
-		}
-		tl.Count = m.Int()
-		tl.Hash = m.Int()
-		r = tl
+		r = decode_body_TL_stickerSet(m)
 	case CRC_messages_stickerSet:
-		tl := TL_messages_stickerSet{}
-		tl.Set = DecodeBuf_GenericObject[TL_stickerSet](m)
-		tl.Packs = DecodeBuf_GenericVector[TL_stickerPack](m)
-		tl.Keywords = DecodeBuf_GenericVector[TL_stickerKeyword](m)
-		tl.Documents = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_stickerSet(m)
 	case CRC_messages_stickerSetNotModified:
-		tl := TL_messages_stickerSetNotModified{}
-		r = tl
+		r = decode_body_TL_messages_stickerSetNotModified(m)
 	case CRC_botCommand:
-		tl := TL_botCommand{}
-		tl.Command = m.String()
-		tl.Description = m.String()
-		r = tl
+		r = decode_body_TL_botCommand(m)
 	case CRC_botInfo:
-		tl := TL_botInfo{}
-		flags := m.Int()
-		tl.HasPreviewMedias = flags&(1<<6) != 0
-		if flags&(1<<0) != 0 {
-			tl.UserID = Ref(m.Long())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Description = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.DescriptionPhoto = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.DescriptionDocument = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.Commands = DecodeBuf_GenericVector[TL_botCommand](m)
-		}
-		if flags&(1<<3) != 0 {
-			tl.MenuButton = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<7) != 0 {
-			tl.PrivacyPolicyURL = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_botInfo(m)
 	case CRC_keyboardButton:
-		tl := TL_keyboardButton{}
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButton(m)
 	case CRC_keyboardButtonURL:
-		tl := TL_keyboardButtonURL{}
-		tl.Text = m.String()
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButtonURL(m)
 	case CRC_keyboardButtonCallback:
-		tl := TL_keyboardButtonCallback{}
-		flags := m.Int()
-		tl.RequiresPassword = flags&(1<<0) != 0
-		tl.Text = m.String()
-		tl.Data = m.StringBytes()
-		r = tl
+		r = decode_body_TL_keyboardButtonCallback(m)
 	case CRC_keyboardButtonRequestPhone:
-		tl := TL_keyboardButtonRequestPhone{}
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButtonRequestPhone(m)
 	case CRC_keyboardButtonRequestGeoLocation:
-		tl := TL_keyboardButtonRequestGeoLocation{}
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButtonRequestGeoLocation(m)
 	case CRC_keyboardButtonSwitchInline:
-		tl := TL_keyboardButtonSwitchInline{}
-		flags := m.Int()
-		tl.SamePeer = flags&(1<<0) != 0
-		tl.Text = m.String()
-		tl.Query = m.String()
-		if flags&(1<<1) != 0 {
-			tl.PeerTypes = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_keyboardButtonSwitchInline(m)
 	case CRC_keyboardButtonGame:
-		tl := TL_keyboardButtonGame{}
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButtonGame(m)
 	case CRC_keyboardButtonBuy:
-		tl := TL_keyboardButtonBuy{}
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButtonBuy(m)
 	case CRC_keyboardButtonURLAuth:
-		tl := TL_keyboardButtonURLAuth{}
-		flags := m.Int()
-		tl.Text = m.String()
-		if flags&(1<<0) != 0 {
-			tl.FwdText = Ref(m.String())
-		}
-		tl.URL = m.String()
-		tl.ButtonID = m.Int()
-		r = tl
+		r = decode_body_TL_keyboardButtonURLAuth(m)
 	case CRC_inputKeyboardButtonURLAuth:
-		tl := TL_inputKeyboardButtonURLAuth{}
-		flags := m.Int()
-		tl.RequestWriteAccess = flags&(1<<0) != 0
-		tl.Text = m.String()
-		if flags&(1<<1) != 0 {
-			tl.FwdText = Ref(m.String())
-		}
-		tl.URL = m.String()
-		tl.Bot = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputKeyboardButtonURLAuth(m)
 	case CRC_keyboardButtonRequestPoll:
-		tl := TL_keyboardButtonRequestPoll{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Quiz = Ref(m.Bool())
-		}
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButtonRequestPoll(m)
 	case CRC_inputKeyboardButtonUserProfile:
-		tl := TL_inputKeyboardButtonUserProfile{}
-		tl.Text = m.String()
-		tl.UserID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputKeyboardButtonUserProfile(m)
 	case CRC_keyboardButtonUserProfile:
-		tl := TL_keyboardButtonUserProfile{}
-		tl.Text = m.String()
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_keyboardButtonUserProfile(m)
 	case CRC_keyboardButtonWebView:
-		tl := TL_keyboardButtonWebView{}
-		tl.Text = m.String()
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButtonWebView(m)
 	case CRC_keyboardButtonSimpleWebView:
-		tl := TL_keyboardButtonSimpleWebView{}
-		tl.Text = m.String()
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_keyboardButtonSimpleWebView(m)
 	case CRC_keyboardButtonRequestPeer:
-		tl := TL_keyboardButtonRequestPeer{}
-		tl.Text = m.String()
-		tl.ButtonID = m.Int()
-		tl.PeerType = DecodeBuf_GenericObject[TL](m)
-		tl.MaxQuantity = m.Int()
-		r = tl
+		r = decode_body_TL_keyboardButtonRequestPeer(m)
 	case CRC_inputKeyboardButtonRequestPeer:
-		tl := TL_inputKeyboardButtonRequestPeer{}
-		flags := m.Int()
-		tl.NameRequested = flags&(1<<0) != 0
-		tl.UsernameRequested = flags&(1<<1) != 0
-		tl.PhotoRequested = flags&(1<<2) != 0
-		tl.Text = m.String()
-		tl.ButtonID = m.Int()
-		tl.PeerType = DecodeBuf_GenericObject[TL](m)
-		tl.MaxQuantity = m.Int()
-		r = tl
+		r = decode_body_TL_inputKeyboardButtonRequestPeer(m)
 	case CRC_keyboardButtonRow:
-		tl := TL_keyboardButtonRow{}
-		tl.Buttons = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_keyboardButtonRow(m)
 	case CRC_replyKeyboardHide:
-		tl := TL_replyKeyboardHide{}
-		flags := m.Int()
-		tl.Selective = flags&(1<<2) != 0
-		r = tl
+		r = decode_body_TL_replyKeyboardHide(m)
 	case CRC_replyKeyboardForceReply:
-		tl := TL_replyKeyboardForceReply{}
-		flags := m.Int()
-		tl.SingleUse = flags&(1<<1) != 0
-		tl.Selective = flags&(1<<2) != 0
-		if flags&(1<<3) != 0 {
-			tl.Placeholder = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_replyKeyboardForceReply(m)
 	case CRC_replyKeyboardMarkup:
-		tl := TL_replyKeyboardMarkup{}
-		flags := m.Int()
-		tl.Resize = flags&(1<<0) != 0
-		tl.SingleUse = flags&(1<<1) != 0
-		tl.Selective = flags&(1<<2) != 0
-		tl.Persistent = flags&(1<<4) != 0
-		tl.Rows = DecodeBuf_GenericVector[TL_keyboardButtonRow](m)
-		if flags&(1<<3) != 0 {
-			tl.Placeholder = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_replyKeyboardMarkup(m)
 	case CRC_replyInlineMarkup:
-		tl := TL_replyInlineMarkup{}
-		tl.Rows = DecodeBuf_GenericVector[TL_keyboardButtonRow](m)
-		r = tl
+		r = decode_body_TL_replyInlineMarkup(m)
 	case CRC_messageEntityUnknown:
-		tl := TL_messageEntityUnknown{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityUnknown(m)
 	case CRC_messageEntityMention:
-		tl := TL_messageEntityMention{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityMention(m)
 	case CRC_messageEntityHashtag:
-		tl := TL_messageEntityHashtag{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityHashtag(m)
 	case CRC_messageEntityBotCommand:
-		tl := TL_messageEntityBotCommand{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityBotCommand(m)
 	case CRC_messageEntityURL:
-		tl := TL_messageEntityURL{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityURL(m)
 	case CRC_messageEntityEmail:
-		tl := TL_messageEntityEmail{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityEmail(m)
 	case CRC_messageEntityBold:
-		tl := TL_messageEntityBold{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityBold(m)
 	case CRC_messageEntityItalic:
-		tl := TL_messageEntityItalic{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityItalic(m)
 	case CRC_messageEntityCode:
-		tl := TL_messageEntityCode{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityCode(m)
 	case CRC_messageEntityPre:
-		tl := TL_messageEntityPre{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		tl.Language = m.String()
-		r = tl
+		r = decode_body_TL_messageEntityPre(m)
 	case CRC_messageEntityTextURL:
-		tl := TL_messageEntityTextURL{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_messageEntityTextURL(m)
 	case CRC_messageEntityMentionName:
-		tl := TL_messageEntityMentionName{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_messageEntityMentionName(m)
 	case CRC_inputMessageEntityMentionName:
-		tl := TL_inputMessageEntityMentionName{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		tl.UserID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputMessageEntityMentionName(m)
 	case CRC_messageEntityPhone:
-		tl := TL_messageEntityPhone{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityPhone(m)
 	case CRC_messageEntityCashtag:
-		tl := TL_messageEntityCashtag{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityCashtag(m)
 	case CRC_messageEntityUnderline:
-		tl := TL_messageEntityUnderline{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityUnderline(m)
 	case CRC_messageEntityStrike:
-		tl := TL_messageEntityStrike{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityStrike(m)
 	case CRC_messageEntityBankCard:
-		tl := TL_messageEntityBankCard{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityBankCard(m)
 	case CRC_messageEntitySpoiler:
-		tl := TL_messageEntitySpoiler{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntitySpoiler(m)
 	case CRC_messageEntityCustomEmoji:
-		tl := TL_messageEntityCustomEmoji{}
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		tl.DocumentID = m.Long()
-		r = tl
+		r = decode_body_TL_messageEntityCustomEmoji(m)
 	case CRC_messageEntityBlockquote:
-		tl := TL_messageEntityBlockquote{}
-		flags := m.Int()
-		tl.Collapsed = flags&(1<<0) != 0
-		tl.Offset = m.Int()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_messageEntityBlockquote(m)
 	case CRC_inputChannelEmpty:
-		tl := TL_inputChannelEmpty{}
-		r = tl
+		r = decode_body_TL_inputChannelEmpty(m)
 	case CRC_inputChannel:
-		tl := TL_inputChannel{}
-		tl.ChannelID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputChannel(m)
 	case CRC_inputChannelFromMessage:
-		tl := TL_inputChannelFromMessage{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		tl.ChannelID = m.Long()
-		r = tl
+		r = decode_body_TL_inputChannelFromMessage(m)
 	case CRC_contacts_resolvedPeer:
-		tl := TL_contacts_resolvedPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_contacts_resolvedPeer(m)
 	case CRC_messageRange:
-		tl := TL_messageRange{}
-		tl.MinID = m.Int()
-		tl.MaxID = m.Int()
-		r = tl
+		r = decode_body_TL_messageRange(m)
 	case CRC_updates_channelDifferenceEmpty:
-		tl := TL_updates_channelDifferenceEmpty{}
-		flags := m.Int()
-		tl.Final = flags&(1<<0) != 0
-		tl.PTS = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.Timeout = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_updates_channelDifferenceEmpty(m)
 	case CRC_updates_channelDifferenceTooLong:
-		tl := TL_updates_channelDifferenceTooLong{}
-		flags := m.Int()
-		tl.Final = flags&(1<<0) != 0
-		if flags&(1<<1) != 0 {
-			tl.Timeout = Ref(m.Int())
-		}
-		tl.Dialog = DecodeBuf_GenericObject[TL](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_updates_channelDifferenceTooLong(m)
 	case CRC_updates_channelDifference:
-		tl := TL_updates_channelDifference{}
-		flags := m.Int()
-		tl.Final = flags&(1<<0) != 0
-		tl.PTS = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.Timeout = Ref(m.Int())
-		}
-		tl.NewMessages = DecodeBuf_GenericVector[TL](m)
-		tl.OtherUpdates = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_updates_channelDifference(m)
 	case CRC_channelMessagesFilterEmpty:
-		tl := TL_channelMessagesFilterEmpty{}
-		r = tl
+		r = decode_body_TL_channelMessagesFilterEmpty(m)
 	case CRC_channelMessagesFilter:
-		tl := TL_channelMessagesFilter{}
-		flags := m.Int()
-		tl.ExcludeNewMessages = flags&(1<<1) != 0
-		tl.Ranges = DecodeBuf_GenericVector[TL_messageRange](m)
-		r = tl
+		r = decode_body_TL_channelMessagesFilter(m)
 	case CRC_channelParticipant:
-		tl := TL_channelParticipant{}
-		flags := m.Int()
-		tl.UserID = m.Long()
-		tl.Date = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.SubscriptionUntilDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_channelParticipant(m)
 	case CRC_channelParticipantSelf:
-		tl := TL_channelParticipantSelf{}
-		flags := m.Int()
-		tl.ViaRequest = flags&(1<<0) != 0
-		tl.UserID = m.Long()
-		tl.InviterID = m.Long()
-		tl.Date = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.SubscriptionUntilDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_channelParticipantSelf(m)
 	case CRC_channelParticipantCreator:
-		tl := TL_channelParticipantCreator{}
-		flags := m.Int()
-		tl.UserID = m.Long()
-		tl.AdminRights = DecodeBuf_GenericObject[TL_chatAdminRights](m)
-		if flags&(1<<0) != 0 {
-			tl.Rank = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_channelParticipantCreator(m)
 	case CRC_channelParticipantAdmin:
-		tl := TL_channelParticipantAdmin{}
-		flags := m.Int()
-		tl.CanEdit = flags&(1<<0) != 0
-		tl.Self = flags&(1<<1) != 0
-		tl.UserID = m.Long()
-		if flags&(1<<1) != 0 {
-			tl.InviterID = Ref(m.Long())
-		}
-		tl.PromotedBy = m.Long()
-		tl.Date = m.Int()
-		tl.AdminRights = DecodeBuf_GenericObject[TL_chatAdminRights](m)
-		if flags&(1<<2) != 0 {
-			tl.Rank = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_channelParticipantAdmin(m)
 	case CRC_channelParticipantBanned:
-		tl := TL_channelParticipantBanned{}
-		flags := m.Int()
-		tl.Left = flags&(1<<0) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.KickedBy = m.Long()
-		tl.Date = m.Int()
-		tl.BannedRights = DecodeBuf_GenericObject[TL_chatBannedRights](m)
-		r = tl
+		r = decode_body_TL_channelParticipantBanned(m)
 	case CRC_channelParticipantLeft:
-		tl := TL_channelParticipantLeft{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelParticipantLeft(m)
 	case CRC_channelParticipantsRecent:
-		tl := TL_channelParticipantsRecent{}
-		r = tl
+		r = decode_body_TL_channelParticipantsRecent(m)
 	case CRC_channelParticipantsAdmins:
-		tl := TL_channelParticipantsAdmins{}
-		r = tl
+		r = decode_body_TL_channelParticipantsAdmins(m)
 	case CRC_channelParticipantsKicked:
-		tl := TL_channelParticipantsKicked{}
-		tl.Q = m.String()
-		r = tl
+		r = decode_body_TL_channelParticipantsKicked(m)
 	case CRC_channelParticipantsBots:
-		tl := TL_channelParticipantsBots{}
-		r = tl
+		r = decode_body_TL_channelParticipantsBots(m)
 	case CRC_channelParticipantsBanned:
-		tl := TL_channelParticipantsBanned{}
-		tl.Q = m.String()
-		r = tl
+		r = decode_body_TL_channelParticipantsBanned(m)
 	case CRC_channelParticipantsSearch:
-		tl := TL_channelParticipantsSearch{}
-		tl.Q = m.String()
-		r = tl
+		r = decode_body_TL_channelParticipantsSearch(m)
 	case CRC_channelParticipantsContacts:
-		tl := TL_channelParticipantsContacts{}
-		tl.Q = m.String()
-		r = tl
+		r = decode_body_TL_channelParticipantsContacts(m)
 	case CRC_channelParticipantsMentions:
-		tl := TL_channelParticipantsMentions{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Q = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.TopMsgID = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_channelParticipantsMentions(m)
 	case CRC_channels_channelParticipants:
-		tl := TL_channels_channelParticipants{}
-		tl.Count = m.Int()
-		tl.Participants = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_channels_channelParticipants(m)
 	case CRC_channels_channelParticipantsNotModified:
-		tl := TL_channels_channelParticipantsNotModified{}
-		r = tl
+		r = decode_body_TL_channels_channelParticipantsNotModified(m)
 	case CRC_channels_channelParticipant:
-		tl := TL_channels_channelParticipant{}
-		tl.Participant = DecodeBuf_GenericObject[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_channels_channelParticipant(m)
 	case CRC_help_termsOfService:
-		tl := TL_help_termsOfService{}
-		flags := m.Int()
-		tl.Popup = flags&(1<<0) != 0
-		tl.ID = DecodeBuf_GenericObject[TL_dataJSON](m)
-		tl.Text = m.String()
-		tl.Entities = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<1) != 0 {
-			tl.MinAgeConfirm = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_help_termsOfService(m)
 	case CRC_messages_savedGIFsNotModified:
-		tl := TL_messages_savedGIFsNotModified{}
-		r = tl
+		r = decode_body_TL_messages_savedGIFsNotModified(m)
 	case CRC_messages_savedGIFs:
-		tl := TL_messages_savedGIFs{}
-		tl.Hash = m.Long()
-		tl.GIFs = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_savedGIFs(m)
 	case CRC_inputBotInlineMessageMediaAuto:
-		tl := TL_inputBotInlineMessageMediaAuto{}
-		flags := m.Int()
-		tl.InvertMedia = flags&(1<<3) != 0
-		tl.Message = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageMediaAuto(m)
 	case CRC_inputBotInlineMessageText:
-		tl := TL_inputBotInlineMessageText{}
-		flags := m.Int()
-		tl.NoWebpage = flags&(1<<0) != 0
-		tl.InvertMedia = flags&(1<<3) != 0
-		tl.Message = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageText(m)
 	case CRC_inputBotInlineMessageMediaGeo:
-		tl := TL_inputBotInlineMessageMediaGeo{}
-		flags := m.Int()
-		tl.GeoPoint = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Heading = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Period = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.ProximityNotificationRadius = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageMediaGeo(m)
 	case CRC_inputBotInlineMessageMediaVenue:
-		tl := TL_inputBotInlineMessageMediaVenue{}
-		flags := m.Int()
-		tl.GeoPoint = DecodeBuf_GenericObject[TL](m)
-		tl.Title = m.String()
-		tl.Address = m.String()
-		tl.Provider = m.String()
-		tl.VenueID = m.String()
-		tl.VenueType = m.String()
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageMediaVenue(m)
 	case CRC_inputBotInlineMessageMediaContact:
-		tl := TL_inputBotInlineMessageMediaContact{}
-		flags := m.Int()
-		tl.PhoneNumber = m.String()
-		tl.FirstName = m.String()
-		tl.LastName = m.String()
-		tl.Vcard = m.String()
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageMediaContact(m)
 	case CRC_inputBotInlineMessageGame:
-		tl := TL_inputBotInlineMessageGame{}
-		flags := m.Int()
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageGame(m)
 	case CRC_inputBotInlineMessageMediaInvoice:
-		tl := TL_inputBotInlineMessageMediaInvoice{}
-		flags := m.Int()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Photo = Ref(DecodeBuf_GenericObject[TL_inputWebDocument](m))
-		}
-		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
-		tl.Payload = m.StringBytes()
-		tl.Provider = m.String()
-		tl.ProviderData = DecodeBuf_GenericObject[TL_dataJSON](m)
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageMediaInvoice(m)
 	case CRC_inputBotInlineMessageMediaWebPage:
-		tl := TL_inputBotInlineMessageMediaWebPage{}
-		flags := m.Int()
-		tl.InvertMedia = flags&(1<<3) != 0
-		tl.ForceLargeMedia = flags&(1<<4) != 0
-		tl.ForceSmallMedia = flags&(1<<5) != 0
-		tl.Optional = flags&(1<<6) != 0
-		tl.Message = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		tl.URL = m.String()
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageMediaWebPage(m)
 	case CRC_inputBotInlineResult:
-		tl := TL_inputBotInlineResult{}
-		flags := m.Int()
-		tl.ID = m.String()
-		tl.Type = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Description = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.URL = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.Thumb = Ref(DecodeBuf_GenericObject[TL_inputWebDocument](m))
-		}
-		if flags&(1<<5) != 0 {
-			tl.Content = Ref(DecodeBuf_GenericObject[TL_inputWebDocument](m))
-		}
-		tl.SendMessage = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputBotInlineResult(m)
 	case CRC_inputBotInlineResultPhoto:
-		tl := TL_inputBotInlineResultPhoto{}
-		tl.ID = m.String()
-		tl.Type = m.String()
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		tl.SendMessage = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputBotInlineResultPhoto(m)
 	case CRC_inputBotInlineResultDocument:
-		tl := TL_inputBotInlineResultDocument{}
-		flags := m.Int()
-		tl.ID = m.String()
-		tl.Type = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Description = Ref(m.String())
-		}
-		tl.Document = DecodeBuf_GenericObject[TL](m)
-		tl.SendMessage = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputBotInlineResultDocument(m)
 	case CRC_inputBotInlineResultGame:
-		tl := TL_inputBotInlineResultGame{}
-		tl.ID = m.String()
-		tl.ShortName = m.String()
-		tl.SendMessage = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputBotInlineResultGame(m)
 	case CRC_botInlineMessageMediaAuto:
-		tl := TL_botInlineMessageMediaAuto{}
-		flags := m.Int()
-		tl.InvertMedia = flags&(1<<3) != 0
-		tl.Message = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_botInlineMessageMediaAuto(m)
 	case CRC_botInlineMessageText:
-		tl := TL_botInlineMessageText{}
-		flags := m.Int()
-		tl.NoWebpage = flags&(1<<0) != 0
-		tl.InvertMedia = flags&(1<<3) != 0
-		tl.Message = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_botInlineMessageText(m)
 	case CRC_botInlineMessageMediaGeo:
-		tl := TL_botInlineMessageMediaGeo{}
-		flags := m.Int()
-		tl.Geo = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Heading = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Period = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.ProximityNotificationRadius = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_botInlineMessageMediaGeo(m)
 	case CRC_botInlineMessageMediaVenue:
-		tl := TL_botInlineMessageMediaVenue{}
-		flags := m.Int()
-		tl.Geo = DecodeBuf_GenericObject[TL](m)
-		tl.Title = m.String()
-		tl.Address = m.String()
-		tl.Provider = m.String()
-		tl.VenueID = m.String()
-		tl.VenueType = m.String()
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_botInlineMessageMediaVenue(m)
 	case CRC_botInlineMessageMediaContact:
-		tl := TL_botInlineMessageMediaContact{}
-		flags := m.Int()
-		tl.PhoneNumber = m.String()
-		tl.FirstName = m.String()
-		tl.LastName = m.String()
-		tl.Vcard = m.String()
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_botInlineMessageMediaContact(m)
 	case CRC_botInlineMessageMediaInvoice:
-		tl := TL_botInlineMessageMediaInvoice{}
-		flags := m.Int()
-		tl.ShippingAddressRequested = flags&(1<<1) != 0
-		tl.Test = flags&(1<<3) != 0
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Currency = m.String()
-		tl.TotalAmount = m.Long()
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_botInlineMessageMediaInvoice(m)
 	case CRC_botInlineMessageMediaWebPage:
-		tl := TL_botInlineMessageMediaWebPage{}
-		flags := m.Int()
-		tl.InvertMedia = flags&(1<<3) != 0
-		tl.ForceLargeMedia = flags&(1<<4) != 0
-		tl.ForceSmallMedia = flags&(1<<5) != 0
-		tl.Manual = flags&(1<<7) != 0
-		tl.Safe = flags&(1<<8) != 0
-		tl.Message = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		tl.URL = m.String()
-		if flags&(1<<2) != 0 {
-			tl.ReplyMarkup = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_botInlineMessageMediaWebPage(m)
 	case CRC_botInlineResult:
-		tl := TL_botInlineResult{}
-		flags := m.Int()
-		tl.ID = m.String()
-		tl.Type = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Description = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.URL = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.Thumb = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.Content = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.SendMessage = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_botInlineResult(m)
 	case CRC_botInlineMediaResult:
-		tl := TL_botInlineMediaResult{}
-		flags := m.Int()
-		tl.ID = m.String()
-		tl.Type = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Document = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Description = Ref(m.String())
-		}
-		tl.SendMessage = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_botInlineMediaResult(m)
 	case CRC_messages_botResults:
-		tl := TL_messages_botResults{}
-		flags := m.Int()
-		tl.Gallery = flags&(1<<0) != 0
-		tl.QueryID = m.Long()
-		if flags&(1<<1) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.SwitchPM = Ref(DecodeBuf_GenericObject[TL_inlineBotSwitchPM](m))
-		}
-		if flags&(1<<3) != 0 {
-			tl.SwitchWebview = Ref(DecodeBuf_GenericObject[TL_inlineBotWebView](m))
-		}
-		tl.Results = DecodeBuf_GenericVector[TL](m)
-		tl.CacheTime = m.Int()
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_botResults(m)
 	case CRC_exportedMessageLink:
-		tl := TL_exportedMessageLink{}
-		tl.Link = m.String()
-		tl.HTML = m.String()
-		r = tl
+		r = decode_body_TL_exportedMessageLink(m)
 	case CRC_messageFwdHeader:
-		tl := TL_messageFwdHeader{}
-		flags := m.Int()
-		tl.Imported = flags&(1<<7) != 0
-		tl.SavedOut = flags&(1<<11) != 0
-		if flags&(1<<0) != 0 {
-			tl.FromID = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.FromName = Ref(m.String())
-		}
-		tl.Date = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.ChannelPost = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.PostAuthor = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.SavedFromPeer = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.SavedFromMsgID = Ref(m.Int())
-		}
-		if flags&(1<<8) != 0 {
-			tl.SavedFromID = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<9) != 0 {
-			tl.SavedFromName = Ref(m.String())
-		}
-		if flags&(1<<10) != 0 {
-			tl.SavedDate = Ref(m.Int())
-		}
-		if flags&(1<<6) != 0 {
-			tl.PSAType = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_messageFwdHeader(m)
 	case CRC_auth_codeTypeSMS:
-		tl := TL_auth_codeTypeSMS{}
-		r = tl
+		r = decode_body_TL_auth_codeTypeSMS(m)
 	case CRC_auth_codeTypeCall:
-		tl := TL_auth_codeTypeCall{}
-		r = tl
+		r = decode_body_TL_auth_codeTypeCall(m)
 	case CRC_auth_codeTypeFlashCall:
-		tl := TL_auth_codeTypeFlashCall{}
-		r = tl
+		r = decode_body_TL_auth_codeTypeFlashCall(m)
 	case CRC_auth_codeTypeMissedCall:
-		tl := TL_auth_codeTypeMissedCall{}
-		r = tl
+		r = decode_body_TL_auth_codeTypeMissedCall(m)
 	case CRC_auth_codeTypeFragmentSMS:
-		tl := TL_auth_codeTypeFragmentSMS{}
-		r = tl
+		r = decode_body_TL_auth_codeTypeFragmentSMS(m)
 	case CRC_auth_sentCodeTypeApp:
-		tl := TL_auth_sentCodeTypeApp{}
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeApp(m)
 	case CRC_auth_sentCodeTypeSMS:
-		tl := TL_auth_sentCodeTypeSMS{}
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeSMS(m)
 	case CRC_auth_sentCodeTypeCall:
-		tl := TL_auth_sentCodeTypeCall{}
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeCall(m)
 	case CRC_auth_sentCodeTypeFlashCall:
-		tl := TL_auth_sentCodeTypeFlashCall{}
-		tl.Pattern = m.String()
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeFlashCall(m)
 	case CRC_auth_sentCodeTypeMissedCall:
-		tl := TL_auth_sentCodeTypeMissedCall{}
-		tl.Prefix = m.String()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeMissedCall(m)
 	case CRC_auth_sentCodeTypeEmailCode:
-		tl := TL_auth_sentCodeTypeEmailCode{}
-		flags := m.Int()
-		tl.AppleSigninAllowed = flags&(1<<0) != 0
-		tl.GoogleSigninAllowed = flags&(1<<1) != 0
-		tl.EmailPattern = m.String()
-		tl.Length = m.Int()
-		if flags&(1<<3) != 0 {
-			tl.ResetAvailablePeriod = Ref(m.Int())
-		}
-		if flags&(1<<4) != 0 {
-			tl.ResetPendingDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeEmailCode(m)
 	case CRC_auth_sentCodeTypeSetUpEmailRequired:
-		tl := TL_auth_sentCodeTypeSetUpEmailRequired{}
-		flags := m.Int()
-		tl.AppleSigninAllowed = flags&(1<<0) != 0
-		tl.GoogleSigninAllowed = flags&(1<<1) != 0
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeSetUpEmailRequired(m)
 	case CRC_auth_sentCodeTypeFragmentSMS:
-		tl := TL_auth_sentCodeTypeFragmentSMS{}
-		tl.URL = m.String()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeFragmentSMS(m)
 	case CRC_auth_sentCodeTypeFirebaseSMS:
-		tl := TL_auth_sentCodeTypeFirebaseSMS{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Nonce = m.StringBytes()
-		}
-		if flags&(1<<2) != 0 {
-			tl.PlayIntegrityProjectID = Ref(m.Long())
-		}
-		if flags&(1<<2) != 0 {
-			tl.PlayIntegrityNonce = m.StringBytes()
-		}
-		if flags&(1<<1) != 0 {
-			tl.Receipt = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.PushTimeout = Ref(m.Int())
-		}
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeFirebaseSMS(m)
 	case CRC_auth_sentCodeTypeSMSWord:
-		tl := TL_auth_sentCodeTypeSMSWord{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Beginning = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeSMSWord(m)
 	case CRC_auth_sentCodeTypeSMSPhrase:
-		tl := TL_auth_sentCodeTypeSMSPhrase{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Beginning = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_auth_sentCodeTypeSMSPhrase(m)
 	case CRC_messages_botCallbackAnswer:
-		tl := TL_messages_botCallbackAnswer{}
-		flags := m.Int()
-		tl.Alert = flags&(1<<1) != 0
-		tl.HasURL = flags&(1<<3) != 0
-		tl.NativeUI = flags&(1<<4) != 0
-		if flags&(1<<0) != 0 {
-			tl.Message = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.URL = Ref(m.String())
-		}
-		tl.CacheTime = m.Int()
-		r = tl
+		r = decode_body_TL_messages_botCallbackAnswer(m)
 	case CRC_messages_messageEditData:
-		tl := TL_messages_messageEditData{}
-		flags := m.Int()
-		tl.Caption = flags&(1<<0) != 0
-		r = tl
+		r = decode_body_TL_messages_messageEditData(m)
 	case CRC_inputBotInlineMessageID:
-		tl := TL_inputBotInlineMessageID{}
-		tl.DCID = m.Int()
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageID(m)
 	case CRC_inputBotInlineMessageID64:
-		tl := TL_inputBotInlineMessageID64{}
-		tl.DCID = m.Int()
-		tl.OwnerID = m.Long()
-		tl.ID = m.Int()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputBotInlineMessageID64(m)
 	case CRC_inlineBotSwitchPM:
-		tl := TL_inlineBotSwitchPM{}
-		tl.Text = m.String()
-		tl.StartParam = m.String()
-		r = tl
+		r = decode_body_TL_inlineBotSwitchPM(m)
 	case CRC_messages_peerDialogs:
-		tl := TL_messages_peerDialogs{}
-		tl.Dialogs = DecodeBuf_GenericVector[TL](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		tl.State = DecodeBuf_GenericObject[TL_updates_state](m)
-		r = tl
+		r = decode_body_TL_messages_peerDialogs(m)
 	case CRC_topPeer:
-		tl := TL_topPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Rating = m.Double()
-		r = tl
+		r = decode_body_TL_topPeer(m)
 	case CRC_topPeerCategoryBotsPM:
-		tl := TL_topPeerCategoryBotsPM{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryBotsPM(m)
 	case CRC_topPeerCategoryBotsInline:
-		tl := TL_topPeerCategoryBotsInline{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryBotsInline(m)
 	case CRC_topPeerCategoryCorrespondents:
-		tl := TL_topPeerCategoryCorrespondents{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryCorrespondents(m)
 	case CRC_topPeerCategoryGroups:
-		tl := TL_topPeerCategoryGroups{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryGroups(m)
 	case CRC_topPeerCategoryChannels:
-		tl := TL_topPeerCategoryChannels{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryChannels(m)
 	case CRC_topPeerCategoryPhoneCalls:
-		tl := TL_topPeerCategoryPhoneCalls{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryPhoneCalls(m)
 	case CRC_topPeerCategoryForwardUsers:
-		tl := TL_topPeerCategoryForwardUsers{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryForwardUsers(m)
 	case CRC_topPeerCategoryForwardChats:
-		tl := TL_topPeerCategoryForwardChats{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryForwardChats(m)
 	case CRC_topPeerCategoryBotsApp:
-		tl := TL_topPeerCategoryBotsApp{}
-		r = tl
+		r = decode_body_TL_topPeerCategoryBotsApp(m)
 	case CRC_topPeerCategoryPeers:
-		tl := TL_topPeerCategoryPeers{}
-		tl.Category = DecodeBuf_GenericObject[TL](m)
-		tl.Count = m.Int()
-		tl.Peers = DecodeBuf_GenericVector[TL_topPeer](m)
-		r = tl
+		r = decode_body_TL_topPeerCategoryPeers(m)
 	case CRC_contacts_topPeersNotModified:
-		tl := TL_contacts_topPeersNotModified{}
-		r = tl
+		r = decode_body_TL_contacts_topPeersNotModified(m)
 	case CRC_contacts_topPeers:
-		tl := TL_contacts_topPeers{}
-		tl.Categories = DecodeBuf_GenericVector[TL_topPeerCategoryPeers](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_contacts_topPeers(m)
 	case CRC_contacts_topPeersDisabled:
-		tl := TL_contacts_topPeersDisabled{}
-		r = tl
+		r = decode_body_TL_contacts_topPeersDisabled(m)
 	case CRC_draftMessageEmpty:
-		tl := TL_draftMessageEmpty{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Date = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_draftMessageEmpty(m)
 	case CRC_draftMessage:
-		tl := TL_draftMessage{}
-		flags := m.Int()
-		tl.NoWebpage = flags&(1<<1) != 0
-		tl.InvertMedia = flags&(1<<6) != 0
-		if flags&(1<<4) != 0 {
-			tl.ReplyTo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Message = m.String()
-		if flags&(1<<3) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.Media = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Date = m.Int()
-		if flags&(1<<7) != 0 {
-			tl.Effect = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_draftMessage(m)
 	case CRC_messages_featuredStickersNotModified:
-		tl := TL_messages_featuredStickersNotModified{}
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_messages_featuredStickersNotModified(m)
 	case CRC_messages_featuredStickers:
-		tl := TL_messages_featuredStickers{}
-		flags := m.Int()
-		tl.Premium = flags&(1<<0) != 0
-		tl.Hash = m.Long()
-		tl.Count = m.Int()
-		tl.Sets = DecodeBuf_GenericVector[TL](m)
-		tl.Unread = m.VectorLong()
-		r = tl
+		r = decode_body_TL_messages_featuredStickers(m)
 	case CRC_messages_recentStickersNotModified:
-		tl := TL_messages_recentStickersNotModified{}
-		r = tl
+		r = decode_body_TL_messages_recentStickersNotModified(m)
 	case CRC_messages_recentStickers:
-		tl := TL_messages_recentStickers{}
-		tl.Hash = m.Long()
-		tl.Packs = DecodeBuf_GenericVector[TL_stickerPack](m)
-		tl.Stickers = DecodeBuf_GenericVector[TL](m)
-		tl.Dates = m.VectorInt()
-		r = tl
+		r = decode_body_TL_messages_recentStickers(m)
 	case CRC_messages_archivedStickers:
-		tl := TL_messages_archivedStickers{}
-		tl.Count = m.Int()
-		tl.Sets = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_archivedStickers(m)
 	case CRC_messages_stickerSetInstallResultSuccess:
-		tl := TL_messages_stickerSetInstallResultSuccess{}
-		r = tl
+		r = decode_body_TL_messages_stickerSetInstallResultSuccess(m)
 	case CRC_messages_stickerSetInstallResultArchive:
-		tl := TL_messages_stickerSetInstallResultArchive{}
-		tl.Sets = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_stickerSetInstallResultArchive(m)
 	case CRC_stickerSetCovered:
-		tl := TL_stickerSetCovered{}
-		tl.Set = DecodeBuf_GenericObject[TL_stickerSet](m)
-		tl.Cover = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_stickerSetCovered(m)
 	case CRC_stickerSetMultiCovered:
-		tl := TL_stickerSetMultiCovered{}
-		tl.Set = DecodeBuf_GenericObject[TL_stickerSet](m)
-		tl.Covers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stickerSetMultiCovered(m)
 	case CRC_stickerSetFullCovered:
-		tl := TL_stickerSetFullCovered{}
-		tl.Set = DecodeBuf_GenericObject[TL_stickerSet](m)
-		tl.Packs = DecodeBuf_GenericVector[TL_stickerPack](m)
-		tl.Keywords = DecodeBuf_GenericVector[TL_stickerKeyword](m)
-		tl.Documents = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stickerSetFullCovered(m)
 	case CRC_stickerSetNoCovered:
-		tl := TL_stickerSetNoCovered{}
-		tl.Set = DecodeBuf_GenericObject[TL_stickerSet](m)
-		r = tl
+		r = decode_body_TL_stickerSetNoCovered(m)
 	case CRC_maskCoords:
-		tl := TL_maskCoords{}
-		tl.N = m.Int()
-		tl.X = m.Double()
-		tl.Y = m.Double()
-		tl.Zoom = m.Double()
-		r = tl
+		r = decode_body_TL_maskCoords(m)
 	case CRC_inputStickeredMediaPhoto:
-		tl := TL_inputStickeredMediaPhoto{}
-		tl.ID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputStickeredMediaPhoto(m)
 	case CRC_inputStickeredMediaDocument:
-		tl := TL_inputStickeredMediaDocument{}
-		tl.ID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputStickeredMediaDocument(m)
 	case CRC_game:
-		tl := TL_game{}
-		flags := m.Int()
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.ShortName = m.String()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Document = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_game(m)
 	case CRC_inputGameID:
-		tl := TL_inputGameID{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputGameID(m)
 	case CRC_inputGameShortName:
-		tl := TL_inputGameShortName{}
-		tl.BotID = DecodeBuf_GenericObject[TL](m)
-		tl.ShortName = m.String()
-		r = tl
+		r = decode_body_TL_inputGameShortName(m)
 	case CRC_highScore:
-		tl := TL_highScore{}
-		tl.Pos = m.Int()
-		tl.UserID = m.Long()
-		tl.Score = m.Int()
-		r = tl
+		r = decode_body_TL_highScore(m)
 	case CRC_messages_highScores:
-		tl := TL_messages_highScores{}
-		tl.Scores = DecodeBuf_GenericVector[TL_highScore](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_highScores(m)
 	case CRC_textEmpty:
-		tl := TL_textEmpty{}
-		r = tl
+		r = decode_body_TL_textEmpty(m)
 	case CRC_textPlain:
-		tl := TL_textPlain{}
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_textPlain(m)
 	case CRC_textBold:
-		tl := TL_textBold{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_textBold(m)
 	case CRC_textItalic:
-		tl := TL_textItalic{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_textItalic(m)
 	case CRC_textUnderline:
-		tl := TL_textUnderline{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_textUnderline(m)
 	case CRC_textStrike:
-		tl := TL_textStrike{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_textStrike(m)
 	case CRC_textFixed:
-		tl := TL_textFixed{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_textFixed(m)
 	case CRC_textURL:
-		tl := TL_textURL{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		tl.URL = m.String()
-		tl.WebpageID = m.Long()
-		r = tl
+		r = decode_body_TL_textURL(m)
 	case CRC_textEmail:
-		tl := TL_textEmail{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		tl.Email = m.String()
-		r = tl
+		r = decode_body_TL_textEmail(m)
 	case CRC_textConcat:
-		tl := TL_textConcat{}
-		tl.Texts = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_textConcat(m)
 	case CRC_textSubscript:
-		tl := TL_textSubscript{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_textSubscript(m)
 	case CRC_textSuperscript:
-		tl := TL_textSuperscript{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_textSuperscript(m)
 	case CRC_textMarked:
-		tl := TL_textMarked{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_textMarked(m)
 	case CRC_textPhone:
-		tl := TL_textPhone{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		tl.Phone = m.String()
-		r = tl
+		r = decode_body_TL_textPhone(m)
 	case CRC_textImage:
-		tl := TL_textImage{}
-		tl.DocumentID = m.Long()
-		tl.W = m.Int()
-		tl.H = m.Int()
-		r = tl
+		r = decode_body_TL_textImage(m)
 	case CRC_textAnchor:
-		tl := TL_textAnchor{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		tl.Name = m.String()
-		r = tl
+		r = decode_body_TL_textAnchor(m)
 	case CRC_pageBlockUnsupported:
-		tl := TL_pageBlockUnsupported{}
-		r = tl
+		r = decode_body_TL_pageBlockUnsupported(m)
 	case CRC_pageBlockTitle:
-		tl := TL_pageBlockTitle{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockTitle(m)
 	case CRC_pageBlockSubtitle:
-		tl := TL_pageBlockSubtitle{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockSubtitle(m)
 	case CRC_pageBlockAuthorDate:
-		tl := TL_pageBlockAuthorDate{}
-		tl.Author = DecodeBuf_GenericObject[TL](m)
-		tl.PublishedDate = m.Int()
-		r = tl
+		r = decode_body_TL_pageBlockAuthorDate(m)
 	case CRC_pageBlockHeader:
-		tl := TL_pageBlockHeader{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockHeader(m)
 	case CRC_pageBlockSubheader:
-		tl := TL_pageBlockSubheader{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockSubheader(m)
 	case CRC_pageBlockParagraph:
-		tl := TL_pageBlockParagraph{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockParagraph(m)
 	case CRC_pageBlockPreformatted:
-		tl := TL_pageBlockPreformatted{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		tl.Language = m.String()
-		r = tl
+		r = decode_body_TL_pageBlockPreformatted(m)
 	case CRC_pageBlockFooter:
-		tl := TL_pageBlockFooter{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockFooter(m)
 	case CRC_pageBlockDivider:
-		tl := TL_pageBlockDivider{}
-		r = tl
+		r = decode_body_TL_pageBlockDivider(m)
 	case CRC_pageBlockAnchor:
-		tl := TL_pageBlockAnchor{}
-		tl.Name = m.String()
-		r = tl
+		r = decode_body_TL_pageBlockAnchor(m)
 	case CRC_pageBlockList:
-		tl := TL_pageBlockList{}
-		tl.Items = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockList(m)
 	case CRC_pageBlockBlockquote:
-		tl := TL_pageBlockBlockquote{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		tl.Caption = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockBlockquote(m)
 	case CRC_pageBlockPullquote:
-		tl := TL_pageBlockPullquote{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		tl.Caption = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockPullquote(m)
 	case CRC_pageBlockPhoto:
-		tl := TL_pageBlockPhoto{}
-		flags := m.Int()
-		tl.PhotoID = m.Long()
-		tl.Caption = DecodeBuf_GenericObject[TL_pageCaption](m)
-		if flags&(1<<0) != 0 {
-			tl.URL = Ref(m.String())
-		}
-		if flags&(1<<0) != 0 {
-			tl.WebpageID = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_pageBlockPhoto(m)
 	case CRC_pageBlockVideo:
-		tl := TL_pageBlockVideo{}
-		flags := m.Int()
-		tl.Autoplay = flags&(1<<0) != 0
-		tl.Loop = flags&(1<<1) != 0
-		tl.VideoID = m.Long()
-		tl.Caption = DecodeBuf_GenericObject[TL_pageCaption](m)
-		r = tl
+		r = decode_body_TL_pageBlockVideo(m)
 	case CRC_pageBlockCover:
-		tl := TL_pageBlockCover{}
-		tl.Cover = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockCover(m)
 	case CRC_pageBlockEmbed:
-		tl := TL_pageBlockEmbed{}
-		flags := m.Int()
-		tl.FullWidth = flags&(1<<0) != 0
-		tl.AllowScrolling = flags&(1<<3) != 0
-		if flags&(1<<1) != 0 {
-			tl.URL = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.HTML = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.PosterPhotoID = Ref(m.Long())
-		}
-		if flags&(1<<5) != 0 {
-			tl.W = Ref(m.Int())
-		}
-		if flags&(1<<5) != 0 {
-			tl.H = Ref(m.Int())
-		}
-		tl.Caption = DecodeBuf_GenericObject[TL_pageCaption](m)
-		r = tl
+		r = decode_body_TL_pageBlockEmbed(m)
 	case CRC_pageBlockEmbedPost:
-		tl := TL_pageBlockEmbedPost{}
-		tl.URL = m.String()
-		tl.WebpageID = m.Long()
-		tl.AuthorPhotoID = m.Long()
-		tl.Author = m.String()
-		tl.Date = m.Int()
-		tl.Blocks = DecodeBuf_GenericVector[TL](m)
-		tl.Caption = DecodeBuf_GenericObject[TL_pageCaption](m)
-		r = tl
+		r = decode_body_TL_pageBlockEmbedPost(m)
 	case CRC_pageBlockCollage:
-		tl := TL_pageBlockCollage{}
-		tl.Items = DecodeBuf_GenericVector[TL](m)
-		tl.Caption = DecodeBuf_GenericObject[TL_pageCaption](m)
-		r = tl
+		r = decode_body_TL_pageBlockCollage(m)
 	case CRC_pageBlockSlideshow:
-		tl := TL_pageBlockSlideshow{}
-		tl.Items = DecodeBuf_GenericVector[TL](m)
-		tl.Caption = DecodeBuf_GenericObject[TL_pageCaption](m)
-		r = tl
+		r = decode_body_TL_pageBlockSlideshow(m)
 	case CRC_pageBlockChannel:
-		tl := TL_pageBlockChannel{}
-		tl.Channel = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockChannel(m)
 	case CRC_pageBlockAudio:
-		tl := TL_pageBlockAudio{}
-		tl.AudioID = m.Long()
-		tl.Caption = DecodeBuf_GenericObject[TL_pageCaption](m)
-		r = tl
+		r = decode_body_TL_pageBlockAudio(m)
 	case CRC_pageBlockKicker:
-		tl := TL_pageBlockKicker{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockKicker(m)
 	case CRC_pageBlockTable:
-		tl := TL_pageBlockTable{}
-		flags := m.Int()
-		tl.Bordered = flags&(1<<0) != 0
-		tl.Striped = flags&(1<<1) != 0
-		tl.Title = DecodeBuf_GenericObject[TL](m)
-		tl.Rows = DecodeBuf_GenericVector[TL_pageTableRow](m)
-		r = tl
+		r = decode_body_TL_pageBlockTable(m)
 	case CRC_pageBlockOrderedList:
-		tl := TL_pageBlockOrderedList{}
-		tl.Items = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockOrderedList(m)
 	case CRC_pageBlockDetails:
-		tl := TL_pageBlockDetails{}
-		flags := m.Int()
-		tl.Open = flags&(1<<0) != 0
-		tl.Blocks = DecodeBuf_GenericVector[TL](m)
-		tl.Title = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageBlockDetails(m)
 	case CRC_pageBlockRelatedArticles:
-		tl := TL_pageBlockRelatedArticles{}
-		tl.Title = DecodeBuf_GenericObject[TL](m)
-		tl.Articles = DecodeBuf_GenericVector[TL_pageRelatedArticle](m)
-		r = tl
+		r = decode_body_TL_pageBlockRelatedArticles(m)
 	case CRC_pageBlockMap:
-		tl := TL_pageBlockMap{}
-		tl.Geo = DecodeBuf_GenericObject[TL](m)
-		tl.Zoom = m.Int()
-		tl.W = m.Int()
-		tl.H = m.Int()
-		tl.Caption = DecodeBuf_GenericObject[TL_pageCaption](m)
-		r = tl
+		r = decode_body_TL_pageBlockMap(m)
 	case CRC_phoneCallDiscardReasonMissed:
-		tl := TL_phoneCallDiscardReasonMissed{}
-		r = tl
+		r = decode_body_TL_phoneCallDiscardReasonMissed(m)
 	case CRC_phoneCallDiscardReasonDisconnect:
-		tl := TL_phoneCallDiscardReasonDisconnect{}
-		r = tl
+		r = decode_body_TL_phoneCallDiscardReasonDisconnect(m)
 	case CRC_phoneCallDiscardReasonHangup:
-		tl := TL_phoneCallDiscardReasonHangup{}
-		r = tl
+		r = decode_body_TL_phoneCallDiscardReasonHangup(m)
 	case CRC_phoneCallDiscardReasonBusy:
-		tl := TL_phoneCallDiscardReasonBusy{}
-		r = tl
+		r = decode_body_TL_phoneCallDiscardReasonBusy(m)
 	case CRC_dataJSON:
-		tl := TL_dataJSON{}
-		tl.Data = m.String()
-		r = tl
+		r = decode_body_TL_dataJSON(m)
 	case CRC_labeledPrice:
-		tl := TL_labeledPrice{}
-		tl.Label = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_labeledPrice(m)
 	case CRC_invoice:
-		tl := TL_invoice{}
-		flags := m.Int()
-		tl.Test = flags&(1<<0) != 0
-		tl.NameRequested = flags&(1<<1) != 0
-		tl.PhoneRequested = flags&(1<<2) != 0
-		tl.EmailRequested = flags&(1<<3) != 0
-		tl.ShippingAddressRequested = flags&(1<<4) != 0
-		tl.Flexible = flags&(1<<5) != 0
-		tl.PhoneToProvider = flags&(1<<6) != 0
-		tl.EmailToProvider = flags&(1<<7) != 0
-		tl.Recurring = flags&(1<<9) != 0
-		tl.Currency = m.String()
-		tl.Prices = DecodeBuf_GenericVector[TL_labeledPrice](m)
-		if flags&(1<<8) != 0 {
-			tl.MaxTipAmount = Ref(m.Long())
-		}
-		if flags&(1<<8) != 0 {
-			tl.SuggestedTipAmounts = m.VectorLong()
-		}
-		if flags&(1<<10) != 0 {
-			tl.TermsURL = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_invoice(m)
 	case CRC_paymentCharge:
-		tl := TL_paymentCharge{}
-		tl.ID = m.String()
-		tl.ProviderChargeID = m.String()
-		r = tl
+		r = decode_body_TL_paymentCharge(m)
 	case CRC_postAddress:
-		tl := TL_postAddress{}
-		tl.StreetLine1 = m.String()
-		tl.StreetLine2 = m.String()
-		tl.City = m.String()
-		tl.State = m.String()
-		tl.CountryISO2 = m.String()
-		tl.PostCode = m.String()
-		r = tl
+		r = decode_body_TL_postAddress(m)
 	case CRC_paymentRequestedInfo:
-		tl := TL_paymentRequestedInfo{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Name = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Phone = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Email = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.ShippingAddress = Ref(DecodeBuf_GenericObject[TL_postAddress](m))
-		}
-		r = tl
+		r = decode_body_TL_paymentRequestedInfo(m)
 	case CRC_paymentSavedCredentialsCard:
-		tl := TL_paymentSavedCredentialsCard{}
-		tl.ID = m.String()
-		tl.Title = m.String()
-		r = tl
+		r = decode_body_TL_paymentSavedCredentialsCard(m)
 	case CRC_webDocument:
-		tl := TL_webDocument{}
-		tl.URL = m.String()
-		tl.AccessHash = m.Long()
-		tl.Size = m.Int()
-		tl.MIMEType = m.String()
-		tl.Attributes = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_webDocument(m)
 	case CRC_webDocumentNoProxy:
-		tl := TL_webDocumentNoProxy{}
-		tl.URL = m.String()
-		tl.Size = m.Int()
-		tl.MIMEType = m.String()
-		tl.Attributes = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_webDocumentNoProxy(m)
 	case CRC_inputWebDocument:
-		tl := TL_inputWebDocument{}
-		tl.URL = m.String()
-		tl.Size = m.Int()
-		tl.MIMEType = m.String()
-		tl.Attributes = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_inputWebDocument(m)
 	case CRC_inputWebFileLocation:
-		tl := TL_inputWebFileLocation{}
-		tl.URL = m.String()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputWebFileLocation(m)
 	case CRC_inputWebFileGeoPointLocation:
-		tl := TL_inputWebFileGeoPointLocation{}
-		tl.GeoPoint = DecodeBuf_GenericObject[TL](m)
-		tl.AccessHash = m.Long()
-		tl.W = m.Int()
-		tl.H = m.Int()
-		tl.Zoom = m.Int()
-		tl.Scale = m.Int()
-		r = tl
+		r = decode_body_TL_inputWebFileGeoPointLocation(m)
 	case CRC_inputWebFileAudioAlbumThumbLocation:
-		tl := TL_inputWebFileAudioAlbumThumbLocation{}
-		flags := m.Int()
-		tl.Small = flags&(1<<2) != 0
-		if flags&(1<<0) != 0 {
-			tl.Document = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Performer = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_inputWebFileAudioAlbumThumbLocation(m)
 	case CRC_upload_webFile:
-		tl := TL_upload_webFile{}
-		tl.Size = m.Int()
-		tl.MIMEType = m.String()
-		tl.FileType = DecodeBuf_GenericObject[TL](m)
-		tl.Mtime = m.Int()
-		tl.Bytes = m.StringBytes()
-		r = tl
+		r = decode_body_TL_upload_webFile(m)
 	case CRC_payments_paymentForm:
-		tl := TL_payments_paymentForm{}
-		flags := m.Int()
-		tl.CanSaveCredentials = flags&(1<<2) != 0
-		tl.PasswordMissing = flags&(1<<3) != 0
-		tl.FormID = m.Long()
-		tl.BotID = m.Long()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<5) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
-		tl.ProviderID = m.Long()
-		tl.URL = m.String()
-		if flags&(1<<4) != 0 {
-			tl.NativeProvider = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.NativeParams = Ref(DecodeBuf_GenericObject[TL_dataJSON](m))
-		}
-		if flags&(1<<6) != 0 {
-			tl.AdditionalMethods = DecodeBuf_GenericVector[TL_paymentFormMethod](m)
-		}
-		if flags&(1<<0) != 0 {
-			tl.SavedInfo = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
-		}
-		if flags&(1<<1) != 0 {
-			tl.SavedCredentials = DecodeBuf_GenericVector[TL_paymentSavedCredentialsCard](m)
-		}
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_payments_paymentForm(m)
 	case CRC_payments_paymentFormStars:
-		tl := TL_payments_paymentFormStars{}
-		flags := m.Int()
-		tl.FormID = m.Long()
-		tl.BotID = m.Long()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<5) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_payments_paymentFormStars(m)
 	case CRC_payments_validatedRequestedInfo:
-		tl := TL_payments_validatedRequestedInfo{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.ID = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.ShippingOptions = DecodeBuf_GenericVector[TL_shippingOption](m)
-		}
-		r = tl
+		r = decode_body_TL_payments_validatedRequestedInfo(m)
 	case CRC_payments_paymentResult:
-		tl := TL_payments_paymentResult{}
-		tl.Updates = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_payments_paymentResult(m)
 	case CRC_payments_paymentVerificationNeeded:
-		tl := TL_payments_paymentVerificationNeeded{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_payments_paymentVerificationNeeded(m)
 	case CRC_payments_paymentReceipt:
-		tl := TL_payments_paymentReceipt{}
-		flags := m.Int()
-		tl.Date = m.Int()
-		tl.BotID = m.Long()
-		tl.ProviderID = m.Long()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<2) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
-		if flags&(1<<0) != 0 {
-			tl.Info = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
-		}
-		if flags&(1<<1) != 0 {
-			tl.Shipping = Ref(DecodeBuf_GenericObject[TL_shippingOption](m))
-		}
-		if flags&(1<<3) != 0 {
-			tl.TipAmount = Ref(m.Long())
-		}
-		tl.Currency = m.String()
-		tl.TotalAmount = m.Long()
-		tl.CredentialsTitle = m.String()
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_payments_paymentReceipt(m)
 	case CRC_payments_paymentReceiptStars:
-		tl := TL_payments_paymentReceiptStars{}
-		flags := m.Int()
-		tl.Date = m.Int()
-		tl.BotID = m.Long()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<2) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Invoice = DecodeBuf_GenericObject[TL_invoice](m)
-		tl.Currency = m.String()
-		tl.TotalAmount = m.Long()
-		tl.TransactionID = m.String()
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_payments_paymentReceiptStars(m)
 	case CRC_payments_savedInfo:
-		tl := TL_payments_savedInfo{}
-		flags := m.Int()
-		tl.HasSavedCredentials = flags&(1<<1) != 0
-		if flags&(1<<0) != 0 {
-			tl.SavedInfo = Ref(DecodeBuf_GenericObject[TL_paymentRequestedInfo](m))
-		}
-		r = tl
+		r = decode_body_TL_payments_savedInfo(m)
 	case CRC_inputPaymentCredentialsSaved:
-		tl := TL_inputPaymentCredentialsSaved{}
-		tl.ID = m.String()
-		tl.TmpPassword = m.StringBytes()
-		r = tl
+		r = decode_body_TL_inputPaymentCredentialsSaved(m)
 	case CRC_inputPaymentCredentials:
-		tl := TL_inputPaymentCredentials{}
-		flags := m.Int()
-		tl.Save = flags&(1<<0) != 0
-		tl.Data = DecodeBuf_GenericObject[TL_dataJSON](m)
-		r = tl
+		r = decode_body_TL_inputPaymentCredentials(m)
 	case CRC_inputPaymentCredentialsApplePay:
-		tl := TL_inputPaymentCredentialsApplePay{}
-		tl.PaymentData = DecodeBuf_GenericObject[TL_dataJSON](m)
-		r = tl
+		r = decode_body_TL_inputPaymentCredentialsApplePay(m)
 	case CRC_inputPaymentCredentialsGooglePay:
-		tl := TL_inputPaymentCredentialsGooglePay{}
-		tl.PaymentToken = DecodeBuf_GenericObject[TL_dataJSON](m)
-		r = tl
+		r = decode_body_TL_inputPaymentCredentialsGooglePay(m)
 	case CRC_account_tmpPassword:
-		tl := TL_account_tmpPassword{}
-		tl.TmpPassword = m.StringBytes()
-		tl.ValidUntil = m.Int()
-		r = tl
+		r = decode_body_TL_account_tmpPassword(m)
 	case CRC_shippingOption:
-		tl := TL_shippingOption{}
-		tl.ID = m.String()
-		tl.Title = m.String()
-		tl.Prices = DecodeBuf_GenericVector[TL_labeledPrice](m)
-		r = tl
+		r = decode_body_TL_shippingOption(m)
 	case CRC_inputStickerSetItem:
-		tl := TL_inputStickerSetItem{}
-		flags := m.Int()
-		tl.Document = DecodeBuf_GenericObject[TL](m)
-		tl.Emoji = m.String()
-		if flags&(1<<0) != 0 {
-			tl.MaskCoords = Ref(DecodeBuf_GenericObject[TL_maskCoords](m))
-		}
-		if flags&(1<<1) != 0 {
-			tl.Keywords = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_inputStickerSetItem(m)
 	case CRC_inputPhoneCall:
-		tl := TL_inputPhoneCall{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputPhoneCall(m)
 	case CRC_phoneCallEmpty:
-		tl := TL_phoneCallEmpty{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_phoneCallEmpty(m)
 	case CRC_phoneCallWaiting:
-		tl := TL_phoneCallWaiting{}
-		flags := m.Int()
-		tl.Video = flags&(1<<6) != 0
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Date = m.Int()
-		tl.AdminID = m.Long()
-		tl.ParticipantID = m.Long()
-		tl.Protocol = DecodeBuf_GenericObject[TL_phoneCallProtocol](m)
-		if flags&(1<<0) != 0 {
-			tl.ReceiveDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_phoneCallWaiting(m)
 	case CRC_phoneCallRequested:
-		tl := TL_phoneCallRequested{}
-		flags := m.Int()
-		tl.Video = flags&(1<<6) != 0
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Date = m.Int()
-		tl.AdminID = m.Long()
-		tl.ParticipantID = m.Long()
-		tl.GAHash = m.StringBytes()
-		tl.Protocol = DecodeBuf_GenericObject[TL_phoneCallProtocol](m)
-		r = tl
+		r = decode_body_TL_phoneCallRequested(m)
 	case CRC_phoneCallAccepted:
-		tl := TL_phoneCallAccepted{}
-		flags := m.Int()
-		tl.Video = flags&(1<<6) != 0
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Date = m.Int()
-		tl.AdminID = m.Long()
-		tl.ParticipantID = m.Long()
-		tl.GB = m.StringBytes()
-		tl.Protocol = DecodeBuf_GenericObject[TL_phoneCallProtocol](m)
-		r = tl
+		r = decode_body_TL_phoneCallAccepted(m)
 	case CRC_phoneCall:
-		tl := TL_phoneCall{}
-		flags := m.Int()
-		tl.P2PAllowed = flags&(1<<5) != 0
-		tl.Video = flags&(1<<6) != 0
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Date = m.Int()
-		tl.AdminID = m.Long()
-		tl.ParticipantID = m.Long()
-		tl.GAOrB = m.StringBytes()
-		tl.KeyFingerprint = m.Long()
-		tl.Protocol = DecodeBuf_GenericObject[TL_phoneCallProtocol](m)
-		tl.Connections = DecodeBuf_GenericVector[TL](m)
-		tl.StartDate = m.Int()
-		if flags&(1<<7) != 0 {
-			tl.CustomParameters = Ref(DecodeBuf_GenericObject[TL_dataJSON](m))
-		}
-		r = tl
+		r = decode_body_TL_phoneCall(m)
 	case CRC_phoneCallDiscarded:
-		tl := TL_phoneCallDiscarded{}
-		flags := m.Int()
-		tl.NeedRating = flags&(1<<2) != 0
-		tl.NeedDebug = flags&(1<<3) != 0
-		tl.Video = flags&(1<<6) != 0
-		tl.ID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Reason = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Duration = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_phoneCallDiscarded(m)
 	case CRC_phoneConnection:
-		tl := TL_phoneConnection{}
-		flags := m.Int()
-		tl.TCP = flags&(1<<0) != 0
-		tl.ID = m.Long()
-		tl.IP = m.String()
-		tl.IPv6 = m.String()
-		tl.Port = m.Int()
-		tl.PeerTag = m.StringBytes()
-		r = tl
+		r = decode_body_TL_phoneConnection(m)
 	case CRC_phoneConnectionWebrtc:
-		tl := TL_phoneConnectionWebrtc{}
-		flags := m.Int()
-		tl.Turn = flags&(1<<0) != 0
-		tl.STUN = flags&(1<<1) != 0
-		tl.ID = m.Long()
-		tl.IP = m.String()
-		tl.IPv6 = m.String()
-		tl.Port = m.Int()
-		tl.Username = m.String()
-		tl.Password = m.String()
-		r = tl
+		r = decode_body_TL_phoneConnectionWebrtc(m)
 	case CRC_phoneCallProtocol:
-		tl := TL_phoneCallProtocol{}
-		flags := m.Int()
-		tl.UDPP2P = flags&(1<<0) != 0
-		tl.UDPReflector = flags&(1<<1) != 0
-		tl.MinLayer = m.Int()
-		tl.MaxLayer = m.Int()
-		tl.LibraryVersions = m.VectorString()
-		r = tl
+		r = decode_body_TL_phoneCallProtocol(m)
 	case CRC_phone_phoneCall:
-		tl := TL_phone_phoneCall{}
-		tl.PhoneCall = DecodeBuf_GenericObject[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_phone_phoneCall(m)
 	case CRC_upload_cdnFileReuploadNeeded:
-		tl := TL_upload_cdnFileReuploadNeeded{}
-		tl.RequestToken = m.StringBytes()
-		r = tl
+		r = decode_body_TL_upload_cdnFileReuploadNeeded(m)
 	case CRC_upload_cdnFile:
-		tl := TL_upload_cdnFile{}
-		tl.Bytes = m.StringBytes()
-		r = tl
+		r = decode_body_TL_upload_cdnFile(m)
 	case CRC_cdnPublicKey:
-		tl := TL_cdnPublicKey{}
-		tl.DCID = m.Int()
-		tl.PublicKey = m.String()
-		r = tl
+		r = decode_body_TL_cdnPublicKey(m)
 	case CRC_cdnConfig:
-		tl := TL_cdnConfig{}
-		tl.PublicKeys = DecodeBuf_GenericVector[TL_cdnPublicKey](m)
-		r = tl
+		r = decode_body_TL_cdnConfig(m)
 	case CRC_langPackString:
-		tl := TL_langPackString{}
-		tl.Key = m.String()
-		tl.Value = m.String()
-		r = tl
+		r = decode_body_TL_langPackString(m)
 	case CRC_langPackStringPluralized:
-		tl := TL_langPackStringPluralized{}
-		flags := m.Int()
-		tl.Key = m.String()
-		if flags&(1<<0) != 0 {
-			tl.ZeroValue = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.OneValue = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.TwoValue = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.FewValue = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.ManyValue = Ref(m.String())
-		}
-		tl.OtherValue = m.String()
-		r = tl
+		r = decode_body_TL_langPackStringPluralized(m)
 	case CRC_langPackStringDeleted:
-		tl := TL_langPackStringDeleted{}
-		tl.Key = m.String()
-		r = tl
+		r = decode_body_TL_langPackStringDeleted(m)
 	case CRC_langPackDifference:
-		tl := TL_langPackDifference{}
-		tl.LangCode = m.String()
-		tl.FromVersion = m.Int()
-		tl.Version = m.Int()
-		tl.Strings = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_langPackDifference(m)
 	case CRC_langPackLanguage:
-		tl := TL_langPackLanguage{}
-		flags := m.Int()
-		tl.Official = flags&(1<<0) != 0
-		tl.RTL = flags&(1<<2) != 0
-		tl.Beta = flags&(1<<3) != 0
-		tl.Name = m.String()
-		tl.NativeName = m.String()
-		tl.LangCode = m.String()
-		if flags&(1<<1) != 0 {
-			tl.BaseLangCode = Ref(m.String())
-		}
-		tl.PluralCode = m.String()
-		tl.StringsCount = m.Int()
-		tl.TranslatedCount = m.Int()
-		tl.TranslationsURL = m.String()
-		r = tl
+		r = decode_body_TL_langPackLanguage(m)
 	case CRC_channelAdminLogEventActionChangeTitle:
-		tl := TL_channelAdminLogEventActionChangeTitle{}
-		tl.PrevValue = m.String()
-		tl.NewValue = m.String()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeTitle(m)
 	case CRC_channelAdminLogEventActionChangeAbout:
-		tl := TL_channelAdminLogEventActionChangeAbout{}
-		tl.PrevValue = m.String()
-		tl.NewValue = m.String()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeAbout(m)
 	case CRC_channelAdminLogEventActionChangeUsername:
-		tl := TL_channelAdminLogEventActionChangeUsername{}
-		tl.PrevValue = m.String()
-		tl.NewValue = m.String()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeUsername(m)
 	case CRC_channelAdminLogEventActionChangePhoto:
-		tl := TL_channelAdminLogEventActionChangePhoto{}
-		tl.PrevPhoto = DecodeBuf_GenericObject[TL](m)
-		tl.NewPhoto = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangePhoto(m)
 	case CRC_channelAdminLogEventActionToggleInvites:
-		tl := TL_channelAdminLogEventActionToggleInvites{}
-		tl.NewValue = m.Bool()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionToggleInvites(m)
 	case CRC_channelAdminLogEventActionToggleSignatures:
-		tl := TL_channelAdminLogEventActionToggleSignatures{}
-		tl.NewValue = m.Bool()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionToggleSignatures(m)
 	case CRC_channelAdminLogEventActionUpdatePinned:
-		tl := TL_channelAdminLogEventActionUpdatePinned{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionUpdatePinned(m)
 	case CRC_channelAdminLogEventActionEditMessage:
-		tl := TL_channelAdminLogEventActionEditMessage{}
-		tl.PrevMessage = DecodeBuf_GenericObject[TL](m)
-		tl.NewMessage = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionEditMessage(m)
 	case CRC_channelAdminLogEventActionDeleteMessage:
-		tl := TL_channelAdminLogEventActionDeleteMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionDeleteMessage(m)
 	case CRC_channelAdminLogEventActionParticipantJoin:
-		tl := TL_channelAdminLogEventActionParticipantJoin{}
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantJoin(m)
 	case CRC_channelAdminLogEventActionParticipantLeave:
-		tl := TL_channelAdminLogEventActionParticipantLeave{}
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantLeave(m)
 	case CRC_channelAdminLogEventActionParticipantInvite:
-		tl := TL_channelAdminLogEventActionParticipantInvite{}
-		tl.Participant = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantInvite(m)
 	case CRC_channelAdminLogEventActionParticipantToggleBan:
-		tl := TL_channelAdminLogEventActionParticipantToggleBan{}
-		tl.PrevParticipant = DecodeBuf_GenericObject[TL](m)
-		tl.NewParticipant = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantToggleBan(m)
 	case CRC_channelAdminLogEventActionParticipantToggleAdmin:
-		tl := TL_channelAdminLogEventActionParticipantToggleAdmin{}
-		tl.PrevParticipant = DecodeBuf_GenericObject[TL](m)
-		tl.NewParticipant = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantToggleAdmin(m)
 	case CRC_channelAdminLogEventActionChangeStickerSet:
-		tl := TL_channelAdminLogEventActionChangeStickerSet{}
-		tl.PrevStickerset = DecodeBuf_GenericObject[TL](m)
-		tl.NewStickerset = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeStickerSet(m)
 	case CRC_channelAdminLogEventActionTogglePreHistoryHidden:
-		tl := TL_channelAdminLogEventActionTogglePreHistoryHidden{}
-		tl.NewValue = m.Bool()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionTogglePreHistoryHidden(m)
 	case CRC_channelAdminLogEventActionDefaultBannedRights:
-		tl := TL_channelAdminLogEventActionDefaultBannedRights{}
-		tl.PrevBannedRights = DecodeBuf_GenericObject[TL_chatBannedRights](m)
-		tl.NewBannedRights = DecodeBuf_GenericObject[TL_chatBannedRights](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionDefaultBannedRights(m)
 	case CRC_channelAdminLogEventActionStopPoll:
-		tl := TL_channelAdminLogEventActionStopPoll{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionStopPoll(m)
 	case CRC_channelAdminLogEventActionChangeLinkedChat:
-		tl := TL_channelAdminLogEventActionChangeLinkedChat{}
-		tl.PrevValue = m.Long()
-		tl.NewValue = m.Long()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeLinkedChat(m)
 	case CRC_channelAdminLogEventActionChangeLocation:
-		tl := TL_channelAdminLogEventActionChangeLocation{}
-		tl.PrevValue = DecodeBuf_GenericObject[TL](m)
-		tl.NewValue = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeLocation(m)
 	case CRC_channelAdminLogEventActionToggleSlowMode:
-		tl := TL_channelAdminLogEventActionToggleSlowMode{}
-		tl.PrevValue = m.Int()
-		tl.NewValue = m.Int()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionToggleSlowMode(m)
 	case CRC_channelAdminLogEventActionStartGroupCall:
-		tl := TL_channelAdminLogEventActionStartGroupCall{}
-		tl.Call = DecodeBuf_GenericObject[TL_inputGroupCall](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionStartGroupCall(m)
 	case CRC_channelAdminLogEventActionDiscardGroupCall:
-		tl := TL_channelAdminLogEventActionDiscardGroupCall{}
-		tl.Call = DecodeBuf_GenericObject[TL_inputGroupCall](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionDiscardGroupCall(m)
 	case CRC_channelAdminLogEventActionParticipantMute:
-		tl := TL_channelAdminLogEventActionParticipantMute{}
-		tl.Participant = DecodeBuf_GenericObject[TL_groupCallParticipant](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantMute(m)
 	case CRC_channelAdminLogEventActionParticipantUnmute:
-		tl := TL_channelAdminLogEventActionParticipantUnmute{}
-		tl.Participant = DecodeBuf_GenericObject[TL_groupCallParticipant](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantUnmute(m)
 	case CRC_channelAdminLogEventActionToggleGroupCallSetting:
-		tl := TL_channelAdminLogEventActionToggleGroupCallSetting{}
-		tl.JoinMuted = m.Bool()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionToggleGroupCallSetting(m)
 	case CRC_channelAdminLogEventActionParticipantJoinByInvite:
-		tl := TL_channelAdminLogEventActionParticipantJoinByInvite{}
-		flags := m.Int()
-		tl.ViaChatlist = flags&(1<<0) != 0
-		tl.Invite = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantJoinByInvite(m)
 	case CRC_channelAdminLogEventActionExportedInviteDelete:
-		tl := TL_channelAdminLogEventActionExportedInviteDelete{}
-		tl.Invite = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionExportedInviteDelete(m)
 	case CRC_channelAdminLogEventActionExportedInviteRevoke:
-		tl := TL_channelAdminLogEventActionExportedInviteRevoke{}
-		tl.Invite = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionExportedInviteRevoke(m)
 	case CRC_channelAdminLogEventActionExportedInviteEdit:
-		tl := TL_channelAdminLogEventActionExportedInviteEdit{}
-		tl.PrevInvite = DecodeBuf_GenericObject[TL](m)
-		tl.NewInvite = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionExportedInviteEdit(m)
 	case CRC_channelAdminLogEventActionParticipantVolume:
-		tl := TL_channelAdminLogEventActionParticipantVolume{}
-		tl.Participant = DecodeBuf_GenericObject[TL_groupCallParticipant](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantVolume(m)
 	case CRC_channelAdminLogEventActionChangeHistoryTTL:
-		tl := TL_channelAdminLogEventActionChangeHistoryTTL{}
-		tl.PrevValue = m.Int()
-		tl.NewValue = m.Int()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeHistoryTTL(m)
 	case CRC_channelAdminLogEventActionParticipantJoinByRequest:
-		tl := TL_channelAdminLogEventActionParticipantJoinByRequest{}
-		tl.Invite = DecodeBuf_GenericObject[TL](m)
-		tl.ApprovedBy = m.Long()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionParticipantJoinByRequest(m)
 	case CRC_channelAdminLogEventActionToggleNoForwards:
-		tl := TL_channelAdminLogEventActionToggleNoForwards{}
-		tl.NewValue = m.Bool()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionToggleNoForwards(m)
 	case CRC_channelAdminLogEventActionSendMessage:
-		tl := TL_channelAdminLogEventActionSendMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionSendMessage(m)
 	case CRC_channelAdminLogEventActionChangeAvailableReactions:
-		tl := TL_channelAdminLogEventActionChangeAvailableReactions{}
-		tl.PrevValue = DecodeBuf_GenericObject[TL](m)
-		tl.NewValue = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeAvailableReactions(m)
 	case CRC_channelAdminLogEventActionChangeUsernames:
-		tl := TL_channelAdminLogEventActionChangeUsernames{}
-		tl.PrevValue = m.VectorString()
-		tl.NewValue = m.VectorString()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeUsernames(m)
 	case CRC_channelAdminLogEventActionToggleForum:
-		tl := TL_channelAdminLogEventActionToggleForum{}
-		tl.NewValue = m.Bool()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionToggleForum(m)
 	case CRC_channelAdminLogEventActionCreateTopic:
-		tl := TL_channelAdminLogEventActionCreateTopic{}
-		tl.Topic = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionCreateTopic(m)
 	case CRC_channelAdminLogEventActionEditTopic:
-		tl := TL_channelAdminLogEventActionEditTopic{}
-		tl.PrevTopic = DecodeBuf_GenericObject[TL](m)
-		tl.NewTopic = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionEditTopic(m)
 	case CRC_channelAdminLogEventActionDeleteTopic:
-		tl := TL_channelAdminLogEventActionDeleteTopic{}
-		tl.Topic = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionDeleteTopic(m)
 	case CRC_channelAdminLogEventActionPINTopic:
-		tl := TL_channelAdminLogEventActionPINTopic{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.PrevTopic = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.NewTopic = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionPINTopic(m)
 	case CRC_channelAdminLogEventActionToggleAntiSpam:
-		tl := TL_channelAdminLogEventActionToggleAntiSpam{}
-		tl.NewValue = m.Bool()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionToggleAntiSpam(m)
 	case CRC_channelAdminLogEventActionChangePeerColor:
-		tl := TL_channelAdminLogEventActionChangePeerColor{}
-		tl.PrevValue = DecodeBuf_GenericObject[TL_peerColor](m)
-		tl.NewValue = DecodeBuf_GenericObject[TL_peerColor](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangePeerColor(m)
 	case CRC_channelAdminLogEventActionChangeProfilePeerColor:
-		tl := TL_channelAdminLogEventActionChangeProfilePeerColor{}
-		tl.PrevValue = DecodeBuf_GenericObject[TL_peerColor](m)
-		tl.NewValue = DecodeBuf_GenericObject[TL_peerColor](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeProfilePeerColor(m)
 	case CRC_channelAdminLogEventActionChangeWallpaper:
-		tl := TL_channelAdminLogEventActionChangeWallpaper{}
-		tl.PrevValue = DecodeBuf_GenericObject[TL](m)
-		tl.NewValue = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeWallpaper(m)
 	case CRC_channelAdminLogEventActionChangeEmojiStatus:
-		tl := TL_channelAdminLogEventActionChangeEmojiStatus{}
-		tl.PrevValue = DecodeBuf_GenericObject[TL](m)
-		tl.NewValue = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeEmojiStatus(m)
 	case CRC_channelAdminLogEventActionChangeEmojiStickerSet:
-		tl := TL_channelAdminLogEventActionChangeEmojiStickerSet{}
-		tl.PrevStickerset = DecodeBuf_GenericObject[TL](m)
-		tl.NewStickerset = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionChangeEmojiStickerSet(m)
 	case CRC_channelAdminLogEventActionToggleSignatureProfiles:
-		tl := TL_channelAdminLogEventActionToggleSignatureProfiles{}
-		tl.NewValue = m.Bool()
-		r = tl
+		r = decode_body_TL_channelAdminLogEventActionToggleSignatureProfiles(m)
 	case CRC_channelAdminLogEvent:
-		tl := TL_channelAdminLogEvent{}
-		tl.ID = m.Long()
-		tl.Date = m.Int()
-		tl.UserID = m.Long()
-		tl.Action = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_channelAdminLogEvent(m)
 	case CRC_channels_adminLogResults:
-		tl := TL_channels_adminLogResults{}
-		tl.Events = DecodeBuf_GenericVector[TL_channelAdminLogEvent](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_channels_adminLogResults(m)
 	case CRC_channelAdminLogEventsFilter:
-		tl := TL_channelAdminLogEventsFilter{}
-		flags := m.Int()
-		tl.Join = flags&(1<<0) != 0
-		tl.Leave = flags&(1<<1) != 0
-		tl.Invite = flags&(1<<2) != 0
-		tl.Ban = flags&(1<<3) != 0
-		tl.Unban = flags&(1<<4) != 0
-		tl.Kick = flags&(1<<5) != 0
-		tl.Unkick = flags&(1<<6) != 0
-		tl.Promote = flags&(1<<7) != 0
-		tl.Demote = flags&(1<<8) != 0
-		tl.Info = flags&(1<<9) != 0
-		tl.Settings = flags&(1<<10) != 0
-		tl.Pinned = flags&(1<<11) != 0
-		tl.Edit = flags&(1<<12) != 0
-		tl.Delete = flags&(1<<13) != 0
-		tl.GroupCall = flags&(1<<14) != 0
-		tl.Invites = flags&(1<<15) != 0
-		tl.Send = flags&(1<<16) != 0
-		tl.Forums = flags&(1<<17) != 0
-		r = tl
+		r = decode_body_TL_channelAdminLogEventsFilter(m)
 	case CRC_popularContact:
-		tl := TL_popularContact{}
-		tl.ClientID = m.Long()
-		tl.Importers = m.Int()
-		r = tl
+		r = decode_body_TL_popularContact(m)
 	case CRC_messages_favedStickersNotModified:
-		tl := TL_messages_favedStickersNotModified{}
-		r = tl
+		r = decode_body_TL_messages_favedStickersNotModified(m)
 	case CRC_messages_favedStickers:
-		tl := TL_messages_favedStickers{}
-		tl.Hash = m.Long()
-		tl.Packs = DecodeBuf_GenericVector[TL_stickerPack](m)
-		tl.Stickers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_favedStickers(m)
 	case CRC_recentMeURLUnknown:
-		tl := TL_recentMeURLUnknown{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_recentMeURLUnknown(m)
 	case CRC_recentMeURLUser:
-		tl := TL_recentMeURLUser{}
-		tl.URL = m.String()
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_recentMeURLUser(m)
 	case CRC_recentMeURLChat:
-		tl := TL_recentMeURLChat{}
-		tl.URL = m.String()
-		tl.ChatID = m.Long()
-		r = tl
+		r = decode_body_TL_recentMeURLChat(m)
 	case CRC_recentMeURLChatInvite:
-		tl := TL_recentMeURLChatInvite{}
-		tl.URL = m.String()
-		tl.ChatInvite = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_recentMeURLChatInvite(m)
 	case CRC_recentMeURLStickerSet:
-		tl := TL_recentMeURLStickerSet{}
-		tl.URL = m.String()
-		tl.Set = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_recentMeURLStickerSet(m)
 	case CRC_help_recentMeURLs:
-		tl := TL_help_recentMeURLs{}
-		tl.URLs = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_help_recentMeURLs(m)
 	case CRC_inputSingleMedia:
-		tl := TL_inputSingleMedia{}
-		flags := m.Int()
-		tl.Media = DecodeBuf_GenericObject[TL](m)
-		tl.RandomID = m.Long()
-		tl.Message = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputSingleMedia(m)
 	case CRC_webAuthorization:
-		tl := TL_webAuthorization{}
-		tl.Hash = m.Long()
-		tl.BotID = m.Long()
-		tl.Domain = m.String()
-		tl.Browser = m.String()
-		tl.Platform = m.String()
-		tl.DateCreated = m.Int()
-		tl.DateActive = m.Int()
-		tl.IP = m.String()
-		tl.Region = m.String()
-		r = tl
+		r = decode_body_TL_webAuthorization(m)
 	case CRC_account_webAuthorizations:
-		tl := TL_account_webAuthorizations{}
-		tl.Authorizations = DecodeBuf_GenericVector[TL_webAuthorization](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_webAuthorizations(m)
 	case CRC_inputMessageID:
-		tl := TL_inputMessageID{}
-		tl.ID = m.Int()
-		r = tl
+		r = decode_body_TL_inputMessageID(m)
 	case CRC_inputMessageReplyTo:
-		tl := TL_inputMessageReplyTo{}
-		tl.ID = m.Int()
-		r = tl
+		r = decode_body_TL_inputMessageReplyTo(m)
 	case CRC_inputMessagePinned:
-		tl := TL_inputMessagePinned{}
-		r = tl
+		r = decode_body_TL_inputMessagePinned(m)
 	case CRC_inputMessageCallbackQuery:
-		tl := TL_inputMessageCallbackQuery{}
-		tl.ID = m.Int()
-		tl.QueryID = m.Long()
-		r = tl
+		r = decode_body_TL_inputMessageCallbackQuery(m)
 	case CRC_inputDialogPeer:
-		tl := TL_inputDialogPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputDialogPeer(m)
 	case CRC_inputDialogPeerFolder:
-		tl := TL_inputDialogPeerFolder{}
-		tl.FolderID = m.Int()
-		r = tl
+		r = decode_body_TL_inputDialogPeerFolder(m)
 	case CRC_dialogPeer:
-		tl := TL_dialogPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_dialogPeer(m)
 	case CRC_dialogPeerFolder:
-		tl := TL_dialogPeerFolder{}
-		tl.FolderID = m.Int()
-		r = tl
+		r = decode_body_TL_dialogPeerFolder(m)
 	case CRC_messages_foundStickerSetsNotModified:
-		tl := TL_messages_foundStickerSetsNotModified{}
-		r = tl
+		r = decode_body_TL_messages_foundStickerSetsNotModified(m)
 	case CRC_messages_foundStickerSets:
-		tl := TL_messages_foundStickerSets{}
-		tl.Hash = m.Long()
-		tl.Sets = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_foundStickerSets(m)
 	case CRC_fileHash:
-		tl := TL_fileHash{}
-		tl.Offset = m.Long()
-		tl.Limit = m.Int()
-		tl.Hash = m.StringBytes()
-		r = tl
+		r = decode_body_TL_fileHash(m)
 	case CRC_inputClientProxy:
-		tl := TL_inputClientProxy{}
-		tl.Address = m.String()
-		tl.Port = m.Int()
-		r = tl
+		r = decode_body_TL_inputClientProxy(m)
 	case CRC_help_termsOfServiceUpdateEmpty:
-		tl := TL_help_termsOfServiceUpdateEmpty{}
-		tl.Expires = m.Int()
-		r = tl
+		r = decode_body_TL_help_termsOfServiceUpdateEmpty(m)
 	case CRC_help_termsOfServiceUpdate:
-		tl := TL_help_termsOfServiceUpdate{}
-		tl.Expires = m.Int()
-		tl.TermsOfService = DecodeBuf_GenericObject[TL_help_termsOfService](m)
-		r = tl
+		r = decode_body_TL_help_termsOfServiceUpdate(m)
 	case CRC_inputSecureFileUploaded:
-		tl := TL_inputSecureFileUploaded{}
-		tl.ID = m.Long()
-		tl.Parts = m.Int()
-		tl.MD5Checksum = m.String()
-		tl.FileHash = m.StringBytes()
-		tl.Secret = m.StringBytes()
-		r = tl
+		r = decode_body_TL_inputSecureFileUploaded(m)
 	case CRC_inputSecureFile:
-		tl := TL_inputSecureFile{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputSecureFile(m)
 	case CRC_secureFileEmpty:
-		tl := TL_secureFileEmpty{}
-		r = tl
+		r = decode_body_TL_secureFileEmpty(m)
 	case CRC_secureFile:
-		tl := TL_secureFile{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Size = m.Long()
-		tl.DCID = m.Int()
-		tl.Date = m.Int()
-		tl.FileHash = m.StringBytes()
-		tl.Secret = m.StringBytes()
-		r = tl
+		r = decode_body_TL_secureFile(m)
 	case CRC_secureData:
-		tl := TL_secureData{}
-		tl.Data = m.StringBytes()
-		tl.DataHash = m.StringBytes()
-		tl.Secret = m.StringBytes()
-		r = tl
+		r = decode_body_TL_secureData(m)
 	case CRC_securePlainPhone:
-		tl := TL_securePlainPhone{}
-		tl.Phone = m.String()
-		r = tl
+		r = decode_body_TL_securePlainPhone(m)
 	case CRC_securePlainEmail:
-		tl := TL_securePlainEmail{}
-		tl.Email = m.String()
-		r = tl
+		r = decode_body_TL_securePlainEmail(m)
 	case CRC_secureValueTypePersonalDetails:
-		tl := TL_secureValueTypePersonalDetails{}
-		r = tl
+		r = decode_body_TL_secureValueTypePersonalDetails(m)
 	case CRC_secureValueTypePassport:
-		tl := TL_secureValueTypePassport{}
-		r = tl
+		r = decode_body_TL_secureValueTypePassport(m)
 	case CRC_secureValueTypeDriverLicense:
-		tl := TL_secureValueTypeDriverLicense{}
-		r = tl
+		r = decode_body_TL_secureValueTypeDriverLicense(m)
 	case CRC_secureValueTypeIdentityCard:
-		tl := TL_secureValueTypeIdentityCard{}
-		r = tl
+		r = decode_body_TL_secureValueTypeIdentityCard(m)
 	case CRC_secureValueTypeInternalPassport:
-		tl := TL_secureValueTypeInternalPassport{}
-		r = tl
+		r = decode_body_TL_secureValueTypeInternalPassport(m)
 	case CRC_secureValueTypeAddress:
-		tl := TL_secureValueTypeAddress{}
-		r = tl
+		r = decode_body_TL_secureValueTypeAddress(m)
 	case CRC_secureValueTypeUtilityBill:
-		tl := TL_secureValueTypeUtilityBill{}
-		r = tl
+		r = decode_body_TL_secureValueTypeUtilityBill(m)
 	case CRC_secureValueTypeBankStatement:
-		tl := TL_secureValueTypeBankStatement{}
-		r = tl
+		r = decode_body_TL_secureValueTypeBankStatement(m)
 	case CRC_secureValueTypeRentalAgreement:
-		tl := TL_secureValueTypeRentalAgreement{}
-		r = tl
+		r = decode_body_TL_secureValueTypeRentalAgreement(m)
 	case CRC_secureValueTypePassportRegistration:
-		tl := TL_secureValueTypePassportRegistration{}
-		r = tl
+		r = decode_body_TL_secureValueTypePassportRegistration(m)
 	case CRC_secureValueTypeTemporaryRegistration:
-		tl := TL_secureValueTypeTemporaryRegistration{}
-		r = tl
+		r = decode_body_TL_secureValueTypeTemporaryRegistration(m)
 	case CRC_secureValueTypePhone:
-		tl := TL_secureValueTypePhone{}
-		r = tl
+		r = decode_body_TL_secureValueTypePhone(m)
 	case CRC_secureValueTypeEmail:
-		tl := TL_secureValueTypeEmail{}
-		r = tl
+		r = decode_body_TL_secureValueTypeEmail(m)
 	case CRC_secureValue:
-		tl := TL_secureValue{}
-		flags := m.Int()
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Data = Ref(DecodeBuf_GenericObject[TL_secureData](m))
-		}
-		if flags&(1<<1) != 0 {
-			tl.FrontSide = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReverseSide = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<3) != 0 {
-			tl.Selfie = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.Translation = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.Files = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.PlainData = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Hash = m.StringBytes()
-		r = tl
+		r = decode_body_TL_secureValue(m)
 	case CRC_inputSecureValue:
-		tl := TL_inputSecureValue{}
-		flags := m.Int()
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Data = Ref(DecodeBuf_GenericObject[TL_secureData](m))
-		}
-		if flags&(1<<1) != 0 {
-			tl.FrontSide = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReverseSide = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<3) != 0 {
-			tl.Selfie = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.Translation = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.Files = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.PlainData = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputSecureValue(m)
 	case CRC_secureValueHash:
-		tl := TL_secureValueHash{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.Hash = m.StringBytes()
-		r = tl
+		r = decode_body_TL_secureValueHash(m)
 	case CRC_secureValueErrorData:
-		tl := TL_secureValueErrorData{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.DataHash = m.StringBytes()
-		tl.Field = m.String()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueErrorData(m)
 	case CRC_secureValueErrorFrontSide:
-		tl := TL_secureValueErrorFrontSide{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.FileHash = m.StringBytes()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueErrorFrontSide(m)
 	case CRC_secureValueErrorReverseSide:
-		tl := TL_secureValueErrorReverseSide{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.FileHash = m.StringBytes()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueErrorReverseSide(m)
 	case CRC_secureValueErrorSelfie:
-		tl := TL_secureValueErrorSelfie{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.FileHash = m.StringBytes()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueErrorSelfie(m)
 	case CRC_secureValueErrorFile:
-		tl := TL_secureValueErrorFile{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.FileHash = m.StringBytes()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueErrorFile(m)
 	case CRC_secureValueErrorFiles:
-		tl := TL_secureValueErrorFiles{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.FileHash = m.VectorBytes()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueErrorFiles(m)
 	case CRC_secureValueError:
-		tl := TL_secureValueError{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.Hash = m.StringBytes()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueError(m)
 	case CRC_secureValueErrorTranslationFile:
-		tl := TL_secureValueErrorTranslationFile{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.FileHash = m.StringBytes()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueErrorTranslationFile(m)
 	case CRC_secureValueErrorTranslationFiles:
-		tl := TL_secureValueErrorTranslationFiles{}
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		tl.FileHash = m.VectorBytes()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_secureValueErrorTranslationFiles(m)
 	case CRC_secureCredentialsEncrypted:
-		tl := TL_secureCredentialsEncrypted{}
-		tl.Data = m.StringBytes()
-		tl.Hash = m.StringBytes()
-		tl.Secret = m.StringBytes()
-		r = tl
+		r = decode_body_TL_secureCredentialsEncrypted(m)
 	case CRC_account_authorizationForm:
-		tl := TL_account_authorizationForm{}
-		flags := m.Int()
-		tl.RequiredTypes = DecodeBuf_GenericVector[TL](m)
-		tl.Values = DecodeBuf_GenericVector[TL_secureValue](m)
-		tl.Errors = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.PrivacyPolicyURL = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_account_authorizationForm(m)
 	case CRC_account_sentEmailCode:
-		tl := TL_account_sentEmailCode{}
-		tl.EmailPattern = m.String()
-		tl.Length = m.Int()
-		r = tl
+		r = decode_body_TL_account_sentEmailCode(m)
 	case CRC_help_deepLinkInfoEmpty:
-		tl := TL_help_deepLinkInfoEmpty{}
-		r = tl
+		r = decode_body_TL_help_deepLinkInfoEmpty(m)
 	case CRC_help_deepLinkInfo:
-		tl := TL_help_deepLinkInfo{}
-		flags := m.Int()
-		tl.UpdateApp = flags&(1<<0) != 0
-		tl.Message = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_help_deepLinkInfo(m)
 	case CRC_savedPhoneContact:
-		tl := TL_savedPhoneContact{}
-		tl.Phone = m.String()
-		tl.FirstName = m.String()
-		tl.LastName = m.String()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_savedPhoneContact(m)
 	case CRC_account_takeout:
-		tl := TL_account_takeout{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_account_takeout(m)
 	case CRC_passwordKDFAlgoUnknown:
-		tl := TL_passwordKDFAlgoUnknown{}
-		r = tl
+		r = decode_body_TL_passwordKDFAlgoUnknown(m)
 	case CRC_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow:
-		tl := TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow{}
-		tl.Salt1 = m.StringBytes()
-		tl.Salt2 = m.StringBytes()
-		tl.G = m.Int()
-		tl.P = m.StringBytes()
-		r = tl
+		r = decode_body_TL_passwordKDFAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow(m)
 	case CRC_securePasswordKDFAlgoUnknown:
-		tl := TL_securePasswordKDFAlgoUnknown{}
-		r = tl
+		r = decode_body_TL_securePasswordKDFAlgoUnknown(m)
 	case CRC_securePasswordKDFAlgoPBKDF2HMACSHA512iter100000:
-		tl := TL_securePasswordKDFAlgoPBKDF2HMACSHA512iter100000{}
-		tl.Salt = m.StringBytes()
-		r = tl
+		r = decode_body_TL_securePasswordKDFAlgoPBKDF2HMACSHA512iter100000(m)
 	case CRC_securePasswordKDFAlgoSHA512:
-		tl := TL_securePasswordKDFAlgoSHA512{}
-		tl.Salt = m.StringBytes()
-		r = tl
+		r = decode_body_TL_securePasswordKDFAlgoSHA512(m)
 	case CRC_secureSecretSettings:
-		tl := TL_secureSecretSettings{}
-		tl.SecureAlgo = DecodeBuf_GenericObject[TL](m)
-		tl.SecureSecret = m.StringBytes()
-		tl.SecureSecretID = m.Long()
-		r = tl
+		r = decode_body_TL_secureSecretSettings(m)
 	case CRC_inputCheckPasswordEmpty:
-		tl := TL_inputCheckPasswordEmpty{}
-		r = tl
+		r = decode_body_TL_inputCheckPasswordEmpty(m)
 	case CRC_inputCheckPasswordSRP:
-		tl := TL_inputCheckPasswordSRP{}
-		tl.SrpID = m.Long()
-		tl.A = m.StringBytes()
-		tl.M1 = m.StringBytes()
-		r = tl
+		r = decode_body_TL_inputCheckPasswordSRP(m)
 	case CRC_secureRequiredType:
-		tl := TL_secureRequiredType{}
-		flags := m.Int()
-		tl.NativeNames = flags&(1<<0) != 0
-		tl.SelfieRequired = flags&(1<<1) != 0
-		tl.TranslationRequired = flags&(1<<2) != 0
-		tl.Type = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_secureRequiredType(m)
 	case CRC_secureRequiredTypeOneOf:
-		tl := TL_secureRequiredTypeOneOf{}
-		tl.Types = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_secureRequiredTypeOneOf(m)
 	case CRC_help_passportConfigNotModified:
-		tl := TL_help_passportConfigNotModified{}
-		r = tl
+		r = decode_body_TL_help_passportConfigNotModified(m)
 	case CRC_help_passportConfig:
-		tl := TL_help_passportConfig{}
-		tl.Hash = m.Int()
-		tl.CountriesLangs = DecodeBuf_GenericObject[TL_dataJSON](m)
-		r = tl
+		r = decode_body_TL_help_passportConfig(m)
 	case CRC_inputAppEvent:
-		tl := TL_inputAppEvent{}
-		tl.Time = m.Double()
-		tl.Type = m.String()
-		tl.Peer = m.Long()
-		tl.Data = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputAppEvent(m)
 	case CRC_jsonObjectValue:
-		tl := TL_jsonObjectValue{}
-		tl.Key = m.String()
-		tl.Value = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_jsonObjectValue(m)
 	case CRC_jsonNull:
-		tl := TL_jsonNull{}
-		r = tl
+		r = decode_body_TL_jsonNull(m)
 	case CRC_jsonBool:
-		tl := TL_jsonBool{}
-		tl.Value = m.Bool()
-		r = tl
+		r = decode_body_TL_jsonBool(m)
 	case CRC_jsonNumber:
-		tl := TL_jsonNumber{}
-		tl.Value = m.Double()
-		r = tl
+		r = decode_body_TL_jsonNumber(m)
 	case CRC_jsonString:
-		tl := TL_jsonString{}
-		tl.Value = m.String()
-		r = tl
+		r = decode_body_TL_jsonString(m)
 	case CRC_jsonArray:
-		tl := TL_jsonArray{}
-		tl.Value = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_jsonArray(m)
 	case CRC_jsonObject:
-		tl := TL_jsonObject{}
-		tl.Value = DecodeBuf_GenericVector[TL_jsonObjectValue](m)
-		r = tl
+		r = decode_body_TL_jsonObject(m)
 	case CRC_pageTableCell:
-		tl := TL_pageTableCell{}
-		flags := m.Int()
-		tl.Header = flags&(1<<0) != 0
-		tl.AlignCenter = flags&(1<<3) != 0
-		tl.AlignRight = flags&(1<<4) != 0
-		tl.ValignMiddle = flags&(1<<5) != 0
-		tl.ValignBottom = flags&(1<<6) != 0
-		if flags&(1<<7) != 0 {
-			tl.Text = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Colspan = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Rowspan = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_pageTableCell(m)
 	case CRC_pageTableRow:
-		tl := TL_pageTableRow{}
-		tl.Cells = DecodeBuf_GenericVector[TL_pageTableCell](m)
-		r = tl
+		r = decode_body_TL_pageTableRow(m)
 	case CRC_pageCaption:
-		tl := TL_pageCaption{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		tl.Credit = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageCaption(m)
 	case CRC_pageListItemText:
-		tl := TL_pageListItemText{}
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageListItemText(m)
 	case CRC_pageListItemBlocks:
-		tl := TL_pageListItemBlocks{}
-		tl.Blocks = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_pageListItemBlocks(m)
 	case CRC_pageListOrderedItemText:
-		tl := TL_pageListOrderedItemText{}
-		tl.Num = m.String()
-		tl.Text = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_pageListOrderedItemText(m)
 	case CRC_pageListOrderedItemBlocks:
-		tl := TL_pageListOrderedItemBlocks{}
-		tl.Num = m.String()
-		tl.Blocks = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_pageListOrderedItemBlocks(m)
 	case CRC_pageRelatedArticle:
-		tl := TL_pageRelatedArticle{}
-		flags := m.Int()
-		tl.URL = m.String()
-		tl.WebpageID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Description = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.PhotoID = Ref(m.Long())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Author = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.PublishedDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_pageRelatedArticle(m)
 	case CRC_page:
-		tl := TL_page{}
-		flags := m.Int()
-		tl.Part = flags&(1<<0) != 0
-		tl.RTL = flags&(1<<1) != 0
-		tl.V2 = flags&(1<<2) != 0
-		tl.URL = m.String()
-		tl.Blocks = DecodeBuf_GenericVector[TL](m)
-		tl.Photos = DecodeBuf_GenericVector[TL](m)
-		tl.Documents = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<3) != 0 {
-			tl.Views = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_page(m)
 	case CRC_help_supportName:
-		tl := TL_help_supportName{}
-		tl.Name = m.String()
-		r = tl
+		r = decode_body_TL_help_supportName(m)
 	case CRC_help_userInfoEmpty:
-		tl := TL_help_userInfoEmpty{}
-		r = tl
+		r = decode_body_TL_help_userInfoEmpty(m)
 	case CRC_help_userInfo:
-		tl := TL_help_userInfo{}
-		tl.Message = m.String()
-		tl.Entities = DecodeBuf_GenericVector[TL](m)
-		tl.Author = m.String()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_help_userInfo(m)
 	case CRC_pollAnswer:
-		tl := TL_pollAnswer{}
-		tl.Text = DecodeBuf_GenericObject[TL_textWithEntities](m)
-		tl.Option = m.StringBytes()
-		r = tl
+		r = decode_body_TL_pollAnswer(m)
 	case CRC_poll:
-		tl := TL_poll{}
-		tl.ID = m.Long()
-		flags := m.Int()
-		tl.Closed = flags&(1<<0) != 0
-		tl.PublicVoters = flags&(1<<1) != 0
-		tl.MultipleChoice = flags&(1<<2) != 0
-		tl.Quiz = flags&(1<<3) != 0
-		tl.Question = DecodeBuf_GenericObject[TL_textWithEntities](m)
-		tl.Answers = DecodeBuf_GenericVector[TL_pollAnswer](m)
-		if flags&(1<<4) != 0 {
-			tl.ClosePeriod = Ref(m.Int())
-		}
-		if flags&(1<<5) != 0 {
-			tl.CloseDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_poll(m)
 	case CRC_pollAnswerVoters:
-		tl := TL_pollAnswerVoters{}
-		flags := m.Int()
-		tl.Chosen = flags&(1<<0) != 0
-		tl.Correct = flags&(1<<1) != 0
-		tl.Option = m.StringBytes()
-		tl.Voters = m.Int()
-		r = tl
+		r = decode_body_TL_pollAnswerVoters(m)
 	case CRC_pollResults:
-		tl := TL_pollResults{}
-		flags := m.Int()
-		tl.Min = flags&(1<<0) != 0
-		if flags&(1<<1) != 0 {
-			tl.Results = DecodeBuf_GenericVector[TL_pollAnswerVoters](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.TotalVoters = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.RecentVoters = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.Solution = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.SolutionEntities = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_pollResults(m)
 	case CRC_chatOnlines:
-		tl := TL_chatOnlines{}
-		tl.Onlines = m.Int()
-		r = tl
+		r = decode_body_TL_chatOnlines(m)
 	case CRC_statsURL:
-		tl := TL_statsURL{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_statsURL(m)
 	case CRC_chatAdminRights:
-		tl := TL_chatAdminRights{}
-		flags := m.Int()
-		tl.ChangeInfo = flags&(1<<0) != 0
-		tl.PostMessages = flags&(1<<1) != 0
-		tl.EditMessages = flags&(1<<2) != 0
-		tl.DeleteMessages = flags&(1<<3) != 0
-		tl.BanUsers = flags&(1<<4) != 0
-		tl.InviteUsers = flags&(1<<5) != 0
-		tl.PINMessages = flags&(1<<7) != 0
-		tl.AddAdmins = flags&(1<<9) != 0
-		tl.Anonymous = flags&(1<<10) != 0
-		tl.ManageCall = flags&(1<<11) != 0
-		tl.Other = flags&(1<<12) != 0
-		tl.ManageTopics = flags&(1<<13) != 0
-		tl.PostStories = flags&(1<<14) != 0
-		tl.EditStories = flags&(1<<15) != 0
-		tl.DeleteStories = flags&(1<<16) != 0
-		r = tl
+		r = decode_body_TL_chatAdminRights(m)
 	case CRC_chatBannedRights:
-		tl := TL_chatBannedRights{}
-		flags := m.Int()
-		tl.ViewMessages = flags&(1<<0) != 0
-		tl.SendMessages = flags&(1<<1) != 0
-		tl.SendMedia = flags&(1<<2) != 0
-		tl.SendStickers = flags&(1<<3) != 0
-		tl.SendGIFs = flags&(1<<4) != 0
-		tl.SendGames = flags&(1<<5) != 0
-		tl.SendInline = flags&(1<<6) != 0
-		tl.EmbedLinks = flags&(1<<7) != 0
-		tl.SendPolls = flags&(1<<8) != 0
-		tl.ChangeInfo = flags&(1<<10) != 0
-		tl.InviteUsers = flags&(1<<15) != 0
-		tl.PINMessages = flags&(1<<17) != 0
-		tl.ManageTopics = flags&(1<<18) != 0
-		tl.SendPhotos = flags&(1<<19) != 0
-		tl.SendVideos = flags&(1<<20) != 0
-		tl.SendRoundvideos = flags&(1<<21) != 0
-		tl.SendAudios = flags&(1<<22) != 0
-		tl.SendVoices = flags&(1<<23) != 0
-		tl.SendDocs = flags&(1<<24) != 0
-		tl.SendPlain = flags&(1<<25) != 0
-		tl.UntilDate = m.Int()
-		r = tl
+		r = decode_body_TL_chatBannedRights(m)
 	case CRC_inputWallPaper:
-		tl := TL_inputWallPaper{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputWallPaper(m)
 	case CRC_inputWallPaperSlug:
-		tl := TL_inputWallPaperSlug{}
-		tl.Slug = m.String()
-		r = tl
+		r = decode_body_TL_inputWallPaperSlug(m)
 	case CRC_inputWallPaperNoFile:
-		tl := TL_inputWallPaperNoFile{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_inputWallPaperNoFile(m)
 	case CRC_account_wallPapersNotModified:
-		tl := TL_account_wallPapersNotModified{}
-		r = tl
+		r = decode_body_TL_account_wallPapersNotModified(m)
 	case CRC_account_wallPapers:
-		tl := TL_account_wallPapers{}
-		tl.Hash = m.Long()
-		tl.Wallpapers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_wallPapers(m)
 	case CRC_codeSettings:
-		tl := TL_codeSettings{}
-		flags := m.Int()
-		tl.AllowFlashcall = flags&(1<<0) != 0
-		tl.CurrentNumber = flags&(1<<1) != 0
-		tl.AllowAppHash = flags&(1<<4) != 0
-		tl.AllowMissedCall = flags&(1<<5) != 0
-		tl.AllowFirebase = flags&(1<<7) != 0
-		tl.UnknownNumber = flags&(1<<9) != 0
-		if flags&(1<<6) != 0 {
-			tl.LogoutTokens = m.VectorBytes()
-		}
-		if flags&(1<<8) != 0 {
-			tl.Token = Ref(m.String())
-		}
-		if flags&(1<<8) != 0 {
-			tl.AppSandbox = Ref(m.Bool())
-		}
-		r = tl
+		r = decode_body_TL_codeSettings(m)
 	case CRC_wallPaperSettings:
-		tl := TL_wallPaperSettings{}
-		flags := m.Int()
-		tl.Blur = flags&(1<<1) != 0
-		tl.Motion = flags&(1<<2) != 0
-		if flags&(1<<0) != 0 {
-			tl.BackgroundColor = Ref(m.Int())
-		}
-		if flags&(1<<4) != 0 {
-			tl.SecondBackgroundColor = Ref(m.Int())
-		}
-		if flags&(1<<5) != 0 {
-			tl.ThirdBackgroundColor = Ref(m.Int())
-		}
-		if flags&(1<<6) != 0 {
-			tl.FourthBackgroundColor = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Intensity = Ref(m.Int())
-		}
-		if flags&(1<<4) != 0 {
-			tl.Rotation = Ref(m.Int())
-		}
-		if flags&(1<<7) != 0 {
-			tl.Emoticon = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_wallPaperSettings(m)
 	case CRC_autoDownloadSettings:
-		tl := TL_autoDownloadSettings{}
-		flags := m.Int()
-		tl.Disabled = flags&(1<<0) != 0
-		tl.VideoPreloadLarge = flags&(1<<1) != 0
-		tl.AudioPreloadNext = flags&(1<<2) != 0
-		tl.PhonecallsLessData = flags&(1<<3) != 0
-		tl.StoriesPreload = flags&(1<<4) != 0
-		tl.PhotoSizeMax = m.Int()
-		tl.VideoSizeMax = m.Long()
-		tl.FileSizeMax = m.Long()
-		tl.VideoUploadMaxbitrate = m.Int()
-		tl.SmallQueueActiveOperationsMax = m.Int()
-		tl.LargeQueueActiveOperationsMax = m.Int()
-		r = tl
+		r = decode_body_TL_autoDownloadSettings(m)
 	case CRC_account_autoDownloadSettings:
-		tl := TL_account_autoDownloadSettings{}
-		tl.Low = DecodeBuf_GenericObject[TL_autoDownloadSettings](m)
-		tl.Medium = DecodeBuf_GenericObject[TL_autoDownloadSettings](m)
-		tl.High = DecodeBuf_GenericObject[TL_autoDownloadSettings](m)
-		r = tl
+		r = decode_body_TL_account_autoDownloadSettings(m)
 	case CRC_emojiKeyword:
-		tl := TL_emojiKeyword{}
-		tl.Keyword = m.String()
-		tl.Emoticons = m.VectorString()
-		r = tl
+		r = decode_body_TL_emojiKeyword(m)
 	case CRC_emojiKeywordDeleted:
-		tl := TL_emojiKeywordDeleted{}
-		tl.Keyword = m.String()
-		tl.Emoticons = m.VectorString()
-		r = tl
+		r = decode_body_TL_emojiKeywordDeleted(m)
 	case CRC_emojiKeywordsDifference:
-		tl := TL_emojiKeywordsDifference{}
-		tl.LangCode = m.String()
-		tl.FromVersion = m.Int()
-		tl.Version = m.Int()
-		tl.Keywords = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_emojiKeywordsDifference(m)
 	case CRC_emojiURL:
-		tl := TL_emojiURL{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_emojiURL(m)
 	case CRC_emojiLanguage:
-		tl := TL_emojiLanguage{}
-		tl.LangCode = m.String()
-		r = tl
+		r = decode_body_TL_emojiLanguage(m)
 	case CRC_folder:
-		tl := TL_folder{}
-		flags := m.Int()
-		tl.AutofillNewBroadcasts = flags&(1<<0) != 0
-		tl.AutofillPublicGroups = flags&(1<<1) != 0
-		tl.AutofillNewCorrespondents = flags&(1<<2) != 0
-		tl.ID = m.Int()
-		tl.Title = m.String()
-		if flags&(1<<3) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_folder(m)
 	case CRC_inputFolderPeer:
-		tl := TL_inputFolderPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.FolderID = m.Int()
-		r = tl
+		r = decode_body_TL_inputFolderPeer(m)
 	case CRC_folderPeer:
-		tl := TL_folderPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.FolderID = m.Int()
-		r = tl
+		r = decode_body_TL_folderPeer(m)
 	case CRC_messages_searchCounter:
-		tl := TL_messages_searchCounter{}
-		flags := m.Int()
-		tl.Inexact = flags&(1<<1) != 0
-		tl.Filter = DecodeBuf_GenericObject[TL](m)
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_messages_searchCounter(m)
 	case CRC_urlAuthResultRequest:
-		tl := TL_urlAuthResultRequest{}
-		flags := m.Int()
-		tl.RequestWriteAccess = flags&(1<<0) != 0
-		tl.Bot = DecodeBuf_GenericObject[TL](m)
-		tl.Domain = m.String()
-		r = tl
+		r = decode_body_TL_urlAuthResultRequest(m)
 	case CRC_urlAuthResultAccepted:
-		tl := TL_urlAuthResultAccepted{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_urlAuthResultAccepted(m)
 	case CRC_urlAuthResultDefault:
-		tl := TL_urlAuthResultDefault{}
-		r = tl
+		r = decode_body_TL_urlAuthResultDefault(m)
 	case CRC_channelLocationEmpty:
-		tl := TL_channelLocationEmpty{}
-		r = tl
+		r = decode_body_TL_channelLocationEmpty(m)
 	case CRC_channelLocation:
-		tl := TL_channelLocation{}
-		tl.GeoPoint = DecodeBuf_GenericObject[TL](m)
-		tl.Address = m.String()
-		r = tl
+		r = decode_body_TL_channelLocation(m)
 	case CRC_peerLocated:
-		tl := TL_peerLocated{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Expires = m.Int()
-		tl.Distance = m.Int()
-		r = tl
+		r = decode_body_TL_peerLocated(m)
 	case CRC_peerSelfLocated:
-		tl := TL_peerSelfLocated{}
-		tl.Expires = m.Int()
-		r = tl
+		r = decode_body_TL_peerSelfLocated(m)
 	case CRC_restrictionReason:
-		tl := TL_restrictionReason{}
-		tl.Platform = m.String()
-		tl.Reason = m.String()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_restrictionReason(m)
 	case CRC_inputTheme:
-		tl := TL_inputTheme{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputTheme(m)
 	case CRC_inputThemeSlug:
-		tl := TL_inputThemeSlug{}
-		tl.Slug = m.String()
-		r = tl
+		r = decode_body_TL_inputThemeSlug(m)
 	case CRC_theme:
-		tl := TL_theme{}
-		flags := m.Int()
-		tl.Creator = flags&(1<<0) != 0
-		tl.Default = flags&(1<<1) != 0
-		tl.ForChat = flags&(1<<5) != 0
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Slug = m.String()
-		tl.Title = m.String()
-		if flags&(1<<2) != 0 {
-			tl.Document = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<3) != 0 {
-			tl.Settings = DecodeBuf_GenericVector[TL_themeSettings](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.Emoticon = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.InstallsCount = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_theme(m)
 	case CRC_account_themesNotModified:
-		tl := TL_account_themesNotModified{}
-		r = tl
+		r = decode_body_TL_account_themesNotModified(m)
 	case CRC_account_themes:
-		tl := TL_account_themes{}
-		tl.Hash = m.Long()
-		tl.Themes = DecodeBuf_GenericVector[TL_theme](m)
-		r = tl
+		r = decode_body_TL_account_themes(m)
 	case CRC_auth_loginToken:
-		tl := TL_auth_loginToken{}
-		tl.Expires = m.Int()
-		tl.Token = m.StringBytes()
-		r = tl
+		r = decode_body_TL_auth_loginToken(m)
 	case CRC_auth_loginTokenMigrateTo:
-		tl := TL_auth_loginTokenMigrateTo{}
-		tl.DCID = m.Int()
-		tl.Token = m.StringBytes()
-		r = tl
+		r = decode_body_TL_auth_loginTokenMigrateTo(m)
 	case CRC_auth_loginTokenSuccess:
-		tl := TL_auth_loginTokenSuccess{}
-		tl.Authorization = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_auth_loginTokenSuccess(m)
 	case CRC_account_contentSettings:
-		tl := TL_account_contentSettings{}
-		flags := m.Int()
-		tl.SensitiveEnabled = flags&(1<<0) != 0
-		tl.SensitiveCanChange = flags&(1<<1) != 0
-		r = tl
+		r = decode_body_TL_account_contentSettings(m)
 	case CRC_messages_inactiveChats:
-		tl := TL_messages_inactiveChats{}
-		tl.Dates = m.VectorInt()
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_inactiveChats(m)
 	case CRC_baseThemeClassic:
-		tl := TL_baseThemeClassic{}
-		r = tl
+		r = decode_body_TL_baseThemeClassic(m)
 	case CRC_baseThemeDay:
-		tl := TL_baseThemeDay{}
-		r = tl
+		r = decode_body_TL_baseThemeDay(m)
 	case CRC_baseThemeNight:
-		tl := TL_baseThemeNight{}
-		r = tl
+		r = decode_body_TL_baseThemeNight(m)
 	case CRC_baseThemeTinted:
-		tl := TL_baseThemeTinted{}
-		r = tl
+		r = decode_body_TL_baseThemeTinted(m)
 	case CRC_baseThemeArctic:
-		tl := TL_baseThemeArctic{}
-		r = tl
+		r = decode_body_TL_baseThemeArctic(m)
 	case CRC_inputThemeSettings:
-		tl := TL_inputThemeSettings{}
-		flags := m.Int()
-		tl.MessageColorsAnimated = flags&(1<<2) != 0
-		tl.BaseTheme = DecodeBuf_GenericObject[TL](m)
-		tl.AccentColor = m.Int()
-		if flags&(1<<3) != 0 {
-			tl.OutboxAccentColor = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.MessageColors = m.VectorInt()
-		}
-		if flags&(1<<1) != 0 {
-			tl.Wallpaper = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.WallpaperSettings = Ref(DecodeBuf_GenericObject[TL_wallPaperSettings](m))
-		}
-		r = tl
+		r = decode_body_TL_inputThemeSettings(m)
 	case CRC_themeSettings:
-		tl := TL_themeSettings{}
-		flags := m.Int()
-		tl.MessageColorsAnimated = flags&(1<<2) != 0
-		tl.BaseTheme = DecodeBuf_GenericObject[TL](m)
-		tl.AccentColor = m.Int()
-		if flags&(1<<3) != 0 {
-			tl.OutboxAccentColor = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.MessageColors = m.VectorInt()
-		}
-		if flags&(1<<1) != 0 {
-			tl.Wallpaper = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_themeSettings(m)
 	case CRC_webPageAttributeTheme:
-		tl := TL_webPageAttributeTheme{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Documents = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Settings = Ref(DecodeBuf_GenericObject[TL_themeSettings](m))
-		}
-		r = tl
+		r = decode_body_TL_webPageAttributeTheme(m)
 	case CRC_webPageAttributeStory:
-		tl := TL_webPageAttributeStory{}
-		flags := m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.ID = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Story = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_webPageAttributeStory(m)
 	case CRC_webPageAttributeStickerSet:
-		tl := TL_webPageAttributeStickerSet{}
-		flags := m.Int()
-		tl.Emojis = flags&(1<<0) != 0
-		tl.TextColor = flags&(1<<1) != 0
-		tl.Stickers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_webPageAttributeStickerSet(m)
 	case CRC_messages_votesList:
-		tl := TL_messages_votesList{}
-		flags := m.Int()
-		tl.Count = m.Int()
-		tl.Votes = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_messages_votesList(m)
 	case CRC_bankCardOpenURL:
-		tl := TL_bankCardOpenURL{}
-		tl.URL = m.String()
-		tl.Name = m.String()
-		r = tl
+		r = decode_body_TL_bankCardOpenURL(m)
 	case CRC_payments_bankCardData:
-		tl := TL_payments_bankCardData{}
-		tl.Title = m.String()
-		tl.OpenURLs = DecodeBuf_GenericVector[TL_bankCardOpenURL](m)
-		r = tl
+		r = decode_body_TL_payments_bankCardData(m)
 	case CRC_dialogFilter:
-		tl := TL_dialogFilter{}
-		flags := m.Int()
-		tl.Contacts = flags&(1<<0) != 0
-		tl.NonContacts = flags&(1<<1) != 0
-		tl.Groups = flags&(1<<2) != 0
-		tl.Broadcasts = flags&(1<<3) != 0
-		tl.Bots = flags&(1<<4) != 0
-		tl.ExcludeMuted = flags&(1<<11) != 0
-		tl.ExcludeRead = flags&(1<<12) != 0
-		tl.ExcludeArchived = flags&(1<<13) != 0
-		tl.ID = m.Int()
-		tl.Title = m.String()
-		if flags&(1<<25) != 0 {
-			tl.Emoticon = Ref(m.String())
-		}
-		if flags&(1<<27) != 0 {
-			tl.Color = Ref(m.Int())
-		}
-		tl.PinnedPeers = DecodeBuf_GenericVector[TL](m)
-		tl.IncludePeers = DecodeBuf_GenericVector[TL](m)
-		tl.ExcludePeers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_dialogFilter(m)
 	case CRC_dialogFilterDefault:
-		tl := TL_dialogFilterDefault{}
-		r = tl
+		r = decode_body_TL_dialogFilterDefault(m)
 	case CRC_dialogFilterChatlist:
-		tl := TL_dialogFilterChatlist{}
-		flags := m.Int()
-		tl.HasMyInvites = flags&(1<<26) != 0
-		tl.ID = m.Int()
-		tl.Title = m.String()
-		if flags&(1<<25) != 0 {
-			tl.Emoticon = Ref(m.String())
-		}
-		if flags&(1<<27) != 0 {
-			tl.Color = Ref(m.Int())
-		}
-		tl.PinnedPeers = DecodeBuf_GenericVector[TL](m)
-		tl.IncludePeers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_dialogFilterChatlist(m)
 	case CRC_dialogFilterSuggested:
-		tl := TL_dialogFilterSuggested{}
-		tl.Filter = DecodeBuf_GenericObject[TL](m)
-		tl.Description = m.String()
-		r = tl
+		r = decode_body_TL_dialogFilterSuggested(m)
 	case CRC_statsDateRangeDays:
-		tl := TL_statsDateRangeDays{}
-		tl.MinDate = m.Int()
-		tl.MaxDate = m.Int()
-		r = tl
+		r = decode_body_TL_statsDateRangeDays(m)
 	case CRC_statsAbsValueAndPrev:
-		tl := TL_statsAbsValueAndPrev{}
-		tl.Current = m.Double()
-		tl.Previous = m.Double()
-		r = tl
+		r = decode_body_TL_statsAbsValueAndPrev(m)
 	case CRC_statsPercentValue:
-		tl := TL_statsPercentValue{}
-		tl.Part = m.Double()
-		tl.Total = m.Double()
-		r = tl
+		r = decode_body_TL_statsPercentValue(m)
 	case CRC_statsGraphAsync:
-		tl := TL_statsGraphAsync{}
-		tl.Token = m.String()
-		r = tl
+		r = decode_body_TL_statsGraphAsync(m)
 	case CRC_statsGraphError:
-		tl := TL_statsGraphError{}
-		tl.Error = m.String()
-		r = tl
+		r = decode_body_TL_statsGraphError(m)
 	case CRC_statsGraph:
-		tl := TL_statsGraph{}
-		flags := m.Int()
-		tl.JSON = DecodeBuf_GenericObject[TL_dataJSON](m)
-		if flags&(1<<0) != 0 {
-			tl.ZoomToken = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_statsGraph(m)
 	case CRC_stats_broadcastStats:
-		tl := TL_stats_broadcastStats{}
-		tl.Period = DecodeBuf_GenericObject[TL_statsDateRangeDays](m)
-		tl.Followers = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.ViewsPerPost = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.SharesPerPost = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.ReactionsPerPost = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.ViewsPerStory = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.SharesPerStory = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.ReactionsPerStory = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.EnabledNotifications = DecodeBuf_GenericObject[TL_statsPercentValue](m)
-		tl.GrowthGraph = DecodeBuf_GenericObject[TL](m)
-		tl.FollowersGraph = DecodeBuf_GenericObject[TL](m)
-		tl.MuteGraph = DecodeBuf_GenericObject[TL](m)
-		tl.TopHoursGraph = DecodeBuf_GenericObject[TL](m)
-		tl.InteractionsGraph = DecodeBuf_GenericObject[TL](m)
-		tl.IVInteractionsGraph = DecodeBuf_GenericObject[TL](m)
-		tl.ViewsBySourceGraph = DecodeBuf_GenericObject[TL](m)
-		tl.NewFollowersBySourceGraph = DecodeBuf_GenericObject[TL](m)
-		tl.LanguagesGraph = DecodeBuf_GenericObject[TL](m)
-		tl.ReactionsByEmotionGraph = DecodeBuf_GenericObject[TL](m)
-		tl.StoryInteractionsGraph = DecodeBuf_GenericObject[TL](m)
-		tl.StoryReactionsByEmotionGraph = DecodeBuf_GenericObject[TL](m)
-		tl.RecentPostsInteractions = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stats_broadcastStats(m)
 	case CRC_help_promoDataEmpty:
-		tl := TL_help_promoDataEmpty{}
-		tl.Expires = m.Int()
-		r = tl
+		r = decode_body_TL_help_promoDataEmpty(m)
 	case CRC_help_promoData:
-		tl := TL_help_promoData{}
-		flags := m.Int()
-		tl.Proxy = flags&(1<<0) != 0
-		tl.Expires = m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<1) != 0 {
-			tl.PSAType = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.PSAMessage = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_help_promoData(m)
 	case CRC_videoSize:
-		tl := TL_videoSize{}
-		flags := m.Int()
-		tl.Type = m.String()
-		tl.W = m.Int()
-		tl.H = m.Int()
-		tl.Size = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.VideoStartTS = Ref(m.Double())
-		}
-		r = tl
+		r = decode_body_TL_videoSize(m)
 	case CRC_videoSizeEmojiMarkup:
-		tl := TL_videoSizeEmojiMarkup{}
-		tl.EmojiID = m.Long()
-		tl.BackgroundColors = m.VectorInt()
-		r = tl
+		r = decode_body_TL_videoSizeEmojiMarkup(m)
 	case CRC_videoSizeStickerMarkup:
-		tl := TL_videoSizeStickerMarkup{}
-		tl.Stickerset = DecodeBuf_GenericObject[TL](m)
-		tl.StickerID = m.Long()
-		tl.BackgroundColors = m.VectorInt()
-		r = tl
+		r = decode_body_TL_videoSizeStickerMarkup(m)
 	case CRC_statsGroupTopPoster:
-		tl := TL_statsGroupTopPoster{}
-		tl.UserID = m.Long()
-		tl.Messages = m.Int()
-		tl.AvgChars = m.Int()
-		r = tl
+		r = decode_body_TL_statsGroupTopPoster(m)
 	case CRC_statsGroupTopAdmin:
-		tl := TL_statsGroupTopAdmin{}
-		tl.UserID = m.Long()
-		tl.Deleted = m.Int()
-		tl.Kicked = m.Int()
-		tl.Banned = m.Int()
-		r = tl
+		r = decode_body_TL_statsGroupTopAdmin(m)
 	case CRC_statsGroupTopInviter:
-		tl := TL_statsGroupTopInviter{}
-		tl.UserID = m.Long()
-		tl.Invitations = m.Int()
-		r = tl
+		r = decode_body_TL_statsGroupTopInviter(m)
 	case CRC_stats_megagroupStats:
-		tl := TL_stats_megagroupStats{}
-		tl.Period = DecodeBuf_GenericObject[TL_statsDateRangeDays](m)
-		tl.Members = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.Messages = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.Viewers = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.Posters = DecodeBuf_GenericObject[TL_statsAbsValueAndPrev](m)
-		tl.GrowthGraph = DecodeBuf_GenericObject[TL](m)
-		tl.MembersGraph = DecodeBuf_GenericObject[TL](m)
-		tl.NewMembersBySourceGraph = DecodeBuf_GenericObject[TL](m)
-		tl.LanguagesGraph = DecodeBuf_GenericObject[TL](m)
-		tl.MessagesGraph = DecodeBuf_GenericObject[TL](m)
-		tl.ActionsGraph = DecodeBuf_GenericObject[TL](m)
-		tl.TopHoursGraph = DecodeBuf_GenericObject[TL](m)
-		tl.WeekdaysGraph = DecodeBuf_GenericObject[TL](m)
-		tl.TopPosters = DecodeBuf_GenericVector[TL_statsGroupTopPoster](m)
-		tl.TopAdmins = DecodeBuf_GenericVector[TL_statsGroupTopAdmin](m)
-		tl.TopInviters = DecodeBuf_GenericVector[TL_statsGroupTopInviter](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stats_megagroupStats(m)
 	case CRC_globalPrivacySettings:
-		tl := TL_globalPrivacySettings{}
-		flags := m.Int()
-		tl.ArchiveAndMuteNewNoncontactPeers = flags&(1<<0) != 0
-		tl.KeepArchivedUnmuted = flags&(1<<1) != 0
-		tl.KeepArchivedFolders = flags&(1<<2) != 0
-		tl.HideReadMarks = flags&(1<<3) != 0
-		tl.NewNoncontactPeersRequirePremium = flags&(1<<4) != 0
-		r = tl
+		r = decode_body_TL_globalPrivacySettings(m)
 	case CRC_help_countryCode:
-		tl := TL_help_countryCode{}
-		flags := m.Int()
-		tl.CountryCode = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Prefixes = m.VectorString()
-		}
-		if flags&(1<<1) != 0 {
-			tl.Patterns = m.VectorString()
-		}
-		r = tl
+		r = decode_body_TL_help_countryCode(m)
 	case CRC_help_country:
-		tl := TL_help_country{}
-		flags := m.Int()
-		tl.Hidden = flags&(1<<0) != 0
-		tl.ISO2 = m.String()
-		tl.DefaultName = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Name = Ref(m.String())
-		}
-		tl.CountryCodes = DecodeBuf_GenericVector[TL_help_countryCode](m)
-		r = tl
+		r = decode_body_TL_help_country(m)
 	case CRC_help_countriesListNotModified:
-		tl := TL_help_countriesListNotModified{}
-		r = tl
+		r = decode_body_TL_help_countriesListNotModified(m)
 	case CRC_help_countriesList:
-		tl := TL_help_countriesList{}
-		tl.Countries = DecodeBuf_GenericVector[TL_help_country](m)
-		tl.Hash = m.Int()
-		r = tl
+		r = decode_body_TL_help_countriesList(m)
 	case CRC_messageViews:
-		tl := TL_messageViews{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Views = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Forwards = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Replies = Ref(DecodeBuf_GenericObject[TL_messageReplies](m))
-		}
-		r = tl
+		r = decode_body_TL_messageViews(m)
 	case CRC_messages_messageViews:
-		tl := TL_messages_messageViews{}
-		tl.Views = DecodeBuf_GenericVector[TL_messageViews](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_messageViews(m)
 	case CRC_messages_discussionMessage:
-		tl := TL_messages_discussionMessage{}
-		flags := m.Int()
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.MaxID = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.ReadInboxMaxID = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.ReadOutboxMaxID = Ref(m.Int())
-		}
-		tl.UnreadCount = m.Int()
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_discussionMessage(m)
 	case CRC_messageReplyHeader:
-		tl := TL_messageReplyHeader{}
-		flags := m.Int()
-		tl.ReplyToScheduled = flags&(1<<2) != 0
-		tl.ForumTopic = flags&(1<<3) != 0
-		tl.Quote = flags&(1<<9) != 0
-		if flags&(1<<4) != 0 {
-			tl.ReplyToMsgID = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.ReplyToPeerID = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.ReplyFrom = Ref(DecodeBuf_GenericObject[TL_messageFwdHeader](m))
-		}
-		if flags&(1<<8) != 0 {
-			tl.ReplyMedia = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.ReplyToTopID = Ref(m.Int())
-		}
-		if flags&(1<<6) != 0 {
-			tl.QuoteText = Ref(m.String())
-		}
-		if flags&(1<<7) != 0 {
-			tl.QuoteEntities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<10) != 0 {
-			tl.QuoteOffset = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageReplyHeader(m)
 	case CRC_messageReplyStoryHeader:
-		tl := TL_messageReplyStoryHeader{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.StoryID = m.Int()
-		r = tl
+		r = decode_body_TL_messageReplyStoryHeader(m)
 	case CRC_messageReplies:
-		tl := TL_messageReplies{}
-		flags := m.Int()
-		tl.Comments = flags&(1<<0) != 0
-		tl.Replies = m.Int()
-		tl.RepliesPTS = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.RecentRepliers = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<0) != 0 {
-			tl.ChannelID = Ref(m.Long())
-		}
-		if flags&(1<<2) != 0 {
-			tl.MaxID = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.ReadMaxID = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageReplies(m)
 	case CRC_peerBlocked:
-		tl := TL_peerBlocked{}
-		tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_peerBlocked(m)
 	case CRC_stats_messageStats:
-		tl := TL_stats_messageStats{}
-		tl.ViewsGraph = DecodeBuf_GenericObject[TL](m)
-		tl.ReactionsByEmotionGraph = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_stats_messageStats(m)
 	case CRC_groupCallDiscarded:
-		tl := TL_groupCallDiscarded{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.Duration = m.Int()
-		r = tl
+		r = decode_body_TL_groupCallDiscarded(m)
 	case CRC_groupCall:
-		tl := TL_groupCall{}
-		flags := m.Int()
-		tl.JoinMuted = flags&(1<<1) != 0
-		tl.CanChangeJoinMuted = flags&(1<<2) != 0
-		tl.JoinDateAsc = flags&(1<<6) != 0
-		tl.ScheduleStartSubscribed = flags&(1<<8) != 0
-		tl.CanStartVideo = flags&(1<<9) != 0
-		tl.RecordVideoActive = flags&(1<<11) != 0
-		tl.RTMPStream = flags&(1<<12) != 0
-		tl.ListenersHidden = flags&(1<<13) != 0
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.ParticipantsCount = m.Int()
-		if flags&(1<<3) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.StreamDCID = Ref(m.Int())
-		}
-		if flags&(1<<5) != 0 {
-			tl.RecordStartDate = Ref(m.Int())
-		}
-		if flags&(1<<7) != 0 {
-			tl.ScheduleDate = Ref(m.Int())
-		}
-		if flags&(1<<10) != 0 {
-			tl.UnmutedVideoCount = Ref(m.Int())
-		}
-		tl.UnmutedVideoLimit = m.Int()
-		tl.Version = m.Int()
-		r = tl
+		r = decode_body_TL_groupCall(m)
 	case CRC_inputGroupCall:
-		tl := TL_inputGroupCall{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputGroupCall(m)
 	case CRC_groupCallParticipant:
-		tl := TL_groupCallParticipant{}
-		flags := m.Int()
-		tl.Muted = flags&(1<<0) != 0
-		tl.Left = flags&(1<<1) != 0
-		tl.CanSelfUnmute = flags&(1<<2) != 0
-		tl.JustJoined = flags&(1<<4) != 0
-		tl.Versioned = flags&(1<<5) != 0
-		tl.Min = flags&(1<<8) != 0
-		tl.MutedByYou = flags&(1<<9) != 0
-		tl.VolumeByAdmin = flags&(1<<10) != 0
-		tl.Self = flags&(1<<12) != 0
-		tl.VideoJoined = flags&(1<<15) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		if flags&(1<<3) != 0 {
-			tl.ActiveDate = Ref(m.Int())
-		}
-		tl.Source = m.Int()
-		if flags&(1<<7) != 0 {
-			tl.Volume = Ref(m.Int())
-		}
-		if flags&(1<<11) != 0 {
-			tl.About = Ref(m.String())
-		}
-		if flags&(1<<13) != 0 {
-			tl.RaiseHandRating = Ref(m.Long())
-		}
-		if flags&(1<<6) != 0 {
-			tl.Video = Ref(DecodeBuf_GenericObject[TL_groupCallParticipantVideo](m))
-		}
-		if flags&(1<<14) != 0 {
-			tl.Presentation = Ref(DecodeBuf_GenericObject[TL_groupCallParticipantVideo](m))
-		}
-		r = tl
+		r = decode_body_TL_groupCallParticipant(m)
 	case CRC_phone_groupCall:
-		tl := TL_phone_groupCall{}
-		tl.Call = DecodeBuf_GenericObject[TL](m)
-		tl.Participants = DecodeBuf_GenericVector[TL_groupCallParticipant](m)
-		tl.ParticipantsNextOffset = m.String()
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_phone_groupCall(m)
 	case CRC_phone_groupParticipants:
-		tl := TL_phone_groupParticipants{}
-		tl.Count = m.Int()
-		tl.Participants = DecodeBuf_GenericVector[TL_groupCallParticipant](m)
-		tl.NextOffset = m.String()
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		tl.Version = m.Int()
-		r = tl
+		r = decode_body_TL_phone_groupParticipants(m)
 	case CRC_inlineQueryPeerTypeSameBotPM:
-		tl := TL_inlineQueryPeerTypeSameBotPM{}
-		r = tl
+		r = decode_body_TL_inlineQueryPeerTypeSameBotPM(m)
 	case CRC_inlineQueryPeerTypePM:
-		tl := TL_inlineQueryPeerTypePM{}
-		r = tl
+		r = decode_body_TL_inlineQueryPeerTypePM(m)
 	case CRC_inlineQueryPeerTypeChat:
-		tl := TL_inlineQueryPeerTypeChat{}
-		r = tl
+		r = decode_body_TL_inlineQueryPeerTypeChat(m)
 	case CRC_inlineQueryPeerTypeMegagroup:
-		tl := TL_inlineQueryPeerTypeMegagroup{}
-		r = tl
+		r = decode_body_TL_inlineQueryPeerTypeMegagroup(m)
 	case CRC_inlineQueryPeerTypeBroadcast:
-		tl := TL_inlineQueryPeerTypeBroadcast{}
-		r = tl
+		r = decode_body_TL_inlineQueryPeerTypeBroadcast(m)
 	case CRC_inlineQueryPeerTypeBotPM:
-		tl := TL_inlineQueryPeerTypeBotPM{}
-		r = tl
+		r = decode_body_TL_inlineQueryPeerTypeBotPM(m)
 	case CRC_messages_historyImport:
-		tl := TL_messages_historyImport{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_messages_historyImport(m)
 	case CRC_messages_historyImportParsed:
-		tl := TL_messages_historyImportParsed{}
-		flags := m.Int()
-		tl.PM = flags&(1<<0) != 0
-		tl.Group = flags&(1<<1) != 0
-		if flags&(1<<2) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_messages_historyImportParsed(m)
 	case CRC_messages_affectedFoundMessages:
-		tl := TL_messages_affectedFoundMessages{}
-		tl.PTS = m.Int()
-		tl.PTSCount = m.Int()
-		tl.Offset = m.Int()
-		tl.Messages = m.VectorInt()
-		r = tl
+		r = decode_body_TL_messages_affectedFoundMessages(m)
 	case CRC_chatInviteImporter:
-		tl := TL_chatInviteImporter{}
-		flags := m.Int()
-		tl.Requested = flags&(1<<0) != 0
-		tl.ViaChatlist = flags&(1<<3) != 0
-		tl.UserID = m.Long()
-		tl.Date = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.About = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.ApprovedBy = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_chatInviteImporter(m)
 	case CRC_messages_exportedChatInvites:
-		tl := TL_messages_exportedChatInvites{}
-		tl.Count = m.Int()
-		tl.Invites = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_exportedChatInvites(m)
 	case CRC_messages_exportedChatInvite:
-		tl := TL_messages_exportedChatInvite{}
-		tl.Invite = DecodeBuf_GenericObject[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_exportedChatInvite(m)
 	case CRC_messages_exportedChatInviteReplaced:
-		tl := TL_messages_exportedChatInviteReplaced{}
-		tl.Invite = DecodeBuf_GenericObject[TL](m)
-		tl.NewInvite = DecodeBuf_GenericObject[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_exportedChatInviteReplaced(m)
 	case CRC_messages_chatInviteImporters:
-		tl := TL_messages_chatInviteImporters{}
-		tl.Count = m.Int()
-		tl.Importers = DecodeBuf_GenericVector[TL_chatInviteImporter](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_chatInviteImporters(m)
 	case CRC_chatAdminWithInvites:
-		tl := TL_chatAdminWithInvites{}
-		tl.AdminID = m.Long()
-		tl.InvitesCount = m.Int()
-		tl.RevokedInvitesCount = m.Int()
-		r = tl
+		r = decode_body_TL_chatAdminWithInvites(m)
 	case CRC_messages_chatAdminsWithInvites:
-		tl := TL_messages_chatAdminsWithInvites{}
-		tl.Admins = DecodeBuf_GenericVector[TL_chatAdminWithInvites](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_chatAdminsWithInvites(m)
 	case CRC_messages_checkedHistoryImportPeer:
-		tl := TL_messages_checkedHistoryImportPeer{}
-		tl.ConfirmText = m.String()
-		r = tl
+		r = decode_body_TL_messages_checkedHistoryImportPeer(m)
 	case CRC_phone_joinAsPeers:
-		tl := TL_phone_joinAsPeers{}
-		tl.Peers = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_phone_joinAsPeers(m)
 	case CRC_phone_exportedGroupCallInvite:
-		tl := TL_phone_exportedGroupCallInvite{}
-		tl.Link = m.String()
-		r = tl
+		r = decode_body_TL_phone_exportedGroupCallInvite(m)
 	case CRC_groupCallParticipantVideoSourceGroup:
-		tl := TL_groupCallParticipantVideoSourceGroup{}
-		tl.Semantics = m.String()
-		tl.Sources = m.VectorInt()
-		r = tl
+		r = decode_body_TL_groupCallParticipantVideoSourceGroup(m)
 	case CRC_groupCallParticipantVideo:
-		tl := TL_groupCallParticipantVideo{}
-		flags := m.Int()
-		tl.Paused = flags&(1<<0) != 0
-		tl.Endpoint = m.String()
-		tl.SourceGroups = DecodeBuf_GenericVector[TL_groupCallParticipantVideoSourceGroup](m)
-		if flags&(1<<1) != 0 {
-			tl.AudioSource = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_groupCallParticipantVideo(m)
 	case CRC_stickers_suggestedShortName:
-		tl := TL_stickers_suggestedShortName{}
-		tl.ShortName = m.String()
-		r = tl
+		r = decode_body_TL_stickers_suggestedShortName(m)
 	case CRC_botCommandScopeDefault:
-		tl := TL_botCommandScopeDefault{}
-		r = tl
+		r = decode_body_TL_botCommandScopeDefault(m)
 	case CRC_botCommandScopeUsers:
-		tl := TL_botCommandScopeUsers{}
-		r = tl
+		r = decode_body_TL_botCommandScopeUsers(m)
 	case CRC_botCommandScopeChats:
-		tl := TL_botCommandScopeChats{}
-		r = tl
+		r = decode_body_TL_botCommandScopeChats(m)
 	case CRC_botCommandScopeChatAdmins:
-		tl := TL_botCommandScopeChatAdmins{}
-		r = tl
+		r = decode_body_TL_botCommandScopeChatAdmins(m)
 	case CRC_botCommandScopePeer:
-		tl := TL_botCommandScopePeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_botCommandScopePeer(m)
 	case CRC_botCommandScopePeerAdmins:
-		tl := TL_botCommandScopePeerAdmins{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_botCommandScopePeerAdmins(m)
 	case CRC_botCommandScopePeerUser:
-		tl := TL_botCommandScopePeerUser{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.UserID = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_botCommandScopePeerUser(m)
 	case CRC_account_resetPasswordFailedWait:
-		tl := TL_account_resetPasswordFailedWait{}
-		tl.RetryDate = m.Int()
-		r = tl
+		r = decode_body_TL_account_resetPasswordFailedWait(m)
 	case CRC_account_resetPasswordRequestedWait:
-		tl := TL_account_resetPasswordRequestedWait{}
-		tl.UntilDate = m.Int()
-		r = tl
+		r = decode_body_TL_account_resetPasswordRequestedWait(m)
 	case CRC_account_resetPasswordOK:
-		tl := TL_account_resetPasswordOK{}
-		r = tl
+		r = decode_body_TL_account_resetPasswordOK(m)
 	case CRC_sponsoredMessage:
-		tl := TL_sponsoredMessage{}
-		flags := m.Int()
-		tl.Recommended = flags&(1<<5) != 0
-		tl.CanReport = flags&(1<<12) != 0
-		tl.RandomID = m.StringBytes()
-		tl.URL = m.String()
-		tl.Title = m.String()
-		tl.Message = m.String()
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<14) != 0 {
-			tl.Media = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<13) != 0 {
-			tl.Color = Ref(DecodeBuf_GenericObject[TL_peerColor](m))
-		}
-		tl.ButtonText = m.String()
-		if flags&(1<<7) != 0 {
-			tl.SponsorInfo = Ref(m.String())
-		}
-		if flags&(1<<8) != 0 {
-			tl.AdditionalInfo = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_sponsoredMessage(m)
 	case CRC_messages_sponsoredMessages:
-		tl := TL_messages_sponsoredMessages{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.PostsBetween = Ref(m.Int())
-		}
-		tl.Messages = DecodeBuf_GenericVector[TL_sponsoredMessage](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_sponsoredMessages(m)
 	case CRC_messages_sponsoredMessagesEmpty:
-		tl := TL_messages_sponsoredMessagesEmpty{}
-		r = tl
+		r = decode_body_TL_messages_sponsoredMessagesEmpty(m)
 	case CRC_searchResultsCalendarPeriod:
-		tl := TL_searchResultsCalendarPeriod{}
-		tl.Date = m.Int()
-		tl.MinMsgID = m.Int()
-		tl.MaxMsgID = m.Int()
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_searchResultsCalendarPeriod(m)
 	case CRC_messages_searchResultsCalendar:
-		tl := TL_messages_searchResultsCalendar{}
-		flags := m.Int()
-		tl.Inexact = flags&(1<<0) != 0
-		tl.Count = m.Int()
-		tl.MinDate = m.Int()
-		tl.MinMsgID = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.OffsetIDOffset = Ref(m.Int())
-		}
-		tl.Periods = DecodeBuf_GenericVector[TL_searchResultsCalendarPeriod](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_searchResultsCalendar(m)
 	case CRC_searchResultPosition:
-		tl := TL_searchResultPosition{}
-		tl.MsgID = m.Int()
-		tl.Date = m.Int()
-		tl.Offset = m.Int()
-		r = tl
+		r = decode_body_TL_searchResultPosition(m)
 	case CRC_messages_searchResultsPositions:
-		tl := TL_messages_searchResultsPositions{}
-		tl.Count = m.Int()
-		tl.Positions = DecodeBuf_GenericVector[TL_searchResultPosition](m)
-		r = tl
+		r = decode_body_TL_messages_searchResultsPositions(m)
 	case CRC_channels_sendAsPeers:
-		tl := TL_channels_sendAsPeers{}
-		tl.Peers = DecodeBuf_GenericVector[TL_sendAsPeer](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_channels_sendAsPeers(m)
 	case CRC_users_userFull:
-		tl := TL_users_userFull{}
-		tl.FullUser = DecodeBuf_GenericObject[TL_userFull](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_users_userFull(m)
 	case CRC_messages_peerSettings:
-		tl := TL_messages_peerSettings{}
-		tl.Settings = DecodeBuf_GenericObject[TL_peerSettings](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_peerSettings(m)
 	case CRC_auth_loggedOut:
-		tl := TL_auth_loggedOut{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.FutureAuthToken = m.StringBytes()
-		}
-		r = tl
+		r = decode_body_TL_auth_loggedOut(m)
 	case CRC_reactionCount:
-		tl := TL_reactionCount{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.ChosenOrder = Ref(m.Int())
-		}
-		tl.Reaction = DecodeBuf_GenericObject[TL](m)
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_reactionCount(m)
 	case CRC_messageReactions:
-		tl := TL_messageReactions{}
-		flags := m.Int()
-		tl.Min = flags&(1<<0) != 0
-		tl.CanSeeList = flags&(1<<2) != 0
-		tl.ReactionsAsTags = flags&(1<<3) != 0
-		tl.Results = DecodeBuf_GenericVector[TL_reactionCount](m)
-		if flags&(1<<1) != 0 {
-			tl.RecentReactions = DecodeBuf_GenericVector[TL_messagePeerReaction](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.TopReactors = DecodeBuf_GenericVector[TL_messageReactor](m)
-		}
-		r = tl
+		r = decode_body_TL_messageReactions(m)
 	case CRC_messages_messageReactionsList:
-		tl := TL_messages_messageReactionsList{}
-		flags := m.Int()
-		tl.Count = m.Int()
-		tl.Reactions = DecodeBuf_GenericVector[TL_messagePeerReaction](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_messages_messageReactionsList(m)
 	case CRC_availableReaction:
-		tl := TL_availableReaction{}
-		flags := m.Int()
-		tl.Inactive = flags&(1<<0) != 0
-		tl.Premium = flags&(1<<2) != 0
-		tl.Reaction = m.String()
-		tl.Title = m.String()
-		tl.StaticIcon = DecodeBuf_GenericObject[TL](m)
-		tl.AppearAnimation = DecodeBuf_GenericObject[TL](m)
-		tl.SelectAnimation = DecodeBuf_GenericObject[TL](m)
-		tl.ActivateAnimation = DecodeBuf_GenericObject[TL](m)
-		tl.EffectAnimation = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<1) != 0 {
-			tl.AroundAnimation = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.CenterIcon = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_availableReaction(m)
 	case CRC_messages_availableReactionsNotModified:
-		tl := TL_messages_availableReactionsNotModified{}
-		r = tl
+		r = decode_body_TL_messages_availableReactionsNotModified(m)
 	case CRC_messages_availableReactions:
-		tl := TL_messages_availableReactions{}
-		tl.Hash = m.Int()
-		tl.Reactions = DecodeBuf_GenericVector[TL_availableReaction](m)
-		r = tl
+		r = decode_body_TL_messages_availableReactions(m)
 	case CRC_messagePeerReaction:
-		tl := TL_messagePeerReaction{}
-		flags := m.Int()
-		tl.Big = flags&(1<<0) != 0
-		tl.Unread = flags&(1<<1) != 0
-		tl.My = flags&(1<<2) != 0
-		tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		tl.Reaction = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messagePeerReaction(m)
 	case CRC_groupCallStreamChannel:
-		tl := TL_groupCallStreamChannel{}
-		tl.Channel = m.Int()
-		tl.Scale = m.Int()
-		tl.LastTimestampMS = m.Long()
-		r = tl
+		r = decode_body_TL_groupCallStreamChannel(m)
 	case CRC_phone_groupCallStreamChannels:
-		tl := TL_phone_groupCallStreamChannels{}
-		tl.Channels = DecodeBuf_GenericVector[TL_groupCallStreamChannel](m)
-		r = tl
+		r = decode_body_TL_phone_groupCallStreamChannels(m)
 	case CRC_phone_groupCallStreamRTMPURL:
-		tl := TL_phone_groupCallStreamRTMPURL{}
-		tl.URL = m.String()
-		tl.Key = m.String()
-		r = tl
+		r = decode_body_TL_phone_groupCallStreamRTMPURL(m)
 	case CRC_attachMenuBotIconColor:
-		tl := TL_attachMenuBotIconColor{}
-		tl.Name = m.String()
-		tl.Color = m.Int()
-		r = tl
+		r = decode_body_TL_attachMenuBotIconColor(m)
 	case CRC_attachMenuBotIcon:
-		tl := TL_attachMenuBotIcon{}
-		flags := m.Int()
-		tl.Name = m.String()
-		tl.Icon = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Colors = DecodeBuf_GenericVector[TL_attachMenuBotIconColor](m)
-		}
-		r = tl
+		r = decode_body_TL_attachMenuBotIcon(m)
 	case CRC_attachMenuBot:
-		tl := TL_attachMenuBot{}
-		flags := m.Int()
-		tl.Inactive = flags&(1<<0) != 0
-		tl.HasSettings = flags&(1<<1) != 0
-		tl.RequestWriteAccess = flags&(1<<2) != 0
-		tl.ShowInAttachMenu = flags&(1<<3) != 0
-		tl.ShowInSideMenu = flags&(1<<4) != 0
-		tl.SideMenuDisclaimerNeeded = flags&(1<<5) != 0
-		tl.BotID = m.Long()
-		tl.ShortName = m.String()
-		if flags&(1<<3) != 0 {
-			tl.PeerTypes = DecodeBuf_GenericVector[TL](m)
-		}
-		tl.Icons = DecodeBuf_GenericVector[TL_attachMenuBotIcon](m)
-		r = tl
+		r = decode_body_TL_attachMenuBot(m)
 	case CRC_attachMenuBotsNotModified:
-		tl := TL_attachMenuBotsNotModified{}
-		r = tl
+		r = decode_body_TL_attachMenuBotsNotModified(m)
 	case CRC_attachMenuBots:
-		tl := TL_attachMenuBots{}
-		tl.Hash = m.Long()
-		tl.Bots = DecodeBuf_GenericVector[TL_attachMenuBot](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_attachMenuBots(m)
 	case CRC_attachMenuBotsBot:
-		tl := TL_attachMenuBotsBot{}
-		tl.Bot = DecodeBuf_GenericObject[TL_attachMenuBot](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_attachMenuBotsBot(m)
 	case CRC_webViewResultURL:
-		tl := TL_webViewResultURL{}
-		flags := m.Int()
-		tl.Fullsize = flags&(1<<1) != 0
-		if flags&(1<<0) != 0 {
-			tl.QueryID = Ref(m.Long())
-		}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_webViewResultURL(m)
 	case CRC_webViewMessageSent:
-		tl := TL_webViewMessageSent{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.MsgID = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_webViewMessageSent(m)
 	case CRC_botMenuButtonDefault:
-		tl := TL_botMenuButtonDefault{}
-		r = tl
+		r = decode_body_TL_botMenuButtonDefault(m)
 	case CRC_botMenuButtonCommands:
-		tl := TL_botMenuButtonCommands{}
-		r = tl
+		r = decode_body_TL_botMenuButtonCommands(m)
 	case CRC_botMenuButton:
-		tl := TL_botMenuButton{}
-		tl.Text = m.String()
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_botMenuButton(m)
 	case CRC_account_savedRingtonesNotModified:
-		tl := TL_account_savedRingtonesNotModified{}
-		r = tl
+		r = decode_body_TL_account_savedRingtonesNotModified(m)
 	case CRC_account_savedRingtones:
-		tl := TL_account_savedRingtones{}
-		tl.Hash = m.Long()
-		tl.Ringtones = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_savedRingtones(m)
 	case CRC_notificationSoundDefault:
-		tl := TL_notificationSoundDefault{}
-		r = tl
+		r = decode_body_TL_notificationSoundDefault(m)
 	case CRC_notificationSoundNone:
-		tl := TL_notificationSoundNone{}
-		r = tl
+		r = decode_body_TL_notificationSoundNone(m)
 	case CRC_notificationSoundLocal:
-		tl := TL_notificationSoundLocal{}
-		tl.Title = m.String()
-		tl.Data = m.String()
-		r = tl
+		r = decode_body_TL_notificationSoundLocal(m)
 	case CRC_notificationSoundRingtone:
-		tl := TL_notificationSoundRingtone{}
-		tl.ID = m.Long()
-		r = tl
+		r = decode_body_TL_notificationSoundRingtone(m)
 	case CRC_account_savedRingtone:
-		tl := TL_account_savedRingtone{}
-		r = tl
+		r = decode_body_TL_account_savedRingtone(m)
 	case CRC_account_savedRingtoneConverted:
-		tl := TL_account_savedRingtoneConverted{}
-		tl.Document = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_account_savedRingtoneConverted(m)
 	case CRC_attachMenuPeerTypeSameBotPM:
-		tl := TL_attachMenuPeerTypeSameBotPM{}
-		r = tl
+		r = decode_body_TL_attachMenuPeerTypeSameBotPM(m)
 	case CRC_attachMenuPeerTypeBotPM:
-		tl := TL_attachMenuPeerTypeBotPM{}
-		r = tl
+		r = decode_body_TL_attachMenuPeerTypeBotPM(m)
 	case CRC_attachMenuPeerTypePM:
-		tl := TL_attachMenuPeerTypePM{}
-		r = tl
+		r = decode_body_TL_attachMenuPeerTypePM(m)
 	case CRC_attachMenuPeerTypeChat:
-		tl := TL_attachMenuPeerTypeChat{}
-		r = tl
+		r = decode_body_TL_attachMenuPeerTypeChat(m)
 	case CRC_attachMenuPeerTypeBroadcast:
-		tl := TL_attachMenuPeerTypeBroadcast{}
-		r = tl
+		r = decode_body_TL_attachMenuPeerTypeBroadcast(m)
 	case CRC_inputInvoiceMessage:
-		tl := TL_inputInvoiceMessage{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		r = tl
+		r = decode_body_TL_inputInvoiceMessage(m)
 	case CRC_inputInvoiceSlug:
-		tl := TL_inputInvoiceSlug{}
-		tl.Slug = m.String()
-		r = tl
+		r = decode_body_TL_inputInvoiceSlug(m)
 	case CRC_inputInvoicePremiumGiftCode:
-		tl := TL_inputInvoicePremiumGiftCode{}
-		tl.Purpose = DecodeBuf_GenericObject[TL](m)
-		tl.Option = DecodeBuf_GenericObject[TL_premiumGiftCodeOption](m)
-		r = tl
+		r = decode_body_TL_inputInvoicePremiumGiftCode(m)
 	case CRC_inputInvoiceStars:
-		tl := TL_inputInvoiceStars{}
-		tl.Purpose = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_inputInvoiceStars(m)
 	case CRC_inputInvoiceChatInviteSubscription:
-		tl := TL_inputInvoiceChatInviteSubscription{}
-		tl.Hash = m.String()
-		r = tl
+		r = decode_body_TL_inputInvoiceChatInviteSubscription(m)
 	case CRC_payments_exportedInvoice:
-		tl := TL_payments_exportedInvoice{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_payments_exportedInvoice(m)
 	case CRC_messages_transcribedAudio:
-		tl := TL_messages_transcribedAudio{}
-		flags := m.Int()
-		tl.Pending = flags&(1<<0) != 0
-		tl.TranscriptionID = m.Long()
-		tl.Text = m.String()
-		if flags&(1<<1) != 0 {
-			tl.TrialRemainsNum = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.TrialRemainsUntilDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messages_transcribedAudio(m)
 	case CRC_help_premiumPromo:
-		tl := TL_help_premiumPromo{}
-		tl.StatusText = m.String()
-		tl.StatusEntities = DecodeBuf_GenericVector[TL](m)
-		tl.VideoSections = m.VectorString()
-		tl.Videos = DecodeBuf_GenericVector[TL](m)
-		tl.PeriodOptions = DecodeBuf_GenericVector[TL_premiumSubscriptionOption](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_help_premiumPromo(m)
 	case CRC_inputStorePaymentPremiumSubscription:
-		tl := TL_inputStorePaymentPremiumSubscription{}
-		flags := m.Int()
-		tl.Restore = flags&(1<<0) != 0
-		tl.Upgrade = flags&(1<<1) != 0
-		r = tl
+		r = decode_body_TL_inputStorePaymentPremiumSubscription(m)
 	case CRC_inputStorePaymentGiftPremium:
-		tl := TL_inputStorePaymentGiftPremium{}
-		tl.UserID = DecodeBuf_GenericObject[TL](m)
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_inputStorePaymentGiftPremium(m)
 	case CRC_inputStorePaymentPremiumGiftCode:
-		tl := TL_inputStorePaymentPremiumGiftCode{}
-		flags := m.Int()
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.BoostPeer = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_inputStorePaymentPremiumGiftCode(m)
 	case CRC_inputStorePaymentPremiumGiveaway:
-		tl := TL_inputStorePaymentPremiumGiveaway{}
-		flags := m.Int()
-		tl.OnlyNewSubscribers = flags&(1<<0) != 0
-		tl.WinnersAreVisible = flags&(1<<3) != 0
-		tl.BoostPeer = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<1) != 0 {
-			tl.AdditionalPeers = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.CountriesISO2 = m.VectorString()
-		}
-		if flags&(1<<4) != 0 {
-			tl.PrizeDescription = Ref(m.String())
-		}
-		tl.RandomID = m.Long()
-		tl.UntilDate = m.Int()
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_inputStorePaymentPremiumGiveaway(m)
 	case CRC_inputStorePaymentStarsTopup:
-		tl := TL_inputStorePaymentStarsTopup{}
-		tl.Stars = m.Long()
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_inputStorePaymentStarsTopup(m)
 	case CRC_inputStorePaymentStarsGift:
-		tl := TL_inputStorePaymentStarsGift{}
-		tl.UserID = DecodeBuf_GenericObject[TL](m)
-		tl.Stars = m.Long()
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_inputStorePaymentStarsGift(m)
 	case CRC_premiumGiftOption:
-		tl := TL_premiumGiftOption{}
-		flags := m.Int()
-		tl.Months = m.Int()
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		tl.BotURL = m.String()
-		if flags&(1<<0) != 0 {
-			tl.StoreProduct = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_premiumGiftOption(m)
 	case CRC_paymentFormMethod:
-		tl := TL_paymentFormMethod{}
-		tl.URL = m.String()
-		tl.Title = m.String()
-		r = tl
+		r = decode_body_TL_paymentFormMethod(m)
 	case CRC_emojiStatusEmpty:
-		tl := TL_emojiStatusEmpty{}
-		r = tl
+		r = decode_body_TL_emojiStatusEmpty(m)
 	case CRC_emojiStatus:
-		tl := TL_emojiStatus{}
-		tl.DocumentID = m.Long()
-		r = tl
+		r = decode_body_TL_emojiStatus(m)
 	case CRC_emojiStatusUntil:
-		tl := TL_emojiStatusUntil{}
-		tl.DocumentID = m.Long()
-		tl.Until = m.Int()
-		r = tl
+		r = decode_body_TL_emojiStatusUntil(m)
 	case CRC_account_emojiStatusesNotModified:
-		tl := TL_account_emojiStatusesNotModified{}
-		r = tl
+		r = decode_body_TL_account_emojiStatusesNotModified(m)
 	case CRC_account_emojiStatuses:
-		tl := TL_account_emojiStatuses{}
-		tl.Hash = m.Long()
-		tl.Statuses = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_emojiStatuses(m)
 	case CRC_reactionEmpty:
-		tl := TL_reactionEmpty{}
-		r = tl
+		r = decode_body_TL_reactionEmpty(m)
 	case CRC_reactionEmoji:
-		tl := TL_reactionEmoji{}
-		tl.Emoticon = m.String()
-		r = tl
+		r = decode_body_TL_reactionEmoji(m)
 	case CRC_reactionCustomEmoji:
-		tl := TL_reactionCustomEmoji{}
-		tl.DocumentID = m.Long()
-		r = tl
+		r = decode_body_TL_reactionCustomEmoji(m)
 	case CRC_reactionPaid:
-		tl := TL_reactionPaid{}
-		r = tl
+		r = decode_body_TL_reactionPaid(m)
 	case CRC_chatReactionsNone:
-		tl := TL_chatReactionsNone{}
-		r = tl
+		r = decode_body_TL_chatReactionsNone(m)
 	case CRC_chatReactionsAll:
-		tl := TL_chatReactionsAll{}
-		flags := m.Int()
-		tl.AllowCustom = flags&(1<<0) != 0
-		r = tl
+		r = decode_body_TL_chatReactionsAll(m)
 	case CRC_chatReactionsSome:
-		tl := TL_chatReactionsSome{}
-		tl.Reactions = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_chatReactionsSome(m)
 	case CRC_messages_reactionsNotModified:
-		tl := TL_messages_reactionsNotModified{}
-		r = tl
+		r = decode_body_TL_messages_reactionsNotModified(m)
 	case CRC_messages_reactions:
-		tl := TL_messages_reactions{}
-		tl.Hash = m.Long()
-		tl.Reactions = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_reactions(m)
 	case CRC_emailVerifyPurposeLoginSetup:
-		tl := TL_emailVerifyPurposeLoginSetup{}
-		tl.PhoneNumber = m.String()
-		tl.PhoneCodeHash = m.String()
-		r = tl
+		r = decode_body_TL_emailVerifyPurposeLoginSetup(m)
 	case CRC_emailVerifyPurposeLoginChange:
-		tl := TL_emailVerifyPurposeLoginChange{}
-		r = tl
+		r = decode_body_TL_emailVerifyPurposeLoginChange(m)
 	case CRC_emailVerifyPurposePassport:
-		tl := TL_emailVerifyPurposePassport{}
-		r = tl
+		r = decode_body_TL_emailVerifyPurposePassport(m)
 	case CRC_emailVerificationCode:
-		tl := TL_emailVerificationCode{}
-		tl.Code = m.String()
-		r = tl
+		r = decode_body_TL_emailVerificationCode(m)
 	case CRC_emailVerificationGoogle:
-		tl := TL_emailVerificationGoogle{}
-		tl.Token = m.String()
-		r = tl
+		r = decode_body_TL_emailVerificationGoogle(m)
 	case CRC_emailVerificationApple:
-		tl := TL_emailVerificationApple{}
-		tl.Token = m.String()
-		r = tl
+		r = decode_body_TL_emailVerificationApple(m)
 	case CRC_account_emailVerified:
-		tl := TL_account_emailVerified{}
-		tl.Email = m.String()
-		r = tl
+		r = decode_body_TL_account_emailVerified(m)
 	case CRC_account_emailVerifiedLogin:
-		tl := TL_account_emailVerifiedLogin{}
-		tl.Email = m.String()
-		tl.SentCode = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_account_emailVerifiedLogin(m)
 	case CRC_premiumSubscriptionOption:
-		tl := TL_premiumSubscriptionOption{}
-		flags := m.Int()
-		tl.Current = flags&(1<<1) != 0
-		tl.CanPurchaseUpgrade = flags&(1<<2) != 0
-		if flags&(1<<3) != 0 {
-			tl.Transaction = Ref(m.String())
-		}
-		tl.Months = m.Int()
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		tl.BotURL = m.String()
-		if flags&(1<<0) != 0 {
-			tl.StoreProduct = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_premiumSubscriptionOption(m)
 	case CRC_sendAsPeer:
-		tl := TL_sendAsPeer{}
-		flags := m.Int()
-		tl.PremiumRequired = flags&(1<<0) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_sendAsPeer(m)
 	case CRC_messageExtendedMediaPreview:
-		tl := TL_messageExtendedMediaPreview{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.W = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.H = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Thumb = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.VideoDuration = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_messageExtendedMediaPreview(m)
 	case CRC_messageExtendedMedia:
-		tl := TL_messageExtendedMedia{}
-		tl.Media = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messageExtendedMedia(m)
 	case CRC_stickerKeyword:
-		tl := TL_stickerKeyword{}
-		tl.DocumentID = m.Long()
-		tl.Keyword = m.VectorString()
-		r = tl
+		r = decode_body_TL_stickerKeyword(m)
 	case CRC_username:
-		tl := TL_username{}
-		flags := m.Int()
-		tl.Editable = flags&(1<<0) != 0
-		tl.Active = flags&(1<<1) != 0
-		tl.Username = m.String()
-		r = tl
+		r = decode_body_TL_username(m)
 	case CRC_forumTopicDeleted:
-		tl := TL_forumTopicDeleted{}
-		tl.ID = m.Int()
-		r = tl
+		r = decode_body_TL_forumTopicDeleted(m)
 	case CRC_forumTopic:
-		tl := TL_forumTopic{}
-		flags := m.Int()
-		tl.My = flags&(1<<1) != 0
-		tl.Closed = flags&(1<<2) != 0
-		tl.Pinned = flags&(1<<3) != 0
-		tl.Short = flags&(1<<5) != 0
-		tl.Hidden = flags&(1<<6) != 0
-		tl.ID = m.Int()
-		tl.Date = m.Int()
-		tl.Title = m.String()
-		tl.IconColor = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.IconEmojiID = Ref(m.Long())
-		}
-		tl.TopMessage = m.Int()
-		tl.ReadInboxMaxID = m.Int()
-		tl.ReadOutboxMaxID = m.Int()
-		tl.UnreadCount = m.Int()
-		tl.UnreadMentionsCount = m.Int()
-		tl.UnreadReactionsCount = m.Int()
-		tl.FromID = DecodeBuf_GenericObject[TL](m)
-		tl.NotifySettings = DecodeBuf_GenericObject[TL_peerNotifySettings](m)
-		if flags&(1<<4) != 0 {
-			tl.Draft = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_forumTopic(m)
 	case CRC_messages_forumTopics:
-		tl := TL_messages_forumTopics{}
-		flags := m.Int()
-		tl.OrderByCreateDate = flags&(1<<0) != 0
-		tl.Count = m.Int()
-		tl.Topics = DecodeBuf_GenericVector[TL](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		tl.PTS = m.Int()
-		r = tl
+		r = decode_body_TL_messages_forumTopics(m)
 	case CRC_defaultHistoryTTL:
-		tl := TL_defaultHistoryTTL{}
-		tl.Period = m.Int()
-		r = tl
+		r = decode_body_TL_defaultHistoryTTL(m)
 	case CRC_exportedContactToken:
-		tl := TL_exportedContactToken{}
-		tl.URL = m.String()
-		tl.Expires = m.Int()
-		r = tl
+		r = decode_body_TL_exportedContactToken(m)
 	case CRC_requestPeerTypeUser:
-		tl := TL_requestPeerTypeUser{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Bot = Ref(m.Bool())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Premium = Ref(m.Bool())
-		}
-		r = tl
+		r = decode_body_TL_requestPeerTypeUser(m)
 	case CRC_requestPeerTypeChat:
-		tl := TL_requestPeerTypeChat{}
-		flags := m.Int()
-		tl.Creator = flags&(1<<0) != 0
-		tl.BotParticipant = flags&(1<<5) != 0
-		if flags&(1<<3) != 0 {
-			tl.HasUsername = Ref(m.Bool())
-		}
-		if flags&(1<<4) != 0 {
-			tl.Forum = Ref(m.Bool())
-		}
-		if flags&(1<<1) != 0 {
-			tl.UserAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
-		}
-		if flags&(1<<2) != 0 {
-			tl.BotAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
-		}
-		r = tl
+		r = decode_body_TL_requestPeerTypeChat(m)
 	case CRC_requestPeerTypeBroadcast:
-		tl := TL_requestPeerTypeBroadcast{}
-		flags := m.Int()
-		tl.Creator = flags&(1<<0) != 0
-		if flags&(1<<3) != 0 {
-			tl.HasUsername = Ref(m.Bool())
-		}
-		if flags&(1<<1) != 0 {
-			tl.UserAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
-		}
-		if flags&(1<<2) != 0 {
-			tl.BotAdminRights = Ref(DecodeBuf_GenericObject[TL_chatAdminRights](m))
-		}
-		r = tl
+		r = decode_body_TL_requestPeerTypeBroadcast(m)
 	case CRC_emojiListNotModified:
-		tl := TL_emojiListNotModified{}
-		r = tl
+		r = decode_body_TL_emojiListNotModified(m)
 	case CRC_emojiList:
-		tl := TL_emojiList{}
-		tl.Hash = m.Long()
-		tl.DocumentID = m.VectorLong()
-		r = tl
+		r = decode_body_TL_emojiList(m)
 	case CRC_emojiGroup:
-		tl := TL_emojiGroup{}
-		tl.Title = m.String()
-		tl.IconEmojiID = m.Long()
-		tl.Emoticons = m.VectorString()
-		r = tl
+		r = decode_body_TL_emojiGroup(m)
 	case CRC_emojiGroupGreeting:
-		tl := TL_emojiGroupGreeting{}
-		tl.Title = m.String()
-		tl.IconEmojiID = m.Long()
-		tl.Emoticons = m.VectorString()
-		r = tl
+		r = decode_body_TL_emojiGroupGreeting(m)
 	case CRC_emojiGroupPremium:
-		tl := TL_emojiGroupPremium{}
-		tl.Title = m.String()
-		tl.IconEmojiID = m.Long()
-		r = tl
+		r = decode_body_TL_emojiGroupPremium(m)
 	case CRC_messages_emojiGroupsNotModified:
-		tl := TL_messages_emojiGroupsNotModified{}
-		r = tl
+		r = decode_body_TL_messages_emojiGroupsNotModified(m)
 	case CRC_messages_emojiGroups:
-		tl := TL_messages_emojiGroups{}
-		tl.Hash = m.Int()
-		tl.Groups = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_emojiGroups(m)
 	case CRC_textWithEntities:
-		tl := TL_textWithEntities{}
-		tl.Text = m.String()
-		tl.Entities = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_textWithEntities(m)
 	case CRC_messages_translateResult:
-		tl := TL_messages_translateResult{}
-		tl.Result = DecodeBuf_GenericVector[TL_textWithEntities](m)
-		r = tl
+		r = decode_body_TL_messages_translateResult(m)
 	case CRC_autoSaveSettings:
-		tl := TL_autoSaveSettings{}
-		flags := m.Int()
-		tl.Photos = flags&(1<<0) != 0
-		tl.Videos = flags&(1<<1) != 0
-		if flags&(1<<2) != 0 {
-			tl.VideoMaxSize = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_autoSaveSettings(m)
 	case CRC_autoSaveException:
-		tl := TL_autoSaveException{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Settings = DecodeBuf_GenericObject[TL_autoSaveSettings](m)
-		r = tl
+		r = decode_body_TL_autoSaveException(m)
 	case CRC_account_autoSaveSettings:
-		tl := TL_account_autoSaveSettings{}
-		tl.UsersSettings = DecodeBuf_GenericObject[TL_autoSaveSettings](m)
-		tl.ChatsSettings = DecodeBuf_GenericObject[TL_autoSaveSettings](m)
-		tl.BroadcastsSettings = DecodeBuf_GenericObject[TL_autoSaveSettings](m)
-		tl.Exceptions = DecodeBuf_GenericVector[TL_autoSaveException](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_autoSaveSettings(m)
 	case CRC_help_appConfigNotModified:
-		tl := TL_help_appConfigNotModified{}
-		r = tl
+		r = decode_body_TL_help_appConfigNotModified(m)
 	case CRC_help_appConfig:
-		tl := TL_help_appConfig{}
-		tl.Hash = m.Int()
-		tl.Config = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_help_appConfig(m)
 	case CRC_inputBotAppID:
-		tl := TL_inputBotAppID{}
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		r = tl
+		r = decode_body_TL_inputBotAppID(m)
 	case CRC_inputBotAppShortName:
-		tl := TL_inputBotAppShortName{}
-		tl.BotID = DecodeBuf_GenericObject[TL](m)
-		tl.ShortName = m.String()
-		r = tl
+		r = decode_body_TL_inputBotAppShortName(m)
 	case CRC_botAppNotModified:
-		tl := TL_botAppNotModified{}
-		r = tl
+		r = decode_body_TL_botAppNotModified(m)
 	case CRC_botApp:
-		tl := TL_botApp{}
-		flags := m.Int()
-		tl.ID = m.Long()
-		tl.AccessHash = m.Long()
-		tl.ShortName = m.String()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		tl.Photo = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Document = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Hash = m.Long()
-		r = tl
+		r = decode_body_TL_botApp(m)
 	case CRC_messages_botApp:
-		tl := TL_messages_botApp{}
-		flags := m.Int()
-		tl.Inactive = flags&(1<<0) != 0
-		tl.RequestWriteAccess = flags&(1<<1) != 0
-		tl.HasSettings = flags&(1<<2) != 0
-		tl.App = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_messages_botApp(m)
 	case CRC_inlineBotWebView:
-		tl := TL_inlineBotWebView{}
-		tl.Text = m.String()
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_inlineBotWebView(m)
 	case CRC_readParticipantDate:
-		tl := TL_readParticipantDate{}
-		tl.UserID = m.Long()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_readParticipantDate(m)
 	case CRC_inputChatlistDialogFilter:
-		tl := TL_inputChatlistDialogFilter{}
-		tl.FilterID = m.Int()
-		r = tl
+		r = decode_body_TL_inputChatlistDialogFilter(m)
 	case CRC_exportedChatlistInvite:
-		tl := TL_exportedChatlistInvite{}
-		m.Int() //unused flags
-		tl.Title = m.String()
-		tl.URL = m.String()
-		tl.Peers = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_exportedChatlistInvite(m)
 	case CRC_chatlists_exportedChatlistInvite:
-		tl := TL_chatlists_exportedChatlistInvite{}
-		tl.Filter = DecodeBuf_GenericObject[TL](m)
-		tl.Invite = DecodeBuf_GenericObject[TL_exportedChatlistInvite](m)
-		r = tl
+		r = decode_body_TL_chatlists_exportedChatlistInvite(m)
 	case CRC_chatlists_exportedInvites:
-		tl := TL_chatlists_exportedInvites{}
-		tl.Invites = DecodeBuf_GenericVector[TL_exportedChatlistInvite](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_chatlists_exportedInvites(m)
 	case CRC_chatlists_chatlistInviteAlready:
-		tl := TL_chatlists_chatlistInviteAlready{}
-		tl.FilterID = m.Int()
-		tl.MissingPeers = DecodeBuf_GenericVector[TL](m)
-		tl.AlreadyPeers = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_chatlists_chatlistInviteAlready(m)
 	case CRC_chatlists_chatlistInvite:
-		tl := TL_chatlists_chatlistInvite{}
-		flags := m.Int()
-		tl.Title = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Emoticon = Ref(m.String())
-		}
-		tl.Peers = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_chatlists_chatlistInvite(m)
 	case CRC_chatlists_chatlistUpdates:
-		tl := TL_chatlists_chatlistUpdates{}
-		tl.MissingPeers = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_chatlists_chatlistUpdates(m)
 	case CRC_bots_botInfo:
-		tl := TL_bots_botInfo{}
-		tl.Name = m.String()
-		tl.About = m.String()
-		tl.Description = m.String()
-		r = tl
+		r = decode_body_TL_bots_botInfo(m)
 	case CRC_messagePeerVote:
-		tl := TL_messagePeerVote{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Option = m.StringBytes()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_messagePeerVote(m)
 	case CRC_messagePeerVoteInputOption:
-		tl := TL_messagePeerVoteInputOption{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_messagePeerVoteInputOption(m)
 	case CRC_messagePeerVoteMultiple:
-		tl := TL_messagePeerVoteMultiple{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Options = m.VectorBytes()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_messagePeerVoteMultiple(m)
 	case CRC_storyViews:
-		tl := TL_storyViews{}
-		flags := m.Int()
-		tl.HasViewers = flags&(1<<1) != 0
-		tl.ViewsCount = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.ForwardsCount = Ref(m.Int())
-		}
-		if flags&(1<<3) != 0 {
-			tl.Reactions = DecodeBuf_GenericVector[TL_reactionCount](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.ReactionsCount = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.RecentViewers = m.VectorLong()
-		}
-		r = tl
+		r = decode_body_TL_storyViews(m)
 	case CRC_storyItemDeleted:
-		tl := TL_storyItemDeleted{}
-		tl.ID = m.Int()
-		r = tl
+		r = decode_body_TL_storyItemDeleted(m)
 	case CRC_storyItemSkipped:
-		tl := TL_storyItemSkipped{}
-		flags := m.Int()
-		tl.CloseFriends = flags&(1<<8) != 0
-		tl.ID = m.Int()
-		tl.Date = m.Int()
-		tl.ExpireDate = m.Int()
-		r = tl
+		r = decode_body_TL_storyItemSkipped(m)
 	case CRC_storyItem:
-		tl := TL_storyItem{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<5) != 0
-		tl.Public = flags&(1<<7) != 0
-		tl.CloseFriends = flags&(1<<8) != 0
-		tl.Min = flags&(1<<9) != 0
-		tl.Noforwards = flags&(1<<10) != 0
-		tl.Edited = flags&(1<<11) != 0
-		tl.Contacts = flags&(1<<12) != 0
-		tl.SelectedContacts = flags&(1<<13) != 0
-		tl.Out = flags&(1<<16) != 0
-		tl.ID = m.Int()
-		tl.Date = m.Int()
-		if flags&(1<<18) != 0 {
-			tl.FromID = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<17) != 0 {
-			tl.FwdFrom = Ref(DecodeBuf_GenericObject[TL_storyFwdHeader](m))
-		}
-		tl.ExpireDate = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Caption = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		tl.Media = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<14) != 0 {
-			tl.MediaAreas = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.Privacy = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<3) != 0 {
-			tl.Views = Ref(DecodeBuf_GenericObject[TL_storyViews](m))
-		}
-		if flags&(1<<15) != 0 {
-			tl.SentReaction = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_storyItem(m)
 	case CRC_stories_allStoriesNotModified:
-		tl := TL_stories_allStoriesNotModified{}
-		m.Int() //unused flags
-		tl.State = m.String()
-		tl.StealthMode = DecodeBuf_GenericObject[TL_storiesStealthMode](m)
-		r = tl
+		r = decode_body_TL_stories_allStoriesNotModified(m)
 	case CRC_stories_allStories:
-		tl := TL_stories_allStories{}
-		flags := m.Int()
-		tl.HasMore = flags&(1<<0) != 0
-		tl.Count = m.Int()
-		tl.State = m.String()
-		tl.PeerStories = DecodeBuf_GenericVector[TL_peerStories](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		tl.StealthMode = DecodeBuf_GenericObject[TL_storiesStealthMode](m)
-		r = tl
+		r = decode_body_TL_stories_allStories(m)
 	case CRC_stories_stories:
-		tl := TL_stories_stories{}
-		flags := m.Int()
-		tl.Count = m.Int()
-		tl.Stories = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.PinnedToTop = m.VectorInt()
-		}
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stories_stories(m)
 	case CRC_storyView:
-		tl := TL_storyView{}
-		flags := m.Int()
-		tl.Blocked = flags&(1<<0) != 0
-		tl.BlockedMyStoriesFrom = flags&(1<<1) != 0
-		tl.UserID = m.Long()
-		tl.Date = m.Int()
-		if flags&(1<<2) != 0 {
-			tl.Reaction = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_storyView(m)
 	case CRC_storyViewPublicForward:
-		tl := TL_storyViewPublicForward{}
-		flags := m.Int()
-		tl.Blocked = flags&(1<<0) != 0
-		tl.BlockedMyStoriesFrom = flags&(1<<1) != 0
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_storyViewPublicForward(m)
 	case CRC_storyViewPublicRepost:
-		tl := TL_storyViewPublicRepost{}
-		flags := m.Int()
-		tl.Blocked = flags&(1<<0) != 0
-		tl.BlockedMyStoriesFrom = flags&(1<<1) != 0
-		tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		tl.Story = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_storyViewPublicRepost(m)
 	case CRC_stories_storyViewsList:
-		tl := TL_stories_storyViewsList{}
-		flags := m.Int()
-		tl.Count = m.Int()
-		tl.ViewsCount = m.Int()
-		tl.ForwardsCount = m.Int()
-		tl.ReactionsCount = m.Int()
-		tl.Views = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_stories_storyViewsList(m)
 	case CRC_stories_storyViews:
-		tl := TL_stories_storyViews{}
-		tl.Views = DecodeBuf_GenericVector[TL_storyViews](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stories_storyViews(m)
 	case CRC_inputReplyToMessage:
-		tl := TL_inputReplyToMessage{}
-		flags := m.Int()
-		tl.ReplyToMsgID = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.TopMsgID = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.ReplyToPeerID = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.QuoteText = Ref(m.String())
-		}
-		if flags&(1<<3) != 0 {
-			tl.QuoteEntities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<4) != 0 {
-			tl.QuoteOffset = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_inputReplyToMessage(m)
 	case CRC_inputReplyToStory:
-		tl := TL_inputReplyToStory{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.StoryID = m.Int()
-		r = tl
+		r = decode_body_TL_inputReplyToStory(m)
 	case CRC_exportedStoryLink:
-		tl := TL_exportedStoryLink{}
-		tl.Link = m.String()
-		r = tl
+		r = decode_body_TL_exportedStoryLink(m)
 	case CRC_storiesStealthMode:
-		tl := TL_storiesStealthMode{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.ActiveUntilDate = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.CooldownUntilDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_storiesStealthMode(m)
 	case CRC_mediaAreaCoordinates:
-		tl := TL_mediaAreaCoordinates{}
-		flags := m.Int()
-		tl.X = m.Double()
-		tl.Y = m.Double()
-		tl.W = m.Double()
-		tl.H = m.Double()
-		tl.Rotation = m.Double()
-		if flags&(1<<0) != 0 {
-			tl.Radius = Ref(m.Double())
-		}
-		r = tl
+		r = decode_body_TL_mediaAreaCoordinates(m)
 	case CRC_mediaAreaVenue:
-		tl := TL_mediaAreaVenue{}
-		tl.Coordinates = DecodeBuf_GenericObject[TL_mediaAreaCoordinates](m)
-		tl.Geo = DecodeBuf_GenericObject[TL](m)
-		tl.Title = m.String()
-		tl.Address = m.String()
-		tl.Provider = m.String()
-		tl.VenueID = m.String()
-		tl.VenueType = m.String()
-		r = tl
+		r = decode_body_TL_mediaAreaVenue(m)
 	case CRC_inputMediaAreaVenue:
-		tl := TL_inputMediaAreaVenue{}
-		tl.Coordinates = DecodeBuf_GenericObject[TL_mediaAreaCoordinates](m)
-		tl.QueryID = m.Long()
-		tl.ResultID = m.String()
-		r = tl
+		r = decode_body_TL_inputMediaAreaVenue(m)
 	case CRC_mediaAreaGeoPoint:
-		tl := TL_mediaAreaGeoPoint{}
-		flags := m.Int()
-		tl.Coordinates = DecodeBuf_GenericObject[TL_mediaAreaCoordinates](m)
-		tl.Geo = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Address = Ref(DecodeBuf_GenericObject[TL_geoPointAddress](m))
-		}
-		r = tl
+		r = decode_body_TL_mediaAreaGeoPoint(m)
 	case CRC_mediaAreaSuggestedReaction:
-		tl := TL_mediaAreaSuggestedReaction{}
-		flags := m.Int()
-		tl.Dark = flags&(1<<0) != 0
-		tl.Flipped = flags&(1<<1) != 0
-		tl.Coordinates = DecodeBuf_GenericObject[TL_mediaAreaCoordinates](m)
-		tl.Reaction = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_mediaAreaSuggestedReaction(m)
 	case CRC_mediaAreaChannelPost:
-		tl := TL_mediaAreaChannelPost{}
-		tl.Coordinates = DecodeBuf_GenericObject[TL_mediaAreaCoordinates](m)
-		tl.ChannelID = m.Long()
-		tl.MsgID = m.Int()
-		r = tl
+		r = decode_body_TL_mediaAreaChannelPost(m)
 	case CRC_inputMediaAreaChannelPost:
-		tl := TL_inputMediaAreaChannelPost{}
-		tl.Coordinates = DecodeBuf_GenericObject[TL_mediaAreaCoordinates](m)
-		tl.Channel = DecodeBuf_GenericObject[TL](m)
-		tl.MsgID = m.Int()
-		r = tl
+		r = decode_body_TL_inputMediaAreaChannelPost(m)
 	case CRC_mediaAreaURL:
-		tl := TL_mediaAreaURL{}
-		tl.Coordinates = DecodeBuf_GenericObject[TL_mediaAreaCoordinates](m)
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_mediaAreaURL(m)
 	case CRC_mediaAreaWeather:
-		tl := TL_mediaAreaWeather{}
-		tl.Coordinates = DecodeBuf_GenericObject[TL_mediaAreaCoordinates](m)
-		tl.Emoji = m.String()
-		tl.TemperatureC = m.Double()
-		tl.Color = m.Int()
-		r = tl
+		r = decode_body_TL_mediaAreaWeather(m)
 	case CRC_peerStories:
-		tl := TL_peerStories{}
-		flags := m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.MaxReadID = Ref(m.Int())
-		}
-		tl.Stories = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_peerStories(m)
 	case CRC_stories_peerStories:
-		tl := TL_stories_peerStories{}
-		tl.Stories = DecodeBuf_GenericObject[TL_peerStories](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stories_peerStories(m)
 	case CRC_messages_webPage:
-		tl := TL_messages_webPage{}
-		tl.Webpage = DecodeBuf_GenericObject[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_webPage(m)
 	case CRC_premiumGiftCodeOption:
-		tl := TL_premiumGiftCodeOption{}
-		flags := m.Int()
-		tl.Users = m.Int()
-		tl.Months = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.StoreProduct = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.StoreQuantity = Ref(m.Int())
-		}
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_premiumGiftCodeOption(m)
 	case CRC_payments_checkedGiftCode:
-		tl := TL_payments_checkedGiftCode{}
-		flags := m.Int()
-		tl.ViaGiveaway = flags&(1<<2) != 0
-		if flags&(1<<4) != 0 {
-			tl.FromID = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<3) != 0 {
-			tl.GiveawayMsgID = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.ToID = Ref(m.Long())
-		}
-		tl.Date = m.Int()
-		tl.Months = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.UsedDate = Ref(m.Int())
-		}
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_payments_checkedGiftCode(m)
 	case CRC_payments_giveawayInfo:
-		tl := TL_payments_giveawayInfo{}
-		flags := m.Int()
-		tl.Participating = flags&(1<<0) != 0
-		tl.PreparingResults = flags&(1<<3) != 0
-		tl.StartDate = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.JoinedTooEarlyDate = Ref(m.Int())
-		}
-		if flags&(1<<2) != 0 {
-			tl.AdminDisallowedChatID = Ref(m.Long())
-		}
-		if flags&(1<<4) != 0 {
-			tl.DisallowedCountry = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_payments_giveawayInfo(m)
 	case CRC_payments_giveawayInfoResults:
-		tl := TL_payments_giveawayInfoResults{}
-		flags := m.Int()
-		tl.Winner = flags&(1<<0) != 0
-		tl.Refunded = flags&(1<<1) != 0
-		tl.StartDate = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.GiftCodeSlug = Ref(m.String())
-		}
-		tl.FinishDate = m.Int()
-		tl.WinnersCount = m.Int()
-		tl.ActivatedCount = m.Int()
-		r = tl
+		r = decode_body_TL_payments_giveawayInfoResults(m)
 	case CRC_prepaidGiveaway:
-		tl := TL_prepaidGiveaway{}
-		tl.ID = m.Long()
-		tl.Months = m.Int()
-		tl.Quantity = m.Int()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_prepaidGiveaway(m)
 	case CRC_boost:
-		tl := TL_boost{}
-		flags := m.Int()
-		tl.Gift = flags&(1<<1) != 0
-		tl.Giveaway = flags&(1<<2) != 0
-		tl.Unclaimed = flags&(1<<3) != 0
-		tl.ID = m.String()
-		if flags&(1<<0) != 0 {
-			tl.UserID = Ref(m.Long())
-		}
-		if flags&(1<<2) != 0 {
-			tl.GiveawayMsgID = Ref(m.Int())
-		}
-		tl.Date = m.Int()
-		tl.Expires = m.Int()
-		if flags&(1<<4) != 0 {
-			tl.UsedGiftSlug = Ref(m.String())
-		}
-		if flags&(1<<5) != 0 {
-			tl.Multiplier = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_boost(m)
 	case CRC_premium_boostsList:
-		tl := TL_premium_boostsList{}
-		flags := m.Int()
-		tl.Count = m.Int()
-		tl.Boosts = DecodeBuf_GenericVector[TL_boost](m)
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_premium_boostsList(m)
 	case CRC_myBoost:
-		tl := TL_myBoost{}
-		flags := m.Int()
-		tl.Slot = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Peer = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Date = m.Int()
-		tl.Expires = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.CooldownUntilDate = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_myBoost(m)
 	case CRC_premium_myBoosts:
-		tl := TL_premium_myBoosts{}
-		tl.MyBoosts = DecodeBuf_GenericVector[TL_myBoost](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_premium_myBoosts(m)
 	case CRC_premium_boostsStatus:
-		tl := TL_premium_boostsStatus{}
-		flags := m.Int()
-		tl.MyBoost = flags&(1<<2) != 0
-		tl.Level = m.Int()
-		tl.CurrentLevelBoosts = m.Int()
-		tl.Boosts = m.Int()
-		if flags&(1<<4) != 0 {
-			tl.GiftBoosts = Ref(m.Int())
-		}
-		if flags&(1<<0) != 0 {
-			tl.NextLevelBoosts = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.PremiumAudience = Ref(DecodeBuf_GenericObject[TL_statsPercentValue](m))
-		}
-		tl.BoostURL = m.String()
-		if flags&(1<<3) != 0 {
-			tl.PrepaidGiveaways = DecodeBuf_GenericVector[TL_prepaidGiveaway](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.MyBoostSlots = m.VectorInt()
-		}
-		r = tl
+		r = decode_body_TL_premium_boostsStatus(m)
 	case CRC_storyFwdHeader:
-		tl := TL_storyFwdHeader{}
-		flags := m.Int()
-		tl.Modified = flags&(1<<3) != 0
-		if flags&(1<<0) != 0 {
-			tl.From = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.FromName = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.StoryID = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_storyFwdHeader(m)
 	case CRC_postInteractionCountersMessage:
-		tl := TL_postInteractionCountersMessage{}
-		tl.MsgID = m.Int()
-		tl.Views = m.Int()
-		tl.Forwards = m.Int()
-		tl.Reactions = m.Int()
-		r = tl
+		r = decode_body_TL_postInteractionCountersMessage(m)
 	case CRC_postInteractionCountersStory:
-		tl := TL_postInteractionCountersStory{}
-		tl.StoryID = m.Int()
-		tl.Views = m.Int()
-		tl.Forwards = m.Int()
-		tl.Reactions = m.Int()
-		r = tl
+		r = decode_body_TL_postInteractionCountersStory(m)
 	case CRC_stats_storyStats:
-		tl := TL_stats_storyStats{}
-		tl.ViewsGraph = DecodeBuf_GenericObject[TL](m)
-		tl.ReactionsByEmotionGraph = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_stats_storyStats(m)
 	case CRC_publicForwardMessage:
-		tl := TL_publicForwardMessage{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_publicForwardMessage(m)
 	case CRC_publicForwardStory:
-		tl := TL_publicForwardStory{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Story = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_publicForwardStory(m)
 	case CRC_stats_publicForwards:
-		tl := TL_stats_publicForwards{}
-		flags := m.Int()
-		tl.Count = m.Int()
-		tl.Forwards = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stats_publicForwards(m)
 	case CRC_peerColor:
-		tl := TL_peerColor{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Color = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.BackgroundEmojiID = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_peerColor(m)
 	case CRC_help_peerColorSet:
-		tl := TL_help_peerColorSet{}
-		tl.Colors = m.VectorInt()
-		r = tl
+		r = decode_body_TL_help_peerColorSet(m)
 	case CRC_help_peerColorProfileSet:
-		tl := TL_help_peerColorProfileSet{}
-		tl.PaletteColors = m.VectorInt()
-		tl.BgColors = m.VectorInt()
-		tl.StoryColors = m.VectorInt()
-		r = tl
+		r = decode_body_TL_help_peerColorProfileSet(m)
 	case CRC_help_peerColorOption:
-		tl := TL_help_peerColorOption{}
-		flags := m.Int()
-		tl.Hidden = flags&(1<<0) != 0
-		tl.ColorID = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.Colors = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.DarkColors = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<3) != 0 {
-			tl.ChannelMinLevel = Ref(m.Int())
-		}
-		if flags&(1<<4) != 0 {
-			tl.GroupMinLevel = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_help_peerColorOption(m)
 	case CRC_help_peerColorsNotModified:
-		tl := TL_help_peerColorsNotModified{}
-		r = tl
+		r = decode_body_TL_help_peerColorsNotModified(m)
 	case CRC_help_peerColors:
-		tl := TL_help_peerColors{}
-		tl.Hash = m.Int()
-		tl.Colors = DecodeBuf_GenericVector[TL_help_peerColorOption](m)
-		r = tl
+		r = decode_body_TL_help_peerColors(m)
 	case CRC_storyReaction:
-		tl := TL_storyReaction{}
-		tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		tl.Date = m.Int()
-		tl.Reaction = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_storyReaction(m)
 	case CRC_storyReactionPublicForward:
-		tl := TL_storyReactionPublicForward{}
-		tl.Message = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_storyReactionPublicForward(m)
 	case CRC_storyReactionPublicRepost:
-		tl := TL_storyReactionPublicRepost{}
-		tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		tl.Story = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_storyReactionPublicRepost(m)
 	case CRC_stories_storyReactionsList:
-		tl := TL_stories_storyReactionsList{}
-		flags := m.Int()
-		tl.Count = m.Int()
-		tl.Reactions = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_stories_storyReactionsList(m)
 	case CRC_savedDialog:
-		tl := TL_savedDialog{}
-		flags := m.Int()
-		tl.Pinned = flags&(1<<2) != 0
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.TopMessage = m.Int()
-		r = tl
+		r = decode_body_TL_savedDialog(m)
 	case CRC_messages_savedDialogs:
-		tl := TL_messages_savedDialogs{}
-		tl.Dialogs = DecodeBuf_GenericVector[TL_savedDialog](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_savedDialogs(m)
 	case CRC_messages_savedDialogsSlice:
-		tl := TL_messages_savedDialogsSlice{}
-		tl.Count = m.Int()
-		tl.Dialogs = DecodeBuf_GenericVector[TL_savedDialog](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_savedDialogsSlice(m)
 	case CRC_messages_savedDialogsNotModified:
-		tl := TL_messages_savedDialogsNotModified{}
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_messages_savedDialogsNotModified(m)
 	case CRC_savedReactionTag:
-		tl := TL_savedReactionTag{}
-		flags := m.Int()
-		tl.Reaction = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_savedReactionTag(m)
 	case CRC_messages_savedReactionTagsNotModified:
-		tl := TL_messages_savedReactionTagsNotModified{}
-		r = tl
+		r = decode_body_TL_messages_savedReactionTagsNotModified(m)
 	case CRC_messages_savedReactionTags:
-		tl := TL_messages_savedReactionTags{}
-		tl.Tags = DecodeBuf_GenericVector[TL_savedReactionTag](m)
-		tl.Hash = m.Long()
-		r = tl
+		r = decode_body_TL_messages_savedReactionTags(m)
 	case CRC_outboxReadDate:
-		tl := TL_outboxReadDate{}
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_outboxReadDate(m)
 	case CRC_smsjobs_eligibleToJoin:
-		tl := TL_smsjobs_eligibleToJoin{}
-		tl.TermsURL = m.String()
-		tl.MonthlySentSMS = m.Int()
-		r = tl
+		r = decode_body_TL_smsjobs_eligibleToJoin(m)
 	case CRC_smsjobs_status:
-		tl := TL_smsjobs_status{}
-		flags := m.Int()
-		tl.AllowInternational = flags&(1<<0) != 0
-		tl.RecentSent = m.Int()
-		tl.RecentSince = m.Int()
-		tl.RecentRemains = m.Int()
-		tl.TotalSent = m.Int()
-		tl.TotalSince = m.Int()
-		if flags&(1<<1) != 0 {
-			tl.LastGiftSlug = Ref(m.String())
-		}
-		tl.TermsURL = m.String()
-		r = tl
+		r = decode_body_TL_smsjobs_status(m)
 	case CRC_smsJob:
-		tl := TL_smsJob{}
-		tl.JobID = m.String()
-		tl.PhoneNumber = m.String()
-		tl.Text = m.String()
-		r = tl
+		r = decode_body_TL_smsJob(m)
 	case CRC_businessWeeklyOpen:
-		tl := TL_businessWeeklyOpen{}
-		tl.StartMinute = m.Int()
-		tl.EndMinute = m.Int()
-		r = tl
+		r = decode_body_TL_businessWeeklyOpen(m)
 	case CRC_businessWorkHours:
-		tl := TL_businessWorkHours{}
-		flags := m.Int()
-		tl.OpenNow = flags&(1<<0) != 0
-		tl.TimezoneID = m.String()
-		tl.WeeklyOpen = DecodeBuf_GenericVector[TL_businessWeeklyOpen](m)
-		r = tl
+		r = decode_body_TL_businessWorkHours(m)
 	case CRC_businessLocation:
-		tl := TL_businessLocation{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.GeoPoint = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Address = m.String()
-		r = tl
+		r = decode_body_TL_businessLocation(m)
 	case CRC_inputBusinessRecipients:
-		tl := TL_inputBusinessRecipients{}
-		flags := m.Int()
-		tl.ExistingChats = flags&(1<<0) != 0
-		tl.NewChats = flags&(1<<1) != 0
-		tl.Contacts = flags&(1<<2) != 0
-		tl.NonContacts = flags&(1<<3) != 0
-		tl.ExcludeSelected = flags&(1<<5) != 0
-		if flags&(1<<4) != 0 {
-			tl.Users = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBusinessRecipients(m)
 	case CRC_businessRecipients:
-		tl := TL_businessRecipients{}
-		flags := m.Int()
-		tl.ExistingChats = flags&(1<<0) != 0
-		tl.NewChats = flags&(1<<1) != 0
-		tl.Contacts = flags&(1<<2) != 0
-		tl.NonContacts = flags&(1<<3) != 0
-		tl.ExcludeSelected = flags&(1<<5) != 0
-		if flags&(1<<4) != 0 {
-			tl.Users = m.VectorLong()
-		}
-		r = tl
+		r = decode_body_TL_businessRecipients(m)
 	case CRC_businessAwayMessageScheduleAlways:
-		tl := TL_businessAwayMessageScheduleAlways{}
-		r = tl
+		r = decode_body_TL_businessAwayMessageScheduleAlways(m)
 	case CRC_businessAwayMessageScheduleOutsideWorkHours:
-		tl := TL_businessAwayMessageScheduleOutsideWorkHours{}
-		r = tl
+		r = decode_body_TL_businessAwayMessageScheduleOutsideWorkHours(m)
 	case CRC_businessAwayMessageScheduleCustom:
-		tl := TL_businessAwayMessageScheduleCustom{}
-		tl.StartDate = m.Int()
-		tl.EndDate = m.Int()
-		r = tl
+		r = decode_body_TL_businessAwayMessageScheduleCustom(m)
 	case CRC_inputBusinessGreetingMessage:
-		tl := TL_inputBusinessGreetingMessage{}
-		tl.ShortcutID = m.Int()
-		tl.Recipients = DecodeBuf_GenericObject[TL_inputBusinessRecipients](m)
-		tl.NoActivityDays = m.Int()
-		r = tl
+		r = decode_body_TL_inputBusinessGreetingMessage(m)
 	case CRC_businessGreetingMessage:
-		tl := TL_businessGreetingMessage{}
-		tl.ShortcutID = m.Int()
-		tl.Recipients = DecodeBuf_GenericObject[TL_businessRecipients](m)
-		tl.NoActivityDays = m.Int()
-		r = tl
+		r = decode_body_TL_businessGreetingMessage(m)
 	case CRC_inputBusinessAwayMessage:
-		tl := TL_inputBusinessAwayMessage{}
-		flags := m.Int()
-		tl.OfflineOnly = flags&(1<<0) != 0
-		tl.ShortcutID = m.Int()
-		tl.Schedule = DecodeBuf_GenericObject[TL](m)
-		tl.Recipients = DecodeBuf_GenericObject[TL_inputBusinessRecipients](m)
-		r = tl
+		r = decode_body_TL_inputBusinessAwayMessage(m)
 	case CRC_businessAwayMessage:
-		tl := TL_businessAwayMessage{}
-		flags := m.Int()
-		tl.OfflineOnly = flags&(1<<0) != 0
-		tl.ShortcutID = m.Int()
-		tl.Schedule = DecodeBuf_GenericObject[TL](m)
-		tl.Recipients = DecodeBuf_GenericObject[TL_businessRecipients](m)
-		r = tl
+		r = decode_body_TL_businessAwayMessage(m)
 	case CRC_timezone:
-		tl := TL_timezone{}
-		tl.ID = m.String()
-		tl.Name = m.String()
-		tl.UtcOffset = m.Int()
-		r = tl
+		r = decode_body_TL_timezone(m)
 	case CRC_help_timezonesListNotModified:
-		tl := TL_help_timezonesListNotModified{}
-		r = tl
+		r = decode_body_TL_help_timezonesListNotModified(m)
 	case CRC_help_timezonesList:
-		tl := TL_help_timezonesList{}
-		tl.Timezones = DecodeBuf_GenericVector[TL_timezone](m)
-		tl.Hash = m.Int()
-		r = tl
+		r = decode_body_TL_help_timezonesList(m)
 	case CRC_quickReply:
-		tl := TL_quickReply{}
-		tl.ShortcutID = m.Int()
-		tl.Shortcut = m.String()
-		tl.TopMessage = m.Int()
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_quickReply(m)
 	case CRC_inputQuickReplyShortcut:
-		tl := TL_inputQuickReplyShortcut{}
-		tl.Shortcut = m.String()
-		r = tl
+		r = decode_body_TL_inputQuickReplyShortcut(m)
 	case CRC_inputQuickReplyShortcutID:
-		tl := TL_inputQuickReplyShortcutID{}
-		tl.ShortcutID = m.Int()
-		r = tl
+		r = decode_body_TL_inputQuickReplyShortcutID(m)
 	case CRC_messages_quickReplies:
-		tl := TL_messages_quickReplies{}
-		tl.QuickReplies = DecodeBuf_GenericVector[TL_quickReply](m)
-		tl.Messages = DecodeBuf_GenericVector[TL](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_quickReplies(m)
 	case CRC_messages_quickRepliesNotModified:
-		tl := TL_messages_quickRepliesNotModified{}
-		r = tl
+		r = decode_body_TL_messages_quickRepliesNotModified(m)
 	case CRC_connectedBot:
-		tl := TL_connectedBot{}
-		flags := m.Int()
-		tl.CanReply = flags&(1<<0) != 0
-		tl.BotID = m.Long()
-		tl.Recipients = DecodeBuf_GenericObject[TL_businessBotRecipients](m)
-		r = tl
+		r = decode_body_TL_connectedBot(m)
 	case CRC_account_connectedBots:
-		tl := TL_account_connectedBots{}
-		tl.ConnectedBots = DecodeBuf_GenericVector[TL_connectedBot](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_connectedBots(m)
 	case CRC_messages_dialogFilters:
-		tl := TL_messages_dialogFilters{}
-		flags := m.Int()
-		tl.TagsEnabled = flags&(1<<0) != 0
-		tl.Filters = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_dialogFilters(m)
 	case CRC_birthday:
-		tl := TL_birthday{}
-		flags := m.Int()
-		tl.Day = m.Int()
-		tl.Month = m.Int()
-		if flags&(1<<0) != 0 {
-			tl.Year = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_birthday(m)
 	case CRC_botBusinessConnection:
-		tl := TL_botBusinessConnection{}
-		flags := m.Int()
-		tl.CanReply = flags&(1<<0) != 0
-		tl.Disabled = flags&(1<<1) != 0
-		tl.ConnectionID = m.String()
-		tl.UserID = m.Long()
-		tl.DCID = m.Int()
-		tl.Date = m.Int()
-		r = tl
+		r = decode_body_TL_botBusinessConnection(m)
 	case CRC_inputBusinessIntro:
-		tl := TL_inputBusinessIntro{}
-		flags := m.Int()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Sticker = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBusinessIntro(m)
 	case CRC_businessIntro:
-		tl := TL_businessIntro{}
-		flags := m.Int()
-		tl.Title = m.String()
-		tl.Description = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Sticker = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_businessIntro(m)
 	case CRC_messages_myStickers:
-		tl := TL_messages_myStickers{}
-		tl.Count = m.Int()
-		tl.Sets = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_myStickers(m)
 	case CRC_inputCollectibleUsername:
-		tl := TL_inputCollectibleUsername{}
-		tl.Username = m.String()
-		r = tl
+		r = decode_body_TL_inputCollectibleUsername(m)
 	case CRC_inputCollectiblePhone:
-		tl := TL_inputCollectiblePhone{}
-		tl.Phone = m.String()
-		r = tl
+		r = decode_body_TL_inputCollectiblePhone(m)
 	case CRC_fragment_collectibleInfo:
-		tl := TL_fragment_collectibleInfo{}
-		tl.PurchaseDate = m.Int()
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		tl.CryptoCurrency = m.String()
-		tl.CryptoAmount = m.Long()
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_fragment_collectibleInfo(m)
 	case CRC_inputBusinessBotRecipients:
-		tl := TL_inputBusinessBotRecipients{}
-		flags := m.Int()
-		tl.ExistingChats = flags&(1<<0) != 0
-		tl.NewChats = flags&(1<<1) != 0
-		tl.Contacts = flags&(1<<2) != 0
-		tl.NonContacts = flags&(1<<3) != 0
-		tl.ExcludeSelected = flags&(1<<5) != 0
-		if flags&(1<<4) != 0 {
-			tl.Users = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<6) != 0 {
-			tl.ExcludeUsers = DecodeBuf_GenericVector[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_inputBusinessBotRecipients(m)
 	case CRC_businessBotRecipients:
-		tl := TL_businessBotRecipients{}
-		flags := m.Int()
-		tl.ExistingChats = flags&(1<<0) != 0
-		tl.NewChats = flags&(1<<1) != 0
-		tl.Contacts = flags&(1<<2) != 0
-		tl.NonContacts = flags&(1<<3) != 0
-		tl.ExcludeSelected = flags&(1<<5) != 0
-		if flags&(1<<4) != 0 {
-			tl.Users = m.VectorLong()
-		}
-		if flags&(1<<6) != 0 {
-			tl.ExcludeUsers = m.VectorLong()
-		}
-		r = tl
+		r = decode_body_TL_businessBotRecipients(m)
 	case CRC_contactBirthday:
-		tl := TL_contactBirthday{}
-		tl.ContactID = m.Long()
-		tl.Birthday = DecodeBuf_GenericObject[TL_birthday](m)
-		r = tl
+		r = decode_body_TL_contactBirthday(m)
 	case CRC_contacts_contactBirthdays:
-		tl := TL_contacts_contactBirthdays{}
-		tl.Contacts = DecodeBuf_GenericVector[TL_contactBirthday](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_contacts_contactBirthdays(m)
 	case CRC_missingInvitee:
-		tl := TL_missingInvitee{}
-		flags := m.Int()
-		tl.PremiumWouldAllowInvite = flags&(1<<0) != 0
-		tl.PremiumRequiredForPM = flags&(1<<1) != 0
-		tl.UserID = m.Long()
-		r = tl
+		r = decode_body_TL_missingInvitee(m)
 	case CRC_messages_invitedUsers:
-		tl := TL_messages_invitedUsers{}
-		tl.Updates = DecodeBuf_GenericObject[TL](m)
-		tl.MissingInvitees = DecodeBuf_GenericVector[TL_missingInvitee](m)
-		r = tl
+		r = decode_body_TL_messages_invitedUsers(m)
 	case CRC_inputBusinessChatLink:
-		tl := TL_inputBusinessChatLink{}
-		flags := m.Int()
-		tl.Message = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_inputBusinessChatLink(m)
 	case CRC_businessChatLink:
-		tl := TL_businessChatLink{}
-		flags := m.Int()
-		tl.Link = m.String()
-		tl.Message = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		tl.Views = m.Int()
-		r = tl
+		r = decode_body_TL_businessChatLink(m)
 	case CRC_account_businessChatLinks:
-		tl := TL_account_businessChatLinks{}
-		tl.Links = DecodeBuf_GenericVector[TL_businessChatLink](m)
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_businessChatLinks(m)
 	case CRC_account_resolvedBusinessChatLinks:
-		tl := TL_account_resolvedBusinessChatLinks{}
-		flags := m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Message = m.String()
-		if flags&(1<<0) != 0 {
-			tl.Entities = DecodeBuf_GenericVector[TL](m)
-		}
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_account_resolvedBusinessChatLinks(m)
 	case CRC_requestedPeerUser:
-		tl := TL_requestedPeerUser{}
-		flags := m.Int()
-		tl.UserID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.FirstName = Ref(m.String())
-		}
-		if flags&(1<<0) != 0 {
-			tl.LastName = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Username = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_requestedPeerUser(m)
 	case CRC_requestedPeerChat:
-		tl := TL_requestedPeerChat{}
-		flags := m.Int()
-		tl.ChatID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_requestedPeerChat(m)
 	case CRC_requestedPeerChannel:
-		tl := TL_requestedPeerChannel{}
-		flags := m.Int()
-		tl.ChannelID = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Username = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		r = tl
+		r = decode_body_TL_requestedPeerChannel(m)
 	case CRC_sponsoredMessageReportOption:
-		tl := TL_sponsoredMessageReportOption{}
-		tl.Text = m.String()
-		tl.Option = m.StringBytes()
-		r = tl
+		r = decode_body_TL_sponsoredMessageReportOption(m)
 	case CRC_channels_sponsoredMessageReportResultChooseOption:
-		tl := TL_channels_sponsoredMessageReportResultChooseOption{}
-		tl.Title = m.String()
-		tl.Options = DecodeBuf_GenericVector[TL_sponsoredMessageReportOption](m)
-		r = tl
+		r = decode_body_TL_channels_sponsoredMessageReportResultChooseOption(m)
 	case CRC_channels_sponsoredMessageReportResultAdsHidden:
-		tl := TL_channels_sponsoredMessageReportResultAdsHidden{}
-		r = tl
+		r = decode_body_TL_channels_sponsoredMessageReportResultAdsHidden(m)
 	case CRC_channels_sponsoredMessageReportResultReported:
-		tl := TL_channels_sponsoredMessageReportResultReported{}
-		r = tl
+		r = decode_body_TL_channels_sponsoredMessageReportResultReported(m)
 	case CRC_stats_broadcastRevenueStats:
-		tl := TL_stats_broadcastRevenueStats{}
-		tl.TopHoursGraph = DecodeBuf_GenericObject[TL](m)
-		tl.RevenueGraph = DecodeBuf_GenericObject[TL](m)
-		tl.Balances = DecodeBuf_GenericObject[TL_broadcastRevenueBalances](m)
-		tl.UsdRate = m.Double()
-		r = tl
+		r = decode_body_TL_stats_broadcastRevenueStats(m)
 	case CRC_stats_broadcastRevenueWithdrawalURL:
-		tl := TL_stats_broadcastRevenueWithdrawalURL{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_stats_broadcastRevenueWithdrawalURL(m)
 	case CRC_broadcastRevenueTransactionProceeds:
-		tl := TL_broadcastRevenueTransactionProceeds{}
-		tl.Amount = m.Long()
-		tl.FromDate = m.Int()
-		tl.ToDate = m.Int()
-		r = tl
+		r = decode_body_TL_broadcastRevenueTransactionProceeds(m)
 	case CRC_broadcastRevenueTransactionWithdrawal:
-		tl := TL_broadcastRevenueTransactionWithdrawal{}
-		flags := m.Int()
-		tl.Pending = flags&(1<<0) != 0
-		tl.Failed = flags&(1<<2) != 0
-		tl.Amount = m.Long()
-		tl.Date = m.Int()
-		tl.Provider = m.String()
-		if flags&(1<<1) != 0 {
-			tl.TransactionDate = Ref(m.Int())
-		}
-		if flags&(1<<1) != 0 {
-			tl.TransactionURL = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_broadcastRevenueTransactionWithdrawal(m)
 	case CRC_broadcastRevenueTransactionRefund:
-		tl := TL_broadcastRevenueTransactionRefund{}
-		tl.Amount = m.Long()
-		tl.Date = m.Int()
-		tl.Provider = m.String()
-		r = tl
+		r = decode_body_TL_broadcastRevenueTransactionRefund(m)
 	case CRC_stats_broadcastRevenueTransactions:
-		tl := TL_stats_broadcastRevenueTransactions{}
-		tl.Count = m.Int()
-		tl.Transactions = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stats_broadcastRevenueTransactions(m)
 	case CRC_reactionNotificationsFromContacts:
-		tl := TL_reactionNotificationsFromContacts{}
-		r = tl
+		r = decode_body_TL_reactionNotificationsFromContacts(m)
 	case CRC_reactionNotificationsFromAll:
-		tl := TL_reactionNotificationsFromAll{}
-		r = tl
+		r = decode_body_TL_reactionNotificationsFromAll(m)
 	case CRC_reactionsNotifySettings:
-		tl := TL_reactionsNotifySettings{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.MessagesNotifyFrom = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<1) != 0 {
-			tl.StoriesNotifyFrom = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Sound = DecodeBuf_GenericObject[TL](m)
-		tl.ShowPreviews = m.Bool()
-		r = tl
+		r = decode_body_TL_reactionsNotifySettings(m)
 	case CRC_broadcastRevenueBalances:
-		tl := TL_broadcastRevenueBalances{}
-		tl.CurrentBalance = m.Long()
-		tl.AvailableBalance = m.Long()
-		tl.OverallRevenue = m.Long()
-		r = tl
+		r = decode_body_TL_broadcastRevenueBalances(m)
 	case CRC_availableEffect:
-		tl := TL_availableEffect{}
-		flags := m.Int()
-		tl.PremiumRequired = flags&(1<<2) != 0
-		tl.ID = m.Long()
-		tl.Emoticon = m.String()
-		if flags&(1<<0) != 0 {
-			tl.StaticIconID = Ref(m.Long())
-		}
-		tl.EffectStickerID = m.Long()
-		if flags&(1<<1) != 0 {
-			tl.EffectAnimationID = Ref(m.Long())
-		}
-		r = tl
+		r = decode_body_TL_availableEffect(m)
 	case CRC_messages_availableEffectsNotModified:
-		tl := TL_messages_availableEffectsNotModified{}
-		r = tl
+		r = decode_body_TL_messages_availableEffectsNotModified(m)
 	case CRC_messages_availableEffects:
-		tl := TL_messages_availableEffects{}
-		tl.Hash = m.Int()
-		tl.Effects = DecodeBuf_GenericVector[TL_availableEffect](m)
-		tl.Documents = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_messages_availableEffects(m)
 	case CRC_factCheck:
-		tl := TL_factCheck{}
-		flags := m.Int()
-		tl.NeedCheck = flags&(1<<0) != 0
-		if flags&(1<<1) != 0 {
-			tl.Country = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Text = Ref(DecodeBuf_GenericObject[TL_textWithEntities](m))
-		}
-		tl.Hash = m.Long()
-		r = tl
+		r = decode_body_TL_factCheck(m)
 	case CRC_starsTransactionPeerUnsupported:
-		tl := TL_starsTransactionPeerUnsupported{}
-		r = tl
+		r = decode_body_TL_starsTransactionPeerUnsupported(m)
 	case CRC_starsTransactionPeerAppStore:
-		tl := TL_starsTransactionPeerAppStore{}
-		r = tl
+		r = decode_body_TL_starsTransactionPeerAppStore(m)
 	case CRC_starsTransactionPeerPlayMarket:
-		tl := TL_starsTransactionPeerPlayMarket{}
-		r = tl
+		r = decode_body_TL_starsTransactionPeerPlayMarket(m)
 	case CRC_starsTransactionPeerPremiumBot:
-		tl := TL_starsTransactionPeerPremiumBot{}
-		r = tl
+		r = decode_body_TL_starsTransactionPeerPremiumBot(m)
 	case CRC_starsTransactionPeerFragment:
-		tl := TL_starsTransactionPeerFragment{}
-		r = tl
+		r = decode_body_TL_starsTransactionPeerFragment(m)
 	case CRC_starsTransactionPeer:
-		tl := TL_starsTransactionPeer{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_starsTransactionPeer(m)
 	case CRC_starsTransactionPeerAds:
-		tl := TL_starsTransactionPeerAds{}
-		r = tl
+		r = decode_body_TL_starsTransactionPeerAds(m)
 	case CRC_starsTopupOption:
-		tl := TL_starsTopupOption{}
-		flags := m.Int()
-		tl.Extended = flags&(1<<1) != 0
-		tl.Stars = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.StoreProduct = Ref(m.String())
-		}
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_starsTopupOption(m)
 	case CRC_starsTransaction:
-		tl := TL_starsTransaction{}
-		flags := m.Int()
-		tl.Refund = flags&(1<<3) != 0
-		tl.Pending = flags&(1<<4) != 0
-		tl.Failed = flags&(1<<6) != 0
-		tl.Gift = flags&(1<<10) != 0
-		tl.Reaction = flags&(1<<11) != 0
-		tl.ID = m.String()
-		tl.Stars = m.Long()
-		tl.Date = m.Int()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		if flags&(1<<0) != 0 {
-			tl.Title = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.Description = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Photo = DecodeBuf_GenericObject[TL](m)
-		}
-		if flags&(1<<5) != 0 {
-			tl.TransactionDate = Ref(m.Int())
-		}
-		if flags&(1<<5) != 0 {
-			tl.TransactionURL = Ref(m.String())
-		}
-		if flags&(1<<7) != 0 {
-			tl.BotPayload = m.StringBytes()
-		}
-		if flags&(1<<8) != 0 {
-			tl.MsgID = Ref(m.Int())
-		}
-		if flags&(1<<9) != 0 {
-			tl.ExtendedMedia = DecodeBuf_GenericVector[TL](m)
-		}
-		if flags&(1<<12) != 0 {
-			tl.SubscriptionPeriod = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_starsTransaction(m)
 	case CRC_payments_starsStatus:
-		tl := TL_payments_starsStatus{}
-		flags := m.Int()
-		tl.Balance = m.Long()
-		if flags&(1<<1) != 0 {
-			tl.Subscriptions = DecodeBuf_GenericVector[TL_starsSubscription](m)
-		}
-		if flags&(1<<2) != 0 {
-			tl.SubscriptionsNextOffset = Ref(m.String())
-		}
-		if flags&(1<<4) != 0 {
-			tl.SubscriptionsMissingBalance = Ref(m.Long())
-		}
-		if flags&(1<<3) != 0 {
-			tl.History = DecodeBuf_GenericVector[TL_starsTransaction](m)
-		}
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_payments_starsStatus(m)
 	case CRC_foundStory:
-		tl := TL_foundStory{}
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.Story = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_foundStory(m)
 	case CRC_stories_foundStories:
-		tl := TL_stories_foundStories{}
-		flags := m.Int()
-		tl.Count = m.Int()
-		tl.Stories = DecodeBuf_GenericVector[TL_foundStory](m)
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		tl.Chats = DecodeBuf_GenericVector[TL](m)
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_stories_foundStories(m)
 	case CRC_geoPointAddress:
-		tl := TL_geoPointAddress{}
-		flags := m.Int()
-		tl.CountryISO2 = m.String()
-		if flags&(1<<0) != 0 {
-			tl.State = Ref(m.String())
-		}
-		if flags&(1<<1) != 0 {
-			tl.City = Ref(m.String())
-		}
-		if flags&(1<<2) != 0 {
-			tl.Street = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_geoPointAddress(m)
 	case CRC_starsRevenueStatus:
-		tl := TL_starsRevenueStatus{}
-		flags := m.Int()
-		tl.WithdrawalEnabled = flags&(1<<0) != 0
-		tl.CurrentBalance = m.Long()
-		tl.AvailableBalance = m.Long()
-		tl.OverallRevenue = m.Long()
-		if flags&(1<<1) != 0 {
-			tl.NextWithdrawalAt = Ref(m.Int())
-		}
-		r = tl
+		r = decode_body_TL_starsRevenueStatus(m)
 	case CRC_payments_starsRevenueStats:
-		tl := TL_payments_starsRevenueStats{}
-		tl.RevenueGraph = DecodeBuf_GenericObject[TL](m)
-		tl.Status = DecodeBuf_GenericObject[TL_starsRevenueStatus](m)
-		tl.UsdRate = m.Double()
-		r = tl
+		r = decode_body_TL_payments_starsRevenueStats(m)
 	case CRC_payments_starsRevenueWithdrawalURL:
-		tl := TL_payments_starsRevenueWithdrawalURL{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_payments_starsRevenueWithdrawalURL(m)
 	case CRC_payments_starsRevenueAdsAccountURL:
-		tl := TL_payments_starsRevenueAdsAccountURL{}
-		tl.URL = m.String()
-		r = tl
+		r = decode_body_TL_payments_starsRevenueAdsAccountURL(m)
 	case CRC_inputStarsTransaction:
-		tl := TL_inputStarsTransaction{}
-		flags := m.Int()
-		tl.Refund = flags&(1<<0) != 0
-		tl.ID = m.String()
-		r = tl
+		r = decode_body_TL_inputStarsTransaction(m)
 	case CRC_starsGiftOption:
-		tl := TL_starsGiftOption{}
-		flags := m.Int()
-		tl.Extended = flags&(1<<1) != 0
-		tl.Stars = m.Long()
-		if flags&(1<<0) != 0 {
-			tl.StoreProduct = Ref(m.String())
-		}
-		tl.Currency = m.String()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_starsGiftOption(m)
 	case CRC_bots_popularAppBots:
-		tl := TL_bots_popularAppBots{}
-		flags := m.Int()
-		if flags&(1<<0) != 0 {
-			tl.NextOffset = Ref(m.String())
-		}
-		tl.Users = DecodeBuf_GenericVector[TL](m)
-		r = tl
+		r = decode_body_TL_bots_popularAppBots(m)
 	case CRC_botPreviewMedia:
-		tl := TL_botPreviewMedia{}
-		tl.Date = m.Int()
-		tl.Media = DecodeBuf_GenericObject[TL](m)
-		r = tl
+		r = decode_body_TL_botPreviewMedia(m)
 	case CRC_bots_previewInfo:
-		tl := TL_bots_previewInfo{}
-		tl.Media = DecodeBuf_GenericVector[TL_botPreviewMedia](m)
-		tl.LangCodes = m.VectorString()
-		r = tl
+		r = decode_body_TL_bots_previewInfo(m)
 	case CRC_starsSubscriptionPricing:
-		tl := TL_starsSubscriptionPricing{}
-		tl.Period = m.Int()
-		tl.Amount = m.Long()
-		r = tl
+		r = decode_body_TL_starsSubscriptionPricing(m)
 	case CRC_starsSubscription:
-		tl := TL_starsSubscription{}
-		flags := m.Int()
-		tl.Canceled = flags&(1<<0) != 0
-		tl.CanRefulfill = flags&(1<<1) != 0
-		tl.MissingBalance = flags&(1<<2) != 0
-		tl.ID = m.String()
-		tl.Peer = DecodeBuf_GenericObject[TL](m)
-		tl.UntilDate = m.Int()
-		tl.Pricing = DecodeBuf_GenericObject[TL_starsSubscriptionPricing](m)
-		if flags&(1<<3) != 0 {
-			tl.ChatInviteHash = Ref(m.String())
-		}
-		r = tl
+		r = decode_body_TL_starsSubscription(m)
 	case CRC_messageReactor:
-		tl := TL_messageReactor{}
-		flags := m.Int()
-		tl.Top = flags&(1<<0) != 0
-		tl.My = flags&(1<<1) != 0
-		tl.Anonymous = flags&(1<<2) != 0
-		if flags&(1<<3) != 0 {
-			tl.PeerID = DecodeBuf_GenericObject[TL](m)
-		}
-		tl.Count = m.Int()
-		r = tl
+		r = decode_body_TL_messageReactor(m)
 
 	default:
 		m.err = merry.Errorf("Unknown constructor: %08x", constructor)
 		return nil
-
 	}
 
 	if m.err != nil {

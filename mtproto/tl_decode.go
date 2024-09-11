@@ -124,6 +124,12 @@ func (m *DecodeBuf) UInt() uint32 {
 }
 
 func (m *DecodeBuf) Bytes(size int) []byte {
+	x := make([]byte, size)
+	return m.BytesTo(x)
+}
+
+func (m *DecodeBuf) BytesTo(dest []byte) []byte {
+	size := len(dest)
 	if m.err != nil {
 		return nil
 	}
@@ -131,21 +137,35 @@ func (m *DecodeBuf) Bytes(size int) []byte {
 		m.err = notEnoughBytesErr("DecodeBytes", m.off, size, m.size)
 		return nil
 	}
-	x := make([]byte, size)
-	copy(x, m.buf[m.off:m.off+size])
+	copy(dest, m.buf[m.off:m.off+size])
 	m.off += size
-	return x
+	return dest
 }
 
 func (m *DecodeBuf) Bytes16() [16]byte {
-	return [16]byte(m.Bytes(16))
+	var buf [16]byte
+	m.BytesTo(buf[:])
+	return buf
 }
 
 func (m *DecodeBuf) Bytes32() [32]byte {
-	return [32]byte(m.Bytes(32))
+	var buf [32]byte
+	m.BytesTo(buf[:])
+	return buf
 }
 
 func (m *DecodeBuf) StringBytes() []byte {
+	slice := m.stringBytesNoCopy()
+	if slice == nil {
+		return nil
+	}
+	x := make([]byte, len(slice))
+	copy(x, slice)
+	return x
+}
+
+// stringBytesNoCopy returns "byte string" as a slice of internal DecodeBuf's buffer (i.e. without copying)
+func (m *DecodeBuf) stringBytesNoCopy() []byte {
 	if m.err != nil {
 		return nil
 	}
@@ -172,8 +192,7 @@ func (m *DecodeBuf) StringBytes() []byte {
 		m.err = notEnoughBytesErr("DecodeStringBytes", m.off, size, m.size)
 		return nil
 	}
-	x := make([]byte, size)
-	copy(x, m.buf[m.off:m.off+size])
+	x := m.buf[m.off : m.off+size]
 	m.off += size
 
 	if m.off+padding > m.size {
@@ -186,7 +205,7 @@ func (m *DecodeBuf) StringBytes() []byte {
 }
 
 func (m *DecodeBuf) String() string {
-	b := m.StringBytes()
+	b := m.stringBytesNoCopy()
 	if m.err != nil {
 		return ""
 	}
@@ -195,7 +214,7 @@ func (m *DecodeBuf) String() string {
 }
 
 func (m *DecodeBuf) BigInt() *big.Int {
-	b := m.StringBytes()
+	b := m.stringBytesNoCopy()
 	if m.err != nil {
 		return nil
 	}
@@ -304,7 +323,18 @@ func DecodeBuf_GenericVector[T TL](m *DecodeBuf) []T {
 }
 
 func (m *DecodeBuf) Vector() []TL {
-	return DecodeBuf_GenericVector[TL](m)
+	size := m.vectorHeader("DecodeVector")
+	if m.err != nil {
+		return nil
+	}
+	x := make([]TL, size)
+	for i := int32(0); i < size; i++ {
+		x[i] = m.Object()
+		if m.err != nil {
+			return nil
+		}
+	}
+	return x
 }
 
 func (m *DecodeBuf) Vector2d() [][]TL {
@@ -326,27 +356,38 @@ func (m *DecodeBuf) Vector2d() [][]TL {
 }
 
 func DecodeBuf_GenericObject[T TL](m *DecodeBuf) T {
-	constructor := m.UInt()
-	if m.err != nil {
-		var blank T
-		return blank
-	}
-	objTL := m.ObjectGenerated(constructor)
+	objTL := m.Object()
 	if m.err != nil {
 		var blank T
 		return blank
 	}
 	obj, ok := objTL.(T)
 	if !ok {
-		m.err = unexpectedTypeErr[T]("GenericVector", objTL)
+		m.err = unexpectedTypeErr[T]("GenericObject", objTL)
 		var blank T
 		return blank
 	}
 	return obj
 }
 
+func (m *DecodeBuf) constructorAssert(expected uint32) bool {
+	constructor := m.UInt()
+	if m.err != nil {
+		return false
+	}
+	if constructor != expected {
+		m.err = merry.Errorf("wrong constructor: expected 0x%08x, got 0x%08x", expected, constructor)
+		return false
+	}
+	return true
+}
+
 func (m *DecodeBuf) Object() TL {
-	return DecodeBuf_GenericObject[TL](m)
+	constructor := m.UInt()
+	if m.err != nil {
+		return nil
+	}
+	return m.ObjectGenerated(constructor)
 }
 
 func (m *DecodeBuf) vectorHeader(errLabel string) int32 {
@@ -472,7 +513,7 @@ func (m *MTProto) decodeMessage(dbuf *DecodeBuf, reqMsg TLReq) (r TL) {
 		obj := make([]byte, 0, 4096)
 
 		var buf bytes.Buffer
-		_, _ = buf.Write(dbuf.StringBytes())
+		_, _ = buf.Write(dbuf.stringBytesNoCopy())
 		gz, _ := gzip.NewReader(&buf)
 
 		b := make([]byte, 4096)
