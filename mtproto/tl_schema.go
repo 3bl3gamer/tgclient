@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	TL_Layer                                                              = 186
+	TL_Layer                                                              = 187
 	CRC_resPQ                                                             = 0x05162463
 	CRC_pqInnerData                                                       = 0x83c95aec
 	CRC_pqInnerDataDC                                                     = 0xa9f55f95
@@ -102,7 +102,7 @@ const (
 	CRC_inputMediaDice                                                    = 0xe66fbf7b
 	CRC_inputMediaStory                                                   = 0x89fdd778
 	CRC_inputMediaWebPage                                                 = 0xc21b8849
-	CRC_inputMediaPaidMedia                                               = 0xaa661fc3
+	CRC_inputMediaPaidMedia                                               = 0xc4103386
 	CRC_inputChatPhotoEmpty                                               = 0x1ca48f57
 	CRC_inputChatUploadedPhoto                                            = 0xbdcdaec0
 	CRC_inputChatPhoto                                                    = 0x8953ad37
@@ -174,8 +174,8 @@ const (
 	CRC_messageMediaPoll                                                  = 0x4bd6e798
 	CRC_messageMediaDice                                                  = 0x3f7ee58b
 	CRC_messageMediaStory                                                 = 0x68cb6283
-	CRC_messageMediaGiveaway                                              = 0xdaad85b0
-	CRC_messageMediaGiveawayResults                                       = 0xc6991068
+	CRC_messageMediaGiveaway                                              = 0xaa073beb
+	CRC_messageMediaGiveawayResults                                       = 0xceaa3ea1
 	CRC_messageMediaPaidMedia                                             = 0xa8852491
 	CRC_messageActionEmpty                                                = 0xb6aef7b0
 	CRC_messageActionChatCreate                                           = 0xbd47cbad
@@ -216,12 +216,13 @@ const (
 	CRC_messageActionRequestedPeer                                        = 0x31518e9b
 	CRC_messageActionSetChatWallPaper                                     = 0x5060a3f4
 	CRC_messageActionGiftCode                                             = 0x678c2e09
-	CRC_messageActionGiveawayLaunch                                       = 0x332ba9ed
-	CRC_messageActionGiveawayResults                                      = 0x2a9fadc5
+	CRC_messageActionGiveawayLaunch                                       = 0xa80f51e4
+	CRC_messageActionGiveawayResults                                      = 0x87e2f155
 	CRC_messageActionBoostApply                                           = 0xcc02aa6d
 	CRC_messageActionRequestedPeerSentMe                                  = 0x93b31848
 	CRC_messageActionPaymentRefunded                                      = 0x41b3e202
 	CRC_messageActionGiftStars                                            = 0x45d5b021
+	CRC_messageActionPrizeStars                                           = 0xb00c47a2
 	CRC_dialog                                                            = 0xd58a08c6
 	CRC_dialogFolder                                                      = 0x71bd134c
 	CRC_photoEmpty                                                        = 0x2331b22d
@@ -435,6 +436,8 @@ const (
 	CRC_updateStarsBalance                                                = 0x0fb85198
 	CRC_updateBusinessBotCallbackQuery                                    = 0x1ea2fda7
 	CRC_updateStarsRevenueStatus                                          = 0xa584b019
+	CRC_updateBotPurchasedPaidMedia                                       = 0x283bd312
+	CRC_updatePaidReactionPrivacy                                         = 0x51ca7aec
 	CRC_updates_state                                                     = 0xa56c2a3e
 	CRC_updates_differenceEmpty                                           = 0x5d75a138
 	CRC_updates_difference                                                = 0x00f49ca0
@@ -896,6 +899,7 @@ const (
 	CRC_channelAdminLogEventActionChangeEmojiStatus                       = 0x3ea9feb1
 	CRC_channelAdminLogEventActionChangeEmojiStickerSet                   = 0x46d840ab
 	CRC_channelAdminLogEventActionToggleSignatureProfiles                 = 0x60a79c79
+	CRC_channelAdminLogEventActionParticipantSubExtend                    = 0x64642db3
 	CRC_channelAdminLogEvent                                              = 0x1fad68cd
 	CRC_channels_adminLogResults                                          = 0xed8af74d
 	CRC_channelAdminLogEventsFilter                                       = 0xea107ae4
@@ -1183,6 +1187,7 @@ const (
 	CRC_inputStorePaymentPremiumGiveaway                                  = 0x160544ca
 	CRC_inputStorePaymentStarsTopup                                       = 0xdddd0f56
 	CRC_inputStorePaymentStarsGift                                        = 0x1d741ef7
+	CRC_inputStorePaymentStarsGiveaway                                    = 0x751f08fa
 	CRC_premiumGiftOption                                                 = 0x74c34319
 	CRC_paymentFormMethod                                                 = 0x88f8f21b
 	CRC_emojiStatusEmpty                                                  = 0x2de11aae
@@ -1284,9 +1289,10 @@ const (
 	CRC_premiumGiftCodeOption                                             = 0x257e962b
 	CRC_payments_checkedGiftCode                                          = 0x284a1096
 	CRC_payments_giveawayInfo                                             = 0x4367daa0
-	CRC_payments_giveawayInfoResults                                      = 0x00cd5570
+	CRC_payments_giveawayInfoResults                                      = 0xe175e66f
 	CRC_prepaidGiveaway                                                   = 0xb2539d54
-	CRC_boost                                                             = 0x2a1c8c71
+	CRC_prepaidStarsGiveaway                                              = 0x9a9d77e0
+	CRC_boost                                                             = 0x4b3e14d6
 	CRC_premium_boostsList                                                = 0x86f8613c
 	CRC_myBoost                                                           = 0xc448415c
 	CRC_premium_myBoosts                                                  = 0x9ae228e2
@@ -1376,7 +1382,7 @@ const (
 	CRC_reactionNotificationsFromContacts                                 = 0xbac3a61a
 	CRC_reactionNotificationsFromAll                                      = 0x4b9e22a0
 	CRC_reactionsNotifySettings                                           = 0x56e34970
-	CRC_broadcastRevenueBalances                                          = 0x8438f1c6
+	CRC_broadcastRevenueBalances                                          = 0xc3ff71e7
 	CRC_availableEffect                                                   = 0x93c3e27e
 	CRC_messages_availableEffectsNotModified                              = 0xd1ed9a5b
 	CRC_messages_availableEffects                                         = 0xbddb616e
@@ -1389,7 +1395,7 @@ const (
 	CRC_starsTransactionPeer                                              = 0xd80da15d
 	CRC_starsTransactionPeerAds                                           = 0x60682812
 	CRC_starsTopupOption                                                  = 0x0bd915c0
-	CRC_starsTransaction                                                  = 0x433aeb2b
+	CRC_starsTransaction                                                  = 0xee7522d5
 	CRC_payments_starsStatus                                              = 0xbbfa316c
 	CRC_foundStory                                                        = 0xe87acbc0
 	CRC_stories_foundStories                                              = 0xe2de7737
@@ -1406,6 +1412,8 @@ const (
 	CRC_starsSubscriptionPricing                                          = 0x05416d58
 	CRC_starsSubscription                                                 = 0x538ecf18
 	CRC_messageReactor                                                    = 0x4ba3a95a
+	CRC_starsGiveawayOption                                               = 0x94ce852a
+	CRC_starsGiveawayWinnersOption                                        = 0x54236209
 	CRC_invokeAfterMsg                                                    = 0xcb9f372d
 	CRC_invokeAfterMsgs                                                   = 0x3dc4b4f0
 	CRC_initConnection                                                    = 0xc1cd5ea9
@@ -1795,8 +1803,9 @@ const (
 	CRC_messages_deleteFactCheck                                          = 0xd1da940c
 	CRC_messages_getFactCheck                                             = 0xb9cdc5ee
 	CRC_messages_requestMainWebView                                       = 0xc9e01e7b
-	CRC_messages_sendPaidReaction                                         = 0x25c8fe3e
+	CRC_messages_sendPaidReaction                                         = 0x9dd6a67b
 	CRC_messages_togglePaidReactionPrivacy                                = 0x849ad397
+	CRC_messages_getPaidReactionPrivacy                                   = 0x472455aa
 	CRC_updates_getState                                                  = 0xedd4882a
 	CRC_updates_getDifference                                             = 0x19c2f763
 	CRC_updates_getChannelDifference                                      = 0x03173d78
@@ -1955,6 +1964,7 @@ const (
 	CRC_payments_getStarsSubscriptions                                    = 0x032512c5
 	CRC_payments_changeStarsSubscription                                  = 0xc7770878
 	CRC_payments_fulfillStarsSubscription                                 = 0xcc5bebb3
+	CRC_payments_getStarsGiveawayOptions                                  = 0xbd1efd3e
 	CRC_stickers_createStickerSet                                         = 0x9021ab67
 	CRC_stickers_removeStickerFromSet                                     = 0xf7760f51
 	CRC_stickers_changeStickerPosition                                    = 0xffb6d4ca
@@ -2684,7 +2694,8 @@ type TL_inputMediaWebPage struct {
 // Constructs InputMedia
 type TL_inputMediaPaidMedia struct {
 	StarsAmount   int64
-	ExtendedMedia []TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage | TL_inputMediaPaidMedia
+	ExtendedMedia []TL    // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage | TL_inputMediaPaidMedia
+	Payload       *string // (optional)
 }
 
 // Constructs InputChatPhoto
@@ -3226,7 +3237,7 @@ type TL_messageService struct {
 	PeerID      TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	ReplyTo     TL // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
 	Date        int32
-	Action      TL     // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPINMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch | TL_messageActionGiveawayResults | TL_messageActionBoostApply | TL_messageActionRequestedPeerSentMe | TL_messageActionPaymentRefunded | TL_messageActionGiftStars
+	Action      TL     // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPINMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch | TL_messageActionGiveawayResults | TL_messageActionBoostApply | TL_messageActionRequestedPeerSentMe | TL_messageActionPaymentRefunded | TL_messageActionGiftStars | TL_messageActionPrizeStars
 	TTLPeriod   *int32 // (optional)
 }
 
@@ -3345,7 +3356,8 @@ type TL_messageMediaGiveaway struct {
 	CountriesISO2      []string // (optional)
 	PrizeDescription   *string  // (optional)
 	Quantity           int32
-	Months             int32
+	Months             *int32 // (optional)
+	Stars              *int64 // (optional)
 	UntilDate          int32
 }
 
@@ -3359,7 +3371,8 @@ type TL_messageMediaGiveawayResults struct {
 	WinnersCount         int32
 	UnclaimedCount       int32
 	Winners              []int64
-	Months               int32
+	Months               *int32  // (optional)
+	Stars                *int64  // (optional)
 	PrizeDescription     *string // (optional)
 	UntilDate            int32
 }
@@ -3608,10 +3621,12 @@ type TL_messageActionGiftCode struct {
 
 // Constructs MessageAction
 type TL_messageActionGiveawayLaunch struct {
+	Stars *int64 // (optional)
 }
 
 // Constructs MessageAction
 type TL_messageActionGiveawayResults struct {
+	Stars          bool
 	WinnersCount   int32
 	UnclaimedCount int32
 }
@@ -3644,6 +3659,15 @@ type TL_messageActionGiftStars struct {
 	CryptoCurrency *string // (optional)
 	CryptoAmount   *int64  // (optional)
 	TransactionID  *string // (optional)
+}
+
+// Constructs MessageAction
+type TL_messageActionPrizeStars struct {
+	Unclaimed     bool
+	Stars         int64
+	TransactionID string
+	BoostPeer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	GiveawayMsgID int32
 }
 
 // Constructs Dialog
@@ -5076,6 +5100,18 @@ type TL_updateStarsRevenueStatus struct {
 	Status TL_starsRevenueStatus
 }
 
+// Constructs Update
+type TL_updateBotPurchasedPaidMedia struct {
+	UserID  int64
+	Payload string
+	QTS     int32
+}
+
+// Constructs Update
+type TL_updatePaidReactionPrivacy struct {
+	Private bool
+}
+
 // Constructs updates.State
 type TL_updates_state struct {
 	PTS         int32
@@ -5095,7 +5131,7 @@ type TL_updates_differenceEmpty struct {
 type TL_updates_difference struct {
 	NewMessages          []TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	NewEncryptedMessages []TL // EncryptedMessage: TL_encryptedMessage | TL_encryptedMessageService
-	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus
+	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus | TL_updateBotPurchasedPaidMedia | TL_updatePaidReactionPrivacy
 	Chats                []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users                []TL // User: TL_userEmpty | TL_user
 	State                TL_updates_state
@@ -5105,7 +5141,7 @@ type TL_updates_difference struct {
 type TL_updates_differenceSlice struct {
 	NewMessages          []TL // Message: TL_messageEmpty | TL_message | TL_messageService
 	NewEncryptedMessages []TL // EncryptedMessage: TL_encryptedMessage | TL_encryptedMessageService
-	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus
+	OtherUpdates         []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus | TL_updateBotPurchasedPaidMedia | TL_updatePaidReactionPrivacy
 	Chats                []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users                []TL // User: TL_userEmpty | TL_user
 	IntermediateState    TL_updates_state
@@ -5161,13 +5197,13 @@ type TL_updateShortChatMessage struct {
 
 // Constructs Updates
 type TL_updateShort struct {
-	Update TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus
+	Update TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus | TL_updateBotPurchasedPaidMedia | TL_updatePaidReactionPrivacy
 	Date   int32
 }
 
 // Constructs Updates
 type TL_updatesCombined struct {
-	Updates  []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus
+	Updates  []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus | TL_updateBotPurchasedPaidMedia | TL_updatePaidReactionPrivacy
 	Users    []TL // User: TL_userEmpty | TL_user
 	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Date     int32
@@ -5177,7 +5213,7 @@ type TL_updatesCombined struct {
 
 // Constructs Updates
 type TL_updates struct {
-	Updates []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus
+	Updates []TL // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus | TL_updateBotPurchasedPaidMedia | TL_updatePaidReactionPrivacy
 	Users   []TL // User: TL_userEmpty | TL_user
 	Chats   []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Date    int32
@@ -6471,7 +6507,7 @@ type TL_updates_channelDifference struct {
 	PTS          int32
 	Timeout      *int32 // (optional)
 	NewMessages  []TL   // Message: TL_messageEmpty | TL_message | TL_messageService
-	OtherUpdates []TL   // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus
+	OtherUpdates []TL   // Update: TL_updateNewMessage | TL_updateMessageID | TL_updateDeleteMessages | TL_updateUserTyping | TL_updateChatUserTyping | TL_updateChatParticipants | TL_updateUserStatus | TL_updateUserName | TL_updateNewAuthorization | TL_updateNewEncryptedMessage | TL_updateEncryptedChatTyping | TL_updateEncryption | TL_updateEncryptedMessagesRead | TL_updateChatParticipantAdd | TL_updateChatParticipantDelete | TL_updateDCOptions | TL_updateNotifySettings | TL_updateServiceNotification | TL_updatePrivacy | TL_updateUserPhone | TL_updateReadHistoryInbox | TL_updateReadHistoryOutbox | TL_updateWebPage | TL_updateReadMessagesContents | TL_updateChannelTooLong | TL_updateChannel | TL_updateNewChannelMessage | TL_updateReadChannelInbox | TL_updateDeleteChannelMessages | TL_updateChannelMessageViews | TL_updateChatParticipantAdmin | TL_updateNewStickerSet | TL_updateStickerSetsOrder | TL_updateStickerSets | TL_updateSavedGIFs | TL_updateBotInlineQuery | TL_updateBotInlineSend | TL_updateEditChannelMessage | TL_updateBotCallbackQuery | TL_updateEditMessage | TL_updateInlineBotCallbackQuery | TL_updateReadChannelOutbox | TL_updateDraftMessage | TL_updateReadFeaturedStickers | TL_updateRecentStickers | TL_updateConfig | TL_updatePTSChanged | TL_updateChannelWebPage | TL_updateDialogPinned | TL_updatePinnedDialogs | TL_updateBotWebhookJSON | TL_updateBotWebhookJSONQuery | TL_updateBotShippingQuery | TL_updateBotPrecheckoutQuery | TL_updatePhoneCall | TL_updateLangPackTooLong | TL_updateLangPack | TL_updateFavedStickers | TL_updateChannelReadMessagesContents | TL_updateContactsReset | TL_updateChannelAvailableMessages | TL_updateDialogUnreadMark | TL_updateMessagePoll | TL_updateChatDefaultBannedRights | TL_updateFolderPeers | TL_updatePeerSettings | TL_updatePeerLocated | TL_updateNewScheduledMessage | TL_updateDeleteScheduledMessages | TL_updateTheme | TL_updateGeoLiveViewed | TL_updateLoginToken | TL_updateMessagePollVote | TL_updateDialogFilter | TL_updateDialogFilterOrder | TL_updateDialogFilters | TL_updatePhoneCallSignalingData | TL_updateChannelMessageForwards | TL_updateReadChannelDiscussionInbox | TL_updateReadChannelDiscussionOutbox | TL_updatePeerBlocked | TL_updateChannelUserTyping | TL_updatePinnedMessages | TL_updatePinnedChannelMessages | TL_updateChat | TL_updateGroupCallParticipants | TL_updateGroupCall | TL_updatePeerHistoryTTL | TL_updateChatParticipant | TL_updateChannelParticipant | TL_updateBotStopped | TL_updateGroupCallConnection | TL_updateBotCommands | TL_updatePendingJoinRequests | TL_updateBotChatInviteRequester | TL_updateMessageReactions | TL_updateAttachMenuBots | TL_updateWebViewResultSent | TL_updateBotMenuButton | TL_updateSavedRingtones | TL_updateTranscribedAudio | TL_updateReadFeaturedEmojiStickers | TL_updateUserEmojiStatus | TL_updateRecentEmojiStatuses | TL_updateRecentReactions | TL_updateMoveStickerSetToTop | TL_updateMessageExtendedMedia | TL_updateChannelPinnedTopic | TL_updateChannelPinnedTopics | TL_updateUser | TL_updateAutoSaveSettings | TL_updateStory | TL_updateReadStories | TL_updateStoryID | TL_updateStoriesStealthMode | TL_updateSentStoryReaction | TL_updateBotChatBoost | TL_updateChannelViewForumAsMessages | TL_updatePeerWallpaper | TL_updateBotMessageReaction | TL_updateBotMessageReactions | TL_updateSavedDialogPinned | TL_updatePinnedSavedDialogs | TL_updateSavedReactionTags | TL_updateSMSJob | TL_updateQuickReplies | TL_updateNewQuickReply | TL_updateDeleteQuickReply | TL_updateQuickReplyMessage | TL_updateDeleteQuickReplyMessages | TL_updateBotBusinessConnect | TL_updateBotNewBusinessMessage | TL_updateBotEditBusinessMessage | TL_updateBotDeleteBusinessMessage | TL_updateNewStoryReaction | TL_updateBroadcastRevenueTransactions | TL_updateStarsBalance | TL_updateBusinessBotCallbackQuery | TL_updateStarsRevenueStatus | TL_updateBotPurchasedPaidMedia | TL_updatePaidReactionPrivacy
 	Chats        []TL   // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 	Users        []TL   // User: TL_userEmpty | TL_user
 }
@@ -8157,12 +8193,18 @@ type TL_channelAdminLogEventActionToggleSignatureProfiles struct {
 	NewValue bool
 }
 
+// Constructs ChannelAdminLogEventAction
+type TL_channelAdminLogEventActionParticipantSubExtend struct {
+	PrevParticipant TL // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
+	NewParticipant  TL // ChannelParticipant: TL_channelParticipant | TL_channelParticipantSelf | TL_channelParticipantCreator | TL_channelParticipantAdmin | TL_channelParticipantBanned | TL_channelParticipantLeft
+}
+
 // Constructs ChannelAdminLogEvent
 type TL_channelAdminLogEvent struct {
 	ID     int64
 	Date   int32
 	UserID int64
-	Action TL // ChannelAdminLogEventAction: TL_channelAdminLogEventActionChangeTitle | TL_channelAdminLogEventActionChangeAbout | TL_channelAdminLogEventActionChangeUsername | TL_channelAdminLogEventActionChangePhoto | TL_channelAdminLogEventActionToggleInvites | TL_channelAdminLogEventActionToggleSignatures | TL_channelAdminLogEventActionUpdatePinned | TL_channelAdminLogEventActionEditMessage | TL_channelAdminLogEventActionDeleteMessage | TL_channelAdminLogEventActionParticipantJoin | TL_channelAdminLogEventActionParticipantLeave | TL_channelAdminLogEventActionParticipantInvite | TL_channelAdminLogEventActionParticipantToggleBan | TL_channelAdminLogEventActionParticipantToggleAdmin | TL_channelAdminLogEventActionChangeStickerSet | TL_channelAdminLogEventActionTogglePreHistoryHidden | TL_channelAdminLogEventActionDefaultBannedRights | TL_channelAdminLogEventActionStopPoll | TL_channelAdminLogEventActionChangeLinkedChat | TL_channelAdminLogEventActionChangeLocation | TL_channelAdminLogEventActionToggleSlowMode | TL_channelAdminLogEventActionStartGroupCall | TL_channelAdminLogEventActionDiscardGroupCall | TL_channelAdminLogEventActionParticipantMute | TL_channelAdminLogEventActionParticipantUnmute | TL_channelAdminLogEventActionToggleGroupCallSetting | TL_channelAdminLogEventActionParticipantJoinByInvite | TL_channelAdminLogEventActionExportedInviteDelete | TL_channelAdminLogEventActionExportedInviteRevoke | TL_channelAdminLogEventActionExportedInviteEdit | TL_channelAdminLogEventActionParticipantVolume | TL_channelAdminLogEventActionChangeHistoryTTL | TL_channelAdminLogEventActionParticipantJoinByRequest | TL_channelAdminLogEventActionToggleNoForwards | TL_channelAdminLogEventActionSendMessage | TL_channelAdminLogEventActionChangeAvailableReactions | TL_channelAdminLogEventActionChangeUsernames | TL_channelAdminLogEventActionToggleForum | TL_channelAdminLogEventActionCreateTopic | TL_channelAdminLogEventActionEditTopic | TL_channelAdminLogEventActionDeleteTopic | TL_channelAdminLogEventActionPINTopic | TL_channelAdminLogEventActionToggleAntiSpam | TL_channelAdminLogEventActionChangePeerColor | TL_channelAdminLogEventActionChangeProfilePeerColor | TL_channelAdminLogEventActionChangeWallpaper | TL_channelAdminLogEventActionChangeEmojiStatus | TL_channelAdminLogEventActionChangeEmojiStickerSet | TL_channelAdminLogEventActionToggleSignatureProfiles
+	Action TL // ChannelAdminLogEventAction: TL_channelAdminLogEventActionChangeTitle | TL_channelAdminLogEventActionChangeAbout | TL_channelAdminLogEventActionChangeUsername | TL_channelAdminLogEventActionChangePhoto | TL_channelAdminLogEventActionToggleInvites | TL_channelAdminLogEventActionToggleSignatures | TL_channelAdminLogEventActionUpdatePinned | TL_channelAdminLogEventActionEditMessage | TL_channelAdminLogEventActionDeleteMessage | TL_channelAdminLogEventActionParticipantJoin | TL_channelAdminLogEventActionParticipantLeave | TL_channelAdminLogEventActionParticipantInvite | TL_channelAdminLogEventActionParticipantToggleBan | TL_channelAdminLogEventActionParticipantToggleAdmin | TL_channelAdminLogEventActionChangeStickerSet | TL_channelAdminLogEventActionTogglePreHistoryHidden | TL_channelAdminLogEventActionDefaultBannedRights | TL_channelAdminLogEventActionStopPoll | TL_channelAdminLogEventActionChangeLinkedChat | TL_channelAdminLogEventActionChangeLocation | TL_channelAdminLogEventActionToggleSlowMode | TL_channelAdminLogEventActionStartGroupCall | TL_channelAdminLogEventActionDiscardGroupCall | TL_channelAdminLogEventActionParticipantMute | TL_channelAdminLogEventActionParticipantUnmute | TL_channelAdminLogEventActionToggleGroupCallSetting | TL_channelAdminLogEventActionParticipantJoinByInvite | TL_channelAdminLogEventActionExportedInviteDelete | TL_channelAdminLogEventActionExportedInviteRevoke | TL_channelAdminLogEventActionExportedInviteEdit | TL_channelAdminLogEventActionParticipantVolume | TL_channelAdminLogEventActionChangeHistoryTTL | TL_channelAdminLogEventActionParticipantJoinByRequest | TL_channelAdminLogEventActionToggleNoForwards | TL_channelAdminLogEventActionSendMessage | TL_channelAdminLogEventActionChangeAvailableReactions | TL_channelAdminLogEventActionChangeUsernames | TL_channelAdminLogEventActionToggleForum | TL_channelAdminLogEventActionCreateTopic | TL_channelAdminLogEventActionEditTopic | TL_channelAdminLogEventActionDeleteTopic | TL_channelAdminLogEventActionPINTopic | TL_channelAdminLogEventActionToggleAntiSpam | TL_channelAdminLogEventActionChangePeerColor | TL_channelAdminLogEventActionChangeProfilePeerColor | TL_channelAdminLogEventActionChangeWallpaper | TL_channelAdminLogEventActionChangeEmojiStatus | TL_channelAdminLogEventActionChangeEmojiStickerSet | TL_channelAdminLogEventActionToggleSignatureProfiles | TL_channelAdminLogEventActionParticipantSubExtend
 }
 
 // Constructs channels.AdminLogResults
@@ -8192,6 +8234,7 @@ type TL_channelAdminLogEventsFilter struct {
 	Invites   bool
 	Send      bool
 	Forums    bool
+	SubExtend bool
 }
 
 // Constructs PopularContact
@@ -10046,13 +10089,13 @@ type TL_inputInvoiceSlug struct {
 
 // Constructs InputInvoice
 type TL_inputInvoicePremiumGiftCode struct {
-	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift | TL_inputStorePaymentStarsGiveaway
 	Option  TL_premiumGiftCodeOption
 }
 
 // Constructs InputInvoice
 type TL_inputInvoiceStars struct {
-	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift | TL_inputStorePaymentStarsGiveaway
 }
 
 // Constructs InputInvoice
@@ -10132,6 +10175,22 @@ type TL_inputStorePaymentStarsGift struct {
 	Stars    int64
 	Currency string
 	Amount   int64
+}
+
+// Constructs InputStorePaymentPurpose
+type TL_inputStorePaymentStarsGiveaway struct {
+	OnlyNewSubscribers bool
+	WinnersAreVisible  bool
+	Stars              int64
+	BoostPeer          TL       // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	AdditionalPeers    []TL     // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	CountriesISO2      []string // (optional)
+	PrizeDescription   *string  // (optional)
+	RandomID           int64
+	UntilDate          int32
+	Currency           string
+	Amount             int64
+	Users              int32
 }
 
 // Constructs PremiumGiftOption
@@ -10857,9 +10916,10 @@ type TL_payments_giveawayInfoResults struct {
 	Refunded       bool
 	StartDate      int32
 	GiftCodeSlug   *string // (optional)
+	StarsPrize     *int64  // (optional)
 	FinishDate     int32
 	WinnersCount   int32
-	ActivatedCount int32
+	ActivatedCount *int32 // (optional)
 }
 
 // Constructs PrepaidGiveaway
@@ -10867,6 +10927,15 @@ type TL_prepaidGiveaway struct {
 	ID       int64
 	Months   int32
 	Quantity int32
+	Date     int32
+}
+
+// Constructs PrepaidGiveaway
+type TL_prepaidStarsGiveaway struct {
+	ID       int64
+	Stars    int64
+	Quantity int32
+	Boosts   int32
 	Date     int32
 }
 
@@ -10882,6 +10951,7 @@ type TL_boost struct {
 	Expires       int32
 	UsedGiftSlug  *string // (optional)
 	Multiplier    *int32  // (optional)
+	Stars         *int64  // (optional)
 }
 
 // Constructs premium.BoostsList
@@ -10918,8 +10988,8 @@ type TL_premium_boostsStatus struct {
 	NextLevelBoosts    *int32                // (optional)
 	PremiumAudience    *TL_statsPercentValue // (optional)
 	BoostURL           string
-	PrepaidGiveaways   []TL_prepaidGiveaway // (optional)
-	MyBoostSlots       []int32              // (optional)
+	PrepaidGiveaways   []TL    // (optional) PrepaidGiveaway: TL_prepaidGiveaway | TL_prepaidStarsGiveaway
+	MyBoostSlots       []int32 // (optional)
 }
 
 // Constructs StoryFwdHeader
@@ -11504,9 +11574,10 @@ type TL_reactionsNotifySettings struct {
 
 // Constructs BroadcastRevenueBalances
 type TL_broadcastRevenueBalances struct {
-	CurrentBalance   int64
-	AvailableBalance int64
-	OverallRevenue   int64
+	WithdrawalEnabled bool
+	CurrentBalance    int64
+	AvailableBalance  int64
+	OverallRevenue    int64
 }
 
 // Constructs AvailableEffect
@@ -11596,6 +11667,7 @@ type TL_starsTransaction struct {
 	MsgID              *int32  // (optional)
 	ExtendedMedia      []TL    // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway | TL_messageMediaGiveawayResults | TL_messageMediaPaidMedia
 	SubscriptionPeriod *int32  // (optional)
+	GiveawayPostID     *int32  // (optional)
 }
 
 // Constructs payments.StarsStatus
@@ -11717,6 +11789,25 @@ type TL_messageReactor struct {
 	Anonymous bool
 	PeerID    TL // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Count     int32
+}
+
+// Constructs StarsGiveawayOption
+type TL_starsGiveawayOption struct {
+	Extended     bool
+	Default      bool
+	Stars        int64
+	YearlyBoosts int32
+	StoreProduct *string // (optional)
+	Currency     string
+	Amount       int64
+	Winners      []TL_starsGiveawayWinnersOption
+}
+
+// Constructs StarsGiveawayWinnersOption
+type TL_starsGiveawayWinnersOption struct {
+	Default      bool
+	Users        int32
+	PerUserStars int64
 }
 
 // Returns response to Query
@@ -14253,11 +14344,11 @@ type TL_messages_requestMainWebView struct {
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_messages_sendPaidReaction struct {
-	Private  bool
 	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID    int32
 	Count    int32
 	RandomID int64
+	Private  *bool // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -14265,6 +14356,10 @@ type TL_messages_togglePaidReactionPrivacy struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	MsgID   int32
 	Private bool
+}
+
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
+type TL_messages_getPaidReactionPrivacy struct {
 }
 
 // Returns updates.State: TL_updates_state
@@ -15125,18 +15220,18 @@ type TL_payments_exportInvoice struct {
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_payments_assignAppStoreTransaction struct {
 	Receipt []byte
-	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift | TL_inputStorePaymentStarsGiveaway
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_payments_assignPlayMarketTransaction struct {
 	Receipt TL_dataJSON
-	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift | TL_inputStorePaymentStarsGiveaway
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
 type TL_payments_canPurchasePremium struct {
-	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift
+	Purpose TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift | TL_inputStorePaymentStarsGiveaway
 }
 
 // Returns Vector<PremiumGiftCodeOption>: TL_premiumGiftCodeOption
@@ -15164,7 +15259,7 @@ type TL_payments_getGiveawayInfo struct {
 type TL_payments_launchPrepaidGiveaway struct {
 	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	GiveawayID int64
-	Purpose    TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift
+	Purpose    TL // InputStorePaymentPurpose: TL_inputStorePaymentPremiumSubscription | TL_inputStorePaymentGiftPremium | TL_inputStorePaymentPremiumGiftCode | TL_inputStorePaymentPremiumGiveaway | TL_inputStorePaymentStarsTopup | TL_inputStorePaymentStarsGift | TL_inputStorePaymentStarsGiveaway
 }
 
 // Returns Vector<StarsTopupOption>: TL_starsTopupOption
@@ -15246,6 +15341,10 @@ type TL_payments_changeStarsSubscription struct {
 type TL_payments_fulfillStarsSubscription struct {
 	Peer           TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	SubscriptionID string
+}
+
+// Returns Vector<StarsGiveawayOption>: TL_starsGiveawayOption
+type TL_payments_getStarsGiveawayOptions struct {
 }
 
 // Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
@@ -16899,10 +16998,18 @@ func (e TL_inputMediaWebPage) encode() []byte {
 }
 
 func (e TL_inputMediaPaidMedia) encode() []byte {
+	var flags int32
+	if e.Payload != nil {
+		flags |= (1 << 0)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputMediaPaidMedia)
+	x.Int(flags)
 	x.Long(e.StarsAmount)
 	EncodeBuf_GenericVector(x, e.ExtendedMedia)
+	if e.Payload != nil {
+		x.String(*e.Payload)
+	}
 	return x.buf
 }
 
@@ -18635,6 +18742,12 @@ func (e TL_messageMediaGiveaway) encode() []byte {
 	if e.PrizeDescription != nil {
 		flags |= (1 << 3)
 	}
+	if e.Months != nil {
+		flags |= (1 << 4)
+	}
+	if e.Stars != nil {
+		flags |= (1 << 5)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageMediaGiveaway)
 	x.Int(flags)
@@ -18646,7 +18759,12 @@ func (e TL_messageMediaGiveaway) encode() []byte {
 		x.String(*e.PrizeDescription)
 	}
 	x.Int(e.Quantity)
-	x.Int(e.Months)
+	if e.Months != nil {
+		x.Int(*e.Months)
+	}
+	if e.Stars != nil {
+		x.Long(*e.Stars)
+	}
 	x.Int(e.UntilDate)
 	return x.buf
 }
@@ -18662,6 +18780,12 @@ func (e TL_messageMediaGiveawayResults) encode() []byte {
 	if e.AdditionalPeersCount != nil {
 		flags |= (1 << 3)
 	}
+	if e.Months != nil {
+		flags |= (1 << 4)
+	}
+	if e.Stars != nil {
+		flags |= (1 << 5)
+	}
 	if e.PrizeDescription != nil {
 		flags |= (1 << 1)
 	}
@@ -18676,7 +18800,12 @@ func (e TL_messageMediaGiveawayResults) encode() []byte {
 	x.Int(e.WinnersCount)
 	x.Int(e.UnclaimedCount)
 	x.VectorLong(e.Winners)
-	x.Int(e.Months)
+	if e.Months != nil {
+		x.Int(*e.Months)
+	}
+	if e.Stars != nil {
+		x.Long(*e.Stars)
+	}
 	if e.PrizeDescription != nil {
 		x.String(*e.PrizeDescription)
 	}
@@ -19156,14 +19285,27 @@ func (e TL_messageActionGiftCode) encode() []byte {
 }
 
 func (e TL_messageActionGiveawayLaunch) encode() []byte {
+	var flags int32
+	if e.Stars != nil {
+		flags |= (1 << 0)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionGiveawayLaunch)
+	x.Int(flags)
+	if e.Stars != nil {
+		x.Long(*e.Stars)
+	}
 	return x.buf
 }
 
 func (e TL_messageActionGiveawayResults) encode() []byte {
+	var flags int32
+	if e.Stars {
+		flags |= (1 << 0)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionGiveawayResults)
+	x.Int(flags)
 	x.Int(e.WinnersCount)
 	x.Int(e.UnclaimedCount)
 	return x.buf
@@ -19228,6 +19370,21 @@ func (e TL_messageActionGiftStars) encode() []byte {
 	if e.TransactionID != nil {
 		x.String(*e.TransactionID)
 	}
+	return x.buf
+}
+
+func (e TL_messageActionPrizeStars) encode() []byte {
+	var flags int32
+	if e.Unclaimed {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionPrizeStars)
+	x.Int(flags)
+	x.Long(e.Stars)
+	x.String(e.TransactionID)
+	x.Object(e.BoostPeer)
+	x.Int(e.GiveawayMsgID)
 	return x.buf
 }
 
@@ -21849,6 +22006,22 @@ func (e TL_updateStarsRevenueStatus) encode() []byte {
 	x.UInt(CRC_updateStarsRevenueStatus)
 	x.Object(e.Peer)
 	x.Object(e.Status)
+	return x.buf
+}
+
+func (e TL_updateBotPurchasedPaidMedia) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updateBotPurchasedPaidMedia)
+	x.Long(e.UserID)
+	x.String(e.Payload)
+	x.Int(e.QTS)
+	return x.buf
+}
+
+func (e TL_updatePaidReactionPrivacy) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_updatePaidReactionPrivacy)
+	x.Bool(e.Private)
 	return x.buf
 }
 
@@ -27519,6 +27692,14 @@ func (e TL_channelAdminLogEventActionToggleSignatureProfiles) encode() []byte {
 	return x.buf
 }
 
+func (e TL_channelAdminLogEventActionParticipantSubExtend) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_channelAdminLogEventActionParticipantSubExtend)
+	x.Object(e.PrevParticipant)
+	x.Object(e.NewParticipant)
+	return x.buf
+}
+
 func (e TL_channelAdminLogEvent) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEvent)
@@ -27593,6 +27774,9 @@ func (e TL_channelAdminLogEventsFilter) encode() []byte {
 	}
 	if e.Forums {
 		flags |= (1 << 17)
+	}
+	if e.SubExtend {
+		flags |= (1 << 18)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channelAdminLogEventsFilter)
@@ -31166,6 +31350,45 @@ func (e TL_inputStorePaymentStarsGift) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputStorePaymentStarsGiveaway) encode() []byte {
+	var flags int32
+	if e.OnlyNewSubscribers {
+		flags |= (1 << 0)
+	}
+	if e.WinnersAreVisible {
+		flags |= (1 << 3)
+	}
+	if e.AdditionalPeers != nil {
+		flags |= (1 << 1)
+	}
+	if e.CountriesISO2 != nil {
+		flags |= (1 << 2)
+	}
+	if e.PrizeDescription != nil {
+		flags |= (1 << 4)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputStorePaymentStarsGiveaway)
+	x.Int(flags)
+	x.Long(e.Stars)
+	x.Object(e.BoostPeer)
+	if e.AdditionalPeers != nil {
+		EncodeBuf_GenericVector(x, e.AdditionalPeers)
+	}
+	if e.CountriesISO2 != nil {
+		x.VectorString(e.CountriesISO2)
+	}
+	if e.PrizeDescription != nil {
+		x.String(*e.PrizeDescription)
+	}
+	x.Long(e.RandomID)
+	x.Int(e.UntilDate)
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	x.Int(e.Users)
+	return x.buf
+}
+
 func (e TL_premiumGiftOption) encode() []byte {
 	var flags int32
 	if e.StoreProduct != nil {
@@ -32525,7 +32748,13 @@ func (e TL_payments_giveawayInfoResults) encode() []byte {
 		flags |= (1 << 1)
 	}
 	if e.GiftCodeSlug != nil {
-		flags |= (1 << 0)
+		flags |= (1 << 3)
+	}
+	if e.StarsPrize != nil {
+		flags |= (1 << 4)
+	}
+	if e.ActivatedCount != nil {
+		flags |= (1 << 2)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_giveawayInfoResults)
@@ -32534,9 +32763,14 @@ func (e TL_payments_giveawayInfoResults) encode() []byte {
 	if e.GiftCodeSlug != nil {
 		x.String(*e.GiftCodeSlug)
 	}
+	if e.StarsPrize != nil {
+		x.Long(*e.StarsPrize)
+	}
 	x.Int(e.FinishDate)
 	x.Int(e.WinnersCount)
-	x.Int(e.ActivatedCount)
+	if e.ActivatedCount != nil {
+		x.Int(*e.ActivatedCount)
+	}
 	return x.buf
 }
 
@@ -32546,6 +32780,17 @@ func (e TL_prepaidGiveaway) encode() []byte {
 	x.Long(e.ID)
 	x.Int(e.Months)
 	x.Int(e.Quantity)
+	x.Int(e.Date)
+	return x.buf
+}
+
+func (e TL_prepaidStarsGiveaway) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_prepaidStarsGiveaway)
+	x.Long(e.ID)
+	x.Long(e.Stars)
+	x.Int(e.Quantity)
+	x.Int(e.Boosts)
 	x.Int(e.Date)
 	return x.buf
 }
@@ -32573,6 +32818,9 @@ func (e TL_boost) encode() []byte {
 	if e.Multiplier != nil {
 		flags |= (1 << 5)
 	}
+	if e.Stars != nil {
+		flags |= (1 << 6)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_boost)
 	x.Int(flags)
@@ -32590,6 +32838,9 @@ func (e TL_boost) encode() []byte {
 	}
 	if e.Multiplier != nil {
 		x.Int(*e.Multiplier)
+	}
+	if e.Stars != nil {
+		x.Long(*e.Stars)
 	}
 	return x.buf
 }
@@ -33776,8 +34027,13 @@ func (e TL_reactionsNotifySettings) encode() []byte {
 }
 
 func (e TL_broadcastRevenueBalances) encode() []byte {
+	var flags int32
+	if e.WithdrawalEnabled {
+		flags |= (1 << 0)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_broadcastRevenueBalances)
+	x.Int(flags)
 	x.Long(e.CurrentBalance)
 	x.Long(e.AvailableBalance)
 	x.Long(e.OverallRevenue)
@@ -33956,6 +34212,9 @@ func (e TL_starsTransaction) encode() []byte {
 	if e.SubscriptionPeriod != nil {
 		flags |= (1 << 12)
 	}
+	if e.GiveawayPostID != nil {
+		flags |= (1 << 13)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_starsTransaction)
 	x.Int(flags)
@@ -33989,6 +34248,9 @@ func (e TL_starsTransaction) encode() []byte {
 	}
 	if e.SubscriptionPeriod != nil {
 		x.Int(*e.SubscriptionPeriod)
+	}
+	if e.GiveawayPostID != nil {
+		x.Int(*e.GiveawayPostID)
 	}
 	return x.buf
 }
@@ -34249,6 +34511,44 @@ func (e TL_messageReactor) encode() []byte {
 		x.Object(e.PeerID)
 	}
 	x.Int(e.Count)
+	return x.buf
+}
+
+func (e TL_starsGiveawayOption) encode() []byte {
+	var flags int32
+	if e.Extended {
+		flags |= (1 << 0)
+	}
+	if e.Default {
+		flags |= (1 << 1)
+	}
+	if e.StoreProduct != nil {
+		flags |= (1 << 2)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_starsGiveawayOption)
+	x.Int(flags)
+	x.Long(e.Stars)
+	x.Int(e.YearlyBoosts)
+	if e.StoreProduct != nil {
+		x.String(*e.StoreProduct)
+	}
+	x.String(e.Currency)
+	x.Long(e.Amount)
+	EncodeBuf_GenericVector(x, e.Winners)
+	return x.buf
+}
+
+func (e TL_starsGiveawayWinnersOption) encode() []byte {
+	var flags int32
+	if e.Default {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_starsGiveawayWinnersOption)
+	x.Int(flags)
+	x.Int(e.Users)
+	x.Long(e.PerUserStars)
 	return x.buf
 }
 
@@ -38903,7 +39203,7 @@ func (e TL_messages_requestMainWebView) encode() []byte {
 
 func (e TL_messages_sendPaidReaction) encode() []byte {
 	var flags int32
-	if e.Private {
+	if e.Private != nil {
 		flags |= (1 << 0)
 	}
 	x := NewEncodeBuf(512)
@@ -38913,6 +39213,9 @@ func (e TL_messages_sendPaidReaction) encode() []byte {
 	x.Int(e.MsgID)
 	x.Int(e.Count)
 	x.Long(e.RandomID)
+	if e.Private != nil {
+		x.Bool(*e.Private)
+	}
 	return x.buf
 }
 
@@ -38922,6 +39225,12 @@ func (e TL_messages_togglePaidReactionPrivacy) encode() []byte {
 	x.Object(e.Peer)
 	x.Int(e.MsgID)
 	x.Bool(e.Private)
+	return x.buf
+}
+
+func (e TL_messages_getPaidReactionPrivacy) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getPaidReactionPrivacy)
 	return x.buf
 }
 
@@ -40549,6 +40858,12 @@ func (e TL_payments_fulfillStarsSubscription) encode() []byte {
 	x.UInt(CRC_payments_fulfillStarsSubscription)
 	x.Object(e.Peer)
 	x.String(e.SubscriptionID)
+	return x.buf
+}
+
+func (e TL_payments_getStarsGiveawayOptions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_getStarsGiveawayOptions)
 	return x.buf
 }
 
@@ -43401,6 +43716,10 @@ func (e TL_messages_togglePaidReactionPrivacy) decodeResponse(dbuf *DecodeBuf) T
 	return dbuf.Object()
 }
 
+func (e TL_messages_getPaidReactionPrivacy) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_updates_getState) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -44031,6 +44350,10 @@ func (e TL_payments_changeStarsSubscription) decodeResponse(dbuf *DecodeBuf) TL 
 
 func (e TL_payments_fulfillStarsSubscription) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
+}
+
+func (e TL_payments_getStarsGiveawayOptions) decodeResponse(dbuf *DecodeBuf) TL {
+	return VectorObject(dbuf.Vector())
 }
 
 func (e TL_stickers_createStickerSet) decodeResponse(dbuf *DecodeBuf) TL {
@@ -45510,8 +45833,12 @@ func decode_TL_inputMediaPaidMedia(m *DecodeBuf) TL {
 }
 func decode_body_TL_inputMediaPaidMedia(m *DecodeBuf) TL {
 	tl := TL_inputMediaPaidMedia{}
+	flags := m.Int()
 	tl.StarsAmount = m.Long()
 	tl.ExtendedMedia = m.Vector()
+	if flags&(1<<0) != 0 {
+		tl.Payload = Ref(m.String())
+	}
 	return tl
 }
 
@@ -46820,7 +47147,12 @@ func decode_body_TL_messageMediaGiveaway(m *DecodeBuf) TL {
 		tl.PrizeDescription = Ref(m.String())
 	}
 	tl.Quantity = m.Int()
-	tl.Months = m.Int()
+	if flags&(1<<4) != 0 {
+		tl.Months = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.Stars = Ref(m.Long())
+	}
 	tl.UntilDate = m.Int()
 	return tl
 }
@@ -46842,7 +47174,12 @@ func decode_body_TL_messageMediaGiveawayResults(m *DecodeBuf) TL {
 	tl.WinnersCount = m.Int()
 	tl.UnclaimedCount = m.Int()
 	tl.Winners = m.VectorLong()
-	tl.Months = m.Int()
+	if flags&(1<<4) != 0 {
+		tl.Months = Ref(m.Int())
+	}
+	if flags&(1<<5) != 0 {
+		tl.Stars = Ref(m.Long())
+	}
 	if flags&(1<<1) != 0 {
 		tl.PrizeDescription = Ref(m.String())
 	}
@@ -47349,8 +47686,12 @@ func decode_TL_messageActionGiveawayLaunch(m *DecodeBuf) TL {
 	m.constructorAssert(CRC_messageActionGiveawayLaunch)
 	return decode_body_TL_messageActionGiveawayLaunch(m)
 }
-func decode_body_TL_messageActionGiveawayLaunch(_ *DecodeBuf) TL {
+func decode_body_TL_messageActionGiveawayLaunch(m *DecodeBuf) TL {
 	tl := TL_messageActionGiveawayLaunch{}
+	flags := m.Int()
+	if flags&(1<<0) != 0 {
+		tl.Stars = Ref(m.Long())
+	}
 	return tl
 }
 
@@ -47360,6 +47701,8 @@ func decode_TL_messageActionGiveawayResults(m *DecodeBuf) TL {
 }
 func decode_body_TL_messageActionGiveawayResults(m *DecodeBuf) TL {
 	tl := TL_messageActionGiveawayResults{}
+	flags := m.Int()
+	tl.Stars = flags&(1<<0) != 0
 	tl.WinnersCount = m.Int()
 	tl.UnclaimedCount = m.Int()
 	return tl
@@ -47422,6 +47765,21 @@ func decode_body_TL_messageActionGiftStars(m *DecodeBuf) TL {
 	if flags&(1<<1) != 0 {
 		tl.TransactionID = Ref(m.String())
 	}
+	return tl
+}
+
+func decode_TL_messageActionPrizeStars(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionPrizeStars)
+	return decode_body_TL_messageActionPrizeStars(m)
+}
+func decode_body_TL_messageActionPrizeStars(m *DecodeBuf) TL {
+	tl := TL_messageActionPrizeStars{}
+	flags := m.Int()
+	tl.Unclaimed = flags&(1<<0) != 0
+	tl.Stars = m.Long()
+	tl.TransactionID = m.String()
+	tl.BoostPeer = m.Object()
+	tl.GiveawayMsgID = m.Int()
 	return tl
 }
 
@@ -50186,6 +50544,28 @@ func decode_body_TL_updateStarsRevenueStatus(m *DecodeBuf) TL {
 	tl := TL_updateStarsRevenueStatus{}
 	tl.Peer = m.Object()
 	tl.Status = decode_TL_starsRevenueStatus(m).(TL_starsRevenueStatus)
+	return tl
+}
+
+func decode_TL_updateBotPurchasedPaidMedia(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updateBotPurchasedPaidMedia)
+	return decode_body_TL_updateBotPurchasedPaidMedia(m)
+}
+func decode_body_TL_updateBotPurchasedPaidMedia(m *DecodeBuf) TL {
+	tl := TL_updateBotPurchasedPaidMedia{}
+	tl.UserID = m.Long()
+	tl.Payload = m.String()
+	tl.QTS = m.Int()
+	return tl
+}
+
+func decode_TL_updatePaidReactionPrivacy(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_updatePaidReactionPrivacy)
+	return decode_body_TL_updatePaidReactionPrivacy(m)
+}
+func decode_body_TL_updatePaidReactionPrivacy(m *DecodeBuf) TL {
+	tl := TL_updatePaidReactionPrivacy{}
+	tl.Private = m.Bool()
 	return tl
 }
 
@@ -56141,6 +56521,17 @@ func decode_body_TL_channelAdminLogEventActionToggleSignatureProfiles(m *DecodeB
 	return tl
 }
 
+func decode_TL_channelAdminLogEventActionParticipantSubExtend(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_channelAdminLogEventActionParticipantSubExtend)
+	return decode_body_TL_channelAdminLogEventActionParticipantSubExtend(m)
+}
+func decode_body_TL_channelAdminLogEventActionParticipantSubExtend(m *DecodeBuf) TL {
+	tl := TL_channelAdminLogEventActionParticipantSubExtend{}
+	tl.PrevParticipant = m.Object()
+	tl.NewParticipant = m.Object()
+	return tl
+}
+
 func decode_TL_channelAdminLogEvent(m *DecodeBuf) TL {
 	m.constructorAssert(CRC_channelAdminLogEvent)
 	return decode_body_TL_channelAdminLogEvent(m)
@@ -56191,6 +56582,7 @@ func decode_body_TL_channelAdminLogEventsFilter(m *DecodeBuf) TL {
 	tl.Invites = flags&(1<<15) != 0
 	tl.Send = flags&(1<<16) != 0
 	tl.Forums = flags&(1<<17) != 0
+	tl.SubExtend = flags&(1<<18) != 0
 	return tl
 }
 
@@ -59872,6 +60264,34 @@ func decode_body_TL_inputStorePaymentStarsGift(m *DecodeBuf) TL {
 	return tl
 }
 
+func decode_TL_inputStorePaymentStarsGiveaway(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputStorePaymentStarsGiveaway)
+	return decode_body_TL_inputStorePaymentStarsGiveaway(m)
+}
+func decode_body_TL_inputStorePaymentStarsGiveaway(m *DecodeBuf) TL {
+	tl := TL_inputStorePaymentStarsGiveaway{}
+	flags := m.Int()
+	tl.OnlyNewSubscribers = flags&(1<<0) != 0
+	tl.WinnersAreVisible = flags&(1<<3) != 0
+	tl.Stars = m.Long()
+	tl.BoostPeer = m.Object()
+	if flags&(1<<1) != 0 {
+		tl.AdditionalPeers = m.Vector()
+	}
+	if flags&(1<<2) != 0 {
+		tl.CountriesISO2 = m.VectorString()
+	}
+	if flags&(1<<4) != 0 {
+		tl.PrizeDescription = Ref(m.String())
+	}
+	tl.RandomID = m.Long()
+	tl.UntilDate = m.Int()
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	tl.Users = m.Int()
+	return tl
+}
+
 func decode_TL_premiumGiftOption(m *DecodeBuf) TL {
 	m.constructorAssert(CRC_premiumGiftOption)
 	return decode_body_TL_premiumGiftOption(m)
@@ -61249,12 +61669,17 @@ func decode_body_TL_payments_giveawayInfoResults(m *DecodeBuf) TL {
 	tl.Winner = flags&(1<<0) != 0
 	tl.Refunded = flags&(1<<1) != 0
 	tl.StartDate = m.Int()
-	if flags&(1<<0) != 0 {
+	if flags&(1<<3) != 0 {
 		tl.GiftCodeSlug = Ref(m.String())
+	}
+	if flags&(1<<4) != 0 {
+		tl.StarsPrize = Ref(m.Long())
 	}
 	tl.FinishDate = m.Int()
 	tl.WinnersCount = m.Int()
-	tl.ActivatedCount = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.ActivatedCount = Ref(m.Int())
+	}
 	return tl
 }
 
@@ -61267,6 +61692,20 @@ func decode_body_TL_prepaidGiveaway(m *DecodeBuf) TL {
 	tl.ID = m.Long()
 	tl.Months = m.Int()
 	tl.Quantity = m.Int()
+	tl.Date = m.Int()
+	return tl
+}
+
+func decode_TL_prepaidStarsGiveaway(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_prepaidStarsGiveaway)
+	return decode_body_TL_prepaidStarsGiveaway(m)
+}
+func decode_body_TL_prepaidStarsGiveaway(m *DecodeBuf) TL {
+	tl := TL_prepaidStarsGiveaway{}
+	tl.ID = m.Long()
+	tl.Stars = m.Long()
+	tl.Quantity = m.Int()
+	tl.Boosts = m.Int()
 	tl.Date = m.Int()
 	return tl
 }
@@ -61295,6 +61734,9 @@ func decode_body_TL_boost(m *DecodeBuf) TL {
 	}
 	if flags&(1<<5) != 0 {
 		tl.Multiplier = Ref(m.Int())
+	}
+	if flags&(1<<6) != 0 {
+		tl.Stars = Ref(m.Long())
 	}
 	return tl
 }
@@ -61368,7 +61810,7 @@ func decode_body_TL_premium_boostsStatus(m *DecodeBuf) TL {
 	}
 	tl.BoostURL = m.String()
 	if flags&(1<<3) != 0 {
-		tl.PrepaidGiveaways = DecodeBuf_GenericVector[TL_prepaidGiveaway](m)
+		tl.PrepaidGiveaways = m.Vector()
 	}
 	if flags&(1<<2) != 0 {
 		tl.MyBoostSlots = m.VectorInt()
@@ -62500,6 +62942,8 @@ func decode_TL_broadcastRevenueBalances(m *DecodeBuf) TL {
 }
 func decode_body_TL_broadcastRevenueBalances(m *DecodeBuf) TL {
 	tl := TL_broadcastRevenueBalances{}
+	flags := m.Int()
+	tl.WithdrawalEnabled = flags&(1<<0) != 0
 	tl.CurrentBalance = m.Long()
 	tl.AvailableBalance = m.Long()
 	tl.OverallRevenue = m.Long()
@@ -62688,6 +63132,9 @@ func decode_body_TL_starsTransaction(m *DecodeBuf) TL {
 	}
 	if flags&(1<<12) != 0 {
 		tl.SubscriptionPeriod = Ref(m.Int())
+	}
+	if flags&(1<<13) != 0 {
+		tl.GiveawayPostID = Ref(m.Int())
 	}
 	return tl
 }
@@ -62927,6 +63374,39 @@ func decode_body_TL_messageReactor(m *DecodeBuf) TL {
 		tl.PeerID = m.Object()
 	}
 	tl.Count = m.Int()
+	return tl
+}
+
+func decode_TL_starsGiveawayOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsGiveawayOption)
+	return decode_body_TL_starsGiveawayOption(m)
+}
+func decode_body_TL_starsGiveawayOption(m *DecodeBuf) TL {
+	tl := TL_starsGiveawayOption{}
+	flags := m.Int()
+	tl.Extended = flags&(1<<0) != 0
+	tl.Default = flags&(1<<1) != 0
+	tl.Stars = m.Long()
+	tl.YearlyBoosts = m.Int()
+	if flags&(1<<2) != 0 {
+		tl.StoreProduct = Ref(m.String())
+	}
+	tl.Currency = m.String()
+	tl.Amount = m.Long()
+	tl.Winners = DecodeBuf_GenericVector[TL_starsGiveawayWinnersOption](m)
+	return tl
+}
+
+func decode_TL_starsGiveawayWinnersOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsGiveawayWinnersOption)
+	return decode_body_TL_starsGiveawayWinnersOption(m)
+}
+func decode_body_TL_starsGiveawayWinnersOption(m *DecodeBuf) TL {
+	tl := TL_starsGiveawayWinnersOption{}
+	flags := m.Int()
+	tl.Default = flags&(1<<0) != 0
+	tl.Users = m.Int()
+	tl.PerUserStars = m.Long()
 	return tl
 }
 
@@ -63345,6 +63825,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_messageActionPaymentRefunded(m)
 	case CRC_messageActionGiftStars:
 		r = decode_body_TL_messageActionGiftStars(m)
+	case CRC_messageActionPrizeStars:
+		r = decode_body_TL_messageActionPrizeStars(m)
 	case CRC_dialog:
 		r = decode_body_TL_dialog(m)
 	case CRC_dialogFolder:
@@ -63771,6 +64253,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_updateBusinessBotCallbackQuery(m)
 	case CRC_updateStarsRevenueStatus:
 		r = decode_body_TL_updateStarsRevenueStatus(m)
+	case CRC_updateBotPurchasedPaidMedia:
+		r = decode_body_TL_updateBotPurchasedPaidMedia(m)
+	case CRC_updatePaidReactionPrivacy:
+		r = decode_body_TL_updatePaidReactionPrivacy(m)
 	case CRC_updates_state:
 		r = decode_body_TL_updates_state(m)
 	case CRC_updates_differenceEmpty:
@@ -64693,6 +65179,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_channelAdminLogEventActionChangeEmojiStickerSet(m)
 	case CRC_channelAdminLogEventActionToggleSignatureProfiles:
 		r = decode_body_TL_channelAdminLogEventActionToggleSignatureProfiles(m)
+	case CRC_channelAdminLogEventActionParticipantSubExtend:
+		r = decode_body_TL_channelAdminLogEventActionParticipantSubExtend(m)
 	case CRC_channelAdminLogEvent:
 		r = decode_body_TL_channelAdminLogEvent(m)
 	case CRC_channels_adminLogResults:
@@ -65267,6 +65755,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_inputStorePaymentStarsTopup(m)
 	case CRC_inputStorePaymentStarsGift:
 		r = decode_body_TL_inputStorePaymentStarsGift(m)
+	case CRC_inputStorePaymentStarsGiveaway:
+		r = decode_body_TL_inputStorePaymentStarsGiveaway(m)
 	case CRC_premiumGiftOption:
 		r = decode_body_TL_premiumGiftOption(m)
 	case CRC_paymentFormMethod:
@@ -65473,6 +65963,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_payments_giveawayInfoResults(m)
 	case CRC_prepaidGiveaway:
 		r = decode_body_TL_prepaidGiveaway(m)
+	case CRC_prepaidStarsGiveaway:
+		r = decode_body_TL_prepaidStarsGiveaway(m)
 	case CRC_boost:
 		r = decode_body_TL_boost(m)
 	case CRC_premium_boostsList:
@@ -65713,6 +66205,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_starsSubscription(m)
 	case CRC_messageReactor:
 		r = decode_body_TL_messageReactor(m)
+	case CRC_starsGiveawayOption:
+		r = decode_body_TL_starsGiveawayOption(m)
+	case CRC_starsGiveawayWinnersOption:
+		r = decode_body_TL_starsGiveawayWinnersOption(m)
 
 	default:
 		m.err = merry.Errorf("Unknown constructor: %08x", constructor)

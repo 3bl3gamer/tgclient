@@ -659,7 +659,7 @@ import (
 	// In Go 1.23 (at least) decoding works faster when the constructor's decoder
 	// is chosen by a large switch and when each case is a simple fucntion call which returns TL.
 	//
-	// It works slower if each decode_* function return exact type (i.e. decode_body_TL_poll()TL_poll{...}).
+	// It works slower if each decode_* function returns exact type (i.e. decode_body_TL_poll() TL_poll{...}).
 	// It works slower when switch is replaced by map[uint32]func(*DecodeBuf)TL.
 	//
 	// Benchmarked via calling DecodeBuf().Object() with three input buffers:
