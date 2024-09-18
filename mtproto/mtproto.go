@@ -302,10 +302,20 @@ func (m *MTProto) Connect() error {
 		if err == nil {
 			break
 		}
+		if IsErrorMessage(err, "AUTH_KEY_DUPLICATED") {
+			m.log.Error(err, "connect AUTH_KEY_DUPLICATED")
+			break
+		}
 
 		if IsWrongClientTimeError(err) {
 			m.log.Info("client time seems inaccurate, applying correction")
 			m.outMsgIDTimeOffsetSec = m.lastInMsgTimeOffsetSec
+		} else if IsMsgSeqnoTooLowError(err) {
+			m.lastOutSeqNo = m.lastOutSeqNo + 64
+			m.log.Error(err, "msg_seqno too low")
+		} else if IsMsgSeqnoTooHighError(err) {
+			m.lastOutSeqNo = m.lastOutSeqNo - 16
+			m.log.Error(err, "msg_seqno too high")
 		} else {
 			m.log.Error(err, "failed to connect")
 		}
