@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	TL_Layer                                                              = 187
+	TL_Layer                                                              = 192
 	CRC_resPQ                                                             = 0x05162463
 	CRC_pqInnerData                                                       = 0x83c95aec
 	CRC_pqInnerDataDC                                                     = 0xa9f55f95
@@ -165,7 +165,7 @@ const (
 	CRC_messageMediaGeo                                                   = 0x56e0d474
 	CRC_messageMediaContact                                               = 0x70322949
 	CRC_messageMediaUnsupported                                           = 0x9f84f49e
-	CRC_messageMediaDocument                                              = 0x4cf4d72d
+	CRC_messageMediaDocument                                              = 0xdd570bd5
 	CRC_messageMediaWebPage                                               = 0xddf10c3b
 	CRC_messageMediaVenue                                                 = 0x2ec0533f
 	CRC_messageMediaGame                                                  = 0xfdb19008
@@ -209,13 +209,13 @@ const (
 	CRC_messageActionChatJoinedByRequest                                  = 0xebbca3cb
 	CRC_messageActionWebViewDataSentMe                                    = 0x47dd8079
 	CRC_messageActionWebViewDataSent                                      = 0xb4c38cb5
-	CRC_messageActionGiftPremium                                          = 0xc83d6aec
+	CRC_messageActionGiftPremium                                          = 0x6c6274fa
 	CRC_messageActionTopicCreate                                          = 0x0d999256
 	CRC_messageActionTopicEdit                                            = 0xc0944820
 	CRC_messageActionSuggestProfilePhoto                                  = 0x57de635e
 	CRC_messageActionRequestedPeer                                        = 0x31518e9b
 	CRC_messageActionSetChatWallPaper                                     = 0x5060a3f4
-	CRC_messageActionGiftCode                                             = 0x678c2e09
+	CRC_messageActionGiftCode                                             = 0x56d03994
 	CRC_messageActionGiveawayLaunch                                       = 0xa80f51e4
 	CRC_messageActionGiveawayResults                                      = 0x87e2f155
 	CRC_messageActionBoostApply                                           = 0xcc02aa6d
@@ -223,6 +223,7 @@ const (
 	CRC_messageActionPaymentRefunded                                      = 0x41b3e202
 	CRC_messageActionGiftStars                                            = 0x45d5b021
 	CRC_messageActionPrizeStars                                           = 0xb00c47a2
+	CRC_messageActionStarGift                                             = 0x9bb3ef44
 	CRC_dialog                                                            = 0xd58a08c6
 	CRC_dialogFolder                                                      = 0x71bd134c
 	CRC_photoEmpty                                                        = 0x2331b22d
@@ -260,7 +261,7 @@ const (
 	CRC_inputReportReasonFake                                             = 0xf5ddd6e7
 	CRC_inputReportReasonIllegalDrugs                                     = 0x0a8eb2be
 	CRC_inputReportReasonPersonalDetails                                  = 0x9ec7863d
-	CRC_userFull                                                          = 0xcc997720
+	CRC_userFull                                                          = 0x1f58e369
 	CRC_contact                                                           = 0x145ade0b
 	CRC_importedContact                                                   = 0xc13e3c50
 	CRC_contactStatus                                                     = 0x16d9703b
@@ -365,7 +366,7 @@ const (
 	CRC_updatePeerSettings                                                = 0x6a7e7366
 	CRC_updatePeerLocated                                                 = 0xb4afcfb0
 	CRC_updateNewScheduledMessage                                         = 0x39a51dfb
-	CRC_updateDeleteScheduledMessages                                     = 0x90866cee
+	CRC_updateDeleteScheduledMessages                                     = 0xf2a71983
 	CRC_updateTheme                                                       = 0x8216fba3
 	CRC_updateGeoLiveViewed                                               = 0x871fb939
 	CRC_updateLoginToken                                                  = 0x564fe691
@@ -555,7 +556,7 @@ const (
 	CRC_documentAttributeImageSize                                        = 0x6c37c15c
 	CRC_documentAttributeAnimated                                         = 0x11b58939
 	CRC_documentAttributeSticker                                          = 0x6319d612
-	CRC_documentAttributeVideo                                            = 0x17399fad
+	CRC_documentAttributeVideo                                            = 0x43c57c48
 	CRC_documentAttributeAudio                                            = 0x9852f9c6
 	CRC_documentAttributeFilename                                         = 0x15590068
 	CRC_documentAttributeHasStickers                                      = 0x9801d2f7
@@ -615,6 +616,7 @@ const (
 	CRC_keyboardButtonSimpleWebView                                       = 0xa0c0505c
 	CRC_keyboardButtonRequestPeer                                         = 0x53d7bfd8
 	CRC_inputKeyboardButtonRequestPeer                                    = 0xc9662d05
+	CRC_keyboardButtonCopy                                                = 0x75d2698e
 	CRC_keyboardButtonRow                                                 = 0x77608b83
 	CRC_replyKeyboardHide                                                 = 0xa03e5b85
 	CRC_replyKeyboardForceReply                                           = 0x86b40b08
@@ -817,6 +819,7 @@ const (
 	CRC_upload_webFile                                                    = 0x21e753bc
 	CRC_payments_paymentForm                                              = 0xa0058751
 	CRC_payments_paymentFormStars                                         = 0x7bf6b15c
+	CRC_payments_paymentFormStarGift                                      = 0xb425cfe1
 	CRC_payments_validatedRequestedInfo                                   = 0xd1451883
 	CRC_payments_paymentResult                                            = 0x4e5f810d
 	CRC_payments_paymentVerificationNeeded                                = 0xd8411139
@@ -1178,12 +1181,13 @@ const (
 	CRC_inputInvoicePremiumGiftCode                                       = 0x98986c0d
 	CRC_inputInvoiceStars                                                 = 0x65f00ce3
 	CRC_inputInvoiceChatInviteSubscription                                = 0x34e793f1
+	CRC_inputInvoiceStarGift                                              = 0x25d8c1d8
 	CRC_payments_exportedInvoice                                          = 0xaed0cbd9
 	CRC_messages_transcribedAudio                                         = 0xcfb9d957
 	CRC_help_premiumPromo                                                 = 0x5334759c
 	CRC_inputStorePaymentPremiumSubscription                              = 0xa6751e66
 	CRC_inputStorePaymentGiftPremium                                      = 0x616f7fe8
-	CRC_inputStorePaymentPremiumGiftCode                                  = 0xa3805f3f
+	CRC_inputStorePaymentPremiumGiftCode                                  = 0xfb790393
 	CRC_inputStorePaymentPremiumGiveaway                                  = 0x160544ca
 	CRC_inputStorePaymentStarsTopup                                       = 0xdddd0f56
 	CRC_inputStorePaymentStarsGift                                        = 0x1d741ef7
@@ -1394,8 +1398,9 @@ const (
 	CRC_starsTransactionPeerFragment                                      = 0xe92fd902
 	CRC_starsTransactionPeer                                              = 0xd80da15d
 	CRC_starsTransactionPeerAds                                           = 0x60682812
+	CRC_starsTransactionPeerAPI                                           = 0xf9677aad
 	CRC_starsTopupOption                                                  = 0x0bd915c0
-	CRC_starsTransaction                                                  = 0xee7522d5
+	CRC_starsTransaction                                                  = 0x35d4f276
 	CRC_payments_starsStatus                                              = 0xbbfa316c
 	CRC_foundStory                                                        = 0xe87acbc0
 	CRC_stories_foundStories                                              = 0xe2de7737
@@ -1414,6 +1419,15 @@ const (
 	CRC_messageReactor                                                    = 0x4ba3a95a
 	CRC_starsGiveawayOption                                               = 0x94ce852a
 	CRC_starsGiveawayWinnersOption                                        = 0x54236209
+	CRC_starGift                                                          = 0x49c577cd
+	CRC_payments_starGiftsNotModified                                     = 0xa388a368
+	CRC_payments_starGifts                                                = 0x901689ea
+	CRC_userStarGift                                                      = 0xeea49a6e
+	CRC_payments_userStarGifts                                            = 0x6b65b517
+	CRC_messageReportOption                                               = 0x7903e3d9
+	CRC_reportResultChooseOption                                          = 0xf0e4e0b6
+	CRC_reportResultAddComment                                            = 0x6f09ac31
+	CRC_reportResultReported                                              = 0x8db33c4b
 	CRC_invokeAfterMsg                                                    = 0xcb9f372d
 	CRC_invokeAfterMsgs                                                   = 0x3dc4b4f0
 	CRC_initConnection                                                    = 0xc1cd5ea9
@@ -1603,7 +1617,7 @@ const (
 	CRC_messages_forwardMessages                                          = 0xd5039208
 	CRC_messages_reportSpam                                               = 0xcf1592db
 	CRC_messages_getPeerSettings                                          = 0xefd9a6a2
-	CRC_messages_report                                                   = 0x8953ab4e
+	CRC_messages_report                                                   = 0xfc78af9b
 	CRC_messages_getChats                                                 = 0x49e9528f
 	CRC_messages_getFullChat                                              = 0xaeb00b34
 	CRC_messages_editChatTitle                                            = 0x73783ffd
@@ -1806,6 +1820,10 @@ const (
 	CRC_messages_sendPaidReaction                                         = 0x9dd6a67b
 	CRC_messages_togglePaidReactionPrivacy                                = 0x849ad397
 	CRC_messages_getPaidReactionPrivacy                                   = 0x472455aa
+	CRC_messages_viewSponsoredMessage                                     = 0x673ad8f1
+	CRC_messages_clickSponsoredMessage                                    = 0x0f093465
+	CRC_messages_reportSponsoredMessage                                   = 0x1af3dbb8
+	CRC_messages_getSponsoredMessages                                     = 0x9bd2f439
 	CRC_updates_getState                                                  = 0xedd4882a
 	CRC_updates_getDifference                                             = 0x19c2f763
 	CRC_updates_getChannelDifference                                      = 0x03173d78
@@ -1882,8 +1900,6 @@ const (
 	CRC_channels_toggleSlowMode                                           = 0xedd49ef0
 	CRC_channels_getInactiveChannels                                      = 0x11e831ee
 	CRC_channels_convertToGigagroup                                       = 0x0b290c69
-	CRC_channels_viewSponsoredMessage                                     = 0xbeaedb94
-	CRC_channels_getSponsoredMessages                                     = 0xec210fbf
 	CRC_channels_getSendAs                                                = 0x0dc770ee
 	CRC_channels_deleteParticipantHistory                                 = 0x367544db
 	CRC_channels_toggleJoinToSend                                         = 0xe4cb9580
@@ -1902,14 +1918,12 @@ const (
 	CRC_channels_toggleAntiSpam                                           = 0x68f3e4eb
 	CRC_channels_reportAntiSpamFalsePositive                              = 0xa850a693
 	CRC_channels_toggleParticipantsHidden                                 = 0x6a6e7854
-	CRC_channels_clickSponsoredMessage                                    = 0x18afbc93
 	CRC_channels_updateColor                                              = 0xd8aa3671
 	CRC_channels_toggleViewForumAsMessages                                = 0x9738bb15
 	CRC_channels_getChannelRecommendations                                = 0x25a71742
 	CRC_channels_updateEmojiStatus                                        = 0xf0d3e6a8
 	CRC_channels_setBoostsToUnblockRestrictions                           = 0xad399cee
 	CRC_channels_setEmojiStickers                                         = 0x3cd930b7
-	CRC_channels_reportSponsoredMessage                                   = 0xaf8ff6b9
 	CRC_channels_restrictSponsoredMessages                                = 0x9ae91519
 	CRC_channels_searchPosts                                              = 0xd19f987b
 	CRC_bots_sendCustomRequest                                            = 0xaa2769ed
@@ -1954,7 +1968,7 @@ const (
 	CRC_payments_getStarsTopupOptions                                     = 0xc00ec7d3
 	CRC_payments_getStarsStatus                                           = 0x104fcfa7
 	CRC_payments_getStarsTransactions                                     = 0x69da4557
-	CRC_payments_sendStarsForm                                            = 0x02bb731d
+	CRC_payments_sendStarsForm                                            = 0x7998c914
 	CRC_payments_refundStarsCharge                                        = 0x25ae8f4a
 	CRC_payments_getStarsRevenueStats                                     = 0xd91ffad6
 	CRC_payments_getStarsRevenueWithdrawalURL                             = 0x13bbe8b3
@@ -1965,6 +1979,10 @@ const (
 	CRC_payments_changeStarsSubscription                                  = 0xc7770878
 	CRC_payments_fulfillStarsSubscription                                 = 0xcc5bebb3
 	CRC_payments_getStarsGiveawayOptions                                  = 0xbd1efd3e
+	CRC_payments_getStarGifts                                             = 0xc4563590
+	CRC_payments_getUserStarGifts                                         = 0x5e72c7e1
+	CRC_payments_saveStarGift                                             = 0x87acf08e
+	CRC_payments_convertStarGift                                          = 0x0421e027
 	CRC_stickers_createStickerSet                                         = 0x9021ab67
 	CRC_stickers_removeStickerFromSet                                     = 0xf7760f51
 	CRC_stickers_changeStickerPosition                                    = 0xffb6d4ca
@@ -2020,9 +2038,9 @@ const (
 	CRC_stats_getMessageStats                                             = 0xb6e0a3f5
 	CRC_stats_getStoryStats                                               = 0x374fef40
 	CRC_stats_getStoryPublicForwards                                      = 0xa6437ef6
-	CRC_stats_getBroadcastRevenueStats                                    = 0x75dfb671
-	CRC_stats_getBroadcastRevenueWithdrawalURL                            = 0x2a65ef73
-	CRC_stats_getBroadcastRevenueTransactions                             = 0x0069280f
+	CRC_stats_getBroadcastRevenueStats                                    = 0xf788ee19
+	CRC_stats_getBroadcastRevenueWithdrawalURL                            = 0x9df4faad
+	CRC_stats_getBroadcastRevenueTransactions                             = 0x70990b6d
 	CRC_chatlists_exportChatlistInvite                                    = 0x8472478e
 	CRC_chatlists_deleteExportedInvite                                    = 0x719c5c5e
 	CRC_chatlists_editExportedInvite                                      = 0x653db63d
@@ -2049,7 +2067,7 @@ const (
 	CRC_stories_getStoryViewsList                                         = 0x7ed23c57
 	CRC_stories_getStoriesViews                                           = 0x28e16cc8
 	CRC_stories_exportStoryLink                                           = 0x7b8def20
-	CRC_stories_report                                                    = 0x1923fa8c
+	CRC_stories_report                                                    = 0x19d8eb45
 	CRC_stories_activateStealthMode                                       = 0x57bbd166
 	CRC_stories_sendReaction                                              = 0x7fd736b2
 	CRC_stories_getPeerStories                                            = 0x2c4ada50
@@ -2059,7 +2077,7 @@ const (
 	CRC_stories_togglePeerStoriesHidden                                   = 0xbd0415c4
 	CRC_stories_getStoryReactionsList                                     = 0xb9b2881f
 	CRC_stories_togglePinnedToTop                                         = 0x0b297e9b
-	CRC_stories_searchPosts                                               = 0x6cea116a
+	CRC_stories_searchPosts                                               = 0xd1810907
 	CRC_premium_getBoostsList                                             = 0x60f67660
 	CRC_premium_getMyBoosts                                               = 0x0be77b4a
 	CRC_premium_applyBoost                                                = 0x6b7da746
@@ -3184,44 +3202,45 @@ type TL_messageEmpty struct {
 
 // Constructs Message
 type TL_message struct {
-	Out                  bool
-	Mentioned            bool
-	MediaUnread          bool
-	Silent               bool
-	Post                 bool
-	FromScheduled        bool
-	Legacy               bool
-	EditHide             bool
-	Pinned               bool
-	Noforwards           bool
-	InvertMedia          bool
-	Offline              bool
-	ID                   int32
-	FromID               TL                   // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	FromBoostsApplied    *int32               // (optional)
-	PeerID               TL                   // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	SavedPeerID          TL                   // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	FwdFrom              *TL_messageFwdHeader // (optional)
-	ViaBotID             *int64               // (optional)
-	ViaBusinessBotID     *int64               // (optional)
-	ReplyTo              TL                   // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
-	Date                 int32
-	Message              string
-	Media                TL                     // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway | TL_messageMediaGiveawayResults | TL_messageMediaPaidMedia
-	ReplyMarkup          TL                     // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
-	Entities             []TL                   // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityURL | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextURL | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
-	Views                *int32                 // (optional)
-	Forwards             *int32                 // (optional)
-	Replies              *TL_messageReplies     // (optional)
-	EditDate             *int32                 // (optional)
-	PostAuthor           *string                // (optional)
-	GroupedID            *int64                 // (optional)
-	Reactions            *TL_messageReactions   // (optional)
-	RestrictionReason    []TL_restrictionReason // (optional)
-	TTLPeriod            *int32                 // (optional)
-	QuickReplyShortcutID *int32                 // (optional)
-	Effect               *int64                 // (optional)
-	Factcheck            *TL_factCheck          // (optional)
+	Out                    bool
+	Mentioned              bool
+	MediaUnread            bool
+	Silent                 bool
+	Post                   bool
+	FromScheduled          bool
+	Legacy                 bool
+	EditHide               bool
+	Pinned                 bool
+	Noforwards             bool
+	InvertMedia            bool
+	Offline                bool
+	VideoProcessingPending bool
+	ID                     int32
+	FromID                 TL                   // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	FromBoostsApplied      *int32               // (optional)
+	PeerID                 TL                   // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	SavedPeerID            TL                   // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	FwdFrom                *TL_messageFwdHeader // (optional)
+	ViaBotID               *int64               // (optional)
+	ViaBusinessBotID       *int64               // (optional)
+	ReplyTo                TL                   // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
+	Date                   int32
+	Message                string
+	Media                  TL                     // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway | TL_messageMediaGiveawayResults | TL_messageMediaPaidMedia
+	ReplyMarkup            TL                     // (optional) ReplyMarkup: TL_replyKeyboardHide | TL_replyKeyboardForceReply | TL_replyKeyboardMarkup | TL_replyInlineMarkup
+	Entities               []TL                   // (optional) MessageEntity: TL_messageEntityUnknown | TL_messageEntityMention | TL_messageEntityHashtag | TL_messageEntityBotCommand | TL_messageEntityURL | TL_messageEntityEmail | TL_messageEntityBold | TL_messageEntityItalic | TL_messageEntityCode | TL_messageEntityPre | TL_messageEntityTextURL | TL_messageEntityMentionName | TL_inputMessageEntityMentionName | TL_messageEntityPhone | TL_messageEntityCashtag | TL_messageEntityUnderline | TL_messageEntityStrike | TL_messageEntityBankCard | TL_messageEntitySpoiler | TL_messageEntityCustomEmoji | TL_messageEntityBlockquote
+	Views                  *int32                 // (optional)
+	Forwards               *int32                 // (optional)
+	Replies                *TL_messageReplies     // (optional)
+	EditDate               *int32                 // (optional)
+	PostAuthor             *string                // (optional)
+	GroupedID              *int64                 // (optional)
+	Reactions              *TL_messageReactions   // (optional)
+	RestrictionReason      []TL_restrictionReason // (optional)
+	TTLPeriod              *int32                 // (optional)
+	QuickReplyShortcutID   *int32                 // (optional)
+	Effect                 *int64                 // (optional)
+	Factcheck              *TL_factCheck          // (optional)
 }
 
 // Constructs Message
@@ -3237,7 +3256,7 @@ type TL_messageService struct {
 	PeerID      TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	ReplyTo     TL // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
 	Date        int32
-	Action      TL     // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPINMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch | TL_messageActionGiveawayResults | TL_messageActionBoostApply | TL_messageActionRequestedPeerSentMe | TL_messageActionPaymentRefunded | TL_messageActionGiftStars | TL_messageActionPrizeStars
+	Action      TL     // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPINMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch | TL_messageActionGiveawayResults | TL_messageActionBoostApply | TL_messageActionRequestedPeerSentMe | TL_messageActionPaymentRefunded | TL_messageActionGiftStars | TL_messageActionPrizeStars | TL_messageActionStarGift
 	TTLPeriod   *int32 // (optional)
 }
 
@@ -3272,14 +3291,14 @@ type TL_messageMediaUnsupported struct {
 
 // Constructs MessageMedia
 type TL_messageMediaDocument struct {
-	Nopremium   bool
-	Spoiler     bool
-	Video       bool
-	Round       bool
-	Voice       bool
-	Document    TL     // (optional) Document: TL_documentEmpty | TL_document
-	AltDocument TL     // (optional) Document: TL_documentEmpty | TL_document
-	TTLSeconds  *int32 // (optional)
+	Nopremium    bool
+	Spoiler      bool
+	Video        bool
+	Round        bool
+	Voice        bool
+	Document     TL     // (optional) Document: TL_documentEmpty | TL_document
+	AltDocuments []TL   // (optional) Document: TL_documentEmpty | TL_document
+	TTLSeconds   *int32 // (optional)
 }
 
 // Constructs MessageMedia
@@ -3569,8 +3588,9 @@ type TL_messageActionGiftPremium struct {
 	Currency       string
 	Amount         int64
 	Months         int32
-	CryptoCurrency *string // (optional)
-	CryptoAmount   *int64  // (optional)
+	CryptoCurrency *string              // (optional)
+	CryptoAmount   *int64               // (optional)
+	Message        *TL_textWithEntities // (optional)
 }
 
 // Constructs MessageAction
@@ -3613,10 +3633,11 @@ type TL_messageActionGiftCode struct {
 	BoostPeer      TL // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	Months         int32
 	Slug           string
-	Currency       *string // (optional)
-	Amount         *int64  // (optional)
-	CryptoCurrency *string // (optional)
-	CryptoAmount   *int64  // (optional)
+	Currency       *string              // (optional)
+	Amount         *int64               // (optional)
+	CryptoCurrency *string              // (optional)
+	CryptoAmount   *int64               // (optional)
+	Message        *TL_textWithEntities // (optional)
 }
 
 // Constructs MessageAction
@@ -3668,6 +3689,16 @@ type TL_messageActionPrizeStars struct {
 	TransactionID string
 	BoostPeer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	GiveawayMsgID int32
+}
+
+// Constructs MessageAction
+type TL_messageActionStarGift struct {
+	NameHidden   bool
+	Saved        bool
+	Converted    bool
+	Gift         TL_starGift
+	Message      *TL_textWithEntities // (optional)
+	ConvertStars int64
 }
 
 // Constructs Dialog
@@ -3950,6 +3981,7 @@ type TL_userFull struct {
 	ContactRequirePremium   bool
 	ReadDatesPrivate        bool
 	SponsoredEnabled        bool
+	CanViewRevenue          bool
 	ID                      int64
 	About                   *string // (optional)
 	Settings                TL_peerSettings
@@ -3977,6 +4009,7 @@ type TL_userFull struct {
 	Birthday                *TL_birthday                // (optional)
 	PersonalChannelID       *int64                      // (optional)
 	PersonalChannelMessage  *int32                      // (optional)
+	StargiftsCount          *int32                      // (optional)
 }
 
 // Constructs Contact
@@ -4638,8 +4671,9 @@ type TL_updateNewScheduledMessage struct {
 
 // Constructs Update
 type TL_updateDeleteScheduledMessages struct {
-	Peer     TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	Messages []int32
+	Peer         TL // Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Messages     []int32
+	SentMessages []int32 // (optional)
 }
 
 // Constructs Update
@@ -5852,6 +5886,7 @@ type TL_documentAttributeVideo struct {
 	H                 int32
 	PreloadPrefixSize *int32   // (optional)
 	VideoStartTS      *float64 // (optional)
+	VideoCodec        *string  // (optional)
 }
 
 // Constructs DocumentAttribute
@@ -6290,9 +6325,15 @@ type TL_inputKeyboardButtonRequestPeer struct {
 	MaxQuantity       int32
 }
 
+// Constructs KeyboardButton
+type TL_keyboardButtonCopy struct {
+	Text     string
+	CopyText string
+}
+
 // Constructs KeyboardButtonRow
 type TL_keyboardButtonRow struct {
-	Buttons []TL // KeyboardButton: TL_keyboardButton | TL_keyboardButtonURL | TL_keyboardButtonCallback | TL_keyboardButtonRequestPhone | TL_keyboardButtonRequestGeoLocation | TL_keyboardButtonSwitchInline | TL_keyboardButtonGame | TL_keyboardButtonBuy | TL_keyboardButtonURLAuth | TL_inputKeyboardButtonURLAuth | TL_keyboardButtonRequestPoll | TL_inputKeyboardButtonUserProfile | TL_keyboardButtonUserProfile | TL_keyboardButtonWebView | TL_keyboardButtonSimpleWebView | TL_keyboardButtonRequestPeer | TL_inputKeyboardButtonRequestPeer
+	Buttons []TL // KeyboardButton: TL_keyboardButton | TL_keyboardButtonURL | TL_keyboardButtonCallback | TL_keyboardButtonRequestPhone | TL_keyboardButtonRequestGeoLocation | TL_keyboardButtonSwitchInline | TL_keyboardButtonGame | TL_keyboardButtonBuy | TL_keyboardButtonURLAuth | TL_inputKeyboardButtonURLAuth | TL_keyboardButtonRequestPoll | TL_inputKeyboardButtonUserProfile | TL_keyboardButtonUserProfile | TL_keyboardButtonWebView | TL_keyboardButtonSimpleWebView | TL_keyboardButtonRequestPeer | TL_inputKeyboardButtonRequestPeer | TL_keyboardButtonCopy
 }
 
 // Constructs ReplyMarkup
@@ -7649,6 +7690,12 @@ type TL_payments_paymentFormStars struct {
 	Photo       TL // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
 	Invoice     TL_invoice
 	Users       []TL // User: TL_userEmpty | TL_user
+}
+
+// Constructs payments.PaymentForm
+type TL_payments_paymentFormStarGift struct {
+	FormID  int64
+	Invoice TL_invoice
 }
 
 // Constructs payments.ValidatedRequestedInfo
@@ -10103,6 +10150,14 @@ type TL_inputInvoiceChatInviteSubscription struct {
 	Hash string
 }
 
+// Constructs InputInvoice
+type TL_inputInvoiceStarGift struct {
+	HideName bool
+	UserID   TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	GiftID   int64
+	Message  *TL_textWithEntities // (optional)
+}
+
 // Constructs payments.ExportedInvoice
 type TL_payments_exportedInvoice struct {
 	URL string
@@ -10146,6 +10201,7 @@ type TL_inputStorePaymentPremiumGiftCode struct {
 	BoostPeer TL   // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Currency  string
 	Amount    int64
+	Message   *TL_textWithEntities // (optional)
 }
 
 // Constructs InputStorePaymentPurpose
@@ -11638,6 +11694,10 @@ type TL_starsTransactionPeer struct {
 type TL_starsTransactionPeerAds struct {
 }
 
+// Constructs StarsTransactionPeer
+type TL_starsTransactionPeerAPI struct {
+}
+
 // Constructs StarsTopupOption
 type TL_starsTopupOption struct {
 	Extended     bool
@@ -11657,17 +11717,19 @@ type TL_starsTransaction struct {
 	ID                 string
 	Stars              int64
 	Date               int32
-	Peer               TL      // StarsTransactionPeer: TL_starsTransactionPeerUnsupported | TL_starsTransactionPeerAppStore | TL_starsTransactionPeerPlayMarket | TL_starsTransactionPeerPremiumBot | TL_starsTransactionPeerFragment | TL_starsTransactionPeer | TL_starsTransactionPeerAds
-	Title              *string // (optional)
-	Description        *string // (optional)
-	Photo              TL      // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
-	TransactionDate    *int32  // (optional)
-	TransactionURL     *string // (optional)
-	BotPayload         []byte  // (optional)
-	MsgID              *int32  // (optional)
-	ExtendedMedia      []TL    // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway | TL_messageMediaGiveawayResults | TL_messageMediaPaidMedia
-	SubscriptionPeriod *int32  // (optional)
-	GiveawayPostID     *int32  // (optional)
+	Peer               TL           // StarsTransactionPeer: TL_starsTransactionPeerUnsupported | TL_starsTransactionPeerAppStore | TL_starsTransactionPeerPlayMarket | TL_starsTransactionPeerPremiumBot | TL_starsTransactionPeerFragment | TL_starsTransactionPeer | TL_starsTransactionPeerAds | TL_starsTransactionPeerAPI
+	Title              *string      // (optional)
+	Description        *string      // (optional)
+	Photo              TL           // (optional) WebDocument: TL_webDocument | TL_webDocumentNoProxy
+	TransactionDate    *int32       // (optional)
+	TransactionURL     *string      // (optional)
+	BotPayload         []byte       // (optional)
+	MsgID              *int32       // (optional)
+	ExtendedMedia      []TL         // (optional) MessageMedia: TL_messageMediaEmpty | TL_messageMediaPhoto | TL_messageMediaGeo | TL_messageMediaContact | TL_messageMediaUnsupported | TL_messageMediaDocument | TL_messageMediaWebPage | TL_messageMediaVenue | TL_messageMediaGame | TL_messageMediaInvoice | TL_messageMediaGeoLive | TL_messageMediaPoll | TL_messageMediaDice | TL_messageMediaStory | TL_messageMediaGiveaway | TL_messageMediaGiveawayResults | TL_messageMediaPaidMedia
+	SubscriptionPeriod *int32       // (optional)
+	GiveawayPostID     *int32       // (optional)
+	Stargift           *TL_starGift // (optional)
+	FloodskipNumber    *int32       // (optional)
 }
 
 // Constructs payments.StarsStatus
@@ -11808,6 +11870,72 @@ type TL_starsGiveawayWinnersOption struct {
 	Default      bool
 	Users        int32
 	PerUserStars int64
+}
+
+// Constructs StarGift
+type TL_starGift struct {
+	Limited             bool
+	SoldOut             bool
+	ID                  int64
+	Sticker             TL // Document: TL_documentEmpty | TL_document
+	Stars               int64
+	AvailabilityRemains *int32 // (optional)
+	AvailabilityTotal   *int32 // (optional)
+	ConvertStars        int64
+	FirstSaleDate       *int32 // (optional)
+	LastSaleDate        *int32 // (optional)
+}
+
+// Constructs payments.StarGifts
+type TL_payments_starGiftsNotModified struct {
+}
+
+// Constructs payments.StarGifts
+type TL_payments_starGifts struct {
+	Hash  int32
+	Gifts []TL_starGift
+}
+
+// Constructs UserStarGift
+type TL_userStarGift struct {
+	NameHidden   bool
+	Unsaved      bool
+	FromID       *int64 // (optional)
+	Date         int32
+	Gift         TL_starGift
+	Message      *TL_textWithEntities // (optional)
+	MsgID        *int32               // (optional)
+	ConvertStars *int64               // (optional)
+}
+
+// Constructs payments.UserStarGifts
+type TL_payments_userStarGifts struct {
+	Count      int32
+	Gifts      []TL_userStarGift
+	NextOffset *string // (optional)
+	Users      []TL    // User: TL_userEmpty | TL_user
+}
+
+// Constructs MessageReportOption
+type TL_messageReportOption struct {
+	Text   string
+	Option []byte
+}
+
+// Constructs ReportResult
+type TL_reportResultChooseOption struct {
+	Title   string
+	Options []TL_messageReportOption
+}
+
+// Constructs ReportResult
+type TL_reportResultAddComment struct {
+	Optional bool
+	Option   []byte
+}
+
+// Constructs ReportResult
+type TL_reportResultReported struct {
 }
 
 // Returns response to Query
@@ -12913,6 +13041,7 @@ type TL_messages_sendMessage struct {
 	Noforwards             bool
 	UpdateStickersetsOrder bool
 	InvertMedia            bool
+	AllowPaidFloodskip     bool
 	Peer                   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ReplyTo                TL // (optional) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	Message                string
@@ -12933,6 +13062,7 @@ type TL_messages_sendMedia struct {
 	Noforwards             bool
 	UpdateStickersetsOrder bool
 	InvertMedia            bool
+	AllowPaidFloodskip     bool
 	Peer                   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ReplyTo                TL // (optional) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	Media                  TL // InputMedia: TL_inputMediaEmpty | TL_inputMediaUploadedPhoto | TL_inputMediaPhoto | TL_inputMediaGeoPoint | TL_inputMediaContact | TL_inputMediaUploadedDocument | TL_inputMediaDocument | TL_inputMediaVenue | TL_inputMediaPhotoExternal | TL_inputMediaDocumentExternal | TL_inputMediaGame | TL_inputMediaInvoice | TL_inputMediaGeoLive | TL_inputMediaPoll | TL_inputMediaDice | TL_inputMediaStory | TL_inputMediaWebPage | TL_inputMediaPaidMedia
@@ -12954,6 +13084,7 @@ type TL_messages_forwardMessages struct {
 	DropAuthor         bool
 	DropMediaCaptions  bool
 	Noforwards         bool
+	AllowPaidFloodskip bool
 	FromPeer           TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID                 []int32
 	RandomID           []int64
@@ -12974,11 +13105,11 @@ type TL_messages_getPeerSettings struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
-// Returns Bool: TL_boolFalse | TL_boolTrue
+// Returns ReportResult: TL_reportResultChooseOption | TL_reportResultAddComment | TL_reportResultReported
 type TL_messages_report struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID      []int32
-	Reason  TL // ReportReason: TL_inputReportReasonSpam | TL_inputReportReasonViolence | TL_inputReportReasonPornography | TL_inputReportReasonChildAbuse | TL_inputReportReasonOther | TL_inputReportReasonCopyright | TL_inputReportReasonGeoIrrelevant | TL_inputReportReasonFake | TL_inputReportReasonIllegalDrugs | TL_inputReportReasonPersonalDetails
+	Option  []byte
 	Message string
 }
 
@@ -13510,6 +13641,7 @@ type TL_messages_sendMultiMedia struct {
 	Noforwards             bool
 	UpdateStickersetsOrder bool
 	InvertMedia            bool
+	AllowPaidFloodskip     bool
 	Peer                   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ReplyTo                TL // (optional) InputReplyTo: TL_inputReplyToMessage | TL_inputReplyToStory
 	MultiMedia             []TL_inputSingleMedia
@@ -14362,6 +14494,32 @@ type TL_messages_togglePaidReactionPrivacy struct {
 type TL_messages_getPaidReactionPrivacy struct {
 }
 
+// Returns Bool: TL_boolFalse | TL_boolTrue
+type TL_messages_viewSponsoredMessage struct {
+	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	RandomID []byte
+}
+
+// Returns Bool: TL_boolFalse | TL_boolTrue
+type TL_messages_clickSponsoredMessage struct {
+	Media      bool
+	Fullscreen bool
+	Peer       TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	RandomID   []byte
+}
+
+// Returns channels.SponsoredMessageReportResult: TL_channels_sponsoredMessageReportResultChooseOption | TL_channels_sponsoredMessageReportResultAdsHidden | TL_channels_sponsoredMessageReportResultReported
+type TL_messages_reportSponsoredMessage struct {
+	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	RandomID []byte
+	Option   []byte
+}
+
+// Returns messages.SponsoredMessages: TL_messages_sponsoredMessages | TL_messages_sponsoredMessagesEmpty
+type TL_messages_getSponsoredMessages struct {
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+}
+
 // Returns updates.State: TL_updates_state
 type TL_updates_getState struct {
 }
@@ -14828,17 +14986,6 @@ type TL_channels_convertToGigagroup struct {
 	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 }
 
-// Returns Bool: TL_boolFalse | TL_boolTrue
-type TL_channels_viewSponsoredMessage struct {
-	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	RandomID []byte
-}
-
-// Returns messages.SponsoredMessages: TL_messages_sponsoredMessages | TL_messages_sponsoredMessagesEmpty
-type TL_channels_getSponsoredMessages struct {
-	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-}
-
 // Returns channels.SendAsPeers: TL_channels_sendAsPeers
 type TL_channels_getSendAs struct {
 	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
@@ -14960,12 +15107,6 @@ type TL_channels_toggleParticipantsHidden struct {
 	Enabled bool
 }
 
-// Returns Bool: TL_boolFalse | TL_boolTrue
-type TL_channels_clickSponsoredMessage struct {
-	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	RandomID []byte
-}
-
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
 type TL_channels_updateColor struct {
 	ForProfile        bool
@@ -15001,13 +15142,6 @@ type TL_channels_setBoostsToUnblockRestrictions struct {
 type TL_channels_setEmojiStickers struct {
 	Channel    TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
 	Stickerset TL // InputStickerSet: TL_inputStickerSetEmpty | TL_inputStickerSetID | TL_inputStickerSetShortName | TL_inputStickerSetAnimatedEmoji | TL_inputStickerSetDice | TL_inputStickerSetAnimatedEmojiAnimations | TL_inputStickerSetPremiumGifts | TL_inputStickerSetEmojiGenericAnimations | TL_inputStickerSetEmojiDefaultStatuses | TL_inputStickerSetEmojiDefaultTopicIcons | TL_inputStickerSetEmojiChannelDefaultStatuses
-}
-
-// Returns channels.SponsoredMessageReportResult: TL_channels_sponsoredMessageReportResultChooseOption | TL_channels_sponsoredMessageReportResultAdsHidden | TL_channels_sponsoredMessageReportResultReported
-type TL_channels_reportSponsoredMessage struct {
-	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	RandomID []byte
-	Option   []byte
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -15168,9 +15302,9 @@ type TL_bots_getPreviewMedias struct {
 	Bot TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
 }
 
-// Returns payments.PaymentForm: TL_payments_paymentForm | TL_payments_paymentFormStars
+// Returns payments.PaymentForm: TL_payments_paymentForm | TL_payments_paymentFormStars | TL_payments_paymentFormStarGift
 type TL_payments_getPaymentForm struct {
-	Invoice     TL           // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode | TL_inputInvoiceStars | TL_inputInvoiceChatInviteSubscription
+	Invoice     TL           // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode | TL_inputInvoiceStars | TL_inputInvoiceChatInviteSubscription | TL_inputInvoiceStarGift
 	ThemeParams *TL_dataJSON // (optional)
 }
 
@@ -15183,14 +15317,14 @@ type TL_payments_getPaymentReceipt struct {
 // Returns payments.ValidatedRequestedInfo: TL_payments_validatedRequestedInfo
 type TL_payments_validateRequestedInfo struct {
 	Save    bool
-	Invoice TL // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode | TL_inputInvoiceStars | TL_inputInvoiceChatInviteSubscription
+	Invoice TL // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode | TL_inputInvoiceStars | TL_inputInvoiceChatInviteSubscription | TL_inputInvoiceStarGift
 	Info    TL_paymentRequestedInfo
 }
 
 // Returns payments.PaymentResult: TL_payments_paymentResult | TL_payments_paymentVerificationNeeded
 type TL_payments_sendPaymentForm struct {
 	FormID           int64
-	Invoice          TL      // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode | TL_inputInvoiceStars | TL_inputInvoiceChatInviteSubscription
+	Invoice          TL      // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode | TL_inputInvoiceStars | TL_inputInvoiceChatInviteSubscription | TL_inputInvoiceStarGift
 	RequestedInfoID  *string // (optional)
 	ShippingOptionID *string // (optional)
 	Credentials      TL      // InputPaymentCredentials: TL_inputPaymentCredentialsSaved | TL_inputPaymentCredentials | TL_inputPaymentCredentialsApplePay | TL_inputPaymentCredentialsGooglePay
@@ -15285,7 +15419,7 @@ type TL_payments_getStarsTransactions struct {
 // Returns payments.PaymentResult: TL_payments_paymentResult | TL_payments_paymentVerificationNeeded
 type TL_payments_sendStarsForm struct {
 	FormID  int64
-	Invoice TL // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode | TL_inputInvoiceStars | TL_inputInvoiceChatInviteSubscription
+	Invoice TL // InputInvoice: TL_inputInvoiceMessage | TL_inputInvoiceSlug | TL_inputInvoicePremiumGiftCode | TL_inputInvoiceStars | TL_inputInvoiceChatInviteSubscription | TL_inputInvoiceStarGift
 }
 
 // Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
@@ -15345,6 +15479,31 @@ type TL_payments_fulfillStarsSubscription struct {
 
 // Returns Vector<StarsGiveawayOption>: TL_starsGiveawayOption
 type TL_payments_getStarsGiveawayOptions struct {
+}
+
+// Returns payments.StarGifts: TL_payments_starGiftsNotModified | TL_payments_starGifts
+type TL_payments_getStarGifts struct {
+	Hash int32
+}
+
+// Returns payments.UserStarGifts: TL_payments_userStarGifts
+type TL_payments_getUserStarGifts struct {
+	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	Offset string
+	Limit  int32
+}
+
+// Returns Bool: TL_boolFalse | TL_boolTrue
+type TL_payments_saveStarGift struct {
+	Unsave bool
+	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	MsgID  int32
+}
+
+// Returns Bool: TL_boolFalse | TL_boolTrue
+type TL_payments_convertStarGift struct {
+	UserID TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
+	MsgID  int32
 }
 
 // Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
@@ -15714,21 +15873,21 @@ type TL_stats_getStoryPublicForwards struct {
 
 // Returns stats.BroadcastRevenueStats: TL_stats_broadcastRevenueStats
 type TL_stats_getBroadcastRevenueStats struct {
-	Dark    bool
-	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
+	Dark bool
+	Peer TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 }
 
 // Returns stats.BroadcastRevenueWithdrawalUrl: TL_stats_broadcastRevenueWithdrawalURL
 type TL_stats_getBroadcastRevenueWithdrawalURL struct {
-	Channel  TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
+	Peer     TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Password TL // InputCheckPasswordSRP: TL_inputCheckPasswordEmpty | TL_inputCheckPasswordSRP
 }
 
 // Returns stats.BroadcastRevenueTransactions: TL_stats_broadcastRevenueTransactions
 type TL_stats_getBroadcastRevenueTransactions struct {
-	Channel TL // InputChannel: TL_inputChannelEmpty | TL_inputChannel | TL_inputChannelFromMessage
-	Offset  int32
-	Limit   int32
+	Peer   TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Offset int32
+	Limit  int32
 }
 
 // Returns chatlists.ExportedChatlistInvite: TL_chatlists_exportedChatlistInvite
@@ -15909,11 +16068,11 @@ type TL_stories_exportStoryLink struct {
 	ID   int32
 }
 
-// Returns Bool: TL_boolFalse | TL_boolTrue
+// Returns ReportResult: TL_reportResultChooseOption | TL_reportResultAddComment | TL_reportResultReported
 type TL_stories_report struct {
 	Peer    TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	ID      []int32
-	Reason  TL // ReportReason: TL_inputReportReasonSpam | TL_inputReportReasonViolence | TL_inputReportReasonPornography | TL_inputReportReasonChildAbuse | TL_inputReportReasonOther | TL_inputReportReasonCopyright | TL_inputReportReasonGeoIrrelevant | TL_inputReportReasonFake | TL_inputReportReasonIllegalDrugs | TL_inputReportReasonPersonalDetails
+	Option  []byte
 	Message string
 }
 
@@ -15975,6 +16134,7 @@ type TL_stories_togglePinnedToTop struct {
 type TL_stories_searchPosts struct {
 	Hashtag *string // (optional)
 	Area    TL      // (optional) MediaArea: TL_mediaAreaVenue | TL_inputMediaAreaVenue | TL_mediaAreaGeoPoint | TL_mediaAreaSuggestedReaction | TL_mediaAreaChannelPost | TL_inputMediaAreaChannelPost | TL_mediaAreaURL | TL_mediaAreaWeather
+	Peer    TL      // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	Offset  string
 	Limit   int32
 }
@@ -18309,6 +18469,9 @@ func (e TL_message) encode() []byte {
 	if e.Offline {
 		flags2 |= (1 << 1)
 	}
+	if e.VideoProcessingPending {
+		flags2 |= (1 << 4)
+	}
 	if e.FromID != nil {
 		flags |= (1 << 8)
 	}
@@ -18573,7 +18736,7 @@ func (e TL_messageMediaDocument) encode() []byte {
 	if e.Document != nil {
 		flags |= (1 << 0)
 	}
-	if e.AltDocument != nil {
+	if e.AltDocuments != nil {
 		flags |= (1 << 5)
 	}
 	if e.TTLSeconds != nil {
@@ -18585,8 +18748,8 @@ func (e TL_messageMediaDocument) encode() []byte {
 	if e.Document != nil {
 		x.Object(e.Document)
 	}
-	if e.AltDocument != nil {
-		x.Object(e.AltDocument)
+	if e.AltDocuments != nil {
+		EncodeBuf_GenericVector(x, e.AltDocuments)
 	}
 	if e.TTLSeconds != nil {
 		x.Int(*e.TTLSeconds)
@@ -19145,6 +19308,9 @@ func (e TL_messageActionGiftPremium) encode() []byte {
 	if e.CryptoAmount != nil {
 		flags |= (1 << 0)
 	}
+	if e.Message != nil {
+		flags |= (1 << 1)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionGiftPremium)
 	x.Int(flags)
@@ -19156,6 +19322,9 @@ func (e TL_messageActionGiftPremium) encode() []byte {
 	}
 	if e.CryptoAmount != nil {
 		x.Long(*e.CryptoAmount)
+	}
+	if e.Message != nil {
+		x.Object(e.Message)
 	}
 	return x.buf
 }
@@ -19261,6 +19430,9 @@ func (e TL_messageActionGiftCode) encode() []byte {
 	if e.CryptoAmount != nil {
 		flags |= (1 << 3)
 	}
+	if e.Message != nil {
+		flags |= (1 << 4)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionGiftCode)
 	x.Int(flags)
@@ -19280,6 +19452,9 @@ func (e TL_messageActionGiftCode) encode() []byte {
 	}
 	if e.CryptoAmount != nil {
 		x.Long(*e.CryptoAmount)
+	}
+	if e.Message != nil {
+		x.Object(e.Message)
 	}
 	return x.buf
 }
@@ -19385,6 +19560,31 @@ func (e TL_messageActionPrizeStars) encode() []byte {
 	x.String(e.TransactionID)
 	x.Object(e.BoostPeer)
 	x.Int(e.GiveawayMsgID)
+	return x.buf
+}
+
+func (e TL_messageActionStarGift) encode() []byte {
+	var flags int32
+	if e.NameHidden {
+		flags |= (1 << 0)
+	}
+	if e.Saved {
+		flags |= (1 << 2)
+	}
+	if e.Converted {
+		flags |= (1 << 3)
+	}
+	if e.Message != nil {
+		flags |= (1 << 1)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionStarGift)
+	x.Int(flags)
+	x.Object(e.Gift)
+	if e.Message != nil {
+		x.Object(e.Message)
+	}
+	x.Long(e.ConvertStars)
 	return x.buf
 }
 
@@ -20025,6 +20225,9 @@ func (e TL_userFull) encode() []byte {
 	if e.SponsoredEnabled {
 		flags2 |= (1 << 7)
 	}
+	if e.CanViewRevenue {
+		flags2 |= (1 << 9)
+	}
 	if e.About != nil {
 		flags |= (1 << 1)
 	}
@@ -20093,6 +20296,9 @@ func (e TL_userFull) encode() []byte {
 	}
 	if e.PersonalChannelMessage != nil {
 		flags2 |= (1 << 6)
+	}
+	if e.StargiftsCount != nil {
+		flags2 |= (1 << 8)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_userFull)
@@ -20170,6 +20376,9 @@ func (e TL_userFull) encode() []byte {
 	}
 	if e.PersonalChannelMessage != nil {
 		x.Int(*e.PersonalChannelMessage)
+	}
+	if e.StargiftsCount != nil {
+		x.Int(*e.StargiftsCount)
 	}
 	return x.buf
 }
@@ -21243,10 +21452,18 @@ func (e TL_updateNewScheduledMessage) encode() []byte {
 }
 
 func (e TL_updateDeleteScheduledMessages) encode() []byte {
+	var flags int32
+	if e.SentMessages != nil {
+		flags |= (1 << 0)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updateDeleteScheduledMessages)
+	x.Int(flags)
 	x.Object(e.Peer)
 	x.VectorInt(e.Messages)
+	if e.SentMessages != nil {
+		x.VectorInt(e.SentMessages)
+	}
 	return x.buf
 }
 
@@ -23232,6 +23449,9 @@ func (e TL_documentAttributeVideo) encode() []byte {
 	if e.VideoStartTS != nil {
 		flags |= (1 << 4)
 	}
+	if e.VideoCodec != nil {
+		flags |= (1 << 5)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_documentAttributeVideo)
 	x.Int(flags)
@@ -23243,6 +23463,9 @@ func (e TL_documentAttributeVideo) encode() []byte {
 	}
 	if e.VideoStartTS != nil {
 		x.Double(*e.VideoStartTS)
+	}
+	if e.VideoCodec != nil {
+		x.String(*e.VideoCodec)
 	}
 	return x.buf
 }
@@ -24226,6 +24449,14 @@ func (e TL_inputKeyboardButtonRequestPeer) encode() []byte {
 	x.Int(e.ButtonID)
 	x.Object(e.PeerType)
 	x.Int(e.MaxQuantity)
+	return x.buf
+}
+
+func (e TL_keyboardButtonCopy) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_keyboardButtonCopy)
+	x.String(e.Text)
+	x.String(e.CopyText)
 	return x.buf
 }
 
@@ -26799,6 +27030,14 @@ func (e TL_payments_paymentFormStars) encode() []byte {
 	}
 	x.Object(e.Invoice)
 	EncodeBuf_GenericVector(x, e.Users)
+	return x.buf
+}
+
+func (e TL_payments_paymentFormStarGift) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_paymentFormStarGift)
+	x.Long(e.FormID)
+	x.Object(e.Invoice)
 	return x.buf
 }
 
@@ -31210,6 +31449,25 @@ func (e TL_inputInvoiceChatInviteSubscription) encode() []byte {
 	return x.buf
 }
 
+func (e TL_inputInvoiceStarGift) encode() []byte {
+	var flags int32
+	if e.HideName {
+		flags |= (1 << 0)
+	}
+	if e.Message != nil {
+		flags |= (1 << 1)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputInvoiceStarGift)
+	x.Int(flags)
+	x.Object(e.UserID)
+	x.Long(e.GiftID)
+	if e.Message != nil {
+		x.Object(e.Message)
+	}
+	return x.buf
+}
+
 func (e TL_payments_exportedInvoice) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_exportedInvoice)
@@ -31282,6 +31540,9 @@ func (e TL_inputStorePaymentPremiumGiftCode) encode() []byte {
 	if e.BoostPeer != nil {
 		flags |= (1 << 0)
 	}
+	if e.Message != nil {
+		flags |= (1 << 1)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputStorePaymentPremiumGiftCode)
 	x.Int(flags)
@@ -31291,6 +31552,9 @@ func (e TL_inputStorePaymentPremiumGiftCode) encode() []byte {
 	}
 	x.String(e.Currency)
 	x.Long(e.Amount)
+	if e.Message != nil {
+		x.Object(e.Message)
+	}
 	return x.buf
 }
 
@@ -34148,6 +34412,12 @@ func (e TL_starsTransactionPeerAds) encode() []byte {
 	return x.buf
 }
 
+func (e TL_starsTransactionPeerAPI) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_starsTransactionPeerAPI)
+	return x.buf
+}
+
 func (e TL_starsTopupOption) encode() []byte {
 	var flags int32
 	if e.Extended {
@@ -34215,6 +34485,12 @@ func (e TL_starsTransaction) encode() []byte {
 	if e.GiveawayPostID != nil {
 		flags |= (1 << 13)
 	}
+	if e.Stargift != nil {
+		flags |= (1 << 14)
+	}
+	if e.FloodskipNumber != nil {
+		flags |= (1 << 15)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_starsTransaction)
 	x.Int(flags)
@@ -34251,6 +34527,12 @@ func (e TL_starsTransaction) encode() []byte {
 	}
 	if e.GiveawayPostID != nil {
 		x.Int(*e.GiveawayPostID)
+	}
+	if e.Stargift != nil {
+		x.Object(e.Stargift)
+	}
+	if e.FloodskipNumber != nil {
+		x.Int(*e.FloodskipNumber)
 	}
 	return x.buf
 }
@@ -34549,6 +34831,153 @@ func (e TL_starsGiveawayWinnersOption) encode() []byte {
 	x.Int(flags)
 	x.Int(e.Users)
 	x.Long(e.PerUserStars)
+	return x.buf
+}
+
+func (e TL_starGift) encode() []byte {
+	var flags int32
+	if e.Limited {
+		flags |= (1 << 0)
+	}
+	if e.SoldOut {
+		flags |= (1 << 1)
+	}
+	if e.AvailabilityRemains != nil {
+		flags |= (1 << 0)
+	}
+	if e.AvailabilityTotal != nil {
+		flags |= (1 << 0)
+	}
+	if e.FirstSaleDate != nil {
+		flags |= (1 << 1)
+	}
+	if e.LastSaleDate != nil {
+		flags |= (1 << 1)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_starGift)
+	x.Int(flags)
+	x.Long(e.ID)
+	x.Object(e.Sticker)
+	x.Long(e.Stars)
+	if e.AvailabilityRemains != nil {
+		x.Int(*e.AvailabilityRemains)
+	}
+	if e.AvailabilityTotal != nil {
+		x.Int(*e.AvailabilityTotal)
+	}
+	x.Long(e.ConvertStars)
+	if e.FirstSaleDate != nil {
+		x.Int(*e.FirstSaleDate)
+	}
+	if e.LastSaleDate != nil {
+		x.Int(*e.LastSaleDate)
+	}
+	return x.buf
+}
+
+func (e TL_payments_starGiftsNotModified) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_starGiftsNotModified)
+	return x.buf
+}
+
+func (e TL_payments_starGifts) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_starGifts)
+	x.Int(e.Hash)
+	EncodeBuf_GenericVector(x, e.Gifts)
+	return x.buf
+}
+
+func (e TL_userStarGift) encode() []byte {
+	var flags int32
+	if e.NameHidden {
+		flags |= (1 << 0)
+	}
+	if e.Unsaved {
+		flags |= (1 << 5)
+	}
+	if e.FromID != nil {
+		flags |= (1 << 1)
+	}
+	if e.Message != nil {
+		flags |= (1 << 2)
+	}
+	if e.MsgID != nil {
+		flags |= (1 << 3)
+	}
+	if e.ConvertStars != nil {
+		flags |= (1 << 4)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_userStarGift)
+	x.Int(flags)
+	if e.FromID != nil {
+		x.Long(*e.FromID)
+	}
+	x.Int(e.Date)
+	x.Object(e.Gift)
+	if e.Message != nil {
+		x.Object(e.Message)
+	}
+	if e.MsgID != nil {
+		x.Int(*e.MsgID)
+	}
+	if e.ConvertStars != nil {
+		x.Long(*e.ConvertStars)
+	}
+	return x.buf
+}
+
+func (e TL_payments_userStarGifts) encode() []byte {
+	var flags int32
+	if e.NextOffset != nil {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_userStarGifts)
+	x.Int(flags)
+	x.Int(e.Count)
+	EncodeBuf_GenericVector(x, e.Gifts)
+	if e.NextOffset != nil {
+		x.String(*e.NextOffset)
+	}
+	EncodeBuf_GenericVector(x, e.Users)
+	return x.buf
+}
+
+func (e TL_messageReportOption) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageReportOption)
+	x.String(e.Text)
+	x.StringBytes(e.Option)
+	return x.buf
+}
+
+func (e TL_reportResultChooseOption) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_reportResultChooseOption)
+	x.String(e.Title)
+	EncodeBuf_GenericVector(x, e.Options)
+	return x.buf
+}
+
+func (e TL_reportResultAddComment) encode() []byte {
+	var flags int32
+	if e.Optional {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_reportResultAddComment)
+	x.Int(flags)
+	x.StringBytes(e.Option)
+	return x.buf
+}
+
+func (e TL_reportResultReported) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_reportResultReported)
 	return x.buf
 }
 
@@ -36441,6 +36870,9 @@ func (e TL_messages_sendMessage) encode() []byte {
 	if e.InvertMedia {
 		flags |= (1 << 16)
 	}
+	if e.AllowPaidFloodskip {
+		flags |= (1 << 19)
+	}
 	if e.ReplyTo != nil {
 		flags |= (1 << 0)
 	}
@@ -36511,6 +36943,9 @@ func (e TL_messages_sendMedia) encode() []byte {
 	}
 	if e.InvertMedia {
 		flags |= (1 << 16)
+	}
+	if e.AllowPaidFloodskip {
+		flags |= (1 << 19)
 	}
 	if e.ReplyTo != nil {
 		flags |= (1 << 0)
@@ -36584,6 +37019,9 @@ func (e TL_messages_forwardMessages) encode() []byte {
 	if e.Noforwards {
 		flags |= (1 << 14)
 	}
+	if e.AllowPaidFloodskip {
+		flags |= (1 << 19)
+	}
 	if e.TopMsgID != nil {
 		flags |= (1 << 9)
 	}
@@ -36637,7 +37075,7 @@ func (e TL_messages_report) encode() []byte {
 	x.UInt(CRC_messages_report)
 	x.Object(e.Peer)
 	x.VectorInt(e.ID)
-	x.Object(e.Reason)
+	x.StringBytes(e.Option)
 	x.String(e.Message)
 	return x.buf
 }
@@ -37654,6 +38092,9 @@ func (e TL_messages_sendMultiMedia) encode() []byte {
 	}
 	if e.InvertMedia {
 		flags |= (1 << 16)
+	}
+	if e.AllowPaidFloodskip {
+		flags |= (1 << 19)
 	}
 	if e.ReplyTo != nil {
 		flags |= (1 << 0)
@@ -39234,6 +39675,46 @@ func (e TL_messages_getPaidReactionPrivacy) encode() []byte {
 	return x.buf
 }
 
+func (e TL_messages_viewSponsoredMessage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_viewSponsoredMessage)
+	x.Object(e.Peer)
+	x.StringBytes(e.RandomID)
+	return x.buf
+}
+
+func (e TL_messages_clickSponsoredMessage) encode() []byte {
+	var flags int32
+	if e.Media {
+		flags |= (1 << 0)
+	}
+	if e.Fullscreen {
+		flags |= (1 << 1)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_clickSponsoredMessage)
+	x.Int(flags)
+	x.Object(e.Peer)
+	x.StringBytes(e.RandomID)
+	return x.buf
+}
+
+func (e TL_messages_reportSponsoredMessage) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_reportSponsoredMessage)
+	x.Object(e.Peer)
+	x.StringBytes(e.RandomID)
+	x.StringBytes(e.Option)
+	return x.buf
+}
+
+func (e TL_messages_getSponsoredMessages) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messages_getSponsoredMessages)
+	x.Object(e.Peer)
+	return x.buf
+}
+
 func (e TL_updates_getState) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_updates_getState)
@@ -40004,21 +40485,6 @@ func (e TL_channels_convertToGigagroup) encode() []byte {
 	return x.buf
 }
 
-func (e TL_channels_viewSponsoredMessage) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_channels_viewSponsoredMessage)
-	x.Object(e.Channel)
-	x.StringBytes(e.RandomID)
-	return x.buf
-}
-
-func (e TL_channels_getSponsoredMessages) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_channels_getSponsoredMessages)
-	x.Object(e.Channel)
-	return x.buf
-}
-
 func (e TL_channels_getSendAs) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_channels_getSendAs)
@@ -40226,14 +40692,6 @@ func (e TL_channels_toggleParticipantsHidden) encode() []byte {
 	return x.buf
 }
 
-func (e TL_channels_clickSponsoredMessage) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_channels_clickSponsoredMessage)
-	x.Object(e.Channel)
-	x.StringBytes(e.RandomID)
-	return x.buf
-}
-
 func (e TL_channels_updateColor) encode() []byte {
 	var flags int32
 	if e.ForProfile {
@@ -40301,15 +40759,6 @@ func (e TL_channels_setEmojiStickers) encode() []byte {
 	x.UInt(CRC_channels_setEmojiStickers)
 	x.Object(e.Channel)
 	x.Object(e.Stickerset)
-	return x.buf
-}
-
-func (e TL_channels_reportSponsoredMessage) encode() []byte {
-	x := NewEncodeBuf(512)
-	x.UInt(CRC_channels_reportSponsoredMessage)
-	x.Object(e.Channel)
-	x.StringBytes(e.RandomID)
-	x.StringBytes(e.Option)
 	return x.buf
 }
 
@@ -40757,10 +41206,8 @@ func (e TL_payments_getStarsTransactions) encode() []byte {
 }
 
 func (e TL_payments_sendStarsForm) encode() []byte {
-	var flags int32
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_sendStarsForm)
-	x.Int(flags)
 	x.Long(e.FormID)
 	x.Object(e.Invoice)
 	return x.buf
@@ -40864,6 +41311,43 @@ func (e TL_payments_fulfillStarsSubscription) encode() []byte {
 func (e TL_payments_getStarsGiveawayOptions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_payments_getStarsGiveawayOptions)
+	return x.buf
+}
+
+func (e TL_payments_getStarGifts) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_getStarGifts)
+	x.Int(e.Hash)
+	return x.buf
+}
+
+func (e TL_payments_getUserStarGifts) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_getUserStarGifts)
+	x.Object(e.UserID)
+	x.String(e.Offset)
+	x.Int(e.Limit)
+	return x.buf
+}
+
+func (e TL_payments_saveStarGift) encode() []byte {
+	var flags int32
+	if e.Unsave {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_saveStarGift)
+	x.Int(flags)
+	x.Object(e.UserID)
+	x.Int(e.MsgID)
+	return x.buf
+}
+
+func (e TL_payments_convertStarGift) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_convertStarGift)
+	x.Object(e.UserID)
+	x.Int(e.MsgID)
 	return x.buf
 }
 
@@ -41518,14 +42002,14 @@ func (e TL_stats_getBroadcastRevenueStats) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stats_getBroadcastRevenueStats)
 	x.Int(flags)
-	x.Object(e.Channel)
+	x.Object(e.Peer)
 	return x.buf
 }
 
 func (e TL_stats_getBroadcastRevenueWithdrawalURL) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stats_getBroadcastRevenueWithdrawalURL)
-	x.Object(e.Channel)
+	x.Object(e.Peer)
 	x.Object(e.Password)
 	return x.buf
 }
@@ -41533,7 +42017,7 @@ func (e TL_stats_getBroadcastRevenueWithdrawalURL) encode() []byte {
 func (e TL_stats_getBroadcastRevenueTransactions) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stats_getBroadcastRevenueTransactions)
-	x.Object(e.Channel)
+	x.Object(e.Peer)
 	x.Int(e.Offset)
 	x.Int(e.Limit)
 	return x.buf
@@ -41875,7 +42359,7 @@ func (e TL_stories_report) encode() []byte {
 	x.UInt(CRC_stories_report)
 	x.Object(e.Peer)
 	x.VectorInt(e.ID)
-	x.Object(e.Reason)
+	x.StringBytes(e.Option)
 	x.String(e.Message)
 	return x.buf
 }
@@ -41984,6 +42468,9 @@ func (e TL_stories_searchPosts) encode() []byte {
 	if e.Area != nil {
 		flags |= (1 << 1)
 	}
+	if e.Peer != nil {
+		flags |= (1 << 2)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_stories_searchPosts)
 	x.Int(flags)
@@ -41992,6 +42479,9 @@ func (e TL_stories_searchPosts) encode() []byte {
 	}
 	if e.Area != nil {
 		x.Object(e.Area)
+	}
+	if e.Peer != nil {
+		x.Object(e.Peer)
 	}
 	x.String(e.Offset)
 	x.Int(e.Limit)
@@ -43720,6 +44210,22 @@ func (e TL_messages_getPaidReactionPrivacy) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_messages_viewSponsoredMessage) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_clickSponsoredMessage) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_reportSponsoredMessage) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_messages_getSponsoredMessages) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_updates_getState) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -44024,14 +44530,6 @@ func (e TL_channels_convertToGigagroup) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
-func (e TL_channels_viewSponsoredMessage) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
-func (e TL_channels_getSponsoredMessages) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
 func (e TL_channels_getSendAs) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -44104,10 +44602,6 @@ func (e TL_channels_toggleParticipantsHidden) decodeResponse(dbuf *DecodeBuf) TL
 	return dbuf.Object()
 }
 
-func (e TL_channels_clickSponsoredMessage) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
 func (e TL_channels_updateColor) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -44129,10 +44623,6 @@ func (e TL_channels_setBoostsToUnblockRestrictions) decodeResponse(dbuf *DecodeB
 }
 
 func (e TL_channels_setEmojiStickers) decodeResponse(dbuf *DecodeBuf) TL {
-	return dbuf.Object()
-}
-
-func (e TL_channels_reportSponsoredMessage) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -44354,6 +44844,22 @@ func (e TL_payments_fulfillStarsSubscription) decodeResponse(dbuf *DecodeBuf) TL
 
 func (e TL_payments_getStarsGiveawayOptions) decodeResponse(dbuf *DecodeBuf) TL {
 	return VectorObject(dbuf.Vector())
+}
+
+func (e TL_payments_getStarGifts) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_getUserStarGifts) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_saveStarGift) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_convertStarGift) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
 }
 
 func (e TL_stickers_createStickerSet) decodeResponse(dbuf *DecodeBuf) TL {
@@ -46823,6 +47329,7 @@ func decode_body_TL_message(m *DecodeBuf) TL {
 	tl.InvertMedia = flags&(1<<27) != 0
 	flags2 := m.Int()
 	tl.Offline = flags2&(1<<1) != 0
+	tl.VideoProcessingPending = flags2&(1<<4) != 0
 	tl.ID = m.Int()
 	if flags&(1<<8) != 0 {
 		tl.FromID = m.Object()
@@ -47000,7 +47507,7 @@ func decode_body_TL_messageMediaDocument(m *DecodeBuf) TL {
 		tl.Document = m.Object()
 	}
 	if flags&(1<<5) != 0 {
-		tl.AltDocument = m.Object()
+		tl.AltDocuments = m.Vector()
 	}
 	if flags&(1<<2) != 0 {
 		tl.TTLSeconds = Ref(m.Int())
@@ -47579,6 +48086,9 @@ func decode_body_TL_messageActionGiftPremium(m *DecodeBuf) TL {
 	if flags&(1<<0) != 0 {
 		tl.CryptoAmount = Ref(m.Long())
 	}
+	if flags&(1<<1) != 0 {
+		tl.Message = Ref(decode_TL_textWithEntities(m).(TL_textWithEntities))
+	}
 	return tl
 }
 
@@ -47678,6 +48188,9 @@ func decode_body_TL_messageActionGiftCode(m *DecodeBuf) TL {
 	}
 	if flags&(1<<3) != 0 {
 		tl.CryptoAmount = Ref(m.Long())
+	}
+	if flags&(1<<4) != 0 {
+		tl.Message = Ref(decode_TL_textWithEntities(m).(TL_textWithEntities))
 	}
 	return tl
 }
@@ -47780,6 +48293,24 @@ func decode_body_TL_messageActionPrizeStars(m *DecodeBuf) TL {
 	tl.TransactionID = m.String()
 	tl.BoostPeer = m.Object()
 	tl.GiveawayMsgID = m.Int()
+	return tl
+}
+
+func decode_TL_messageActionStarGift(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionStarGift)
+	return decode_body_TL_messageActionStarGift(m)
+}
+func decode_body_TL_messageActionStarGift(m *DecodeBuf) TL {
+	tl := TL_messageActionStarGift{}
+	flags := m.Int()
+	tl.NameHidden = flags&(1<<0) != 0
+	tl.Saved = flags&(1<<2) != 0
+	tl.Converted = flags&(1<<3) != 0
+	tl.Gift = decode_TL_starGift(m).(TL_starGift)
+	if flags&(1<<1) != 0 {
+		tl.Message = Ref(decode_TL_textWithEntities(m).(TL_textWithEntities))
+	}
+	tl.ConvertStars = m.Long()
 	return tl
 }
 
@@ -48340,6 +48871,7 @@ func decode_body_TL_userFull(m *DecodeBuf) TL {
 	tl.ReadDatesPrivate = flags&(1<<30) != 0
 	flags2 := m.Int()
 	tl.SponsoredEnabled = flags2&(1<<7) != 0
+	tl.CanViewRevenue = flags2&(1<<9) != 0
 	tl.ID = m.Long()
 	if flags&(1<<1) != 0 {
 		tl.About = Ref(m.String())
@@ -48412,6 +48944,9 @@ func decode_body_TL_userFull(m *DecodeBuf) TL {
 	}
 	if flags2&(1<<6) != 0 {
 		tl.PersonalChannelMessage = Ref(m.Int())
+	}
+	if flags2&(1<<8) != 0 {
+		tl.StargiftsCount = Ref(m.Int())
 	}
 	return tl
 }
@@ -49675,8 +50210,12 @@ func decode_TL_updateDeleteScheduledMessages(m *DecodeBuf) TL {
 }
 func decode_body_TL_updateDeleteScheduledMessages(m *DecodeBuf) TL {
 	tl := TL_updateDeleteScheduledMessages{}
+	flags := m.Int()
 	tl.Peer = m.Object()
 	tl.Messages = m.VectorInt()
+	if flags&(1<<0) != 0 {
+		tl.SentMessages = m.VectorInt()
+	}
 	return tl
 }
 
@@ -51977,6 +52516,9 @@ func decode_body_TL_documentAttributeVideo(m *DecodeBuf) TL {
 	if flags&(1<<4) != 0 {
 		tl.VideoStartTS = Ref(m.Double())
 	}
+	if flags&(1<<5) != 0 {
+		tl.VideoCodec = Ref(m.String())
+	}
 	return tl
 }
 
@@ -52852,6 +53394,17 @@ func decode_body_TL_inputKeyboardButtonRequestPeer(m *DecodeBuf) TL {
 	tl.ButtonID = m.Int()
 	tl.PeerType = m.Object()
 	tl.MaxQuantity = m.Int()
+	return tl
+}
+
+func decode_TL_keyboardButtonCopy(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_keyboardButtonCopy)
+	return decode_body_TL_keyboardButtonCopy(m)
+}
+func decode_body_TL_keyboardButtonCopy(m *DecodeBuf) TL {
+	tl := TL_keyboardButtonCopy{}
+	tl.Text = m.String()
+	tl.CopyText = m.String()
 	return tl
 }
 
@@ -55504,6 +56057,17 @@ func decode_body_TL_payments_paymentFormStars(m *DecodeBuf) TL {
 	}
 	tl.Invoice = decode_TL_invoice(m).(TL_invoice)
 	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_payments_paymentFormStarGift(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_paymentFormStarGift)
+	return decode_body_TL_payments_paymentFormStarGift(m)
+}
+func decode_body_TL_payments_paymentFormStarGift(m *DecodeBuf) TL {
+	tl := TL_payments_paymentFormStarGift{}
+	tl.FormID = m.Long()
+	tl.Invoice = decode_TL_invoice(m).(TL_invoice)
 	return tl
 }
 
@@ -60129,6 +60693,22 @@ func decode_body_TL_inputInvoiceChatInviteSubscription(m *DecodeBuf) TL {
 	return tl
 }
 
+func decode_TL_inputInvoiceStarGift(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputInvoiceStarGift)
+	return decode_body_TL_inputInvoiceStarGift(m)
+}
+func decode_body_TL_inputInvoiceStarGift(m *DecodeBuf) TL {
+	tl := TL_inputInvoiceStarGift{}
+	flags := m.Int()
+	tl.HideName = flags&(1<<0) != 0
+	tl.UserID = m.Object()
+	tl.GiftID = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.Message = Ref(decode_TL_textWithEntities(m).(TL_textWithEntities))
+	}
+	return tl
+}
+
 func decode_TL_payments_exportedInvoice(m *DecodeBuf) TL {
 	m.constructorAssert(CRC_payments_exportedInvoice)
 	return decode_body_TL_payments_exportedInvoice(m)
@@ -60210,6 +60790,9 @@ func decode_body_TL_inputStorePaymentPremiumGiftCode(m *DecodeBuf) TL {
 	}
 	tl.Currency = m.String()
 	tl.Amount = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.Message = Ref(decode_TL_textWithEntities(m).(TL_textWithEntities))
+	}
 	return tl
 }
 
@@ -63073,6 +63656,15 @@ func decode_body_TL_starsTransactionPeerAds(_ *DecodeBuf) TL {
 	return tl
 }
 
+func decode_TL_starsTransactionPeerAPI(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starsTransactionPeerAPI)
+	return decode_body_TL_starsTransactionPeerAPI(m)
+}
+func decode_body_TL_starsTransactionPeerAPI(_ *DecodeBuf) TL {
+	tl := TL_starsTransactionPeerAPI{}
+	return tl
+}
+
 func decode_TL_starsTopupOption(m *DecodeBuf) TL {
 	m.constructorAssert(CRC_starsTopupOption)
 	return decode_body_TL_starsTopupOption(m)
@@ -63135,6 +63727,12 @@ func decode_body_TL_starsTransaction(m *DecodeBuf) TL {
 	}
 	if flags&(1<<13) != 0 {
 		tl.GiveawayPostID = Ref(m.Int())
+	}
+	if flags&(1<<14) != 0 {
+		tl.Stargift = Ref(decode_TL_starGift(m).(TL_starGift))
+	}
+	if flags&(1<<15) != 0 {
+		tl.FloodskipNumber = Ref(m.Int())
 	}
 	return tl
 }
@@ -63407,6 +64005,139 @@ func decode_body_TL_starsGiveawayWinnersOption(m *DecodeBuf) TL {
 	tl.Default = flags&(1<<0) != 0
 	tl.Users = m.Int()
 	tl.PerUserStars = m.Long()
+	return tl
+}
+
+func decode_TL_starGift(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starGift)
+	return decode_body_TL_starGift(m)
+}
+func decode_body_TL_starGift(m *DecodeBuf) TL {
+	tl := TL_starGift{}
+	flags := m.Int()
+	tl.Limited = flags&(1<<0) != 0
+	tl.SoldOut = flags&(1<<1) != 0
+	tl.ID = m.Long()
+	tl.Sticker = m.Object()
+	tl.Stars = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.AvailabilityRemains = Ref(m.Int())
+	}
+	if flags&(1<<0) != 0 {
+		tl.AvailabilityTotal = Ref(m.Int())
+	}
+	tl.ConvertStars = m.Long()
+	if flags&(1<<1) != 0 {
+		tl.FirstSaleDate = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.LastSaleDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_payments_starGiftsNotModified(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_starGiftsNotModified)
+	return decode_body_TL_payments_starGiftsNotModified(m)
+}
+func decode_body_TL_payments_starGiftsNotModified(_ *DecodeBuf) TL {
+	tl := TL_payments_starGiftsNotModified{}
+	return tl
+}
+
+func decode_TL_payments_starGifts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_starGifts)
+	return decode_body_TL_payments_starGifts(m)
+}
+func decode_body_TL_payments_starGifts(m *DecodeBuf) TL {
+	tl := TL_payments_starGifts{}
+	tl.Hash = m.Int()
+	tl.Gifts = DecodeBuf_GenericVector[TL_starGift](m)
+	return tl
+}
+
+func decode_TL_userStarGift(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_userStarGift)
+	return decode_body_TL_userStarGift(m)
+}
+func decode_body_TL_userStarGift(m *DecodeBuf) TL {
+	tl := TL_userStarGift{}
+	flags := m.Int()
+	tl.NameHidden = flags&(1<<0) != 0
+	tl.Unsaved = flags&(1<<5) != 0
+	if flags&(1<<1) != 0 {
+		tl.FromID = Ref(m.Long())
+	}
+	tl.Date = m.Int()
+	tl.Gift = decode_TL_starGift(m).(TL_starGift)
+	if flags&(1<<2) != 0 {
+		tl.Message = Ref(decode_TL_textWithEntities(m).(TL_textWithEntities))
+	}
+	if flags&(1<<3) != 0 {
+		tl.MsgID = Ref(m.Int())
+	}
+	if flags&(1<<4) != 0 {
+		tl.ConvertStars = Ref(m.Long())
+	}
+	return tl
+}
+
+func decode_TL_payments_userStarGifts(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_userStarGifts)
+	return decode_body_TL_payments_userStarGifts(m)
+}
+func decode_body_TL_payments_userStarGifts(m *DecodeBuf) TL {
+	tl := TL_payments_userStarGifts{}
+	flags := m.Int()
+	tl.Count = m.Int()
+	tl.Gifts = DecodeBuf_GenericVector[TL_userStarGift](m)
+	if flags&(1<<0) != 0 {
+		tl.NextOffset = Ref(m.String())
+	}
+	tl.Users = m.Vector()
+	return tl
+}
+
+func decode_TL_messageReportOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageReportOption)
+	return decode_body_TL_messageReportOption(m)
+}
+func decode_body_TL_messageReportOption(m *DecodeBuf) TL {
+	tl := TL_messageReportOption{}
+	tl.Text = m.String()
+	tl.Option = m.StringBytes()
+	return tl
+}
+
+func decode_TL_reportResultChooseOption(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reportResultChooseOption)
+	return decode_body_TL_reportResultChooseOption(m)
+}
+func decode_body_TL_reportResultChooseOption(m *DecodeBuf) TL {
+	tl := TL_reportResultChooseOption{}
+	tl.Title = m.String()
+	tl.Options = DecodeBuf_GenericVector[TL_messageReportOption](m)
+	return tl
+}
+
+func decode_TL_reportResultAddComment(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reportResultAddComment)
+	return decode_body_TL_reportResultAddComment(m)
+}
+func decode_body_TL_reportResultAddComment(m *DecodeBuf) TL {
+	tl := TL_reportResultAddComment{}
+	flags := m.Int()
+	tl.Optional = flags&(1<<0) != 0
+	tl.Option = m.StringBytes()
+	return tl
+}
+
+func decode_TL_reportResultReported(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_reportResultReported)
+	return decode_body_TL_reportResultReported(m)
+}
+func decode_body_TL_reportResultReported(_ *DecodeBuf) TL {
+	tl := TL_reportResultReported{}
 	return tl
 }
 
@@ -63827,6 +64558,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_messageActionGiftStars(m)
 	case CRC_messageActionPrizeStars:
 		r = decode_body_TL_messageActionPrizeStars(m)
+	case CRC_messageActionStarGift:
+		r = decode_body_TL_messageActionStarGift(m)
 	case CRC_dialog:
 		r = decode_body_TL_dialog(m)
 	case CRC_dialogFolder:
@@ -64611,6 +65344,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_keyboardButtonRequestPeer(m)
 	case CRC_inputKeyboardButtonRequestPeer:
 		r = decode_body_TL_inputKeyboardButtonRequestPeer(m)
+	case CRC_keyboardButtonCopy:
+		r = decode_body_TL_keyboardButtonCopy(m)
 	case CRC_keyboardButtonRow:
 		r = decode_body_TL_keyboardButtonRow(m)
 	case CRC_replyKeyboardHide:
@@ -65015,6 +65750,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_payments_paymentForm(m)
 	case CRC_payments_paymentFormStars:
 		r = decode_body_TL_payments_paymentFormStars(m)
+	case CRC_payments_paymentFormStarGift:
+		r = decode_body_TL_payments_paymentFormStarGift(m)
 	case CRC_payments_validatedRequestedInfo:
 		r = decode_body_TL_payments_validatedRequestedInfo(m)
 	case CRC_payments_paymentResult:
@@ -65737,6 +66474,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_inputInvoiceStars(m)
 	case CRC_inputInvoiceChatInviteSubscription:
 		r = decode_body_TL_inputInvoiceChatInviteSubscription(m)
+	case CRC_inputInvoiceStarGift:
+		r = decode_body_TL_inputInvoiceStarGift(m)
 	case CRC_payments_exportedInvoice:
 		r = decode_body_TL_payments_exportedInvoice(m)
 	case CRC_messages_transcribedAudio:
@@ -66169,6 +66908,8 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_starsTransactionPeer(m)
 	case CRC_starsTransactionPeerAds:
 		r = decode_body_TL_starsTransactionPeerAds(m)
+	case CRC_starsTransactionPeerAPI:
+		r = decode_body_TL_starsTransactionPeerAPI(m)
 	case CRC_starsTopupOption:
 		r = decode_body_TL_starsTopupOption(m)
 	case CRC_starsTransaction:
@@ -66209,6 +66950,24 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_starsGiveawayOption(m)
 	case CRC_starsGiveawayWinnersOption:
 		r = decode_body_TL_starsGiveawayWinnersOption(m)
+	case CRC_starGift:
+		r = decode_body_TL_starGift(m)
+	case CRC_payments_starGiftsNotModified:
+		r = decode_body_TL_payments_starGiftsNotModified(m)
+	case CRC_payments_starGifts:
+		r = decode_body_TL_payments_starGifts(m)
+	case CRC_userStarGift:
+		r = decode_body_TL_userStarGift(m)
+	case CRC_payments_userStarGifts:
+		r = decode_body_TL_payments_userStarGifts(m)
+	case CRC_messageReportOption:
+		r = decode_body_TL_messageReportOption(m)
+	case CRC_reportResultChooseOption:
+		r = decode_body_TL_reportResultChooseOption(m)
+	case CRC_reportResultAddComment:
+		r = decode_body_TL_reportResultAddComment(m)
+	case CRC_reportResultReported:
+		r = decode_body_TL_reportResultReported(m)
 
 	default:
 		m.err = merry.Errorf("Unknown constructor: %08x", constructor)
