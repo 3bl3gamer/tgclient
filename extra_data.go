@@ -34,13 +34,13 @@ func (e *extraData) rememberEventExtraData(objs []mtproto.TL) {
 		switch x := obj.(type) {
 		case mtproto.TL_user:
 			e.users[x.ID] = &x
-			e.tg.log.Debug("extra: user: %d %s", x.ID, x.Username)
+			e.tg.log.Debug("extra: user: %d %s", x.ID, mtproto.DerefOr(x.Username, "-"))
 		case mtproto.TL_chat:
 			e.chats[x.ID] = &x
 			e.tg.log.Debug("extra: chat: %d %s", x.ID, x.Title)
 		case mtproto.TL_channel:
 			e.channels[x.ID] = &x
-			e.tg.log.Debug("extra: channel: %d %s", x.ID, x.Username)
+			e.tg.log.Debug("extra: channel: %d %s", x.ID, mtproto.DerefOr(x.Username, "-"))
 		default:
 			e.tg.log.Warn(mtproto.UnexpectedTL("extra data", obj))
 		}
