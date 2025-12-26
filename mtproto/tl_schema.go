@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	TL_Layer                                                              = 218
+	TL_Layer                                                              = 220
 	CRC_resPQ                                                             = 0x05162463
 	CRC_pqInnerData                                                       = 0x83c95aec
 	CRC_pqInnerDataDC                                                     = 0xa9f55f95
@@ -229,7 +229,7 @@ const (
 	CRC_messageActionPaymentRefunded                                      = 0x41b3e202
 	CRC_messageActionGiftStars                                            = 0x45d5b021
 	CRC_messageActionPrizeStars                                           = 0xb00c47a2
-	CRC_messageActionStarGift                                             = 0xdb596550
+	CRC_messageActionStarGift                                             = 0xea2c31d3
 	CRC_messageActionStarGiftUnique                                       = 0x95728543
 	CRC_messageActionPaidMessagesRefunded                                 = 0xac1f1fcd
 	CRC_messageActionPaidMessagesPrice                                    = 0x84b88578
@@ -241,6 +241,8 @@ const (
 	CRC_messageActionSuggestedPostRefund                                  = 0x69f916f8
 	CRC_messageActionGiftTon                                              = 0xa8a3c699
 	CRC_messageActionSuggestBirthday                                      = 0x2c8f2a25
+	CRC_messageActionStarGiftPurchaseOffer                                = 0x774278d4
+	CRC_messageActionStarGiftPurchaseOfferDeclined                        = 0x73ada76b
 	CRC_dialog                                                            = 0xd58a08c6
 	CRC_dialogFolder                                                      = 0x71bd134c
 	CRC_photoEmpty                                                        = 0x2331b22d
@@ -1100,7 +1102,7 @@ const (
 	CRC_webPageAttributeStickerSet                                        = 0x50cc03d3
 	CRC_webPageAttributeUniqueStarGift                                    = 0xcf6f6db8
 	CRC_webPageAttributeStarGiftCollection                                = 0x31cad303
-	CRC_webPageAttributeStarGiftAuction                                   = 0x034986ab
+	CRC_webPageAttributeStarGiftAuction                                   = 0x01c641c2
 	CRC_messages_votesList                                                = 0x4899484e
 	CRC_bankCardOpenURL                                                   = 0xf568028a
 	CRC_payments_bankCardData                                             = 0x3e24e573
@@ -1477,8 +1479,8 @@ const (
 	CRC_messageReactor                                                    = 0x4ba3a95a
 	CRC_starsGiveawayOption                                               = 0x94ce852a
 	CRC_starsGiveawayWinnersOption                                        = 0x54236209
-	CRC_starGift                                                          = 0x1b9a4d7f
-	CRC_starGiftUnique                                                    = 0xb0bf741b
+	CRC_starGift                                                          = 0x313a9547
+	CRC_starGiftUnique                                                    = 0x569d64c9
 	CRC_payments_starGiftsNotModified                                     = 0xa388a368
 	CRC_payments_starGifts                                                = 0x2ed82995
 	CRC_messageReportOption                                               = 0x7903e3d9
@@ -1507,7 +1509,7 @@ const (
 	CRC_users_usersSlice                                                  = 0x315a4974
 	CRC_payments_uniqueStarGift                                           = 0x416c56e8
 	CRC_messages_webPagePreview                                           = 0x8c9a88ac
-	CRC_savedStarGift                                                     = 0x8983a452
+	CRC_savedStarGift                                                     = 0xead6805e
 	CRC_payments_savedStarGifts                                           = 0x95f389b1
 	CRC_inputSavedStarGiftUser                                            = 0x69279795
 	CRC_inputSavedStarGiftChat                                            = 0xf101aa7f
@@ -1569,17 +1571,28 @@ const (
 	CRC_recentStory                                                       = 0x711d692d
 	CRC_auctionBidLevel                                                   = 0x310240cc
 	CRC_starGiftAuctionStateNotModified                                   = 0xfe333952
-	CRC_starGiftAuctionState                                              = 0x5db04f4b
-	CRC_starGiftAuctionStateFinished                                      = 0x7d967c3a
+	CRC_starGiftAuctionState                                              = 0x771a4e66
+	CRC_starGiftAuctionStateFinished                                      = 0x972dabbf
 	CRC_starGiftAuctionUserState                                          = 0x2eeed1c4
-	CRC_payments_starGiftAuctionState                                     = 0x0e98e474
-	CRC_starGiftAuctionAcquiredGift                                       = 0xab60e20b
+	CRC_payments_starGiftAuctionState                                     = 0x6b39f4ec
+	CRC_starGiftAuctionAcquiredGift                                       = 0x42b00348
 	CRC_payments_starGiftAuctionAcquiredGifts                             = 0x7d5bd1f0
 	CRC_starGiftActiveAuctionState                                        = 0xd31bc45d
 	CRC_payments_starGiftActiveAuctionsNotModified                        = 0xdb33dad0
-	CRC_payments_starGiftActiveAuctions                                   = 0x97f187d8
+	CRC_payments_starGiftActiveAuctions                                   = 0xaef6abbc
 	CRC_inputStarGiftAuction                                              = 0x02e16c98
 	CRC_inputStarGiftAuctionSlug                                          = 0x7ab58308
+	CRC_passkey                                                           = 0x98613ebf
+	CRC_account_passkeys                                                  = 0xf8e0aa1c
+	CRC_account_passkeyRegistrationOptions                                = 0xe16b5ce1
+	CRC_auth_passkeyLoginOptions                                          = 0xe2037789
+	CRC_inputPasskeyResponseRegister                                      = 0x3e63935c
+	CRC_inputPasskeyResponseLogin                                         = 0xc31fc14a
+	CRC_inputPasskeyCredentialPublicKey                                   = 0x3c27b78f
+	CRC_starGiftBackground                                                = 0xaff56398
+	CRC_starGiftAuctionRound                                              = 0x3aae0528
+	CRC_starGiftAuctionRoundExtendable                                    = 0x0aa021e5
+	CRC_payments_starGiftUpgradeAttributes                                = 0x46c6e36f
 	CRC_invokeAfterMsg                                                    = 0xcb9f372d
 	CRC_invokeAfterMsgs                                                   = 0x3dc4b4f0
 	CRC_initConnection                                                    = 0xc1cd5ea9
@@ -1615,6 +1628,8 @@ const (
 	CRC_auth_resetLoginEmail                                              = 0x7e960193
 	CRC_auth_reportMissingCode                                            = 0xcb9deff6
 	CRC_auth_checkPaidAuth                                                = 0x56e59f9c
+	CRC_auth_initPasskeyLogin                                             = 0x518ad0b7
+	CRC_auth_finishPasskeyLogin                                           = 0x9857ad07
 	CRC_account_registerDevice                                            = 0xec86017a
 	CRC_account_unregisterDevice                                          = 0x6a0d3206
 	CRC_account_updateNotifySettings                                      = 0x84be5b93
@@ -1734,6 +1749,10 @@ const (
 	CRC_account_saveMusic                                                 = 0xb26732a9
 	CRC_account_getSavedMusicIDs                                          = 0xe09d5faf
 	CRC_account_getUniqueGiftChatThemes                                   = 0xe42ce9c9
+	CRC_account_initPasskeyRegistration                                   = 0x429547e8
+	CRC_account_registerPasskey                                           = 0x55b41fd6
+	CRC_account_getPasskeys                                               = 0xea1f0c52
+	CRC_account_deletePasskey                                             = 0xf5b5563f
 	CRC_users_getUsers                                                    = 0x0d91a548
 	CRC_users_getFullUser                                                 = 0xb60f5918
 	CRC_users_setSecureValueErrors                                        = 0x90c894b5
@@ -1780,7 +1799,7 @@ const (
 	CRC_messages_setTyping                                                = 0x58943ee2
 	CRC_messages_sendMessage                                              = 0x545cd15a
 	CRC_messages_sendMedia                                                = 0x0330e77f
-	CRC_messages_forwardMessages                                          = 0x41d41ade
+	CRC_messages_forwardMessages                                          = 0x13704a7c
 	CRC_messages_reportSpam                                               = 0xcf1592db
 	CRC_messages_getPeerSettings                                          = 0xefd9a6a2
 	CRC_messages_report                                                   = 0xfc78af9b
@@ -2196,6 +2215,9 @@ const (
 	CRC_payments_getStarGiftAuctionState                                  = 0x5c9ff4d6
 	CRC_payments_getStarGiftAuctionAcquiredGifts                          = 0x6ba2cbec
 	CRC_payments_getStarGiftActiveAuctions                                = 0xa5d0514d
+	CRC_payments_resolveStarGiftOffer                                     = 0xe9ce781c
+	CRC_payments_sendStarGiftOffer                                        = 0x8fb86b41
+	CRC_payments_getStarGiftUpgradeAttributes                             = 0x6d038b58
 	CRC_stickers_createStickerSet                                         = 0x9021ab67
 	CRC_stickers_removeStickerFromSet                                     = 0xf7760f51
 	CRC_stickers_changeStickerPosition                                    = 0xffb6d4ca
@@ -3533,7 +3555,7 @@ type TL_messageService struct {
 	SavedPeerID          TL // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	ReplyTo              TL // (optional) MessageReplyHeader: TL_messageReplyHeader | TL_messageReplyStoryHeader
 	Date                 int32
-	Action               TL                   // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPINMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch | TL_messageActionGiveawayResults | TL_messageActionBoostApply | TL_messageActionRequestedPeerSentMe | TL_messageActionPaymentRefunded | TL_messageActionGiftStars | TL_messageActionPrizeStars | TL_messageActionStarGift | TL_messageActionStarGiftUnique | TL_messageActionPaidMessagesRefunded | TL_messageActionPaidMessagesPrice | TL_messageActionConferenceCall | TL_messageActionTodoCompletions | TL_messageActionTodoAppendTasks | TL_messageActionSuggestedPostApproval | TL_messageActionSuggestedPostSuccess | TL_messageActionSuggestedPostRefund | TL_messageActionGiftTon | TL_messageActionSuggestBirthday
+	Action               TL                   // MessageAction: TL_messageActionEmpty | TL_messageActionChatCreate | TL_messageActionChatEditTitle | TL_messageActionChatEditPhoto | TL_messageActionChatDeletePhoto | TL_messageActionChatAddUser | TL_messageActionChatDeleteUser | TL_messageActionChatJoinedByLink | TL_messageActionChannelCreate | TL_messageActionChatMigrateTo | TL_messageActionChannelMigrateFrom | TL_messageActionPINMessage | TL_messageActionHistoryClear | TL_messageActionGameScore | TL_messageActionPaymentSentMe | TL_messageActionPaymentSent | TL_messageActionPhoneCall | TL_messageActionScreenshotTaken | TL_messageActionCustomAction | TL_messageActionBotAllowed | TL_messageActionSecureValuesSentMe | TL_messageActionSecureValuesSent | TL_messageActionContactSignUp | TL_messageActionGeoProximityReached | TL_messageActionGroupCall | TL_messageActionInviteToGroupCall | TL_messageActionSetMessagesTTL | TL_messageActionGroupCallScheduled | TL_messageActionSetChatTheme | TL_messageActionChatJoinedByRequest | TL_messageActionWebViewDataSentMe | TL_messageActionWebViewDataSent | TL_messageActionGiftPremium | TL_messageActionTopicCreate | TL_messageActionTopicEdit | TL_messageActionSuggestProfilePhoto | TL_messageActionRequestedPeer | TL_messageActionSetChatWallPaper | TL_messageActionGiftCode | TL_messageActionGiveawayLaunch | TL_messageActionGiveawayResults | TL_messageActionBoostApply | TL_messageActionRequestedPeerSentMe | TL_messageActionPaymentRefunded | TL_messageActionGiftStars | TL_messageActionPrizeStars | TL_messageActionStarGift | TL_messageActionStarGiftUnique | TL_messageActionPaidMessagesRefunded | TL_messageActionPaidMessagesPrice | TL_messageActionConferenceCall | TL_messageActionTodoCompletions | TL_messageActionTodoAppendTasks | TL_messageActionSuggestedPostApproval | TL_messageActionSuggestedPostSuccess | TL_messageActionSuggestedPostRefund | TL_messageActionGiftTon | TL_messageActionSuggestBirthday | TL_messageActionStarGiftPurchaseOffer | TL_messageActionStarGiftPurchaseOfferDeclined
 	Reactions            *TL_messageReactions // (optional)
 	TTLPeriod            *int32               // (optional)
 }
@@ -4008,6 +4030,7 @@ type TL_messageActionStarGift struct {
 	PrepaidUpgradeHash *string              // (optional)
 	GiftMsgID          *int32               // (optional)
 	ToID               TL                   // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	GiftNum            *int32               // (optional)
 }
 
 // Constructs MessageAction
@@ -4018,6 +4041,7 @@ type TL_messageActionStarGiftUnique struct {
 	Refunded                 bool
 	PrepaidUpgrade           bool
 	Assigned                 bool
+	FromOffer                bool
 	Gift                     TL     // StarGift: TL_starGift | TL_starGiftUnique
 	CanExportAt              *int32 // (optional)
 	TransferStars            *int64 // (optional)
@@ -4094,6 +4118,22 @@ type TL_messageActionGiftTon struct {
 // Constructs MessageAction
 type TL_messageActionSuggestBirthday struct {
 	Birthday TL_birthday
+}
+
+// Constructs MessageAction
+type TL_messageActionStarGiftPurchaseOffer struct {
+	Accepted  bool
+	Declined  bool
+	Gift      TL // StarGift: TL_starGift | TL_starGiftUnique
+	Price     TL // StarsAmount: TL_starsAmount | TL_starsTonAmount
+	ExpiresAt int32
+}
+
+// Constructs MessageAction
+type TL_messageActionStarGiftPurchaseOfferDeclined struct {
+	Expired bool
+	Gift    TL // StarGift: TL_starGift | TL_starGiftUnique
+	Price   TL // StarsAmount: TL_starsAmount | TL_starsTonAmount
 }
 
 // Constructs Dialog
@@ -9839,11 +9879,8 @@ type TL_webPageAttributeStarGiftCollection struct {
 
 // Constructs WebPageAttribute
 type TL_webPageAttributeStarGiftAuction struct {
-	Gift        TL // StarGift: TL_starGift | TL_starGiftUnique
-	EndDate     int32
-	CenterColor int32
-	EdgeColor   int32
-	TextColor   int32
+	Gift    TL // StarGift: TL_starGift | TL_starGiftUnique
+	EndDate int32
 }
 
 // Constructs messages.VotesList
@@ -12426,6 +12463,7 @@ type TL_starsTransaction struct {
 	StargiftDropOriginalDetails bool
 	PhonegroupMessage           bool
 	StargiftAuctionBid          bool
+	Offer                       bool
 	ID                          string
 	Amount                      TL // StarsAmount: TL_starsAmount | TL_starsTonAmount
 	Date                        int32
@@ -12612,17 +12650,20 @@ type TL_starGift struct {
 	AvailabilityTotal   *int32 // (optional)
 	AvailabilityResale  *int64 // (optional)
 	ConvertStars        int64
-	FirstSaleDate       *int32  // (optional)
-	LastSaleDate        *int32  // (optional)
-	UpgradeStars        *int64  // (optional)
-	ResellMinStars      *int64  // (optional)
-	Title               *string // (optional)
-	ReleasedBy          TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	PerUserTotal        *int32  // (optional)
-	PerUserRemains      *int32  // (optional)
-	LockedUntilDate     *int32  // (optional)
-	AuctionSlug         *string // (optional)
-	GiftsPerRound       *int32  // (optional)
+	FirstSaleDate       *int32                 // (optional)
+	LastSaleDate        *int32                 // (optional)
+	UpgradeStars        *int64                 // (optional)
+	ResellMinStars      *int64                 // (optional)
+	Title               *string                // (optional)
+	ReleasedBy          TL                     // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	PerUserTotal        *int32                 // (optional)
+	PerUserRemains      *int32                 // (optional)
+	LockedUntilDate     *int32                 // (optional)
+	AuctionSlug         *string                // (optional)
+	GiftsPerRound       *int32                 // (optional)
+	AuctionStartDate    *int32                 // (optional)
+	UpgradeVariants     *int32                 // (optional)
+	Background          *TL_starGiftBackground // (optional)
 }
 
 // Constructs StarGift
@@ -12646,9 +12687,11 @@ type TL_starGiftUnique struct {
 	ReleasedBy         TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	ValueAmount        *int64  // (optional)
 	ValueCurrency      *string // (optional)
+	ValueUsdAmount     *int64  // (optional)
 	ThemePeer          TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
 	PeerColor          TL      // (optional) PeerColor: TL_peerColor | TL_peerColorCollectible | TL_inputPeerColorCollectible
 	HostID             TL      // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	OfferMinStars      *int32  // (optional)
 }
 
 // Constructs payments.StarGifts
@@ -12871,6 +12914,7 @@ type TL_savedStarGift struct {
 	CollectionID             []int32              // (optional)
 	PrepaidUpgradeHash       *string              // (optional)
 	DropOriginalDetailsStars *int64               // (optional)
+	GiftNum                  *int32               // (optional)
 }
 
 // Constructs payments.SavedStarGifts
@@ -13220,11 +13264,10 @@ type TL_groupCallMessage struct {
 
 // Constructs GroupCallDonor
 type TL_groupCallDonor struct {
-	Top       bool
-	My        bool
-	Anonymous bool
-	PeerID    TL // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
-	Stars     int64
+	Top    bool
+	My     bool
+	PeerID TL // (optional) Peer: TL_peerUser | TL_peerChat | TL_peerChannel
+	Stars  int64
 }
 
 // Constructs phone.GroupCallStars
@@ -13261,16 +13304,21 @@ type TL_starGiftAuctionState struct {
 	BidLevels    []TL_auctionBidLevel
 	TopBidders   []int64
 	NextRoundAt  int32
+	LastGiftNum  int32
 	GiftsLeft    int32
 	CurrentRound int32
 	TotalRounds  int32
+	Rounds       []TL // StarGiftAuctionRound: TL_starGiftAuctionRound | TL_starGiftAuctionRoundExtendable
 }
 
 // Constructs StarGiftAuctionState
 type TL_starGiftAuctionStateFinished struct {
-	StartDate    int32
-	EndDate      int32
-	AveragePrice int64
+	StartDate           int32
+	EndDate             int32
+	AveragePrice        int64
+	ListedCount         *int32  // (optional)
+	FragmentListedCount *int32  // (optional)
+	FragmentListedURL   *string // (optional)
 }
 
 // Constructs StarGiftAuctionUserState
@@ -13290,6 +13338,7 @@ type TL_payments_starGiftAuctionState struct {
 	UserState TL_starGiftAuctionUserState
 	Timeout   int32
 	Users     []TL // User: TL_userEmpty | TL_user
+	Chats     []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 }
 
 // Constructs StarGiftAuctionAcquiredGift
@@ -13301,6 +13350,7 @@ type TL_starGiftAuctionAcquiredGift struct {
 	Round      int32
 	Pos        int32
 	Message    *TL_textWithEntities // (optional)
+	GiftNum    *int32               // (optional)
 }
 
 // Constructs payments.StarGiftAuctionAcquiredGifts
@@ -13325,6 +13375,7 @@ type TL_payments_starGiftActiveAuctionsNotModified struct {
 type TL_payments_starGiftActiveAuctions struct {
 	Auctions []TL_starGiftActiveAuctionState
 	Users    []TL // User: TL_userEmpty | TL_user
+	Chats    []TL // Chat: TL_chatEmpty | TL_chat | TL_chatForbidden | TL_channel | TL_channelForbidden
 }
 
 // Constructs InputStarGiftAuction
@@ -13335,6 +13386,77 @@ type TL_inputStarGiftAuction struct {
 // Constructs InputStarGiftAuction
 type TL_inputStarGiftAuctionSlug struct {
 	Slug string
+}
+
+// Constructs Passkey
+type TL_passkey struct {
+	ID              string
+	Name            string
+	Date            int32
+	SoftwareEmojiID *int64 // (optional)
+	LastUsageDate   *int32 // (optional)
+}
+
+// Constructs account.Passkeys
+type TL_account_passkeys struct {
+	Passkeys []TL_passkey
+}
+
+// Constructs account.PasskeyRegistrationOptions
+type TL_account_passkeyRegistrationOptions struct {
+	Options TL_dataJSON
+}
+
+// Constructs auth.PasskeyLoginOptions
+type TL_auth_passkeyLoginOptions struct {
+	Options TL_dataJSON
+}
+
+// Constructs InputPasskeyResponse
+type TL_inputPasskeyResponseRegister struct {
+	ClientData      TL_dataJSON
+	AttestationData []byte
+}
+
+// Constructs InputPasskeyResponse
+type TL_inputPasskeyResponseLogin struct {
+	ClientData        TL_dataJSON
+	AuthenticatorData []byte
+	Signature         []byte
+	UserHandle        string
+}
+
+// Constructs InputPasskeyCredential
+type TL_inputPasskeyCredentialPublicKey struct {
+	ID       string
+	RawID    string
+	Response TL // InputPasskeyResponse: TL_inputPasskeyResponseRegister | TL_inputPasskeyResponseLogin
+}
+
+// Constructs StarGiftBackground
+type TL_starGiftBackground struct {
+	CenterColor int32
+	EdgeColor   int32
+	TextColor   int32
+}
+
+// Constructs StarGiftAuctionRound
+type TL_starGiftAuctionRound struct {
+	Num      int32
+	Duration int32
+}
+
+// Constructs StarGiftAuctionRound
+type TL_starGiftAuctionRoundExtendable struct {
+	Num          int32
+	Duration     int32
+	ExtendTop    int32
+	ExtendWindow int32
+}
+
+// Constructs payments.StarGiftUpgradeAttributes
+type TL_payments_starGiftUpgradeAttributes struct {
+	Attributes []TL // StarGiftAttribute: TL_starGiftAttributeModel | TL_starGiftAttributePattern | TL_starGiftAttributeBackdrop | TL_starGiftAttributeOriginalDetails
 }
 
 // Returns response to Query
@@ -13561,6 +13683,19 @@ type TL_auth_checkPaidAuth struct {
 	PhoneNumber   string
 	PhoneCodeHash string
 	FormID        int64
+}
+
+// Returns auth.PasskeyLoginOptions: TL_auth_passkeyLoginOptions
+type TL_auth_initPasskeyLogin struct {
+	APIID   int32
+	APIHash string
+}
+
+// Returns auth.Authorization: TL_auth_authorization | TL_auth_authorizationSignUpRequired
+type TL_auth_finishPasskeyLogin struct {
+	Credential    TL_inputPasskeyCredentialPublicKey
+	FromDCID      *int32 // (optional)
+	FromAuthKeyID *int64 // (optional)
 }
 
 // Returns Bool: TL_boolFalse | TL_boolTrue
@@ -14231,6 +14366,24 @@ type TL_account_getUniqueGiftChatThemes struct {
 	Hash   int64
 }
 
+// Returns account.PasskeyRegistrationOptions: TL_account_passkeyRegistrationOptions
+type TL_account_initPasskeyRegistration struct {
+}
+
+// Returns Passkey: TL_passkey
+type TL_account_registerPasskey struct {
+	Credential TL_inputPasskeyCredentialPublicKey
+}
+
+// Returns account.Passkeys: TL_account_passkeys
+type TL_account_getPasskeys struct {
+}
+
+// Returns Bool: TL_boolFalse | TL_boolTrue
+type TL_account_deletePasskey struct {
+	ID string
+}
+
 // Returns Vector<User>: TL_userEmpty | TL_user
 type TL_users_getUsers struct {
 	ID []TL // InputUser: TL_inputUserEmpty | TL_inputUserSelf | TL_inputUser | TL_inputUserFromMessage
@@ -14588,6 +14741,7 @@ type TL_messages_forwardMessages struct {
 	ScheduleRepeatPeriod *int32            // (optional)
 	SendAs               TL                // (optional) InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
 	QuickReplyShortcut   TL                // (optional) InputQuickReplyShortcut: TL_inputQuickReplyShortcut | TL_inputQuickReplyShortcutID
+	Effect               *int64            // (optional)
 	VideoTimestamp       *int32            // (optional)
 	AllowPaidStars       *int64            // (optional)
 	SuggestedPost        *TL_suggestedPost // (optional)
@@ -17344,6 +17498,27 @@ type TL_payments_getStarGiftAuctionAcquiredGifts struct {
 // Returns payments.StarGiftActiveAuctions: TL_payments_starGiftActiveAuctionsNotModified | TL_payments_starGiftActiveAuctions
 type TL_payments_getStarGiftActiveAuctions struct {
 	Hash int64
+}
+
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
+type TL_payments_resolveStarGiftOffer struct {
+	Decline    bool
+	OfferMsgID int32
+}
+
+// Returns Updates: TL_updatesTooLong | TL_updateShortMessage | TL_updateShortChatMessage | TL_updateShort | TL_updatesCombined | TL_updates | TL_updateShortSentMessage
+type TL_payments_sendStarGiftOffer struct {
+	Peer           TL // InputPeer: TL_inputPeerEmpty | TL_inputPeerSelf | TL_inputPeerChat | TL_inputPeerUser | TL_inputPeerChannel | TL_inputPeerUserFromMessage | TL_inputPeerChannelFromMessage
+	Slug           string
+	Price          TL // StarsAmount: TL_starsAmount | TL_starsTonAmount
+	Duration       int32
+	RandomID       int64
+	AllowPaidStars *int64 // (optional)
+}
+
+// Returns payments.StarGiftUpgradeAttributes: TL_payments_starGiftUpgradeAttributes
+type TL_payments_getStarGiftUpgradeAttributes struct {
+	GiftID int64
 }
 
 // Returns messages.StickerSet: TL_messages_stickerSet | TL_messages_stickerSetNotModified
@@ -21835,6 +22010,9 @@ func (e TL_messageActionStarGift) encode() []byte {
 	if e.ToID != nil {
 		flags |= (1 << 18)
 	}
+	if e.GiftNum != nil {
+		flags |= (1 << 19)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionStarGift)
 	x.Int(flags)
@@ -21869,6 +22047,9 @@ func (e TL_messageActionStarGift) encode() []byte {
 	if e.ToID != nil {
 		x.Object(e.ToID)
 	}
+	if e.GiftNum != nil {
+		x.Int(*e.GiftNum)
+	}
 	return x.buf
 }
 
@@ -21891,6 +22072,9 @@ func (e TL_messageActionStarGiftUnique) encode() []byte {
 	}
 	if e.Assigned {
 		flags |= (1 << 13)
+	}
+	if e.FromOffer {
+		flags |= (1 << 14)
 	}
 	if e.CanExportAt != nil {
 		flags |= (1 << 3)
@@ -22090,6 +22274,36 @@ func (e TL_messageActionSuggestBirthday) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_messageActionSuggestBirthday)
 	x.Object(e.Birthday)
+	return x.buf
+}
+
+func (e TL_messageActionStarGiftPurchaseOffer) encode() []byte {
+	var flags int32
+	if e.Accepted {
+		flags |= (1 << 0)
+	}
+	if e.Declined {
+		flags |= (1 << 1)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionStarGiftPurchaseOffer)
+	x.Int(flags)
+	x.Object(e.Gift)
+	x.Object(e.Price)
+	x.Int(e.ExpiresAt)
+	return x.buf
+}
+
+func (e TL_messageActionStarGiftPurchaseOfferDeclined) encode() []byte {
+	var flags int32
+	if e.Expired {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_messageActionStarGiftPurchaseOfferDeclined)
+	x.Int(flags)
+	x.Object(e.Gift)
+	x.Object(e.Price)
 	return x.buf
 }
 
@@ -32706,9 +32920,6 @@ func (e TL_webPageAttributeStarGiftAuction) encode() []byte {
 	x.UInt(CRC_webPageAttributeStarGiftAuction)
 	x.Object(e.Gift)
 	x.Int(e.EndDate)
-	x.Int(e.CenterColor)
-	x.Int(e.EdgeColor)
-	x.Int(e.TextColor)
 	return x.buf
 }
 
@@ -37703,6 +37914,9 @@ func (e TL_starsTransaction) encode() []byte {
 	if e.StargiftAuctionBid {
 		flags |= (1 << 28)
 	}
+	if e.Offer {
+		flags |= (1 << 29)
+	}
 	if e.Title != nil {
 		flags |= (1 << 0)
 	}
@@ -38218,6 +38432,15 @@ func (e TL_starGift) encode() []byte {
 	if e.GiftsPerRound != nil {
 		flags |= (1 << 11)
 	}
+	if e.AuctionStartDate != nil {
+		flags |= (1 << 11)
+	}
+	if e.UpgradeVariants != nil {
+		flags |= (1 << 12)
+	}
+	if e.Background != nil {
+		flags |= (1 << 13)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_starGift)
 	x.Int(flags)
@@ -38267,6 +38490,15 @@ func (e TL_starGift) encode() []byte {
 	if e.GiftsPerRound != nil {
 		x.Int(*e.GiftsPerRound)
 	}
+	if e.AuctionStartDate != nil {
+		x.Int(*e.AuctionStartDate)
+	}
+	if e.UpgradeVariants != nil {
+		x.Int(*e.UpgradeVariants)
+	}
+	if e.Background != nil {
+		x.Object(e.Background)
+	}
 	return x.buf
 }
 
@@ -38305,6 +38537,9 @@ func (e TL_starGiftUnique) encode() []byte {
 	if e.ValueCurrency != nil {
 		flags |= (1 << 8)
 	}
+	if e.ValueUsdAmount != nil {
+		flags |= (1 << 8)
+	}
 	if e.ThemePeer != nil {
 		flags |= (1 << 10)
 	}
@@ -38313,6 +38548,9 @@ func (e TL_starGiftUnique) encode() []byte {
 	}
 	if e.HostID != nil {
 		flags |= (1 << 12)
+	}
+	if e.OfferMinStars != nil {
+		flags |= (1 << 13)
 	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_starGiftUnique)
@@ -38349,6 +38587,9 @@ func (e TL_starGiftUnique) encode() []byte {
 	if e.ValueCurrency != nil {
 		x.String(*e.ValueCurrency)
 	}
+	if e.ValueUsdAmount != nil {
+		x.Long(*e.ValueUsdAmount)
+	}
 	if e.ThemePeer != nil {
 		x.Object(e.ThemePeer)
 	}
@@ -38357,6 +38598,9 @@ func (e TL_starGiftUnique) encode() []byte {
 	}
 	if e.HostID != nil {
 		x.Object(e.HostID)
+	}
+	if e.OfferMinStars != nil {
+		x.Int(*e.OfferMinStars)
 	}
 	return x.buf
 }
@@ -38772,6 +39016,9 @@ func (e TL_savedStarGift) encode() []byte {
 	if e.DropOriginalDetailsStars != nil {
 		flags |= (1 << 18)
 	}
+	if e.GiftNum != nil {
+		flags |= (1 << 19)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_savedStarGift)
 	x.Int(flags)
@@ -38815,6 +39062,9 @@ func (e TL_savedStarGift) encode() []byte {
 	}
 	if e.DropOriginalDetailsStars != nil {
 		x.Long(*e.DropOriginalDetailsStars)
+	}
+	if e.GiftNum != nil {
+		x.Int(*e.GiftNum)
 	}
 	return x.buf
 }
@@ -39479,9 +39729,6 @@ func (e TL_groupCallDonor) encode() []byte {
 	if e.My {
 		flags |= (1 << 1)
 	}
-	if e.Anonymous {
-		flags |= (1 << 2)
-	}
 	if e.PeerID != nil {
 		flags |= (1 << 3)
 	}
@@ -39547,18 +39794,40 @@ func (e TL_starGiftAuctionState) encode() []byte {
 	EncodeBuf_GenericVector(x, e.BidLevels)
 	x.VectorLong(e.TopBidders)
 	x.Int(e.NextRoundAt)
+	x.Int(e.LastGiftNum)
 	x.Int(e.GiftsLeft)
 	x.Int(e.CurrentRound)
 	x.Int(e.TotalRounds)
+	EncodeBuf_GenericVector(x, e.Rounds)
 	return x.buf
 }
 
 func (e TL_starGiftAuctionStateFinished) encode() []byte {
+	var flags int32
+	if e.ListedCount != nil {
+		flags |= (1 << 0)
+	}
+	if e.FragmentListedCount != nil {
+		flags |= (1 << 1)
+	}
+	if e.FragmentListedURL != nil {
+		flags |= (1 << 1)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_starGiftAuctionStateFinished)
+	x.Int(flags)
 	x.Int(e.StartDate)
 	x.Int(e.EndDate)
 	x.Long(e.AveragePrice)
+	if e.ListedCount != nil {
+		x.Int(*e.ListedCount)
+	}
+	if e.FragmentListedCount != nil {
+		x.Int(*e.FragmentListedCount)
+	}
+	if e.FragmentListedURL != nil {
+		x.String(*e.FragmentListedURL)
+	}
 	return x.buf
 }
 
@@ -39606,6 +39875,7 @@ func (e TL_payments_starGiftAuctionState) encode() []byte {
 	x.Object(e.UserState)
 	x.Int(e.Timeout)
 	EncodeBuf_GenericVector(x, e.Users)
+	EncodeBuf_GenericVector(x, e.Chats)
 	return x.buf
 }
 
@@ -39617,6 +39887,9 @@ func (e TL_starGiftAuctionAcquiredGift) encode() []byte {
 	if e.Message != nil {
 		flags |= (1 << 1)
 	}
+	if e.GiftNum != nil {
+		flags |= (1 << 2)
+	}
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_starGiftAuctionAcquiredGift)
 	x.Int(flags)
@@ -39627,6 +39900,9 @@ func (e TL_starGiftAuctionAcquiredGift) encode() []byte {
 	x.Int(e.Pos)
 	if e.Message != nil {
 		x.Object(e.Message)
+	}
+	if e.GiftNum != nil {
+		x.Int(*e.GiftNum)
 	}
 	return x.buf
 }
@@ -39660,6 +39936,7 @@ func (e TL_payments_starGiftActiveAuctions) encode() []byte {
 	x.UInt(CRC_payments_starGiftActiveAuctions)
 	EncodeBuf_GenericVector(x, e.Auctions)
 	EncodeBuf_GenericVector(x, e.Users)
+	EncodeBuf_GenericVector(x, e.Chats)
 	return x.buf
 }
 
@@ -39674,6 +39951,111 @@ func (e TL_inputStarGiftAuctionSlug) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_inputStarGiftAuctionSlug)
 	x.String(e.Slug)
+	return x.buf
+}
+
+func (e TL_passkey) encode() []byte {
+	var flags int32
+	if e.SoftwareEmojiID != nil {
+		flags |= (1 << 0)
+	}
+	if e.LastUsageDate != nil {
+		flags |= (1 << 1)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_passkey)
+	x.Int(flags)
+	x.String(e.ID)
+	x.String(e.Name)
+	x.Int(e.Date)
+	if e.SoftwareEmojiID != nil {
+		x.Long(*e.SoftwareEmojiID)
+	}
+	if e.LastUsageDate != nil {
+		x.Int(*e.LastUsageDate)
+	}
+	return x.buf
+}
+
+func (e TL_account_passkeys) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_passkeys)
+	EncodeBuf_GenericVector(x, e.Passkeys)
+	return x.buf
+}
+
+func (e TL_account_passkeyRegistrationOptions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_passkeyRegistrationOptions)
+	x.Object(e.Options)
+	return x.buf
+}
+
+func (e TL_auth_passkeyLoginOptions) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_passkeyLoginOptions)
+	x.Object(e.Options)
+	return x.buf
+}
+
+func (e TL_inputPasskeyResponseRegister) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputPasskeyResponseRegister)
+	x.Object(e.ClientData)
+	x.StringBytes(e.AttestationData)
+	return x.buf
+}
+
+func (e TL_inputPasskeyResponseLogin) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputPasskeyResponseLogin)
+	x.Object(e.ClientData)
+	x.StringBytes(e.AuthenticatorData)
+	x.StringBytes(e.Signature)
+	x.String(e.UserHandle)
+	return x.buf
+}
+
+func (e TL_inputPasskeyCredentialPublicKey) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_inputPasskeyCredentialPublicKey)
+	x.String(e.ID)
+	x.String(e.RawID)
+	x.Object(e.Response)
+	return x.buf
+}
+
+func (e TL_starGiftBackground) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_starGiftBackground)
+	x.Int(e.CenterColor)
+	x.Int(e.EdgeColor)
+	x.Int(e.TextColor)
+	return x.buf
+}
+
+func (e TL_starGiftAuctionRound) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_starGiftAuctionRound)
+	x.Int(e.Num)
+	x.Int(e.Duration)
+	return x.buf
+}
+
+func (e TL_starGiftAuctionRoundExtendable) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_starGiftAuctionRoundExtendable)
+	x.Int(e.Num)
+	x.Int(e.Duration)
+	x.Int(e.ExtendTop)
+	x.Int(e.ExtendWindow)
+	return x.buf
+}
+
+func (e TL_payments_starGiftUpgradeAttributes) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_starGiftUpgradeAttributes)
+	EncodeBuf_GenericVector(x, e.Attributes)
 	return x.buf
 }
 
@@ -40029,6 +40411,35 @@ func (e TL_auth_checkPaidAuth) encode() []byte {
 	x.String(e.PhoneNumber)
 	x.String(e.PhoneCodeHash)
 	x.Long(e.FormID)
+	return x.buf
+}
+
+func (e TL_auth_initPasskeyLogin) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_initPasskeyLogin)
+	x.Int(e.APIID)
+	x.String(e.APIHash)
+	return x.buf
+}
+
+func (e TL_auth_finishPasskeyLogin) encode() []byte {
+	var flags int32
+	if e.FromDCID != nil {
+		flags |= (1 << 0)
+	}
+	if e.FromAuthKeyID != nil {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_auth_finishPasskeyLogin)
+	x.Int(flags)
+	x.Object(e.Credential)
+	if e.FromDCID != nil {
+		x.Int(*e.FromDCID)
+	}
+	if e.FromAuthKeyID != nil {
+		x.Long(*e.FromAuthKeyID)
+	}
 	return x.buf
 }
 
@@ -41193,6 +41604,32 @@ func (e TL_account_getUniqueGiftChatThemes) encode() []byte {
 	return x.buf
 }
 
+func (e TL_account_initPasskeyRegistration) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_initPasskeyRegistration)
+	return x.buf
+}
+
+func (e TL_account_registerPasskey) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_registerPasskey)
+	x.Object(e.Credential)
+	return x.buf
+}
+
+func (e TL_account_getPasskeys) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_getPasskeys)
+	return x.buf
+}
+
+func (e TL_account_deletePasskey) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_account_deletePasskey)
+	x.String(e.ID)
+	return x.buf
+}
+
 func (e TL_users_getUsers) encode() []byte {
 	x := NewEncodeBuf(512)
 	x.UInt(CRC_users_getUsers)
@@ -41925,6 +42362,9 @@ func (e TL_messages_forwardMessages) encode() []byte {
 	if e.QuickReplyShortcut != nil {
 		flags |= (1 << 17)
 	}
+	if e.Effect != nil {
+		flags |= (1 << 18)
+	}
 	if e.VideoTimestamp != nil {
 		flags |= (1 << 20)
 	}
@@ -41958,6 +42398,9 @@ func (e TL_messages_forwardMessages) encode() []byte {
 	}
 	if e.QuickReplyShortcut != nil {
 		x.Object(e.QuickReplyShortcut)
+	}
+	if e.Effect != nil {
+		x.Long(*e.Effect)
 	}
 	if e.VideoTimestamp != nil {
 		x.Int(*e.VideoTimestamp)
@@ -46996,6 +47439,44 @@ func (e TL_payments_getStarGiftActiveAuctions) encode() []byte {
 	return x.buf
 }
 
+func (e TL_payments_resolveStarGiftOffer) encode() []byte {
+	var flags int32
+	if e.Decline {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_resolveStarGiftOffer)
+	x.Int(flags)
+	x.Int(e.OfferMsgID)
+	return x.buf
+}
+
+func (e TL_payments_sendStarGiftOffer) encode() []byte {
+	var flags int32
+	if e.AllowPaidStars != nil {
+		flags |= (1 << 0)
+	}
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_sendStarGiftOffer)
+	x.Int(flags)
+	x.Object(e.Peer)
+	x.String(e.Slug)
+	x.Object(e.Price)
+	x.Int(e.Duration)
+	x.Long(e.RandomID)
+	if e.AllowPaidStars != nil {
+		x.Long(*e.AllowPaidStars)
+	}
+	return x.buf
+}
+
+func (e TL_payments_getStarGiftUpgradeAttributes) encode() []byte {
+	x := NewEncodeBuf(512)
+	x.UInt(CRC_payments_getStarGiftUpgradeAttributes)
+	x.Long(e.GiftID)
+	return x.buf
+}
+
 func (e TL_stickers_createStickerSet) encode() []byte {
 	var flags int32
 	if e.Masks {
@@ -48717,6 +49198,14 @@ func (e TL_auth_checkPaidAuth) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
+func (e TL_auth_initPasskeyLogin) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_auth_finishPasskeyLogin) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
 func (e TL_account_registerDevice) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
@@ -49190,6 +49679,22 @@ func (e TL_account_getSavedMusicIDs) decodeResponse(dbuf *DecodeBuf) TL {
 }
 
 func (e TL_account_getUniqueGiftChatThemes) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_initPasskeyRegistration) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_registerPasskey) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_getPasskeys) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_account_deletePasskey) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -51038,6 +51543,18 @@ func (e TL_payments_getStarGiftAuctionAcquiredGifts) decodeResponse(dbuf *Decode
 }
 
 func (e TL_payments_getStarGiftActiveAuctions) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_resolveStarGiftOffer) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_sendStarGiftOffer) decodeResponse(dbuf *DecodeBuf) TL {
+	return dbuf.Object()
+}
+
+func (e TL_payments_getStarGiftUpgradeAttributes) decodeResponse(dbuf *DecodeBuf) TL {
 	return dbuf.Object()
 }
 
@@ -54739,6 +55256,9 @@ func decode_body_TL_messageActionStarGift(m *DecodeBuf) TL {
 	if flags&(1<<18) != 0 {
 		tl.ToID = m.Object()
 	}
+	if flags&(1<<19) != 0 {
+		tl.GiftNum = Ref(m.Int())
+	}
 	return tl
 }
 
@@ -54755,6 +55275,7 @@ func decode_body_TL_messageActionStarGiftUnique(m *DecodeBuf) TL {
 	tl.Refunded = flags&(1<<5) != 0
 	tl.PrepaidUpgrade = flags&(1<<11) != 0
 	tl.Assigned = flags&(1<<13) != 0
+	tl.FromOffer = flags&(1<<14) != 0
 	tl.Gift = m.Object()
 	if flags&(1<<3) != 0 {
 		tl.CanExportAt = Ref(m.Int())
@@ -54916,6 +55437,34 @@ func decode_TL_messageActionSuggestBirthday(m *DecodeBuf) TL {
 func decode_body_TL_messageActionSuggestBirthday(m *DecodeBuf) TL {
 	tl := TL_messageActionSuggestBirthday{}
 	tl.Birthday = decode_TL_birthday(m).(TL_birthday)
+	return tl
+}
+
+func decode_TL_messageActionStarGiftPurchaseOffer(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionStarGiftPurchaseOffer)
+	return decode_body_TL_messageActionStarGiftPurchaseOffer(m)
+}
+func decode_body_TL_messageActionStarGiftPurchaseOffer(m *DecodeBuf) TL {
+	tl := TL_messageActionStarGiftPurchaseOffer{}
+	flags := m.Int()
+	tl.Accepted = flags&(1<<0) != 0
+	tl.Declined = flags&(1<<1) != 0
+	tl.Gift = m.Object()
+	tl.Price = m.Object()
+	tl.ExpiresAt = m.Int()
+	return tl
+}
+
+func decode_TL_messageActionStarGiftPurchaseOfferDeclined(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_messageActionStarGiftPurchaseOfferDeclined)
+	return decode_body_TL_messageActionStarGiftPurchaseOfferDeclined(m)
+}
+func decode_body_TL_messageActionStarGiftPurchaseOfferDeclined(m *DecodeBuf) TL {
+	tl := TL_messageActionStarGiftPurchaseOfferDeclined{}
+	flags := m.Int()
+	tl.Expired = flags&(1<<0) != 0
+	tl.Gift = m.Object()
+	tl.Price = m.Object()
 	return tl
 }
 
@@ -66006,9 +66555,6 @@ func decode_body_TL_webPageAttributeStarGiftAuction(m *DecodeBuf) TL {
 	tl := TL_webPageAttributeStarGiftAuction{}
 	tl.Gift = m.Object()
 	tl.EndDate = m.Int()
-	tl.CenterColor = m.Int()
-	tl.EdgeColor = m.Int()
-	tl.TextColor = m.Int()
 	return tl
 }
 
@@ -70937,6 +71483,7 @@ func decode_body_TL_starsTransaction(m *DecodeBuf) TL {
 	tl.StargiftDropOriginalDetails = flags&(1<<26) != 0
 	tl.PhonegroupMessage = flags&(1<<27) != 0
 	tl.StargiftAuctionBid = flags&(1<<28) != 0
+	tl.Offer = flags&(1<<29) != 0
 	tl.ID = m.String()
 	tl.Amount = m.Object()
 	tl.Date = m.Int()
@@ -71346,6 +71893,15 @@ func decode_body_TL_starGift(m *DecodeBuf) TL {
 	if flags&(1<<11) != 0 {
 		tl.GiftsPerRound = Ref(m.Int())
 	}
+	if flags&(1<<11) != 0 {
+		tl.AuctionStartDate = Ref(m.Int())
+	}
+	if flags&(1<<12) != 0 {
+		tl.UpgradeVariants = Ref(m.Int())
+	}
+	if flags&(1<<13) != 0 {
+		tl.Background = Ref(decode_TL_starGiftBackground(m).(TL_starGiftBackground))
+	}
 	return tl
 }
 
@@ -71391,6 +71947,9 @@ func decode_body_TL_starGiftUnique(m *DecodeBuf) TL {
 	if flags&(1<<8) != 0 {
 		tl.ValueCurrency = Ref(m.String())
 	}
+	if flags&(1<<8) != 0 {
+		tl.ValueUsdAmount = Ref(m.Long())
+	}
 	if flags&(1<<10) != 0 {
 		tl.ThemePeer = m.Object()
 	}
@@ -71399,6 +71958,9 @@ func decode_body_TL_starGiftUnique(m *DecodeBuf) TL {
 	}
 	if flags&(1<<12) != 0 {
 		tl.HostID = m.Object()
+	}
+	if flags&(1<<13) != 0 {
+		tl.OfferMinStars = Ref(m.Int())
 	}
 	return tl
 }
@@ -71832,6 +72394,9 @@ func decode_body_TL_savedStarGift(m *DecodeBuf) TL {
 	}
 	if flags&(1<<18) != 0 {
 		tl.DropOriginalDetailsStars = Ref(m.Long())
+	}
+	if flags&(1<<19) != 0 {
+		tl.GiftNum = Ref(m.Int())
 	}
 	return tl
 }
@@ -72529,7 +73094,6 @@ func decode_body_TL_groupCallDonor(m *DecodeBuf) TL {
 	flags := m.Int()
 	tl.Top = flags&(1<<0) != 0
 	tl.My = flags&(1<<1) != 0
-	tl.Anonymous = flags&(1<<2) != 0
 	if flags&(1<<3) != 0 {
 		tl.PeerID = m.Object()
 	}
@@ -72598,9 +73162,11 @@ func decode_body_TL_starGiftAuctionState(m *DecodeBuf) TL {
 	tl.BidLevels = DecodeBuf_GenericVector[TL_auctionBidLevel](m)
 	tl.TopBidders = m.VectorLong()
 	tl.NextRoundAt = m.Int()
+	tl.LastGiftNum = m.Int()
 	tl.GiftsLeft = m.Int()
 	tl.CurrentRound = m.Int()
 	tl.TotalRounds = m.Int()
+	tl.Rounds = m.Vector()
 	return tl
 }
 
@@ -72610,9 +73176,19 @@ func decode_TL_starGiftAuctionStateFinished(m *DecodeBuf) TL {
 }
 func decode_body_TL_starGiftAuctionStateFinished(m *DecodeBuf) TL {
 	tl := TL_starGiftAuctionStateFinished{}
+	flags := m.Int()
 	tl.StartDate = m.Int()
 	tl.EndDate = m.Int()
 	tl.AveragePrice = m.Long()
+	if flags&(1<<0) != 0 {
+		tl.ListedCount = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.FragmentListedCount = Ref(m.Int())
+	}
+	if flags&(1<<1) != 0 {
+		tl.FragmentListedURL = Ref(m.String())
+	}
 	return tl
 }
 
@@ -72651,6 +73227,7 @@ func decode_body_TL_payments_starGiftAuctionState(m *DecodeBuf) TL {
 	tl.UserState = decode_TL_starGiftAuctionUserState(m).(TL_starGiftAuctionUserState)
 	tl.Timeout = m.Int()
 	tl.Users = m.Vector()
+	tl.Chats = m.Vector()
 	return tl
 }
 
@@ -72669,6 +73246,9 @@ func decode_body_TL_starGiftAuctionAcquiredGift(m *DecodeBuf) TL {
 	tl.Pos = m.Int()
 	if flags&(1<<1) != 0 {
 		tl.Message = Ref(decode_TL_textWithEntities(m).(TL_textWithEntities))
+	}
+	if flags&(1<<2) != 0 {
+		tl.GiftNum = Ref(m.Int())
 	}
 	return tl
 }
@@ -72714,6 +73294,7 @@ func decode_body_TL_payments_starGiftActiveAuctions(m *DecodeBuf) TL {
 	tl := TL_payments_starGiftActiveAuctions{}
 	tl.Auctions = DecodeBuf_GenericVector[TL_starGiftActiveAuctionState](m)
 	tl.Users = m.Vector()
+	tl.Chats = m.Vector()
 	return tl
 }
 
@@ -72734,6 +73315,137 @@ func decode_TL_inputStarGiftAuctionSlug(m *DecodeBuf) TL {
 func decode_body_TL_inputStarGiftAuctionSlug(m *DecodeBuf) TL {
 	tl := TL_inputStarGiftAuctionSlug{}
 	tl.Slug = m.String()
+	return tl
+}
+
+func decode_TL_passkey(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_passkey)
+	return decode_body_TL_passkey(m)
+}
+func decode_body_TL_passkey(m *DecodeBuf) TL {
+	tl := TL_passkey{}
+	flags := m.Int()
+	tl.ID = m.String()
+	tl.Name = m.String()
+	tl.Date = m.Int()
+	if flags&(1<<0) != 0 {
+		tl.SoftwareEmojiID = Ref(m.Long())
+	}
+	if flags&(1<<1) != 0 {
+		tl.LastUsageDate = Ref(m.Int())
+	}
+	return tl
+}
+
+func decode_TL_account_passkeys(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_passkeys)
+	return decode_body_TL_account_passkeys(m)
+}
+func decode_body_TL_account_passkeys(m *DecodeBuf) TL {
+	tl := TL_account_passkeys{}
+	tl.Passkeys = DecodeBuf_GenericVector[TL_passkey](m)
+	return tl
+}
+
+func decode_TL_account_passkeyRegistrationOptions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_account_passkeyRegistrationOptions)
+	return decode_body_TL_account_passkeyRegistrationOptions(m)
+}
+func decode_body_TL_account_passkeyRegistrationOptions(m *DecodeBuf) TL {
+	tl := TL_account_passkeyRegistrationOptions{}
+	tl.Options = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_auth_passkeyLoginOptions(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_auth_passkeyLoginOptions)
+	return decode_body_TL_auth_passkeyLoginOptions(m)
+}
+func decode_body_TL_auth_passkeyLoginOptions(m *DecodeBuf) TL {
+	tl := TL_auth_passkeyLoginOptions{}
+	tl.Options = decode_TL_dataJSON(m).(TL_dataJSON)
+	return tl
+}
+
+func decode_TL_inputPasskeyResponseRegister(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPasskeyResponseRegister)
+	return decode_body_TL_inputPasskeyResponseRegister(m)
+}
+func decode_body_TL_inputPasskeyResponseRegister(m *DecodeBuf) TL {
+	tl := TL_inputPasskeyResponseRegister{}
+	tl.ClientData = decode_TL_dataJSON(m).(TL_dataJSON)
+	tl.AttestationData = m.StringBytes()
+	return tl
+}
+
+func decode_TL_inputPasskeyResponseLogin(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPasskeyResponseLogin)
+	return decode_body_TL_inputPasskeyResponseLogin(m)
+}
+func decode_body_TL_inputPasskeyResponseLogin(m *DecodeBuf) TL {
+	tl := TL_inputPasskeyResponseLogin{}
+	tl.ClientData = decode_TL_dataJSON(m).(TL_dataJSON)
+	tl.AuthenticatorData = m.StringBytes()
+	tl.Signature = m.StringBytes()
+	tl.UserHandle = m.String()
+	return tl
+}
+
+func decode_TL_inputPasskeyCredentialPublicKey(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_inputPasskeyCredentialPublicKey)
+	return decode_body_TL_inputPasskeyCredentialPublicKey(m)
+}
+func decode_body_TL_inputPasskeyCredentialPublicKey(m *DecodeBuf) TL {
+	tl := TL_inputPasskeyCredentialPublicKey{}
+	tl.ID = m.String()
+	tl.RawID = m.String()
+	tl.Response = m.Object()
+	return tl
+}
+
+func decode_TL_starGiftBackground(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starGiftBackground)
+	return decode_body_TL_starGiftBackground(m)
+}
+func decode_body_TL_starGiftBackground(m *DecodeBuf) TL {
+	tl := TL_starGiftBackground{}
+	tl.CenterColor = m.Int()
+	tl.EdgeColor = m.Int()
+	tl.TextColor = m.Int()
+	return tl
+}
+
+func decode_TL_starGiftAuctionRound(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starGiftAuctionRound)
+	return decode_body_TL_starGiftAuctionRound(m)
+}
+func decode_body_TL_starGiftAuctionRound(m *DecodeBuf) TL {
+	tl := TL_starGiftAuctionRound{}
+	tl.Num = m.Int()
+	tl.Duration = m.Int()
+	return tl
+}
+
+func decode_TL_starGiftAuctionRoundExtendable(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_starGiftAuctionRoundExtendable)
+	return decode_body_TL_starGiftAuctionRoundExtendable(m)
+}
+func decode_body_TL_starGiftAuctionRoundExtendable(m *DecodeBuf) TL {
+	tl := TL_starGiftAuctionRoundExtendable{}
+	tl.Num = m.Int()
+	tl.Duration = m.Int()
+	tl.ExtendTop = m.Int()
+	tl.ExtendWindow = m.Int()
+	return tl
+}
+
+func decode_TL_payments_starGiftUpgradeAttributes(m *DecodeBuf) TL {
+	m.constructorAssert(CRC_payments_starGiftUpgradeAttributes)
+	return decode_body_TL_payments_starGiftUpgradeAttributes(m)
+}
+func decode_body_TL_payments_starGiftUpgradeAttributes(m *DecodeBuf) TL {
+	tl := TL_payments_starGiftUpgradeAttributes{}
+	tl.Attributes = m.Vector()
 	return tl
 }
 
@@ -73190,6 +73902,10 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_messageActionGiftTon(m)
 	case CRC_messageActionSuggestBirthday:
 		r = decode_body_TL_messageActionSuggestBirthday(m)
+	case CRC_messageActionStarGiftPurchaseOffer:
+		r = decode_body_TL_messageActionStarGiftPurchaseOffer(m)
+	case CRC_messageActionStarGiftPurchaseOfferDeclined:
+		r = decode_body_TL_messageActionStarGiftPurchaseOfferDeclined(m)
 	case CRC_dialog:
 		r = decode_body_TL_dialog(m)
 	case CRC_dialogFolder:
@@ -75868,6 +76584,28 @@ func (m *DecodeBuf) ObjectGenerated(constructor uint32) (r TL) {
 		r = decode_body_TL_inputStarGiftAuction(m)
 	case CRC_inputStarGiftAuctionSlug:
 		r = decode_body_TL_inputStarGiftAuctionSlug(m)
+	case CRC_passkey:
+		r = decode_body_TL_passkey(m)
+	case CRC_account_passkeys:
+		r = decode_body_TL_account_passkeys(m)
+	case CRC_account_passkeyRegistrationOptions:
+		r = decode_body_TL_account_passkeyRegistrationOptions(m)
+	case CRC_auth_passkeyLoginOptions:
+		r = decode_body_TL_auth_passkeyLoginOptions(m)
+	case CRC_inputPasskeyResponseRegister:
+		r = decode_body_TL_inputPasskeyResponseRegister(m)
+	case CRC_inputPasskeyResponseLogin:
+		r = decode_body_TL_inputPasskeyResponseLogin(m)
+	case CRC_inputPasskeyCredentialPublicKey:
+		r = decode_body_TL_inputPasskeyCredentialPublicKey(m)
+	case CRC_starGiftBackground:
+		r = decode_body_TL_starGiftBackground(m)
+	case CRC_starGiftAuctionRound:
+		r = decode_body_TL_starGiftAuctionRound(m)
+	case CRC_starGiftAuctionRoundExtendable:
+		r = decode_body_TL_starGiftAuctionRoundExtendable(m)
+	case CRC_payments_starGiftUpgradeAttributes:
+		r = decode_body_TL_payments_starGiftUpgradeAttributes(m)
 
 	default:
 		m.err = merry.Errorf("Unknown constructor: %08x", constructor)
