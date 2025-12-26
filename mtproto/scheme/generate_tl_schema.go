@@ -483,7 +483,7 @@ import (
 					if vecNesting == 0 && t.flag != nil {
 						type_ = "*" + type_
 					}
-					write(type_)
+					write("%s", type_)
 				} else {
 					write("%sTL", strings.Repeat("[]", vecNesting))
 					fieldComment += innerTypeName + ": " + strings.Join(constructorIDs, " | ")
@@ -562,19 +562,20 @@ import (
 			write("func (e %s) decodeResponse(dbuf *DecodeBuf) TL {\n", c.structName())
 
 			innerTypeName, vecNesting, _ := parseVectorType(c.typeName)
-			if vecNesting == 0 {
+			switch vecNesting {
+			case 0:
 				if dependentField, ok := c.findFieldWithType(innerTypeName); ok && innerTypeName == "X" {
 					write("return e.%s.decodeResponse(dbuf)\n", normalizeFieldName(dependentField.name))
 				} else {
 					write("return dbuf.Object()\n")
 				}
-			} else if vecNesting == 1 {
+			case 1:
 				if mapped, ok := simpleFieldTypeMap[c.typeName]; ok {
 					write("return %s(dbuf.%s())\n", mapped.EncDec, mapped.EncDec)
 				} else {
 					write("return VectorObject(dbuf.Vector())\n")
 				}
-			} else {
+			default:
 				panic(fmt.Sprintf("nested vectors in return types are not supported (%s)", c.id))
 			}
 
@@ -628,15 +629,16 @@ import (
 					typ = constructorIDs[0]
 				}
 
-				if vecNesting == 1 {
+				switch vecNesting {
+				case 1:
 					read := "m.Vector()"
 					if typ != "TL" {
 						read = fmt.Sprintf("DecodeBuf_GenericVector[%s](m)", typ)
 					}
 					write("tl.%s = %s\n", fieldName, read)
-				} else if vecNesting == 2 {
+				case 2:
 					write("tl.%s = m.Vector2d()\n", fieldName)
-				} else {
+				default:
 					read := "m.Object()"
 					if typ != "TL" {
 						read = fmt.Sprintf("decode_%s(m).(%s)", typ, typ)
