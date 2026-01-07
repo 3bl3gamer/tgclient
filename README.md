@@ -17,6 +17,8 @@ Consists of two parts:
 
 You may use [tg-history-dumper](https://github.com/3bl3gamer/tg-history-dumper) repo as an example, in particular this file: https://github.com/3bl3gamer/tg-history-dumper/blob/master/tg.go#L67
 
+Alternatively, you may use a community-maintained [template repository](https://github.com/Layerex/tgclient-application-template).
+
 ### Create
 
 First, `TGClient` object should be created with `tgclient.NewTGClient` or `tgclient.NewTGClientExt` for example:
